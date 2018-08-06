@@ -25,7 +25,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('权限添加');
+				$this->setPageTitle('权限添加');
 
 				$this->displayContents = integrationTags::basicFrame([
 
@@ -186,7 +186,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('权限编辑');
+				$this->setPageTitle('权限编辑');
 				$info = $this->logic->getInfo($this->param);
 
 				session(md5(URL_MODULE) , $this->param['id']);
@@ -344,7 +344,7 @@
 
 		public function dataList()
 		{
-			$this->setPageTiele('权限列表');
+			$this->setPageTitle('权限列表');
 
 			$this->initLogic();
 			$this->displayContents = integrationTags::basicFrame([

@@ -145,7 +145,7 @@
 							
 							<div class="table-responsive">
 							
-								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/role/datalist?%2Fadmin%2Frole%2Fdatalist=&amp;name=&amp;reg_time_begin=&amp;reg_time_end=&amp;pagerow=5&amp;order_filed=id&amp;order=asc&amp;status=-1&amp;page=2">2</a></li> <li><a href="/admin/role/datalist?%2Fadmin%2Frole%2Fdatalist=&amp;name=&amp;reg_time_begin=&amp;reg_time_end=&amp;pagerow=5&amp;order_filed=id&amp;order=asc&amp;status=-1&amp;page=2">&raquo;</a></li></ul>
+								
 
 								<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
@@ -245,7 +245,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -770,11 +770,503 @@
 		</tr>
 
 
+						
+		<tr data-id="6" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 6
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 33
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-07-25 09:00:22
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 备注
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="7" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 7
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-01 15:35:08
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="8" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 8
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填2
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-01 15:35:19
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="9" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 9
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填23
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 13
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-01 15:35:28
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > dsfsdf
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
 
 									</tbody>
 								</table>
 		
-								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/role/datalist?%2Fadmin%2Frole%2Fdatalist=&amp;name=&amp;reg_time_begin=&amp;reg_time_end=&amp;pagerow=5&amp;order_filed=id&amp;order=asc&amp;status=-1&amp;page=2">2</a></li> <li><a href="/admin/role/datalist?%2Fadmin%2Frole%2Fdatalist=&amp;name=&amp;reg_time_begin=&amp;reg_time_end=&amp;pagerow=5&amp;order_filed=id&amp;order=asc&amp;status=-1&amp;page=2">&raquo;</a></li></ul>
+								
 
 							</div>
 
@@ -857,7 +1349,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="5" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
 		</div>
 
 

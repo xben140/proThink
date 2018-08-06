@@ -181,7 +181,7 @@ css;
 			$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
 
 			//设置标题
-			$this->setPageTiele('form测试');
+			$this->setPageTitle('form测试');
 
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
@@ -381,7 +381,7 @@ css;
 			]);
 
 			//设置标题
-			$this->setPageTiele('form测试');
+			$this->setPageTitle('form测试');
 
 			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
 				$_this->setNodeValue([
@@ -625,7 +625,7 @@ css;
 
 		public function tab()
 		{
-			$this->setPageTiele('table测试');
+			$this->setPageTitle('table测试');
 			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
 				$_this->setNodeValue([
 					'animate_type' => 'fadeInRight' ,
@@ -983,7 +983,7 @@ css;
 
 		public function tab11()
 		{
-			$this->setPageTiele('table测试');
+			$this->setPageTitle('table测试');
 			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
 				$_this->setNodeValue([
 					'animate_type' => 'fadeInRight' ,

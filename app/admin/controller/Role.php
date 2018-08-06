@@ -25,7 +25,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('角色添加');
+				$this->setPageTitle('角色添加');
 
 				$this->displayContents = integrationTags::basicFrame([
 
@@ -108,7 +108,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('角色编辑');
+				$this->setPageTitle('角色编辑');
 
 				$info = $this->logic->getInfo($this->param);
 				session(URL_MODULE , $this->param['id']);
@@ -179,7 +179,7 @@
 
 		public function dataList()
 		{
-			$this->setPageTiele('角色列表');
+			$this->setPageTitle('角色列表');
 
 			$this->initLogic();
 			$this->displayContents = integrationTags::basicFrame([
@@ -479,7 +479,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('分配权限');
+				$this->setPageTitle('分配权限');
 				session(URL_MODULE , $this->param['id']);
 
 				//获取所有有效权限

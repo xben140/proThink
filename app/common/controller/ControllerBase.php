@@ -206,7 +206,7 @@
 
 		}
 
-		public function setPageTiele($title)
+		public function setPageTitle($title)
 		{
 			//设置标题
 			$this->makePage()->setHead(elementsFactory::singleLabel('<title>'.$title.'</title>'));

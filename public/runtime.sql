@@ -1,1 +1,1 @@
-SELECT `privilege_id` FROM `ithink_role_privilege` WHERE  `role_id` = 1
+UPDATE `ithink_privilege`  SET `action`='klkl'  WHERE  `id` IN (7)

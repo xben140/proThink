@@ -25,7 +25,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('用户添加');
+				$this->setPageTitle('用户添加');
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -117,7 +117,7 @@
 			else
 			{
 
-				$this->setPageTiele('用户编辑');
+				$this->setPageTitle('用户编辑');
 				$info = $this->logic->getInfo($this->param);
 
 				session(URL_MODULE , $this->param['id']);
@@ -203,7 +203,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('修改密码');
+				$this->setPageTitle('修改密码');
 				session(URL_MODULE , $this->param['id']);
 
 				$this->displayContents = integrationTags::basicFrame([
@@ -237,7 +237,7 @@
 		 */
 		public function dataList()
 		{
-			$this->setPageTiele('用户列表');
+			$this->setPageTitle('用户列表');
 
 			$this->initLogic();
 			$this->displayContents = integrationTags::basicFrame([
@@ -597,7 +597,7 @@
 			}
 			else
 			{
-				$this->setPageTiele('用户授权');
+				$this->setPageTitle('用户授权');
 				session(URL_MODULE , $this->param['id']);
 
 				//获取所有有效角色
