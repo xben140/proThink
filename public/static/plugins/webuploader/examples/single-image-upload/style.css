@@ -1,0 +1,40 @@
+.uploader-demo {
+	/*background : #ccc;*/
+	width : 100%;
+}
+
+.progress-box {
+	height     : 30px;
+	/*background : #0f0;*/
+	margin-top : 10px;
+}
+
+.uploader-btn-box {
+	/*height : 50px;*/
+}
+
+.status-box {
+	height        : 25px;
+	margin-bottom : 10px;
+	/*background    : #00f;*/
+}
+
+.status-box-text {
+	color       : #312bff;
+	font-weight : bold;
+}
+
+.status-box-progess {
+	color       : #f00;
+	font-weight : bold;
+}
+
+.uploader-preview {
+	height        : 120px;
+	/*background    : #0f0;*/
+	margin-bottom : 10px;
+}
+
+.uploader-preview img {
+	height : 100px;
+}

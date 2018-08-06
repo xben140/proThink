@@ -1,0 +1,18 @@
+<application>
+  <component name="FileTypeManager" version="16">
+    <extensionMap>
+      <mapping pattern="urlc" type="PLAIN_TEXT" />
+      <mapping pattern=".555.php.swp" type="PLAIN_TEXT" />
+      <mapping pattern="deom" type="PLAIN_TEXT" />
+      <mapping pattern="changelog" type="PLAIN_TEXT" />
+      <mapping pattern="url" type="PLAIN_TEXT" />
+      <mapping pattern="dd" type="PLAIN_TEXT" />
+      <mapping ext="table" type="PLAIN_TEXT" />
+      <mapping ext="esp" type="PLAIN_TEXT" />
+      <mapping ext="tmp" type="PLAIN_TEXT" />
+      <mapping ext="hhk" type="PLAIN_TEXT" />
+      <mapping ext="ttf" type="PLAIN_TEXT" />
+      <mapping ext="db" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>

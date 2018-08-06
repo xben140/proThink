@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>H+ 后台主题UI框架 - 表单验证 jQuery Validation</title>
+		<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+		<meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+		<link rel="shortcut icon" href="favicon.ico">
+
+		<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+		<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+		<link href="css/animate.min.css" rel="stylesheet">
+		<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+		<!--  iCheck-->
+		<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+		<!--  /iCheck-->
+
+		<!--  switchery-->
+		<link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+		<!--  /switchery-->
+
+
+		<style>
+			.error-tip {
+				color       : #f00;
+				font-weight : bold;
+			}
+
+			label.valid {
+				color : #58c75d;
+			}
+		</style>
+	</head>
+
+
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-content">
+
+							<form role="form" class="form-inline">
+
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">用户名</label>
+									<input type="email" placeholder="请输入用户名" id="exampleInputEmail2" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword2" class="sr-only">密码</label>
+									<input type="password" placeholder="请输入密码" id="exampleInputPassword2" class="form-control">
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="i-checks"> <input type="checkbox"><i></i> 自动登录</label>
+									<label class="i-checks"> <input type="checkbox"><i></i> 自动登录</label>
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="checkbox-inline i-checks">
+										<input name="gender" type="radio" value="option3">c </label>
+									<label class="checkbox-inline i-checks">
+										<input name="gender" type="radio" value="option3">a </label>
+								</div>
+
+								<button class="btn btn-white" type="submit">登录</button>
+							</form>
+							<div class="hr-line-dashed"></div>
+
+
+							<form class="form-horizontal m-t" id="form1" method="post" action="/home/index/index">
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">静态控制</label>
+									<div class="col-sm-8">
+										<p class="form-control-static">i@zi-han.net</p>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">文本框：</label>
+									<div class="col-sm-8">
+										<input placeholder="placeholder" id="text" name="text" class="form-control  " type="text">
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 用户名允许字符为字母，数字，下划线，小数点，长度6-16位 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">密码：</label>
+									<div class="col-sm-8">
+										<input id="password" name="password" class="form-control input-sm " type="password">
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 密码允许字符为字母，数字，下划线，小数点，长度6-16位 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">确认密码：</label>
+									<div class="col-sm-8">
+										<input id="confirm_password" name="confirm_password" class="form-control input-sm " type="password">
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码<span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">E-mail：</label>
+									<div class="col-sm-8">
+										<input id="email" name="email" class="form-control input-sm " type="email">
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 联系邮箱 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">内联单选框</label>
+									<div class="col-sm-9">
+										<label class="checkbox-inline i-checks">
+											<input name="radio" type="radio" value="option1">a </label>
+										<label class="checkbox-inline i-checks">
+											<input name="radio" type="radio" value="option2">b </label>
+										<label class="checkbox-inline i-checks">
+											<input name="radio" type="radio" value="option3">c </label>
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 内联单选框 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">内联复选框</label>
+									<div class="col-sm-9">
+										<label class="checkbox-inline i-checks">
+											<input type="checkbox" value="option1" name="checkbox_inline[]">a </label>
+
+										<label class="checkbox-inline i-checks">
+											<input type="checkbox" value="option2" name="checkbox_inline[]">b </label>
+
+										<label class="checkbox-inline i-checks">
+											<input type="checkbox" value="option3" name="checkbox_inline[]">c </label>
+
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 内联复选框 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">复选框</label>
+									<div class="col-sm-9">
+										<div class="checkbox i-checks">
+											<label> <input type="checkbox" value="1" name="checkbox_block[]">
+												<i></i> 选项1</label>
+										</div>
+										<div class="checkbox i-checks">
+											<label> <input type="checkbox" value="2" checked="" name="checkbox_block[]">
+												<i></i> 选项2（选中）</label>
+										</div>
+
+										<div class="radio i-checks">
+											<label>
+												<input type="radio" disabled="" checked="" value="option1" name="aa">
+												<i></i> 选项3（选中并禁用）</label>
+										</div>
+
+										<div class="radio i-checks">
+											<label> <input type="radio" disabled="" value="option2" name="aa">
+												<i></i> 选项4（禁用）</label>
+										</div>
+
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 复选框 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">开关</label>
+									<div class="col-sm-8">
+
+
+										<div class="col-sm-4">
+											<span>是否开启</span>
+											<input type="checkbox" class="js-switch" name="switch1[]"  value="1" />
+										</div>
+
+
+										<div class="col-sm-8">
+											<span>是否开启</span>
+											<input type="checkbox" class="js-switch" name="switch2[]"  value="2" />
+										</div>
+
+
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 开关 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">下拉选项</label>
+									<div class="col-sm-8">
+										<select class="form-control  m-b" name="select">
+											<option value="">选项 0</option>
+											<option value="1">选项 1</option>
+											<option value="2">选项 2</option>
+										</select>
+
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 下拉选项 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">下拉多选项</label>
+									<div class="col-sm-8">
+										<div class="col-sm-4 m-l-n">
+											<select class="form-control input-sm " multiple="" name="select_multi[]">
+												<option>选项 1</option>
+												<option>选项 2</option>
+												<option>选项 3</option>
+												<option>选项 4</option>
+											</select>
+										</div>
+
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 下拉多选项 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">列尺寸</label>
+									<div class="col-sm-8">
+										<div class="row">
+											<div class="col-md-2">
+												<input type="text" placeholder=".col-md-2" class="form-control" name="row_size1">
+											</div>
+											<div class="col-md-3">
+												<input type="text" placeholder=".col-md-3" class="form-control" name="row_size2">
+											</div>
+											<div class="col-md-4">
+												<input type="text" placeholder=".col-md-4" class="form-control" name="row_size3">
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">textarea</label>
+									<div class="col-sm-8">
+										<textarea type="text/plain" style="width:100%;height:200px;" name="textarea">sdf</textarea>
+										<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 下拉选项 <span class="error-tip"></span></span>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">富文本编辑器</label>
+									<div class="col-sm-8">
+										<textarea id="editor" type="text/plain" style="width:100%;height:350px;" name="uedit">sdf</textarea>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">普通：</label>
+									<div class="col-sm-9">
+										<input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+										<label class="laydate-icon"></label>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">外部js调用：</label>
+									<div class="col-sm-9">
+										<input id="hello" class="laydate-icon form-control layer-date">
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">图标触发日期：</label>
+									<div class="col-sm-9">
+										<input readonly class="form-control layer-date" id="hello1">
+										<label class="laydate-icon inline demoicon" onclick="laydate({elem: '#hello1'});"></label>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">日期范围选择：</label>
+									<div class="col-sm-8">
+										<input placeholder="开始日期" class="form-control layer-date" id="start">
+										<input placeholder="结束日期" class="form-control layer-date" id="end">
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-3">
+										<button class="btn btn-primary" type="submit">提交</button>
+										<!--<button class="btn btn-info reset" type="reset">重写填写</button>-->
+									</div>
+								</div>
+							</form>
+
+
+							<div class="hr-line-dashed"></div>
+							<button id="pop-login-iframe" class="btn btn-primary" type="button">iframe</button>
+							<button id="pop-login-dom" class="btn btn-primary" type="button">拾取dom</button>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="output"></div>
+
+		<div id="modal-form" style="display: none;">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-6 b-r">
+							<h3 class="m-t-none m-b">登录</h3>
+							<p>欢迎登录本站(⊙o⊙)</p>
+							<form role="form">
+								<div class="form-group">
+									<label>用户名：</label> <input type="email" placeholder="请输入用户名" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>密码：</label> <input type="password" placeholder="请输入密码" class="form-control">
+								</div>
+								<div>
+									<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+										<strong>登录</strong>
+									</button>
+									<label> <input type="checkbox" class="i-checks">自动登录</label>
+								</div>
+							</form>
+						</div>
+						<div class="col-sm-6">
+							<h4>还不是会员？</h4>
+							<p>您可以注册一个账户</p>
+							<p class="text-center">
+								<a href="form_basic.html"><i class="fa fa-sign-in big-icon"></i></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js?v=2.1.4"></script>
+		<script src="js/bootstrap.min.js?v=3.3.6"></script>
+		<script src="js/content.min.js?v=1.0.0"></script>
+		<script src="js/plugins/layer/layer.min.js"></script>
+
+		<!--  validate  -->
+		<script src="js/plugins/validate/jquery.validate.min.js"></script>
+		<!--  /validate  -->
+
+		<!--  icheck-->
+		<script src="js/plugins/iCheck/icheck.min.js"></script>
+		<script>
+			$(document).ready(function () {$(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})});
+		</script>
+		<!--  /icheck-->
+
+		<!--  switchery-->
+		<script src="js/plugins/switchery/switchery.js"></script>
+		<script>
+			$(document).ready(function () {
+				// let sitcher = document.querySelectorAll(".js-switch");
+				let sitcher = document.getElementsByClassName("js-switch");
+				let switchery = [];
+				console.dir(sitcher)
+
+				for (let i = 0; i < sitcher.length; i++)
+				{
+					switchery[i] = new Switchery(sitcher[i], {
+						color             : '#28fa1a',
+						// secondaryColor    : '#fC73d0',
+						jackColor         : '#fffff9',
+						jackSecondaryColor: '#e5e5df',
+						// className         : 'switchery',
+						disabled          : false,
+						disabledOpacity   : 0.1,
+						speed             : '0.3s',
+						size              : 'small',
+					});
+				}
+			});
+		</script>
+		<!--  /switchery-->
+
+		<!--  ueditor-->
+		<script type="text/javascript" charset="utf-8" src="../static/plugins/uediter/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../static/plugins/uediter/ueditor.all.min.js"></script>
+		<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+		<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+		<script type="text/javascript" charset="utf-8" src="../static/plugins/uediter/lang/zh-cn/zh-cn.js"></script>
+		<script>
+			$(document).ready(function () {var ue = UE.getEditor('editor');});
+		</script>
+		<!--  /ueditor-->
+
+		<!--  form.js-->
+		<script type="text/javascript" charset="utf-8" src="../static/js/form.js"></script>
+		<!--  /form.js-->
+
+		<!--  laydate.js-->
+		<script src="js/plugins/layer/laydate/laydate.js"></script>
+		<script>
+			laydate({
+				elem : "#hello",
+				event: "focus"
+			});
+
+			laydate({
+				elem   : "#start",
+				format : "YYYY/MM/DD hh:mm:ss",
+				min    : laydate.now(),
+				max    : "2099-06-16 23:59:59",
+				istime : true,
+				istoday: false,
+				choose : function (datas) {
+					end.min = datas;
+					end.start = datas
+				}
+			});
+			laydate({
+				elem   : "#end",
+				format : "YYYY/MM/DD hh:mm:ss",
+				min    : laydate.now(),
+				max    : "2099-06-16 23:59:59",
+				istime : true,
+				istoday: false,
+				choose : function (datas) {
+					end.min = datas;
+					end.start = datas
+				}
+			});
+		</script>
+		<!--  /laydate.js-->
+
+
+		<script>
+
+			(function () {
+				let form1 = $("#form1");
+				form1.submit(function () {
+					let _this = $(this);
+					_this.find('button:submit').attr("disabled", true);
+					console.dir(this);
+					/*$(this).ajaxSubmit({
+
+						//把服务器返回的内容放入id为output的元素中
+						target: '#output',
+
+						//提交前的回调函数
+						beforeSubmit: function (formData, jqForm, options) {
+							// console.dir(formData)
+							// console.dir(jqForm)
+							// console.dir(options)
+
+							//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]
+							//jqForm:   jQuery对象，封装了表单的元素
+							//options:  options对象
+
+							// var queryString = $.param(formData);   //name=1&address=2
+							// var formElement = jqForm[0];              //将jqForm转换为DOM对象
+							// var address = formElement.address.value;  //访问jqForm的DOM元素
+
+							//只要不返回false，表单都会提交,在这里可以对表单元素进行验证
+							return true;
+						},
+
+						//提交后的回调函数
+						success: successFunc = function (responseText, statusText) {
+							_this.find('button:submit').attr("disabled",false);
+							console.dir(responseText)
+							console.dir(statusText)
+						},
+
+						// 默认是form的action， 如果申明，则会覆盖
+						//url: url,
+
+						// 默认是form的method（get or post），如果申明，则会覆盖
+						//type: type,
+
+						// html(默认), xml, script, json...接受服务端返回的类型
+						dataType: 'json',
+
+						// 成功提交后，清除所有表单元素的值
+						//clearForm: true,
+
+						// 成功提交后，重置所有表单元素的值
+						//resetForm: true,
+
+						//限制请求的时间，当请求大于3秒后，跳出请求
+						timeout: 3000
+					});*/
+					return false;
+				})
+
+
+				let rules = {
+					/*
+
+					text            : {
+						username: [],
+					},
+					password        : {
+						username: [],
+					},
+					confirm_password: {
+						required: true,
+						equalTo : "#password"
+					},
+					email           : {
+						required: true,
+						email   : true
+					},
+					radio           : {
+						required: true,
+					},
+					switch1         : {
+						required: true,
+					},
+					switch2         : {
+						required: true,
+					},
+					checkbox_inline[] : {
+						required   : true,
+						rangelength: [2, 3]
+					},
+					checkbox_block[]  : {
+						required: true,
+					},
+					select          : {
+						required: true,
+					},
+					select_multi    : {
+						required: true,
+					},
+
+					*/
+				};
+				let messages = {
+					confirm_password: {
+						required: "请再次输入密码",
+						equalTo : "两次密码输入不一致"
+					},
+					email           : "请输入一个正确的邮箱",
+				};
+
+				let submitHandler = function (form) {
+
+					//https://blog.csdn.net/qq_38602656/article/details/78668924
+					//https://www.cnblogs.com/fire-dragon/p/6708718.html
+					form1.ajaxSubmit({
+
+						//把服务器返回的内容放入id为output的元素中
+						target: '#output',
+
+						//提交前的回调函数
+						beforeSubmit: function (formData, jqForm, options) {
+							// console.dir(formData)
+							// console.dir(jqForm)
+							// console.dir(options)
+
+							//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]
+							//jqForm:   jQuery对象，封装了表单的元素
+							//options:  options对象
+
+							// var queryString = $.param(formData);   //name=1&address=2
+							// var formElement = jqForm[0];              //将jqForm转换为DOM对象
+							// var address = formElement.address.value;  //访问jqForm的DOM元素
+
+							//只要不返回false，表单都会提交,在这里可以对表单元素进行验证
+							return true;
+						},
+
+						//提交后的回调函数
+						success: successFunc = function (responseText, statusText) {
+							console.dir(responseText)
+							console.dir(statusText)
+						},
+
+						// 默认是form的action， 如果申明，则会覆盖
+						//url: url,
+
+						// 默认是form的method（get or post），如果申明，则会覆盖
+						//type: type,
+
+						// html(默认), xml, script, json...接受服务端返回的类型
+						dataType: 'json',
+
+						// 成功提交后，清除所有表单元素的值
+						//clearForm: true,
+
+						// 成功提交后，重置所有表单元素的值
+						//resetForm: true,
+
+						//限制请求的时间，当请求大于3秒后，跳出请求
+						timeout: 3000
+					});
+				}
+
+
+				let validateOptions = {
+					rules         : rules,
+					//验证出错提示
+					messages      : messages,
+					//验证通过，提交表单
+					submitHandler : submitHandler,
+					//单个元素验证失败
+					errorPlacement: function (error, element) {
+						element.parents('.form-group').find('.error-tip').html(error.html());
+					},
+					//单个元素验证成功
+					success       : function (label) {
+						// label.html("&nbsp;").addClass("checked");
+						// label.addClass("valid").text("填写正确")
+					}
+
+				};
+
+				/*
+				* 自定义方法
+				*
+				* */
+				$.validator.addMethod("username", function (value, element, param) {
+					return /^[a-z\d._]{6,16}$/i.test(value);
+				}, "规则不合法，请参考提示填写");
+
+				//通用默认配置
+				$.validator.setDefaults({
+					onfocusout: true,
+				});
+
+				// 在键盘按下并释放及提交后验证提交表单
+				let validator = form1.validate(validateOptions);
+
+				// 重置表单
+				//使用了那个开关插件，不能重置
+				// form1.find('.reset').click(function () {validator.resetForm();});
+
+			}());
+		</script>
+
+
+		<script>
+
+			$(document).ready(function () {
+
+				$('#pop-login-iframe').click(function () {
+					layer.open({
+						type      : 2,
+						title     : 'layer mobile页',
+						shadeClose: true,
+						shade     : 0.1,
+						area      : ['80%', '90%'],
+						content   : 'http://baidu.com' //iframe的url
+					});
+				});
+
+				$('#pop-login-dom').click(function () {
+					layer.open({
+						type      : 1,
+						title     : 'layer mobile页',
+						shadeClose: true,
+						shade     : 0.1,
+						area      : ['500px', 'auto'],
+						content   : $('#modal-form'), //dom
+						cancel    : function () {
+							layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', {time: 5000, icon: 6});
+						}
+					});
+
+				});
+			});
+		</script>
+
+	</body>
+</html>

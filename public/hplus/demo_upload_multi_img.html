@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>H+ 后台主题UI框架 - 表单验证 jQuery Validation</title>
+		<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+		<meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+		<link rel="shortcut icon" href="favicon.ico">
+
+		<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+		<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+		<link href="css/animate.min.css" rel="stylesheet">
+		<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+		<!--  webuploader-->
+		<!--  多图片上传-->
+		<link rel="stylesheet" type="text/css" href="../static/plugins/webuploader/css/webuploader.css">
+		<link rel="stylesheet" type="text/css" href="../static/plugins/webuploader/examples/multi-image-upload/style.css">
+		<!--  webuploader-->
+
+	</head>
+
+
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInRight">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<div class="page-container">
+
+								<input type="hidden" name="">
+								<p style="font-weight: bold;color: #f00;">上传须知</p>
+								<p>单次最多添加300张</p>
+								<p>单个图片最大50M</p>
+								<p>所有文件总大小最大200M，如果需要上传的大图片过多，请分多次上传</p>
+								<p>允许的图片格式为 gif, jpg, jpeg, bmp, png</p>
+								<br>
+
+								<p style="font-weight: bold;color: #f00;">添加方法</p>
+								<p>将要上传的图片文件拖拽到下方的虚线框内</p>
+								<p>使用浏览器或QQ截屏工具截图，点击此窗口后粘贴</p>
+								<p>点击添加图片按钮</p>
+
+								<div id="uploader" class="wu-example">
+									<div class="queueList">
+										<div id="dndArea" class="placeholder">
+											<div id="filePicker"></div>
+											<p>或将照片拖到这里，单次最多可选300张</p>
+										</div>
+									</div>
+									<div class="statusBar" style="display:none;">
+										<div class="progress">
+											<span class="text">0%</span>
+											<span class="percentage"></span>
+										</div>
+										<div class="info"></div>
+										<div class="btns">
+											<div id="filePicker2"></div>
+											<div class="uploadBtn">开始上传</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js?v=2.1.4"></script>
+		<script src="js/bootstrap.min.js?v=3.3.6"></script>
+		<script src="js/content.min.js?v=1.0.0"></script>
+		<script src="js/plugins/layer/layer.min.js"></script>
+
+		<!--  webuploader.js-->
+		<!--  多图片上传-->
+		<script type="text/javascript" charset="utf-8" src="../static/plugins/webuploader/dist/webuploader.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../static/plugins/webuploader/examples/multi-image-upload/upload.js"></script>
+		<!--  /webuploader.js-->
+
+	</body>
+</html>

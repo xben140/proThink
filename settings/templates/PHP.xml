@@ -1,0 +1,320 @@
+<templateSet group="PHP">
+    <template name="forei" value="foreach ($ITERABLE$ as $v) {&#10;    $END$&#10;}"
+              description="foreach($arr as $value)" toReformat="true" toShortenFQNames="true">
+        <variable name="ITERABLE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="ifi" value="&#9;if ($condition$)&#10;&#9;{&#10;&#9;&#9;$end$&#10;&#9;}" description="if ($end$)"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="condition" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="forl"
+              value="for ($INDEX$ = 0, $INDEX$_len = count($ARRAY$); $INDEX$ &lt; $INDEX$_len; $INDEX$++)&#10;{&#10;  $END$&#10;}"
+              description="for ($i=0, $len=count($arr); $i&lt;$len; $i++)" toReformat="false" toShortenFQNames="true">
+        <variable name="INDEX" expression="" defaultValue="i" alwaysStopAt="true"/>
+        <variable name="ARRAY" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="fori" value="for ($i=0; $i&lt;$len; $i++)&#10;{&#10;    $end$&#10;}"
+              description="for ($i=0; $i&lt;$len; $i++)" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="whii" value="while ($condition$)&#10;{&#10;    $end$&#10;}" description="while ($end$)"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="condition" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="doi" value="do&#10;{&#10;    $end$&#10;}while($condition$)" description="do while"
+              toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="condition" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="fui" value="function $function_name$($params$)&#10;{&#10;    $end$&#10;}"
+              description="function $end$()" toReformat="false" toShortenFQNames="true">
+        <variable name="function_name" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="params" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="eei" value="echo &quot;$END$&quot;;" description="echo &quot;$END$&quot;;" toReformat="true"
+              toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="hhh" value="header('content-type:text/html; charset=utf-8');&#10;&#10;$end$"
+              description="header('content-type:text/html; charset=utf-8');" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_pp" value="$_POST['$end$'];" description="$_POST['$end$'];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_gg" value="$_GET['$end$'];" description="$_GET['$end$'];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_qq" value="$_REQUEST['$end$'];" description="$_REQUEST['$end$'];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_q" value="$_REQUEST['$end$']" description="$_REQUEST['$end$']" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_g" value="$_GET['$end$']" description="$_GET['$end$']" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_p" value="$_POST['$end$']" description="$_POST['$end$']" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="eer" value="echo $END$;" description="echo $END$;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="forek" value="foreach ($ITERABLE$ as $k =&gt; $v) {&#10;    $END$&#10;}"
+              description="foreach($arr as $k =&gt; $v)" toReformat="true" toShortenFQNames="true">
+        <variable name="ITERABLE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="rqr" value="require &quot;$END$&quot;;" description="require &quot;$END$&quot;;" toReformat="true"
+              toShortenFQNames="true">
+        <context/>
+    </template>
+    <template name="rqro" value="require_once &quot;$END$&quot;;" description="require_once &quot;$END$&quot;;"
+              toReformat="true" toShortenFQNames="true">
+        <context/>
+    </template>
+    <template name="inc" value="include &quot;$END$&quot;;" description="include &quot;$END$&quot;;" toReformat="true"
+              toShortenFQNames="true">
+        <context/>
+    </template>
+    <template name="inco" value="include_once &quot;$END$&quot;;" description="include_once &quot;$END$&quot;;"
+              toReformat="true" toShortenFQNames="true">
+        <context/>
+    </template>
+    <template name="_c" value="$_COOKIE['$end$']" description="$_COOKIE['$end$']" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_cc" value="$_COOKIE['$end$'];" description="$_COOKIE['$end$'];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_s" value="$_SESSION['$end$']" description="$_SESSION['$end$']" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="_ss" value="$_SESSION['$end$'];" description="$_SESSION['$end$'];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="prid" value="print_r($end$);exit;;" description="print_r();exit;;" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="eli" value="else&#10;{&#10;&#9;$end$&#10;}" description="else" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="efi" value="elseif($condition$)&#10;{&#10;&#9;$end$&#10;}" description="elseif" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="condition" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="pubf" value="public function $NAME$($PARAMETERS$)&#10;{&#10;    $END$&#10;}"
+              description="public function" toReformat="true" toShortenFQNames="true">
+        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="PARAMETERS" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <context/>
+    </template>
+    <template name="cli"
+              value="class $CLASS_NAME$&#10;{&#10;&#9;public function $FUNCTION_NAME$()&#10;&#9;{&#10;&#9;&#9;$CONTEXT$&#10;&#9;}&#9;&#10;}"
+              description="不带父类构造函数" toReformat="false" toShortenFQNames="true">
+        <variable name="CLASS_NAME" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <variable name="FUNCTION_NAME" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CONTEXT" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="vard" value="var_dump($end$);exit;" description="var_dump();exit;" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+            <option name="PHP Comment" value="false"/>
+        </context>
+    </template>
+    <template name="eeei" value="echo $ARRAY$['$end$'];" description="echo $end$[''];" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="ARRAY" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="clii"
+              value="class $CLASS_NAME$&#10;{&#10;&#9;public function $FUNCTION_NAME$()&#10;&#9;{&#10;&#9;&#9;$CONTEXT$&#10;&#9;&#9;parent::__construct();&#10;&#9;}&#9;&#10;}"
+              description="带父类构造函数" toReformat="false" toShortenFQNames="true">
+        <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="FUNCTION_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CONTEXT" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="pubf_"
+              value="public function __construct()&#10;{&#10;&#9;parent::__construct();&#10;&#9;$end$&#10;}"
+              description="" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="eern" value="echo &quot;\r\n&quot;;" description="echo &quot;\r\n&quot;;" toReformat="false"
+              toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="eebr" value="echo '&lt;br&gt;';" description="echo '&lt;br&gt;';" toReformat="false"
+              toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="hec" value="&lt;?php echo $end$;?&gt;" description="&lt;?php echo ;?&gt;" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="HTML" value="true"/>
+        </context>
+    </template>
+    <template name="dis" value="$this-&gt;display();" description="$this-&gt;display();" toReformat="false"
+              toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="assi" value="$this-&gt;assign('$name$', $data$);" description="$this-&gt;assign('data', $data);"
+              toReformat="false" toShortenFQNames="true">
+        <variable name="name" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="data" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="hfore" value="{foreach ($data$ as $k =&gt; $v)}&#10;&#9;$end$&#10;{/foreach}"
+              description="&lt;?php foreach ($data as $k =&gt; $v): ?&gt;" toReformat="false" toShortenFQNames="true">
+        <variable name="data" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="HTML" value="true"/>
+        </context>
+    </template>
+    <template name="hif" value="{if $condition$ }&#10;&#9;$end$&#10;{/if}" description="&lt;?php if ($end$):?&gt;"
+              toReformat="false" toShortenFQNames="true">
+        <variable name="condition" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="HTML" value="true"/>
+        </context>
+    </template>
+    <template name="hecv" value="value=&quot;&lt;?php echo $end$;?&gt;&quot;"
+              description="value=&quot;&lt;?php echo $end$;?&gt;&quot;" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="HTML" value="true"/>
+        </context>
+    </template>
+    <template name="thii" value="$this-&gt;" description="$this-&gt;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="--" value="-&gt;$end$" description="-&gt;" toReformat="false" toShortenFQNames="true">
+        <variable name="end" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="kv" value="'$KEY$' =&gt; '$value$'," description="'' =&gt; ''," toReformat="false"
+              toShortenFQNames="true">
+        <variable name="KEY" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <variable name="value" expression="phpVar" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+    <template name="==" value="=&gt; $END$" description="=&gt;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="PHP" value="true"/>
+        </context>
+    </template>
+</templateSet>

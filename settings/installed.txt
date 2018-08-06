@@ -1,0 +1,3 @@
+com.aurimasniekis.phppsr4namespacedetector
+net.vektah.codeglance
+ru.adelf.idea.dotenv

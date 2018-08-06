@@ -1,0 +1,37 @@
+.red {
+	color : #f00;
+}
+
+.blue {
+	color : #00f;
+}
+
+.green {
+	color : #0f0;
+}
+
+.tips {
+	display    : block;
+	background : #ececec;
+	color      : #312bff;
+	padding    : 10px;
+	width      : 100%;
+}
+
+.td-modify {
+	cursor     : pointer;
+	background : #f8d3ff;
+	padding    : 0 6px;
+	margin     : 0 3px;
+}
+
+.td-modify:hover {
+	background : #a8efc6;
+}
+
+.search-btn {
+	position : fixed;
+	top      : 100px;
+	left     : 100px;
+
+}
