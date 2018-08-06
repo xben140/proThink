@@ -50,23 +50,23 @@
 							//'attr'        => 'disabled' ,
 							'name'        => 'order' ,
 						]) ,
-/*
-						integrationTags::switchery([
-							'isChecked'  => 'checked' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
-*/
+						/*
+												integrationTags::switchery([
+													'isChecked'  => 'checked' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
+						*/
 
 						integrationTags::textarea([
 							'field_name' => '备注' ,
@@ -135,23 +135,23 @@
 							//'attr'        => 'disabled' ,
 							'name'        => 'order' ,
 						]) ,
-/*
-						integrationTags::switchery([
-							'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
-*/
+						/*
+												integrationTags::switchery([
+													'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
+						*/
 
 						integrationTags::textarea([
 							'field_name' => '备注' ,
@@ -442,6 +442,10 @@
 							}
 
 						}) ,
+					] , [
+						'width'      => '12' ,
+						'main_title' => '' ,
+						'sub_title'  => '' ,
 					]) ,
 				]) ,
 			]);
@@ -492,16 +496,27 @@
 				} , $privileges);
 
 				$this->displayContents = integrationTags::basicFrame([
+					integrationTags::row([
 
-					integrationTags::form([
-						//blockCheckbox
-						//inlineCheckbox
-						integrationTags::blockCheckbox($roles_ , 'privileges[]' , '角色权限' , '每个角色可分配多个权限' , $currPrivileges) ,
-					] , [
-						'id'     => 'form1' ,
-						'method' => 'post' ,
-						'action' => url() ,
+						integrationTags::rowBlock([
+							integrationTags::form([
+								//blockCheckbox
+								//inlineCheckbox
+								integrationTags::blockCheckbox($roles_ , 'privileges[]' , '分配权限' , '每个角色可分配多个权限' , $currPrivileges) ,
+							] , [
+								'id'     => 'form1' ,
+								'method' => 'post' ,
+								'action' => url() ,
+							]) ,
+						], [
+							'width'      => '6' ,
+							'main_title' => '分配菜单和访问权限' ,
+							'sub_title'  => '' ,
+						]) ,
+
+
 					]) ,
+
 
 				] , [
 					'animate_type' => 'fadeInRight' ,

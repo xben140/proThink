@@ -1006,8 +1006,7 @@
 
 
 		<!--					script					-->
-		<script src="__STATIC__/js/custom.js"></script>
-
+		
 			<script>  
 		
 			</script>  
@@ -1016,9 +1015,10 @@
 
 
 
+		<script src="__STATIC__/js/custom.js"></script>
 
-		
 <!-- ! ~~~JS_INVOKE~~~ -->
+
 
 		<!--					/script					-->
 	</body>

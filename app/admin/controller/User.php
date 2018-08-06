@@ -70,22 +70,22 @@
 							'name'        => 'phone' ,
 						]) ,
 
-/*
-						integrationTags::switchery([
-							'isChecked'  => 'checked' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,*/
+						/*
+												integrationTags::switchery([
+													'isChecked'  => 'checked' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,*/
 
 					] , [
 						'id'     => 'form1' ,
@@ -154,24 +154,24 @@
 							'attr'        => '' ,
 							'name'        => 'phone' ,
 						]) ,
-/*
+						/*
 
-						integrationTags::switchery([
-							'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
-*/
+												integrationTags::switchery([
+													'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
+						*/
 
 					] , [
 						'id'     => 'form1' ,
@@ -199,7 +199,7 @@
 			{
 				$this->initLogic();
 				$this->param['id'] = session(URL_MODULE);
-				$this->jump($this->logic->editPwd($this->param ));
+				$this->jump($this->logic->editPwd($this->param));
 			}
 			else
 			{
@@ -543,7 +543,7 @@
 
 										integrationTags::tdButton([
 											'attr'  => ' btn-info btn-assign-role' ,
-											'value' => '分配角色' ,
+											'value' => '用户授权' ,
 										]) ,
 
 										integrationTags::tdButton([
@@ -592,13 +592,13 @@
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);
-				
+
 				$this->jump($this->logic->assignRoles($this->param));
 			}
 			else
 			{
-				$this->setPageTiele('分配角色');
-				session(URL_MODULE, $this->param['id']);
+				$this->setPageTiele('用户授权');
+				session(URL_MODULE , $this->param['id']);
 
 				//获取所有有效角色
 				$roles = $this->logic__common_role->getActivedData();
@@ -610,19 +610,46 @@
 					return [
 						'value' => $v['id'] ,
 						'field' => $v['name'] ,
-					] ;
+					];
 				} , $roles);
 
 				$this->displayContents = integrationTags::basicFrame([
+					integrationTags::row([
 
-					integrationTags::form([
-						//blockCheckbox
-						//inlineCheckbox
-						integrationTags::blockCheckbox($roles_, 'roles[]' , '用户角色' , '每个用户可分配多个角色' , $currRoles) ,
-					] , [
-						'id'     => 'form1' ,
-						'method' => 'post' ,
-						'action' => url() ,
+						integrationTags::rowBlock([
+							integrationTags::form([
+								//blockCheckbox
+								//inlineCheckbox
+								integrationTags::blockCheckbox($roles_ , 'roles[]' , '用户角色' , '每个用户可分配多个角色' , $currRoles) ,
+							] , [
+								'id'     => 'form1' ,
+								'method' => 'post' ,
+								'action' => url() ,
+							]) ,
+						], [
+							'width'      => '6' ,
+							'main_title' => '分配角色' ,
+							'sub_title'  => '' ,
+						]) ,
+
+
+						integrationTags::rowBlock([
+							integrationTags::form([
+								//blockCheckbox
+								//inlineCheckbox
+								integrationTags::blockCheckbox($roles_ , 'roles[]' , '用户组' , '每个用户可分配多个角色' , $currRoles) ,
+							] , [
+								'id'     => 'form1' ,
+								'method' => 'post' ,
+								'action' => url() ,
+							]) ,
+						], [
+							'width'      => '6' ,
+							'main_title' => '分配组' ,
+							'sub_title'  => '' ,
+						]) ,
+
+
 					]) ,
 
 				] , [

@@ -1,1 +1,1 @@
-UPDATE `ithink_privilege`  SET `is_menu`=0  WHERE  `id` IN (1)
+SELECT `privilege_id` FROM `ithink_role_privilege` WHERE  `role_id` = 1
