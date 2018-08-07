@@ -258,7 +258,7 @@
 
 
 		/**
-		 * 所有表查询数据时候不查回收站数据
+		 * 设置所有表查询数据时候不查回收站数据
 		 **/
 		public function getAvailableOnly()
 		{
@@ -271,10 +271,12 @@
 					] ,
 				] ,
 			]);
+
+			return $this;
 		}
 
 		/**
-		 * 所有表查询status等于1的数据
+		 * 设置所有表查询status等于1的数据
 		 **/
 		public function getActivedOnly()
 		{
@@ -287,6 +289,7 @@
 					] ,
 				] ,
 			]);
+			return $this;
 		}
 
 		/**

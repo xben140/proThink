@@ -9,23 +9,26 @@
 	 */
 	class Role extends LogicBase
 	{
-
+		public function __construct()
+		{
+			$this->initBaseClass();
+		}
 
 		/**
-		 * 获取当前用户的角色id
+		 * 获取当前角色有的权限
 		 *
 		 * @param $param
 		 *
 		 * @return mixed
 		 */
-		public function getPrivilegesId($param)
+		public function getRoleMenus($param)
 		{
 			$id = $param['id'];
+			$currPrivileges = $this->model__common_Privilegeresource->getPrivilegeIdByroleid([$id]);
 
-			$roles = $this->model__common_privilege->getPrivilegeIdByRoleId($id);
-
-			return $roles;
+			return $currPrivileges;
 		}
+
 
 		/**
 		 * 为用户分配角色
@@ -38,6 +41,8 @@
 		{
 			//用户id
 			$id = $param['id'];
+			!isset($param['privileges']) && $param['privileges'] = [];
+
 			//新分配角色id
 			$privileges = $param['privileges'];
 
@@ -55,7 +60,7 @@
 						foreach ($privileges as $v)
 						{
 							db('role_privilege')->insert([
-								'role_id' => $id ,
+								'role_id'      => $id ,
 								'privilege_id' => $v ,
 							]);
 						}
@@ -147,8 +152,8 @@
 				'between' ,
 				[
 					$reg_time_begin ,
-					$reg_time_end,
-				],
+					$reg_time_end ,
+				] ,
 			];
 
 			$order[$order_filed] = $order_;

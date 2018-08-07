@@ -1,22 +1,35 @@
 <?php
 
 	namespace app\common\logic;
+	use think\Loader;
 
 
 	/**
-	 * Class Privilege
+	 * 权限映射类
+	 *
+	 * Class Privilegeresource
 	 * @package app\common\logic
 	 */
-	class Privilege extends LogicBase
+	class Privilegeresource extends LogicBase
 	{
-
-		public function getDefaultAction()
+		public function __construct()
 		{
-			$data = $this->model_->getDefaultAction();
-
-			return $data->toArray();
+			$this->initBaseClass();
 		}
+		/**
+		 * 根据资源索引获取对应所有有效的资源数据
+		 *
+		 * @param $index
+		 *
+		 * @return mixed
+		 */
+		public function getResourceByIndex($index)
+		{
+		    $logic = $this->{'logic__common_' .Loader::parseName(strtr(RESOURCE_MAP[$index], ['_' => '']), 1)};;
 
+		    return $logic->getActivedData();
+
+		}
 
 		/**
 		 * @param $param
@@ -30,7 +43,7 @@
 
 			$order_filed = 'id';
 			$order_ = 'asc';
-
+/*
 			foreach ($param as $k => $v)
 			{
 				switch ($k)
@@ -74,6 +87,7 @@
 						break;
 				}
 			}
+*/
 
 			$order[$order_filed] = $order_;
 

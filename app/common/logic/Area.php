@@ -9,6 +9,10 @@
 	 */
 	class Area extends LogicBase
 	{
+		public function __construct()
+		{
+			$this->initBaseClass();
+		}
 
 		public function getAreaByPid($pid)
 		{

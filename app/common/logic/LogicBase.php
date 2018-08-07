@@ -3,19 +3,12 @@
 	namespace app\common\logic;
 
 	use app\common\common\set;
+
 	//use app\common\model\ModelBase;
 
 	class LogicBase
 	{
 		use set;
-		public function __construct()
-		{
-			//当前类名
-			//$this->model_ = $this->logic__common_User;
-			$this->model_ = $this->{'model__common_' . getClassBase(static::class)};
-			$this->validate_ = $this->{'validate__common_' . getClassBase(static::class)};
-		}
-
 
 		//对应表的验证器实例
 		public $validate_ = null;
@@ -31,7 +24,13 @@
 			'url'     => '' ,
 		];
 
-
+		public function initBaseClass()
+		{
+			//当前类名
+			//$this->model_ = $this->logic__common_User;
+			$this->model_ = $this->{'model__common_' . getClassBase(static::class)};
+			$this->validate_ = $this->{'validate__common_' . getClassBase(static::class)};
+		}
 
 		/**
 		 * @param $data
@@ -66,14 +65,13 @@
 		}
 
 
-
 		/**
 		 * @param $param
 		 * @param $id
 		 *
 		 * @return array
 		 */
-		public function edit($param, $id)
+		public function edit($param , $id)
 		{
 			$validateResult = $this->validate_->scene('edit')->check($param);
 
@@ -82,7 +80,7 @@
 				$where = [
 					'id' => [
 						'=' ,
-						$id,
+						$id ,
 					] ,
 				];
 
@@ -110,8 +108,6 @@
 		}
 
 
-
-
 		/**
 		 * 获取单条数据
 		 *
@@ -121,7 +117,8 @@
 		 */
 		public function getInfo($param)
 		{
-			$data = $this->model_->getRowById($param['id'] );
+			$data = $this->model_->getRowById($param['id']);
+
 			return $data;
 		}
 
@@ -134,7 +131,7 @@
 		 *
 		 * @return mixed
 		 */
-		public function dataList($param, $callback = null)
+		public function dataList($param , $callback = null)
 		{
 			$condition = $this->makeCondition($param);
 
@@ -157,15 +154,15 @@
 		 *
 		 * @return mixed
 		 */
-		public function dataListWithPagination($param, $callback = null)
+		public function dataListWithPagination($param , $callback = null)
 		{
 
 			$condition = $this->makeCondition($param);
-			$pageSize = (isset($param['pagerow']) && is_numeric($param['pagerow']) )? $param['pagerow'] : DB_LIST_ROWS;
+			$pageSize = (isset($param['pagerow']) && is_numeric($param['pagerow'])) ? $param['pagerow'] : DB_LIST_ROWS;
 
-			$data = $this->model_->selectDataWithPagination($condition, $pageSize , [
-				'var_page'  => 'page',
-				'query'     => $param,
+			$data = $this->model_->selectDataWithPagination($condition , $pageSize , [
+				'var_page' => 'page' ,
+				'query'    => $param ,
 			]);
 
 			if(is_callable($callback))
@@ -175,13 +172,13 @@
 
 			$result = $data->toArray();
 			$result['pagination'] = $data->render();
+
 			return $result;
 		}
 
 
 		/**
 		 * 获取当前表所有status为1的数据
-		 *
 		 * @return mixed
 		 */
 		public function getActivedData()
@@ -200,7 +197,7 @@
 		 *
 		 * @return array
 		 */
-		public function delete($param, $closureList = null)
+		public function delete($param , $closureList = null)
 		{
 			//TODO 执行前置钩子，根据结果决定是否删除
 			//TODO 把删除语句加入闭包队列中最后一个都通过才删除

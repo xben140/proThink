@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Privilege extends AdminBase
+	class Resourcemenu extends AdminBase
 	{
 		public function _initialize()
 		{
@@ -84,7 +84,6 @@
 						]) ,
 
 
-
 						integrationTags::text([
 							//随便写
 							'field_name'  => '图标' ,
@@ -95,55 +94,55 @@
 							'name'        => 'ico' ,
 						]) ,
 
-/*
+						/*
 
-						integrationTags::switchery([
-							//额外属性
-							//'attr'       => '' ,
-							'isChecked'  => 'checked' ,
-							//随便写
-							'tip'        => '' ,
-							//随便写
-							'field_name' => '是否作为菜单显示' ,
-							//表单name值
-							'name'       => 'is_menu' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
+												integrationTags::switchery([
+													//额外属性
+													//'attr'       => '' ,
+													'isChecked'  => 'checked' ,
+													//随便写
+													'tip'        => '' ,
+													//随便写
+													'field_name' => '是否作为菜单显示' ,
+													//表单name值
+													'name'       => 'is_menu' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
 
-						integrationTags::switchery([
-							//额外属性
-							//'attr'       => '' ,
-							//随便写
-							'isChecked'  => '' ,
-							'tip'        => '' ,
-							//随便写
-							'field_name' => '是否为公共方法' ,
-							//表单name值
-							'name'       => 'is_common' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
+												integrationTags::switchery([
+													//额外属性
+													//'attr'       => '' ,
+													//随便写
+													'isChecked'  => '' ,
+													'tip'        => '' ,
+													//随便写
+													'field_name' => '是否为公共方法' ,
+													//表单name值
+													'name'       => 'is_common' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
 
-						integrationTags::switchery([
-							'isChecked'  => 'checked' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,*/
+												integrationTags::switchery([
+													'isChecked'  => 'checked' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,*/
 
 						integrationTags::textarea([
 							'field_name' => '备注' ,
@@ -160,7 +159,6 @@
 						'method' => 'post' ,
 						'action' => url() ,
 					]) ,
-
 
 
 				] , [
@@ -247,7 +245,6 @@
 						]) ,
 
 
-
 						integrationTags::text([
 							//随便写
 							'field_name'  => '图标' ,
@@ -259,66 +256,64 @@
 						]) ,
 
 
-
-
-/*
-						integrationTags::switchery([
-							//额外属性
-							//'attr'       => '' ,
-							'isChecked'  => $info['is_menu'] == 1 ? 'checked' : '' ,
-							//随便写
-							'tip'        => '' ,
-							//随便写
-							'field_name' => '是否作为菜单显示' ,
-							//表单name值
-							'name'       => 'is_menu' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
+						/*
+												integrationTags::switchery([
+													//额外属性
+													//'attr'       => '' ,
+													'isChecked'  => $info['is_menu'] == 1 ? 'checked' : '' ,
+													//随便写
+													'tip'        => '' ,
+													//随便写
+													'field_name' => '是否作为菜单显示' ,
+													//表单name值
+													'name'       => 'is_menu' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
 
 
 
 
-						integrationTags::switchery([
-							//额外属性
-							//'attr'       => '' ,
-							//随便写
-							'isChecked'  => $info['is_common'] == 1 ? 'checked' : '' ,
-							'tip'        => '' ,
-							//随便写
-							'field_name' => '是否为公共方法' ,
-							//表单name值
-							'name'       => 'is_common' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
+												integrationTags::switchery([
+													//额外属性
+													//'attr'       => '' ,
+													//随便写
+													'isChecked'  => $info['is_common'] == 1 ? 'checked' : '' ,
+													'tip'        => '' ,
+													//随便写
+													'field_name' => '是否为公共方法' ,
+													//表单name值
+													'name'       => 'is_common' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
 
-						integrationTags::switchery([
-							'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
-							//额外属性
-							//'attr'       => '{if 1 == 1}checked{/if}' ,
-							//随便写
-							'tip'        => '是否启用' ,
-							//随便写
-							'field_name' => '是否启用' ,
-							//表单name值
-							'name'       => 'status' ,
-							//表单value值,$data里的字段
-							'value'      => '1' ,
-							//表单value对应名字,$data里的字段
-							'field'      => '' ,
-						]) ,
-*/
+												integrationTags::switchery([
+													'isChecked'  => $info['status'] == 1 ? 'checked' : '' ,
+													//额外属性
+													//'attr'       => '{if 1 == 1}checked{/if}' ,
+													//随便写
+													'tip'        => '是否启用' ,
+													//随便写
+													'field_name' => '是否启用' ,
+													//表单name值
+													'name'       => 'status' ,
+													//表单value值,$data里的字段
+													'value'      => '1' ,
+													//表单value对应名字,$data里的字段
+													'field'      => '' ,
+												]) ,
+						*/
 
 						integrationTags::textarea([
 							'field_name' => '备注' ,
 							'tip'        => '角色备注' ,
 							'name'       => 'remark' ,
-							'value'       => $info['remark'] ,
+							'value'      => $info['remark'] ,
 							'attr'       => '' ,
 							'style'      => 'width:100%;height:150px;' ,
 						]) ,
@@ -340,11 +335,9 @@
 		}
 
 
-
-
 		public function dataList()
 		{
-			$this->setPageTitle('权限列表');
+			$this->setPageTitle('菜单列表');
 
 			$this->initLogic();
 			$this->displayContents = integrationTags::basicFrame([
@@ -654,7 +647,6 @@
 									]) ,
 
 
-
 									//是否作为菜单
 									integrationTags::td([
 										integrationTags::tdSwitcher([
@@ -726,6 +718,10 @@
 							}
 
 						}) ,
+					] , [
+						'width'      => '12' ,
+						'main_title' => '菜单列表' ,
+						'sub_title'  => '' ,
 					]) ,
 				]) ,
 			]);
@@ -743,7 +739,7 @@
 		public function delete()
 		{
 			$this->initLogic();
-			$this->jump($this->logic->delete($this->param));
+			return $this->jump($this->logic->delete($this->param));
 		}
 
 	}

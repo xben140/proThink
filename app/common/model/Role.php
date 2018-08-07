@@ -29,27 +29,49 @@
 		];
 
 
+
+
+
+
+
+
+
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
+
+
 		/**
 		 * 根据用户id获取角色信息
 		 *
 		 * @param $id
 		 *
-		 * @return mixed
+		 * @return false|\PDOStatement|string|\think\Collection
+		 * @throws \think\db\exception\DataNotFoundException
+		 * @throws \think\db\exception\ModelNotFoundException
+		 * @throws \think\exception\DbException
 		 */
 		public function getRoleByUserId($id)
 		{
-			$where = [
-				'id' => [
-					'=' ,
-					$id,
-				] ,
-			];
+			//角色id
+			$rolesId = $this->getRoleIdByUserId($id);
 
-			$condition = [
-				'where' => $where,
-			];
-
-			$data = $this->findData($condition);
+			$data = $this->selectData([
+				'where' => [
+					'id' => [
+						'in' ,
+						$rolesId ,
+					] ,
+				],
+			]);
 
 			return $data;
 		}

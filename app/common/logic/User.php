@@ -8,7 +8,10 @@
 	 */
 	class User extends LogicBase
 	{
-
+		public function __construct()
+		{
+			$this->initBaseClass();
+		}
 
 		/**
 		 * 获取当前用户的角色id
@@ -17,7 +20,7 @@
 		 *
 		 * @return mixed
 		 */
-		public function getRolesId($param)
+		public function getUserRoles($param)
 		{
 			$id = $param['id'];
 
@@ -38,6 +41,7 @@
 		{
 			//用户id
 			$id = $param['id'];
+			!isset($param['roles']) && $param['roles'] = [];
 			//新分配角色id
 			$roles = $param['roles'];
 
@@ -64,7 +68,7 @@
 					} ,
 					[
 						$roles ,
-						$id,
+						$id ,
 					] ,
 				] ,
 			] , $err);

@@ -2,8 +2,10 @@
 
 	namespace app\common\model;
 
-	class Privilege extends ModelBase
+	class Resourcemenu extends ModelBase
 	{
+		public $name = 'resource_menu';
+
 		/**
 		 *  初始化模型
 		 * @access protected
@@ -74,54 +76,6 @@
 		}
 
 
-
-
-		/**
-		 * 根据用户id获取角色信息
-		 *
-		 * @param $id
-		 *
-		 * @return mixed
-		 */
-		public function getPrivilegeByRoleId($id)
-		{
-			$where = [
-				'id' => [
-					'=' ,
-					$id,
-				] ,
-			];
-
-			$condition = [
-				'where' => $where,
-			];
-
-			$data = $this->findData($condition);
-
-			return $data;
-		}
-
-		/**
-		 * 根据用户id获取角色id
-		 *    查role_user映射表
-		 *
-		 * @param $id
-		 *
-		 * @return mixed
-		 */
-		public function getPrivilegeIdByRoleId($id)
-		{
-			$where = [
-				'role_id' => [
-					'=' ,
-					$id ,
-				] ,
-			];
-
-			$data = db('role_privilege')->where($where)->column('privilege_id');
-
-			return $data;
-		}
 
 	}
 

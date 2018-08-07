@@ -2,10 +2,8 @@
 
 	namespace app\common\validate;
 
-	class Privilege extends ValidateBase
+	class Resourcemenu extends ValidateBase
 	{
-
-
 		// 验证规则
 		protected $rule = [
 			'pid'        => 'number' ,

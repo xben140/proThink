@@ -27,6 +27,8 @@
 		'admin_themes'           => 'default' ,
 		//后台默认皮肤
 		'home_themes'            => 'default' ,
+		//后台默认皮肤
+		'portal_themes'            => 'default' ,
 
 		//后台页面构造器页面是否缓存
 		'enable_static_cache'    => 0 ,

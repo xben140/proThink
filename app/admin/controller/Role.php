@@ -444,7 +444,7 @@
 						}) ,
 					] , [
 						'width'      => '12' ,
-						'main_title' => '' ,
+						'main_title' => '角色列表' ,
 						'sub_title'  => '' ,
 					]) ,
 				]) ,
@@ -464,7 +464,7 @@
 		public function delete()
 		{
 			$this->initLogic();
-			$this->jump($this->logic->delete($this->param));
+			return $this->jump($this->logic->delete($this->param));
 		}
 
 
@@ -482,18 +482,18 @@
 				$this->setPageTitle('分配权限');
 				session(URL_MODULE , $this->param['id']);
 
-				//获取所有有效权限
-				$privileges = $this->logic__common_privilege->getActivedData();
+				//获取所有有效菜单
+				$menus = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU);
 
-				//获取当前用户有的权限
-				$currPrivileges = $this->logic->getPrivilegesId($this->param);
+				//获取当前角色有的菜单
+				$currPrivileges = $this->logic->getRoleMenus($this->param);
 
 				$roles_ = array_map(function($v) {
 					return [
 						'value' => $v['id'] ,
 						'field' => $v['name'] ,
 					];
-				} , $privileges);
+				} , $menus);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::row([
@@ -508,7 +508,7 @@
 								'method' => 'post' ,
 								'action' => url() ,
 							]) ,
-						], [
+						] , [
 							'width'      => '6' ,
 							'main_title' => '分配菜单和访问权限' ,
 							'sub_title'  => '' ,

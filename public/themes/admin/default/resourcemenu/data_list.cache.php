@@ -15,7 +15,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>权限列表</title>
+<title>菜单列表</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -80,8 +80,8 @@
 <div class="col-sm-12">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
-							<h5>大标题
-								<small>小标题</small>
+							<h5>菜单列表
+								<small></small>
 							</h5>
 							<div class="ibox-tools">
 							
@@ -156,6 +156,826 @@
 									</thead>
 									<tbody>
 																	
+		<tr data-id="1" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 111111
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > home
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > user
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-07-25 16:22:40
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 333
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="2" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 22222
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > home
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > user
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > add
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-07-25 16:22:57
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="3" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 3
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 33333
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > user
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-07-25 16:23:31
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="4" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 4
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 44444
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > hhhhh
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > aaa
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-01 15:44:29
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
 		<tr data-id="5" >
 		
 												
@@ -189,7 +1009,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > sfsdfsdf3
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 55555
 
  </span>
 
@@ -227,7 +1047,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > ccccc
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > df
 
  </span>
 
@@ -394,7 +1214,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 改改
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 66666
 
  </span>
 
@@ -422,7 +1242,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > fff
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > sdfsdf
 
  </span>
 
@@ -599,7 +1419,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 3434
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 77777
 
  </span>
 
@@ -637,7 +1457,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > ccccc
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > ccccc33
 
  </span>
 
@@ -804,7 +1624,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 橄榄色的green333
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 88888
 
  </span>
 
@@ -901,6 +1721,211 @@
 		<td  >
 		
 				<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="9" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 9
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 99999
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > ffff
+
+ </span>
+
+/
+
+<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > ccc
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-03 09:55:16
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > dfdf
 
  </span>
 
@@ -1094,7 +2119,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="53" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="533" name="pagerow">
 		</div>
 
 
@@ -1129,7 +2154,7 @@
 	</span>
 	<div data-toggle="buttons" class="btn-group">
 		<!--<label class="btn  btn-white active"> <input type="radio" id="option2" name="options">周</label>-->
-		<label class="btn  btn-white active"> <input checked type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white "> <input  type="radio"   name="order" value="desc">反序</label>
+		<label class="btn  btn-white "> <input  type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white active"> <input checked type="radio"   name="order" value="desc">反序</label>
 	</div>
 </div>
 
@@ -1147,7 +2172,7 @@
 	</span>
 	<div data-toggle="buttons" class="btn-group">
 		<!--<label class="btn  btn-white active"> <input type="radio" id="option2" name="options">周</label>-->
-		<label class="btn  btn-white "> <input  type="radio"   name="status" value="-1">全部</label><label class="btn  btn-white "> <input  type="radio"   name="status" value="0">禁用</label><label class="btn  btn-white active"> <input checked type="radio"   name="status" value="1">正常</label>
+		<label class="btn  btn-white active"> <input checked type="radio"   name="status" value="-1">全部</label><label class="btn  btn-white "> <input  type="radio"   name="status" value="0">禁用</label><label class="btn  btn-white "> <input  type="radio"   name="status" value="1">正常</label>
 	</div>
 </div>
 
@@ -1162,11 +2187,11 @@
 						
 
 <script>
-window.deleteUrl = '/admin/privilege/delete.html';
-window.setFieldUrl = '/admin/privilege/setfield.html';
-window.detailUrl = '/admin/privilege/detail.html';
-window.editUrl = '/admin/privilege/edit.html';
-window.addUrl = '/admin/privilege/add.html';
+window.deleteUrl = '/admin/resourcemenu/delete.html';
+window.setFieldUrl = '/admin/resourcemenu/setfield.html';
+window.detailUrl = '/admin/resourcemenu/detail.html';
+window.editUrl = '/admin/resourcemenu/edit.html';
+window.addUrl = '/admin/resourcemenu/add.html';
 </script>
 
 			<script>  

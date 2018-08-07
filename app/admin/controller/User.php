@@ -533,14 +533,14 @@
 									//操作
 									integrationTags::td([
 										integrationTags::tdButton([
-											'attr'  => ' btn-success btn-edit' ,
-											'value' => '编辑' ,
-										]) ,
-										integrationTags::tdButton([
 											'attr'  => ' btn-info btn-modify-pwd' ,
 											'value' => '修改密码' ,
 										]) ,
-
+										integrationTags::tdButton([
+											'attr'  => ' btn-success btn-edit' ,
+											'value' => '编辑' ,
+										]) ,
+										'<br>',
 										integrationTags::tdButton([
 											'attr'  => ' btn-info btn-assign-role' ,
 											'value' => '用户授权' ,
@@ -559,6 +559,9 @@
 							}
 
 						}) ,
+					] , [
+						'main_title' => '用户列表' ,
+						'sub_title'  => '' ,
 					]) ,
 				]) ,
 			]);
@@ -583,7 +586,7 @@
 		public function delete()
 		{
 			$this->initLogic();
-			$this->jump($this->logic->delete($this->param));
+			return $this->jump($this->logic->delete($this->param));
 		}
 
 		public function assignRoles()
@@ -592,7 +595,6 @@
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);
-
 				$this->jump($this->logic->assignRoles($this->param));
 			}
 			else
@@ -604,7 +606,7 @@
 				$roles = $this->logic__common_role->getActivedData();
 
 				//获取当前用户有的角色
-				$currRoles = $this->logic->getRolesId($this->param);
+				$currRoles = $this->logic->getUserRoles($this->param);
 
 				$roles_ = array_map(function($v) {
 					return [
@@ -626,26 +628,9 @@
 								'method' => 'post' ,
 								'action' => url() ,
 							]) ,
-						], [
+						] , [
 							'width'      => '6' ,
-							'main_title' => '分配角色' ,
-							'sub_title'  => '' ,
-						]) ,
-
-
-						integrationTags::rowBlock([
-							integrationTags::form([
-								//blockCheckbox
-								//inlineCheckbox
-								integrationTags::blockCheckbox($roles_ , 'roles[]' , '用户组' , '每个用户可分配多个角色' , $currRoles) ,
-							] , [
-								'id'     => 'form1' ,
-								'method' => 'post' ,
-								'action' => url() ,
-							]) ,
-						], [
-							'width'      => '6' ,
-							'main_title' => '分配组' ,
+							'main_title' => '用户授权' ,
 							'sub_title'  => '' ,
 						]) ,
 

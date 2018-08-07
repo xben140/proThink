@@ -80,7 +80,7 @@
 <div class="col-sm-12">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
-							<h5>
+							<h5>角色列表
 								<small></small>
 							</h5>
 							<div class="ibox-tools">
@@ -189,7 +189,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员2323
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员111
 
  </span>
 
@@ -245,7 +245,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -312,7 +312,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员122
 
  </span>
 
@@ -435,7 +435,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员12333
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员123333
 
  </span>
 
@@ -491,7 +491,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -558,7 +558,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员111
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1444
 
  </span>
 
@@ -614,7 +614,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -681,7 +681,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员11123
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员5555
 
  </span>
 
@@ -804,7 +804,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员6666
 
  </span>
 
@@ -860,7 +860,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -927,7 +927,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员777
 
  </span>
 
@@ -1050,7 +1050,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填2
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员888
 
  </span>
 
@@ -1106,7 +1106,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -1173,7 +1173,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 必填23
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员999
 
  </span>
 
@@ -1349,7 +1349,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="533" name="pagerow">
 		</div>
 
 
