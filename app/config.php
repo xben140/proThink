@@ -14,28 +14,28 @@
 		// | 应用设置
 		// +----------------------------------------------------------------------
 
-		'admin_id'               => 1 ,
-		'app_namespace'          => 'app' ,
+		'admin_id'            => 1 ,
+		'app_namespace'       => 'app' ,
 
 		// 应用调试模式
-		'app_debug'              => true ,
+		'app_debug'           => true ,
 		// 应用Trace
-		'app_trace'              => false ,
+		'app_trace'           => false ,
 
 		//每添加一个模块这里要加个配置
 		//前台默认皮肤
-		'admin_themes'           => 'default' ,
+		'admin_themes'        => 'default' ,
 		//后台默认皮肤
-		'home_themes'            => 'default' ,
+		'home_themes'         => 'default' ,
 		//后台默认皮肤
-		'portal_themes'            => 'default' ,
+		'portal_themes'       => 'default' ,
 
 		//后台页面构造器页面是否缓存
-		'enable_static_cache'    => 0 ,
+		'enable_static_cache' => 0 ,
 
 
 		// 扩展函数文件
-		'extra_file_list'        => [
+		'extra_file_list'     => [
 			THINK_PATH . 'helper' . EXT ,
 			APP_PATH . 'function' . EXT ,
 			APP_PATH . 'extend' . EXT ,
@@ -43,21 +43,21 @@
 
 		'captcha'                => [
 			// 验证码字符集合
-			'codeSet'  => '0123456789',
+			'codeSet'  => '0123456789' ,
 			// 验证码字体大小(px)
-			'fontSize' => 24,
+			'fontSize' => 24 ,
 			// 是否画混淆曲线
-			'useCurve' => false,
+			'useCurve' => false ,
 
 			// 验证码图片高度
-			'imageH'   => 50,
+			'imageH'   => 50 ,
 			// 验证码图片宽度
-			'imageW'   => 280,
+			'imageW'   => 280 ,
 			// 验证码位数
-			'length'   => 4,
+			'length'   => 4 ,
 			// 验证成功后是否重置
-			'reset'    => true,
-		],
+			'reset'    => true ,
+		] ,
 
 		//模板元素映射表
 		'elements_map'           => [
@@ -142,7 +142,6 @@
 		'default_controller'     => 'login' ,
 		// 默认操作名
 		'default_action'         => 'login' ,
-
 
 
 		// 禁止访问模块
