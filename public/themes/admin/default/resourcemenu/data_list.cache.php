@@ -331,7 +331,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -536,7 +536,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -741,7 +741,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -2154,7 +2154,7 @@
 	</span>
 	<div data-toggle="buttons" class="btn-group">
 		<!--<label class="btn  btn-white active"> <input type="radio" id="option2" name="options">周</label>-->
-		<label class="btn  btn-white "> <input  type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white active"> <input checked type="radio"   name="order" value="desc">反序</label>
+		<label class="btn  btn-white active"> <input checked type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white "> <input  type="radio"   name="order" value="desc">反序</label>
 	</div>
 </div>
 

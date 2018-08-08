@@ -215,10 +215,14 @@
 		return preg_replace('%([^\\\\/]+$)%m' , 'thumb_$1' , $path);
 	}
 
-	/**
-	 *计算路径
-	 */
-
+	/*
+	 *
+	 *
+	 * 计算路径
+	 *
+	 *
+	 *
+	 * */
 	/**
 	 * 计算文件路径
 	 * 以常量为基础
@@ -343,6 +347,40 @@
 		return md5(md5($pwd) . md5($salt));
 	}
 
+
+	/*
+	 *
+	 *
+	 * 读session
+	 *
+	 *
+	 *
+	 * */
+
+
+	/**
+	 * 指定平台是否登录
+	 * @return array|string|bool
+	 */
+	function isAdminLogin()
+	{
+		return getAdminSessionInfo('user');
+	}
+
+	/**
+	 * 构造用户密码
+	 *
+	 * @param string $tag sesion 信息标签
+	 * @param        $key
+	 *
+	 * @return array|string|bool
+	 */
+	function getAdminSessionInfo($tag, $key=null)
+	{
+		$info =  session(SESSION_TAG_ADMIN . $tag);
+
+		return isset($info[$key]) ? $info[$key] : $info;
+	}
 
 
 

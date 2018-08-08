@@ -41,7 +41,9 @@
 		{
 			$data[TIME_INSERT_FIELD_NAME] = TIME_NOW;
 
-			return $this->allowField(true)->isUpdate(false)->save($data);
+			$res = $this->allowField(true)->isUpdate(false)->save($data);
+
+			return $res;
 		}
 
 
@@ -74,16 +76,18 @@
 		 *
 		 * @return ModelBase|int
 		 */
-		final protected function deleteData($where = [], $isTurelyDelete = 0)
+		final protected function deleteData($where = [] , $isTurelyDelete = 0)
 		{
 			if($isTurelyDelete)
 			{
 				$this->setCondition(['where' => $where ,]);
-				return $this->delete();
+				$res = $this->delete();
+
+				return $res;
 			}
 			else
 			{
-				return $this->updateData(['status'=> '2'], $where);
+				return $this->updateData(['status' => '2'] , $where);
 			}
 		}
 
@@ -134,7 +138,9 @@
 		final public function updateField($data , $where)
 		{
 			//每个添加的数据都加入时间字段
-			return $this->update($data , $where);
+			$res = $this->update($data , $where);
+
+			return $res;
 		}
 
 
@@ -147,10 +153,12 @@
 		 *
 		 * @return ModelBase
 		 */
-		final public function updateData($data , $where  , $field = true)
+		final public function updateData($data , $where , $field = true)
 		{
 			//每个添加的数据都加入时间字段
-			return $this->update($data , $where , $field);
+			$res = $this->update($data , $where , $field);
+
+			return $res;
 		}
 
 
@@ -177,9 +185,9 @@
 			$this->getAvailableOnly();
 			$this->setCondition($condition);
 			//每个添加的数据都加入时间字段
-			return $this
-				//->fetchSql(1)
-				->select();
+			$res = $this->fetchSql(0)->select();
+
+			return $res;
 		}
 
 		/**
@@ -192,12 +200,14 @@
 		 * @return \think\Paginator
 		 * @throws \think\exception\DbException
 		 */
-		final public function selectDataWithPagination($condition, $pagesize , $params)
+		final public function selectDataWithPagination($condition , $pagesize , $params)
 		{
 			$this->getAvailableOnly();
 			$this->setCondition($condition);
 			//每个添加的数据都加入时间字段
-			return $this->paginate($pagesize, false, $params);
+			$res = $this->fetchSql(0)->paginate($pagesize , false , $params);
+
+			return $res;
 		}
 
 		/**
@@ -215,34 +225,38 @@
 			$this->getAvailableOnly();
 			$this->setCondition($condition);
 			//每个添加的数据都加入时间字段
-			return $this->find();
+			$res = $this->fetchSql(0)->find();
+
+			return $res;
 		}
 
 		/**
-		 *	根据id获取单条数据
+		 *    根据id获取单条数据
 		 *
-		 * @param       $id
-		 * @param array $where_
+		 * @param        $id
+		 * @param string $field
 		 *
 		 * @return array|false|\PDOStatement|string|Model
 		 * @throws \think\db\exception\DataNotFoundException
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		public function getRowById($id, $where_ = [])
+		public function getRowById($id, $field = '*')
 		{
 			$where = [
 				'id' => [
 					'=' ,
-					$id
+					$id ,
 				] ,
 			];
 
-			$condition=[
-				'where' => array_merge($where, $where_),
+			$condition = [
+				'where' => $where ,
+				'field' => $field ,
 			];
 
 			$data = $this->findData($condition);
+
 			return $data;
 		}
 
@@ -256,18 +270,17 @@
 		 */
 
 
-
 		/**
 		 * 设置所有表查询数据时候不查回收站数据
 		 **/
 		public function getAvailableOnly()
 		{
-			$this->setCondition(['alias' => self::$currentTableAlias]);
 			$this->setCondition([
+				'alias' => self::$currentTableAlias ,
 				'where' => [
 					self::makeSelfAliasField(DATA_STATUS_NAME) => [
 						'<>' ,
-						'2',
+						'2' ,
 					] ,
 				] ,
 			]);
@@ -280,15 +293,16 @@
 		 **/
 		public function getActivedOnly()
 		{
-			$this->setCondition(['alias' => self::$currentTableAlias]);
 			$this->setCondition([
+				'alias' => self::$currentTableAlias ,
 				'where' => [
 					self::makeSelfAliasField(DATA_STATUS_NAME) => [
 						'=' ,
-						'1',
+						'1' ,
 					] ,
 				] ,
 			]);
+
 			return $this;
 		}
 
@@ -314,7 +328,7 @@
 
 		public function setCondition(array $condition = [])
 		{
-			foreach ($condition as $k => $v) 	$this->$k($v);
+			foreach ($condition as $k => $v) $this->$k($v);
 
 			return $this;
 		}

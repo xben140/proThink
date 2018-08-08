@@ -156,7 +156,7 @@
 									</thead>
 									<tbody>
 																	
-		<tr data-id="11" >
+		<tr data-id="1" >
 		
 												
 		<td  >
@@ -173,7 +173,7 @@
 						
 		<td  >
 		
-				<span  > 11
+				<span  > 1
 
  </span>
 
@@ -189,7 +189,7 @@
 
  </span>
 
-<span  > test1c
+<span  > qq123456
 
  </span>
 
@@ -215,7 +215,7 @@
 
  </span>
 
-<span  > sfklsdajf@aa.cc
+<span  > dfddcc@qq.cc
 
  </span>
 
@@ -225,7 +225,7 @@
 
  </span>
 
-<span  > 13321212121
+<span  > 15826533333
 
  </span>
 
@@ -241,7 +241,7 @@
 
  </span>
 
-<span  > 2018-08-07 15:26:45
+<span  > 2018-08-01 15:29:56
 
  </span>
 
@@ -251,7 +251,7 @@
 
  </span>
 
-<span  > 1970-01-01 08:00:00
+<span  > 2018-08-08 16:08:11
 
  </span>
 
@@ -277,7 +277,7 @@
 
  </span>
 
-<span  > 0
+<span  > 127.0.0.1
 
  </span>
 
@@ -289,7 +289,7 @@
 						
 		<td  >
 		
-				<span  > 0
+				<span  > 28
 
  </span>
 
@@ -305,7 +305,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -345,7 +345,7 @@
 
 
 						
-		<tr data-id="10" >
+		<tr data-id="2" >
 		
 												
 		<td  >
@@ -362,7 +362,7 @@
 						
 		<td  >
 		
-				<span  > 10
+				<span  > 2
 
  </span>
 
@@ -378,7 +378,7 @@
 
  </span>
 
-<span  > kjsdkj
+<span  > qq1234567
 
  </span>
 
@@ -388,7 +388,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > use999
+<span  class="td-modify"  data-field="nickname"  > user222
 
  </span>
 
@@ -404,574 +404,7 @@
 
  </span>
 
-<span  > sdddddf@434.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 15533654444
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-03 09:04:48
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="8" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 8
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dfdfee
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user1888
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > skldfj@qq.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 12312312355
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-02 10:03:58
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="7" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 7
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > xiaoming
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user1777
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > 123456@cc.vv
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 12312312355
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-01 22:40:11
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="6" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 6
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dfdf123456
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user666
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > dd2d2ee6@qq.cc
+<span  > 1234522226@qq.cc
 
  </span>
 
@@ -997,385 +430,7 @@
 
  </span>
 
-<span  > 2018-08-01 15:31:00
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="5" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 5
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dfd123456
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user555
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > dd2d26@qq.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-01 15:30:30
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="4" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 4
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dd123456
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user444
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > dd226@qq.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-01 15:30:18
+<span  > 2018-08-01 15:30:06
 
  </span>
 
@@ -1668,7 +723,7 @@
 
 
 						
-		<tr data-id="2" >
+		<tr data-id="4" >
 		
 												
 		<td  >
@@ -1685,7 +740,7 @@
 						
 		<td  >
 		
-				<span  > 2
+				<span  > 4
 
  </span>
 
@@ -1701,7 +756,7 @@
 
  </span>
 
-<span  > qq123456
+<span  > dd123456
 
  </span>
 
@@ -1711,7 +766,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user222
+<span  class="td-modify"  data-field="nickname"  > user444
 
  </span>
 
@@ -1727,7 +782,7 @@
 
  </span>
 
-<span  > 1234522226@qq.cc
+<span  > dd226@qq.cc
 
  </span>
 
@@ -1753,7 +808,7 @@
 
  </span>
 
-<span  > 2018-08-01 15:30:06
+<span  > 2018-08-01 15:30:18
 
  </span>
 
@@ -1857,7 +912,7 @@
 
 
 						
-		<tr data-id="1" >
+		<tr data-id="5" >
 		
 												
 		<td  >
@@ -1874,7 +929,7 @@
 						
 		<td  >
 		
-				<span  > 1
+				<span  > 5
 
  </span>
 
@@ -1890,7 +945,952 @@
 
  </span>
 
-<span  > sdfsdf
+<span  > dfd123456
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > user555
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > dd2d26@qq.cc
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-01 15:30:30
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="6" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 6
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > dfdf123456
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > user666
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > dd2d2ee6@qq.cc
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-01 15:31:00
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="7" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 7
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > xiaoming
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > user1777
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > 123456@cc.vv
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 12312312355
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-01 22:40:11
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="8" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 8
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > dfdfee
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > user1888
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > skldfj@qq.cc
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 12312312355
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-02 10:03:58
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="10" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 10
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > kjsdkj
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > use999
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > sdddddf@434.cc
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 15533654444
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-03 09:04:48
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="11" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 11
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > test1c
 
  </span>
 
@@ -1916,7 +1916,7 @@
 
  </span>
 
-<span  > dfddcc@qq.cc
+<span  > sfklsdajf@aa.cc
 
  </span>
 
@@ -1926,7 +1926,7 @@
 
  </span>
 
-<span  > 15826533333
+<span  > 13321212121
 
  </span>
 
@@ -1942,7 +1942,196 @@
 
  </span>
 
-<span  > 2018-08-01 15:29:56
+<span  > 2018-08-07 15:26:45
+
+ </span>
+
+<br>
+
+<span  > 登陆时间
+
+ </span>
+
+<span  > 1970-01-01 08:00:00
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册IP
+
+ </span>
+
+<span  > 127.0.0.1
+
+ </span>
+
+<br>
+
+<span  > 登陆IP
+
+ </span>
+
+<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+<br>
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="12" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 12
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 用户名 : 
+
+ </span>
+
+<span  > helloworld
+
+ </span>
+
+<br/>
+
+<span  > 姓名 : 
+
+ </span>
+
+<span  class="td-modify"  data-field="nickname"  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > email : 
+
+ </span>
+
+<span  > 
+
+ </span>
+
+<br>
+
+<span  > 电话 : 
+
+ </span>
+
+<span  > 
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 注册时间
+
+ </span>
+
+<span  > 2018-08-08 14:14:51
 
  </span>
 
@@ -2149,7 +2338,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="522" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
 		</div>
 
 
@@ -2184,7 +2373,7 @@
 	</span>
 	<div data-toggle="buttons" class="btn-group">
 		<!--<label class="btn  btn-white active"> <input type="radio" id="option2" name="options">周</label>-->
-		<label class="btn  btn-white "> <input  type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white active"> <input checked type="radio"   name="order" value="desc">反序</label>
+		<label class="btn  btn-white active"> <input checked type="radio"   name="order" value="asc">正序</label><label class="btn  btn-white "> <input  type="radio"   name="order" value="desc">反序</label>
 	</div>
 </div>
 

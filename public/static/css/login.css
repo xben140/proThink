@@ -116,12 +116,13 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .login-layout {
-	width    : 434px;
-	position : absolute;
-	z-index  : 3;
-	top      : 50%;
-	left     : 60%;
-	margin   : -289px auto auto -60px;
+	/* width    : 434px; */
+	/* background : #f00; */
+	position   : absolute;
+	z-index    : 3;
+	top        : 50%;
+	left       : 60%;
+	margin     : -289px auto auto -60px;
 }
 
 /*-209*/
@@ -139,8 +140,9 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .formContent {
-	width  : 412px;
-	height : 376px;
+	width      : 418px;
+	/* background : #0ff; */
+	height     : 376px;
 }
 
 .formContent .title {
@@ -152,8 +154,9 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .formInfo {
-	width  : 225px;
-	margin : 10px auto;
+	width      : 280px;
+	margin     : 0px auto;
+	/* background : #ccc; */
 }
 
 .formText {
@@ -171,10 +174,10 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .formText .input-text {
-	width         : 100%;
+	width         : 93%;
 	height        : 36px;
 	border-radius : inherit;
-	border-radius : 5px
+	border-radius : 5px;
 }
 
 .icon {
@@ -205,11 +208,13 @@ input[type='text']:focus::-webkit-input-placeholder {
 
 .chicuele {
 	cursor   : pointer;
-	width    : 100px;
+	/* width    : 100px; */
 	position : RELATIVE;
-	left     : 18px;
-	top      : 12px;
-	height   : 37px;
+	/* left     : 18px; */
+	/* top      : 12px; */
+	/* height   : 37px; */
+	display  : block;
+	margin   : 10px 0 10px 0;
 }
 
 .checkbox, .cur {
@@ -259,7 +264,7 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .submitDiv {
-	margin-left : -30px
+	margin-left: -8px;
 }
 
 .submitDiv .text_span {

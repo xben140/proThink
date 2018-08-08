@@ -30,7 +30,6 @@
 	//编辑按钮事件注册
 	$('.btn-edit').on({'click': function () {registerEdit(this)}});
 
-
 	//详情按钮事件注册
 	$('.btn-detail').on({'click': function () {registerDetail(this)}});
 	//删除按钮事件注册

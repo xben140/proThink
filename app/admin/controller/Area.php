@@ -12,7 +12,7 @@
 		public function getAreaByPid()
 		{
 			$this->initLogic();
-			$data = $this->logic->getAreaByPid($this->param['pid']);
+			$data = $this->logic->getAreaByPid($this->param);
 
 			return json($data);
 		}

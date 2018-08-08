@@ -5,12 +5,13 @@
 		<meta name="”renderer”" content="”webkit”">
 		<title>登录页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="icon" href="http://demo6.tp-shop.cn/public/static/animated_favicon.gif" type="image/gif">
+		<link rel="icon" href="">
 
 		<link href="__STATIC__/css/login.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="__HPLUS__js/jquery.min.js"></script>
 		<script type="text/javascript" src="__STATIC__js/jquery.SuperSlide.2.1.2.js"></script>
 		<script type="text/javascript" src="__STATIC__js/jquery.cookie.js"></script>
+		<script src="__HPLUS__js/plugins/layer/layer.js"></script>
 
 	</head>
 
@@ -19,7 +20,7 @@
 			<!--
 			<div class="logo"><img src="./images/loginImg.png"></div>
 			-->
-			<form action="" name="theForm" id="theForm" method="post">
+			<form action="/portal/login/dologin" name="loginForm" id="loginForm" method="post">
 				<div class="login-form" style="position: relative">
 					<div class="formContent">
 						<div class="title">管理中心</div>
@@ -34,15 +35,19 @@
 							</div>
 							<div class="formText">
 								<i class="icon icon-chick"></i>
-								<input type="text" name="vertify" autocomplete="off" class="input-text chick_ue" value="" placeholder="验证码">
-								<img src="" class="chicuele" id="imgVerify" alt="" onclick="fleshVerify()">
+								<input type="text" name="captcha" autocomplete="off" class="input-text chick_ue" value="" placeholder="验证码">
+								<div><img  src="{:captcha_src()}" onclick="refreshSrc()" alt="captcha"  class="chicuele" id="imgVerify"  /></div>
+
 							</div>
+							<!--
 							<div class="formText">
-								<!--<a href="" class="forget_pwd">忘记密码？</a>-->
+								<a href="" class="forget_pwd">忘记密码？</a>
 							</div>
+
+							-->
 							<div class="formText submitDiv">
                           <span class="submit_span">
-                          	<input type="button" name="submit" class="sub" value="登录" style="pointer-events: auto;">
+                          	<input type="submit" name="submit" class="sub" value="登录" style="pointer-events: auto;">
                           </span>
 							</div>
 						</div>
@@ -60,17 +65,8 @@
 				</li>
 			</ul>
 		</div>
-		<script type="text/javascript">
-			$("#bannerBox").slide({
-				mainCell: ".slideBanner", effect: "fold", interTime: 3500, delayTime: 500, autoPlay: true, autoPage: true, endFun: function (i, c, s) {
-					$(window).resize(function () {
-						var width = $(window).width();
-						var height = $(window).height();
-						s.find(".slideBanner,.slideBanner li").css({"width": width, "height": height});
-					});
-				}
-			});
 
-		</script>
+		<script src="__STATIC__/js/form.js"></script>
+		<script src="__STATIC__/js/login.js"></script>
 	</body>
 </html>

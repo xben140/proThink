@@ -14,8 +14,9 @@
 			$this->initBaseClass();
 		}
 
-		public function getAreaByPid($pid)
+		public function getAreaByPid($param)
 		{
+			$pid = $param['pid'];
 			$data = $this->model_->getAreaByPid($pid);
 
 			//array

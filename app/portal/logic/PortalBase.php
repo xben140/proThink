@@ -1,6 +1,6 @@
 <?php
 
-	namespace app\portal\logical;
+	namespace app\portal\logic;
 
 	use app\common\logic\LogicBase;
 

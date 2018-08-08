@@ -41,6 +41,23 @@
 			APP_PATH . 'extend' . EXT ,
 		] ,
 
+		'captcha'                => [
+			// 验证码字符集合
+			'codeSet'  => '0123456789',
+			// 验证码字体大小(px)
+			'fontSize' => 24,
+			// 是否画混淆曲线
+			'useCurve' => false,
+
+			// 验证码图片高度
+			'imageH'   => 50,
+			// 验证码图片宽度
+			'imageW'   => 280,
+			// 验证码位数
+			'length'   => 4,
+			// 验证成功后是否重置
+			'reset'    => true,
+		],
 
 		//模板元素映射表
 		'elements_map'           => [
@@ -120,13 +137,16 @@
 		// +----------------------------------------------------------------------
 
 		// 默认模块名
-		'default_module'         => 'home' ,
+		'default_module'         => 'portal' ,
+		// 默认控制器名
+		'default_controller'     => 'login' ,
+		// 默认操作名
+		'default_action'         => 'login' ,
+
+
+
 		// 禁止访问模块
 		'deny_module_list'       => ['common'] ,
-		// 默认控制器名
-		'default_controller'     => 'Index' ,
-		// 默认操作名
-		'default_action'         => 'index' ,
 		// 默认验证器
 		'default_validate'       => '' ,
 		// 默认的空控制器名

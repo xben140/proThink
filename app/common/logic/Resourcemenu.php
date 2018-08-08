@@ -35,7 +35,7 @@
 
 			$order_filed = 'id';
 			$order_ = 'asc';
-			/*
+
 						foreach ($param as $k => $v)
 						{
 							switch ($k)
@@ -79,7 +79,7 @@
 									break;
 							}
 						}
-			*/
+
 
 			$order[$order_filed] = $order_;
 

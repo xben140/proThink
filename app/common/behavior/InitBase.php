@@ -71,7 +71,6 @@
 		 */
 		private function initLayerConst()
 		{
-
 			define('LAYER_LOGIC_NAME' , 'logic');
 			define('LAYER_MODEL_NAME' , 'model');
 			define('LAYER_SERVICE_NAME' , 'service');
@@ -96,7 +95,6 @@
 		 */
 		private function initResultConst()
 		{
-
 			define('RESULT_SUCCESS' , 'success');
 			define('RESULT_ERROR' , 'error');
 			define('RESULT_REDIRECT' , 'redirect');
@@ -110,7 +108,6 @@
 		 */
 		private function initDataStatusConst()
 		{
-
 			define('DATA_STATUS_NAME' , 'status');
 			define('DATA_NORMAL' , 1);
 			define('DATA_DISABLE' , 0);
@@ -124,7 +121,6 @@
 		 */
 		private function initTimeConst()
 		{
-
 			//define('TIME_CT_NAME', 'create_time');
 			//define('TIME_UT_NAME', 'update_time');
 			define('TIME_INSERT_FIELD_NAME' , 'time');
@@ -147,6 +143,12 @@
 			define('SYS_ADMINISTRATOR_ID' , 1);
 			define('SYS_DS_PROS' , '/');
 			define('SYS_DS_CONS' , '\\');
+
+
+			define('SESSION_TAG_ADMIN' , 'admin_info');
+
+			define('SYS_NON_LOGIN_INDEX' , 'portal/login/login');
+			define('SYS_LOGIN_INDEX' , 'admin/user/datalist');
 
 			$database_config = config('database');
 			define('SYS_DB_PREFIX' , $database_config['prefix']);

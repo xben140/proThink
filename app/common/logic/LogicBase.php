@@ -16,7 +16,6 @@
 		//对应表的模型实例
 		public $model_ = null;
 
-
 		//返回结果默认值
 		public $retureResult = [
 			'sign'    => RESULT_SUCCESS ,
@@ -33,7 +32,9 @@
 		}
 
 		/**
-		 * @param $data
+		 * 控制器添加数据
+		 *
+		 * @param array $data 控制器传来的参数
 		 *
 		 * @return array
 		 */
@@ -66,8 +67,10 @@
 
 
 		/**
-		 * @param $param
-		 * @param $id
+		 * 控制器编辑数据
+		 *
+		 * @param array      $param 控制器传来的参数
+		 * @param int|string $id    要更新的id
 		 *
 		 * @return array
 		 */
@@ -109,7 +112,8 @@
 
 
 		/**
-		 * 获取单条数据
+		 * 按id获取单条数据
+		 * 状态不为2的数据
 		 *
 		 * @param $param
 		 *
@@ -126,21 +130,19 @@
 		/**
 		 * 不带分页的查询
 		 *
-		 * @param      $param
-		 * @param null $callback
+		 * @param array $param         控制器传的参数
+		 * @param null  $callback      每个数据的回调
+		 * @param bool  $isActivedOnly 是否只取status为1的值
 		 *
 		 * @return mixed
 		 */
-		public function dataList($param , $callback = null)
+		public function dataList($param = [] , $callback = null , $isActivedOnly = false)
 		{
 			$condition = $this->makeCondition($param);
+			$isActivedOnly && $this->model_->getActivedOnly();
 
 			$data = $this->model_->selectData($condition);
-
-			if(is_callable($callback))
-			{
-				$data->each($callback);
-			}
+			(is_callable($callback)) && $data->each($callback);
 
 			return $data->toArray();
 		}
@@ -149,15 +151,18 @@
 		/**
 		 * 带分页的查询
 		 *
-		 * @param      $param
-		 * @param null $callback
+		 * @param array $param         控制器传的参数
+		 * @param null  $callback      每个数据的回调
+		 * @param bool  $isActivedOnly 是否只取status为1的值
 		 *
 		 * @return mixed
 		 */
-		public function dataListWithPagination($param , $callback = null)
+		public function dataListWithPagination($param , $callback = null , $isActivedOnly = false)
 		{
 
 			$condition = $this->makeCondition($param);
+			$isActivedOnly && $this->model_->getActivedOnly();
+
 			$pageSize = (isset($param['pagerow']) && is_numeric($param['pagerow'])) ? $param['pagerow'] : DB_LIST_ROWS;
 
 			$data = $this->model_->selectDataWithPagination($condition , $pageSize , [
@@ -165,10 +170,7 @@
 				'query'    => $param ,
 			]);
 
-			if(is_callable($callback))
-			{
-				$data->each($callback);
-			}
+			(is_callable($callback)) && $data->each($callback);
 
 			$result = $data->toArray();
 			$result['pagination'] = $data->render();
@@ -178,15 +180,33 @@
 
 
 		/**
-		 * 获取当前表所有status为1的数据
+		 * 不分页获取当前表所有status为1的数据
+		 *
+		 * @param array $param    控制器传的参数
+		 * @param null  $callback 每个数据的回调
+		 *
 		 * @return mixed
 		 */
-		public function getActivedData()
+		public function getActivedData($param = [] , $callback = null)
 		{
-			$this->model_->getActivedOnly();
-			$data = $this->model_->selectData();
+			$data = $this->dataList($param , $callback , 1);
 
-			return $data->toArray();
+			return $data;
+		}
+
+		/**
+		 * 分页获取当前表所有status为1的数据
+		 *
+		 * @param array $param    控制器传的参数
+		 * @param null  $callback 每个数据的回调
+		 *
+		 * @return mixed
+		 */
+		public function getActivedDataWithPagination($param = [] , $callback = null)
+		{
+			$data = $this->dataListWithPagination($param , $callback , 1);
+
+			return $data;
 		}
 
 

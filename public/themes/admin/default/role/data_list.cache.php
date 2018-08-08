@@ -245,7 +245,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -368,7 +368,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -435,7 +435,7 @@
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员123333
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员333
 
  </span>
 
@@ -491,7 +491,7 @@
 
  </span>
 
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"    class='js-switch' />
 
 
 
@@ -1214,6 +1214,252 @@
 		<td  >
 		
 				<span  > dsfsdf
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="10" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 10
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaa
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-08 14:14:01
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > cvcv
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="11" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 11
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > ffff
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 2018-08-08 14:56:53
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
 
  </span>
 
