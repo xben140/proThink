@@ -16,6 +16,7 @@
 		{
 			$this->initBaseClass();
 		}
+
 		/**
 		 * 根据资源索引获取对应所有有效的资源数据
 		 *
@@ -28,7 +29,6 @@
 		    $logic = $this->{'logic__common_' .Loader::parseName(strtr(RESOURCE_MAP[$index], ['_' => '']), 1)};;
 
 		    return $logic->getActivedData();
-
 		}
 
 		/**

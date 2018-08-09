@@ -7,7 +7,6 @@
 		<!--					head					-->
 
 		<meta charset="utf-8">
-<link rel="shortcut icon" href="favicon.ico">
 <!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
 <title>用户授权</title>
 
 <!-- ! ~~~HEAD~~~ -->
-
 
 
 
@@ -141,13 +139,13 @@
 				<div class="col-sm-9">
 									<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="1" name="roles[]" >
+						<input type="checkbox" value="1" name="roles[]" checked>
 							<i></i>
 							管理员111
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="2" name="roles[]" >
+						<input type="checkbox" value="2" name="roles[]" checked>
 							<i></i>
 							管理员122
 						</label>
@@ -155,7 +153,7 @@
 						<label> 
 						<input type="checkbox" value="3" name="roles[]" >
 							<i></i>
-							管理员123333
+							管理员333
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
@@ -198,6 +196,12 @@
 						<input type="checkbox" value="10" name="roles[]" >
 							<i></i>
 							aaa
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="11" name="roles[]" >
+							<i></i>
+							ffff
 						</label>
 				</div>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个用户可分配多个角色 <span class="error-tip"></span></span>

@@ -177,7 +177,7 @@
 
 			//公用mate
 			$mates[] = elementsFactory::singleLabel('<meta charset="utf-8">');
-			$mates[] = elementsFactory::singleLabel('<link rel="shortcut icon" href="favicon.ico">');
+			//$mates[] = elementsFactory::singleLabel('<link rel="shortcut icon" href="">');
 			$mates[] = elementsFactory::singleLabel('<!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->');
 			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');

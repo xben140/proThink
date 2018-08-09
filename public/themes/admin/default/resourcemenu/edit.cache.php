@@ -7,7 +7,6 @@
 		<!--					head					-->
 
 		<meta charset="utf-8">
-<link rel="shortcut icon" href="favicon.ico">
 <!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
 <title>权限编辑</title>
 
 <!-- ! ~~~HEAD~~~ -->
-
 
 
 
@@ -85,7 +83,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">权限名字</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="22222"  >
+					<input placeholder=""   name="name" class="form-control  " type="text" value="区域联动接口"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -95,7 +93,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">模块名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="module" class="form-control  " type="text" value="home"  >
+					<input placeholder=""   name="module" class="form-control  " type="text" value="admin"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>默认为admin<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -105,7 +103,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">控制器名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="controller" class="form-control  " type="text" value="user"  >
+					<input placeholder=""   name="controller" class="form-control  " type="text" value="Area"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -115,7 +113,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">方法名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="action" class="form-control  " type="text" value="add"  >
+					<input placeholder=""   name="action" class="form-control  " type="text" value="getAreaByPid"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -125,7 +123,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">排序</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="0"  >
+					<input placeholder=""   name="order" class="form-control  " type="text" value="3"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -145,7 +143,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" ></textarea>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >4级联动地址接口</textarea>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
 				</div>
 			</div>

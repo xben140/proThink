@@ -148,7 +148,7 @@
 			define('SESSION_TAG_ADMIN' , 'admin_info');
 
 			define('SYS_NON_LOGIN_INDEX' , 'portal/login/login');
-			define('SYS_LOGIN_INDEX' , 'admin/user/datalist');
+			define('SYS_LOGIN_INDEX' , 'admin/index/index');
 
 			$database_config = config('database');
 			define('SYS_DB_PREFIX' , $database_config['prefix']);
@@ -182,8 +182,8 @@
 		 */
 		private function initResource()
 		{
-			define('RESOURCE_INDEX_MENU' , '1');
-			define('RESOURCE_INDEX_ELEMENT' , '0');
+			define('RESOURCE_INDEX_MENU' , '0');
+			define('RESOURCE_INDEX_ELEMENT' , '1');
 
 			define('RESOURCE_MENU' , 'resource_menu');
 			define('RESOURCE_ELEMENT' , 'resource_element');

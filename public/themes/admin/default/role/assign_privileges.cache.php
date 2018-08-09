@@ -7,7 +7,6 @@
 		<!--					head					-->
 
 		<meta charset="utf-8">
-<link rel="shortcut icon" href="favicon.ico">
 <!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
 <title>分配权限</title>
 
 <!-- ! ~~~HEAD~~~ -->
-
 
 
 
@@ -141,39 +139,141 @@
 				<div class="col-sm-9">
 									<div class="checkbox i-checks">
 						<label> 
+						<input type="checkbox" value="1" name="privileges[]" >
+							<i></i>
+							区域联动接口
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="2" name="privileges[]" >
+							<i></i>
+							主页
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="3" name="privileges[]" >
+							<i></i>
+							用户管理
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
 						<input type="checkbox" value="4" name="privileges[]" >
 							<i></i>
-							44444
+							分配角色
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="5" name="privileges[]" >
 							<i></i>
-							55555
+							用户列表
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="6" name="privileges[]" >
 							<i></i>
-							66666
+							删除用户
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="7" name="privileges[]" >
 							<i></i>
-							77777
+							编辑用户
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="8" name="privileges[]" >
 							<i></i>
-							88888
+							修改密码-列表
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="9" name="privileges[]" >
 							<i></i>
-							99999
+							设置字段
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="10" name="privileges[]" >
+							<i></i>
+							添加用户
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="11" name="privileges[]" checked>
+							<i></i>
+							角色管理
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="12" name="privileges[]" checked>
+							<i></i>
+							删除角色
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="13" name="privileges[]" checked>
+							<i></i>
+							角色授权
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="14" name="privileges[]" checked>
+							<i></i>
+							设置字段
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="15" name="privileges[]" checked>
+							<i></i>
+							添加角色
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="16" name="privileges[]" checked>
+							<i></i>
+							角色列表
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="17" name="privileges[]" checked>
+							<i></i>
+							编辑角色
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="18" name="privileges[]" >
+							<i></i>
+							菜单管理
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="19" name="privileges[]" >
+							<i></i>
+							删除菜单
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="20" name="privileges[]" >
+							<i></i>
+							编辑菜单
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="21" name="privileges[]" >
+							<i></i>
+							设置字段
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="22" name="privileges[]" >
+							<i></i>
+							菜单列表
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="23" name="privileges[]" >
+							<i></i>
+							添加菜单
 						</label>
 				</div>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个角色可分配多个权限 <span class="error-tip"></span></span>

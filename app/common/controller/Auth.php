@@ -16,17 +16,17 @@
 		public function _initialize()
 		{
 			parent::_initialize();
-			$this->_loginAuth();
+			$this->_authIsLogin();
 			$this->_initEnv();
-			$this->_statusAuth();
+			$this->_authUserStatus();
 			//$this->_authIp();
-			//$this->_authPrivilege();
+			$this->_authPrivilege();
 			//$this->_initMenu();
 		}
 
 
 		//登陆验证
-		private function _loginAuth()
+		private function _authIsLogin()
 		{
 			!isAdminLogin() && $this->redirect(SYS_NON_LOGIN_INDEX);
 		}
@@ -39,7 +39,7 @@
 		}
 
 		//用户状态验证
-		private function _statusAuth()
+		private function _authUserStatus()
 		{
 			if(!$this->model__common_User->isValidateUser($this->adminInfo))
 			{
@@ -51,6 +51,25 @@
 					'msg'  => '用户已被禁用，请联系管理员' ,
 				]);
 
+			}
+		}
+
+		//用户权限验证
+		private function _authPrivilege()
+		{
+			$privilege = getAdminSessionInfo('privilege');;
+			$menuMap = getMenu($privilege);
+			$currentAction = formatMenu($this->request->module(), $this->request->controller(), $this->request->action());
+
+			if((!in_array($currentAction, $menuMap)))
+			{
+				print_r('klsdfjsdflkjf');
+				exit;;
+				$this->assign('data', [
+					'code' => '403',
+					'msg'  => '未授权的访问！',
+				]);
+				exit($this->fetch(':error'));
 			}
 		}
 	}

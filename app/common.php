@@ -375,18 +375,117 @@
 	 *
 	 * @return array|string|bool
 	 */
-	function getAdminSessionInfo($tag, $key=null)
+	function getAdminSessionInfo($tag , $key = null)
 	{
-		$info =  session(SESSION_TAG_ADMIN . $tag);
+		$info = session(SESSION_TAG_ADMIN . $tag);
 
 		return isset($info[$key]) ? $info[$key] : $info;
 	}
 
 
+	/*
+	 *
+	 *
+	 * 菜单相关
+	 *
+	 *
+	 *
+	 * */
 
 
+	//传入id，获取所有子级id
+	function getSonId($data , $id = 0)
+	{
+		static $ids = [];
+		foreach ($data as $k => $v)
+		{
+			if($v['pid'] == $id)
+			{
+				$ids[] = $v['id'];
+				getSonId($data , $v['id']);
+			}
+		}
 
+		return $ids;
+	}
 
+	//添加等级段
+	function makeTree($data , $id = 0 , $level = 1, $parentField = 'pid')
+	{
+		static $result = [];
+		foreach ($data as $k => $v)
+		{
+			if($v[$parentField] == $id)
+			{
+				$v['level'] = $level;
+				$result[] = $v;
+				makeTree($data , $v['id'] , $level + 1, $parentField);
+			}
+		}
+
+		return $result;
+	}
+
+	//传入数组和id，获取返回所有子级
+	function getSon($data , $id)
+	{
+		$result = [];
+		foreach ($data as $k => $v)
+		{
+			if($v['pid'] == $id)
+			{
+				$result[] = $v;
+			}
+		}
+
+		return $result;
+	}
+
+	//生成树
+	function makeTreeMenu($items , $id = 0)
+	{
+		$tree = array();
+		foreach ($items as $k1 => $v1)
+		{
+			if($v1['pid'] == $id)
+			{
+				$v1['path'] = formatMenu($v1['module'] , $v1['controller'] , $v1['action']);
+				$v1['son'] = makeTreeMenu($items , $v1['id']);
+				$tree[] = $v1;
+			}
+		}
+
+		return $tree;
+	}
+
+	function formatMenu($a , $b , $c)
+	{
+		return strtolower($a . '/' . $b . '/' . $c);
+	}
+
+	//获取用户拥有的菜单
+	function getMenu($data)
+	{
+		$menu = [];
+		foreach ($data as $k => $v) $menu[] = (formatMenu($v['module'] , $v['controller'] , $v['action']));
+
+		return $menu;
+	}
+
+	function buildPath($data)
+	{
+		return strtolower($data['action']) == 'none' ? '#' : url($data['path']);
+	}
+
+	function isDeftule($data)
+	{
+		return strtolower($data['action']) == 'none';
+	}
+
+	function isMeun($data)
+	{
+		return $data['is_menu'];
+	}
 
 
 

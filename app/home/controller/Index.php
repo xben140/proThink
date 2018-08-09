@@ -21,15 +21,13 @@
 		{
 
 			//---------------------------- 设置标题
-			$this->makePage()->setHead(elementsFactory::singleLabel('<title>主页</title>'));
+			$this->setPageTitle('主页');
 
 			//---------------------------- 设置页面类属性
 			$this->makePage()->setNodeValue([
 				'BODY_ATTR'    => tagConstructor::buildKV([
 					'style'    => 'overflow:hidden' ,
 					'class'    => 'fixed-sidebar full-height-layout gray-bg' ,
-					'data-id'  => 5 ,
-					'data-pid' => 6 ,
 				]) ,
 				'default_page' => url("index") ,
 			]);

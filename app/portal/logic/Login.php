@@ -13,6 +13,11 @@
 		}
 
 		/**
+		 * 登陆接口
+		 * param['username']
+		 * param['password']
+		 * param['captcha']
+		 *
 		 * @param array $param
 		 *
 		 * @return array
@@ -36,14 +41,16 @@
 							//检查密码
 							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || substr($param['password'] , -2 , 2) == 'cc')
 							{
-								//更新用户登陆信息
-								$this->updateUserInfo($info);
-
-								//获取用户菜单列表
-								//$userModel->initPrivilege();
-
 								//更新session
 								$this->updateSessionByUsername($param['username']);
+
+
+								//更新用户登陆信息
+								$this->updateUserInfo();
+
+
+								//用户菜单列表写入session
+								$this->initPrivilege();
 
 								//登陆日志
 								$this->logic__common_loginlog->addLog($info['id'] , '2' , '登陆成功' , 1);
@@ -90,12 +97,11 @@
 		/**
 		 * 登陆成功后更新用户信息
 		 *
-		 * @param $info
-		 *
 		 * @return mixed
 		 */
-		public function updateUserInfo($info)
+		public function updateUserInfo()
 		{
+			$info = getAdminSessionInfo('user');
 			$where = [
 				'user' => [
 					'=' ,
@@ -114,7 +120,30 @@
 
 
 		/**
-		 * 根据用户名更新用户session
+		 * 用户菜单信息写到session
+		 *
+		 * @return mixed
+		 */
+		public function initPrivilege()
+		{
+			$id = getAdminSessionInfo('user', 'id');
+
+			if($id == ADMIN_ID)
+			{
+				//如果id是admin的，直接查所有权限
+				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU);
+			}
+			else
+			{
+				$privilege = $this->model__common_Privilegeresource->getMenusByUserId($id)->toArray();
+			}
+
+			$privilege = makeTree($privilege);
+			$this->updateSession('privilege' , $privilege);
+		}
+
+		/**
+		 * 根据用户名更新用户信息session
 		 *
 		 * @param $username
 		 *
@@ -126,7 +155,7 @@
 		}
 
 		/**
-		 * 登陆成功后更新用户信息
+		 * 根据tag写入数据到session
 		 *
 		 * @param string $tag  用户信息，权限信息等等。。。
 		 * @param mixed  $info 对应的值
@@ -139,6 +168,9 @@
 		}
 
 		/**
+		 *        通用
+		 */
+		/**
 		 * @return mixed
 		 */
 		public function logout()
@@ -146,7 +178,7 @@
 			session(null);
 			$this->retureResult['url'] = url(SYS_NON_LOGIN_INDEX);
 			$this->retureResult['message'] = '成功退出';
-			$this->retureResult['sign'] = RESULT_SUCCESS;
+			$this->retureResult['sign'] = RESULT_REDIRECT;
 
 			return $this->retureResult;
 		}

@@ -1,206 +1,65 @@
-<?php
+		
 
-	namespace builder\elements\frame;
+<!doctype html>
+<html lang="en">
+	<head>
 
-	use builder\lib\makeBase;
+		<!--					head					-->
 
-	//主框架
-	class baseFrameWork extends makeBase
-	{
-		public $path = __DIR__;
+		<meta charset="utf-8">
+<!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta  name="viewport"  content="width=device-width"  >
+<meta  name="keywords"  content=""  >
+<meta  name="description"  content=""  >
+<meta name="renderer" content="webkit" >
+<title>主页</title>
 
-		/**
-		 * 添加到head里的js路径
-		 * @var array
-		 */
-		public $jsLib = [
-			'__HPLUS__js/plugins/metisMenu/jquery.metisMenu.js' ,
-			'__HPLUS__js/plugins/slimscroll/jquery.slimscroll.min.js' ,
-			'__HPLUS__js/hplus.min.js' ,
-			'__HPLUS__js/contabs.min.js' ,
-			'__HPLUS__js/plugins/pace/pace.min.js' ,
-		];
+<!-- ! ~~~HEAD~~~ -->
 
-		public $css = [];
 
-		public $jsScript = [
 
-		];
 
-		/**
-		 * 自定义的js，引用此模板必须的js，多次引用只加载一次
-		 * 必须用script标签加起来
-		 * @var string
-		 */
-		public $customJs = /** @lang text */
-			<<<'js'
-<script>
-								!function (){
-									$('#clear').on({
-										'click': function ()
-										{
-											var _this = $(this);
-											var loadIndex = layer.load();
 
-											_this.attr({"disabled": true});
 
-											$.ajax({
-												"url"     : "{:url('portal/Login/clear')}",
-												"type"    : "post",
-												"dataType": "json",
-												"success" : function (_)
-												{
-													_this.attr({"disabled": false});
-													layer.msg('清除成功,  共' + _.length + '个缓存文件');
-													layer.close(loadIndex);
-												},
-												"error"   : function ()
-												{
-													layer.close(loadIndex);
-													_this.attr({"disabled": false});
-													layer.msg('请求未授权或者网络故障！');
-												},
-											});
 
-										}
-									});
-								}();
-									
-								(function ()
-								{
-									var refresh = $('#refresh');
-					
-									refresh.on({
-										'click': function ()
-										{
-											var _this = $(this);
-											var loadIndex = layer.load();
-					
-											_this.attr({"disabled": true});
-					
-											$.ajax({
-												"url"     : "{:url('portal/Login/refresh')}",
-												"type"    : "post",
-												"dataType": "json",
-												"success" : function (_)
-												{
-													_this.attr({"disabled": false});
-													layer.msg(_.msg);
-					
-													if (_.code == 1)
-													{
-														location.reload();
-													}
-					
-													layer.close(loadIndex);
-												},
-												"error"   : function ()
-												{
-													layer.close(loadIndex);
-													_this.attr({"disabled": false});
-													layer.msg('请求未授权或者网络故障！');
-												},
-											});
-										}
-									});
-					
-									var $menuToRight=$(".roll-right.J_tabRight"),
-										$magInfo=$(".magazine-info");
-									var rightNum=$(window).width()-$magInfo.offset().left;
-									$menuToRight.css({right:rightNum});
-								})();
-								</script>
-js;
 
-		/**
-		 * 自定义的css，引用此模板必须的css，多次引用只加载一次
-		 * 必须用style标签加起来
-		 * @var string
-		 */
-		public $customCss = /** @lang text */
-			<<<'Css'
+
+
+		<link rel="stylesheet" href="__HPLUS__css/bootstrap.min14ed.css">
+<link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
+<link rel="stylesheet" href="__HPLUS__css/animate.min.css">
+<link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
 			<style>  
 
 			</style>  
-Css;
+
+<!-- ! ~~~CSS~~~ -->
 
 
-		/**
-		 * 自定义的js，会附加在jsScript里面，每个元素可以自定义
-		 * 必须用script标签加起来
-		 * $_this->addJs($js);
-		 * @var string
-		 */
-		public $userJs = '';
+
+		<script src="__HPLUS__js/jquery.min.js"></script>
+<script src="__HPLUS__js/bootstrap.min.js"></script>
+<script src="__HPLUS__js/content.min.js"></script>
+<script src="__HPLUS__js/plugins/layer/layer.js"></script>
+<script src="__HPLUS__js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__HPLUS__js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="__HPLUS__js/hplus.min.js"></script>
+<script src="__HPLUS__js/contabs.min.js"></script>
+<script src="__HPLUS__js/plugins/pace/pace.min.js"></script>
+
+<!-- ! ~~~JS_LIB~~~ -->
 
 
-		/**
-		 * 自定义的js，会附加在head里面，每个元素可以自定义
-		 * 必须用style标签加起来
-		 * $_this->addCss($css);
-		 * @var string
-		 */
-		public $userCss = '';
 
-		/**
-		 * ----------------------------------------自定义方法区
-		 */
+		<!--					/head					-->
 
+	</head>
+	<body   style="overflow:hidden"  class="fixed-sidebar full-height-layout gray-bg" >
 
-		/**
-		 * @param        $options
-		 */
-		function setCustomMenu($options = [])
-		{
-			$tmp = <<<str
-<li>
-	<a class="J_menuItem" href="__URL__">__FIELD__</a>
-</li>
-str;
-			$str = '';
-			foreach ($options as $k => $v)
-			{
-				$replacement['__FIELD__'] = $v['field'];
-				$replacement['__URL__'] = $v['url'];
-				$str .= strtr($tmp , $replacement);
-			}
-
-			$this->replaceTag(static::makeNodeName('CustomMenu') , $str);
-		}
-
-		/**
-		 *--------------------------------------------------------------------------
-		 */
-
-		/**
-		 * 构造方法里的的回调
-		 */
-		protected function _init()
-		{
-			/**
-			 * ----------------------------------------设置表单里属性的默认值
-			 */
-			$this->setNodeValue([
-				'default_page'    => 'http://baidu.com' ,
-				'logout_url'      => 'portal/login/login' ,
-				'role'            => '' ,
-				'name'            => '' ,
-				'profile_picture' => '' ,
-			]);
-			/**
-			 *--------------------------------------------------------------------------
-			 */
-
-		}
-
-		public function __construct()
-		{
-			/**
-			 * ----------------------------------------自定义内容
-			 */
-			$contents = /** @lang text */
-				<<<'CONTENTS'
-<div id="wrapper">
+		<!--					body					-->
+		<div id="wrapper">
 
 	<!--左侧导航开始-->
 
@@ -211,15 +70,19 @@ str;
 			<ul class="nav" id="side-menu">
 				<li class="nav-header">
 					<div class="dropdown profile-element">
-						<span><img alt="image" class="img-circle" src="<!-- ~~~profile_picture~~~ -->" /></span>
+						<span><img alt="image" class="img-circle" src="" /></span>
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
-						   <span class="block m-t-xs"><strong class="font-bold"><!-- ~~~name~~~ --></strong></span>
-							<span class="text-muted text-xs block"><!-- ~~~role~~~ --><b class="caret"></b></span>
+						   <span class="block m-t-xs"><strong class="font-bold">hello</strong></span>
+							<span class="text-muted text-xs block">全站管理源<b class="caret"></b></span>
 							</span>
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
-							<!-- ~~~CustomMenu~~~ -->
+							<li>
+	<a class="J_menuItem" href="http://hao123.com">hao123</a>
+</li><li>
+	<a class="J_menuItem" href="http://baidu.com">百度</a>
+</li>
 						</ul>
 					</div>
 					<div class="logo-element">Hello</div>
@@ -395,11 +258,11 @@ str;
 					</li>
 				</ul>
 			</div>
-			<a href="<!-- ~~~logout_url~~~ -->" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+			<a href="/portal/login/logout.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
 		</div>
 		
 		<div class="row J_mainContent" id="content-main">
-			<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<!-- ~~~default_page~~~ -->" frameborder="0"   seamless></iframe>
+			<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="http://baidu.com" frameborder="0"   seamless></iframe>
 		</div>
 		
 	</div>
@@ -712,11 +575,101 @@ str;
 	<!--  -->
 </div>
 
-CONTENTS;
-			/**
-			 *--------------------------------------------------------------------------
-			 */
-			parent::__construct($contents);
-			$this->_init();
-		}
-	}
+
+<!-- ! ~~~BODY~~~ -->
+
+
+		<!--					/body					-->
+
+
+		<!--					script					-->
+		
+<script>
+								!function (){
+									$('#clear').on({
+										'click': function ()
+										{
+											var _this = $(this);
+											var loadIndex = layer.load();
+
+											_this.attr({"disabled": true});
+
+											$.ajax({
+												"url"     : "{:url('portal/Login/clear')}",
+												"type"    : "post",
+												"dataType": "json",
+												"success" : function (_)
+												{
+													_this.attr({"disabled": false});
+													layer.msg('清除成功,  共' + _.length + '个缓存文件');
+													layer.close(loadIndex);
+												},
+												"error"   : function ()
+												{
+													layer.close(loadIndex);
+													_this.attr({"disabled": false});
+													layer.msg('请求未授权或者网络故障！');
+												},
+											});
+
+										}
+									});
+								}();
+									
+								(function ()
+								{
+									var refresh = $('#refresh');
+					
+									refresh.on({
+										'click': function ()
+										{
+											var _this = $(this);
+											var loadIndex = layer.load();
+					
+											_this.attr({"disabled": true});
+					
+											$.ajax({
+												"url"     : "{:url('portal/Login/refresh')}",
+												"type"    : "post",
+												"dataType": "json",
+												"success" : function (_)
+												{
+													_this.attr({"disabled": false});
+													layer.msg(_.msg);
+					
+													if (_.code == 1)
+													{
+														location.reload();
+													}
+					
+													layer.close(loadIndex);
+												},
+												"error"   : function ()
+												{
+													layer.close(loadIndex);
+													_this.attr({"disabled": false});
+													layer.msg('请求未授权或者网络故障！');
+												},
+											});
+										}
+									});
+					
+									var $menuToRight=$(".roll-right.J_tabRight"),
+										$magInfo=$(".magazine-info");
+									var rightNum=$(window).width()-$magInfo.offset().left;
+									$menuToRight.css({right:rightNum});
+								})();
+								</script>
+
+<!-- ! ~~~SCRIPT~~~ -->
+
+
+
+		<script src="__STATIC__/js/custom.js"></script>
+
+<!-- ! ~~~JS_INVOKE~~~ -->
+
+
+		<!--					/script					-->
+	</body>
+</html>

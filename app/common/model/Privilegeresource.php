@@ -63,6 +63,7 @@ WHERE role_id IN (1, 5)
 
 			$data = db('role_privilege')->where($where)->column('privilege_id');
 			$data = array_flip(array_flip($data));
+
 			return $data;
 		}
 
@@ -80,9 +81,16 @@ WHERE role_id IN (1, 5)
 		 */
 		public function getMenusByUserId($userId)
 		{
+			//角色id
 			$privilegesId = $this->getPrivilegeIdByUserId($userId);
 
-			return $this->getReourceByResourceIndexAndPrivilegeId($privilegesId , RESOURCE_INDEX_ELEMENT);
+			//动态id
+			//TODO
+
+			//根据查权限
+			$data = $this->getReourceByResourceIndexAndPrivilegeId($privilegesId , RESOURCE_INDEX_MENU);
+
+			return $data;
 		}
 
 
@@ -99,26 +107,13 @@ WHERE role_id IN (1, 5)
 		 */
 		public function getReourceByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
 		{
-			/*
-			SELECT
-				b.*
-			FROM
-				`ithink_privilege_resource` a
-				LEFT JOIN `ithink_resource_menu` b
-					ON a.`resource_id` = b.id
-			WHERE a.`resource_type` = 1
-				AND a.id IN (1, 2, 4, 6) ;
-			*/
-
 
 			$join = [
-
 				[
-					'ithink_resource_menu b' ,
+					'ithink_' . RESOURCE_MAP[$index] . ' b' ,
 					self::makeSelfAliasField('resource_id') . ' = b.id ' ,
 					'left' ,
 				] ,
-
 			];
 
 			$where = [
@@ -136,14 +131,22 @@ WHERE role_id IN (1, 5)
 					'=' ,
 					$index ,
 				] ,
+			];
 
+			$whereOr = [
+				'b.is_common' => [
+					'=' ,
+					'1' ,
+				] ,
 			];
 
 			$condition = [
-				'join'  => $join ,
-				'where' => $where ,
-				'field' => 'b.*' ,
-				'alias' => self::$currentTableAlias
+				'order'   => 'b.order' ,
+				'join'    => $join ,
+				'where'   => $where ,
+				'whereOr' => $whereOr ,
+				'field'   => ' DISTINCT b.id, `b`.name, `b`.`pid`, `b`.`module`, `b`.`controller`, `b`.`action`, `b`.`ico`, `b`.`order`, `b`.`is_menu`, `b`.`is_common`, `b`.`remark`, `b`.`status`, `b`.`time`' ,
+				'alias'   => self::$currentTableAlias ,
 			];
 
 			$this->setCondition($condition);

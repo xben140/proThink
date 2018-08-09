@@ -7,7 +7,6 @@
 		<!--					head					-->
 
 		<meta charset="utf-8">
-<link rel="shortcut icon" href="favicon.ico">
 <!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
 <title>用户列表</title>
 
 <!-- ! ~~~HEAD~~~ -->
-
 
 
 
@@ -251,7 +249,7 @@
 
  </span>
 
-<span  > 2018-08-08 16:08:11
+<span  > 2018-08-09 17:47:15
 
  </span>
 
@@ -289,7 +287,7 @@
 						
 		<td  >
 		
-				<span  > 28
+				<span  > 38
 
  </span>
 
@@ -440,7 +438,7 @@
 
  </span>
 
-<span  > 1970-01-01 08:00:00
+<span  > 2018-08-09 17:46:56
 
  </span>
 
@@ -466,7 +464,7 @@
 
  </span>
 
-<span  > 0
+<span  > 127.0.0.1
 
  </span>
 
@@ -478,7 +476,7 @@
 						
 		<td  >
 		
-				<span  > 0
+				<span  > 15
 
  </span>
 
