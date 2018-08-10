@@ -171,7 +171,7 @@
 						
 		<td  >
 		
-				<span  > 1
+				<span  class=" name"  > 1
 
  </span>
 
@@ -183,11 +183,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 区域联动接口
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 区域联动
 
  </span>
 
@@ -201,31 +201,19 @@
 						
 		<td  >
 		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Area
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Area
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > getAreaByPid
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > getAreaByPid
 
  </span>
 
@@ -239,27 +227,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 3
+<span  class="td-modify name"  data-field="ico"  > fa-edit
 
  </span>
 
@@ -271,7 +243,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 16:22:40
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 35
 
  </span>
 
@@ -283,9 +259,21 @@
 						
 		<td  >
 		
-				<span  > 4级联动地址接口
+				<span  class=" name"  > 2018-07-25 16:22:40
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 4级联动地址接口
+
+ </textarea>
 
 
 
@@ -376,7 +364,7 @@
 						
 		<td  >
 		
-				<span  > 2
+				<span  class=" name"  > 2
 
  </span>
 
@@ -388,11 +376,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 主页
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 主页
 
  </span>
 
@@ -406,31 +394,19 @@
 						
 		<td  >
 		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Index
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Index
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > Index
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > Index
 
  </span>
 
@@ -444,27 +420,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 2
+<span  class="td-modify name"  data-field="ico"  > fa-edit
 
  </span>
 
@@ -476,7 +436,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 16:22:57
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 2
 
  </span>
 
@@ -488,9 +452,21 @@
 						
 		<td  >
 		
-				<span  > 主页
+				<span  class=" name"  > 2018-07-25 16:22:57
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 主页
+
+ </textarea>
 
 
 
@@ -581,7 +557,7 @@
 						
 		<td  >
 		
-				<span  > 3
+				<span  class=" name"  > 3
 
  </span>
 
@@ -593,11 +569,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 用户管理
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 用户管理
 
  </span>
 
@@ -611,31 +587,19 @@
 						
 		<td  >
 		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
 
  </span>
 
@@ -649,27 +613,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="ico"  > fa-edit
 
  </span>
 
@@ -681,7 +629,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 16:23:31
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -693,9 +645,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-07-25 16:23:31
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 用户管理
+
+ </textarea>
 
 
 
@@ -786,7 +750,7 @@
 						
 		<td  >
 		
-				<span  > 4
+				<span  class=" name"  > 4
 
  </span>
 
@@ -798,11 +762,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 分配角色
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 分配角色
 
  </span>
 
@@ -816,31 +780,19 @@
 						
 		<td  >
 		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > assignRoles
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > assignRoles
 
  </span>
 
@@ -854,27 +806,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+<span  class="td-modify name"  data-field="ico"  > fa-edit
 
  </span>
 
@@ -886,7 +822,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-01 15:44:29
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
 
  </span>
 
@@ -898,9 +838,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-08-01 15:44:29
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 分配角色
+
+ </textarea>
 
 
 
@@ -991,7 +943,7 @@
 						
 		<td  >
 		
-				<span  > 5
+				<span  class=" name"  > 5
 
  </span>
 
@@ -1003,11 +955,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 用户列表
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > 用户列表
 
  </span>
 
@@ -1021,31 +973,19 @@
 						
 		<td  >
 		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
 
  </span>
 
 /
 
-<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > dataList
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > dataList
 
  </span>
 
@@ -1059,27 +999,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+<span  class="td-modify name"  data-field="ico"  > fa-edit
 
  </span>
 
@@ -1091,7 +1015,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-01 15:44:44
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
 
  </span>
 
@@ -1103,9 +1031,21 @@
 						
 		<td  >
 		
-				<span  > sdfsdf
+				<span  class=" name"  > 2018-08-01 15:44:44
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 用户列表
+
+ </textarea>
 
 
 

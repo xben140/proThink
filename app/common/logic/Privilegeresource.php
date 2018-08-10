@@ -26,9 +26,9 @@
 		 */
 		public function getResourceByIndex($index)
 		{
-		    $logic = $this->{'logic__common_' .Loader::parseName(strtr(RESOURCE_MAP[$index], ['_' => '']), 1)};;
+			$logic = $this->{'logic__common_' .Loader::parseName(strtr(RESOURCE_MAP[$index], ['_' => '']), 1)};;
 
-		    return $logic->getActivedData();
+			return $logic->getActivedData();
 		}
 
 		/**

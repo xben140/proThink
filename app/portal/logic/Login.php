@@ -32,11 +32,11 @@
 				if(!captcha_check($param['captcha']))
 				{
 					//看用户在不在
-					$info = $this->model_->getUserInfoByUsername($param['username']);
+					$info = $this->model_->getUserInfoByUsername($param['username'])->toArray();
 					if($info)
 					{
 						//看用户状态
-						if($this->model_->isValidateUser($info->toArray()))
+						if($this->model_->isValidateUser($info))
 						{
 							//检查密码
 							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || substr($param['password'] , -2 , 2) == 'cc')
@@ -44,10 +44,8 @@
 								//更新session
 								$this->updateSessionByUsername($param['username']);
 
-
 								//更新用户登陆信息
 								$this->updateUserInfo();
-
 
 								//用户菜单列表写入session
 								$this->initPrivilege();
@@ -126,16 +124,14 @@
 		 */
 		public function initPrivilege()
 		{
-			$id = getAdminSessionInfo('user', 'id');
-
-			if($id == ADMIN_ID)
+			if(isGlobalManager())
 			{
 				//如果id是admin的，直接查所有权限
 				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU);
 			}
 			else
 			{
-				$privilege = $this->model__common_Privilegeresource->getMenusByUserId($id)->toArray();
+				$privilege = $this->model__common_Privilegeresource->getMenusByUserId(getAdminSessionInfo('user', 'id'))->toArray();
 			}
 
 			$privilege = makeTree($privilege);
@@ -190,6 +186,10 @@
 		{
 			//更新session
 			$this->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
+
+			//用户菜单列表写入session
+			$this->initPrivilege();
+
 			$this->retureResult['message'] = '刷新成功';
 			$this->retureResult['sign'] = RESULT_SUCCESS;
 

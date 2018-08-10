@@ -64,32 +64,34 @@
 	<!--左侧导航开始-->
 
 	<nav class="navbar-default navbar-static-side" role="navigation">
-		<div class="nav-close"><i class="fa fa-times-circle"></i>
-		</div>
+		<div class="nav-close"><i class="fa fa-times-circle"></i></div>
 		<div class="sidebar-collapse">
-			<ul class="nav" id="side-menu">
-				<li class="nav-header">
-					<div class="dropdown profile-element">
-						<span><img alt="image" class="img-circle" src="" /></span>
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="clear">
-						   <span class="block m-t-xs"><strong class="font-bold">hello</strong></span>
-							<span class="text-muted text-xs block">全站管理源<b class="caret"></b></span>
-							</span>
-						</a>
-						<ul class="dropdown-menu animated fadeInRight m-t-xs">
-							<li>
-	<a class="J_menuItem" href="http://hao123.com">hao123</a>
-</li><li>
-	<a class="J_menuItem" href="http://baidu.com">百度</a>
-</li>
-						</ul>
-					</div>
-					<div class="logo-element">Hello</div>
-				</li>
+			
+			<div class="dropdown profile-element">
+				<div  class="profile-pic"><img alt="image" src="http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg" /></div>
 				
+								<div class="profile-item">
+				<span class="font-bold">账号 : </span><span >qq1234567</span>
+			</div>			<div class="profile-item">
+				<span class="font-bold">名字 : </span><span >user222</span>
+			</div>
+			
+				<!--
+				<div class="profile-item">
+					<span class="font-bold">角色 : </span><span class="">全站管理员</span>
+				</div>
+				-->
+				
+				<!-- ~~~profile_link~~~ -->
+				<div class="profile-item">
+					<span><a href="/portal/login/logout.html" class=" font-bold">退出登陆</a></span>
+				</div>
+				
+			</div>
+				
+				
+			<ul class="nav" id="side-menu">
 					<!-- 菜单 -->
-
 						{foreach $menuTree as $vo1}
 							{if condition="isMeun($vo1)"}
 								<li>
@@ -126,7 +128,7 @@
 								</li>
 							{/if}
 						{/foreach}
-						<!-- /菜单 -->
+					<!-- /菜单 -->
 			</ul>
 		</div>
 	</nav>
@@ -235,16 +237,13 @@
 				<div class="page-tabs-content">
 					<a id="refresh"  class="" data-id="">全局刷新</a>
 					<a id="clear"  class="" data-id="">清除缓存</a>
-
 				</div>
 			</nav>
 			<button class="roll-nav roll-right J_tabRight">
 			<i class="fa fa-forward"></i>
 			</button>
 			<div class="btn-group roll-nav roll-right">
-				<button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作
-					<span class="caret"></span>
-				</button>
+				<button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span></button>
 				<ul role="menu" class="dropdown-menu dropdown-menu-right">
 					<li class="J_tabShowActive">
 						<a>定位当前选项卡</a>

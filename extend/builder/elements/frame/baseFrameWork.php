@@ -150,22 +150,44 @@ Css;
 		/**
 		 * @param        $options
 		 */
-		function setCustomMenu($options = [])
+		function setMeta($options = [])
 		{
 			$tmp = <<<str
-<li>
-	<a class="J_menuItem" href="__URL__">__FIELD__</a>
-</li>
+			<div class="profile-item">
+				<span class="font-bold">__FIELD__</span><span >__VALUE__</span>
+			</div>
 str;
 			$str = '';
 			foreach ($options as $k => $v)
 			{
 				$replacement['__FIELD__'] = $v['field'];
-				$replacement['__URL__'] = $v['url'];
+				$replacement['__VALUE__'] = $v['value'];
 				$str .= strtr($tmp , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('CustomMenu') , $str);
+			$this->replaceTag(static::makeNodeName('profile_meta') , $str);
+		}
+
+
+		/**
+		 * @param        $options
+		 */
+		function setLink($options = [])
+		{
+			$tmp = <<<str
+		<div class="profile-item">
+			<span><a href="__URL__" class="J_menuItem font-bold">__FIELD__</a></span>
+		</div>
+str;
+			$str = '';
+			foreach ($options as $k => $v)
+			{
+				$replacement['__FIELD__'] = $v['field'];
+				$replacement['__VALUE__'] = $v['value'];
+				$str .= strtr($tmp , $replacement);
+			}
+
+			$this->replaceTag(static::makeNodeName('profile_link') , $str);
 		}
 
 		/**
@@ -183,8 +205,6 @@ str;
 			$this->setNodeValue([
 				'default_page'    => 'http://baidu.com' ,
 				'logout_url'      => 'portal/login/login' ,
-				'role'            => '' ,
-				'name'            => '' ,
 				'profile_picture' => '' ,
 			]);
 			/**
@@ -205,28 +225,30 @@ str;
 	<!--左侧导航开始-->
 
 	<nav class="navbar-default navbar-static-side" role="navigation">
-		<div class="nav-close"><i class="fa fa-times-circle"></i>
-		</div>
+		<div class="nav-close"><i class="fa fa-times-circle"></i></div>
 		<div class="sidebar-collapse">
-			<ul class="nav" id="side-menu">
-				<li class="nav-header">
-					<div class="dropdown profile-element">
-						<span><img alt="image" class="img-circle" src="<!-- ~~~profile_picture~~~ -->" /></span>
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="clear">
-						   <span class="block m-t-xs"><strong class="font-bold"><!-- ~~~name~~~ --></strong></span>
-							<span class="text-muted text-xs block"><!-- ~~~role~~~ --><b class="caret"></b></span>
-							</span>
-						</a>
-						<ul class="dropdown-menu animated fadeInRight m-t-xs">
-							<!-- ~~~CustomMenu~~~ -->
-						</ul>
-					</div>
-					<div class="logo-element">Hello</div>
-				</li>
+			
+			<div class="dropdown profile-element">
+				<div  class="profile-pic"><img alt="image" src="<!-- ~~~profile_picture~~~ -->" /></div>
 				
+					<!-- ~~~profile_meta~~~ -->
+			
+				<!--
+				<div class="profile-item">
+					<span class="font-bold">角色 : </span><span class="">全站管理员</span>
+				</div>
+				-->
+				
+				<!-- ~~~profile_link~~~ -->
+				<div class="profile-item">
+					<span><a href="<!-- ~~~logout_url~~~ -->" class=" font-bold">退出登陆</a></span>
+				</div>
+				
+			</div>
+				
+				
+			<ul class="nav" id="side-menu">
 					<!-- 菜单 -->
-
 						{foreach $menuTree as $vo1}
 							{if condition="isMeun($vo1)"}
 								<li>
@@ -263,7 +285,7 @@ str;
 								</li>
 							{/if}
 						{/foreach}
-						<!-- /菜单 -->
+					<!-- /菜单 -->
 			</ul>
 		</div>
 	</nav>
@@ -372,16 +394,13 @@ str;
 				<div class="page-tabs-content">
 					<a id="refresh"  class="" data-id="">全局刷新</a>
 					<a id="clear"  class="" data-id="">清除缓存</a>
-
 				</div>
 			</nav>
 			<button class="roll-nav roll-right J_tabRight">
 			<i class="fa fa-forward"></i>
 			</button>
 			<div class="btn-group roll-nav roll-right">
-				<button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作
-					<span class="caret"></span>
-				</button>
+				<button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span></button>
 				<ul role="menu" class="dropdown-menu dropdown-menu-right">
 					<li class="J_tabShowActive">
 						<a>定位当前选项卡</a>

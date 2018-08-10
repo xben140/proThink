@@ -254,11 +254,11 @@
 							$_this->setHead([
 								[
 									'field' => '' ,
-									'attr'  => 'style="width:20px;"' ,
+									'attr'  => 'style="width:30px;"' ,
 								] ,
 								[
 									'field' => 'ID' ,
-									//'attr'  => 'class="red"' ,
+									'attr'  => 'style="width:40px;"' ,
 								] ,
 								[
 									'field' => '账户' ,
@@ -458,21 +458,21 @@
 									//联系方式
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'name'  => 'email : ' ,
-											//'editable' => '1' ,
-											'value' => $v['email'] ,
-											//'field'    => 'name' ,
-											//'reg'      => '/^\d{1,4}$/' ,
-											//'msg'      => '请填写合法手机号码' ,
+											'name'     => 'email : ' ,
+											'editable' => '1' ,
+											'value'    => $v['email'] ,
+											'field'    => 'email' ,
+											'reg'      => '/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/' ,
+											'msg'      => '请填写合法email' ,
 										]) ,
 										'<br>' ,
 										integrationTags::tdSimple([
-											'name'  => '电话 : ' ,
-											//'editable' => '1' ,
-											'value' => $v['phone'] ,
-											//'field'    => 'name' ,
-											//'reg'      => '/^\d{1,4}$/' ,
-											//'msg'      => '请填写合法手机号码' ,
+											'name'     => '电话 : ' ,
+											'editable' => '1' ,
+											'value'    => $v['phone'] ,
+											'field'    => 'phone' ,
+											'reg'      => '/^1\d{10}$/' ,
+											'msg'      => '请填写合法手机号码' ,
 										]) ,
 									]) ,
 
@@ -517,41 +517,54 @@
 
 
 									//用户状态
-									integrationTags::td([
-										integrationTags::tdSwitcher([
-											'params'  => [
-												'checked'         => $v['status'] ? 'checked' : '' ,
-												'name'            => 'status' ,
-												'change_callback' => 'switcherUpdateField' ,
-												//switcherUpdateFieldConfirm
-											] ,
-											'name'    => '' ,
-											'is_auto' => '1' ,
-										]) ,
-									]) ,
+									integrationTags::td((function($v) {
+
+											return !isGlobalManagerId($v['id']) ? [
+												integrationTags::tdSwitcher([
+													'params'  => [
+														'checked'         => $v['status'] ? 'checked' : '' ,
+														'name'            => 'status' ,
+														'change_callback' => 'switcherUpdateField' ,
+														//switcherUpdateFieldConfirm
+													] ,
+													'name'    => '' ,
+													'is_auto' => '1' ,
+												]) ,
+											] : [];
+
+										})($v)
+
+									) ,
 
 									//操作
-									integrationTags::td([
-										integrationTags::tdButton([
-											'attr'  => ' btn-info btn-modify-pwd' ,
-											'value' => '修改密码' ,
-										]) ,
-										integrationTags::tdButton([
-											'attr'  => ' btn-success btn-edit' ,
-											'value' => '编辑' ,
-										]) ,
-										'<br>',
-										integrationTags::tdButton([
-											'attr'  => ' btn-info btn-assign-role' ,
-											'value' => '用户授权' ,
-										]) ,
+									integrationTags::td((function($v) {
 
-										integrationTags::tdButton([
-											'attr'  => ' btn-danger btn-delete' ,
-											'value' => '删除' ,
-										]) ,
+											return !isGlobalManagerId($v['id']) ? [
+												integrationTags::tdButton([
+													'attr'  => ' btn-info btn-modify-pwd' ,
+													'value' => '修改密码' ,
+												]) ,
+												/*
+												integrationTags::tdButton([
+													'attr'  => ' btn-success btn-edit' ,
+													'value' => '编辑' ,
+												]) ,
+												*/
+												'<br>' ,
+												integrationTags::tdButton([
+													'attr'  => ' btn-info btn-assign-role' ,
+													'value' => '用户授权' ,
+												]) ,
 
-									]) ,
+												integrationTags::tdButton([
+													'attr'  => ' btn-danger btn-delete' ,
+													'value' => '删除' ,
+												]) ,
+											] : [];
+
+										})($v)
+
+									) ,
 
 								] , ['id' => $v['id']]);
 
@@ -586,6 +599,7 @@
 		public function delete()
 		{
 			$this->initLogic();
+
 			return $this->jump($this->logic->delete($this->param));
 		}
 

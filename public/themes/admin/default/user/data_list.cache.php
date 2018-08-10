@@ -143,13 +143,13 @@
 							
 							<div class="table-responsive">
 							
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">2</a></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=3">3</a></li> <li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 								<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:20px;"></th><th >ID</th><th >账户</th><th >联系方式</th><th >时间</th><th >IP</th><th >登陆次数</th><th >状态</th><th >操作</th>
+											<th style="width:30px;"></th><th style="width:40px;">ID</th><th >账户</th><th >联系方式</th><th >时间</th><th >IP</th><th >登陆次数</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -171,7 +171,7 @@
 						
 		<td  >
 		
-				<span  > 1
+				<span  class=" name"  > 1
 
  </span>
 
@@ -183,21 +183,21 @@
 						
 		<td  >
 		
-				<span  > 用户名 : 
+				<span  class="name"  > 用户名 : 
 
  </span>
 
-<span  > qq123456
+<span  class=" name"  > qq123456
 
  </span>
 
 <br/>
 
-<span  > 姓名 : 
+<span  class="name"  > 姓名 : 
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user111
+<span  class="td-modify name"  data-field="nickname"  > user111
 
  </span>
 
@@ -209,21 +209,21 @@
 						
 		<td  >
 		
-				<span  > email : 
+				<span  class="name"  > email : 
 
  </span>
 
-<span  > dfddcc@qq.cc
+<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > dfddcc@qq.cc
 
  </span>
 
 <br>
 
-<span  > 电话 : 
+<span  class="name"  > 电话 : 
 
  </span>
 
-<span  > 15826533333
+<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 15826533333
 
  </span>
 
@@ -235,21 +235,21 @@
 						
 		<td  >
 		
-				<span  > 注册时间
+				<span  class="name"  > 注册时间
 
  </span>
 
-<span  > 2018-08-01 15:29:56
+<span  class=" name"  > 2018-08-01 15:29:56
 
  </span>
 
 <br>
 
-<span  > 登陆时间
+<span  class="name"  > 登陆时间
 
  </span>
 
-<span  > 2018-08-09 17:47:15
+<span  class=" name"  > 2018-08-10 14:21:00
 
  </span>
 
@@ -261,33 +261,21 @@
 						
 		<td  >
 		
-				<span  > 注册IP
+				<span  class="name"  > 注册IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
 <br>
 
-<span  > 登陆IP
+<span  class="name"  > 登陆IP
 
  </span>
 
-<span  > 127.0.0.1
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 38
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
@@ -299,12 +287,9 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 7
 
  </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
 
 
 
@@ -314,25 +299,15 @@
 						
 		<td  >
 		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
+				
+
+		</td>
 
 
 						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
+		<td  >
+		
+				
 
 		</td>
 
@@ -360,7 +335,7 @@
 						
 		<td  >
 		
-				<span  > 2
+				<span  class=" name"  > 2
 
  </span>
 
@@ -372,21 +347,21 @@
 						
 		<td  >
 		
-				<span  > 用户名 : 
+				<span  class="name"  > 用户名 : 
 
  </span>
 
-<span  > qq1234567
+<span  class=" name"  > qq1234567
 
  </span>
 
 <br/>
 
-<span  > 姓名 : 
+<span  class="name"  > 姓名 : 
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user222
+<span  class="td-modify name"  data-field="nickname"  > user222
 
  </span>
 
@@ -398,21 +373,21 @@
 						
 		<td  >
 		
-				<span  > email : 
+				<span  class="name"  > email : 
 
  </span>
 
-<span  > 1234522226@qq.cc
+<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > 1234522226@qq.cc
 
  </span>
 
 <br>
 
-<span  > 电话 : 
+<span  class="name"  > 电话 : 
 
  </span>
 
-<span  > 
+<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 15826544417
 
  </span>
 
@@ -424,21 +399,21 @@
 						
 		<td  >
 		
-				<span  > 注册时间
+				<span  class="name"  > 注册时间
 
  </span>
 
-<span  > 2018-08-01 15:30:06
+<span  class=" name"  > 2018-08-01 15:30:06
 
  </span>
 
 <br>
 
-<span  > 登陆时间
+<span  class="name"  > 登陆时间
 
  </span>
 
-<span  > 2018-08-09 17:46:56
+<span  class=" name"  > 2018-08-10 14:19:56
 
  </span>
 
@@ -450,21 +425,21 @@
 						
 		<td  >
 		
-				<span  > 注册IP
+				<span  class="name"  > 注册IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
 <br>
 
-<span  > 登陆IP
+<span  class="name"  > 登陆IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
@@ -476,7 +451,7 @@
 						
 		<td  >
 		
-				<span  > 15
+				<span  class=" name"  > 2
 
  </span>
 
@@ -505,10 +480,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
 
 
 <br>
@@ -549,7 +520,7 @@
 						
 		<td  >
 		
-				<span  > 3
+				<span  class=" name"  > 3
 
  </span>
 
@@ -561,21 +532,21 @@
 						
 		<td  >
 		
-				<span  > 用户名 : 
+				<span  class="name"  > 用户名 : 
 
  </span>
 
-<span  > zz123456
+<span  class=" name"  > zz123456
 
  </span>
 
 <br/>
 
-<span  > 姓名 : 
+<span  class="name"  > 姓名 : 
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user333
+<span  class="td-modify name"  data-field="nickname"  > user333
 
  </span>
 
@@ -587,21 +558,21 @@
 						
 		<td  >
 		
-				<span  > email : 
+				<span  class="name"  > email : 
 
  </span>
 
-<span  > 123zz226@qq.cc
+<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > 123zz226@qq.cc
 
  </span>
 
 <br>
 
-<span  > 电话 : 
+<span  class="name"  > 电话 : 
 
  </span>
 
-<span  > 
+<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
 
@@ -613,21 +584,21 @@
 						
 		<td  >
 		
-				<span  > 注册时间
+				<span  class="name"  > 注册时间
 
  </span>
 
-<span  > 2018-08-01 15:30:11
+<span  class=" name"  > 2018-08-01 15:30:11
 
  </span>
 
 <br>
 
-<span  > 登陆时间
+<span  class="name"  > 登陆时间
 
  </span>
 
-<span  > 1970-01-01 08:00:00
+<span  class=" name"  > 1970-01-01 08:00:00
 
  </span>
 
@@ -639,21 +610,21 @@
 						
 		<td  >
 		
-				<span  > 注册IP
+				<span  class="name"  > 注册IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
 <br>
 
-<span  > 登陆IP
+<span  class="name"  > 登陆IP
 
  </span>
 
-<span  > 0
+<span  class=" name"  > 0
 
  </span>
 
@@ -665,7 +636,7 @@
 						
 		<td  >
 		
-				<span  > 0
+				<span  class=" name"  > 0
 
  </span>
 
@@ -694,10 +665,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
 
 
 <br>
@@ -738,7 +705,7 @@
 						
 		<td  >
 		
-				<span  > 4
+				<span  class=" name"  > 4
 
  </span>
 
@@ -750,21 +717,21 @@
 						
 		<td  >
 		
-				<span  > 用户名 : 
+				<span  class="name"  > 用户名 : 
 
  </span>
 
-<span  > dd123456
+<span  class=" name"  > dd123456
 
  </span>
 
 <br/>
 
-<span  > 姓名 : 
+<span  class="name"  > 姓名 : 
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user444
+<span  class="td-modify name"  data-field="nickname"  > user444
 
  </span>
 
@@ -776,21 +743,21 @@
 						
 		<td  >
 		
-				<span  > email : 
+				<span  class="name"  > email : 
 
  </span>
 
-<span  > dd226@qq.cc
+<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > dd226@qq.cc
 
  </span>
 
 <br>
 
-<span  > 电话 : 
+<span  class="name"  > 电话 : 
 
  </span>
 
-<span  > 
+<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
 
@@ -802,21 +769,21 @@
 						
 		<td  >
 		
-				<span  > 注册时间
+				<span  class="name"  > 注册时间
 
  </span>
 
-<span  > 2018-08-01 15:30:18
+<span  class=" name"  > 2018-08-01 15:30:18
 
  </span>
 
 <br>
 
-<span  > 登陆时间
+<span  class="name"  > 登陆时间
 
  </span>
 
-<span  > 1970-01-01 08:00:00
+<span  class=" name"  > 1970-01-01 08:00:00
 
  </span>
 
@@ -828,21 +795,21 @@
 						
 		<td  >
 		
-				<span  > 注册IP
+				<span  class="name"  > 注册IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
 <br>
 
-<span  > 登陆IP
+<span  class="name"  > 登陆IP
 
  </span>
 
-<span  > 0
+<span  class=" name"  > 0
 
  </span>
 
@@ -854,7 +821,7 @@
 						
 		<td  >
 		
-				<span  > 0
+				<span  class=" name"  > 0
 
  </span>
 
@@ -883,10 +850,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
 
 
 <br>
@@ -927,7 +890,7 @@
 						
 		<td  >
 		
-				<span  > 5
+				<span  class=" name"  > 5
 
  </span>
 
@@ -939,21 +902,21 @@
 						
 		<td  >
 		
-				<span  > 用户名 : 
+				<span  class="name"  > 用户名 : 
 
  </span>
 
-<span  > dfd123456
+<span  class=" name"  > dfd123456
 
  </span>
 
 <br/>
 
-<span  > 姓名 : 
+<span  class="name"  > 姓名 : 
 
  </span>
 
-<span  class="td-modify"  data-field="nickname"  > user555
+<span  class="td-modify name"  data-field="nickname"  > user555
 
  </span>
 
@@ -965,21 +928,21 @@
 						
 		<td  >
 		
-				<span  > email : 
+				<span  class="name"  > email : 
 
  </span>
 
-<span  > dd2d26@qq.cc
+<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > dd2d26@qq.cc
 
  </span>
 
 <br>
 
-<span  > 电话 : 
+<span  class="name"  > 电话 : 
 
  </span>
 
-<span  > 
+<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
 
@@ -991,21 +954,21 @@
 						
 		<td  >
 		
-				<span  > 注册时间
+				<span  class="name"  > 注册时间
 
  </span>
 
-<span  > 2018-08-01 15:30:30
+<span  class=" name"  > 2018-08-01 15:30:30
 
  </span>
 
 <br>
 
-<span  > 登陆时间
+<span  class="name"  > 登陆时间
 
  </span>
 
-<span  > 1970-01-01 08:00:00
+<span  class=" name"  > 1970-01-01 08:00:00
 
  </span>
 
@@ -1017,21 +980,21 @@
 						
 		<td  >
 		
-				<span  > 注册IP
+				<span  class="name"  > 注册IP
 
  </span>
 
-<span  > 127.0.0.1
+<span  class=" name"  > 127.0.0.1
 
  </span>
 
 <br>
 
-<span  > 登陆IP
+<span  class="name"  > 登陆IP
 
  </span>
 
-<span  > 0
+<span  class=" name"  > 0
 
  </span>
 
@@ -1043,7 +1006,7 @@
 						
 		<td  >
 		
-				<span  > 0
+				<span  class=" name"  > 0
 
  </span>
 
@@ -1072,1144 +1035,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="6" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 6
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dfdf123456
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user666
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > dd2d2ee6@qq.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-01 15:31:00
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="7" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 7
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > xiaoming
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user1777
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > 123456@cc.vv
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 12312312355
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-01 22:40:11
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="8" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 8
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > dfdfee
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user1888
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > skldfj@qq.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 12312312355
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-02 10:03:58
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="10" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 10
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > kjsdkj
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > use999
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > sdddddf@434.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 15533654444
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-03 09:04:48
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="11" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 11
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > test1c
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > user111
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > sfklsdajf@aa.cc
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 13321212121
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-07 15:26:45
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="12" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 12
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 用户名 : 
-
- </span>
-
-<span  > helloworld
-
- </span>
-
-<br/>
-
-<span  > 姓名 : 
-
- </span>
-
-<span  class="td-modify"  data-field="nickname"  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > email : 
-
- </span>
-
-<span  > 
-
- </span>
-
-<br>
-
-<span  > 电话 : 
-
- </span>
-
-<span  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册时间
-
- </span>
-
-<span  > 2018-08-08 14:14:51
-
- </span>
-
-<br>
-
-<span  > 登陆时间
-
- </span>
-
-<span  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 注册IP
-
- </span>
-
-<span  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  > 登陆IP
-
- </span>
-
-<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
 
 
 <br>
@@ -2236,7 +1061,7 @@
 									</tbody>
 								</table>
 		
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">2</a></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=3">3</a></li> <li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 							</div>
 
@@ -2336,7 +1161,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="5" name="pagerow">
 		</div>
 
 

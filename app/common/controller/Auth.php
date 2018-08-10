@@ -21,7 +21,6 @@
 			$this->_authUserStatus();
 			//$this->_authIp();
 			$this->_authPrivilege();
-			//$this->_initMenu();
 		}
 
 
@@ -59,11 +58,11 @@
 		{
 			$privilege = getAdminSessionInfo('privilege');;
 			$menuMap = getMenu($privilege);
-			$currentAction = formatMenu($this->request->module(), $this->request->controller(), $this->request->action());
+			$currentAction = formatMenu(MODULE_NAME,CONTROLLER_NAME,ACTION_NAME);
 
 			if((!in_array($currentAction, $menuMap)))
 			{
-				print_r('klsdfjsdflkjf');
+				print_r('未授权的访问');
 				exit;;
 				$this->assign('data', [
 					'code' => '403',

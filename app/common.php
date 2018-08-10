@@ -359,6 +359,28 @@
 
 
 	/**
+	 * 是否为全站管理员id
+	 *
+	 * @param $id
+	 *
+	 * @return bool
+	 */
+	function isGlobalManagerId($id)
+	{
+		return $id == ADMIN_ID;
+	}
+
+
+	/**
+	 * 是否为全站管理员登陆
+	 * @return array|string|bool
+	 */
+	function isGlobalManager()
+	{
+		return isGlobalManagerId(getAdminSessionInfo('user', 'id'));
+	}
+
+	/**
 	 * 指定平台是否登录
 	 * @return array|string|bool
 	 */

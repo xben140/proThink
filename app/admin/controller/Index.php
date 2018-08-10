@@ -35,23 +35,32 @@
 				$_this->setNodeValue([
 					'default_page'    => 'http://baidu.com' ,
 					'logout_url'      => url('portal/login/logout') ,
-					'role'            => '全站管理源' ,
-					'name'            => 'hello' ,
-					'profile_picture' => '' ,
+					'profile_picture' => 'http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg' ,
 				]);
 
-				$_this->setCustomMenu([
+				$_this->setMeta([
 					[
-						'url'   => 'http://hao123.com' ,
+						'field' => '账号 : ' ,
+						'value' => $this->adminInfo['user'] ,
+					] ,
+					[
+						'field' => '名字 : ' ,
+						'value' => $this->adminInfo['nickname'] ,
+					] ,
+				]);
+
+/*
+				$_this->setLink([
+					[
 						'field' => 'hao123' ,
+						'value' => 'http://hao123.com' ,
 					] ,
 					[
-
-						'url'   => 'http://baidu.com' ,
 						'field' => '百度' ,
+						'value'   => 'http://baidu.com' ,
 					] ,
 				]);
-
+*/
 
 			});
 

@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>角色编辑</title>
+<title>用户编辑</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -77,34 +77,34 @@
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
 							
-			<form action="/admin/role/edit.html" class="form-horizontal" id="form1" method="post"  >
+			<form action="/admin/user/edit.html" class="form-horizontal" id="form1" method="post"  >
 					
 							
 			<div class="form-group">
-				<label class="col-sm-3 control-label">角色名</label>
+				<label class="col-sm-3 control-label">用户名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="管理员5555"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+					<input placeholder="请填写用户名"   name="user" class="form-control  " type="text" value="qq123456"  disabled>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）用户名允许字符为字母，数字，下划线，小数点，长度6-16位<span class="error-tip"></span></span>
 				</div>
 			</div>
 
 
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">排序</label>
+				<label class="col-sm-3 control-label">邮箱</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="22"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+					<input placeholder=""   name="email" class="form-control  " type="text" value="dfddcc@qq.cc"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写邮箱<span class="error-tip"></span></span>
 				</div>
 			</div>
 
 
-
+		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">备注</label>
+				<label class="col-sm-3 control-label">手机</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >备注</textarea>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
+					<input placeholder=""   name="phone" class="form-control  " type="text" value="15826533333"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写手机号码<span class="error-tip"></span></span>
 				</div>
 			</div>
 
@@ -137,8 +137,6 @@
 			<script>  
 			
 			</script>  
-			
-
 		<!--  icheck--> 
 			<script>  
 				$(document).ready(function () {
@@ -220,7 +218,6 @@
 			</script>  
 
 <!-- ! ~~~SCRIPT~~~ -->
-
 
 
 

@@ -21,8 +21,8 @@
 .td-modify {
 	cursor     : pointer;
 	background : #f8d3ff;
-	padding    : 0 6px;
-	margin     : 0 3px;
+	/* padding: 5px 5px; */
+	/* margin: 1px 1px; */
 }
 
 .td-modify:hover {

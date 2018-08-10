@@ -141,139 +141,139 @@
 						<label> 
 						<input type="checkbox" value="1" name="privileges[]" >
 							<i></i>
-							区域联动接口
+							区域联动 -- admin/area/getareabypid
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="2" name="privileges[]" >
 							<i></i>
-							主页
+							主页 -- admin/index/index
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="3" name="privileges[]" >
 							<i></i>
-							用户管理
+							用户管理 -- admin/user/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="4" name="privileges[]" >
 							<i></i>
-							分配角色
+							分配角色 -- admin/user/assignroles
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="5" name="privileges[]" >
 							<i></i>
-							用户列表
+							用户列表 -- admin/user/datalist
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="6" name="privileges[]" >
 							<i></i>
-							删除用户
+							删除用户 -- admin/user/delete
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="7" name="privileges[]" >
 							<i></i>
-							编辑用户
+							编辑用户 -- admin/user/edit
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="8" name="privileges[]" >
+						<input type="checkbox" value="8" name="privileges[]" checked>
 							<i></i>
-							修改密码-列表
+							修改密码 -- admin/user/editpwd
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="9" name="privileges[]" >
+						<input type="checkbox" value="9" name="privileges[]" checked>
 							<i></i>
-							设置字段
+							设置字段 -- admin/user/setfield
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="10" name="privileges[]" >
+						<input type="checkbox" value="10" name="privileges[]" checked>
 							<i></i>
-							添加用户
+							添加用户 -- admin/user/add
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="11" name="privileges[]" checked>
 							<i></i>
-							角色管理
+							角色管理 -- admin/role/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="12" name="privileges[]" checked>
 							<i></i>
-							删除角色
+							删除角色 -- admin/role/delete
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="13" name="privileges[]" checked>
 							<i></i>
-							角色授权
+							角色授权 -- admin/role/assignprivileges
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="14" name="privileges[]" checked>
 							<i></i>
-							设置字段
+							设置字段 -- admin/role/setfield
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="15" name="privileges[]" checked>
 							<i></i>
-							添加角色
+							添加角色 -- admin/role/add
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="16" name="privileges[]" checked>
 							<i></i>
-							角色列表
+							角色列表 -- admin/role/datalist
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="17" name="privileges[]" checked>
 							<i></i>
-							编辑角色
+							编辑角色 -- admin/role/edit
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="18" name="privileges[]" >
 							<i></i>
-							菜单管理
+							菜单管理 -- admin/resourcemenu/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="19" name="privileges[]" >
 							<i></i>
-							删除菜单
+							删除菜单 -- admin/resourcemenu/delete
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="20" name="privileges[]" >
 							<i></i>
-							编辑菜单
+							编辑菜单 -- admin/resourcemenu/edit
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="21" name="privileges[]" >
 							<i></i>
-							设置字段
+							设置字段 -- admin/resourcemenu/setfield
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="22" name="privileges[]" >
 							<i></i>
-							菜单列表
+							菜单列表 -- admin/resourcemenu/datalist
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="23" name="privileges[]" >
 							<i></i>
-							添加菜单
+							添加菜单 -- admin/resourcemenu/add
 						</label>
 				</div>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个角色可分配多个权限 <span class="error-tip"></span></span>

@@ -146,6 +146,9 @@
 		},
 		'dblclick' : function () {
 			let _this = $(this);
+
+			let openType = this.nodeName == 'TEXTAREA' ? 2 : 0;
+
 			let url = setFieldUrl;
 
 			//当前td有data-field属性，父级tr有data-id字段
@@ -162,7 +165,7 @@
 					anim      : 0,
 					title     : '输入更新的值',
 					shadeClose: true, //开启遮罩关闭
-					formType  : 0,
+					formType  : openType,
 					shade     : 0.1,
 					value     : oldVal,
 					area      : ['800px', '350px'], //自定义文本域宽高
@@ -597,11 +600,12 @@ function registerDetail($obj)
 }
 
 
-
 /**
  * setFieldUrl
  *    传入item 的id，同一设置为启用
  * @param ids 字符串，逗号分隔 1,23,4
+ * @param btn
+ * @param callback_
  */
 function itemEnable(ids, btn, callback_)
 {
@@ -626,6 +630,8 @@ function itemEnable(ids, btn, callback_)
  * setFieldUrl
  *    传入item 的id，同一设置为禁用
  * @param ids 字符串，逗号分隔 1,23,4
+ * @param btn
+ * @param callback_
  */
 function itemDisable(ids, btn, callback_)
 {
@@ -651,6 +657,7 @@ function itemDisable(ids, btn, callback_)
  *    传入item 的id，同一删除
  * @param ids 字符串，逗号分隔 1,23,4
  * @param btn 要加锁按钮
+ * @param callback_
  */
 function itemDelete(ids, btn, callback_)
 {
@@ -719,7 +726,8 @@ function getSwitcherParams(obj)
 	let val = obj_.val();
 	let isChecked = obj_.is(':checked');
 	let field = obj_.attr("name");
-	let id = obj_.parents('tr').data('id')
+	// let id = obj_.parents('tr').data('id')
+	let id = getParentTr(obj_).data('id')
 
 	return {
 		'id'   : id,

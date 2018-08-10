@@ -2,6 +2,8 @@
 
 	namespace app\common\model;
 
+	use think\Loader;
+
 	class Privilegeresource extends ModelBase
 	{
 		public $name = 'privilege_resource';
@@ -81,13 +83,13 @@ WHERE role_id IN (1, 5)
 		 */
 		public function getMenusByUserId($userId)
 		{
-			//角色id
+			//权限id
 			$privilegesId = $this->getPrivilegeIdByUserId($userId);
 
 			//动态id
 			//TODO
 
-			//根据查权限
+			//根据权限id和资源索引查资源
 			$data = $this->getReourceByResourceIndexAndPrivilegeId($privilegesId , RESOURCE_INDEX_MENU);
 
 			return $data;
@@ -95,7 +97,7 @@ WHERE role_id IN (1, 5)
 
 
 		/**
-		 *  根据权限id和对应类型查资源
+		 *  根据权限id和对应类型查 资源表的id
 		 *
 		 * @param array  $PrivilegeresourceId
 		 * @param string $index 资源类型
@@ -105,22 +107,10 @@ WHERE role_id IN (1, 5)
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		public function getReourceByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
+		public function getReourceIdByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
 		{
 
-			$join = [
-				[
-					'ithink_' . RESOURCE_MAP[$index] . ' b' ,
-					self::makeSelfAliasField('resource_id') . ' = b.id ' ,
-					'left' ,
-				] ,
-			];
-
 			$where = [
-				'b.status' => [
-					'=' ,
-					'1' ,
-				] ,
 
 				self::makeSelfAliasField('id') => [
 					'in' ,
@@ -133,25 +123,89 @@ WHERE role_id IN (1, 5)
 				] ,
 			];
 
-			$whereOr = [
-				'b.is_common' => [
+			$condition = [
+				'where' => $where ,
+				//'field' => self::makeSelfAliasField('resource_id') ,
+				'alias' => self::$currentTableAlias ,
+			];
+
+			$this->setCondition($condition);
+
+			$data = $this->fetchSql(0)->column(self::makeSelfAliasField('resource_id'));
+
+			return $data;
+		}
+
+
+		/**
+		 *  根据资源id和对应类型查 资源
+		 *
+		 * @param array  $id    ithink_privilege_resource表的id
+		 * @param string $index 资源类型
+		 *
+		 * @return false|\PDOStatement|string|\think\Collection
+		 * @throws \think\db\exception\DataNotFoundException
+		 * @throws \think\db\exception\ModelNotFoundException
+		 * @throws \think\exception\DbException
+		 */
+		public function getReourceByResourceIndexAndId($id = [] , $index)
+		{
+			$model = $this->{'model__common_' . Loader::parseName(strtr(RESOURCE_MAP[$index] , ['_' => '']) , 1)};;
+
+			$where = [
+				self::makeSelfAliasField('status') => [
 					'=' ,
 					'1' ,
 				] ,
 			];
 
 			$condition = [
-				'order'   => 'b.order' ,
-				'join'    => $join ,
-				'where'   => $where ,
-				'whereOr' => $whereOr ,
-				'field'   => ' DISTINCT b.id, `b`.name, `b`.`pid`, `b`.`module`, `b`.`controller`, `b`.`action`, `b`.`ico`, `b`.`order`, `b`.`is_menu`, `b`.`is_common`, `b`.`remark`, `b`.`status`, `b`.`time`' ,
-				'alias'   => self::$currentTableAlias ,
+				'field' => '*' ,
+				'alias' => self::$currentTableAlias ,
+				'where' => $where ,
 			];
 
-			$this->setCondition($condition);
+			$model->setCondition($condition);
 
-			$data = $this->fetchSql(0)->select();
+			$model->setCondition([
+				'where' => function($query) use ($id) {
+					$query->whereOr([
+						self::makeSelfAliasField('is_common') => [
+							'=' ,
+							'1' ,
+						] ,
+					])->whereOr([
+						self::makeSelfAliasField('id') => [
+							'in' ,
+							$id ,
+						] ,
+
+					]);
+				} ,
+			]);
+
+			$data = $model->fetchSql(0)->select();
+
+			return $data;
+		}
+
+
+		/**
+		 *  根据权限id和对应类型查资源
+		 *
+		 * @param array $PrivilegeresourceId
+		 * @param       $index
+		 *
+		 * @return false|\PDOStatement|string|\think\Collection
+		 * @throws \think\db\exception\DataNotFoundException
+		 * @throws \think\db\exception\ModelNotFoundException
+		 * @throws \think\exception\DbException
+		 */
+		public function getReourceByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
+		{
+
+			$resourceId = $this->getReourceIdByResourceIndexAndPrivilegeId($PrivilegeresourceId , $index);
+			$data = $this->getReourceByResourceIndexAndId($resourceId , $index);
 
 			return $data;
 		}

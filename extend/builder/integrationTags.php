@@ -89,7 +89,7 @@
 		}
 
 		/**
-		 * 生成一个简单的td，里面一个字段不带修改
+		 * 生成一个简单的td，里面一个字段用span标签
 		 * 'name'     => 'name:' ,
 		 * 'value'    => '234' ,
 		 * 'editable' => '1' ,
@@ -107,7 +107,50 @@
 			//如果设置标签名字
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , []));
+			} , ['class' => 'name',]));
+
+			$attr = [];
+			//如果可以编辑
+			if(isset($params['editable']) && $params['editable'])
+			{
+				$attr['class'] = "td-modify name";
+				$attr['data-field'] = $params['field'];
+				isset($params['reg']) && $attr['data-reg'] = $params['reg'];
+				isset($params['msg']) && $attr['data-msg'] = $params['msg'];
+			}
+			else
+			{
+				$attr['class'] = " name";
+			}
+
+			$doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
+				$doms[] = $params['value'];
+			} , $attr);
+
+			return $doms;
+		}
+
+		/**
+		 * 生成一个简单的td，里面一个字段里面加textarea
+		 * 'style'     => 'width:80%' ,
+		 * 'name'     => 'name:' ,
+		 * 'value'    => '234' ,
+		 * 'editable' => '1' ,
+		 * 'field'    => 'fieldname' ,
+		 * 'reg'      => '/^\d{1,4}$/' ,
+		 * 'msg'      => '请填写合法手机号码' ,
+		 *
+		 * @param array $params
+		 *
+		 * @return array
+		 */
+		public static function tdTextarea($params)
+		{
+			$doms = [];
+			//如果设置标签名字
+			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
+				$doms[] = $params['name'];
+			} , ['class' => 'name',]));
 
 			$attr = [];
 			//如果可以编辑
@@ -118,13 +161,20 @@
 				isset($params['reg']) && $attr['data-reg'] = $params['reg'];
 				isset($params['msg']) && $attr['data-msg'] = $params['msg'];
 			}
+			else
+			{
+				$attr['disabled'] = "disabled";
+				$attr['class'] = " name";
+			}
 
-			$doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
+			isset($params['style']) && $attr['style'] = $params['style'];
+
+
+			$doms[] = elementsFactory::doubleLabel('textarea' , function(&$doms) use ($params) {
 				$doms[] = $params['value'];
 			} , $attr);
 
 			return $doms;
-
 		}
 
 		/**

@@ -397,9 +397,13 @@
 
 									//备注
 									integrationTags::td([
-										integrationTags::tdSimple([
-											//'name'     => '备注' ,
-											'editable' => '0' ,
+										integrationTags::tdTextarea([
+											'style'    => 'width:100%' ,
+											//'name'     => 'remark' ,
+											'editable' => '1' ,
+											'field'    => 'remark' ,
+											//'reg'      => '/^\d{1,4}$/' ,
+											//'msg'      => '请填写合法手机号码' ,
 											'value'    => $v['remark'] ,
 										]) ,
 									]) ,
@@ -491,7 +495,7 @@
 				$roles_ = array_map(function($v) {
 					return [
 						'value' => $v['id'] ,
-						'field' => $v['name'] ,
+						'field' => $v['name'] ." -- " .formatMenu($v['module'], $v['controller'], $v['action']),
 					];
 				} , $menus);
 

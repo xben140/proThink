@@ -171,7 +171,7 @@
 						
 		<td  >
 		
-				<span  > 1
+				<span  class=" name"  > 1
 
  </span>
 
@@ -183,27 +183,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员111
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 133
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员111
 
  </span>
 
@@ -215,7 +199,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-24 22:10:07
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 133
 
  </span>
 
@@ -227,9 +215,21 @@
 						
 		<td  >
 		
-				<span  > 123456
+				<span  class=" name"  > 2018-07-24 22:10:07
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 3243
+
+ </textarea>
 
 
 
@@ -294,7 +294,7 @@
 						
 		<td  >
 		
-				<span  > 2
+				<span  class=" name"  > 2
 
  </span>
 
@@ -306,27 +306,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员122
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员122
 
  </span>
 
@@ -338,7 +322,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-24 22:11:13
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -350,9 +338,21 @@
 						
 		<td  >
 		
-				<span  > 123456
+				<span  class=" name"  > 2018-07-24 22:11:13
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 123456
+
+ </textarea>
 
 
 
@@ -417,7 +417,7 @@
 						
 		<td  >
 		
-				<span  > 3
+				<span  class=" name"  > 3
 
  </span>
 
@@ -429,27 +429,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员333
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员333
 
  </span>
 
@@ -461,7 +445,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-24 22:13:05
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1000
 
  </span>
 
@@ -473,9 +461,21 @@
 						
 		<td  >
 		
-				<span  > 123456333
+				<span  class=" name"  > 2018-07-24 22:13:05
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > dgsfsdf
+
+ </textarea>
 
 
 
@@ -540,7 +540,7 @@
 						
 		<td  >
 		
-				<span  > 4
+				<span  class=" name"  > 4
 
  </span>
 
@@ -552,27 +552,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1444
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1444
 
  </span>
 
@@ -584,7 +568,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 08:59:45
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -596,9 +584,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-07-25 08:59:45
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > gsdfasf
+
+ </textarea>
 
 
 
@@ -663,7 +663,7 @@
 						
 		<td  >
 		
-				<span  > 5
+				<span  class=" name"  > 5
 
  </span>
 
@@ -675,27 +675,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员5555
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 22
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员5555
 
  </span>
 
@@ -707,7 +691,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 09:00:18
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 22
 
  </span>
 
@@ -719,9 +707,21 @@
 						
 		<td  >
 		
-				<span  > 备注
+				<span  class=" name"  > 2018-07-25 09:00:18
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 备注
+
+ </textarea>
 
 
 
@@ -786,7 +786,7 @@
 						
 		<td  >
 		
-				<span  > 6
+				<span  class=" name"  > 6
 
  </span>
 
@@ -798,27 +798,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员6666
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 33
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员6666
 
  </span>
 
@@ -830,7 +814,11 @@
 						
 		<td  >
 		
-				<span  > 2018-07-25 09:00:22
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 33
 
  </span>
 
@@ -842,9 +830,21 @@
 						
 		<td  >
 		
-				<span  > 备注
+				<span  class=" name"  > 2018-07-25 09:00:22
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 备注
+
+ </textarea>
 
 
 
@@ -909,7 +909,7 @@
 						
 		<td  >
 		
-				<span  > 7
+				<span  class=" name"  > 7
 
  </span>
 
@@ -921,27 +921,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员777
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员777
 
  </span>
 
@@ -953,7 +937,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-01 15:35:08
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -965,9 +953,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-08-01 15:35:08
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
 
 
 
@@ -1032,7 +1032,7 @@
 						
 		<td  >
 		
-				<span  > 8
+				<span  class=" name"  > 8
 
  </span>
 
@@ -1044,27 +1044,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员888
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员888
 
  </span>
 
@@ -1076,7 +1060,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-01 15:35:19
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -1088,9 +1076,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-08-01 15:35:19
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
 
 
 
@@ -1155,7 +1155,7 @@
 						
 		<td  >
 		
-				<span  > 9
+				<span  class=" name"  > 9
 
  </span>
 
@@ -1167,27 +1167,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员999
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 13
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员999
 
  </span>
 
@@ -1199,7 +1183,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-01 15:35:28
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 13
 
  </span>
 
@@ -1211,9 +1199,21 @@
 						
 		<td  >
 		
-				<span  > dsfsdf
+				<span  class=" name"  > 2018-08-01 15:35:28
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > dsfsdf
+
+ </textarea>
 
 
 
@@ -1278,7 +1278,7 @@
 						
 		<td  >
 		
-				<span  > 10
+				<span  class=" name"  > 10
 
  </span>
 
@@ -1290,27 +1290,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaa
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaa
 
  </span>
 
@@ -1322,7 +1306,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-08 14:14:01
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -1334,9 +1322,21 @@
 						
 		<td  >
 		
-				<span  > cvcv
+				<span  class=" name"  > 2018-08-08 14:14:01
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > cvcv
+
+ </textarea>
 
 
 
@@ -1401,7 +1401,7 @@
 						
 		<td  >
 		
-				<span  > 11
+				<span  class=" name"  > 11
 
  </span>
 
@@ -1413,27 +1413,11 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class="name"  > 
 
  </span>
 
-<span  class="td-modify"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > ffff
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-<span  class="td-modify"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > ffff
 
  </span>
 
@@ -1445,7 +1429,11 @@
 						
 		<td  >
 		
-				<span  > 2018-08-08 14:56:53
+				<span  class="name"  > 
+
+ </span>
+
+<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
 
  </span>
 
@@ -1457,9 +1445,21 @@
 						
 		<td  >
 		
-				<span  > 
+				<span  class=" name"  > 2018-08-08 14:56:53
 
  </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
 
 
 
