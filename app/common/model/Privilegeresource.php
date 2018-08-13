@@ -18,61 +18,8 @@
 			parent::initialize();
 		}
 
-
 		/**
-		 *  根据用id查权限id
-		 * @access public
-		 *
-		 * @param $id
-		 *
-		 * @return array
-		 */
-		public function getPrivilegeIdByUserId($id)
-		{
-			$rolesId = $this->model__common_role->getRoleIdByUserId($id);
-
-			$data = $this->getPrivilegeIdByroleid($rolesId);
-
-			return $data;
-		}
-
-
-		/**
-		 *  根据角色id查权限id
-		 * @access public
-		 *
-		 * @param array $rolesId
-		 *
-		 * @return array
-		 */
-		public function getPrivilegeIdByroleid($rolesId = [])
-		{
-
-			/*
-SELECT
-    a.privilege_id
-FROM
-    `ithink_role_privilege` a
-WHERE role_id IN (1, 5)
-			*/
-
-			$where = [
-				'role_id' => [
-					'in' ,
-					$rolesId ,
-				] ,
-			];
-
-			$data = db('role_privilege')->where($where)->column('privilege_id');
-			$data = array_flip(array_flip($data));
-
-			return $data;
-		}
-
-
-		/**
-		 *  用户id查菜单
-		 * @access public
+		 *  用户id  --> 菜单
 		 *
 		 * @param $userId
 		 *
@@ -97,21 +44,55 @@ WHERE role_id IN (1, 5)
 
 
 		/**
-		 *  根据权限id和对应类型查 资源表的id
+		 *  用户id  --> 权限ids
 		 *
-		 * @param array  $PrivilegeresourceId
-		 * @param string $index 资源类型
+		 * @param $id
+		 *
+		 * @return array
+		 */
+		public function getPrivilegeIdByUserId($id)
+		{
+			$rolesId = $this->model__common_role->getRoleIdByUserId($id);
+			$data = $this->getPrivilegeIdByroleid($rolesId);
+
+			return $data;
+		}
+
+
+		/**
+		 *  权限ids + 对应类型 --> 资源
+		 *
+		 * @param array $PrivilegeresourceId
+		 * @param       $index
 		 *
 		 * @return false|\PDOStatement|string|\think\Collection
 		 * @throws \think\db\exception\DataNotFoundException
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
+		public function getReourceByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
+		{
+			$PrivilegeresourceId = array_flip(array_flip($PrivilegeresourceId));
+
+			$resourceId = $this->getReourceIdByResourceIndexAndPrivilegeId($PrivilegeresourceId , $index);
+			$data = $this->getReourceByResourceIndexAndId($resourceId , $index);
+
+			return $data;
+		}
+
+
+		/**
+		 *  权限ids + 对应类型 --> 资源ids
+		 *
+		 * @param array $PrivilegeresourceId
+		 * @param       $index
+		 *
+		 * @return array
+		 */
 		public function getReourceIdByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
 		{
-
+			$PrivilegeresourceId = array_flip(array_flip($PrivilegeresourceId));
 			$where = [
-
 				self::makeSelfAliasField('id') => [
 					'in' ,
 					$PrivilegeresourceId ,
@@ -132,15 +113,54 @@ WHERE role_id IN (1, 5)
 			$this->setCondition($condition);
 
 			$data = $this->fetchSql(0)->column(self::makeSelfAliasField('resource_id'));
+			$data = array_flip(array_flip($data));
 
 			return $data;
 		}
 
 
 		/**
-		 *  根据资源id和对应类型查 资源
+		 *  资源ids + 对应类型 --> 权限ids
 		 *
-		 * @param array  $id    ithink_privilege_resource表的id
+		 * @param array $resourceId
+		 * @param       $index
+		 *
+		 * @return array
+		 */
+		public function getPrivilegesIdByResourceIndexAndResourceId($resourceId = [] , $index)
+		{
+			$resourceId = array_flip(array_flip($resourceId));
+			$where = [
+				self::makeSelfAliasField('resource_id') => [
+					'in' ,
+					$resourceId ,
+				] ,
+
+				self::makeSelfAliasField('resource_type') => [
+					'=' ,
+					$index ,
+				] ,
+			];
+
+			$condition = [
+				'where' => $where ,
+				//'field' => self::makeSelfAliasField('resource_id') ,
+				'alias' => self::$currentTableAlias ,
+			];
+
+			$this->setCondition($condition);
+
+			$data = $this->fetchSql(0)->column(self::makeSelfAliasField('id'));
+			$data = array_flip(array_flip($data));
+
+			return $data;
+		}
+
+
+		/**
+		 *  资源ids + 对应类型 --> 资源
+		 *
+		 * @param array  $ids   ithink_privilege_resource表的id
 		 * @param string $index 资源类型
 		 *
 		 * @return false|\PDOStatement|string|\think\Collection
@@ -148,8 +168,9 @@ WHERE role_id IN (1, 5)
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		public function getReourceByResourceIndexAndId($id = [] , $index)
+		public function getReourceByResourceIndexAndId($ids = [] , $index)
 		{
+			$ids = array_flip(array_flip($ids));
 			$model = $this->{'model__common_' . Loader::parseName(strtr(RESOURCE_MAP[$index] , ['_' => '']) , 1)};;
 
 			$where = [
@@ -168,7 +189,7 @@ WHERE role_id IN (1, 5)
 			$model->setCondition($condition);
 
 			$model->setCondition([
-				'where' => function($query) use ($id) {
+				'where' => function($query) use ($ids) {
 					$query->whereOr([
 						self::makeSelfAliasField('is_common') => [
 							'=' ,
@@ -177,7 +198,7 @@ WHERE role_id IN (1, 5)
 					])->whereOr([
 						self::makeSelfAliasField('id') => [
 							'in' ,
-							$id ,
+							$ids ,
 						] ,
 
 					]);
@@ -191,21 +212,25 @@ WHERE role_id IN (1, 5)
 
 
 		/**
-		 *  根据权限id和对应类型查资源
+		 *  角色ids --> 权限ids
+		 * @access public
 		 *
-		 * @param array $PrivilegeresourceId
-		 * @param       $index
+		 * @param array $rolesId
 		 *
-		 * @return false|\PDOStatement|string|\think\Collection
-		 * @throws \think\db\exception\DataNotFoundException
-		 * @throws \think\db\exception\ModelNotFoundException
-		 * @throws \think\exception\DbException
+		 * @return array
 		 */
-		public function getReourceByResourceIndexAndPrivilegeId($PrivilegeresourceId = [] , $index)
+		public function getPrivilegeIdByroleid($rolesId = [])
 		{
+			$rolesId = array_flip(array_flip($rolesId));
+			$where = [
+				'role_id' => [
+					'in' ,
+					$rolesId ,
+				] ,
+			];
 
-			$resourceId = $this->getReourceIdByResourceIndexAndPrivilegeId($PrivilegeresourceId , $index);
-			$data = $this->getReourceByResourceIndexAndId($resourceId , $index);
+			$data = db('role_privilege')->where($where)->column('privilege_id');
+			$data = array_flip(array_flip($data));
 
 			return $data;
 		}

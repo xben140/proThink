@@ -71,9 +71,9 @@
 				<div  class="profile-pic"><img alt="image" src="http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg" /></div>
 				
 								<div class="profile-item">
-				<span class="font-bold">账号 : </span><span >qq1234567</span>
+				<span class="font-bold">账号 : </span><span >qq123456</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">名字 : </span><span >user222</span>
+				<span class="font-bold">名字 : </span><span >user111</span>
 			</div>
 			
 				<!--

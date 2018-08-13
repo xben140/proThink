@@ -377,7 +377,7 @@
 	 */
 	function isGlobalManager()
 	{
-		return isGlobalManagerId(getAdminSessionInfo('user', 'id'));
+		return isGlobalManagerId(getAdminSessionInfo('user' , 'id'));
 	}
 
 	/**
@@ -432,7 +432,7 @@
 	}
 
 	//添加等级段
-	function makeTree($data , $id = 0 , $level = 1, $parentField = 'pid')
+	function makeTree($data , $id = 0 , $level = 1 , $parentField = 'pid')
 	{
 		static $result = [];
 		foreach ($data as $k => $v)
@@ -441,7 +441,7 @@
 			{
 				$v['level'] = $level;
 				$result[] = $v;
-				makeTree($data , $v['id'] , $level + 1, $parentField);
+				makeTree($data , $v['id'] , $level + 1 , $parentField);
 			}
 		}
 
@@ -509,7 +509,19 @@
 		return $data['is_menu'];
 	}
 
+	function indentationByLevel($data , $level = 0)
+	{
+		$s = '';
+		$margin = (($level - 1) * 30);
+		($level>1)&& $s = '╘══ ';
 
+		return "<span style='margin-left: " . $margin . "px;'>".$s . $data . '</span>';
+	}
+
+	function indentationOptionsByLevel($data , $level = 0)
+	{
+		return str_repeat('&nbsp;' , ($level - 1) * 6) . $data;
+	}
 
 
 

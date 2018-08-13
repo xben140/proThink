@@ -253,12 +253,8 @@
 							 */
 							$_this->setHead([
 								[
-									'field' => '' ,
-									'attr'  => 'style="width:30px;"' ,
-								] ,
-								[
 									'field' => 'ID' ,
-									'attr'  => 'style="width:40px;"' ,
+									'attr'  => 'style="width:80px;"' ,
 								] ,
 								[
 									'field' => '账户' ,
@@ -429,10 +425,6 @@
 									//checkbox
 									integrationTags::td([
 										integrationTags::tdCheckbox() ,
-									]) ,
-
-									//id
-									integrationTags::td([
 										integrationTags::tdSimple([
 											'value' => $v['id'] ,
 										]) ,

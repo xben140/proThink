@@ -195,12 +195,8 @@
 							 */
 							$_this->setHead([
 								[
-									'field' => '' ,
-									'attr'  => 'style="width:20px;"' ,
-								] ,
-								[
 									'field' => 'ID' ,
-									//'attr'  => 'class="red"' ,
+									'attr'  => 'style="width:80px;"' ,
 								] ,
 								[
 									'field' => '角色名' ,
@@ -351,10 +347,6 @@
 									//checkbox
 									integrationTags::td([
 										integrationTags::tdCheckbox() ,
-									]) ,
-
-									//id
-									integrationTags::td([
 										integrationTags::tdSimple([
 											'value' => $v['id'] ,
 										]) ,
@@ -468,6 +460,7 @@
 		public function delete()
 		{
 			$this->initLogic();
+
 			return $this->jump($this->logic->delete($this->param));
 		}
 
@@ -478,7 +471,6 @@
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);
-
 				$this->jump($this->logic->assignPrivileges($this->param));
 			}
 			else
@@ -486,41 +478,65 @@
 				$this->setPageTitle('分配权限');
 				session(URL_MODULE , $this->param['id']);
 
+				/**
+				 ***************************************************************************************************************
+				 *                                                        菜单
+				 ***************************************************************************************************************
+				 */
+
+				$resourceMenuIndex = RESOURCE_INDEX_MENU;
 				//获取所有有效菜单
-				$menus = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU);
+				$menus = $this->logic__common_Privilegeresource->getAssignableResource($resourceMenuIndex);
 
-				//获取当前角色有的菜单
-				$currPrivileges = $this->logic->getRoleMenus($this->param);
-
-				$roles_ = array_map(function($v) {
+				$availableMenus = array_map(function($v) {
 					return [
 						'value' => $v['id'] ,
-						'field' => $v['name'] ." -- " .formatMenu($v['module'], $v['controller'], $v['action']),
+						//'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+						'field' => $v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']) ,
 					];
 				} , $menus);
 
-				$this->displayContents = integrationTags::basicFrame([
-					integrationTags::row([
+				//获取当前角色有的菜单
+				$currMenu = $this->logic->getRolesResource($this->param, $resourceMenuIndex);
 
-						integrationTags::rowBlock([
-							integrationTags::form([
-								//blockCheckbox
-								//inlineCheckbox
-								integrationTags::blockCheckbox($roles_ , 'privileges[]' , '分配权限' , '每个角色可分配多个权限' , $currPrivileges) ,
-							] , [
-								'id'     => 'form1' ,
-								'method' => 'post' ,
-								'action' => url() ,
-							]) ,
-						] , [
-							'width'      => '6' ,
-							'main_title' => '分配菜单和访问权限' ,
-							'sub_title'  => '' ,
+				$menusForms = integrationTags::rowBlock([
+					integrationTags::form([
+
+						//blockCheckbox
+						//inlineCheckbox
+						integrationTags::blockCheckbox($availableMenus , 'privileges[]' , '分配菜单' , '每个角色可分配多个菜单' , $currMenu) ,
+						integrationTags::hidden([
+							'name'  => 'type' ,
+							'value' => $resourceMenuIndex ,
 						]) ,
 
-
+					] , [
+						'id'     => 'form1' ,
+						'method' => 'post' ,
+						'action' => url() ,
 					]) ,
+				] , [
+					'width'      => '6' ,
+					'main_title' => '分配菜单和访问权限' ,
+					'sub_title'  => '' ,
+				]);
 
+				/**
+				 ***************************************************************************************************************
+				 *                                                        页面元素
+				 ***************************************************************************************************************
+				 */
+
+
+				/**
+				 ***************************************************************************************************************
+				 *                                                        构造页面
+				 ***************************************************************************************************************
+				 */
+				$this->displayContents = integrationTags::basicFrame([
+					integrationTags::row([
+						$menusForms ,
+					]) ,
 
 				] , [
 					'animate_type' => 'fadeInRight' ,

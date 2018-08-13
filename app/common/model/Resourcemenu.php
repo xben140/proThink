@@ -40,7 +40,6 @@
 				] ,
 			]);
 
-
 			$data = $this
 				//->fetchSql(1)
 				->select();

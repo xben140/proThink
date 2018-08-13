@@ -37,6 +37,7 @@
 		 * 根据用户名查出用户数据
 		 *
 		 * @param string $username
+		 * @param string $field
 		 *
 		 * @return array|false|\PDOStatement|string|Model
 		 * @throws \think\db\exception\DataNotFoundException
@@ -67,6 +68,7 @@
 		 * 根据id查出用户数据
 		 *
 		 * @param string $id
+		 * @param string $field
 		 *
 		 * @return array|false|\PDOStatement|string|Model
 		 * @throws \think\db\exception\DataNotFoundException
@@ -80,7 +82,7 @@
 
 
 		/**
-		 * 根据用户名状态是否为1
+		 * 根据用户名查出状态是否为1
 		 *
 		 * @param $username
 		 *
@@ -101,16 +103,16 @@
 		/**
 		 * 根据id状态是否为1
 		 *
-		 * @param $username
+		 * @param $id
 		 *
 		 * @return bool
 		 * @throws \think\db\exception\DataNotFoundException
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		final public function isValidateUserByUserId($username)
+		final public function isValidateUserByUserId($id)
 		{
-			$info = $this->getUserInfoByUserId($username);
+			$info = $this->getUserInfoByUserId($id);
 
 			return $this->isValidateUser($info->toArray());
 		}

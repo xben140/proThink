@@ -3212,8 +3212,11 @@ nav.page-tabs .page-tabs-content {
 
 .table > tbody > tr > td > span.name {
 	display : inline-block;
-	padding: 5px 5px;
+	padding: 2px 2px;
 	margin: 1px 1px;
+	min-width: 18px;
+	min-height: 10px;
+	/* line-height: 23px; */
 }
 
 .panel.blank-panel {

@@ -20,13 +20,13 @@
 
 .td-modify {
 	cursor     : pointer;
-	background : #f8d3ff;
+	background: #c9f3db;
 	/* padding: 5px 5px; */
 	/* margin: 1px 1px; */
 }
 
 .td-modify:hover {
-	background : #a8efc6;
+	background: #f8d3ff;
 }
 
 .search-btn {

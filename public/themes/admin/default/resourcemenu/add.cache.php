@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>权限编辑</title>
+<title>权限添加</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -77,7 +77,7 @@
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
 							
-			<form action="/admin/resourcemenu/edit.html" class="form-horizontal" id="form1" method="post"  >
+			<form action="/admin/resourcemenu/add.html" class="form-horizontal" id="form1" method="post"  >
 					
 					
 				<div class="form-group">
@@ -86,7 +86,7 @@
 					</label>
 					<div class="col-sm-8">
 						<select class="form-control  m-b" name="pid">
-							<option value='1' >全局 -- admin/none/none</option><option value='4' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置 -- admin/index/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;菜单管理 -- admin/resourcemenu/none</option>
+							<option value='1' >全局 -- admin/none/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置 -- admin/index/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;菜单管理 -- admin/resourcemenu/none</option>
 						</select>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必填 <span class="error-tip"></span></span>
 						</div>
@@ -97,7 +97,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">权限名字</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="权限名字"  >
+					<input placeholder=""   name="name" class="form-control  " type="text" value=""  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">控制器名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="controller" class="form-control  " type="text" value="dfdf"  >
+					<input placeholder=""   name="controller" class="form-control  " type="text" value=""  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -127,7 +127,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">方法名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="action" class="form-control  " type="text" value="dfdf"  >
+					<input placeholder=""   name="action" class="form-control  " type="text" value=""  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>

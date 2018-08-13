@@ -18,15 +18,21 @@
 		 * 获取当前角色有的权限
 		 *
 		 * @param $param
+		 * @param $index
 		 *
 		 * @return mixed
 		 */
-		public function getRoleMenus($param)
+		public function getRolesResource($param, $index)
 		{
 			$id = $param['id'];
-			$currPrivileges = $this->model__common_Privilegeresource->getPrivilegeIdByroleid([$id]);
 
-			return $currPrivileges;
+			//当前角色对应的权限id
+			$currPrivilegesId = $this->model__common_Privilegeresource->getPrivilegeIdByroleid([$id]);
+
+			//根据当前权限id查对应资源
+			$menusId = $this->model__common_Privilegeresource->getReourceIdByResourceIndexAndPrivilegeId($currPrivilegesId, $index);
+
+			return $menusId;
 		}
 
 
@@ -41,10 +47,11 @@
 		{
 			//用户id
 			$id = $param['id'];
+			$resourceIndex = $param['type'];
 			!isset($param['privileges']) && $param['privileges'] = [];
 
-			//新分配角色id
-			$privileges = $param['privileges'];
+			//根据资源ids和资源类型查权限id
+			$privileges = $this->model__common_Privilegeresource->getPrivilegesIdByResourceIndexAndResourceId($param['privileges'], $resourceIndex);
 
 			$res = execClosureList([
 				[
@@ -110,26 +117,26 @@
 				switch ($k)
 				{
 					case 'order_filed' :
-						$v && $order_filed = $v;
+						$v != '' && $order_filed = $v;
 						break;
 
 					case 'order' :
-						$v && $order_ = $v;
+						$v != '' && $order_ = $v;
 						break;
 
 					case 'name' :
-						$v && $where[$this->model_::makeSelfAliasField($k)] = [
+						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
 							'like' ,
 							"%" . $v . "%" ,
 						];
 						break;
 
 					case 'reg_time_begin' :
-						$v && $reg_time_begin = strtotime($v);
+						$v != '' && $reg_time_begin = strtotime($v);
 						break;
 
 					case 'reg_time_end' :
-						$v && $reg_time_end = strtotime($v);
+						$v != '' && $reg_time_end = strtotime($v);
 						break;
 
 					case 'status' :

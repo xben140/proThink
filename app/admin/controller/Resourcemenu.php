@@ -18,18 +18,32 @@
 		 */
 		public function add()
 		{
+			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->initLogic();
 				$this->jump($this->logic->add($this->param_post));
 			}
 			else
 			{
 				$this->setPageTitle('权限添加');
 
+				//获取可做父级的action
+				$parentsMenus = $this->logic->getDefaultAction();
+				$parentsMenus = makeTree($parentsMenus);
+
+				$availableMenus = array_map(function($v) {
+					return [
+						'value' => $v['id'] ,
+						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+					];
+				} , $parentsMenus);
+
+
 				$this->displayContents = integrationTags::basicFrame([
 
 					integrationTags::form([
+
+						integrationTags::singleSelect($availableMenus , 'pid' , '上级权限' , '必填' , 0) ,
 
 						integrationTags::text([
 							//随便写
@@ -186,11 +200,24 @@
 			{
 				$this->setPageTitle('权限编辑');
 				$info = $this->logic->getInfo($this->param);
-
 				session(md5(URL_MODULE) , $this->param['id']);
+
+
+				//获取所有可用权限
+				$parentsMenus = $this->logic->getDefaultAction();
+				$parentsMenus = makeTree($parentsMenus);
+
+				$availableMenus = array_map(function($v) {
+					return [
+						'value' => $v['id'] ,
+						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+					];
+				} , $parentsMenus);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
+
+						integrationTags::singleSelect($availableMenus , 'pid' , '上级权限' , '必填' , $info['pid']) ,
 
 						integrationTags::text([
 							//随便写
@@ -345,28 +372,35 @@
 					integrationTags::rowBlock([
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
-							//$data = $this->logic->dataList($this->param);
-							$data = $this->logic->dataListWithPagination($this->param);
+							/**
+							 * 不分页
+							 */
+							$data = $this->logic->dataList($this->param);
+							$data = makeTree($data);
+
+							/**
+							 * 分页
+							$dataWithPagination = $this->logic->dataListWithPagination($this->param);
+							$_this->setPagination($dataWithPagination['pagination']);
+							$data = $dataWithPagination['data'];
+							 */
+
 
 							/**
 							 * 设置表格头
 							 */
 							$_this->setHead([
 								[
-									'field' => '' ,
-									'attr'  => 'style="width:20px;"' ,
-								] ,
-								[
 									'field' => 'ID' ,
-									//'attr'  => 'class="red"' ,
+									'attr'  => 'style="width:80px;"' ,
 								] ,
 								[
 									'field' => '权限名' ,
-									'attr'  => '' ,
+									'attr'  => 'style="width:220px;"' ,
 								] ,
 								[
 									'field' => '模块/控制器/方法' ,
-									'attr'  => '' ,
+									'attr'  => 'style="width:250px;"' ,
 								] ,
 
 								[
@@ -406,11 +440,6 @@
 									'attr'  => '' ,
 								] ,
 							]);
-
-							/**
-							 * 设置表分页按钮
-							 */
-							$_this->setPagination($data['pagination']);
 
 							/**
 							 * 设置js请求api
@@ -539,9 +568,9 @@
 							});
 
 							$_this->setSearchForm($searchForm);
-
-							foreach ($data['data'] as $k => $v)
+							foreach ($data as $k => $v)
 							{
+								
 								/**
 								 * 构造tr
 								 */
@@ -550,21 +579,16 @@
 									//checkbox
 									integrationTags::td([
 										integrationTags::tdCheckbox() ,
-									]) ,
-
-									//id
-									integrationTags::td([
 										integrationTags::tdSimple([
 											'value' => $v['id'] ,
 										]) ,
 									]) ,
-
 									//权限名字
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'name'     => '' ,
+											//'name'     => '' ,
 											'editable' => '1' ,
-											'value'    => $v['name'] ,
+											'value'    => indentationByLevel($v['name'], $v['level']),
 											'field'    => 'name' ,
 											'reg'      => '/^\S+$/' ,
 											'msg'      => '权限名必填' ,
@@ -606,7 +630,7 @@
 									//图标
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'name'     => '' ,
+											//'name'     => '' ,
 											'editable' => '1' ,
 											'value'    => $v['ico'] ,
 											'field'    => 'ico' ,
@@ -618,7 +642,7 @@
 									//排序
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'name'     => '' ,
+											//'name'     => '' ,
 											'editable' => '1' ,
 											'value'    => $v['order'] ,
 											'field'    => 'order' ,
@@ -690,17 +714,20 @@
 												'change_callback' => 'switcherUpdateField' ,
 												//switcherUpdateFieldConfirm
 											] ,
-											'name'    => '' ,
+											//'name'    => '' ,
 											'is_auto' => '1' ,
 										]) ,
 									]) ,
 
 									//操作
 									integrationTags::td([
+
+
 										integrationTags::tdButton([
 											'attr'  => ' btn-success btn-edit' ,
 											'value' => '编辑' ,
 										]) ,
+
 
 										/*
 										integrationTags::tdButton([

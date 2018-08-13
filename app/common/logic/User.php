@@ -192,33 +192,33 @@
 				switch ($k)
 				{
 					case 'user' :
-						$v && $where[$this->model_::makeSelfAliasField($k)] = [
+						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
 							'=' ,
 							$v ,
 						];
 						break;
 
 					case 'order_filed' :
-						$v && $order_filed = $v;
+						$v != '' && $order_filed = $v;
 						break;
 
 					case 'order' :
-						$v && $order_ = $v;
+						$v != '' && $order_ = $v;
 						break;
 
 					case 'nickname' :
-						$v && $where[$this->model_::makeSelfAliasField($k)] = [
+						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
 							'like' ,
 							"%" . $v . "%" ,
 						];
 						break;
 
 					case 'reg_time_begin' :
-						$v && $reg_time_begin = strtotime($v);
+						$v != '' && $reg_time_begin = strtotime($v);
 						break;
 
 					case 'reg_time_end' :
-						$v && $reg_time_end = strtotime($v);
+						$v != '' && $reg_time_end = strtotime($v);
 						break;
 
 					case 'status' :

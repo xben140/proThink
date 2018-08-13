@@ -162,7 +162,7 @@
 
 				layer.prompt({
 					closeBtn  : 0, //不显示关闭按钮
-					anim      : 0,
+					anim      : 5,
 					title     : '输入更新的值',
 					shadeClose: true, //开启遮罩关闭
 					formType  : openType,

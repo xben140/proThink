@@ -50,7 +50,7 @@
 
 
 		/**
-		 * 根据用户id获取角色信息
+		 *  用户id  --> 角色信息
 		 *
 		 * @param $id
 		 *
@@ -77,8 +77,7 @@
 		}
 
 		/**
-		 * 根据用户id获取角色id
-		 *    查role_user映射表
+		 *  用户id  --> 角色ids
 		 *
 		 * @param $id
 		 *
@@ -94,6 +93,7 @@
 			];
 
 			$data = db('user_role')->where($where)->column('role_id');
+			$data = array_flip(array_flip($data));
 
 			return $data;
 		}

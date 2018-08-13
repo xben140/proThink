@@ -263,7 +263,9 @@
 		 *
 		 * @param $uploadDir
 		 *
-		 * @return array
+		 * @return array|string
+		 * @throws \LogicException
+		 * @throws \RuntimeException
 		 */
 		public function moveTo($uploadDir)
 		{
@@ -604,7 +606,7 @@
 		 */
 		private static function mkdir_($path)
 		{
-			return !is_dir(($path)) && mkdir(($path) , 777 , 1);
+			return !is_dir(($path)) && mkdir(($path) , 0777 , 1);
 		}
 
 

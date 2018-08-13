@@ -59,6 +59,13 @@
 			'reset'    => true ,
 		] ,
 
+		//分页配置
+		'paginate' => [
+			'type'      => 'bootstrap' ,
+			'var_page'  => 'page' ,
+			'list_rows' => 50 ,
+		] ,
+
 		//模板元素映射表
 		'elements_map'           => [
 
@@ -321,10 +328,4 @@
 			'setcookie' => true ,
 		] ,
 
-		//分页配置
-		'paginate' => [
-			'type'      => 'bootstrap' ,
-			'var_page'  => 'page' ,
-			'list_rows' => 5 ,
-		] ,
 	];

@@ -149,7 +149,7 @@
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:20px;"></th><th >ID</th><th >角色名</th><th >排序</th><th >添加时间</th><th >备注</th><th >状态</th><th >操作</th>
+											<th style="width:80px;">ID</th><th >角色名</th><th >排序</th><th >添加时间</th><th >备注</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -163,15 +163,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 1
+<span  class=" name"  > 1
 
  </span>
 
@@ -286,15 +278,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2
+<span  class=" name"  > 2
 
  </span>
 
@@ -409,15 +393,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 3
+<span  class=" name"  > 3
 
  </span>
 
@@ -532,15 +508,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 4
+<span  class=" name"  > 4
 
  </span>
 
@@ -655,15 +623,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 5
+<span  class=" name"  > 5
 
  </span>
 
@@ -778,15 +738,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 6
+<span  class=" name"  > 6
 
  </span>
 
@@ -901,15 +853,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 7
+<span  class=" name"  > 7
 
  </span>
 
@@ -1024,15 +968,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 8
+<span  class=" name"  > 8
 
  </span>
 
@@ -1147,15 +1083,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 9
+<span  class=" name"  > 9
 
  </span>
 
@@ -1270,15 +1198,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 10
+<span  class=" name"  > 10
 
  </span>
 
@@ -1393,15 +1313,7 @@
 			<input type="checkbox" class="i-checks ids" >
 
 
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 11
+<span  class=" name"  > 11
 
  </span>
 

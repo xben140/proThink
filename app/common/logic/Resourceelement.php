@@ -41,27 +41,28 @@
 							switch ($k)
 							{
 								case 'name' :
-									$v && $where[$this->model_::makeSelfAliasField($k)] = [
+									$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
 										'like' ,
 										"%" . $v . "%" ,
 									];
 									break;
 
+								case 'is_common' :
 								case 'module' :
 								case 'controller' :
 								case 'action' :
-									$v && $where[$this->model_::makeSelfAliasField($k)] = [
+									$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
 										'=' ,
 										$v ,
 									];
 									break;
 
 								case 'order_filed' :
-									$v && $order_filed = $v;
+									$v != '' && $order_filed = $v;
 									break;
 
 								case 'order' :
-									$v && $order_ = $v;
+									$v != '' && $order_ = $v;
 									break;
 
 								case 'status' :
