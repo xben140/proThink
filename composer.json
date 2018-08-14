@@ -16,18 +16,19 @@
 		}
 	],
 	"require"     : {
-		"php"                      : ">=5.4.0",
-		"topthink/framework"       : "5.0.*",
-		"topthink/think-captcha"   : "^1.0",
-		"topthink/think-cache"     : "^1.0",
-		"topthink/think-helper"    : "^1.0",
-		"topthink/think-container" : "^1.0",
-		"topthink/think-image"     : "^1.0",
-		"firebase/php-jwt"         : "^5.0",
-		"phpoffice/phpspreadsheet" : "^1.0",
-		"ramsey/uuid": "^3.7",
-		"swiftmailer/swiftmailer": "^6.0",
-		"yidas/phpspreadsheet-helper": "^1.2"
+		"php"                         : ">=5.4.0",
+		"topthink/framework"          : "5.0.*",
+		"topthink/think-captcha"      : "^1.0",
+		"topthink/think-cache"        : "^1.0",
+		"topthink/think-helper"       : "^1.0",
+		"topthink/think-container"    : "^1.0",
+		"topthink/think-image"        : "^1.0",
+		"firebase/php-jwt"            : "^5.0",
+		"phpoffice/phpspreadsheet"    : "^1.0",
+		"ramsey/uuid"                 : "^3.7",
+		"swiftmailer/swiftmailer"     : "^6.0",
+		"yidas/phpspreadsheet-helper" : "^1.2",
+		"miljar/php-exif"             : "^0.6.4"
 	},
 	"autoload"    : {
 		"psr-4" : {
