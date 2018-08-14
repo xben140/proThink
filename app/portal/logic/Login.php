@@ -127,7 +127,7 @@
 			if(isGlobalManager())
 			{
 				//如果id是admin的，直接查所有权限
-				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU);
+				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU, ['order_filed' => 'order','order' => 'asc',]);
 			}
 			else
 			{

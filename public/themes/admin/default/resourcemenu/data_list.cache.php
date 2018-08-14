@@ -175,7 +175,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>全局</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>全局设置</span>
 
  </span>
 
@@ -215,7 +215,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -227,7 +227,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 99
 
  </span>
 
@@ -384,7 +384,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -553,7 +553,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -606,513 +606,6 @@
  </span>
 
 			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"    class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="4" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 4
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 设置</span>
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Index
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 35
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-07-25 16:22:40
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 设置
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="5" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 5
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 修改信息</span>
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > modifyInfo
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-08-03 09:55:16
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="6" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 6
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 修改密码</span>
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
-
- </span>
-
-/
-
-<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > modifyPwd
-
- </span>
-
- 
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-08-03 09:55:16
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 
@@ -1229,7 +722,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -1398,7 +891,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -1567,7 +1060,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -1736,7 +1229,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -1905,7 +1398,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2074,7 +1567,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2243,7 +1736,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2412,7 +1905,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2581,7 +2074,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2750,7 +2243,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -2919,7 +2412,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3088,7 +2581,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3257,7 +2750,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3426,7 +2919,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3595,7 +3088,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3764,7 +3257,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -3933,7 +3426,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4102,7 +3595,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4271,7 +3764,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4440,7 +3933,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4609,7 +4102,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4778,7 +4271,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -4947,7 +4440,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -5015,6 +4508,513 @@
  </span>
 
 			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="4" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+<span  class=" name"  > 4
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>信息设置</span>
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > Index
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > none
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="ico"  > -
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 98
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-07-25 16:22:40
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 设置
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="5" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+<span  class=" name"  > 5
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 修改信息</span>
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > modifyInfo
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="ico"  > -
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-03 09:55:16
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
+						
+		<tr data-id="6" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+<span  class=" name"  > 6
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 修改密码</span>
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > modifyPwd
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="ico"  > -
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 0
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-03 09:55:16
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 

@@ -175,6 +175,18 @@
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
+						<input type="checkbox" value="13" name="privileges[]" checked>
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置字段 -- admin/user/setfield
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="14" name="privileges[]" checked>
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 添加用户 -- admin/user/add
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
 						<input type="checkbox" value="15" name="privileges[]" checked>
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none

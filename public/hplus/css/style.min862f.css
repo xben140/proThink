@@ -6941,7 +6941,7 @@ body.skin-3 {
 }
 
 .profile-element .profile-item {
-	padding : 2px 0px 2px 14px;
+	padding: 0px 0px 2px 11px;
 }
 
 .profile-element .profile-item span {
@@ -6949,7 +6949,7 @@ body.skin-3 {
 }
 
 .profile-element .profile-item span a {
-	color : #d1eaf1;
+	color: #dddce8;
 }
 
 .profile-element .profile-item span a:hover {

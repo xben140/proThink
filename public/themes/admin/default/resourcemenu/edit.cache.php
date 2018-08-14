@@ -86,7 +86,7 @@
 					</label>
 					<div class="col-sm-8">
 						<select class="form-control  m-b" name="pid">
-							<option value='0' >顶级菜单 -- none/none/none</option><option value='1' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局 -- admin/none/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置 -- admin/index/none</option><option value='7' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option>
+							<option value='0' >顶级菜单 -- none/none/none</option><option value='1' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局 -- admin/none/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置 -- admin/index/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option>
 						</select>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必填 <span class="error-tip"></span></span>
 						</div>
@@ -97,7 +97,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">权限名字</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="添加用户"  >
+					<input placeholder=""   name="name" class="form-control  " type="text" value="设置"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">控制器名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="controller" class="form-control  " type="text" value="User"  >
+					<input placeholder=""   name="controller" class="form-control  " type="text" value="Index"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -127,7 +127,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">方法名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="action" class="form-control  " type="text" value="add"  >
+					<input placeholder=""   name="action" class="form-control  " type="text" value="none"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -137,7 +137,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">排序</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="0"  >
+					<input placeholder=""   name="order" class="form-control  " type="text" value="35"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -157,7 +157,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >分</textarea>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >设置</textarea>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
 				</div>
 			</div>

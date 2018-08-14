@@ -213,7 +213,8 @@
 		/**
 		 * 软删除用户
 		 *
-		 * @param $param
+		 * @param            $param
+		 * @param null|array $closureList
 		 *
 		 * @return array
 		 */
@@ -223,14 +224,20 @@
 			//TODO 把删除语句加入闭包队列中最后一个都通过才删除
 			//TODO 或者在执行删除语句之前执行一个前置方法，通过才删除
 
-			$where = [
-				'id' => [
-					'in' ,
-					explode(',' , $param['ids']) ,
-				] ,
+			$closureList[] = [
+				function() use ($param) {
+					$where = [
+						'id' => [
+							'in' ,
+							explode(',' , $param['ids']) ,
+						] ,
+					];
+
+					return $this->model_->recycle($where);
+				} ,
 			];
 
-			$res = $this->model_->recycle($where);
+			$res = execClosureList($closureList , $err);
 
 			if(($res) !== false)
 			{
@@ -239,7 +246,7 @@
 			}
 			else
 			{
-				$this->retureResult['message'] = $this->model_->getError();
+				$this->retureResult['message'] = $err ? $err : $this->model_->getError();
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 
@@ -248,25 +255,32 @@
 
 
 		/**
-		 * @param $param
+		 * @param      $param
+		 * @param null $closureList
 		 *
 		 * @return array
 		 */
-		public function updateField($param)
+		public function updateField($param , $closureList = null)
 		{
 			//TODO 执行前置钩子，根据结果处理
-			$data = [
-				$param['field'] => $param['val'] ,
+			$closureList[] = [
+				function() use ($param) {
+					$data = [
+						$param['field'] => $param['val'] ,
+					];
+
+					$where = [
+						'id' => [
+							'in' ,
+							explode(',' , $param['ids']) ,
+						] ,
+					];
+
+					return $this->model_->updateField($data , $where);
+				} ,
 			];
 
-			$where = [
-				'id' => [
-					'in' ,
-					explode(',' , $param['ids']) ,
-				] ,
-			];
-
-			$res = $this->model_->updateField($data , $where);
+			$res = execClosureList($closureList , $err);
 
 			if(($res) !== false)
 			{
@@ -275,7 +289,8 @@
 			}
 			else
 			{
-				$this->retureResult['message'] = $this->model_->getError();
+				$msg = $err ? $err : $this->model_->getError();
+				$this->retureResult['message'] = $msg;
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 

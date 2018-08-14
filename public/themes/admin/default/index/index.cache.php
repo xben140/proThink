@@ -73,7 +73,13 @@
 								<div class="profile-item">
 				<span class="font-bold">账号 : </span><span >qq1234567</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">名字 : </span><span >user222</span>
+				<span class="font-bold">名字 : </span><span >HELLO</span>
+			</div>			<div class="profile-item">
+				<span class="font-bold">登陆次数 : </span><span >8</span>
+			</div>			<div class="profile-item">
+				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
+			</div>			<div class="profile-item">
+				<span class="font-bold">登陆时间 : </span><span >2018-08-14</span>
 			</div>
 			
 				<!--

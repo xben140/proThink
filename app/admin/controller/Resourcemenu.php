@@ -678,7 +678,7 @@
 										integrationTags::tdSimple([
 											//'name'     => '添加时间' ,
 											'editable' => '0' ,
-											'value'    => date('Y-m-d H:i:s' , $v['time']) ,
+											'value'    => formatTime($v['time']) ,
 										]) ,
 									]) ,
 

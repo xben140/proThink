@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>用户授权</title>
+<title>修改密码</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -48,11 +48,8 @@
 			<style>  
 				
 			</style>  
-			<style>  
-			</style>  
 
 <!-- ! ~~~CSS~~~ -->
-
 
 
 
@@ -79,134 +76,36 @@
 					
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
-				
-			
-			<div class="row"  >
+							
+			<form action="/admin/user/modifypwd.html" class="form-horizontal" id="form1" method="post"  >
+					
+					
 
+				<div class="form-group">
+					<label class="col-sm-3 control-label">密码</label>
+					<div class="col-sm-8">
+						<input name="password" class="form-control input-sm " type="password"  >
+						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）密码允许字符为字母，数字，下划线，小数点，长度6-16位<span class="error-tip"></span></span>
+					</div>
+				</div>
 						
-<div class="col-sm-6">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>用户授权
-								<small></small>
-							</h5>
-							<div class="ibox-tools">
-							
-							
-								<a class="collapse-link">
-									<i class="fa fa-chevron-up"></i>
-								</a>
-								
-								
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-wrench"></i>
-								</a>
-								
-								
-								<ul class="dropdown-menu dropdown-user">
-								
-							<!--	
-									<li>
-										<a href="graph_morris.html#">选项1</a>
-									</li>
-									<li>
-										<a href="graph_morris.html#">选项2</a>
-									</li>
-									
-							-->
-									<!-- ~~~option~~~ -->
-								</ul>
-								
-								<!-- ~~~isEnableClosed~~~ -->
-								<!--	
-									<a class="close-link">
-										<i class="fa fa-times"></i>
-									</a>
-								-->
-								
-							</div>
-						</div>
-						<div class="ibox-content" style="position: relative">
-							
-													
-			<form action="/admin/user/assignroles.html" class="form-horizontal" id="form1" method="post"  >
-					
-					
-			<div class="form-group">
-				<label class="col-sm-3 control-label">
-					用户角色
-				</label>
-				<div class="col-sm-9">
-									<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="1" name="roles[]" >
-							<i></i>
-							管理员111
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="2" name="roles[]" >
-							<i></i>
-							管理员122
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="3" name="roles[]" >
-							<i></i>
-							管理员333
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="4" name="roles[]" >
-							<i></i>
-							管理员1444
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="5" name="roles[]" >
-							<i></i>
-							管理员5555
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="6" name="roles[]" >
-							<i></i>
-							管理员6666
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="7" name="roles[]" >
-							<i></i>
-							管理员777
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="8" name="roles[]" >
-							<i></i>
-							管理员888
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="9" name="roles[]" >
-							<i></i>
-							管理员999
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="10" name="roles[]" >
-							<i></i>
-							aaa
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="11" name="roles[]" >
-							<i></i>
-							ffff
-						</label>
+								<div class="form-group">
+					<label class="col-sm-3 control-label">确认密码</label>
+					<div class="col-sm-8">
+						<input name="password_confirm" class="form-control input-sm " type="password"  >
+						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请再次输入密码<span class="error-tip"></span></span>
+					</div>
 				</div>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个用户可分配多个角色 <span class="error-tip"></span></span>
+<!--
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">确认密码：</label>
+					<div class="col-sm-8">
+						<input name="&lt;!&ndash; ~~~confirm_name~~~ &ndash;&gt;" class="form-control input-sm " type="password"  &lt;!&ndash; ~~~confirm_attr~~~ &ndash;&gt;>
+						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请再次输入密码<span class="error-tip"></span></span>
+					</div>
 				</div>
-			</div>
+-->
 
 
 
@@ -221,17 +120,6 @@
 					</div>
 			</form>
 
-
-
-							
-						</div>
-					</div>
-				</div>
-
-
-
-
-			</div>
 
 
 
@@ -326,14 +214,10 @@
 
 			</script>  
 			<script>  
-					
-			</script>  
-			<script>  
 				
 			</script>  
 
 <!-- ! ~~~SCRIPT~~~ -->
-
 
 
 

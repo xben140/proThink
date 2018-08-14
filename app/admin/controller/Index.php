@@ -47,6 +47,18 @@
 						'field' => '名字 : ' ,
 						'value' => $this->adminInfo['nickname'] ,
 					] ,
+					[
+						'field' => '登陆次数 : ' ,
+						'value' => $this->adminInfo['login_count'] ,
+					] ,
+					[
+						'field' => '登陆IP : ' ,
+						'value' => $this->adminInfo['last_login_ip'] ,
+					] ,
+					[
+						'field' => '登陆时间 : ' ,
+						'value' => formatTime($this->adminInfo['last_login_time'], 0) ,
+					] ,
 				]);
 
 /*
