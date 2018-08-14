@@ -42,7 +42,8 @@
 		 */
 		public function getAssignableResource($index)
 		{
-			return $this->getResourceByIndex($index , ['is_common' => '0' ,]);
+			return $this->getResourceByIndex($index , [//'is_common' => '0' ,
+			]);
 		}
 
 		/**

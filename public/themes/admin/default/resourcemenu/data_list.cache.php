@@ -175,7 +175,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 0px;'>全局</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>全局</span>
 
  </span>
 
@@ -344,7 +344,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 主页</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 主页</span>
 
  </span>
 
@@ -513,7 +513,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 区域联动</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 区域联动</span>
 
  </span>
 
@@ -682,7 +682,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 设置</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 设置</span>
 
  </span>
 
@@ -851,7 +851,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 修改信息</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 修改信息</span>
 
  </span>
 
@@ -1020,7 +1020,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 修改密码</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 修改密码</span>
 
  </span>
 
@@ -1189,7 +1189,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 用户管理</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 用户管理</span>
 
  </span>
 
@@ -1358,7 +1358,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 分配角色</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 分配角色</span>
 
  </span>
 
@@ -1527,7 +1527,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 用户列表</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 用户列表</span>
 
  </span>
 
@@ -1696,7 +1696,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 删除用户</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 删除用户</span>
 
  </span>
 
@@ -1865,7 +1865,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 编辑用户</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 编辑用户</span>
 
  </span>
 
@@ -2034,7 +2034,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 修改密码</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 修改密码</span>
 
  </span>
 
@@ -2203,7 +2203,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 设置字段</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 设置字段</span>
 
  </span>
 
@@ -2372,7 +2372,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 添加用户</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 添加用户</span>
 
  </span>
 
@@ -2541,7 +2541,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 角色管理</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 角色管理</span>
 
  </span>
 
@@ -2710,7 +2710,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 删除角色</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 删除角色</span>
 
  </span>
 
@@ -2879,7 +2879,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 角色授权</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 角色授权</span>
 
  </span>
 
@@ -3048,7 +3048,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 设置字段</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 设置字段</span>
 
  </span>
 
@@ -3217,7 +3217,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 添加角色</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 添加角色</span>
 
  </span>
 
@@ -3386,7 +3386,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 角色列表</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 角色列表</span>
 
  </span>
 
@@ -3555,7 +3555,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 编辑角色</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 编辑角色</span>
 
  </span>
 
@@ -3724,7 +3724,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 菜单管理</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 菜单管理</span>
 
  </span>
 
@@ -3893,7 +3893,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 删除菜单</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 删除菜单</span>
 
  </span>
 
@@ -4062,7 +4062,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 编辑菜单</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 编辑菜单</span>
 
  </span>
 
@@ -4231,7 +4231,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 设置字段</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 设置字段</span>
 
  </span>
 
@@ -4400,7 +4400,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 菜单列表</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 菜单列表</span>
 
  </span>
 
@@ -4569,7 +4569,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 添加菜单</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 90px;'>╘══ 添加菜单</span>
 
  </span>
 
@@ -4738,7 +4738,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ ccccc</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ ccccc</span>
 
  </span>
 
@@ -4907,7 +4907,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 权限名字</span>
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 60px;'>╘══ 权限名字</span>
 
  </span>
 

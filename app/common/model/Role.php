@@ -15,38 +15,28 @@
 		}
 
 		//自动完成[新增和修改时都会执行]
-		protected $auto = [
-		];
+		protected $auto = [];
 
 		//新增时自动验证
-		protected $insert = [
-		];
+		protected $insert = [];
 
 
 		//修改时自动验证
-		protected $update = [
-			//'status' ,
+		protected $update = [//'status' ,
 		];
 
 
-
-
-
-
-
-
-
-/*
- *
- *
- *
- *
- *
- *
- *
- *
- *
- * */
+		/*
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 * */
 
 
 		/**
@@ -70,7 +60,7 @@
 						'in' ,
 						$rolesId ,
 					] ,
-				],
+				] ,
 			]);
 
 			return $data;
@@ -86,16 +76,47 @@
 		public function getRoleIdByUserId($id)
 		{
 			$where = [
-				'user_id' => [
+				'b.user_id' => [
 					'=' ,
 					$id ,
 				] ,
 			];
 
-			$data = db('user_role')->where($where)->column('role_id');
+			$join = [
+				[
+					'ithink_user_role b ' ,
+					self::makeSelfAliasField('id') . '  = b.role_id ' ,
+					'inner',
+				] ,
+			];
+			$condition = [
+				'where' => $where ,
+				'join'  => $join ,
+			];
+
+			$this->getAvailableOnly();
+			$this->getActivedOnly();
+			$this->setCondition($condition);
+			$data = $this->column('b.role_id');
 			$data = array_flip(array_flip($data));
 
 			return $data;
 		}
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

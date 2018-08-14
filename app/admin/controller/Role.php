@@ -487,14 +487,17 @@
 				$resourceMenuIndex = RESOURCE_INDEX_MENU;
 				//获取所有有效菜单
 				$menus = $this->logic__common_Privilegeresource->getAssignableResource($resourceMenuIndex);
+				$menus = makeTree($menus);
 
-				$availableMenus = array_map(function($v) {
-					return [
+				foreach ($menus as $k => $v)
+				{
+					(!$v['is_common']) && $availableMenus[] = [
 						'value' => $v['id'] ,
-						//'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
-						'field' => $v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']) ,
+						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+						//'field' => $v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']) ,
 					];
-				} , $menus);
+				}
+				
 
 				//获取当前角色有的菜单
 				$currMenu = $this->logic->getRolesResource($this->param, $resourceMenuIndex);
@@ -516,7 +519,7 @@
 						'action' => url() ,
 					]) ,
 				] , [
-					'width'      => '6' ,
+					'width'      => '12' ,
 					'main_title' => '分配菜单和访问权限' ,
 					'sub_title'  => '' ,
 				]);

@@ -86,7 +86,7 @@
 					</label>
 					<div class="col-sm-8">
 						<select class="form-control  m-b" name="pid">
-							<option value='1' >全局 -- admin/none/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置 -- admin/index/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;菜单管理 -- admin/resourcemenu/none</option>
+							<option value='0' selected>顶级菜单 -- none/none/none</option><option value='1' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局 -- admin/none/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置 -- admin/index/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option>
 						</select>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必填 <span class="error-tip"></span></span>
 						</div>

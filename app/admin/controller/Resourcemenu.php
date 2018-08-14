@@ -31,10 +31,20 @@
 				$parentsMenus = $this->logic->getDefaultAction();
 				$parentsMenus = makeTree($parentsMenus);
 
+				//顶级菜单
+				array_unshift($parentsMenus , [
+					'id'         => '0' ,
+					'name'       => '顶级菜单' ,
+					'module'     => 'none' ,
+					'controller' => 'none' ,
+					'action'     => 'none' ,
+					'level'      => '0' ,
+				]);
+
 				$availableMenus = array_map(function($v) {
 					return [
 						'value' => $v['id'] ,
-						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']) , $v['level']) ,
 					];
 				} , $parentsMenus);
 
@@ -203,16 +213,28 @@
 				session(md5(URL_MODULE) , $this->param['id']);
 
 
-				//获取所有可用权限
+
+				//获取可做父级的action
 				$parentsMenus = $this->logic->getDefaultAction();
 				$parentsMenus = makeTree($parentsMenus);
+
+				//顶级菜单
+				array_unshift($parentsMenus , [
+					'id'         => '0' ,
+					'name'       => '顶级菜单' ,
+					'module'     => 'none' ,
+					'controller' => 'none' ,
+					'action'     => 'none' ,
+					'level'      => '0' ,
+				]);
 
 				$availableMenus = array_map(function($v) {
 					return [
 						'value' => $v['id'] ,
-						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']), $v['level']) ,
+						'field' => indentationOptionsByLevel($v['name'] . " -- " . formatMenu($v['module'] , $v['controller'] , $v['action']) , $v['level']) ,
 					];
 				} , $parentsMenus);
+
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -380,9 +402,9 @@
 
 							/**
 							 * 分页
-							$dataWithPagination = $this->logic->dataListWithPagination($this->param);
-							$_this->setPagination($dataWithPagination['pagination']);
-							$data = $dataWithPagination['data'];
+							 * $dataWithPagination = $this->logic->dataListWithPagination($this->param);
+							 * $_this->setPagination($dataWithPagination['pagination']);
+							 * $data = $dataWithPagination['data'];
 							 */
 
 
@@ -570,7 +592,7 @@
 							$_this->setSearchForm($searchForm);
 							foreach ($data as $k => $v)
 							{
-								
+
 								/**
 								 * 构造tr
 								 */
@@ -588,7 +610,7 @@
 										integrationTags::tdSimple([
 											//'name'     => '' ,
 											'editable' => '1' ,
-											'value'    => indentationByLevel($v['name'], $v['level']),
+											'value'    => indentationByLevel($v['name'] , $v['level']) ,
 											'field'    => 'name' ,
 											'reg'      => '/^\S+$/' ,
 											'msg'      => '权限名必填' ,
@@ -770,6 +792,7 @@
 		public function delete()
 		{
 			$this->initLogic();
+
 			return $this->jump($this->logic->delete($this->param));
 		}
 

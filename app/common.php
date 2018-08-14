@@ -463,7 +463,7 @@
 		return $result;
 	}
 
-	//生成树
+	//生成菜单树
 	function makeTreeMenu($items , $id = 0)
 	{
 		$tree = array();
@@ -480,6 +480,7 @@
 		return $tree;
 	}
 
+	//统一格式化菜单
 	function formatMenu($a , $b , $c)
 	{
 		return strtolower($a . '/' . $b . '/' . $c);
@@ -494,33 +495,46 @@
 		return $menu;
 	}
 
+	//构造菜单的路径
 	function buildPath($data)
 	{
 		return strtolower($data['action']) == 'none' ? '#' : url($data['path']);
 	}
 
-	function isDeftule($data)
+	//是否为默认菜单
+	function isDefault($data)
 	{
 		return strtolower($data['action']) == 'none';
 	}
 
-	function isMeun($data)
+	//返回是否为菜单
+	function isMenu($data)
 	{
 		return $data['is_menu'];
 	}
 
+	/**
+	 *        杂项
+	 */
+
+
+	//权限列表里使用
 	function indentationByLevel($data , $level = 0)
 	{
 		$s = '';
-		$margin = (($level - 1) * 30);
-		($level>1)&& $s = '╘══ ';
+		$margin = (($level) * 30);
+		($level > 1) && $s = '╘══ ';
 
-		return "<span style='margin-left: " . $margin . "px;'>".$s . $data . '</span>';
+		return "<span style='margin-left: " . $margin . "px;'>" . $s . $data . '</span>';
 	}
 
+	//option选项里使用
 	function indentationOptionsByLevel($data , $level = 0)
 	{
-		return str_repeat('&nbsp;' , ($level - 1) * 6) . $data;
+		$s = '';
+		($level > 0) && $s = '╘══ ';
+
+		return str_repeat('&nbsp;' , ($level) * 8) . $s . $data;
 	}
 
 

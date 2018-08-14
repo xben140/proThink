@@ -30,7 +30,7 @@
 
 			if(!isset($result[0]) || !isset($result[1]))
 			{
-				$msg = $result.'  -- 属性命名不规范,示例: model__Admin_User, logic__User, logic__common_UserType ...';
+				$msg = $name.'  -- 属性命名不规范,示例: model__Admin_User, logic__User, logic__common_UserType ...';
 				exception($msg);
 			}
 

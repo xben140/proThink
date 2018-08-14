@@ -139,13 +139,13 @@
 				<div class="col-sm-9">
 									<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="1" name="roles[]" checked>
+						<input type="checkbox" value="1" name="roles[]" >
 							<i></i>
 							管理员111
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="2" name="roles[]" checked>
+						<input type="checkbox" value="2" name="roles[]" >
 							<i></i>
 							管理员122
 						</label>
@@ -157,13 +157,13 @@
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="4" name="roles[]" >
+						<input type="checkbox" value="4" name="roles[]" checked>
 							<i></i>
 							管理员1444
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="5" name="roles[]" >
+						<input type="checkbox" value="5" name="roles[]" checked>
 							<i></i>
 							管理员5555
 						</label>
@@ -190,18 +190,6 @@
 						<input type="checkbox" value="9" name="roles[]" >
 							<i></i>
 							管理员999
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="10" name="roles[]" >
-							<i></i>
-							aaa
-						</label>
-				</div>				<div class="checkbox i-checks">
-						<label> 
-						<input type="checkbox" value="11" name="roles[]" >
-							<i></i>
-							ffff
 						</label>
 				</div>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个用户可分配多个角色 <span class="error-tip"></span></span>

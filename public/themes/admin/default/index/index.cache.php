@@ -71,9 +71,9 @@
 				<div  class="profile-pic"><img alt="image" src="http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg" /></div>
 				
 								<div class="profile-item">
-				<span class="font-bold">账号 : </span><span >qq123456</span>
+				<span class="font-bold">账号 : </span><span >qq1234567</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">名字 : </span><span >user111</span>
+				<span class="font-bold">名字 : </span><span >user222</span>
 			</div>
 			
 				<!--
@@ -93,24 +93,24 @@
 			<ul class="nav" id="side-menu">
 					<!-- 菜单 -->
 						{foreach $menuTree as $vo1}
-							{if condition="isMeun($vo1)"}
+							{if condition="isMenu($vo1)"}
 								<li>
 									<a href="{:buildPath($vo1)}"><i class="fa {:$vo1.ico}"></i>
 										<span class="nav-label">{:$vo1.name}</span>
 										<span class="fa arrow fa-angle-right"></span>
 									</a>
-									{if condition="isDeftule($vo1)"}
+									{if condition="isDefault($vo1)"}
 										<ul class="nav nav-second-level">
 											{foreach $vo1['son'] as $vo2}
-												{if condition="isMeun($vo2)"}
+												{if condition="isMenu($vo2)"}
 												<li>
-													{if condition="isDeftule($vo2)"}
+													{if condition="isDefault($vo2)"}
 														<a href="{:buildPath($vo2)}">{:$vo2.name}
 															<span class="fa arrow fa-angle-right"></span>
 														</a>
 														<ul class="nav nav-third-level">
 															{foreach $vo2['son'] as $vo3}
-																{if condition="isMeun($vo3)"}
+																{if condition="isMenu($vo3)"}
 																<li>
 																	<a class="J_menuItem" href="{:buildPath($vo3)}">{:$vo3.name}</a>
 																</li>
