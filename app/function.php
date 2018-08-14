@@ -636,6 +636,9 @@
 
 	/**
 	 * 钩子
+	 *
+	 * @param string $tag
+	 * @param array  $params
 	 */
 	function hook($tag = '' , $params = [])
 	{
@@ -643,4 +646,252 @@
 	}
 
 
+	/**广度优先
+	 *
+	 * @param          $path
+	 * @param callable $dirCallback
+	 * @param callable $fileCallback
+	 */
 
+	function loop2($path , callable $dirCallback , callable $fileCallback)
+	{
+		$dirs = [realpath($path)];
+		static $originPath = null;
+		!$originPath && $originPath = $path;
+		do
+		{
+			$item = array_shift($dirs);
+			if(!$item) continue;
+
+			if(is_dir($item))
+			{
+				!in_array(substr($item , -1) , [
+					'/' ,
+					'\\' ,
+				]) && ($item .= DIRECTORY_SEPARATOR);
+				$relativePath = str_replace($originPath , '' , $item);
+
+				$dirs_ = scandir($item);
+				$res = $dirCallback($item , $dirs_ , $relativePath , $originPath);
+				if($res)
+				{
+					$dirs_ = array_map(function($v) use ($item) {
+						return (!in_array($v , [
+							'.' ,
+							'..' ,
+						])) ? $item . $v : '';
+					} , $dirs_);
+					$dirs = array_merge($dirs , $dirs_);
+				}
+				else
+				{
+					break;
+				}
+			}
+			elseif(is_file($item))
+			{
+				$relativePath = str_replace($originPath , '' , $item);
+				$fileCallback($item , pathinfo($item) , $relativePath , $originPath);
+			}
+
+			// file_put_contents('dd.txt', $item."\r\n", FILE_APPEND|LOCK_EX);
+		} while (count($dirs));
+	}
+
+
+	/**深度优先
+	 *
+	 * @param          $path
+	 * @param callable $dirCallback
+	 * @param callable $fileCallback
+	 */
+	function loop1($path , callable $dirCallback , callable $fileCallback)
+	{
+		static $dep = 0;
+		!in_array(substr($path , -1) , [
+			'/' ,
+			'\\' ,
+		]) && ($path .= DIRECTORY_SEPARATOR);
+		static $originPath = null;
+		($dep === 0) && (!$originPath) && ($originPath = $path);
+		$dep++;
+
+		$dirs = scandir($path);
+		foreach ($dirs as $k => $v)
+		{
+
+			if(!in_array($v , [
+				'.' ,
+				'..' ,
+			]))
+			{
+				$fullPath = $path . $v;
+				$relativePath = str_replace($originPath , '' , $fullPath);
+
+				if(is_dir($fullPath))
+				{
+					$res = $dirCallback($fullPath , $dirs , $relativePath , $originPath);
+
+					if($res)
+					{
+						loop1($fullPath , $dirCallback , $fileCallback);
+					}
+				}
+				elseif(is_file($fullPath))
+				{
+					$fileCallback($fullPath , pathinfo($fullPath) , $relativePath , $originPath);
+				}
+				//file_put_contents('cc.txt', $fullPath."\r\n", FILE_APPEND|LOCK_EX);
+			}
+		}
+		$dep--;
+
+		($dep === 0) && ($originPath = null);
+	}
+
+
+	/**
+	 * @param $path
+	 *
+	 * @return bool
+	 */
+	function mkdir_($path)
+	{
+		return !is_dir(($path)) && mkdir(($path) , 777 , 1);
+	}
+
+
+	//递归复制文件夹-通用
+	/**
+	 * @param $config
+	 *
+	 * @return bool
+	 */
+	function cp($config)
+	{
+		$destinationDir = $config['des'];
+		$originDir = $config['source'];
+		!in_array(substr($originDir , -1) , [
+			'/' ,
+			'\\' ,
+		]) && ($originDir .= DIRECTORY_SEPARATOR);
+		!in_array(substr($destinationDir , -1) , [
+			'/' ,
+			'\\' ,
+		]) && ($destinationDir .= DIRECTORY_SEPARATOR);
+		/*
+				print_r('-' .  $originDir);;;
+				echo "\r\n";
+				print_r('*' .  $destinationDir);;;
+				echo "\r\n";
+				echo "\r\n";
+		*/
+
+
+		loop1($originDir , function($path , $dirs_ , $relativePath , $originPath) use ($config , $destinationDir) {
+			$pathinfo = pathinfo($path);
+			$baseName = (iconv('gbk' , 'utf-8//IGNORE' , $pathinfo['basename']));
+
+			foreach ($config['skip_dir_reg'] as $k => $v)
+			{
+				$flag = preg_match($v , $baseName);
+				if($flag) return 0;
+			}
+			/*
+				echo '111111++ '.$originPath."\r\n";
+				echo '222222++ '.$relativePath."\r\n";
+				echo '333333++ '.$path."\r\n";
+				echo "\r\n";
+			*/
+
+			//返回真继续遍历下层，否则停止遍历此文件夹
+			return 1;
+
+
+		} , function($path , $pathinfo , $relativePath , $originPath) use ($config , $destinationDir) {
+
+			//或者文件夹名字，在self::$skipDirs里就跳过
+			$baseName = (iconv('gbk' , 'utf-8//IGNORE' , $pathinfo['basename']));
+			foreach ($config['skip_file_reg'] as $k => $v)
+			{
+				$flag = preg_match($v , $baseName);
+				if($flag) return 0;
+			}
+
+			$dest = $destinationDir . $relativePath;
+			mkdir_(dirname($dest));
+			copy($path , $dest);
+
+
+			echo "\r\n";
+			echo '复制' . "\r\n";
+			echo $path . "\r\n";
+			echo '到' . "\r\n";
+			echo $destinationDir . "\r\n";
+			echo '和' . "\r\n";
+			echo $relativePath . "\r\n";
+			echo '和--' . "\r\n";
+			echo $destinationDir . $relativePath . "\r\n";
+			echo "\r\n";
+
+
+			return 1;
+		});
+
+		return true;
+	}
+
+
+
+
+
+	/*
+		$p = 'D:\VMHD';
+	// $p = 'F:\localWeb\local2\ex9\public\upload';
+		loop1($p, function($path, $dirs_, $relativePath){
+			echo '------'.$relativePath."\r\n";
+			echo '------'.$path."\r\n";
+			echo "\r\n";
+
+			//返回真继续遍历下层，否则停止遍历此文件夹
+			return 1;
+
+		}, function($path, $pathinfo, $relativePath){
+
+			echo '++++++'.$relativePath."\r\n";
+			echo '++++++'.$path."\r\n";
+			echo "\r\n";
+		});
+
+		loop2($p, function($path, $dirs_, $relativePath){
+			echo '------'.$relativePath."\r\n";
+			echo '------'.$path."\r\n";
+			echo "\r\n";
+			//返回真继续遍历下层，否则停止遍历此文件夹
+			return 1;
+
+		}, function($path, $pathinfo, $relativePath){
+
+			echo '++++++'.$relativePath."\r\n";
+			echo '++++++'.$path."\r\n";
+			echo "\r\n";
+		});
+
+
+			cp([
+				'source'    => $path,
+				'des'       => $savePath,
+				//正则过滤文件
+				'skip_file_reg'     => [
+					'#模板之家#u',
+					'#3000套#u',
+					'#readme.txt#',
+					'#说明.txt#u',
+				],
+				//正则过滤文件夹
+				'skip_dir_reg'     => [
+					//'#ima(?=ge)#',
+				],
+			]);
+
+	*/
