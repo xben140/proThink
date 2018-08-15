@@ -1,13 +1,30 @@
 <?php
 
 	namespace app\cmd\controller;
+	//压缩图片功能
+	//文件转义重命名
+	//删除空文件夹
+	//文件去重
+
+	//spl接口
+
+
+	//php index.php /cmd/index/index
+
+
+	use image\imageProcessor;
 
 	class Index
 	{
-		public function index()
-		{
-			$path = 'F:\BaiduNetdiskDownload\LT28h';
 
+		//public $testImg = 'C:\Users\Administrator\Desktop\pic\a.jpg';
+		public $testImg = 'C:\Users\Administrator\Desktop\pic\b.png';
+		public $testPath = 'C:\Users\Administrator\Desktop\test\\';
+		public static $hashMap = [];
+
+		public function rename()
+		{
+			$path = 'C:\Users\Administrator\Desktop\qq';
 
 			loop2($path , function($path , $dirs_ , $relativePath) {
 				//echo '------' . $relativePath . "\r\n";
@@ -18,52 +35,83 @@
 				return 1;
 
 			} , function($path , $pathinfo , $relativePath) {
+				$pathinfo = pathinfo_($path);
 
-				$img = 'F:\BaiduNetdiskDownload\LT28h\Pictures\Screenshot_2013-11-09-11-05-15.png';
-
-// reader with Native adapter
 				$reader = \PHPExif\Reader\Reader::factory(\PHPExif\Reader\Reader::TYPE_NATIVE);
+				$exif = $reader->read($path);
 
-// reader with Exiftool adapter
-//$reader = \PHPExif\Reader\Reader::factory(\PHPExif\Reader\Reader::TYPE_EXIFTOOL);
+				if($exif)
+				{
+					$data = $exif->getRawData();
+					//$data = \exif_read_data($path);
 
-				$exif = $reader->read($img);
+					$name = date('Y-m-d-H-i-s' , $data['FileDateTime']) . '-' . $data['FileSize'] . '-' . $pathinfo['basename'];
+					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . '/' . $name;
+				}
+				else
+				{
+					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . '/' . $pathinfo['basename'];
+				}
 
-				print_r($exif->getRawData());;;
-				print_r($exif->getData());exit;;
-
-
-
-				$exif = \exif_read_data($path);
-				$name = date('Y-m-d-H-i-s' , $exif['FileDateTime']).'-' . $exif['FileSize'] .'-'. $exif['FileName'];
-				$dest = 'C:\Users\Administrator\Desktop\pics/' . $name;
-
-				echo '++++++' . $relativePath . "\r\n";
+				$a = md5_file($path);
+				echo '++++++' . $relativePath . '  --  ' . $a . "\r\n";
 				echo '++++++' . $path . "\r\n";
 				echo '------' . $dest . "\r\n";
 				echo "\r\n";
-				//mkdir_(dirname($dest));
-				//copy($path , $dest);
-/*
 
-				cp([
-					'source'        => $path ,
-					'des'           => $dest ,
-					//正则过滤文件
-					'skip_file_reg' => [
-						//'#模板之家#u',
-						//'#3000套#u',
-						//'#readme.txt#',
-						//'#说明.txt#u',
-					] ,
-					//正则过滤文件夹
-					'skip_dir_reg'  => [
-						//'#ima(?=ge)#',
-					] ,
-				]);*/
+				if(!in_array($a , self::$hashMap))
+				{
+					self::$hashMap[] = $a;
 
+					mkdir_(dirname($dest));
 
+					if(in_array(strtolower($pathinfo['extension']) , [
+						'jpeg' ,
+						'jpg' ,
+					]))
+					{
+
+						$imageCompress = imageProcessor::getProcessor('compress');
+						$ratio = 8;
+						$imageCompress->form($path)->ratio($ratio)->to($dest);
+					}
+					else
+					{
+						copy($path , $dest);
+					}
+
+				}
 			});
-
 		}
+
+		/**
+		 * @throws \ReflectionException
+		 */
+		public function compress()
+		{
+			//https://blog.csdn.net/qq_36608163/article/details/73167284
+			$imageCompress = imageProcessor::getProcessor('compress');
+
+			$info = pathinfo($this->testImg);
+			$ratio = 10;
+			$imageCompress->form($this->testImg)->ratio($ratio)->to($this->testPath . '/' . $ratio . '_' . $info['basename']);
+		}
+
+		public function thumb()
+		{
+			$info = pathinfo($this->testImg);
+			$image = imageProcessor::Image()::open($this->testImg);
+
+			mkdir_($this->testPath);
+			$image->thumb(300 , 300)->save($this->testPath . '/thumb.png' , 'png');
+		}
+
+
+		public function removeEmpty()
+		{
+			$path = 'c:';
+
+			rm_empty_dir($path);
+		}
+
 	}

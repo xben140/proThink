@@ -633,6 +633,13 @@
 		return date($format , $time);
 	}
 
+	function pathinfo_($path)
+	{
+		preg_match("%^(?'dirname'.*?(?=[^.]+\.[^.]+$))(?'filename'[^\\\\/]*?)\.(?'extension'[a-z\d]*?)$%im" , $path , $res);
+		$res['basename'] = $res['filename'] . '.' . $res['extension'];
+
+		return $res;
+	}
 
 	/**
 	 * 钩子
@@ -841,7 +848,34 @@
 		return true;
 	}
 
+	function rm_empty_dir($path)
+	{
+		if(is_dir($path) && (@$handle = opendir($path)) !== false)
+		{
+			while (($file = readdir($handle)) !== false)
+			{
+				if($file != '.' && $file != '..')
+				{
+					$curfile = $path . '/' . $file;// 当前目录
+					if(is_dir($curfile) && is_readable($curfile))
+					{
+						rm_empty_dir($curfile);// 如果是目录则继续遍历
+						$a = @scandir($curfile);
 
+						if($a[0] == '.' && $a[1] == '..' && !isset($a[2]))
+						{
+							//目录为空,=2是因为.和..存在
+							$msg = '删除 -- ' . $curfile . "\r\n";
+							file_put_contents('C:\Users\Administrator\Desktop\log.txt' ,$msg, FILE_APPEND);
+							echo $msg;
+							@rmdir($curfile);// 删除空目录
+						}
+					}
+				}
+			}
+			closedir($handle);
+		}
+	}
 
 
 
