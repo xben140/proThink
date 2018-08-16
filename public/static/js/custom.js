@@ -14,7 +14,8 @@
 	 */
 
 	//icheck
-	$(document).ready(function () {typeof $(".i-checks").iCheck === "function" &&   $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})});
+	$(document).ready(function () {typeof $(".i-checks").iCheck === "function" && $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})});
+
 
 })();
 

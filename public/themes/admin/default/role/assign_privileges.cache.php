@@ -139,61 +139,61 @@
 				<div class="col-sm-9">
 									<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="7" name="privileges[]" checked>
+						<input type="checkbox" value="7" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="8" name="privileges[]" checked>
+						<input type="checkbox" value="8" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 分配角色 -- admin/user/assignroles
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="9" name="privileges[]" checked>
+						<input type="checkbox" value="9" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户列表 -- admin/user/datalist
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="10" name="privileges[]" checked>
+						<input type="checkbox" value="10" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 删除用户 -- admin/user/delete
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="11" name="privileges[]" checked>
+						<input type="checkbox" value="11" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 编辑用户 -- admin/user/edit
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="12" name="privileges[]" checked>
+						<input type="checkbox" value="12" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 修改密码 -- admin/user/editpwd
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="13" name="privileges[]" checked>
+						<input type="checkbox" value="13" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置字段 -- admin/user/setfield
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="14" name="privileges[]" checked>
+						<input type="checkbox" value="14" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 添加用户 -- admin/user/add
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="15" name="privileges[]" checked>
+						<input type="checkbox" value="15" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
-						<input type="checkbox" value="16" name="privileges[]" checked>
+						<input type="checkbox" value="16" name="privileges[]" >
 							<i></i>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 删除角色 -- admin/role/delete
 						</label>
@@ -267,13 +267,73 @@
 						<label> 
 						<input type="checkbox" value="28" name="privileges[]" >
 							<i></i>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ ccccc -- admin/fff/ccc
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置分组 -- admin/configgroup/none
 						</label>
 				</div>				<div class="checkbox i-checks">
 						<label> 
 						<input type="checkbox" value="29" name="privileges[]" >
 							<i></i>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 权限名字 -- admin/dfdf/dfdf
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 分组列表 -- admin/configgroup/datalist
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="30" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置字段 -- admin/configgroup/setfield
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="31" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 删除分组 -- admin/configgroup/delete
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="32" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 添加分组 -- admin/configgroup/add
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="33" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 编辑分组 -- admin/configgroup/edit
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="34" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置设置 -- admin/config/none
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="36" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置列表 -- admin/config/datalist
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="37" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 设置字段 -- admin/config/setfield
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="38" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 删除配置 -- admin/config/delete
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="39" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 添加配置 -- admin/config/add
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="40" name="privileges[]" >
+							<i></i>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 编辑配置 -- admin/config/edit
 						</label>
 				</div>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个角色可分配多个菜单 <span class="error-tip"></span></span>

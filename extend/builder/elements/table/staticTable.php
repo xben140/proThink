@@ -23,7 +23,6 @@
 			'__HPLUS__css/plugins/iCheck/custom.css' ,
 			'__HPLUS__css/plugins/switchery/switchery.css' ,
 			'__HPLUS__css/plugins/datapicker/datepicker3.css' ,
-			'__STATIC__/css/custom.css' ,
 		];
 		/**
 		 * 添加到body之前的js路径

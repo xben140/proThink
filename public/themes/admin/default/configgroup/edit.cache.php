@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>角色编辑</title>
+<title>配置组编辑</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 			<style>  
 			
@@ -77,14 +78,14 @@
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
 							
-			<form action="/admin/role/edit.html" class="form-horizontal" id="form1" method="post"  >
+			<form action="/admin/configgroup/edit.html" class="form-horizontal" id="form1" method="post"  >
 					
 							
 			<div class="form-group">
-				<label class="col-sm-3 control-label">角色名</label>
+				<label class="col-sm-3 control-label">配置组名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="管理员111"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+					<input placeholder="请填写配置组名"   name="name" class="form-control  " type="text" value="页面"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）配置组名<span class="error-tip"></span></span>
 				</div>
 			</div>
 
@@ -93,7 +94,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">排序</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="133"  >
+					<input placeholder=""   name="order" class="form-control  " type="text" value="1"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -103,8 +104,8 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >3243</textarea>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >页面配置，seo，友链啥的</textarea>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 备注 <span class="error-tip"></span></span>
 				</div>
 			</div>
 

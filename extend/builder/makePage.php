@@ -74,6 +74,7 @@
 			'__HPLUS__css/font-awesome.min93e3.css' ,
 			"__HPLUS__css/animate.min.css" ,
 			"__HPLUS__css/style.min862f.css" ,
+			'__STATIC__/css/custom.css' ,
 		];
 
 		/**

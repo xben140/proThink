@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/switchery/switchery.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/datapicker/datepicker3.css">
-<link rel="stylesheet" href="__STATIC__/css/custom.css">
 			
 			<style>  
 				
@@ -143,13 +143,13 @@
 							
 							<div class="table-responsive">
 							
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/role/datalist.html?%2Fadmin%2Frole%2Fdatalist_html=&amp;page=2">2</a></li> <li><a href="/admin/role/datalist.html?%2Fadmin%2Frole%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 								<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:80px;">ID</th><th >角色名</th><th >排序</th><th >添加时间</th><th >备注</th><th >状态</th><th >操作</th>
+											<th style="width:80px;">ID</th><th >角色名</th><th >排序</th><th >添加时间</th><th style="width:150px;">备注</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1214,7 +1214,7 @@
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaa
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaaff
 
  </span>
 
@@ -1303,126 +1303,11 @@
 		</tr>
 
 
-						
-		<tr data-id="11" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 11
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > ffff
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-08-08 14:56:53
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
 
 									</tbody>
 								</table>
 		
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/role/datalist.html?%2Fadmin%2Frole%2Fdatalist_html=&amp;page=2">2</a></li> <li><a href="/admin/role/datalist.html?%2Fadmin%2Frole%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 							</div>
 
@@ -1505,7 +1390,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="10" name="pagerow">
 		</div>
 
 

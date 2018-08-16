@@ -26,8 +26,8 @@
 			//---------------------------- 设置页面类属性
 			$this->makePage()->setNodeValue([
 				'BODY_ATTR'    => tagConstructor::buildKV([
-					'style'    => 'overflow:hidden' ,
-					'class'    => 'fixed-sidebar full-height-layout gray-bg' ,
+					'style' => 'overflow:hidden' ,
+					'class' => 'fixed-sidebar full-height-layout gray-bg' ,
 				]) ,
 				'default_page' => url("index") ,
 			]);
@@ -767,7 +767,10 @@ css;
 											'value' => '3' ,
 											'field' => '日3' ,
 										] ,
-									] , 'a3' , '上传时间3' , [2,1]) ,
+									] , 'a3' , '上传时间3' , [
+										2 ,
+										1 ,
+									]) ,
 
 
 								] , ['col' => '12']);
@@ -788,7 +791,7 @@ css;
 											'value' => '3' ,
 											'field' => '日4' ,
 										] ,
-									] , 'c1' ,'用户状态' , '1') ,
+									] , 'c1' , '用户状态' , '1') ,
 
 									integrationTags::searchFormCheckbox([
 										[
@@ -803,7 +806,7 @@ css;
 											'value' => '3' ,
 											'field' => '日5' ,
 										] ,
-									] , 'c2'  ,'用户状态' , [
+									] , 'c2' , '用户状态' , [
 										2 ,
 										1 ,
 									]) ,
@@ -821,8 +824,6 @@ css;
 									]) ,
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
-
-
 
 
 								$t = integrationTags::searchFormCol([
@@ -1343,6 +1344,47 @@ css;
 			return $this->showPage();
 		}
 
+
+		public function execlTest()
+		{
+			$a = 'A';
+			for ($i="A"; $i<$len; $i++)
+			{
+
+			}
+
+
+
+			$path = 'C:\Users\Administrator\Desktop\\';
+
+			$list = $this->logic__common_Resourcemenu->dataList();
+
+			$titles = [
+				'id' ,
+				'name' ,
+				'pid' ,
+				'module' ,
+				'controller' ,
+				'action' ,
+				'ico' ,
+				'order' ,
+				'is_menu' ,
+				'is_common' ,
+				'remark' ,
+				'status' ,
+				'time' ,
+			];
+			$fileName = $path . '到处测试';
+
+			$func = function($v , &$data ) {
+				$data[] = $v;
+			};
+
+			exportExcel($titles , $list , $fileName , $func);
+
+
+			return '234234';
+		}
 	}
 
 

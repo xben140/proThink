@@ -24,7 +24,6 @@
 		public $css = [];
 
 		public $jsScript = [
-
 		];
 
 		/**
@@ -104,10 +103,42 @@
 										}
 									});
 					
-									var $menuToRight=$(".roll-right.J_tabRight"),
-										$magInfo=$(".magazine-info");
-									var rightNum=$(window).width()-$magInfo.offset().left;
-									$menuToRight.css({right:rightNum});
+								})();
+								
+								
+								(function ()
+								{
+								console.dir($('.index_pop'))
+									$('.index_pop').on({
+										'click': function (e) {
+											let _this = $(this);
+											var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+											layer.open({
+												type     : 2,
+												title    : _this.text(),
+												// shadeClose: true,
+												shade    : 0.1,
+												area     : ['75%', '75%'],
+												resize   : 1,
+												moveOut  : 1,
+												skin     : 'search-dom-pop', //样式类名
+												closeBtn : 1, //不显示关闭按钮
+												anim     : 0,
+												// anim      : randomNum(0, 6),
+												isOutAnim: 0,
+												content  : _this.attr('href'), //iframe的url
+												success  : function (_) {
+													_this.attr("disabled", false);
+												},
+												end       : function () {
+													// location.reload();
+												}
+											});
+											 e.preventDefault();
+											return false;
+										}
+									});
+
 								})();
 								</script>
 js;
@@ -183,11 +214,33 @@ str;
 			foreach ($options as $k => $v)
 			{
 				$replacement['__FIELD__'] = $v['field'];
-				$replacement['__VALUE__'] = $v['value'];
+				$replacement['__URL__'] = $v['value'];
 				$str .= strtr($tmp , $replacement);
 			}
 
 			$this->replaceTag(static::makeNodeName('profile_link') , $str);
+		}
+
+
+		/**
+		 * @param        $options
+		 */
+		function setLinkPop($options = [])
+		{
+			$tmp = <<<str
+		<div class="profile-item">
+			<span><a href="__URL__" class="index_pop font-bold">__FIELD__</a></span>
+		</div>
+str;
+			$str = '';
+			foreach ($options as $k => $v)
+			{
+				$replacement['__FIELD__'] = $v['field'];
+				$replacement['__URL__'] = $v['value'];
+				$str .= strtr($tmp , $replacement);
+			}
+
+			$this->replaceTag(static::makeNodeName('profile_pop_link') , $str);
 		}
 
 		/**
@@ -239,7 +292,10 @@ str;
 				</div>
 				-->
 				
+				<!-- ~~~profile_pop_link~~~ -->
+				
 				<!-- ~~~profile_link~~~ -->
+				
 				<div class="profile-item">
 					<span><a href="<!-- ~~~logout_url~~~ -->" class=" font-bold">退出登陆</a></span>
 				</div>

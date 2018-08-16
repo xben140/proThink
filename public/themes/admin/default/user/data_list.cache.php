@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/switchery/switchery.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/datapicker/datepicker3.css">
-<link rel="stylesheet" href="__STATIC__/css/custom.css">
 			
 			<style>  
 				
@@ -143,7 +143,7 @@
 							
 							<div class="table-responsive">
 							
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">2</a></li> <li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 								<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
@@ -241,7 +241,7 @@
 
  </span>
 
-<span  class=" name"  > 2018-08-14 20:38:28
+<span  class=" name"  > 2018-08-16 16:19:49
 
  </span>
 
@@ -279,7 +279,7 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 10
+				<span  class=" name"  > 15
 
  </span>
 
@@ -1902,188 +1902,11 @@
 		</tr>
 
 
-						
-		<tr data-id="12" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 12
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 用户名 : 
-
- </span>
-
-<span  class=" name"  > helloworld
-
- </span>
-
-<br/>
-
-<span  class="name"  > 姓名 : 
-
- </span>
-
-<span  class="td-modify name"  data-field="nickname"  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > email : 
-
- </span>
-
-<span  class="td-modify name"  data-field="email"  data-reg="/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/"  data-msg="请填写合法email"  > 
-
- </span>
-
-<br>
-
-<span  class="name"  > 电话 : 
-
- </span>
-
-<span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 注册时间
-
- </span>
-
-<span  class=" name"  > 2018-08-08 14:14:51
-
- </span>
-
-<br>
-
-<span  class="name"  > 登陆时间
-
- </span>
-
-<span  class=" name"  > 1970-01-01 08:00:00
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 注册IP
-
- </span>
-
-<span  class=" name"  > 127.0.0.1
-
- </span>
-
-<br>
-
-<span  class="name"  > 登陆IP
-
- </span>
-
-<span  class=" name"  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 0
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-info btn-modify-pwd" >修改密码</button>
-
-
-<br>
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-role" >用户授权</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
 
 									</tbody>
 								</table>
 		
-								
+								<ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">2</a></li> <li><a href="/admin/user/datalist.html?%2Fadmin%2Fuser%2Fdatalist_html=&amp;page=2">&raquo;</a></li></ul>
 
 							</div>
 
@@ -2183,7 +2006,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="50" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="10" name="pagerow">
 		</div>
 
 

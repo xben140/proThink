@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 			<style>  
 			
@@ -84,7 +85,7 @@
 				<label class="col-sm-3 control-label">用户名</label>
 				<div class="col-sm-8">
 					<input placeholder="请填写用户名"   name="user" class="form-control  " type="text" value="qq123456"  disabled>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）用户名允许字符为字母，数字，下划线，小数点，长度6-16位<span class="error-tip"></span></span>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
 

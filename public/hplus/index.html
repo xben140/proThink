@@ -45,6 +45,11 @@
 						</div>
 
 						<div class="profile-item">
+							<span><a href="http://hao123.com" class="index_pop font-bold">修改密码</a></span>
+							<span><a href="http://hao123.com" class="index_pop font-bold">修改信息</a></span>
+						</div>
+
+						<div class="profile-item">
 							<span><a href="http://hao123.com" class="J_menuItem font-bold">退出登陆</a></span>
 						</div>
 
@@ -1048,5 +1053,39 @@
 		<script src="js/hplus.min.js?v=4.1.0"></script>
 		<script type="text/javascript" src="js/contabs.min.js"></script>
 		<script src="js/plugins/pace/pace.min.js"></script>
+
+		<script>
+
+			$('.index_pop').on({
+				'click': function (e) {
+					let _this = $(this);
+					var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+					layer.open({
+						type     : 2,
+						title    : _this.text(),
+						// shadeClose: true,
+						shade    : 0.1,
+						area     : ['75%', '75%'],
+						resize   : 1,
+						moveOut  : 1,
+						skin     : 'search-dom-pop', //样式类名
+						closeBtn : 1, //不显示关闭按钮
+						anim     : 0,
+						// anim      : randomNum(0, 6),
+						isOutAnim: 0,
+						content  : _this.attr('href'), //iframe的url
+						success  : function (_) {
+							_this.attr("disabled", false);
+						},
+						end       : function () {
+							// location.reload();
+						}
+					});
+					e.preventDefault();
+					// return false;
+				}
+			});
+
+		</script>
 	</body>
 </html>

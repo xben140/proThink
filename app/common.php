@@ -4,6 +4,10 @@
 	 * 上传，下载，导出excel。。。。
 	 */
 
+
+	use PhpOffice\PhpSpreadsheet\Spreadsheet;
+	use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 	/**
 	 * 上传文件主方法
 	 *
@@ -136,10 +140,53 @@
 
 	/**
 	 *导出excel信息
+	 *
+	 * @param array         $titles   标题
+	 * @param array         $list     数据
+	 * @param string        $fileName 保存名字
+	 * @param callable|null $callback 数据处理回调
+	 *
+	 * @throws \PhpOffice\PhpSpreadsheet\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
 	 */
-	function exportExcel()
+	function exportExcel(array $titles , array $list , string $fileName = '导出文件' , callable $callback = null)
 	{
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$data = [];
 
+		if(is_callable($callback))
+		{
+			foreach ($list as $k => $v)
+			{
+				call_user_func_array($callback , [
+					$v ,
+					&$data ,
+				]);
+			}
+		}
+		else
+		{
+			$data = $list;
+		}
+
+		foreach ($titles as $k => $v)
+		{
+			$sheet->setCellValue('A1' , 'Hello World !A1');
+		}
+
+		foreach ($data as $k => $v)
+		{
+
+		}
+
+		$sheet->setCellValue('A1' , 'Hello World !A1');
+		$sheet->setCellValue('A2' , 'Hello World !A2');
+		$sheet->setCellValue('B1' , 'Hello World !B1');
+		$sheet->setCellValue('B2' , 'Hello World !B2');
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save($fileName);
 	}
 
 	/**

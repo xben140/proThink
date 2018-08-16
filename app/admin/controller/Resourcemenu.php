@@ -422,7 +422,7 @@
 								] ,
 								[
 									'field' => '模块/控制器/方法' ,
-									'attr'  => 'style="width:250px;"' ,
+									'attr'  => 'style="width:280px;"' ,
 								] ,
 
 								[
@@ -441,7 +441,7 @@
 
 								[
 									'field' => '备注' ,
-									'attr'  => '' ,
+									'attr'  => 'style="width:150px;"' ,
 								] ,
 
 								[

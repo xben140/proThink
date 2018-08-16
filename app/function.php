@@ -68,14 +68,12 @@
 	 */
 	function createClosureClass($class , $method , $parameter = [])
 	{
-		$func = function() use ($class , $method , $parameter) {
+		return function() use ($class , $method , $parameter) {
 			return App::invokeMethod([
 				App::invokeClass($class) ,
 				$method ,
 			] , $parameter);
 		};
-
-		return $func;
 	}
 
 	/**
@@ -88,11 +86,10 @@
 	 */
 	function createClosureFunc(callable $func , $parameter = [])
 	{
-		$func = function() use ($func , $parameter) {
+		return function() use ($func , $parameter) {
 			return call_user_func_array($func , $parameter);
 		};
 
-		return $func;
 	}
 
 	/**
@@ -102,13 +99,14 @@
 	 * @param callable $func
 	 * @param array    $params
 	 * @param int      $time
+	 * @param bool     $isForce
 	 *
 	 * @return mixed
 	 */
-	function authCache($key , callable $func , $params = [] , $time = 3)
+	function autoCache($key , callable $func , $params = [] , $time = 3, $isForce = false)
 	{
 		$result = cache($key);
-		if(empty($result))
+		if(empty($result) || $isForce)
 		{
 			$result = call_user_func_array($func , $params);
 			!empty($result) && cache($key , $result , $time);
@@ -597,7 +595,7 @@
 	function indentationByLevel($data , $level = 0)
 	{
 		$s = '';
-		$margin = (($level) * 30);
+		$margin = (($level-1) * 30);
 		($level > 1) && $s = '╘══ ';
 
 		return "<span style='margin-left: " . $margin . "px;'>" . $s . $data . '</span>';

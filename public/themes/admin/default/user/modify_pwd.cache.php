@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 			<style>  
 			

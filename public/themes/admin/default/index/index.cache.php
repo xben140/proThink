@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 			<style>  
 
 			</style>  
@@ -75,11 +76,11 @@
 			</div>			<div class="profile-item">
 				<span class="font-bold">名字 : </span><span >user111</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆次数 : </span><span >9</span>
+				<span class="font-bold">登陆次数 : </span><span >15</span>
 			</div>			<div class="profile-item">
 				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆时间 : </span><span >2018-08-14</span>
+				<span class="font-bold">登陆时间 : </span><span >2018-08-16</span>
 			</div>
 			
 				<!--
@@ -88,7 +89,14 @@
 				</div>
 				-->
 				
+						<div class="profile-item">
+			<span><a href="/admin/user/modifypwd.html" class="index_pop font-bold">修改密码</a></span>
+		</div>		<div class="profile-item">
+			<span><a href="/admin/user/modifyinfo.html" class="index_pop font-bold">修改资料</a></span>
+		</div>
+				
 				<!-- ~~~profile_link~~~ -->
+				
 				<div class="profile-item">
 					<span><a href="/portal/login/logout.html" class=" font-bold">退出登陆</a></span>
 				</div>
@@ -659,10 +667,42 @@
 										}
 									});
 					
-									var $menuToRight=$(".roll-right.J_tabRight"),
-										$magInfo=$(".magazine-info");
-									var rightNum=$(window).width()-$magInfo.offset().left;
-									$menuToRight.css({right:rightNum});
+								})();
+								
+								
+								(function ()
+								{
+								console.dir($('.index_pop'))
+									$('.index_pop').on({
+										'click': function (e) {
+											let _this = $(this);
+											var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+											layer.open({
+												type     : 2,
+												title    : _this.text(),
+												// shadeClose: true,
+												shade    : 0.1,
+												area     : ['75%', '75%'],
+												resize   : 1,
+												moveOut  : 1,
+												skin     : 'search-dom-pop', //样式类名
+												closeBtn : 1, //不显示关闭按钮
+												anim     : 0,
+												// anim      : randomNum(0, 6),
+												isOutAnim: 0,
+												content  : _this.attr('href'), //iframe的url
+												success  : function (_) {
+													_this.attr("disabled", false);
+												},
+												end       : function () {
+													// location.reload();
+												}
+											});
+											 e.preventDefault();
+											return false;
+										}
+									});
+
 								})();
 								</script>
 

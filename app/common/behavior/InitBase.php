@@ -29,7 +29,7 @@
 			$this->initConst();
 
 			// 初始化配置
-			//$this->initConfig();
+			$this->initConfig();
 
 			// 注册命名空间
 			//$this->registerNamespace();
@@ -86,8 +86,6 @@
 				LAYER_VALIDATE_NAME ,
 				LAYER_VIEW_NAME ,
 			]);
-
-
 		}
 
 		/**
@@ -194,7 +192,6 @@
 			]);
 
 
-
 		}
 
 		/**
@@ -202,10 +199,8 @@
 		 */
 		private function initApiConst()
 		{
-
 			define('API_CODE_NAME' , 'code');
 			define('API_MSG_NAME' , 'msg');
-
 		}
 
 		/**
@@ -213,20 +208,15 @@
 		 */
 		private function initConfig()
 		{
+			$model = model('Common/Config' , 'logic');
+			$configArray = [];
+			$configList = autoCache('config_list' , createClosureClass($model , 'getAvailableConfig'));
 
-			$model = model(SYS_COMMON_DIR_NAME . SYS_DS_PROS . 'Config');
+			foreach ($configList as $info) $configArray[$info['field']] = $info['value'];
 
-			$config_list = auto_cache('config_list' , create_closure($model , 'all'));
+			config($configArray);
 
-			foreach ($config_list as $info)
-			{
-
-				$config_array[$info['name']] = $info['value'];
-			}
-
-			config($config_array);
-
-			$this->initTmconfig();
+			//$this->initTmconfig();
 		}
 
 		/**
@@ -249,7 +239,6 @@
 		 */
 		private function registerNamespace()
 		{
-
 			// 注册插件根命名空间
 			Loader::addNamespace(SYS_ADDON_DIR_NAME , PATH_ADDON);
 		}

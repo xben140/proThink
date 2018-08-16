@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>角色编辑</title>
+<title>添加配置项</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 			<style>  
 			
@@ -77,24 +78,82 @@
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
 							
-			<form action="/admin/role/edit.html" class="form-horizontal" id="form1" method="post"  >
+			<form action="/admin/config/add.html" class="form-horizontal" id="form1" method="post"  >
 					
 							
+			
 			<div class="form-group">
-				<label class="col-sm-3 control-label">角色名</label>
+				<label class="col-sm-3 control-label">
+					所属分组
+				</label>
+				<div class="col-sm-9">
+								
+			<label class="checkbox-inline i-checks">
+				<input name="group_id" type="radio" value="1"  checked >
+				系统
+			</label>			
+			<label class="checkbox-inline i-checks">
+				<input name="group_id" type="radio" value="2"   >
+				页面
+			</label>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 所属分组 <span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+
+		
+			<div class="form-group">
+				<label class="col-sm-3 control-label">配置名字</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="管理员111"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+					<input placeholder="请填写配置名字"   name="name" class="form-control  " type="text" value=""  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）配置名字<span class="error-tip"></span></span>
 				</div>
 			</div>
 
 
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">排序</label>
+				<label class="col-sm-3 control-label">配置键</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="133"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+					<input placeholder="config函数用的键"   name="key" class="form-control  " type="text" value=""  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）config函数用的键<span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+		
+			
+			<div class="form-group">
+				<label class="col-sm-3 control-label">
+					键值类型
+				</label>
+				<div class="col-sm-9">
+								
+			<label class="checkbox-inline i-checks">
+				<input name="type" type="radio" value="2"  checked >
+				text
+			</label>			
+			<label class="checkbox-inline i-checks">
+				<input name="type" type="radio" value="1"   >
+				array
+			</label>			
+			<label class="checkbox-inline i-checks">
+				<input name="type" type="radio" value="3"   >
+				switch
+			</label>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> <span class="red"><br>array,select 键值使用英文冒号分隔，每行一条 <br> textarea 键值没有格式要求，填入字符串即可 <br> switch 键值留空</span> <span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">值</label>
+				<div class="col-sm-8">
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="value" ></textarea>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>  <span class="error-tip"></span></span>
 				</div>
 			</div>
 
@@ -103,8 +162,8 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >3243</textarea>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" ></textarea>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 备注 <span class="error-tip"></span></span>
 				</div>
 			</div>
 

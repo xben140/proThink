@@ -128,7 +128,7 @@
 						integrationTags::text([
 							'field_name'  => '用户名' ,
 							'placeholder' => '请填写用户名' ,
-							'tip'         => '（必填）用户名允许字符为字母，数字，下划线，小数点，长度6-16位' ,
+							'tip'         => '' ,
 							'value'       => $info['user'] ,
 							'attr'        => 'disabled' ,
 							'name'        => 'user' ,
@@ -224,7 +224,7 @@
 						integrationTags::text([
 							'field_name'  => '用户名' ,
 							'placeholder' => '请填写用户名' ,
-							'tip'         => '（必填）用户名允许字符为字母，数字，下划线，小数点，长度6-16位' ,
+							'tip'         => '' ,
 							'value'       => $info['user'] ,
 							'attr'        => 'disabled' ,
 							'name'        => 'user' ,
