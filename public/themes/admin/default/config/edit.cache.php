@@ -95,6 +95,10 @@
 			<label class="checkbox-inline i-checks">
 				<input name="group_id" type="radio" value="2"   >
 				页面
+			</label>			
+			<label class="checkbox-inline i-checks">
+				<input name="group_id" type="radio" value="7"   >
+				邮箱
 			</label>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 所属分组 <span class="error-tip"></span></span>
 				</div>
@@ -106,7 +110,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">配置名字</label>
 				<div class="col-sm-8">
-					<input placeholder="请填写配置名字"   name="name" class="form-control  " type="text" value="应用调试模式"  >
+					<input placeholder="请填写配置名字"   name="name" class="form-control  " type="text" value="应用Trace"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）配置名字<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -116,7 +120,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">配置键</label>
 				<div class="col-sm-8">
-					<input placeholder="config函数用的键"   name="key" class="form-control  " type="text" value="app_debug"  >
+					<input placeholder="config函数用的键"   name="key" class="form-control  " type="text" value="app_trace"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>（必填）config函数用的键<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -162,7 +166,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >应用调试模式</textarea>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >应用Trace</textarea>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 备注 <span class="error-tip"></span></span>
 				</div>
 			</div>

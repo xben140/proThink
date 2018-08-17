@@ -20,7 +20,7 @@
 		// 应用调试模式
 		'app_debug'           => true ,
 		// 应用Trace
-		'app_trace'           => false ,
+		'app_trace'           => true ,
 
 		//每添加一个模块这里要加个配置
 		//前台默认皮肤
@@ -32,7 +32,20 @@
 
 		//后台页面构造器页面是否缓存
 		'enable_static_cache' => 0 ,
+/*
 
+		//email配置
+		//邮件服务器
+		'email_host'          => 'smtp.yeah.net' ,
+		//邮件服务器端口
+		'email_port'          => '25' ,
+		//邮件用户名
+		'email_username'      => 'wf585858@yeah.net' ,
+		//邮件用户登陆秘钥
+		'email_password'      => 'qq123456789' ,
+		//对方显示发件人
+		'email_user'          => '来自proThink的邮件' ,
+*/
 
 		// 扩展函数文件
 		'extra_file_list'     => [
@@ -60,7 +73,7 @@
 		] ,
 
 		//分页配置
-		'paginate' => [
+		'paginate'               => [
 			'type'      => 'bootstrap' ,
 			'var_page'  => 'page' ,
 			'list_rows' => 50 ,
@@ -296,7 +309,7 @@
 		// | 会话设置
 		// +----------------------------------------------------------------------
 
-		'session'  => [
+		'session' => [
 			'id'             => '' ,
 			// SESSION_ID的提交变量,解决flash上传跨域
 			'var_session_id' => '' ,
@@ -311,7 +324,7 @@
 		// +----------------------------------------------------------------------
 		// | Cookie设置
 		// +----------------------------------------------------------------------
-		'cookie'   => [
+		'cookie'  => [
 			// cookie 名称前缀
 			'prefix'    => '' ,
 			// cookie 保存时间

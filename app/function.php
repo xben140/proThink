@@ -103,7 +103,7 @@
 	 *
 	 * @return mixed
 	 */
-	function autoCache($key , callable $func , $params = [] , $time = 3, $isForce = false)
+	function autoCache($key , callable $func , $params = [] , $time = 1, $isForce = false)
 	{
 		$result = cache($key);
 		if(empty($result) || $isForce)

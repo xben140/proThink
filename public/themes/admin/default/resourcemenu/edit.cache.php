@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="__HPLUS__css/font-awesome.min93e3.css">
 <link rel="stylesheet" href="__HPLUS__css/animate.min.css">
 <link rel="stylesheet" href="__HPLUS__css/style.min862f.css">
+<link rel="stylesheet" href="__STATIC__/css/custom.css">
 <link rel="stylesheet" href="__HPLUS__css/plugins/iCheck/custom.css">
 			<style>  
 			
@@ -86,7 +87,7 @@
 					</label>
 					<div class="col-sm-8">
 						<select class="form-control  m-b" name="pid">
-							<option value='0' selected>顶级菜单 -- none/none/none</option><option value='1' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局设置 -- admin/none/none</option><option value='7' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option><option value='28' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置分组 -- admin/configgroup/none</option><option value='34' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置设置 -- admin/config/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 信息设置 -- admin/index/none</option>
+							<option value='0' >顶级菜单 -- none/none/none</option><option value='1' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局设置 -- admin/none/none</option><option value='7' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option><option value='28' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置分组 -- admin/configgroup/none</option><option value='34' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置设置 -- admin/config/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 信息设置 -- admin/index/none</option>
 						</select>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必填 <span class="error-tip"></span></span>
 						</div>
@@ -97,7 +98,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">权限名字</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="name" class="form-control  " type="text" value="全局设置"  >
+					<input placeholder=""   name="name" class="form-control  " type="text" value="用户列表"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -117,7 +118,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">控制器名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="controller" class="form-control  " type="text" value="none"  >
+					<input placeholder=""   name="controller" class="form-control  " type="text" value="User"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -127,7 +128,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">方法名</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="action" class="form-control  " type="text" value="none"  >
+					<input placeholder=""   name="action" class="form-control  " type="text" value="dataList"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -137,7 +138,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">排序</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="order" class="form-control  " type="text" value="99"  >
+					<input placeholder=""   name="order" class="form-control  " type="text" value="0"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -157,7 +158,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注</label>
 				<div class="col-sm-8">
-					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" ></textarea>
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >用户列表</textarea>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
 				</div>
 			</div>

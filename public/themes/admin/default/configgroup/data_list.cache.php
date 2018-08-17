@@ -149,7 +149,7 @@
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:80px;">ID</th><th >组名</th><th >排序</th><th >时间</th><th >状态</th><th style="width:150px;">备注</th><th >操作</th>
+											<th style="width:80px;">ID</th><th >组名</th><th >排序</th><th >时间</th><th style="width:150px;">备注</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -359,6 +359,109 @@
 		</tr>
 
 
+						
+		<tr data-id="7" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+<span  class=" name"  > 7
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="必填"  > 邮箱
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-17 13:03:33
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 邮箱相关的配置
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
 
 									</tbody>
 								</table>
@@ -410,7 +513,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="10" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="15" name="pagerow">
 		</div>
 
 

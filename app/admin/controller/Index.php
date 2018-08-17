@@ -35,7 +35,8 @@
 				$_this->setNodeValue([
 					'default_page'    => 'http://baidu.com' ,
 					'logout_url'      => url('portal/login/logout') ,
-					'profile_picture' => 'http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg' ,
+					'profile_picture' => '/static/image/logo.gif' ,
+					//'profile_picture' => 'http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg' ,
 				]);
 
 				$_this->setMeta([

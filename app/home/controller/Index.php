@@ -1345,18 +1345,14 @@ css;
 		}
 
 
-		public function execlTest()
+		/**
+		 * @return string
+		 * @throws \PhpOffice\PhpSpreadsheet\Exception
+		 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+		 */
+		public function exportExcel()
 		{
-			$a = 'A';
-			for ($i="A"; $i<$len; $i++)
-			{
-
-			}
-
-
-
 			$path = 'C:\Users\Administrator\Desktop\\';
-
 			$list = $this->logic__common_Resourcemenu->dataList();
 
 			$titles = [
@@ -1374,16 +1370,74 @@ css;
 				'status' ,
 				'time' ,
 			];
-			$fileName = $path . '到处测试';
+			$fileName = $path . '到处测试.xlsx';
 
-			$func = function($v , &$data ) {
-				$data[] = $v;
+			$func = function($v , &$data) {
+				//$v['is_menu'] && ($data[] =  $v);
+				($data[] = $v);
 			};
-
 			exportExcel($titles , $list , $fileName , $func);
 
+			return 'done';
+		}
 
-			return '234234';
+		public function importExcel()
+		{
+			$path = 'C:\Users\Administrator\Desktop\\';
+			$fileName = $path . '到处测试.xlsx';
+
+			$data = importExcel($fileName);
+			print_r($data);
+			exit;;
+		}
+
+
+		public function generateQrcode()
+		{
+			$path = 'C:\Users\Administrator\Desktop\\';
+			$fileName = $path . '3.png';
+
+			generateQrcode('http://www.hao123.com' , false , 3 , 10);
+			//generateQrcode('http://www.hao123.com', $fileName, 3, 10);
+		}
+
+		public function sendEmail()
+		{
+			$title = 'just title';
+			$body = '163邮件是支持普通连接和SSL连接两种方式的，这里我们推荐使用 ssl 连接方式。';
+			$to = [
+				'845875470@qq.com' => 'by hello' ,
+				'5496150@qq.com'   => 'by 5496150' ,
+			];
+			$res = sendEmail($title , $body , $to , $err);
+			print_r($res);
+			print_r($err);exit;;
+		}
+
+		public function upload()
+		{
+			if(isset($_FILES['image']))
+			{
+				$res = uploadImg('image' , function($result) {
+					$result['url'] = URL_PICTURE . DS . $result['savename'];
+
+					return $result;
+				} ,[200, 200, 1]);
+			}
+			elseif(isset($_FILES['file']))
+			{
+				$res = uploadFile('file' , function($result) {
+					return $result;
+				});
+			}
+
+
+			return json($res);
+		}
+
+		public function download()
+		{
+
 		}
 	}
 

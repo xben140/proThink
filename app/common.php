@@ -154,6 +154,7 @@
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
 		$data = [];
+		//$sheet->setCellValueByColumnAndRow(1, 5, 'PhpSpreadsheet');
 
 		if(is_callable($callback))
 		{
@@ -170,20 +171,25 @@
 			$data = $list;
 		}
 
+		$index = 'A';
 		foreach ($titles as $k => $v)
 		{
-			$sheet->setCellValue('A1' , 'Hello World !A1');
+			$sheet->setCellValue($index . '1' , $v);
+			$index++;
 		}
 
-		foreach ($data as $k => $v)
+		for ($l = 0 , $len_l = count($data); $l < $len_l; $l++)
 		{
+			$index = 'A';
+			$arr = array_values($data[$l]);
 
+			for ($i = 0 , $len = count($arr); $i < $len; $i++)
+			{
+				$t = $index . ($l + 2);
+				$sheet->setCellValue($t , $arr[$i]);
+				$index++;
+			}
 		}
-
-		$sheet->setCellValue('A1' , 'Hello World !A1');
-		$sheet->setCellValue('A2' , 'Hello World !A2');
-		$sheet->setCellValue('B1' , 'Hello World !B1');
-		$sheet->setCellValue('B2' , 'Hello World !B2');
 
 		$writer = new Xlsx($spreadsheet);
 		$writer->save($fileName);
@@ -191,18 +197,110 @@
 
 	/**
 	 *导入excel信息
+	 *
+	 * @param string        $path
+	 *
+	 * @return array
+	 * @throws \PhpOffice\PhpSpreadsheet\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
 	 */
-	function importExcel()
+	function importExcel(string $path)
 	{
+		$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+		$reader->setReadDataOnly(true);
+		$spreadsheet = $reader->load($path);
+		$worksheet = $spreadsheet->getActiveSheet();
+		$data = [];
 
+		//遍历行
+		foreach ($worksheet->getRowIterator() as $k1 => $row)
+		{
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false);
+
+			//遍历每行里的每个cell
+			// This loops through all cells,even if a cell value is not set.
+			// By default, only cells that have a value set will be iterated.
+			foreach ($cellIterator as $k2 => $cell)
+			{
+				$data[$k1][] = $cell->getValue();
+			}
+		}
+
+		//$cellValue = $worksheet->getCell('A1')->getValue();
+		//$cellValue = $worksheet->getCellByColumnAndRow(2 , 5)->getValue();
+		return $data;
 	}
 
 	/**
 	 *发送邮件
+	 *
+	 * @param string $title
+	 * @param string $body
+	 * @param array  $to
+	 * @param null   $err
+	 *
+	 * @return int
 	 */
-	function sendEmail()
+	function sendEmail($title , $body , $to , &$err = null)
 	{
 
+//https://blog.csdn.net/Edu_enth/article/details/53114818
+//https://swiftmailer.symfony.com/docs/messages.html
+//https://www.helloweba.net/php/457.html
+
+		// 邮箱服务器
+		$transport = new Swift_SmtpTransport(config('email_host') , config('email_port'));
+		// 邮箱用户名
+		$transport->setUsername(config('email_username'));
+		// 邮箱密码，有的邮件服务器是授权码
+		$transport->setPassword(config('email_password'));
+
+		// 邮件标题
+		$message = new Swift_Message();
+		//邮件标题
+		$message->setSubject($title);
+		// 发送者
+		$message->setFrom([config('email_username') => config('email_user')]);
+
+		//发送对象，数组形式支持多个
+		$message->setTo($to);
+		//邮件内容
+		$message->setBody($body);
+
+		$mailer = new Swift_Mailer($transport);
+
+		//$path = 'C:\Users\Administrator\Desktop\test.png';
+		//$message->attach(Swift_Attachment::fromPath($path , 'image/jpeg')->setFilename('rename_pic.jpg'));//附件图片
+
+		try
+		{
+			$res = $mailer->send($message);
+
+			return $res;
+		} catch (Swift_ConnectionException $e)
+		{
+			$err = $e->getMessage();
+		} catch (\Exception $e)
+		{
+			$err = $e->getMessage();
+		}
+	}
+
+	/**
+	 * 生成二维码
+	 *
+	 * @param string       $data 写入数据
+	 * @param string |bool $path 二维码保存路径,不填为不保存
+	 * @param string       $ecc  错误修正水平    0 - 3
+	 * @param int          $size 二维码大小      1 - 10
+	 */
+	function generateQrcode($data , $path = false , $ecc = '2' , $size = 10)
+	{
+		//https://packagist.org/packages/kairos/phpqrcode
+		//http://phpqrcode.sourceforge.net/examples/index.php?example=001
+		ob_end_flush();
+		QRcode::png($data , $path , $ecc , $size , 2);
 	}
 
 	/**
@@ -213,13 +311,21 @@
 
 	}
 
-	/**
-	 *生成二维码
-	 */
-	function generateQrcode()
-	{
 
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

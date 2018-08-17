@@ -69,14 +69,14 @@
 		<div class="sidebar-collapse">
 			
 			<div class="dropdown profile-element">
-				<div  class="profile-pic"><img alt="image" src="http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg" /></div>
+				<div  class="profile-pic"><img alt="image" src="/static/image/logo.gif" /></div>
 				
 								<div class="profile-item">
 				<span class="font-bold">账号 : </span><span >qq123456</span>
 			</div>			<div class="profile-item">
 				<span class="font-bold">名字 : </span><span >user111</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆次数 : </span><span >15</span>
+				<span class="font-bold">登陆次数 : </span><span >16</span>
 			</div>			<div class="profile-item">
 				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
 			</div>			<div class="profile-item">

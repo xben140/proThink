@@ -95,6 +95,10 @@
 			<label class="checkbox-inline i-checks">
 				<input name="group_id" type="radio" value="2"   >
 				页面
+			</label>			
+			<label class="checkbox-inline i-checks">
+				<input name="group_id" type="radio" value="7"   >
+				邮箱
 			</label>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 所属分组 <span class="error-tip"></span></span>
 				</div>

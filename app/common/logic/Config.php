@@ -34,7 +34,7 @@
 						$tmpArr = [];
 						foreach ($t as $k1 => $v1)
 						{
-							$t1 = explode('-----', $v1);
+							$t1 = explode(':', $v1);
 							$tmpArr[$t1[0]] = $t1[1];
 						}
 						$val = $tmpArr;

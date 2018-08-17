@@ -215,12 +215,12 @@
 									'attr'  => '' ,
 								] ,
 								[
-									'field' => '状态' ,
-									'attr'  => '' ,
-								] ,
-								[
 									'field' => '备注' ,
 									'attr'  => 'style="width:150px;"' ,
+								] ,
+								[
+									'field' => '状态' ,
+									'attr'  => '' ,
 								] ,
 								[
 									'field' => '操作' ,
