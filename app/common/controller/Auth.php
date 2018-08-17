@@ -42,14 +42,7 @@
 		{
 			if(!$this->model__common_User->isValidateUser($this->adminInfo))
 			{
-				print_r('klsdfjsdflkjf');
-				exit;;
-				session(null);
-				$this->assign('data' , [
-					'code' => '403' ,
-					'msg'  => '用户已被禁用，请联系管理员' ,
-				]);
-
+				exception('用户状态异常，请联系管理员' , 403 );
 			}
 		}
 
@@ -62,13 +55,19 @@
 
 			if((!in_array($currentAction, $menuMap)))
 			{
-				print_r('未授权的访问');
-				exit;;
-				$this->assign('data', [
-					'code' => '403',
-					'msg'  => '未授权的访问！',
-				]);
-				exit($this->fetch(':error'));
+				exception('未授权的访问' , 403 );
 			}
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -46,7 +46,7 @@
 
 			// 自动上传。
 			auto  : true,
-			server: '/admin/common/upload',
+			server: '/home/index/upload',
 			// runtimeOrder: 'flash',
 
 			accept             : {

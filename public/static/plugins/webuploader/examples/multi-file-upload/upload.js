@@ -139,7 +139,7 @@
 			paste   : '#uploader',
 			swf     : '../static/plugins/webuploader/dist/Uploader.swf',
 
-			server: '/admin/common/upload',
+			server: '/home/index/upload',
 			// runtimeOrder: 'flash',
 
 			accept             : {
