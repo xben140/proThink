@@ -6863,7 +6863,7 @@
 			<span class="input-group-btn">
 					<span class="btn">每页显示条数</span>
 			</span>
-			<input type="text" placeholder="" class=" form-control" value="5" name="pagerow">
+			<input type="text" placeholder="" class=" form-control" value="15" name="pagerow">
 		</div>
 
 

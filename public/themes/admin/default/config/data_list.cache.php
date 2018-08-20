@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>角色列表</title>
+<title>配置列表</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -78,7 +78,7 @@
 <div class="col-sm-12">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
-							<h5>角色列表
+							<h5>配置列表
 								<small></small>
 							</h5>
 							<div class="ibox-tools">
@@ -149,7 +149,7 @@
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:80px;">ID</th><th >角色名</th><th >排序</th><th >添加时间</th><th style="width:150px;">备注</th><th >状态</th><th >操作</th>
+											<th style="width:80px;">ID</th><th >配置</th><th >属性</th><th >值</th><th >备注</th><th >时间</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -175,27 +175,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员111
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 应用调试模式
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 133
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > app_debug
 
  </span>
 
@@ -207,9 +201,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-07-24 22:10:07
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' selected>系统</option><option value='2' >页面</option><option value='7' >邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' >text</option><option value='1' >array</option><option value='3' selected>switch</option>
+		</select>
+
 
 
 
@@ -219,9 +231,36 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 3243
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="value"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 应用调试模式
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:25:10
+
+ </span>
 
 
 
@@ -248,10 +287,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -290,27 +325,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员122
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 应用Trace
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > app_trace
 
  </span>
 
@@ -322,9 +351,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-07-24 22:11:13
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' selected>系统</option><option value='2' >页面</option><option value='7' >邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' >text</option><option value='1' >array</option><option value='3' selected>switch</option>
+		</select>
+
 
 
 
@@ -334,9 +381,36 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 123456
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="value"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 应用Trace
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:25:53
+
+ </span>
 
 
 
@@ -363,10 +437,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -405,27 +475,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员333
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 分页配置
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1000
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > paginate
 
  </span>
 
@@ -437,9 +501,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-07-24 22:13:05
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' selected>页面</option><option value='7' >邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' >text</option><option value='1' selected>array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -449,9 +531,35 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > dgsfsdf
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > type =            bootstrap
+var_page    =  page
+list_rows   =         15
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:26:17
+
+ </span>
 
 
 
@@ -478,125 +586,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="4" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 4
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员1444
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-07-25 08:59:45
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > gsdfasf
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -635,27 +624,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员5555
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 邮件服务器
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 22
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > email_host
 
  </span>
 
@@ -667,9 +650,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-07-25 09:00:18
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' >页面</option><option value='7' selected>邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' selected>text</option><option value='1' >array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -679,9 +680,33 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 备注
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > smtp.yeah.net
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-17 13:08:00
+
+ </span>
 
 
 
@@ -708,10 +733,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -750,27 +771,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员6666
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 邮件服务器端口
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 33
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > email_port
 
  </span>
 
@@ -782,9 +797,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-07-25 09:00:22
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' >页面</option><option value='7' selected>邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' selected>text</option><option value='1' >array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -794,9 +827,33 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 备注
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > 25
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:26:17
+
+ </span>
 
 
 
@@ -823,10 +880,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -865,27 +918,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员777
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 邮件用户名
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > email_username
 
  </span>
 
@@ -897,9 +944,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-08-01 15:35:08
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' >页面</option><option value='7' selected>邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' selected>text</option><option value='1' >array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -909,9 +974,33 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > wf585858@yeah.net
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 邮箱账号
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:26:17
+
+ </span>
 
 
 
@@ -938,10 +1027,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -980,27 +1065,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员888
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 邮件用户登陆秘钥
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > email_password
 
  </span>
 
@@ -1012,9 +1091,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-08-01 15:35:19
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' >页面</option><option value='7' selected>邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' selected>text</option><option value='1' >array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -1024,9 +1121,33 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > qq123456789
 
  </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 用于登陆第三方客户端的密码
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-16 12:26:17
+
+ </span>
 
 
 
@@ -1053,10 +1174,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -1095,27 +1212,21 @@
 						
 		<td  >
 		
-				<span  class="name"  > 
+				<span  class="name"  > 配置名 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > 管理员999
+<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="配置名必填"  > 对方显示发件人
 
  </span>
 
+<br/>
 
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
+<span  class="name"  > 配置键 : 
 
  </span>
 
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 13
+<span  class="td-modify name"  data-field="key"  data-reg="/^\S+$/"  data-msg="配置键必填"  > email_user
 
  </span>
 
@@ -1127,9 +1238,27 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 2018-08-01 15:35:28
+				<span  > 分组:
 
  </span>
+
+			
+		<select  data-field="group_id"  class="   td-select" >
+			<option value='1' >系统</option><option value='2' >页面</option><option value='7' selected>邮箱</option>
+		</select>
+
+
+ 
+
+<span  > 类型:
+
+ </span>
+
+			
+		<select  data-field="type"  class="   td-select" >
+			<option value='2' selected>text</option><option value='1' >array</option><option value='3' >switch</option>
+		</select>
+
 
 
 
@@ -1139,227 +1268,9 @@
 						
 		<td  >
 		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > dsfsdf
+				<textarea  class="td-modify"  data-field="value"  style="width:100%"  > 来自proThink的邮件
 
  </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="10" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 10
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > aaaff
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-08-08 14:14:01
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > cvcv
-
- </textarea>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  > 
-
- </span>
-
-			<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
-
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-										
-			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
-
-
-
-
-		</td>
-
-
-
-
-		</tr>
-
-
-						
-		<tr data-id="11" >
-		
-												
-		<td  >
-		
-										
-			<input type="checkbox" class="i-checks ids" >
-
-
-<span  class=" name"  > 11
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="角色名必填"  > ffff
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class="name"  > 
-
- </span>
-
-<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
-
- </span>
-
-
-
-		</td>
-
-
-						
-		<td  >
-		
-				<span  class=" name"  > 2018-08-08 14:56:53
-
- </span>
 
 
 
@@ -1381,6 +1292,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > 2018-08-16 12:26:17
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  > 
 
  </span>
@@ -1398,10 +1321,6 @@
 		
 										
 			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
-
-
-						
-			<button type="button" class="btn btn-xs   btn-info btn-assign-privileges" >分配权限</button>
 
 
 						
@@ -1464,10 +1383,61 @@
 											
 		<div class="col-sm-6 m-b-xs">
 
+						<div class="input-group">
+				<span class="input-group-btn">
+						<span class="btn">配置组</span>
+				</span>
+				<select class=" form-control  inline change_serach" name="group_id">
+					<option value='-1' selected>全部</option><option value='1' >系统</option><option value='2' >页面</option><option value='7' >邮箱</option>
+				</select>
+			</div>
+
+
+
+		</div>
+
+
+						
+		<div class="col-sm-6 m-b-xs">
+
+						<div class="input-group">
+				<span class="input-group-btn">
+						<span class="btn">类型</span>
+				</span>
+				<select class=" form-control  inline change_serach" name="type">
+					<option value='-1' selected>全部</option><option value='2' >text</option><option value='1' >array</option><option value='3' >switch</option>
+				</select>
+			</div>
+
+
+
+		</div>
+
+
+						
+		<div class="col-sm-6 m-b-xs">
+
 			
 		<div class="input-group">
 			<span class="input-group-btn">
-					<span class="btn">角色名</span>
+					<span class="btn">配置键</span>
+			</span>
+			<input type="text" placeholder="" class=" form-control" value="" name="key">
+		</div>
+
+
+
+
+		</div>
+
+
+						
+		<div class="col-sm-6 m-b-xs">
+
+			
+		<div class="input-group">
+			<span class="input-group-btn">
+					<span class="btn">配置名</span>
 			</span>
 			<input type="text" placeholder="" class=" form-control" value="" name="name">
 		</div>
@@ -1573,12 +1543,11 @@
 						
 
 <script>
-window.deleteUrl = '/admin/role/delete.html';
-window.setFieldUrl = '/admin/role/setfield.html';
-window.detailUrl = '/admin/role/detail.html';
-window.editUrl = '/admin/role/edit.html';
-window.addUrl = '/admin/role/add.html';
-window.assignPrivilegesUrl = '/admin/role/assignprivileges.html';
+window.deleteUrl = '/admin/config/delete.html';
+window.setFieldUrl = '/admin/config/setfield.html';
+window.detailUrl = '/admin/config/detail.html';
+window.editUrl = '/admin/config/edit.html';
+window.addUrl = '/admin/config/add.html';
 </script>
 
 			<script>  
