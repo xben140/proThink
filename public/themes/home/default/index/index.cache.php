@@ -69,19 +69,9 @@
 		<div class="sidebar-collapse">
 			
 			<div class="dropdown profile-element">
-				<div  class="profile-pic"><img alt="image" src="/static/image/logo.gif" /></div>
+				<div  class="profile-pic"><img alt="image" src="" /></div>
 				
-								<div class="profile-item">
-				<span class="font-bold">账号 : </span><span >qq123456</span>
-			</div>			<div class="profile-item">
-				<span class="font-bold">名字 : </span><span >user111</span>
-			</div>			<div class="profile-item">
-				<span class="font-bold">登陆次数 : </span><span >25</span>
-			</div>			<div class="profile-item">
-				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
-			</div>			<div class="profile-item">
-				<span class="font-bold">登陆时间 : </span><span >2018-08-20</span>
-			</div>
+					<!-- ~~~profile_meta~~~ -->
 			
 				<!--
 				<div class="profile-item">
@@ -89,16 +79,12 @@
 				</div>
 				-->
 				
-						<div class="profile-item">
-			<span><a href="/admin/user/modifypwd.html" class="index_pop font-bold">修改密码</a></span>
-		</div>		<div class="profile-item">
-			<span><a href="/admin/user/modifyinfo.html" class="index_pop font-bold">修改资料</a></span>
-		</div>
+				<!-- ~~~profile_pop_link~~~ -->
 				
 				<!-- ~~~profile_link~~~ -->
 				
 				<div class="profile-item">
-					<span><a href="/portal/login/logout.html" class=" font-bold">退出登陆</a></span>
+					<span><a href="portal/login/login" class=" font-bold">退出登陆</a></span>
 				</div>
 				
 			</div>
@@ -271,7 +257,7 @@
 					</li>
 				</ul>
 			</div>
-			<a href="/portal/login/logout.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+			<a href="portal/login/login" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
 		</div>
 		
 		<div class="row J_mainContent" id="content-main">

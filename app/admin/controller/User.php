@@ -4,6 +4,7 @@
 
 	use builder\elementsFactory;
 	use builder\integrationTags;
+	use builder\tagConstructor;
 
 	class User extends AdminBase
 	{
@@ -214,9 +215,9 @@
 
 				$this->setPageTitle('修改资料');
 
-				$id = getAdminSessionInfo('user', 'id');
+				$id = getAdminSessionInfo('user' , 'id');
 				session(URL_MODULE , $id);
-				$info = $this->logic->getInfo(['id' => $id,]);
+				$info = $this->logic->getInfo(['id' => $id ,]);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -309,7 +310,7 @@
 			else
 			{
 				$this->setPageTitle('修改密码');
-				session(URL_MODULE , getAdminSessionInfo('user', 'id'));
+				session(URL_MODULE , getAdminSessionInfo('user' , 'id'));
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -750,7 +751,7 @@
 								] ,
 							])->delete() !== false;
 					} ,
-					[$this->param['ids'] ] ,
+					[$this->param['ids']] ,
 				] ,
 			]));
 		}
@@ -810,6 +811,88 @@
 				return $this->showPage();
 			}
 		}
+
+
+		public function editProfilePic()
+		{
+			if(isset($_FILES['image']))
+			{
+				$res = uploadImg('image' , function($result) {
+					$result['url'] = URL_PICTURE . DS . $result['savename'];
+
+					return $result;
+				} , [
+					200 ,
+					200 ,
+					1 ,
+				]);
+
+				return $res;
+			}
+			else
+			{
+
+
+				$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
+
+				//设置标题
+				$this->setPageTitle('上传测试');
+
+				$this->displayContents = integrationTags::basicFrame([
+					integrationTags::row([
+						integrationTags::rowBlock([
+
+							integrationTags::upload(2 , [
+								[
+									'title' => '上传须知' ,
+									'items' => [
+										'支持jpg，png，gif格式' ,
+										'大小不要超过2M' ,
+									] ,
+								] ,
+							] , [
+
+								'uploadSuccess' => <<<AAA
+function (file, response) {
+	//等于2或1
+	if (response.sign)
+	{
+		if (response.is_finished == 1)
+		{
+			console.dir(response)
+
+			window.upload_file.push({
+				"savename":response.savename,
+			});
+			
+			$(".uploader-preview").find('img').attr({
+				'src':response['thumb_url'],
+			});
+			$(".status-box-text").text('上传完成');
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		//服务器处理出错
+	}
+}
+AAA
+								,
+							] , [
+								'server' => url('upload') ,
+							]) ,
+
+						]) ,
+					]) ,
+				]);
+
+				return $this->showPage();
+			}
+		}
+
 	}
 
 

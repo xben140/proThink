@@ -204,7 +204,8 @@
 		}
 
 		/**
-		 * 初始化配置信息
+		 *
+		 * 初始化动态配置信息
 		 */
 		private function initConfig()
 		{
@@ -220,7 +221,7 @@
 		}
 
 		/**
-		 * 初始化动态配置信息
+		 * 初始化配置信息
 		 */
 		private function initTmconfig()
 		{

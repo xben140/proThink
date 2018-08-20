@@ -5,10 +5,6 @@
 		//返回信息的所有信息
 		window.upload_file = [];
 
-		window.uploaderEvent = function (event) {
-
-			return event
-		}
 
 		/**
 		 *
@@ -32,7 +28,7 @@
 		 *
 		 */
 
-		let otions = {
+		let options = {
 			fileVal : 'file',
 			pick    : {
 				id      : '#filePicker',
@@ -215,10 +211,23 @@
 		};
 
 
-		//自定义事件处理
-		window.uploaderEvent !== 'undefined'
-		&& typeof window.uploaderEvent === 'function'
-		&& (eventMap = window.uploaderEvent(eventMap));
+		//自定义事件覆盖默认事件
+		if(window.uploaderEventMap !== 'undefined' && typeof window.uploaderEventMap === 'object')
+		{
+			for (var key in window.uploaderEventMap)
+			{
+				eventMap[key] = window.uploaderEventMap[key];
+			}
+		}
+
+		//自定义选项覆盖默认选项
+		if(window.uploaderOptionMap !== 'undefined' && typeof window.uploaderOptionMap  === 'object')
+		{
+			for (var key in window.uploaderOptionMap)
+			{
+				options[key] = window.uploaderOptionMap[key];
+			}
+		}
 
 
 		/**
@@ -233,7 +242,7 @@
 		 *
 		 */
 
-		uploader = WebUploader.create(otions);
+		uploader = WebUploader.create(options);
 
 
 		for (var event in eventMap)

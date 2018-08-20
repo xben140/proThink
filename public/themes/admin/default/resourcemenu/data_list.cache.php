@@ -6744,6 +6744,175 @@
 		</tr>
 
 
+						
+		<tr data-id="41" >
+		
+												
+		<td  >
+		
+										
+			<input type="checkbox" class="i-checks ids" >
+
+
+<span  class=" name"  > 41
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="name"  data-reg="/^\S+$/"  data-msg="权限名必填"  > <span style='margin-left: 30px;'>╘══ 修改头像</span>
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="module"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="模块名必填"  > admin
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="controller"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="控制器名必填"  > User
+
+ </span>
+
+/
+
+<span  class="td-modify name"  data-field="action"  data-reg="/^[a-zA-Z_][a-zA-Z\d_]{0,31}$/"  data-msg="方法名必填"  > editProfilePic
+
+ </span>
+
+ 
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="ico"  > fa-edit
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class="td-modify name"  data-field="order"  data-reg="/^\d+$/"  data-msg="必须为数字，确保前后无空格"  > 1
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > 2018-08-20 17:57:11
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<textarea  class="td-modify"  data-field="remark"  style="width:100%"  > 
+
+ </textarea>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_menu"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  > 
+
+ </span>
+
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+							<input type="checkbox"  name="status"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
+
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+										
+			<button type="button" class="btn btn-xs   btn-success btn-edit" >编辑</button>
+
+
+						
+			<button type="button" class="btn btn-xs   btn-danger btn-delete" >删除</button>
+
+
+
+
+		</td>
+
+
+
+
+		</tr>
+
+
 
 									</tbody>
 								</table>

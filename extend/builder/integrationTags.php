@@ -10,7 +10,6 @@
 	{
 		/**
 		 * ********************************************************************************************************************************************************************
-		 *
 		 * ********************************************************************************************************************************************************************
 		 *                                                表格段
 		 * ********************************************************************************************************************************************************************
@@ -108,7 +107,7 @@
 			//如果设置标签名字
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , ['class' => 'name',]));
+			} , ['class' => 'name' ,]));
 
 			$attr = [];
 			//如果可以编辑
@@ -151,7 +150,7 @@
 			//如果设置标签名字
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , ['class' => 'name',]));
+			} , ['class' => 'name' ,]));
 
 			$attr = [];
 			//如果可以编辑
@@ -809,7 +808,37 @@
 			$doms = [];
 			$str = tagConstructor::buildKV($params);
 
-			$doms[] = elementsFactory::singleLabel('<input type="hidden" '.$str.'>');
+			$doms[] = elementsFactory::singleLabel('<input type="hidden" ' . $str . '>');
+
+			return $doms;
+		}
+
+
+		/**
+		 * 文件上传
+		 *
+		 * @param string $type 上传类型 0 单文件，1 多文件，2 单图片（default），3 多图片，
+		 * @param array  $params
+		 * @param array  $eventMap
+		 * @param array  $optionMap
+		 *
+		 * @return array
+		 */
+		public static function upload($type , $params = [] , $eventMap = [] , $optionMap = [])
+		{
+			$map = [
+				'uploadSingleFile',
+				'uploadMutilFile',
+				'uploadSingleImg',
+				'uploadMutilImg',
+			];
+
+			$class = isset($map[$type]) ? $map[$type]:$map[2];
+			$doms[] = elementsFactory::{$class}()->make(function(&$doms , $_this) use($params, $eventMap, $optionMap) {
+				$_this->setOption($params);
+				$_this->setEventMap($eventMap);
+				$_this->setOptionMap($optionMap);
+			});
 
 			return $doms;
 		}

@@ -141,20 +141,20 @@
 	/**
 	 *导出excel信息
 	 *
-	 * @param array         $titles   标题
-	 * @param array         $list     数据
-	 * @param string        $fileName 保存名字
-	 * @param callable|null $callback 数据处理回调
+	 * @param array         $list       数据
+	 * @param string        $fileName   保存名字
+	 * @param callable|null $callback   数据处理回调
+	 * @param bool          $isDownload 是否直接下载
 	 *
 	 * @throws \PhpOffice\PhpSpreadsheet\Exception
 	 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
 	 */
-	function exportExcel(array $titles , array $list , string $fileName = '导出文件' , callable $callback = null)
+	function exportExcel(array $list , string $fileName = '导出文件' , callable $callback = null , $isDownload = true)
 	{
+		//https://phpspreadsheet.readthedocs.io/en/develop/topics/accessing-cells/
 		$spreadsheet = new Spreadsheet();
-		$sheet = $spreadsheet->getActiveSheet();
+		//$sheet = $spreadsheet->getActiveSheet();
 		$data = [];
-		//$sheet->setCellValueByColumnAndRow(1, 5, 'PhpSpreadsheet');
 
 		if(is_callable($callback))
 		{
@@ -171,34 +171,67 @@
 			$data = $list;
 		}
 
-		$index = 'A';
-		foreach ($titles as $k => $v)
-		{
-			$sheet->setCellValue($index . '1' , $v);
-			$index++;
-		}
+		//$sheet->setCellValueByColumnAndRow(1, 5, 'PhpSpreadsheet');
 
-		for ($l = 0 , $len_l = count($data); $l < $len_l; $l++)
-		{
+
+		/*
+				$data = [
+					[NULL, 2010, 2011, 2012],
+					['Q1',   12,   15,   21],
+					['Q2',   56,   73,   86],
+					['Q3',   52,   61,   69],
+					['Q4',   30,   32,    0],
+				];*/
+
+		$spreadsheet->getActiveSheet()->fromArray($data ,  // The data to set
+				null ,        // Array values with this value will not be set
+				'A1'         // Top left coordinate of the worksheet range where we want to set these values (default is A1)
+			);
+
+
+		/*
+
 			$index = 'A';
-			$arr = array_values($data[$l]);
-
-			for ($i = 0 , $len = count($arr); $i < $len; $i++)
+			foreach ($titles as $k => $v)
 			{
-				$t = $index . ($l + 2);
-				$sheet->setCellValue($t , $arr[$i]);
+				$sheet->setCellValue($index . '1' , $v);
 				$index++;
 			}
-		}
+
+			for ($l = 0 , $len_l = count($data); $l < $len_l; $l++)
+			{
+				$index = 'A';
+				$arr = array_values($data[$l]);
+
+				for ($i = 0 , $len = count($arr); $i < $len; $i++)
+				{
+					$t = $index . ($l + 2);
+					$sheet->setCellValue($t , $arr[$i]);
+					$index++;
+				}
+			}*/
+
 
 		$writer = new Xlsx($spreadsheet);
-		$writer->save($fileName);
+
+		if($isDownload)
+		{
+			$info = pathinfo_($fileName);
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="' . $info['basename']);
+			header('Cache-Control: max-age=0');
+			$writer->save('php://output');
+		}
+		else
+		{
+			$writer->save($fileName);
+		}
 	}
 
 	/**
 	 *导入excel信息
 	 *
-	 * @param string        $path
+	 * @param string $path
 	 *
 	 * @return array
 	 * @throws \PhpOffice\PhpSpreadsheet\Exception
@@ -206,6 +239,19 @@
 	 */
 	function importExcel(string $path)
 	{
+		/*
+		 *
+		 *
+		'Xlsx' => Reader\Xlsx::class,
+        'Xls' => Reader\Xls::class,
+        'Xml' => Reader\Xml::class,
+        'Ods' => Reader\Ods::class,
+        'Slk' => Reader\Slk::class,
+        'Gnumeric' => Reader\Gnumeric::class,
+        'Html' => Reader\Html::class,
+        'Csv' => Reader\Csv::class,
+		 *
+		 * */
 		$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 		$reader->setReadDataOnly(true);
 		$spreadsheet = $reader->load($path);

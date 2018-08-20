@@ -32,20 +32,20 @@
 
 		//后台页面构造器页面是否缓存
 		'enable_static_cache' => 0 ,
-/*
+		/*
 
-		//email配置
-		//邮件服务器
-		'email_host'          => 'smtp.yeah.net' ,
-		//邮件服务器端口
-		'email_port'          => '25' ,
-		//邮件用户名
-		'email_username'      => 'wf585858@yeah.net' ,
-		//邮件用户登陆秘钥
-		'email_password'      => 'qq123456789' ,
-		//对方显示发件人
-		'email_user'          => '来自proThink的邮件' ,
-*/
+				//email配置
+				//邮件服务器
+				'email_host'          => 'smtp.yeah.net' ,
+				//邮件服务器端口
+				'email_port'          => '25' ,
+				//邮件用户名
+				'email_username'      => 'wf585858@yeah.net' ,
+				//邮件用户登陆秘钥
+				'email_password'      => 'qq123456789' ,
+				//对方显示发件人
+				'email_user'          => '来自proThink的邮件' ,
+		*/
 
 		// 扩展函数文件
 		'extra_file_list'     => [
@@ -97,6 +97,10 @@
 			'singleDate'         => \builder\elements\form\singleDate::class ,
 			'betweenDate'        => \builder\elements\form\betweenDate::class ,
 			'textarea'           => \builder\elements\form\textarea::class ,
+			'uploadSingleImg'    => \builder\elements\form\uploadSingleImg::class ,
+			'uploadSingleFile'   => \builder\elements\form\uploadSingleFile::class ,
+			'uploadMutilImg'    => \builder\elements\form\uploadMutilImg::class ,
+			'uploadMutilFile'   => \builder\elements\form\uploadMutilFile::class ,
 
 			//table
 			'staticTable'        => \builder\elements\table\staticTable::class ,

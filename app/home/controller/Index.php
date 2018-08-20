@@ -10,7 +10,11 @@
 	{
 		public function api()
 		{
-			return $this->success('处理成功');
+			//print_r($this->param['files']);
+			$a = (base64_decode($this->param['files'], 1));
+			$b = (json_decode($a, 1));
+
+			return json($b);
 		}
 
 		/**
@@ -142,11 +146,21 @@ css;
 
 							$doms[] = elementsFactory::doubleLabel('div' , function(&$doms) {
 
-								$doms[] = elementsFactory::singleLabel('<div class="hr-line-dashed"></div>');
-								$doms[] = elementsFactory::inlineRadio()->make();
+								$t = integrationTags::staticText([
+									'field_name' => 'staticText' ,
+									'value'      => 'value' ,
+								]);
+								$doms = array_merge($doms , $t);
 
-								$doms[] = elementsFactory::singleLabel('<div class="hr-line-dashed"></div>');
-								$doms[] = elementsFactory::inlineCheckbox()->make();
+								$t = integrationTags::textarea([
+									'field_name' => 'textarea' ,
+									'name'       => 'textarea' ,
+									'value'      => '11' ,
+									'attr'       => '' ,
+									'style'      => 'width:100%;height:200px;' ,
+								]);
+								$doms = array_merge($doms , $t);
+
 
 							} , [
 								'class' => 'test-div' ,
@@ -155,10 +169,24 @@ css;
 
 							$path = $this->getTemplatePath(':test');
 
-
 							$doms[] = elementsFactory::customElementFormPath($path)->make(function(&$doms , $_this) {
 
-								$doms[] = elementsFactory::inlineRadio()->make();
+
+								$t = integrationTags::staticText([
+									'field_name' => 'staticText' ,
+									'value'      => 'value' ,
+								]);
+								$doms = array_merge($doms , $t);
+
+								$t = integrationTags::textarea([
+									'field_name' => 'textarea' ,
+									'name'       => 'textarea' ,
+									'value'      => '11' ,
+									'attr'       => '' ,
+									'style'      => 'width:100%;height:200px;' ,
+								]);
+								$doms = array_merge($doms , $t);
+
 							});
 
 						});
@@ -1084,9 +1112,8 @@ css;
 												'field' => '年' ,
 											] ,
 											[
-												'checked' => '1' ,
-												'value'   => '2' ,
-												'field'   => '月' ,
+												'value' => '2' ,
+												'field' => '月' ,
 											] ,
 											[
 												'value' => '3' ,
@@ -1107,15 +1134,14 @@ css;
 												'field' => '年' ,
 											] ,
 											[
-												'checked' => '1' ,
-												'value'   => '2' ,
-												'field'   => '月' ,
+												'value' => '2' ,
+												'field' => '月' ,
 											] ,
 											[
 												'value' => '3' ,
 												'field' => '日' ,
 											] ,
-										] , 'nameaaa');
+										] , 'nameaaa' , 'searchFormRadio' , 3);
 									});
 								});
 
@@ -1130,16 +1156,17 @@ css;
 												'field' => '年' ,
 											] ,
 											[
-												'checked' => '1' ,
-												'value'   => '2' ,
-												'field'   => '月' ,
+												'value' => '2' ,
+												'field' => '月' ,
 											] ,
 											[
-												'checked' => '1' ,
-												'value'   => '3' ,
-												'field'   => '日' ,
+												'value' => '3' ,
+												'field' => '日' ,
 											] ,
-										] , 'namebbbb');
+										] , 'namebbbb' , 'searchFormCheckbox' , [
+											1 ,
+											2 ,
+										]);
 
 									});
 								});
@@ -1345,11 +1372,6 @@ css;
 		}
 
 
-		/**
-		 * @return string
-		 * @throws \PhpOffice\PhpSpreadsheet\Exception
-		 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-		 */
 		public function exportExcel()
 		{
 			$path = 'C:\Users\Administrator\Desktop\\';
@@ -1370,21 +1392,25 @@ css;
 				'status' ,
 				'time' ,
 			];
-			$fileName = $path . '到处测试.xlsx';
+
+			array_unshift($list , $titles);
+
+			$fileName = $path . '测试.xlsx';
 
 			$func = function($v , &$data) {
 				//$v['is_menu'] && ($data[] =  $v);
 				($data[] = $v);
 			};
-			exportExcel($titles , $list , $fileName , $func);
+			exportExcel($list , $fileName , $func , false);
 
 			return 'done';
 		}
 
+
 		public function importExcel()
 		{
 			$path = 'C:\Users\Administrator\Desktop\\';
-			$fileName = $path . '到处测试.xlsx';
+			$fileName = $path . '测试.xlsx';
 
 			$data = importExcel($fileName);
 			print_r($data);
@@ -1397,9 +1423,10 @@ css;
 			$path = 'C:\Users\Administrator\Desktop\\';
 			$fileName = $path . '3.png';
 
-			generateQrcode('http://www.hao123.com' , false , 3 , 10);
-			//generateQrcode('http://www.hao123.com', $fileName, 3, 10);
+			//generateQrcode('http://www.hao123.com' , false , 3 , 10);
+			generateQrcode('http://www.hao123.com' , $fileName , 3 , 10);
 		}
+
 
 		public function sendEmail()
 		{
@@ -1411,8 +1438,10 @@ css;
 			];
 			$res = sendEmail($title , $body , $to , $err);
 			print_r($res);
-			print_r($err);exit;;
+			print_r($err);
+			exit;;
 		}
+
 
 		public function upload()
 		{
@@ -1422,7 +1451,11 @@ css;
 					$result['url'] = URL_PICTURE . DS . $result['savename'];
 
 					return $result;
-				} ,[200, 200, 1]);
+				} , [
+					200 ,
+					200 ,
+					1 ,
+				]);
 			}
 			elseif(isset($_FILES['file']))
 			{
@@ -1431,7 +1464,6 @@ css;
 				});
 			}
 
-
 			return json($res);
 		}
 
@@ -1439,6 +1471,407 @@ css;
 		{
 
 		}
+
+		public function uploadTest1()
+		{
+
+			$data = 'test-data';
+			$this->assign('data' , $data);
+
+
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'data-id' => 5 ,
+					'style'   => 'overflow:hidden' ,
+					'class'   => ' gray-bg' ,
+				]) ,
+			]);
+
+			//设置标题
+			$this->makePage()->setHead(elementsFactory::singleLabel('<title>主页</title>'));
+
+			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
+
+				$doms[] = elementsFactory::row()->make(function(&$doms , $_this) {
+
+					$doms[] = elementsFactory::rowBlock()->make(function(&$doms , $_this) {
+
+						//---------------------------- 表单
+
+						$doms[] = elementsFactory::form()->make(function(&$doms , $_this) {
+							$_this->setNodeValue('method' , 'post');
+
+							$_this->setNodeValue([
+								//'class'  => 'form-inline' ,
+								'action' => url('api') ,
+							]);
+
+							$_this->setNodeValue('attr' , tagConstructor::buildKV([
+								'data-id'  => 5 ,
+								'data-pid' => 6 ,
+							]));
+
+							$doms[] = elementsFactory::staticText()->make(function(&$doms , $_this) {
+								$_this->setNodeValue([
+									'field_name' => 'username' ,
+									'value'      => 'hello' ,
+								]);
+							});
+
+
+							//生成文本
+							$doms = array_merge($doms , integrationTags::hidden([
+								'id'    => 'upload-files' ,
+								'name'  => 'files' ,
+								'value' => '' ,
+							]));
+
+
+							//uploadSingleImg
+							$doms[] = elementsFactory::uploadSingleFile()->make(function(&$doms , $_this) {
+								$_this->setOption([
+									[
+										'title' => '111' ,
+										'items' => [
+											'sdfsdfs1' ,
+											'sdfsdfs2' ,
+											'sdfsdfs3' ,
+										] ,
+									] ,
+									[
+										'title' => '222' ,
+										'items' => [
+											'sdfsdfs12' ,
+											'sdfsdfs22' ,
+											'sdfsdfs32' ,
+										] ,
+									] ,
+								]);
+
+								$_this->setEventMap([
+									'beforeFileQueued' => <<<AAA
+function (file) {
+	var subject = $.trim(file.name);
+	console.dir(subject + 123456)
+}
+AAA
+									,
+									'uploadSuccess' => <<<AAA
+function (file, response) {
+	//等于2或1
+	if (response.sign)
+	{
+		if (response.is_finished == 1)
+		{
+			console.dir(response)
+
+			window.upload_file.push({
+				"savename":response.savename,
+			});
+			
+			$(".uploader-preview").find('img').attr({
+				'src':response['thumb_url'],
+			});
+			$(".status-box-text").text('上传完成');
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		//服务器处理出错
+	}
+}
+AAA
+									,
+									'uploadFinished' => <<<AAA
+function () {
+	$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
+	layer.msg('处理完成111111111');
+}
+AAA
+									,
+								]);
+
+								$_this->setOptionMap([
+									'server' => '/home/index/upload' ,
+								]);
+
+
+							});
+
+						});
+
+					});
+
+				});
+
+			});
+
+			return $this->showPage();
+		}
+
+		public function uploadTest2()
+		{
+
+			$data = 'test-data';
+			$this->assign('data' , $data);
+
+
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'data-id' => 5 ,
+					'style'   => 'overflow:hidden' ,
+					'class'   => ' gray-bg' ,
+				]) ,
+			]);
+
+			//设置标题
+			$this->makePage()->setHead(elementsFactory::singleLabel('<title>主页</title>'));
+
+			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
+
+				$doms[] = elementsFactory::row()->make(function(&$doms , $_this) {
+
+					$doms[] = elementsFactory::rowBlock()->make(function(&$doms , $_this) {
+
+						//---------------------------- 表单
+
+						$doms[] = elementsFactory::form()->make(function(&$doms , $_this) {
+							$_this->setNodeValue('method' , 'post');
+
+							$_this->setNodeValue([
+								//'class'  => 'form-inline' ,
+								'action' => url('api') ,
+							]);
+
+							$_this->setNodeValue('attr' , tagConstructor::buildKV([
+								'data-id'  => 5 ,
+								'data-pid' => 6 ,
+							]));
+
+							$doms[] = elementsFactory::staticText()->make(function(&$doms , $_this) {
+								$_this->setNodeValue([
+									'field_name' => 'username' ,
+									'value'      => 'hello' ,
+								]);
+							});
+
+
+							//生成文本
+							$doms = array_merge($doms , integrationTags::hidden([
+								'id'    => 'upload-files' ,
+								'name'  => 'files' ,
+								'value' => '' ,
+							]));
+
+
+							//uploadMutilImg
+
+							$doms[] = elementsFactory::uploadMutilFile()->make(function(&$doms , $_this) {
+								$_this->setOption([
+									[
+										'title' => '111' ,
+										'items' => [
+											'sdfsdfs1' ,
+											'sdfsdfs2' ,
+											'sdfsdfs3' ,
+										] ,
+									] ,
+									[
+										'title' => '222' ,
+										'items' => [
+											'sdfsdfs12' ,
+											'sdfsdfs22' ,
+											'sdfsdfs32' ,
+										] ,
+									] ,
+								]);
+
+								$_this->setEventMap([
+									'beforeFileQueued' => <<<AAA
+function (file) {
+	var subject = $.trim(file.name);
+	console.dir(subject + 123456)
+}
+AAA
+									,
+
+
+									'uploadSuccess' => <<<AAA
+function (file, response) {
+	//等于2或1
+	if (response.sign)
+	{
+		if (response.is_finished == 1)
+		{
+			console.dir(response)
+
+			window.upload_file.push({
+				"savename":response.savename,
+			});
+			
+			$(".uploader-preview").find('img').attr({
+				'src':response['thumb_url'],
+			});
+			$(".status-box-text").text('上传完成');
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		//服务器处理出错
+	}
+}
+AAA
+									,
+
+
+
+									'uploadFinished' => <<<AAA
+function () {
+	$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
+	layer.msg('处理完成111111111');
+}
+AAA
+									,
+								]);
+
+								$_this->setOptionMap([
+									'server' => url('upload') ,
+								]);
+
+
+							});
+
+						});
+
+					});
+
+				});
+
+			});
+
+			return $this->showPage();
+		}
+
+		public function uploadTest11()
+		{
+			$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
+
+			//设置标题
+			$this->setPageTitle('上传测试');
+
+			$this->displayContents = integrationTags::basicFrame([
+				integrationTags::row([
+					integrationTags::rowBlock([
+
+						integrationTags::form([
+
+							integrationTags::staticText([
+								'field_name' => 'staticText' ,
+								'value'      => 'value' ,
+							]) ,
+
+							integrationTags::hidden([
+								'id'    => 'upload-files' ,
+								'name'  => 'files' ,
+								'value' => '' ,
+							]),
+
+							integrationTags::uediter([
+								'field_name' => '内容' ,
+								'name'       => 'uediter' ,
+								'value'      => 'sdfsdfsdfsdf' ,
+							]) ,
+
+							integrationTags::upload(3, [
+								[
+									'title' => '111' ,
+									'items' => [
+										'sdfsdfs1' ,
+										'sdfsdfs2' ,
+										'sdfsdfs3' ,
+									] ,
+								] ,
+								[
+									'title' => '222' ,
+									'items' => [
+										'sdfsdfs12' ,
+										'sdfsdfs22' ,
+										'sdfsdfs32' ,
+									] ,
+								] ,
+							], [
+								'beforeFileQueued' => <<<AAA
+function (file) {
+	var subject = $.trim(file.name);
+	console.dir(subject + 123456)
+}
+AAA
+								,
+
+
+								'uploadSuccess' => <<<AAA
+function (file, response) {
+	//等于2或1
+	if (response.sign)
+	{
+		if (response.is_finished == 1)
+		{
+			console.dir(response)
+
+			window.upload_file.push({
+				"savename":response.savename,
+			});
+			
+			$(".uploader-preview").find('img').attr({
+				'src':response['thumb_url'],
+			});
+			$(".status-box-text").text('上传完成');
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		//服务器处理出错
+	}
+}
+AAA
+								,
+
+
+
+								'uploadFinished' => <<<AAA
+function () {
+	$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
+	layer.msg('处理完成111111111');
+}
+AAA
+								,
+							], [
+								'server' => url('upload') ,
+							]) ,
+
+						] , [
+							'id'     => 'form122222' ,
+							'method' => 'post' ,
+							'action' => url('api') ,
+						]) ,
+
+
+					]) ,
+				]) ,
+			]);
+
+			return $this->showPage();
+		}
+
 	}
 
 

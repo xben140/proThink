@@ -7,7 +7,7 @@
 		// 验证规则
 		protected $rule = [
 			'pid'        => 'number' ,
-			'name'       => 'unique:privilege|require' ,
+			'name'       => 'unique:resource_menu|require' ,
 			'module'     => 'alpha|require' ,
 			'controller' => 'alpha|require' ,
 			'action'     => 'alpha|require' ,
