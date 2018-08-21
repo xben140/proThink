@@ -208,14 +208,15 @@
 			if(IS_POST)
 			{
 				$id = session(URL_MODULE);
-				$this->jump($this->logic->edit($this->param , $id));
+				$res = $this->logic->edit($this->param , $id);
+				$this->logic->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
+				$this->jump($res);
 			}
 			else
 			{
-
 				$this->setPageTitle('修改资料');
-
 				$id = getAdminSessionInfo('user' , 'id');
+
 				session(URL_MODULE , $id);
 				$info = $this->logic->getInfo(['id' => $id ,]);
 
@@ -405,6 +406,10 @@
 									'attr'  => 'style="width:80px;"' ,
 								] ,
 								[
+									'field' => '头像' ,
+									'attr'  => '' ,
+								] ,
+								[
 									'field' => '账户' ,
 									'attr'  => '' ,
 								] ,
@@ -578,6 +583,20 @@
 										]) ,
 									]) ,
 
+									//checkbox
+									integrationTags::td([
+										integrationTags::tdSimple([
+											'value' => elementsFactory::singleLabel(function(&$doms) use($v){
+												$attr = tagConstructor::buildKV([
+													'src'   => generateProfilePicPath($v['profile_pic'], 1) ,
+													'style' => 'height: 65px;' ,
+												]);
+
+												$doms[] = '<img '.$attr.'/>';
+											}) ,
+										]) ,
+									]) ,
+
 									//用户名
 									integrationTags::td([
 										integrationTags::tdSimple([
@@ -613,6 +632,26 @@
 											'field'    => 'phone' ,
 											'reg'      => '/^1\d{10}$/' ,
 											'msg'      => '请填写合法手机号码' ,
+										]) ,
+										'<br/>' ,
+										integrationTags::tdSelect([
+											'name'     => 'gender' ,
+											'field_name'     => '性别 :' ,
+											'selected' => $v['gender'] ,
+											'options'  => [
+												[
+													'value' => '0' ,
+													'field' => $this->logic::$sexMap[0] ,
+												] ,
+												[
+													'value' => '1' ,
+													'field' => $this->logic::$sexMap[1] ,
+												] ,
+												[
+													'value' => '2' ,
+													'field' => $this->logic::$sexMap[2] ,
+												] ,
+											] ,
 										]) ,
 									]) ,
 
@@ -800,8 +839,6 @@
 							'main_title' => '用户授权' ,
 							'sub_title'  => '' ,
 						]) ,
-
-
 					]) ,
 
 				] , [
@@ -817,7 +854,10 @@
 		{
 			if(isset($_FILES['image']))
 			{
+				$this->initLogic();
+
 				$res = uploadImg('image' , function($result) {
+
 					$result['url'] = URL_PICTURE . DS . $result['savename'];
 
 					return $result;
@@ -827,12 +867,24 @@
 					1 ,
 				]);
 
-				return $res;
+				if($res['is_finished'])
+				{
+					$this->logic->updateField([
+						'ids'   => getAdminSessionInfo('user' , 'id') ,
+						'val'   => $res['savename'] ,
+						'field' => 'profile_pic' ,
+					]);
+					$this->logic->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
+
+					return $this->result($res, 1, '更新成功', 'json');
+				}
+				else
+				{
+					return $this->error();
+				}
 			}
 			else
 			{
-
-
 				$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
 
 				//设置标题
@@ -847,32 +899,30 @@
 									'title' => '上传须知' ,
 									'items' => [
 										'支持jpg，png，gif格式' ,
-										'大小不要超过2M' ,
+										'图片大小不超过2M' ,
 									] ,
 								] ,
 							] , [
 
 								'uploadSuccess' => <<<AAA
 function (file, response) {
-	//等于2或1
-	if (response.sign)
+	if (response.code == 1)
 	{
-		if (response.is_finished == 1)
-		{
-			console.dir(response)
-
-			window.upload_file.push({
-				"savename":response.savename,
-			});
-			
-			$(".uploader-preview").find('img').attr({
-				'src':response['thumb_url'],
-			});
-			$(".status-box-text").text('上传完成');
-		}
-		else
-		{
-		}
+		parent.$('.profile-pic>img').attr('src', response.data.thumb_url);
+	
+		$(".uploader-preview").find('img').attr({
+			'src':response.data.thumb_url,
+		});
+		
+		$(".profile_pic_preview").attr({
+			'src':response.data.url,
+		});
+		
+		$(".status-box-text").text('更新成功');
+		
+		setTimeout(function(){
+		//	layer.close()
+		}, 400);
 	}
 	else
 	{
@@ -882,9 +932,44 @@ function (file, response) {
 AAA
 								,
 							] , [
-								'server' => url('upload') ,
+								'server' => "'".url('editProfilePic')."'" ,
+								'accept' =>json_encode( [
+									'extensions' => 'jpg,jpeg,png,gif',
+								]) ,
 							]) ,
 
+						], [
+							'width'      => '6' ,
+							'main_title' => '' ,
+							'sub_title'  => '' ,
+						]) ,
+
+						integrationTags::rowBlock((function() {
+							return [
+								elementsFactory::doubleLabel('div' , function(&$doms) {
+
+									$doms[] = elementsFactory::singleLabel(function(&$doms) {
+										$profile_pic = generateProfilePicPath(getAdminSessionInfo('user', 'profile_pic') , 0);
+
+										$attr = tagConstructor::buildKV([
+											'src' => $profile_pic,
+											'class' => 'profile_pic_preview',
+										]);
+
+										$doms[] = '<img '.$attr.'/>';
+									});
+
+								} , [
+									'class' => 'test-div' ,
+									'id'    => 'div1' ,
+								]),
+							];
+
+
+						})(), [
+							'width'      => '6' ,
+							'main_title' => '' ,
+							'sub_title'  => '' ,
 						]) ,
 					]) ,
 				]);

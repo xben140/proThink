@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>修改资料</title>
+<title>权限编辑</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -78,13 +78,47 @@
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
 							
-			<form action="/admin/user/modifyinfo.html" class="form-horizontal" id="form1" method="post"  >
+			<form action="/admin/resourcemenu/edit.html" class="form-horizontal" id="form1" method="post"  >
 					
-							
+					
+				<div class="form-group">
+					<label class="col-sm-3 control-label">
+						上级权限
+					</label>
+					<div class="col-sm-8">
+						<select class="form-control  m-b" name="pid">
+							<option value='0' >顶级菜单 -- none/none/none</option><option value='1' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 全局设置 -- admin/none/none</option><option value='7' selected>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 用户管理 -- admin/user/none</option><option value='15' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 角色管理 -- admin/role/none</option><option value='22' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 菜单管理 -- admin/resourcemenu/none</option><option value='28' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置分组 -- admin/configgroup/none</option><option value='34' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 配置设置 -- admin/config/none</option><option value='4' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╘══ 信息设置 -- admin/index/none</option>
+						</select>
+						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 必填 <span class="error-tip"></span></span>
+						</div>
+				</div>
+
+
+		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">用户名</label>
+				<label class="col-sm-3 control-label">权限名字</label>
 				<div class="col-sm-8">
-					<input placeholder="请填写用户名"   name="user" class="form-control  " type="text" value="qq123456"  disabled>
+					<input placeholder=""   name="name" class="form-control  " type="text" value="分配角色"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+		
+			<div class="form-group">
+				<label class="col-sm-3 control-label">模块名</label>
+				<div class="col-sm-8">
+					<input placeholder=""   name="module" class="form-control  " type="text" value="admin"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>默认为admin<span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+		
+			<div class="form-group">
+				<label class="col-sm-3 control-label">控制器名</label>
+				<div class="col-sm-8">
+					<input placeholder=""   name="controller" class="form-control  " type="text" value="User"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -92,9 +126,9 @@
 
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">姓名</label>
+				<label class="col-sm-3 control-label">方法名</label>
 				<div class="col-sm-8">
-					<input placeholder="请填写用户名"   name="nickname" class="form-control  " type="text" value="user111dddddddddddddd"  >
+					<input placeholder=""   name="action" class="form-control  " type="text" value="assignRoles"  >
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
 				</div>
 			</div>
@@ -102,20 +136,30 @@
 
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">邮箱</label>
+				<label class="col-sm-3 control-label">排序</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="email" class="form-control  " type="text" value="dfddcc@qq.cc"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写邮箱<span class="error-tip"></span></span>
+					<input placeholder=""   name="order" class="form-control  " type="text" value="0"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>必填<span class="error-tip"></span></span>
 				</div>
 			</div>
 
 
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label">手机</label>
+				<label class="col-sm-3 control-label">图标</label>
 				<div class="col-sm-8">
-					<input placeholder=""   name="phone" class="form-control  " type="text" value="15826533333"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写手机号码<span class="error-tip"></span></span>
+					<input placeholder=""   name="ico" class="form-control  " type="text" value="-"  >
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
+				</div>
+			</div>
+
+
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">备注</label>
+				<div class="col-sm-8">
+					<textarea   type="text/plain" style="width:100%;height:150px;" name="remark" >分配角色</textarea>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 角色备注 <span class="error-tip"></span></span>
 				</div>
 			</div>
 
@@ -145,9 +189,14 @@
 
 		<!--					script					-->
 		
+			
+
+
 			<script>  
 			
 			</script>  
+			
+
 		<!--  icheck--> 
 			<script>  
 				$(document).ready(function () {
@@ -229,6 +278,8 @@
 			</script>  
 
 <!-- ! ~~~SCRIPT~~~ -->
+
+
 
 
 

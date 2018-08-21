@@ -95,7 +95,7 @@ Css;
 			foreach ($option as $k => $v)
 			{
 				$replacement['__FIELD__'] = $k;
-				$replacement['__VALUE__'] = "'{$v}'";
+				$replacement['__VALUE__'] = "{$v}";
 				$str .= strtr($tmp1 , $replacement);
 			}
 

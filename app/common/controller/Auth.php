@@ -53,7 +53,7 @@
 			$menuMap = getMenu($privilege);
 			$currentAction = formatMenu(MODULE_NAME,CONTROLLER_NAME,ACTION_NAME);
 
-			if((!in_array($currentAction, $menuMap)))
+			if(!in_array($currentAction, $menuMap))
 			{
 				exception('未授权的访问' , 403 );
 			}

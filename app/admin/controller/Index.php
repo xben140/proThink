@@ -32,11 +32,13 @@
 			//---------------------------- 主体结构
 			$this->displayContents = elementsFactory::build('baseFrameWork')->make(function(&$doms , $_this) {
 
+				//http://local14.cc/upload/picture/20180821/thumb_f1229ba969c61e234f40ac27433166a3.png
+				$profile_pic = generateProfilePicPath(getAdminSessionInfo('user', 'profile_pic') , 1);
+
 				$_this->setNodeValue([
 					'default_page'    => 'http://baidu.com' ,
 					'logout_url'      => url('portal/login/logout') ,
-					'profile_picture' => '/static/image/logo.gif' ,
-					//'profile_picture' => 'http://img.newyx.net/newspic/image/201706/01/d380e50205.jpg' ,
+					'profile_picture' => $profile_pic,
 				]);
 
 				$_this->setMeta([

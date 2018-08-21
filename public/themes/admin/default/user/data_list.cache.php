@@ -149,7 +149,7 @@
 								<table class="table table-striped  table-bordered table-hover table-condensed ">
 									<thead>
 										<tr>
-											<th style="width:80px;">ID</th><th >账户</th><th >联系方式</th><th >时间</th><th >IP</th><th >登陆次数</th><th >状态</th><th >操作</th>
+											<th style="width:80px;">ID</th><th >头像</th><th >账户</th><th >联系方式</th><th >时间</th><th >IP</th><th >登陆次数</th><th >状态</th><th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -175,6 +175,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="http://local14.cc/upload/picture/20180821/thumb_0d03b253bfd2c77825c34a749b565adf.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -189,7 +201,7 @@
 
  </span>
 
-<span  class="td-modify name"  data-field="nickname"  > user111
+<span  class="td-modify name"  data-field="nickname"  > hello
 
  </span>
 
@@ -219,6 +231,18 @@
 
  </span>
 
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' >保密</option><option value='1' selected>男</option><option value='2' >女</option>
+		</select>
+
+
 
 
 		</td>
@@ -241,7 +265,7 @@
 
  </span>
 
-<span  class=" name"  > 2018-08-20 17:50:49
+<span  class=" name"  > 2018-08-21 14:29:40
 
  </span>
 
@@ -279,7 +303,7 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 25
+				<span  class=" name"  > 30
 
  </span>
 
@@ -320,6 +344,18 @@
 
 
 <span  class=" name"  > 2
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
 
  </span>
 
@@ -375,6 +411,18 @@
 
  </span>
 
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' >保密</option><option value='1' >男</option><option value='2' selected>女</option>
+		</select>
+
+
 
 
 		</td>
@@ -397,7 +445,7 @@
 
  </span>
 
-<span  class=" name"  > 2018-08-16 16:33:13
+<span  class=" name"  > 2018-08-21 11:05:59
 
  </span>
 
@@ -435,7 +483,7 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 10
+				<span  class=" name"  > 12
 
  </span>
 
@@ -508,6 +556,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -551,6 +611,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -685,6 +757,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -728,6 +812,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 15826544417
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -862,6 +958,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -905,6 +1013,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1039,6 +1159,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1082,6 +1214,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1216,6 +1360,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1259,6 +1415,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 12312312355
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1393,6 +1561,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1436,6 +1616,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 12312312355
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1570,6 +1762,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1613,6 +1817,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 15533654444
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1747,6 +1963,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1790,6 +2018,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 13321212121
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 
@@ -1924,6 +2164,18 @@
 						
 		<td  >
 		
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
+
+ </span>
+
+
+
+		</td>
+
+
+						
+		<td  >
+		
 				<span  class="name"  > 用户名 : 
 
  </span>
@@ -1967,6 +2219,18 @@
 <span  class="td-modify name"  data-field="phone"  data-reg="/^1\d{10}$/"  data-msg="请填写合法手机号码"  > 
 
  </span>
+
+<br/>
+
+<span  class="name"  > 性别 :
+
+ </span>
+
+			
+		<select  data-field="gender"  class="   td-select" >
+			<option value='0' selected>保密</option><option value='1' >男</option><option value='2' >女</option>
+		</select>
+
 
 
 

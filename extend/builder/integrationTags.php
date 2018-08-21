@@ -233,7 +233,7 @@
 
 			isset($params['field_name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['field_name'];
-			} , []));
+			} , ['class' => 'name',]));
 
 			$doms[] = elementsFactory::select()->make(function(&$doms , $_this) use ($params) {
 				$_this->setNodeValue(['field' => $params['name']]);

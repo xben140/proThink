@@ -69,18 +69,18 @@
 		<div class="sidebar-collapse">
 			
 			<div class="dropdown profile-element">
-				<div  class="profile-pic"><img alt="image" src="/static/image/logo.gif" /></div>
+				<div  class="profile-pic"><img alt="image" src="http://local14.cc/upload/picture/20180821/thumb_0d03b253bfd2c77825c34a749b565adf.gif" class='index_pop' data-href='/admin/User/editProfilePic' data-text='修改头像'/></div>
 				
 								<div class="profile-item">
 				<span class="font-bold">账号 : </span><span >qq123456</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">名字 : </span><span >user111</span>
+				<span class="font-bold">名字 : </span><span >hello</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆次数 : </span><span >25</span>
+				<span class="font-bold">登陆次数 : </span><span >30</span>
 			</div>			<div class="profile-item">
 				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆时间 : </span><span >2018-08-20</span>
+				<span class="font-bold">登陆时间 : </span><span >2018-08-21</span>
 			</div>
 			
 				<!--
@@ -598,119 +598,15 @@
 		<!--					script					-->
 		
 <script>
-								!function (){
-									$('#clear').on({
-										'click': function ()
-										{
-											var _this = $(this);
-											var loadIndex = layer.load();
 
-											_this.attr({"disabled": true});
-
-											$.ajax({
-												"url"     : "{:url('portal/Login/clear')}",
-												"type"    : "post",
-												"dataType": "json",
-												"success" : function (_)
-												{
-													_this.attr({"disabled": false});
-													layer.msg('清除成功,  共' + _.length + '个缓存文件');
-													layer.close(loadIndex);
-												},
-												"error"   : function ()
-												{
-													layer.close(loadIndex);
-													_this.attr({"disabled": false});
-													layer.msg('请求未授权或者网络故障！');
-												},
-											});
-
-										}
-									});
-								}();
-									
-								(function ()
-								{
-									var refresh = $('#refresh');
-					
-									refresh.on({
-										'click': function ()
-										{
-											var _this = $(this);
-											var loadIndex = layer.load();
-					
-											_this.attr({"disabled": true});
-					
-											$.ajax({
-												"url"     : "{:url('portal/Login/refresh')}",
-												"type"    : "post",
-												"dataType": "json",
-												"success" : function (_)
-												{
-													_this.attr({"disabled": false});
-													layer.msg(_.msg);
-					
-													if (_.code == 1)
-													{
-														location.reload();
-													}
-					
-													layer.close(loadIndex);
-												},
-												"error"   : function ()
-												{
-													layer.close(loadIndex);
-													_this.attr({"disabled": false});
-													layer.msg('请求未授权或者网络故障！');
-												},
-											});
-										}
-									});
-					
-								})();
-								
-								
-								(function ()
-								{
-								console.dir($('.index_pop'))
-									$('.index_pop').on({
-										'click': function (e) {
-											let _this = $(this);
-											var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-											layer.open({
-												type     : 2,
-												title    : _this.text(),
-												// shadeClose: true,
-												shade    : 0.1,
-												area     : ['75%', '75%'],
-												resize   : 1,
-												moveOut  : 1,
-												skin     : 'search-dom-pop', //样式类名
-												closeBtn : 1, //不显示关闭按钮
-												anim     : 0,
-												// anim      : randomNum(0, 6),
-												isOutAnim: 0,
-												content  : _this.attr('href'), //iframe的url
-												success  : function (_) {
-													_this.attr("disabled", false);
-												},
-												end       : function () {
-													// location.reload();
-												}
-											});
-											 e.preventDefault();
-											return false;
-										}
-									});
-
-								})();
-								</script>
+</script>
 
 <!-- ! ~~~SCRIPT~~~ -->
 
 
 
 		<script src="__STATIC__/js/custom.js"></script>
+<script src="__STATIC__/js/index.js"></script>
 
 <!-- ! ~~~JS_INVOKE~~~ -->
 

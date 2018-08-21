@@ -6806,7 +6806,7 @@
 						
 		<td  >
 		
-				<span  class="td-modify name"  data-field="ico"  > fa-edit
+				<span  class="td-modify name"  data-field="ico"  > -
 
  </span>
 
@@ -6873,7 +6873,7 @@
 
  </span>
 
-			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"    class='js-switch' />
+			<input type="checkbox"  name="is_common"  data-change-callback="switcherUpdateField"  checked  class='js-switch' />
 
 
 

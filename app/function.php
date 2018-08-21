@@ -103,7 +103,7 @@
 	 *
 	 * @return mixed
 	 */
-	function autoCache($key , callable $func , $params = [] , $time = 1, $isForce = false)
+	function autoCache($key , callable $func , $params = [] , $time = 1 , $isForce = false)
 	{
 		$result = cache($key);
 		if(empty($result) || $isForce)
@@ -247,7 +247,7 @@
 	 */
 	function makeFilePath($path)
 	{
-		return PATH_FILE . $path;
+		return replaceToSysSeparator(PATH_FILE . $path);
 	}
 
 
@@ -264,7 +264,7 @@
 	{
 		$path = $isThumb ? makeImgThumbName($path) : $path;
 
-		return PATH_PICTURE . $path;
+		return replaceToSysSeparator(PATH_PICTURE . $path);
 	}
 
 	/*
@@ -276,6 +276,26 @@
 	 *
 	 * */
 
+
+	/**
+	 * 自动计算头像url
+	 *
+	 * @param      $path 20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt
+	 * @param int  $isThumb
+	 *
+	 * @return string 'http://local15.cc/upload/file/20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt'
+	 */
+	function generateProfilePicPath($path, $isThumb = 1)
+	{
+		$profile_pic =
+			is_file(makeImgPath($path, $isThumb))
+				? makeImgUrl($path , $isThumb)
+				: '/static/image/logo.gif';
+
+		return $profile_pic;
+	}
+
+
 	/**
 	 * 计算文件url
 	 * 以常量为基础
@@ -286,8 +306,7 @@
 	 */
 	function makeFileUrl($path)
 	{
-
-		return URL_FILE . $path;
+		return replaceToUrlSeparator(URL_FILE . $path);
 	}
 
 
@@ -304,8 +323,39 @@
 	{
 		$path = $isThumb ? makeImgThumbName($path) : $path;
 
-		return URL_PICTURE . $path;
+		return replaceToUrlSeparator(URL_PICTURE . $path);
 	}
+
+
+	/**
+	 * 地址里的分隔符替换为url里的符号
+	 *
+	 * @param      $path
+	 *
+	 * @return string 'http://local15.cc/upload/file/20180717\a514e349fbb9233b3dc47d5ce2e0a82e.png'
+	 */
+	function replaceToUrlSeparator($path)
+	{
+		return strtr($path , [
+			'\\' => '/' ,
+		]);
+	}
+
+	/**
+	 * 地址里的分隔符替换为系统分隔符
+	 *
+	 * @param      $path
+	 *
+	 * @return string 'http://local15.cc/upload/file/20180717\a514e349fbb9233b3dc47d5ce2e0a82e.png'
+	 */
+	function replaceToSysSeparator($path)
+	{
+		return strtr($path , [
+			'\\' => DS ,
+			'/'  => DS ,
+		]);
+	}
+
 
 	/*
 	 *
@@ -595,7 +645,7 @@
 	function indentationByLevel($data , $level = 0)
 	{
 		$s = '';
-		$margin = (($level-1) * 30);
+		$margin = (($level - 1) * 30);
 		($level > 1) && $s = '╘══ ';
 
 		return "<span style='margin-left: " . $margin . "px;'>" . $s . $data . '</span>';
@@ -864,7 +914,7 @@
 						{
 							//目录为空,=2是因为.和..存在
 							$msg = '删除 -- ' . $curfile . "\r\n";
-							file_put_contents('C:\Users\Administrator\Desktop\log.txt' ,$msg, FILE_APPEND);
+							file_put_contents('C:\Users\Administrator\Desktop\log.txt' , $msg , FILE_APPEND);
 							echo $msg;
 							@rmdir($curfile);// 删除空目录
 						}

@@ -14,7 +14,7 @@
 <meta  name="keywords"  content=""  >
 <meta  name="description"  content=""  >
 <meta name="renderer" content="webkit" >
-<title>修改资料</title>
+<title>用户授权</title>
 
 <!-- ! ~~~HEAD~~~ -->
 
@@ -49,8 +49,11 @@
 			<style>  
 				
 			</style>  
+			<style>  
+			</style>  
 
 <!-- ! ~~~CSS~~~ -->
+
 
 
 
@@ -77,47 +80,135 @@
 					
 		<div class="wrapper wrapper-content animated fadeInRight   ">
 
+				
+			
+			<div class="row"  >
+
+						
+<div class="col-sm-6">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>用户授权
+								<small></small>
+							</h5>
+							<div class="ibox-tools">
 							
-			<form action="/admin/user/modifyinfo.html" class="form-horizontal" id="form1" method="post"  >
+							
+								<a class="collapse-link">
+									<i class="fa fa-chevron-up"></i>
+								</a>
+								
+								
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="fa fa-wrench"></i>
+								</a>
+								
+								
+								<ul class="dropdown-menu dropdown-user">
+								
+							<!--	
+									<li>
+										<a href="graph_morris.html#">选项1</a>
+									</li>
+									<li>
+										<a href="graph_morris.html#">选项2</a>
+									</li>
+									
+							-->
+									<!-- ~~~option~~~ -->
+								</ul>
+								
+								<!-- ~~~isEnableClosed~~~ -->
+								<!--	
+									<a class="close-link">
+										<i class="fa fa-times"></i>
+									</a>
+								-->
+								
+							</div>
+						</div>
+						<div class="ibox-content" style="position: relative">
+							
+													
+			<form action="/admin/user/assignroles.html" class="form-horizontal" id="form1" method="post"  >
 					
-							
+					
 			<div class="form-group">
-				<label class="col-sm-3 control-label">用户名</label>
-				<div class="col-sm-8">
-					<input placeholder="请填写用户名"   name="user" class="form-control  " type="text" value="qq123456"  disabled>
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
+				<label class="col-sm-3 control-label">
+					用户角色
+				</label>
+				<div class="col-sm-9">
+									<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="1" name="roles[]" checked>
+							<i></i>
+							管理员111
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="2" name="roles[]" checked>
+							<i></i>
+							管理员122
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="3" name="roles[]" >
+							<i></i>
+							管理员333
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="4" name="roles[]" >
+							<i></i>
+							管理员1444
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="5" name="roles[]" >
+							<i></i>
+							管理员5555
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="6" name="roles[]" >
+							<i></i>
+							管理员6666
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="7" name="roles[]" >
+							<i></i>
+							管理员777
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="8" name="roles[]" >
+							<i></i>
+							管理员888
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="9" name="roles[]" >
+							<i></i>
+							管理员999
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="10" name="roles[]" >
+							<i></i>
+							aaaff
+						</label>
+				</div>				<div class="checkbox i-checks">
+						<label> 
+						<input type="checkbox" value="11" name="roles[]" >
+							<i></i>
+							ffff
+						</label>
+				</div>
+					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 每个用户可分配多个角色 <span class="error-tip"></span></span>
 				</div>
 			</div>
 
-
-		
-			<div class="form-group">
-				<label class="col-sm-3 control-label">姓名</label>
-				<div class="col-sm-8">
-					<input placeholder="请填写用户名"   name="nickname" class="form-control  " type="text" value="user111dddddddddddddd"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><span class="error-tip"></span></span>
-				</div>
-			</div>
-
-
-		
-			<div class="form-group">
-				<label class="col-sm-3 control-label">邮箱</label>
-				<div class="col-sm-8">
-					<input placeholder=""   name="email" class="form-control  " type="text" value="dfddcc@qq.cc"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写邮箱<span class="error-tip"></span></span>
-				</div>
-			</div>
-
-
-		
-			<div class="form-group">
-				<label class="col-sm-3 control-label">手机</label>
-				<div class="col-sm-8">
-					<input placeholder=""   name="phone" class="form-control  " type="text" value="15826533333"  >
-					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请填写手机号码<span class="error-tip"></span></span>
-				</div>
-			</div>
 
 
 
@@ -131,6 +222,17 @@
 					</div>
 			</form>
 
+
+
+							
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
 
 
 
@@ -225,10 +327,14 @@
 
 			</script>  
 			<script>  
+					
+			</script>  
+			<script>  
 				
 			</script>  
 
 <!-- ! ~~~SCRIPT~~~ -->
+
 
 
 

@@ -6937,7 +6937,8 @@ body.skin-3 {
 }
 
 .profile-element .profile-pic img {
-	height : 90px;
+	height: 90px;
+	cursor: pointer;
 }
 
 .profile-element .profile-item {

@@ -68,7 +68,6 @@
 
 			parent::_initialize();
 
-
 		}
 
 		//初始化当前模型

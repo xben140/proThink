@@ -298,4 +298,91 @@
 		}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/**
+		 * 登陆成功后更新用户信息
+		 *
+		 * @return mixed
+		 */
+		public function updateUserInfo()
+		{
+			$info = getAdminSessionInfo('user');
+			$where = [
+				'user' => [
+					'=' ,
+					$info['user'] ,
+				] ,
+			];
+
+			$res = $this->model__user->updateData([
+				'last_login_ip'   => IP ,
+				'last_login_time' => TIME_NOW ,
+				'login_count'     => $info['login_count'] + 1 ,
+			] , $where);
+
+			return $res;
+		}
+
+
+		/**
+		 * 用户菜单信息写到session
+		 *
+		 * @return mixed
+		 */
+		public function initPrivilege()
+		{
+			if(isGlobalManager())
+			{
+				//如果id是admin的，直接查所有权限
+				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU, ['order_filed' => 'order','order' => 'asc',]);
+			}
+			else
+			{
+				$privilege = $this->model__common_Privilegeresource->getMenusByUserId(getAdminSessionInfo('user', 'id'))->toArray();
+			}
+
+			$privilege = makeTree($privilege);
+			$this->updateSession('privilege' , $privilege);
+		}
+
+		/**
+		 * 根据用户名更新用户信息session
+		 *
+		 * @param $username
+		 *
+		 * @return mixed
+		 */
+		public function updateSessionByUsername($username)
+		{
+			$this->updateSession('user' , $this->model__common_user->getUserInfoByUsername($username)->toArray());
+		}
+
+		/**
+		 * 根据tag写入数据到session
+		 *
+		 * @param string $tag  用户信息，权限信息等等。。。
+		 * @param mixed  $info 对应的值
+		 *
+		 * @return mixed
+		 */
+		public function updateSession($tag , $info)
+		{
+			session(SESSION_TAG_ADMIN . $tag , $info);
+		}
+
+
+
 	}

@@ -201,7 +201,7 @@
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -213,7 +213,7 @@
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -351,7 +351,7 @@
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -363,7 +363,7 @@
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -501,7 +501,7 @@
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -513,7 +513,7 @@
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -650,7 +650,7 @@ list_rows   =         15
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -662,7 +662,7 @@ list_rows   =         15
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -797,7 +797,7 @@ list_rows   =         15
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -809,7 +809,7 @@ list_rows   =         15
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -944,7 +944,7 @@ list_rows   =         15
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -956,7 +956,7 @@ list_rows   =         15
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -1091,7 +1091,7 @@ list_rows   =         15
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -1103,7 +1103,7 @@ list_rows   =         15
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
@@ -1238,7 +1238,7 @@ list_rows   =         15
 						
 		<td  >
 		
-				<span  > 分组:
+				<span  class="name"  > 分组:
 
  </span>
 
@@ -1250,7 +1250,7 @@ list_rows   =         15
 
  
 
-<span  > 类型:
+<span  class="name"  > 类型:
 
  </span>
 
