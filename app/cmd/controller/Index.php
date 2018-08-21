@@ -13,6 +13,9 @@
 
 
 	use image\imageProcessor;
+	use PhpMyAdmin\SqlParser\Parser;
+	use PhpMyAdmin\SqlParser\Utils\Query;
+	use PHPSQLParser\PHPSQLParser;
 
 	class Index
 	{
@@ -24,7 +27,7 @@
 
 		public function rename()
 		{
-			$path = 'C:\Users\Administrator\Desktop\qq';
+			$path = 'C:\Users\Administrator\Desktop\emo';
 
 			loop2($path , function($path , $dirs_ , $relativePath) {
 				//echo '------' . $relativePath . "\r\n";
@@ -50,8 +53,8 @@
 				}
 				else
 				{
-					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . '/' . $pathinfo['basename'];
 				}
+					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath)  . md5(uniqid($pathinfo['basename'], 1)).'.'.$pathinfo['extension'];
 
 				$a = md5_file($path);
 				echo '++++++' . $relativePath . '  --  ' . $a . "\r\n";
@@ -114,4 +117,85 @@
 			rm_empty_dir($path);
 		}
 
+		public function sqlParser()
+		{
+			$query1 = "
+SELECT 
+    table1.customer_id,
+    city,
+    COUNT(order_id) 
+FROM
+    table1 
+    left JOIN table2 
+        ON table1.customer_id = table2.customer_id 
+WHERE table1.customer_id <> 'tx' 
+    AND table1.customer_id <> '9you' 
+GROUP BY customer_id 
+HAVING COUNT(order_id) > ANY 
+    (SELECT 
+        COUNT(order_id) 
+    FROM
+        table2 
+    WHERE customer_id = 'tx' 
+        OR customer_id = '9you' 
+    GROUP BY customer_id) ;
+";
+			$parser = new Parser($query1);
+
+			$flags = Query::getFlags($parser->statements[0]);
+			print_r($parser);;;
+			//print_r($flags);;;
+		}
+
+
+		public function sqlParser1()
+		{
+			$query1 = "
+SELECT 
+    table1.customer_id,
+    city,
+    COUNT(order_id) 
+FROM
+    table1 
+    left JOIN table2 
+        ON table1.customer_id = table2.customer_id 
+WHERE table1.customer_id <> 'tx' 
+    AND table1.customer_id <> '9you' 
+GROUP BY customer_id 
+HAVING COUNT(order_id) > ANY 
+    (SELECT 
+        COUNT(order_id) 
+    FROM
+        table2 
+    WHERE customer_id = 'tx' 
+        OR customer_id = '9you' 
+    GROUP BY customer_id) ;
+";
+			/*
+			$query1 = "
+INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`) 
+VALUES
+    (9, 31, '上海市', 0, 1) ;
+";
+
+		*/
+			$parser = new PHPSQLParser();
+			$parsed = $parser->parse($query1, true);
+			print_r($parsed);
+		}
+
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

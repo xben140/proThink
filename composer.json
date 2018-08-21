@@ -29,7 +29,9 @@
 		"swiftmailer/swiftmailer"     : "^6.0",
 		"yidas/phpspreadsheet-helper" : "^1.2",
 		"miljar/php-exif"             : "^0.6.4",
-		"kairos/phpqrcode": "^1.0"
+		"kairos/phpqrcode": "^1.0",
+		"phpmyadmin/sql-parser": "^4.2",
+		"greenlion/php-sql-parser": "^4.1"
 	},
 	"autoload"    : {
 		"psr-4" : {
