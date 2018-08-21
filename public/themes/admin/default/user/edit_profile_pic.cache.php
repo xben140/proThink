@@ -241,7 +241,7 @@
 						</div>
 						<div class="ibox-content" style="position: relative">
 							
-							<div  class="test-div"  id="div1"  > <img  src="http://local14.cc/upload/picture/20180821/0d03b253bfd2c77825c34a749b565adf.gif"  class="profile_pic_preview" />
+							<div  class="test-div"  id="div1"  > <img  src="/static/image/logo.gif"  class="profile_pic_preview" />
 
  </div>
 

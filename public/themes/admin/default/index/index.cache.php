@@ -69,7 +69,7 @@
 		<div class="sidebar-collapse">
 			
 			<div class="dropdown profile-element">
-				<div  class="profile-pic"><img alt="image" src="http://local14.cc/upload/picture/20180821/thumb_0d03b253bfd2c77825c34a749b565adf.gif" class='index_pop' data-href='/admin/User/editProfilePic' data-text='修改头像'/></div>
+				<div  class="profile-pic"><img alt="image" src="/static/image/logo.gif" class='index_pop' data-href='/admin/User/editProfilePic' data-text='修改头像'/></div>
 				
 								<div class="profile-item">
 				<span class="font-bold">账号 : </span><span >qq123456</span>

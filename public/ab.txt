@@ -1,0 +1,185 @@
+Array
+(
+    [INSERT] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => reserved
+                    [base_expr] => INTO
+                    [position] => 9
+                )
+
+            [1] => Array
+                (
+                    [expr_type] => table
+                    [table] => `ithink_area`
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => ithink_area
+                                )
+
+                        )
+
+                    [alias] => 
+                    [base_expr] => `ithink_area`
+                    [position] => 14
+                )
+
+            [2] => Array
+                (
+                    [expr_type] => column-list
+                    [base_expr] => (`id`, `code`, `name`, `pid`, `level`)
+                    [sub_tree] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => `id`
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => id
+                                                )
+
+                                        )
+
+                                    [position] => 29
+                                )
+
+                            [1] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => `code`
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => code
+                                                )
+
+                                        )
+
+                                    [position] => 35
+                                )
+
+                            [2] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => `name`
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => name
+                                                )
+
+                                        )
+
+                                    [position] => 43
+                                )
+
+                            [3] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => `pid`
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => pid
+                                                )
+
+                                        )
+
+                                    [position] => 51
+                                )
+
+                            [4] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => `level`
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => level
+                                                )
+
+                                        )
+
+                                    [position] => 58
+                                )
+
+                        )
+
+                    [position] => 28
+                )
+
+        )
+
+    [VALUES] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => record
+                    [base_expr] => (9, 31, '上海市', 0, 1)
+                    [data] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [expr_type] => const
+                                    [base_expr] => 9
+                                    [sub_tree] => 
+                                    [position] => 82
+                                )
+
+                            [1] => Array
+                                (
+                                    [expr_type] => const
+                                    [base_expr] => 31
+                                    [sub_tree] => 
+                                    [position] => 85
+                                )
+
+                            [2] => Array
+                                (
+                                    [expr_type] => const
+                                    [base_expr] => '上海市'
+                                    [sub_tree] => 
+                                    [position] => 89
+                                )
+
+                            [3] => Array
+                                (
+                                    [expr_type] => const
+                                    [base_expr] => 0
+                                    [sub_tree] => 
+                                    [position] => 102
+                                )
+
+                            [4] => Array
+                                (
+                                    [expr_type] => const
+                                    [base_expr] => 1
+                                    [sub_tree] => 
+                                    [position] => 105
+                                )
+
+                        )
+
+                    [delim] => 
+                    [position] => 81
+                )
+
+        )
+
+)

@@ -1,0 +1,526 @@
+Array
+(
+    [SELECT] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => colref
+                    [alias] => 
+                    [base_expr] => table1.customer_id
+                    [no_quotes] => Array
+                        (
+                            [delim] => .
+                            [parts] => Array
+                                (
+                                    [0] => table1
+                                    [1] => customer_id
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [delim] => ,
+                    [position] => 15
+                )
+
+            [1] => Array
+                (
+                    [expr_type] => colref
+                    [alias] => 
+                    [base_expr] => city
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => city
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [delim] => ,
+                    [position] => 40
+                )
+
+            [2] => Array
+                (
+                    [expr_type] => aggregate_function
+                    [alias] => 
+                    [base_expr] => COUNT
+                    [sub_tree] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => order_id
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => order_id
+                                                )
+
+                                        )
+
+                                    [sub_tree] => 
+                                    [position] => 57
+                                )
+
+                        )
+
+                    [delim] => 
+                    [position] => 51
+                )
+
+        )
+
+    [FROM] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => table
+                    [table] => table1
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => table1
+                                )
+
+                        )
+
+                    [alias] => 
+                    [hints] => 
+                    [join_type] => JOIN
+                    [ref_type] => 
+                    [ref_clause] => 
+                    [base_expr] => table1
+                    [sub_tree] => 
+                    [position] => 79
+                )
+
+            [1] => Array
+                (
+                    [expr_type] => table
+                    [table] => table2
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => table2
+                                )
+
+                        )
+
+                    [alias] => 
+                    [hints] => 
+                    [join_type] => LEFT
+                    [ref_type] => ON
+                    [ref_clause] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => table1.customer_id
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => .
+                                            [parts] => Array
+                                                (
+                                                    [0] => table1
+                                                    [1] => customer_id
+                                                )
+
+                                        )
+
+                                    [sub_tree] => 
+                                    [position] => 122
+                                )
+
+                            [1] => Array
+                                (
+                                    [expr_type] => operator
+                                    [base_expr] => =
+                                    [sub_tree] => 
+                                    [position] => 141
+                                )
+
+                            [2] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => table2.customer_id
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => .
+                                            [parts] => Array
+                                                (
+                                                    [0] => table2
+                                                    [1] => customer_id
+                                                )
+
+                                        )
+
+                                    [sub_tree] => 
+                                    [position] => 143
+                                )
+
+                        )
+
+                    [base_expr] => table2 
+        ON table1.customer_id = table2.customer_id
+                    [sub_tree] => 
+                    [position] => 102
+                )
+
+        )
+
+    [WHERE] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => colref
+                    [base_expr] => table1.customer_id
+                    [no_quotes] => Array
+                        (
+                            [delim] => .
+                            [parts] => Array
+                                (
+                                    [0] => table1
+                                    [1] => customer_id
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [position] => 170
+                )
+
+            [1] => Array
+                (
+                    [expr_type] => operator
+                    [base_expr] => <>
+                    [sub_tree] => 
+                    [position] => 189
+                )
+
+            [2] => Array
+                (
+                    [expr_type] => const
+                    [base_expr] => 'tx'
+                    [sub_tree] => 
+                    [position] => 192
+                )
+
+            [3] => Array
+                (
+                    [expr_type] => operator
+                    [base_expr] => AND
+                    [sub_tree] => 
+                    [position] => 203
+                )
+
+            [4] => Array
+                (
+                    [expr_type] => colref
+                    [base_expr] => table1.customer_id
+                    [no_quotes] => Array
+                        (
+                            [delim] => .
+                            [parts] => Array
+                                (
+                                    [0] => table1
+                                    [1] => customer_id
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [position] => 207
+                )
+
+            [5] => Array
+                (
+                    [expr_type] => operator
+                    [base_expr] => <>
+                    [sub_tree] => 
+                    [position] => 226
+                )
+
+            [6] => Array
+                (
+                    [expr_type] => const
+                    [base_expr] => '9you'
+                    [sub_tree] => 
+                    [position] => 229
+                )
+
+        )
+
+    [GROUP] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => colref
+                    [base_expr] => customer_id
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => customer_id
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [position] => 247
+                )
+
+        )
+
+    [HAVING] => Array
+        (
+            [0] => Array
+                (
+                    [expr_type] => aggregate_function
+                    [base_expr] => COUNT
+                    [sub_tree] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [expr_type] => colref
+                                    [base_expr] => order_id
+                                    [no_quotes] => Array
+                                        (
+                                            [delim] => 
+                                            [parts] => Array
+                                                (
+                                                    [0] => order_id
+                                                )
+
+                                        )
+
+                                    [sub_tree] => 
+                                    [position] => 274
+                                )
+
+                        )
+
+                    [position] => 268
+                )
+
+            [1] => Array
+                (
+                    [expr_type] => operator
+                    [base_expr] => >
+                    [sub_tree] => 
+                    [position] => 284
+                )
+
+            [2] => Array
+                (
+                    [expr_type] => colref
+                    [base_expr] => ANY
+                    [no_quotes] => Array
+                        (
+                            [delim] => 
+                            [parts] => Array
+                                (
+                                    [0] => ANY
+                                )
+
+                        )
+
+                    [sub_tree] => 
+                    [position] => 286
+                )
+
+            [3] => Array
+                (
+                    [expr_type] => subquery
+                    [base_expr] => (SELECT 
+        COUNT(order_id) 
+    FROM
+        table2 
+    WHERE customer_id = 'tx' 
+        OR customer_id = '9you' 
+    GROUP BY customer_id)
+                    [sub_tree] => Array
+                        (
+                            [SELECT] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [expr_type] => aggregate_function
+                                            [alias] => 
+                                            [base_expr] => COUNT
+                                            [sub_tree] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [expr_type] => colref
+                                                            [base_expr] => order_id
+                                                            [no_quotes] => Array
+                                                                (
+                                                                    [delim] => 
+                                                                    [parts] => Array
+                                                                        (
+                                                                            [0] => order_id
+                                                                        )
+
+                                                                )
+
+                                                            [sub_tree] => 
+                                                            [position] => 320
+                                                        )
+
+                                                )
+
+                                            [delim] => 
+                                            [position] => 314
+                                        )
+
+                                )
+
+                            [FROM] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [expr_type] => table
+                                            [table] => table2
+                                            [no_quotes] => Array
+                                                (
+                                                    [delim] => 
+                                                    [parts] => Array
+                                                        (
+                                                            [0] => table2
+                                                        )
+
+                                                )
+
+                                            [alias] => 
+                                            [hints] => 
+                                            [join_type] => JOIN
+                                            [ref_type] => 
+                                            [ref_clause] => 
+                                            [base_expr] => table2
+                                            [sub_tree] => 
+                                            [position] => 350
+                                        )
+
+                                )
+
+                            [WHERE] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [expr_type] => colref
+                                            [base_expr] => customer_id
+                                            [no_quotes] => Array
+                                                (
+                                                    [delim] => 
+                                                    [parts] => Array
+                                                        (
+                                                            [0] => customer_id
+                                                        )
+
+                                                )
+
+                                            [sub_tree] => 
+                                            [position] => 369
+                                        )
+
+                                    [1] => Array
+                                        (
+                                            [expr_type] => operator
+                                            [base_expr] => =
+                                            [sub_tree] => 
+                                            [position] => 381
+                                        )
+
+                                    [2] => Array
+                                        (
+                                            [expr_type] => const
+                                            [base_expr] => 'tx'
+                                            [sub_tree] => 
+                                            [position] => 383
+                                        )
+
+                                    [3] => Array
+                                        (
+                                            [expr_type] => operator
+                                            [base_expr] => OR
+                                            [sub_tree] => 
+                                            [position] => 398
+                                        )
+
+                                    [4] => Array
+                                        (
+                                            [expr_type] => colref
+                                            [base_expr] => customer_id
+                                            [no_quotes] => Array
+                                                (
+                                                    [delim] => 
+                                                    [parts] => Array
+                                                        (
+                                                            [0] => customer_id
+                                                        )
+
+                                                )
+
+                                            [sub_tree] => 
+                                            [position] => 401
+                                        )
+
+                                    [5] => Array
+                                        (
+                                            [expr_type] => operator
+                                            [base_expr] => =
+                                            [sub_tree] => 
+                                            [position] => 413
+                                        )
+
+                                    [6] => Array
+                                        (
+                                            [expr_type] => const
+                                            [base_expr] => '9you'
+                                            [sub_tree] => 
+                                            [position] => 415
+                                        )
+
+                                )
+
+                            [GROUP] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [expr_type] => colref
+                                            [base_expr] => customer_id
+                                            [no_quotes] => Array
+                                                (
+                                                    [delim] => 
+                                                    [parts] => Array
+                                                        (
+                                                            [0] => customer_id
+                                                        )
+
+                                                )
+
+                                            [sub_tree] => 
+                                            [position] => 437
+                                        )
+
+                                )
+
+                        )
+
+                    [position] => 296
+                )
+
+        )
+
+)
