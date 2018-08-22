@@ -130,6 +130,16 @@
 							
 							<div class="row">
 								<div class="col-sm-12 m-b-xs">
+												<button type="button" class="btn btn-success  search-dom-btn-1">筛选</button>
+<button type="button" class="btn btn-info  se-all">全选</button>
+<button type="button" class="btn btn-info  se-rev">反选</button>
+<button type="button" class="btn btn-danger  btn-add">添加数据</button>
+<button type="button" class="btn btn-danger  multi-op multi-op-del">批量删除</button>
+<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable">批量启用</button>
+<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-disable">批量禁用</button>
+
+									
+									<!--
 									<button type="button" class="btn btn-success  search-dom-btn-1"> 筛选</button>
 									<button type="button" class="btn btn-info  se-all"> 全选</button>
 									<button type="button" class="btn btn-info  se-rev"> 反选</button>
@@ -137,6 +147,7 @@
 									<button type="button" class="btn btn-danger  multi-op multi-op-del"> 批量删除</button>
 									<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable"> 批量启用</button>
 									<button type="button" class="btn btn-warning  multi-op multi-op-toggle-status-disable"> 批量禁用</button>
+								-->
 								</div>
 							</div>
 

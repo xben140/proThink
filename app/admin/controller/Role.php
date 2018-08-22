@@ -190,6 +190,38 @@
 							//$data = $this->logic->dataList($this->param);
 							$data = $this->logic->dataListWithPagination($this->param);
 
+
+							$_this->setMenu([
+								[
+									'class' => 'btn-success  search-dom-btn-1',
+									'field' => '筛选',
+								],
+								[
+									'class' => 'btn-info  se-all',
+									'field' => '全选',
+								],
+								[
+									'class' => 'btn-info  se-rev',
+									'field' => '反选',
+								],
+								[
+									'class' => 'btn-danger  btn-add',
+									'field' => '添加数据',
+								],
+								[
+									'class' => 'btn-danger  multi-op multi-op-del',
+									'field' => '批量删除',
+								],
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
+									'field' => '批量启用',
+								],
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
+									'field' => '批量禁用',
+								],
+							]);
+
 							/**
 							 * 设置表格头
 							 */

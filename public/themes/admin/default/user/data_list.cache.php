@@ -130,6 +130,16 @@
 							
 							<div class="row">
 								<div class="col-sm-12 m-b-xs">
+												<button type="button" class="btn btn-success  search-dom-btn-1">筛选</button>
+<button type="button" class="btn btn-info  se-all">全选</button>
+<button type="button" class="btn btn-info  se-rev">反选</button>
+<button type="button" class="btn btn-danger  btn-add">添加数据</button>
+<button type="button" class="btn btn-danger  multi-op multi-op-del">批量删除</button>
+<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable">批量启用</button>
+<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-disable">批量禁用</button>
+
+									
+									<!--
 									<button type="button" class="btn btn-success  search-dom-btn-1"> 筛选</button>
 									<button type="button" class="btn btn-info  se-all"> 全选</button>
 									<button type="button" class="btn btn-info  se-rev"> 反选</button>
@@ -137,6 +147,7 @@
 									<button type="button" class="btn btn-danger  multi-op multi-op-del"> 批量删除</button>
 									<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable"> 批量启用</button>
 									<button type="button" class="btn btn-warning  multi-op multi-op-toggle-status-disable"> 批量禁用</button>
+								-->
 								</div>
 							</div>
 
@@ -175,7 +186,7 @@
 						
 		<td  >
 		
-				<span  class=" name"  > <img  src="http://local14.cc/upload/picture/20180821/thumb_0d03b253bfd2c77825c34a749b565adf.gif"  style="height: 65px;" />
+				<span  class=" name"  > <img  src="/static/image/logo.gif"  style="height: 65px;" />
 
  </span>
 
@@ -265,7 +276,7 @@
 
  </span>
 
-<span  class=" name"  > 2018-08-21 14:29:40
+<span  class=" name"  > 2018-08-22 11:46:45
 
  </span>
 
@@ -303,7 +314,7 @@
 						
 		<td  >
 		
-				<span  class=" name"  > 30
+				<span  class=" name"  > 31
 
  </span>
 

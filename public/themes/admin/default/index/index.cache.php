@@ -76,11 +76,11 @@
 			</div>			<div class="profile-item">
 				<span class="font-bold">名字 : </span><span >hello</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆次数 : </span><span >30</span>
+				<span class="font-bold">登陆次数 : </span><span >31</span>
 			</div>			<div class="profile-item">
 				<span class="font-bold">登陆IP : </span><span >127.0.0.1</span>
 			</div>			<div class="profile-item">
-				<span class="font-bold">登陆时间 : </span><span >2018-08-21</span>
+				<span class="font-bold">登陆时间 : </span><span >2018-08-22</span>
 			</div>
 			
 				<!--

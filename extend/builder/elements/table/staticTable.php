@@ -168,6 +168,29 @@ js;
 
 
 		/**
+		 * 设置功能按钮
+		 *
+		 * @param array $menu
+		 */
+		function setMenu($menu = [])
+		{
+			$tmp = '<button type="button" class="btn __CLASS__">__FIELD__</button>'."\r\n";
+			$str = '';
+
+			foreach ($menu as $k => $v)
+			{
+				$replacement['__CLASS__'] = $v['class'];
+				$replacement['__FIELD__'] = $v['field'];
+
+				$str .= strtr($tmp , $replacement);
+			}
+
+			$this->replaceTag(static::makeNodeName('menu') , $str);
+		}
+
+
+
+		/**
 		 *--------------------------------------------------------------------------
 		 */
 
@@ -210,6 +233,9 @@ js;
 							
 							<div class="row">
 								<div class="col-sm-12 m-b-xs">
+												<!-- ~~~menu~~~ -->
+									
+									<!--
 									<button type="button" class="btn btn-success  search-dom-btn-1"> 筛选</button>
 									<button type="button" class="btn btn-info  se-all"> 全选</button>
 									<button type="button" class="btn btn-info  se-rev"> 反选</button>
@@ -217,6 +243,7 @@ js;
 									<button type="button" class="btn btn-danger  multi-op multi-op-del"> 批量删除</button>
 									<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable"> 批量启用</button>
 									<button type="button" class="btn btn-warning  multi-op multi-op-toggle-status-disable"> 批量禁用</button>
+								-->
 								</div>
 							</div>
 
