@@ -89,6 +89,11 @@ table {
 	font-weight : bold;
 }
 
+.status-box-filename{
+	color       : #df43b2;
+	font-weight : bold;
+}
+
 .status-box-progess {
 	color       : #f00;
 	font-weight : bold;

@@ -44,12 +44,14 @@
 				//return sha1(uniqid('', 1));
 			})//最终文件夹要保存的位置
 			->moveTo($toDir);
+			//file_put_contents('./ddd.txt' , json_encode($result));
 
 		} catch (\think\exception\ErrorException $exception)
 		{
 			$result = [
-				'error' => $exception->getMessage() ,
-				'sign'  => 0 ,
+				'error'       => $exception->getMessage() ,
+				'sign'        => 0 ,
+				'is_finished' => 0 ,
 			];
 		}
 
@@ -65,7 +67,7 @@
 	/**
 	 * 上传图片专用
 	 *
-	 * @param               $fieldName 图片字段
+	 * @param string        $fieldName 图片字段
 	 * @param callable|null $callback
 	 * @param array         $thumbSize 数组，三个参数，为$image->thumb 的三个参数
 	 *
@@ -138,6 +140,12 @@
 	}
 
 
+	function downloadFile($file , $saveName = '' , $buffer = 4 * 1024)
+	{
+		$downloader = new \download\downloader($file , $saveName);
+		$downloader->setBuffer($buffer)->send();
+	}
+
 	/**
 	 *导出excel信息
 	 *
@@ -153,7 +161,7 @@
 	{
 		//https://phpspreadsheet.readthedocs.io/en/develop/topics/accessing-cells/
 		$spreadsheet = new Spreadsheet();
-		//$sheet = $spreadsheet->getActiveSheet();
+
 		$data = [];
 
 		if(is_callable($callback))
@@ -171,9 +179,6 @@
 			$data = $list;
 		}
 
-		//$sheet->setCellValueByColumnAndRow(1, 5, 'PhpSpreadsheet');
-
-
 		/*
 				$data = [
 					[NULL, 2010, 2011, 2012],
@@ -181,13 +186,17 @@
 					['Q2',   56,   73,   86],
 					['Q3',   52,   61,   69],
 					['Q4',   30,   32,    0],
-				];*/
+				];
+		*/
 
 		$spreadsheet->getActiveSheet()->fromArray($data ,  // The data to set
-				null ,        // Array values with this value will not be set
-				'A1'         // Top left coordinate of the worksheet range where we want to set these values (default is A1)
-			);
+			null ,        // Array values with this value will not be set
+			'A1'         // Top left coordinate of the worksheet range where we want to set these values (default is A1)
+		);
 
+
+		//$sheet = $spreadsheet->getActiveSheet();
+		//$sheet->setCellValueByColumnAndRow(1, 5, 'PhpSpreadsheet');
 
 		/*
 
@@ -324,12 +333,10 @@
 			$res = $mailer->send($message);
 
 			return $res;
-		} catch (Swift_ConnectionException $e)
-		{
-			$err = $e->getMessage();
 		} catch (\Exception $e)
 		{
 			$err = $e->getMessage();
+			return false;
 		}
 	}
 
@@ -347,14 +354,6 @@
 		//http://phpqrcode.sourceforge.net/examples/index.php?example=001
 		ob_end_flush();
 		QRcode::png($data , $path , $ecc , $size , 2);
-	}
-
-	/**
-	 *生成条形码
-	 */
-	function generateBrcode()
-	{
-
 	}
 
 

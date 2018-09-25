@@ -16,7 +16,7 @@
 		}
 	],
 	"require"     : {
-		"php"                         : ">=5.4.0",
+		"php"                         : ">=7.0.0",
 		"topthink/framework"          : "5.0.*",
 		"topthink/think-captcha"      : "^1.0",
 		"topthink/think-cache"        : "^1.0",
@@ -29,9 +29,11 @@
 		"swiftmailer/swiftmailer"     : "^6.0",
 		"yidas/phpspreadsheet-helper" : "^1.2",
 		"miljar/php-exif"             : "^0.6.4",
-		"kairos/phpqrcode": "^1.0",
-		"phpmyadmin/sql-parser": "^4.2",
-		"greenlion/php-sql-parser": "^4.1"
+		"kairos/phpqrcode"            : "^1.0",
+		"guzzlehttp/guzzle"           : ">=3.0",
+		"electrolinux/phpquery"       : "^0.9.6",
+		"phpmyadmin/sql-parser"       : "^4.2",
+		"greenlion/php-sql-parser"    : "^4.1"
 	},
 	"autoload"    : {
 		"psr-4" : {

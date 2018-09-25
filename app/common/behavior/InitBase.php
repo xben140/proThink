@@ -11,6 +11,7 @@
 
 	namespace app\common\behavior;
 
+	use auth\Auth;
 	use think\Loader;
 
 	/**
@@ -64,6 +65,10 @@
 
 			// 初始化资源数据表常量
 			$this->initResource();
+
+
+			// session键常量
+			$this->sessionConst();
 		}
 
 		/**
@@ -112,6 +117,12 @@
 			define('DATA_DELETE' , -1);
 			define('DATA_SUCCESS' , 1);
 			define('DATA_ERROR' , 0);
+
+			//文件上传类标识
+			define('SINGLE_FILE' , 0);
+			define('MULTI_FILE' , 1);
+			define('SINGLE_IMG' , 2);
+			define('MULTI_IMG' , 3);
 		}
 
 		/**
@@ -137,7 +148,7 @@
 			define('SYS_DRIVER_DIR_NAME' , 'driver');
 			define('SYS_COMMON_DIR_NAME' , 'common');
 			define('SYS_STATIC_DIR_NAME' , 'static');
-			define('SYS_VERSION' , '1.3.0');
+			define('SYS_VERSION' , '1.0.0');
 			define('SYS_ADMINISTRATOR_ID' , 1);
 			define('SYS_DS_PROS' , '/');
 			define('SYS_DS_CONS' , '\\');
@@ -190,8 +201,6 @@
 				RESOURCE_INDEX_MENU    => RESOURCE_MENU ,
 				RESOURCE_INDEX_ELEMENT => RESOURCE_ELEMENT ,
 			]);
-
-
 		}
 
 		/**
@@ -204,36 +213,36 @@
 		}
 
 		/**
-		 *
+		 * 初始化session常量标识
+		 */
+		private function sessionConst()
+		{
+			define('SESSOIN_TAG_USER' , 'user');
+			define('SESSOIN_TAG_ROLE' , 'roles');
+			define('SESSOIN_TAG_PRIVILEGES' , 'privileges');
+
+			define('SESSOIN_TAG_ROLE_NAME' , 'rolesName');
+			define('SESSOIN_TAG_ROLE_IDS' , 'rolesId');
+		}
+
+
+		/**
 		 * 初始化动态配置信息
 		 */
 		private function initConfig()
 		{
-			$model = model('Common/Config' , 'logic');
-			$configArray = [];
-			$configList = autoCache('config_list' , createClosureClass($model , 'getAvailableConfig'));
-
-			foreach ($configList as $info) $configArray[$info['field']] = $info['value'];
-
-			config($configArray);
-
-			//$this->initTmconfig();
+			$configList = autoCache('config_list' , Auth::createClosure([
+				model('Common/Config' , 'logic') ,
+				'getAvailableConfig' ,
+			]));
+			//print_r($configList);exit;;
+			array_map(function($info) {
+				($info['is_const']) ? defined($info['field']) or define($info['field'] , $info['value']) : config($info['field'] , $info['value']);
+				//return true;
+			} , $configList);
 		}
 
-		/**
-		 * 初始化配置信息
-		 */
-		private function initTmconfig()
-		{
 
-			$api_key = config('api_key');
-			$jwt_key = config('jwt_key');
-			$static_domain = config('static_domain');
-
-			define('API_KEY' , empty($api_key) ? 'OneBase' : $api_key);
-			define('JWT_KEY' , empty($jwt_key) ? 'OneBase' : $jwt_key);
-			define('STATIC_DOMAIN' , empty($static_domain) ? null : $static_domain);
-		}
 
 		/**
 		 * 注册命名空间

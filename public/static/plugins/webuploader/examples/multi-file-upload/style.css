@@ -124,22 +124,51 @@ table {
 }
 
 
-
-
-
-
-
-
-
 #uploader .filelist{list-style:none;margin:0;padding:0}
 #uploader .filelist:after{content:'';display:block;width:0;height:0;overflow:hidden;clear:both}
 #uploader .filelist li{width:95%;height:30px;line-height:30px;text-align:left;position:relative;display:inline;float:left;font-size:14px;margin:2px 0 10px 8px;overflow:hidden;border:1px solid #CECECE;border-radius:5px;color: #f10000;padding-left:10px;}
+
+
 #uploader .filelist li .title{width:90%;text-overflow:ellipsis;display:block;float:left;height: 27px;line-height: 23px;}
 #uploader .filelist li .del{display:block;float:right;height: 20px;line-height: 30px;border-radius:0;/* z-index: 99999999999; */color: #000;/* font-weight:  bold; */font-size: 16px;}
-#uploader .filelist li .success{display :block;position :absolute;left :auto;right :0;height : 30px;width :auto;color :#fff;z-index :200;background : #ec3e35;transition :background-color .3s ease;padding :0 10px;text-align :center;font-size :14px;}
-#uploader .filelist li .failure{display:block;position:absolute;left:auto;right:0;height:28px;width:auto;color:#fff;z-index:200;background:#c81506;text-align:center;font-size:18px}
-#uploader .filelist li .error{display :block;position :absolute;left :auto;right :0;height :28px;width :auto;color :#fff;z-index :200;background : #7d65c8;text-align :center;font-size :18px}
-#uploader .filelist li .uploaded{display:block;position:absolute;left:auto;right:0;height:28px;width:auto;color:#fff;z-index:200;background:#3fe0a6;text-align:center;padding:0 14px}
+
+#uploader .filelist li .upload-status {
+	display    : block;
+	position   : absolute;
+	left       : auto;
+	right      : 0;
+	height     : 30px;
+	width      : auto;
+	color      : #fff;
+	z-index    : 200;
+	transition : background-color .3s ease;
+	padding    : 0 10px;
+	text-align : center;
+	font-size  : 14px;
+}
+
+#uploader .filelist li .upload-status-success {
+	background : #ec3e35;
+}
+
+#uploader .filelist li .upload-status-failure {
+	background : #c81506;
+}
+
+#uploader .filelist li .upload-status-error {
+	background : #7d65c8;
+}
+
+#uploader .filelist li .upload-status-uploaded {
+	background : #3fe0a6;
+}
+
+
+
+
+
+
+
 #uploader .filelist li p.log{position:relative;top:-45px}
 #uploader .filelist li p.title{position:absolute;top:0;left:0;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;top:5px;text-indent:5px;text-align:left}
 #uploader .filelist li p.progress{position:absolute;width:100%;bottom:0;left:0;height: 5px;/* opacity: 0.5; */overflow:hidden;z-index: 0;margin:0;border-radius:0;background: #fff;-webkit-box-shadow:0 0 0;}
@@ -153,9 +182,8 @@ table {
 @keyframes progressmove{0%{background-position:0 0}
 	100%{background-position:17px 0}
 }
-.btn-big{padding:6px 36px}
-.btn-info{background-color:#2879e2;border-color:#2879e2;background-image:none;color:#FFF;transition:background-color .3s ease;margin-right:15px}
-.btn-info:hover{background-color:#2f89fc}
+
+
 #uploader .filelist li p.imgWrap{position:relative;z-index:2;line-height:110px;vertical-align:middle;overflow:hidden;width:110px;height:110px;-webkit-transform-origin:50% 50%;-moz-transform-origin:50% 50%;-o-transform-origin:50% 50%;-ms-transform-origin:50% 50%;transform-origin:50% 50%;-webit-transition:.2s ease-out;-moz-transition:.2s ease-out;-o-transition:.2s ease-out;-ms-transition:.2s ease-out;transition:.2s ease-out}
 #uploader .filelist li img{width:100%}
 #uploader .filelist li p.error{background:#f43838;color:#fff;position:absolute;bottom:0;left:0;height:28px;line-height:28px;width:100%;z-index:100}

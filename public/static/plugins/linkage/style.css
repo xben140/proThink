@@ -1,0 +1,48 @@
+.linkage-panel {
+	border   : 1px solid #1ab394;
+	position : absolute;
+	display  : none;
+	z-index  : 999;
+	/* left: 0px; */
+	/* background : #0f1; */
+	/* height     : 200px; */
+}
+
+.linkage-box {
+	width      : 160px;
+	height     : 300px;
+	float      : left;
+	overflow   : auto;
+	background : #eee;
+}
+
+.linkage-box ul {
+	list-style-type : none;
+	width           : 100%;
+	background      : #ffc4d8;
+	padding         : 0;
+	margin          : 0px;
+}
+
+.linkage-box ul li {
+	border-bottom : 1px solid #ccc;
+	border-left   : 1px solid #ccc;
+	background    : #fff;
+	height        : 36px;
+	line-height   : 36px;
+	cursor        : pointer;
+	padding       : 0px 0px 0px 8px;
+	overflow      : hidden;
+}
+
+.linkage-box ul li:hover {
+	color      : #000;
+	background : rgb(205, 232, 231);
+
+}
+
+.linkage-box ul li.active {
+	color      : #fff;
+	background : #009f95;
+}
+

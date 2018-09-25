@@ -73,6 +73,12 @@
 		 * */
 
 		/**
+		 * 是否隐藏dom
+		 * @var string
+		 */
+		public $isDisplay = true;
+
+		/**
 		 * 自定义的js，引用此模板必须的js，多次引用只加载一次
 		 * @var string
 		 */
@@ -119,7 +125,7 @@
 		 *
 		 *
 		 *
-		 * 属性
+		 * 方法
 		 *
 		 *
 		 *
@@ -202,7 +208,19 @@
 			$this->registerResource();
 			$this->appends($this->defaultTags, $doms);
 
-			return $this->getContents();
+			return $this->isDisplay ? $this->getContents() : '';
+		}
+
+
+
+		/**
+		 * 设置是否显示元素
+		 *
+		 * @param  $isDisplay
+		 */
+		public function setIsDisplay($isDisplay)
+		{
+			$this->isDisplay  = !!$isDisplay;
 		}
 
 

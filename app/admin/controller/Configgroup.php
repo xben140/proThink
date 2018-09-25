@@ -189,42 +189,43 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::rowButton([[
+							[
+								'class' => 'btn-success  search-dom-btn-1',
+								'field' => '筛选',
+							],
+							[
+								'class' => 'btn-info  se-all',
+								'field' => '全选',
+							],
+							[
+								'class' => 'btn-info  se-rev',
+								'field' => '反选',
+							],
+							[
+								'class' => 'btn-danger  btn-add',
+								'field' => '添加数据',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
+							],
+							[
+								'class' => 'btn-danger  multi-op multi-op-del',
+								'field' => '批量删除',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
+								'field' => '批量启用',
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
+								'field' => '批量禁用',
+							],
+						]]),
+
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							//$data = $this->logic->dataList($this->param);
 							$data = $this->logic->dataListWithPagination($this->param);
-
-
-							$_this->setMenu([
-								[
-									'class' => 'btn-success  search-dom-btn-1',
-									'field' => '筛选',
-								],
-								[
-									'class' => 'btn-info  se-all',
-									'field' => '全选',
-								],
-								[
-									'class' => 'btn-info  se-rev',
-									'field' => '反选',
-								],
-								[
-									'class' => 'btn-danger  btn-add',
-									'field' => '添加数据',
-								],
-								[
-									'class' => 'btn-danger  multi-op multi-op-del',
-									'field' => '批量删除',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-									'field' => '批量启用',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-									'field' => '批量禁用',
-								],
-							]);
 
 							/**
 							 * 设置表格头
@@ -325,22 +326,13 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
+
 								//状态
+								$k = static::$statusMap;
+								array_pop($k);
+								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
 								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio([
-										[
-											'value' => '-1' ,
-											'field' => '全部' ,
-										] ,
-										[
-											'value' => '0' ,
-											'field' => static::$statusMap[0] ,
-										] ,
-										[
-											'value' => '1' ,
-											'field' => static::$statusMap[1] ,
-										] ,
-									] , 'status' , '状态' , input('status' , '-1')) ,
+									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
 
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
@@ -428,10 +420,14 @@
 
 									//操作
 									integrationTags::td([
+
+										/*
 										integrationTags::tdButton([
 											'attr'  => ' btn-success btn-edit' ,
 											'value' => '编辑' ,
 										]) ,
+										*/
+
 										integrationTags::tdButton([
 											'attr'  => ' btn-danger btn-delete' ,
 											'value' => '删除' ,
@@ -454,16 +450,6 @@
 			return $this->showPage();
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \Exception
-		 */
-		public function setField()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->updateField($this->param));
-		}
 
 		/**
 		 * @throws \Exception
@@ -474,16 +460,17 @@
 
 			return $this->jump($this->logic->delete($this->param , [
 				[
-					function($ids) {
-						//删除用户角色关联记录
-						return db('user_role')->where([
-								'user_id' => [
-									'in' ,
-									$ids ,
-								] ,
-							])->delete() !== false;
+					function($param) {
+						//当前组下还有配置就不许删除
+						return !db('config')->where([
+							'group_id' => [
+								'in' ,
+								$param['ids'] ,
+							] ,
+						])->find();
 					} ,
-					[$this->param['ids']] ,
+					[] ,
+					'当前组下还有配置，不能删除',
 				] ,
 			]));
 		}

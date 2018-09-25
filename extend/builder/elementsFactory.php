@@ -2,7 +2,6 @@
 
 	namespace builder;
 
-	use think\App;
 
 	/**
 	 * Class elementsFactory
@@ -47,15 +46,14 @@
 		/**
 		 * 静态方法转接
 		 *
-		 * @param $name
+		 * @param $className
 		 * @param $arguments
 		 *
 		 * @return mixed
-		 * @throws \ReflectionException
 		 */
-		public static function __callStatic($name, $arguments = [])
+		public static function __callStatic($className, $arguments = [])
 		{
-			return App::invokeClass(self::$elementsClassMap[$name], $arguments);
+			return self::build($className , $arguments);
 		}
 
 		/**
@@ -65,11 +63,10 @@
 		 * @param array $arguments
 		 *
 		 * @return mixed
-		 * @throws \ReflectionException
 		 */
 		public static function build($className, $arguments = [])
 		{
-			return App::invokeClass(self::$elementsClassMap[$className], $arguments);
+			return new self::$elementsClassMap[$className](... $arguments);
 		}
 
 

@@ -60,20 +60,6 @@ Css;
 		 */
 
 
-		function isEnableClosed($is)
-		{
-			if($is)
-			{
-				$this->replaceTag(static::makeNodeName('isEnableClosed') , <<<tag
-								<a class="close-link">
-									<i class="fa fa-times"></i>
-								</a>
-tag
-				);
-			}
-		}
-
-
 		/**
 		 *--------------------------------------------------------------------------
 		 */
@@ -104,55 +90,40 @@ tag
 			 */
 			$contents = <<<'CONTENTS'
 			
-<div class="col-sm-<!-- ~~~width~~~ -->">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5><!-- ~~~main_title~~~ -->
-								<small><!-- ~~~sub_title~~~ --></small>
-							</h5>
-							<div class="ibox-tools">
-							
-							
-								<a class="collapse-link">
-									<i class="fa fa-chevron-up"></i>
-								</a>
-								
-								
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-wrench"></i>
-								</a>
-								
-								
-								<ul class="dropdown-menu dropdown-user">
-								
-							<!--	
-									<li>
-										<a href="graph_morris.html#">选项1</a>
-									</li>
-									<li>
-										<a href="graph_morris.html#">选项2</a>
-									</li>
-									
-							-->
-									<!-- ~~~option~~~ -->
-								</ul>
-								
-								<!-- ~~~isEnableClosed~~~ -->
-								<!--	
-									<a class="close-link">
-										<i class="fa fa-times"></i>
-									</a>
-								-->
-								
-							</div>
-						</div>
-						<div class="ibox-content" style="position: relative">
-							
-							<!-- _____DEFAULT_CONTENTS_____ -->
-							
-						</div>
-					</div>
-				</div>
+			
+<div class="col-sm-<!-- ~~~width~~~ --> ui-sortable">
+	<div class="ibox float-e-margins">
+		<div class="ibox-title">
+			<h5><!-- ~~~main_title~~~ -->
+				<small><!-- ~~~sub_title~~~ --></small>
+			</h5>
+			<div class="ibox-tools">
+				<!--<label class="label label-primary">可拖动</label>-->
+				<a class="collapse-link">
+					<i class="fa fa-chevron-up"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user">
+						<!-- ~~~option~~~ -->
+					<!--	
+					<li>
+						<a href="graph_morris.html#">选项1</a>
+					</li>
+					<li>
+						<a href="graph_morris.html#">选项2</a>
+					</li>
+					-->
+				</ul>
+				
+			</div>
+		</div>
+		<div class="ibox-content" style="position: relative">
+			
+			<!-- _____DEFAULT_CONTENTS_____ -->
+			
+		</div>
+	</div>
+</div>
+
 
 CONTENTS;
 			/**

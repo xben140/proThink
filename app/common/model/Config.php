@@ -18,6 +18,14 @@
 				'value' => '3' ,
 				'field' => 'switch' ,
 			] ,
+			[
+				'value' => '4' ,
+				'field' => 'option' ,
+			] ,
+			[
+				'value' => '5' ,
+				'field' => 'image' ,
+			] ,
 		];
 
 		/**
@@ -38,6 +46,7 @@
 		//新增时自动验证
 		protected $insert = [
 			'status' => 1 ,
+			'is_const' => 0 ,
 		];
 
 		protected $update = [
@@ -86,6 +95,7 @@
 					'LEFT' ,
 				] ,
 			];
+
 			$condition = [
 				'where' => $where ,
 				'join'  => $join ,
@@ -95,6 +105,35 @@
 			$data = $this->selectData($condition);
 
 			return $data;
+		}
+
+		/**
+		 *  获取所有类型为options的key
+		 */
+		public function getOptionsKey()
+		{
+			$where = [
+				self::makeSelfAliasField('type') => [
+					'=' ,
+					4 ,
+				] ,
+			];
+
+			$condition = [
+				'alias' => self::$currentTableAlias ,
+				'where' => $where ,
+			];
+
+			$this->setCondition($condition);
+			$data = $this->fetchSql(false)->column(self::makeSelfAliasField('type'));
+
+			return $data;
+		}
+
+
+		public function setIsConstAttr($val)
+		{
+			return !is_null($val) ? $val : 0;
 		}
 
 

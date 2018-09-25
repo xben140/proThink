@@ -15,6 +15,7 @@
 		/**
 		 * @return mixed
 		 * @throws \ReflectionException
+		 * @throws \Exception
 		 */
 		public function add()
 		{
@@ -28,13 +29,7 @@
 				$this->setPageTitle('添加配置项');
 
 				//配置组
-				$configGroup = $this->logic__common_Configgroup->getActivedData();
-				$configGroup = array_map(function($v) {
-					return [
-						'value' => $v['id'] ,
-						'field' => $v['name'] ,
-					];
-				} , $configGroup);
+				$configGroup = $this->logic__common_Configgroup->getFormatedData();
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -60,7 +55,7 @@
 						]) ,
 
 						//1:array 2:textarea
-						integrationTags::inlineRadio($this->model__Common_Config->type , 'type' , '键值类型' , '<span class="red"><br>array,select 键值使用英文冒号分隔，每行一条 <br> textarea 键值没有格式要求，填入字符串即可 <br> switch 键值留空</span>' , 2) ,
+						integrationTags::inlineRadio($this->logic->model_->type , 'type' , '键值类型' , '<span class="red"><br>array,select 键值使用英文冒号分隔，每行一条 <br> textarea 键值没有格式要求，填入字符串即可 <br> switch 键值留空</span>' , 2) ,
 
 						integrationTags::textarea([
 							'field_name' => '值' ,
@@ -80,22 +75,41 @@
 							'style'      => 'width:100%;height:150px;' ,
 						]) ,
 
-						/*
-												integrationTags::switchery([
-													'isChecked'  => 'checked' ,
-													//额外属性
-													//'attr'       => '{if 1 == 1}checked{/if}' ,
-													//随便写
-													'tip'        => '是否启用' ,
-													//随便写
-													'field_name' => '是否启用' ,
-													//表单name值
-													'name'       => 'status' ,
-													//表单value值,$data里的字段
-													'value'      => '1' ,
-													//表单value对应名字,$data里的字段
-													'field'      => '' ,
-												]) ,*/
+/*
+
+						integrationTags::switchery([
+							'isChecked'  => '' ,
+							//额外属性
+							//'attr'       => '{if 1 == 1}checked{/if}' ,
+							//随便写
+							'tip'        => '' ,
+							//随便写
+							'field_name' => '是否常量' ,
+							//表单name值
+							'name'       => 'is_const' ,
+							//表单value值,$data里的字段
+							//'value'      => '0' ,
+							//表单value对应名字,$data里的字段
+							'field'      => '' ,
+						]) ,
+
+
+						integrationTags::switchery([
+							'isChecked'  => 'checked' ,
+							//额外属性
+							//'attr'       => '{if 1 == 1}checked{/if}' ,
+							//随便写
+							'tip'        => '' ,
+							//随便写
+							'field_name' => '是否启用' ,
+							//表单name值
+							'name'       => 'status' ,
+							//表单value值,$data里的字段
+							'value'      => '1' ,
+							//表单value对应名字,$data里的字段
+							'field'      => '' ,
+						]) ,
+*/
 
 					] , [
 						'id'     => 'form1' ,
@@ -114,6 +128,7 @@
 		/**
 		 * @return mixed
 		 * @throws \ReflectionException
+		 * @throws \Exception
 		 */
 		public function edit()
 		{
@@ -132,13 +147,7 @@
 				session(URL_MODULE , $this->param['id']);
 
 				//配置组
-				$configGroup = $this->logic__common_Configgroup->getActivedData();
-				$configGroup = array_map(function($v) {
-					return [
-						'value' => $v['id'] ,
-						'field' => $v['name'] ,
-					];
-				} , $configGroup);
+				$configGroup = $this->logic__common_Configgroup->getFormatedData();
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -165,7 +174,7 @@
 						]) ,
 
 						//1:array 2:textarea
-						integrationTags::inlineRadio($this->model__Common_Config->type , 'type' , '键值类型' , '<span class="red"><br>array,select 键值使用英文冒号分隔，每行一条 <br> textarea 键值没有格式要求，填入字符串即可 <br> switch 键值留空</span>' , $info['type']) ,
+						integrationTags::inlineRadio($this->logic->model_->type , 'type' , '键值类型' , '<span class="red"><br>array,select 键值使用英文冒号分隔，每行一条 <br> textarea 键值没有格式要求，填入字符串即可 <br> switch 键值留空</span>' , $info['type']) ,
 
 						integrationTags::textarea([
 							'field_name' => '值' ,
@@ -187,22 +196,43 @@
 						]) ,
 
 
-						/*
-												integrationTags::switchery([
-													'isChecked'  => 'checked' ,
-													//额外属性
-													//'attr'       => '{if 1 == 1}checked{/if}' ,
-													//随便写
-													'tip'        => '是否启用' ,
-													//随便写
-													'field_name' => '是否启用' ,
-													//表单name值
-													'name'       => 'status' ,
-													//表单value值,$data里的字段
-													'value'      => '1' ,
-													//表单value对应名字,$data里的字段
-													'field'      => '' ,
-												]) ,*/
+/*
+
+
+						integrationTags::switchery([
+							'isChecked'  => $info['is_const'] ? 'checked': '' ,
+							//额外属性
+							//'attr'       => '{if 1 == 1}checked{/if}' ,
+							//随便写
+							'tip'        => '' ,
+							//随便写
+							'field_name' => '是否常量' ,
+							//表单name值
+							'name'       => 'is_const' ,
+							//表单value值,$data里的字段
+							//'value'      => '0' ,
+							//表单value对应名字,$data里的字段
+							'field'      => '' ,
+						]) ,
+
+
+						integrationTags::switchery([
+							'isChecked'  => $info['status'] ? 'checked': '' ,
+							//额外属性
+							//'attr'       => '{if 1 == 1}checked{/if}' ,
+							//随便写
+							'tip'        => '' ,
+							//随便写
+							'field_name' => '是否启用' ,
+							//表单name值
+							'name'       => 'status' ,
+							//表单value值,$data里的字段
+							'value'      => '1' ,
+							//表单value对应名字,$data里的字段
+							'field'      => '' ,
+						]) ,
+*/
+
 
 					] , [
 						'id'     => 'form1' ,
@@ -234,52 +264,46 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::rowButton([[
+							[
+								'class' => 'btn-success  search-dom-btn-1',
+								'field' => '筛选',
+							],
+							[
+								'class' => 'btn-info  se-all',
+								'field' => '全选',
+							],
+							[
+								'class' => 'btn-info  se-rev',
+								'field' => '反选',
+							],
+							[
+								'class' => 'btn-danger  btn-add',
+								'field' => '添加数据',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
+							],
+							[
+								'class' => 'btn-danger  multi-op multi-op-del',
+								'field' => '批量删除',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
+								'field' => '批量启用',
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
+								'field' => '批量禁用',
+							],
+						]]),
+
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							//$data = $this->logic->dataList($this->param);
 							$data = $this->logic->dataListWithPagination($this->param);
 
-
 							//配置组
-							$configGroup = $this->logic__common_Configgroup->getActivedData();
-							$configGroup = array_map(function($v) {
-								return [
-									'value' => $v['id'] ,
-									'field' => $v['name'] ,
-								];
-							} , $configGroup);
-
-
-							$_this->setMenu([
-								[
-									'class' => 'btn-success  search-dom-btn-1',
-									'field' => '筛选',
-								],
-								[
-									'class' => 'btn-info  se-all',
-									'field' => '全选',
-								],
-								[
-									'class' => 'btn-info  se-rev',
-									'field' => '反选',
-								],
-								[
-									'class' => 'btn-danger  btn-add',
-									'field' => '添加数据',
-								],
-								[
-									'class' => 'btn-danger  multi-op multi-op-del',
-									'field' => '批量删除',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-									'field' => '批量启用',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-									'field' => '批量禁用',
-								],
-							]);
+							$configGroup = $this->logic__common_Configgroup->getFormatedData();
 
 							/**
 							 * 设置表格头
@@ -307,6 +331,10 @@
 								] ,
 								[
 									'field' => '时间' ,
+									'attr'  => '' ,
+								] ,
+								[
+									'field' => '是否常量' ,
 									'attr'  => '' ,
 								] ,
 								[
@@ -347,13 +375,14 @@
 									'value' => '-1' ,
 									'field' => '全部' ,
 								]);
+
 								$t = integrationTags::searchFormCol([
 									integrationTags::searchFormSelect( $tmp, 'group_id' , '配置组' , input('group_id' , '-1')) ,
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
 								//类型
-								$tmp = $this->model__Common_Config->type;
+								$tmp = $this->logic->model_->type;
 								array_unshift( $tmp, [
 									'value' => '-1' ,
 									'field' => '全部' ,
@@ -402,6 +431,27 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
+
+								//状态
+								$t = integrationTags::searchFormCol([
+									integrationTags::searchFormRadio([
+										[
+											'value' => '-1' ,
+											'field' => '全部' ,
+										] ,
+										[
+											'value' => '0' ,
+											'field' => '非常量' ,
+										] ,
+										[
+											'value' => '1' ,
+											'field' => '常量' ,
+										] ,
+									] , 'is_const' , '是否常量' , input('is_const' , '-1')) ,
+
+								] , ['col' => '6']);
+								$doms = array_merge($doms , $t);
+
 								//每页显示条数
 								$t = integrationTags::searchFormCol([
 									integrationTags::searchFormText([
@@ -441,22 +491,13 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
+
 								//状态
+								$k = static::$statusMap;
+								array_pop($k);
+								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
 								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio([
-										[
-											'value' => '-1' ,
-											'field' => '全部' ,
-										] ,
-										[
-											'value' => '0' ,
-											'field' => static::$statusMap[0] ,
-										] ,
-										[
-											'value' => '1' ,
-											'field' => static::$statusMap[1] ,
-										] ,
-									] , 'status' , '状态' , input('status' , '-1')) ,
+									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
 
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
@@ -514,15 +555,44 @@
 											'field_name' => '类型:' ,
 											'name'       => 'type' ,
 											'selected'   => $v['type'] ,
-											'options'    => $this->model__Common_Config->type,
+											'options'    => $this->logic->model_->type,
 										]) ,
 									]) ,
 
-									//用户状态
+									//状态
 									integrationTags::td((function($v) {
+										$doms = [];
 
-											return $v['type'] == '3' ? [
-												integrationTags::tdSwitcher([
+										switch ($v['type'])
+										{
+											//array
+											case '1' :
+												$doms = integrationTags::tdTextarea([
+													'style'    => 'width:100%' ,
+													//'name'     => '' ,
+													'editable' => '1' ,
+													'field'    => 'value' ,
+													//'reg'      => '/^\d{1,4}$/' ,
+													//'msg'      => '请填写合法手机号码' ,
+													'value'    => $v['value'] ,
+												]);
+												break;
+
+												//text
+											case '2' :
+												$doms = integrationTags::tdTextarea([
+													'style'    => 'width:100%' ,
+													//'name'     => '' ,
+													'editable' => '1' ,
+													'field'    => 'value' ,
+													//'reg'      => '/^\d{1,4}$/' ,
+													//'msg'      => '请填写合法手机号码' ,
+													'value'    => $v['value'] ,
+												]);
+												break;
+											//switch
+											case '3' :
+												$doms = integrationTags::tdSwitcher([
 													'params'  => [
 														'checked'         => $v['value'] ? 'checked' : '' ,
 														'name'            => 'value' ,
@@ -531,22 +601,51 @@
 													] ,
 													'name'    => '' ,
 													'is_auto' => '1' ,
-												]) ,
-											] : integrationTags::tdTextarea([
-												'style'    => 'width:100%' ,
-												//'name'     => '' ,
-												'editable' => '1' ,
-												'field'    => 'value' ,
-												//'reg'      => '/^\d{1,4}$/' ,
-												//'msg'      => '请填写合法手机号码' ,
-												'value'    => $v['value'] ,
-											]) ;
+												]);
+												break;
+											//option
+											case '4' :
 
-										})($v)
+												$t = $this->logic::makeOptionsVal($v);
+												$res = [];
+												foreach ($t['options'] as $k1 => $v11)
+												{
+													$res[$k1] = [
+														'field' => $v11 ,
+														'value' => $k1 ,
+													];
+												}
 
-									) ,
+												$doms = integrationTags::tdSelect([
+													//'field_name' => '分组:' ,
+													'name'     => 'value' ,
+													'selected' => $t['selected'] ,
+													'options'  => $res ,
+												]);
 
+												break;
+											//image
+											case '5' :
 
+												$doms = integrationTags::tdSimple([
+													'value' => elementsFactory::singleLabel(integrationTags::singleLabel('img' , [
+														'src'             => generateProfilePicPath($v['value'] , 1) ,
+														'style'           => 'height: 35px;' ,
+														'class'           => 'preview-img index_pop' ,
+														'data-origin-src' => generateProfilePicPath($v['value'] , 0) ,
+														'data-condition'  => formatMenu(CONTROLLER_NAME , 'value' , $v['id']) ,
+														'data-text'       => '修改图片' ,
+													])) ,
+												]);
+
+												break;
+											default :
+												#...
+												break;
+										}
+
+										return $doms;
+									})($v)) ,
 
 
 									//备注
@@ -572,7 +671,21 @@
 										]),
 									]) ,
 
-									//用户状态
+									//is_const
+									integrationTags::td([
+										integrationTags::tdSwitcher([
+											'params'  => [
+												'checked'         => $v['is_const'] ? 'checked' : '' ,
+												'name'            => 'is_const' ,
+												'change_callback' => 'switcherUpdateField' ,
+												//switcherUpdateFieldConfirm
+											] ,
+											'name'    => '' ,
+											'is_auto' => '1' ,
+										]) ,
+									]) ,
+
+									//状态
 									integrationTags::td([
 										integrationTags::tdSwitcher([
 											'params'  => [
@@ -615,6 +728,16 @@
 		}
 
 		/**
+		 * @throws \Exception
+		 */
+		public function delete()
+		{
+			$this->initLogic();
+			return $this->jump($this->logic->delete($this->param));
+		}
+
+
+		/**
 		 * @return mixed
 		 * @throws \Exception
 		 */
@@ -622,28 +745,34 @@
 		{
 			$this->initLogic();
 
-			return $this->jump($this->logic->updateField($this->param));
-		}
-
-		/**
-		 * @throws \Exception
-		 */
-		public function delete()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->delete($this->param , [
+			return $this->jump($this->logic->updateField($this->param, [
 				[
-					function($ids) {
-						//删除用户角色关联记录
-						return db('user_role')->where([
-								'user_id' => [
-									'in' ,
-									$ids ,
-								] ,
-							])->delete() !== false;
+					function( &$globalVariable) {
+						//如果是更新值
+						if($globalVariable['field'] == 'value')
+						{
+							$info = $this->logic->getInfo(['id' => $this->param['ids'] ,]);
+							$res = true;
+							//为4的时候是更新option类型
+							switch ($info['type'])
+							{
+								case '4' :
+									$t = $this->logic::makeOptionsVal($info);
+									array_walk($t['options'] , function(&$v , $k) use ($globalVariable) {
+										($k == $globalVariable['val']) && ($v .= '!!--!!');
+									});
+									$globalVariable['val'] = implode("\r\n" , $t['options']);
+
+									break;
+								default :
+									break;
+							}
+
+							return $res;
+						}
 					} ,
-					[$this->param['ids']] ,
+					[] ,
+					'' ,
 				] ,
 			]));
 		}

@@ -1,5 +1,68 @@
 (function () {
 
+
+	$('.index_pop').on({
+		'click': function (e) {
+			let _this = $(this);
+			let url = _this.attr('href') || _this.data('href');
+
+			_this.hasClass('preview-img') && (url = '/admin/Index/updateImage?condition=' + _this.data('condition'))
+
+			// let parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+			layer.open({
+				type      : 2,
+				title     : _this.text() || _this.data('text'),
+				shadeClose: true,
+				shade     : 0.1,
+				area      : ['70%', '70%'],
+				resize    : 1,
+				moveOut   : 1,
+				skin      : 'search-dom-pop', //样式类名
+				closeBtn  : 0, //不显示关闭按钮
+				anim      : 0,
+				// anim      : randomNum(0, 6),
+				isOutAnim : 0,
+				content   : url, //iframe的url
+				success   : function (_) {
+					_this.attr("disabled", false);
+				},
+				end       : function () {
+					// location.reload();
+				}
+			});
+			e.preventDefault();
+			return false;
+		}
+	});
+
+
+
+	//列表页图片预览
+	$('.preview-img').on({
+		'mouseover': function () {
+			let _this = $(this);
+			let src = _this.data('origin-src') || _this.attr('src')
+			index_preview = layer.open({
+				type    : 4,
+				closeBtn: 0,
+				shade   : 0,
+				// shadeClose: 1,
+				area    : ['auto', 'auto'],
+				// time      : 0,
+				content : ['<img style="max-height: 300px;" src="' + src + '">', this] //数组第二项即吸附元素选择器或者DOM
+			});
+		},
+		'mouseout' : function () {
+			layer.close(index_preview)
+		},
+	})
+
+
+
+
+
+
 	/**
 	 *
 	 *

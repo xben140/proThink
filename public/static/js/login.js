@@ -49,8 +49,6 @@
 			//提交后的回调函数
 			success:  function (responseText, statusText) {
 				layer.close(loadIndex)
-				console.dir(responseText)
-				console.dir(statusText)
 
 				_this.find('button:submit').attr("disabled", false);
 				layer.msg(responseText.msg)

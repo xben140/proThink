@@ -14,24 +14,24 @@
 		// | 应用设置
 		// +----------------------------------------------------------------------
 
-		'admin_id'            => 1 ,
-		'app_namespace'       => 'app' ,
-
 		// 应用调试模式
 		'app_debug'           => true ,
+
 		// 应用Trace
 		'app_trace'           => true ,
 
 		//每添加一个模块这里要加个配置
 		//前台默认皮肤
-		'admin_themes'        => 'default' ,
+		//'admin_themes'        => 'default' ,
 		//后台默认皮肤
-		'home_themes'         => 'default' ,
+		//'home_themes'         => 'default' ,
 		//后台默认皮肤
-		'portal_themes'       => 'default' ,
+		//'portal_themes'       => 'default' ,
 
 		//后台页面构造器页面是否缓存
 		'enable_static_cache' => 0 ,
+
+
 		/*
 
 				//email配置
@@ -52,9 +52,10 @@
 			THINK_PATH . 'helper' . EXT ,
 			APP_PATH . 'function' . EXT ,
 			APP_PATH . 'extend' . EXT ,
+			APP_PATH . 'rule' . EXT ,
 		] ,
 
-		'captcha'                => [
+		'captcha'      => [
 			// 验证码字符集合
 			'codeSet'  => '0123456789' ,
 			// 验证码字体大小(px)
@@ -73,14 +74,14 @@
 		] ,
 
 		//分页配置
-		'paginate'               => [
+		'paginate'     => [
 			'type'      => 'bootstrap' ,
 			'var_page'  => 'page' ,
 			'list_rows' => 50 ,
 		] ,
 
 		//模板元素映射表
-		'elements_map'           => [
+		'elements_map' => [
 
 			//form
 			'form'               => \builder\elements\form\form::class ,
@@ -89,6 +90,7 @@
 			'inlineRadio'        => \builder\elements\form\inlineRadio::class ,
 			'blockRadio'         => \builder\elements\form\blockRadio::class ,
 			'text'               => \builder\elements\form\text::class ,
+			'linkage'            => \builder\elements\form\linkage::class ,
 			'staticText'         => \builder\elements\form\staticText::class ,
 			'password'           => \builder\elements\form\password::class ,
 			'switchery'          => \builder\elements\form\switchery::class ,
@@ -99,8 +101,8 @@
 			'textarea'           => \builder\elements\form\textarea::class ,
 			'uploadSingleImg'    => \builder\elements\form\uploadSingleImg::class ,
 			'uploadSingleFile'   => \builder\elements\form\uploadSingleFile::class ,
-			'uploadMutilImg'    => \builder\elements\form\uploadMutilImg::class ,
-			'uploadMutilFile'   => \builder\elements\form\uploadMutilFile::class ,
+			'uploadMultiImg'     => \builder\elements\form\uploadMultiImg::class ,
+			'uploadMultiFile'    => \builder\elements\form\uploadMultiFile::class ,
 
 			//table
 			'staticTable'        => \builder\elements\table\staticTable::class ,
@@ -124,7 +126,21 @@
 			'basicFrame'         => \builder\elements\frame\basicFrame::class ,
 			'row'                => \builder\elements\frame\row::class ,
 			'rowBlock'           => \builder\elements\frame\rowBlock::class ,
+			'rowButton'          => \builder\elements\frame\rowButton::class ,
 		] ,
+
+
+		'admin_id'             => 1 ,
+		'global_admin_role_id' => 1 ,
+
+
+		'app_namespace'          => 'app' ,
+
+		//默认头像
+		//'default_profile_pic'    => '/static/image/default_pic.gif' ,
+		'default_profile_pic'    => '/static/image/default-logo.jpg' ,
+		//上传默认占位图
+		'default_img'            => '/static/image/timg.jpg' ,
 
 
 		// 应用模式状态
@@ -148,7 +164,7 @@
 		// 是否开启多语言
 		'lang_switch_on'         => false ,
 		// 默认全局过滤方法 用逗号分隔多个
-		'default_filter'         => 'stripslashes,htmlentities,htmlspecialchars,strip_tags' ,
+		'default_filter'         => 'stripslashes,htmlentities,htmlspecialchars' ,
 		// 默认语言
 		'default_lang'           => 'zh-cn' ,
 		// 应用类库后缀

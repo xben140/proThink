@@ -181,7 +181,7 @@
 			];
 
 			$condition = [
-				'order' => ['order' => 'asc',] ,
+				'order' => ['order' => 'desc',] ,
 				'field' => '*' ,
 				'alias' => self::$currentTableAlias ,
 				'where' => $where ,

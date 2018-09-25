@@ -7,11 +7,12 @@
 		// 验证规则
 		protected $rule = [
 			'pid'        => 'number' ,
-			'name'       => 'unique:resource_menu|require' ,
+			'name'       => 'require' ,
+			//'name'       => 'unique:resource_menu|require' ,
 			'module'     => 'alpha|require' ,
 			'controller' => 'alpha|require' ,
 			'action'     => 'alpha|require' ,
-			'order'       => 'number' ,
+			'order'      => 'number' ,
 		];
 
 		// 验证提示
@@ -21,14 +22,14 @@
 			'name.unique'  => '同样的记录已存在' ,
 			'name.require' => '权限名字必填' ,
 
-			'module.require'     => '权限名字必填' ,
-			'module.alpha'       => '允许为英文字母' ,
+			'module.require' => '权限名字必填' ,
+			'module.alpha'   => '允许为英文字母' ,
 
 			'controller.require' => '控制器名字必填' ,
 			'controller.alpha'   => '允许为英文字母' ,
 
-			'action.require'     => '方法名字必填' ,
-			'action.alpha'       => '允许为英文字母' ,
+			'action.require' => '方法名字必填' ,
+			'action.alpha'   => '允许为英文字母' ,
 
 			'order.number' => '排序必须为数字' ,
 		];

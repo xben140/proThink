@@ -2,12 +2,6 @@
 
 	namespace app\common\logic;
 
-
-	/**
-	 * 菜单权限
-	 * Class Privilege
-	 * @package app\common\logic
-	 */
 	class Configgroup extends LogicBase
 	{
 		public function __construct()
@@ -15,11 +9,23 @@
 			$this->initBaseClass();
 		}
 
-		public function getDefaultAction()
+		public function getFormatedData($isPushDefault = 0)
 		{
-			$data = $this->model_->getDefaultAction();
+			$journalTypes = $this->getActivedData();
 
-			return $data->toArray();
+			$journalTypes = array_map(function($v) {
+				return [
+					'value' => $v['id'] ,
+					'field' => $v['name'] ,
+				];
+			} , $journalTypes);
+
+			$isPushDefault && array_unshift($journalTypes , [
+				'value' => 0 ,
+				'field' => '请选择' ,
+			]);
+
+			return $journalTypes;
 		}
 
 
@@ -35,51 +41,51 @@
 
 			$order_filed = 'id';
 			$order_ = 'asc';
-/*
-			foreach ($param as $k => $v)
-			{
-				switch ($k)
-				{
-					case 'name' :
-						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
-							'like' ,
-							"%" . $v . "%" ,
-						];
-						break;
-
-					case 'is_common' :
-					case 'module' :
-					case 'controller' :
-					case 'action' :
-						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
-							'=' ,
-							$v ,
-						];
-						break;
-
-					case 'order_filed' :
-						$v != '' && $order_filed = $v;
-						break;
-
-					case 'order' :
-						$v != '' && $order_ = $v;
-						break;
-
-					case 'status' :
-						if($v != -1)
+			/*
+						foreach ($param as $k => $v)
 						{
-							$where[$this->model_::makeSelfAliasField($k)] = [
-								'=' ,
-								$v ,
-							];
-						}
-						break;
+							switch ($k)
+							{
+								case 'name' :
+									$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
+										'like' ,
+										"%" . $v . "%" ,
+									];
+									break;
 
-					default :
-						#...
-						break;
-				}
-			}*/
+								case 'is_common' :
+								case 'module' :
+								case 'controller' :
+								case 'action' :
+									$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
+										'=' ,
+										$v ,
+									];
+									break;
+
+								case 'order_filed' :
+									$v != '' && $order_filed = $v;
+									break;
+
+								case 'order' :
+									$v != '' && $order_ = $v;
+									break;
+
+								case 'status' :
+									if($v != -1)
+									{
+										$where[$this->model_::makeSelfAliasField($k)] = [
+											'=' ,
+											$v ,
+										];
+									}
+									break;
+
+								default :
+									#...
+									break;
+							}
+						}*/
 
 
 			$order[$order_filed] = $order_;

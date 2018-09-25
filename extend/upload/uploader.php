@@ -4,10 +4,6 @@
 
 	use SplFileObject;
 
-	/**
-	 * Class chunkUpload
-	 * @package builder
-	 */
 	class uploader extends SplFileObject
 	{
 		/**
@@ -151,6 +147,7 @@
 			$this->setInfo('chunks' , $this->chunks);
 			$this->setInfo('session_id' , $this->sessionId);
 			$this->setInfo('name' , $this->files['name']);
+			$this->setInfo('mime' , $this->files['type']);
 
 			$this->noCache();
 		}
@@ -287,6 +284,8 @@
 			//F:\localWeb\local1\upload\server\upload_temp\53bbd50fbb5a78032d3f5abd0097422f_0
 			$finishedPath = $this->tempDir . $finishedName;
 
+			$this->setInfo('is_finished' , 0);
+
 			self::mkdir_($this->tempDir);
 
 			if(!is_dir($this->tempDir))
@@ -296,7 +295,6 @@
 				return $this->getInfo();
 			}
 
-			system('chmod -R 777 ' . $this->tempDir . '/*');
 
 			if(!is_writable($this->tempDir))
 			{
@@ -446,7 +444,6 @@
 				$fileObj = new \SplFileObject($filePath);
 				$this->setError('文件上传成功', 2);
 				$this->setInfo('size' , $fileObj->getSize());
-				$this->setInfo('mime' , $this->files['type']);
 				$this->setInfo('is_finished' , 1);
 				$this->setInfo('hash' , md5_file($filePath));
 				$this->setInfo('file_obj' , $fileObj);
@@ -455,6 +452,7 @@
 			{
 				$this->setInfo('is_finished' , 0);
 			}
+			system('chmod -R 777 ' . $this->uploadDir . '/*');
 
 			return $this->getInfo();
 		}
@@ -549,7 +547,7 @@
 		/**
 		 * 根据文件名和分块名构造唯一临时文件名 - 上传完成后的名字
 		 *
-		 * @param $fileName
+		 * @param string $fileName
 		 * @param $chunk
 		 *
 		 * @return string
@@ -562,7 +560,7 @@
 		/**
 		 * 根据文件名和分块名构造唯一临时文件名 - 未上传完成的名字
 		 *
-		 * @param $fileName
+		 * @param string $fileName
 		 * @param $chunk
 		 *
 		 * @return string
@@ -577,7 +575,7 @@
 		/**
 		 * 临时文件上传完成后修改名字
 		 *
-		 * @param $fileName
+		 * @param string $fileName
 		 * @param $chunk
 		 *
 		 * @return string
@@ -600,7 +598,7 @@
 		/**
 		 * 创建文件夹
 		 *
-		 * @param $path 文件夹路径
+		 * @param string $path 文件夹路径
 		 *
 		 * @return bool
 		 */
@@ -613,7 +611,7 @@
 		/**
 		 * 自动为路径后面加DIRECTORY_SEPARATORY
 		 *
-		 * @param $path 文件夹路径
+		 * @param string $path 文件夹路径
 		 *
 		 * @return string
 		 */
@@ -624,69 +622,69 @@
 
 	}
 
-/*
+	/*
 
-	print_r($re);;;
-
-
-	if($re['is_finished'])
-	{
-		$res = $re['file_obj'];
+		print_r($re);;;
 
 
-		//提供的接口
-		echo 'getPath		' .  $res->getPath();
-		echo "\r\n";
-		echo 'getFilename		' .  $res->getFilename();
-		echo "\r\n";
-		echo 'getExtension		' .  $res->getExtension();
-		echo "\r\n";
-		echo 'getBasename		' .  $res->getBasename();
-		echo "\r\n";
-		echo 'getPathname		' .  $res->getPathname();
-		echo "\r\n";
-		echo 'getPerms		' .  $res->getPerms();
-		echo "\r\n";
-		echo 'getInode		' .  $res->getInode();
-		echo "\r\n";
-		echo 'getSize		' .  $res->getSize();
-		echo "\r\n";
-		echo 'getOwner		' .  $res->getOwner();
-		echo "\r\n";
-		echo 'getGroup		' .  $res->getGroup();
-		echo "\r\n";
-		echo 'getATime		' .  $res->getATime();
-		echo "\r\n";
-		echo 'getMTime		' .  $res->getMTime();
-		echo "\r\n";
-		echo 'getCTime		' .  $res->getCTime();
-		echo "\r\n";
-		echo 'getType		' .  $res->getType();
-		echo "\r\n";
-		echo 'isWritable		' .  $res->isWritable();
-		echo "\r\n";
-		echo 'isReadable		' .  $res->isReadable();
-		echo "\r\n";
-		echo 'isExecutable		' .  $res->isExecutable();
-		echo "\r\n";
-		echo 'isFile		' .  $res->isFile();
-		echo "\r\n";
-		echo 'isDir		' .  $res->isDir();
-		echo "\r\n";
-		echo 'isLink		' .  $res->isLink();
-		echo "\r\n";
-		echo 'getLinkTarget		' .  $res->getLinkTarget();
-		echo "\r\n";
-		echo 'getRealPath		' .  $res->getRealPath();
-		echo "\r\n";
-		echo 'getFileInfo		' .  $res->getFileInfo();
-		echo "\r\n";
-		echo 'getPathInfo		' .  $res->getPathInfo();
-		echo "\r\n";
-	}
+		if($re['is_finished'])
+		{
+			$res = $re['file_obj'];
 
 
-*/
+			//提供的接口
+			echo 'getPath		' .  $res->getPath();
+			echo "\r\n";
+			echo 'getFilename		' .  $res->getFilename();
+			echo "\r\n";
+			echo 'getExtension		' .  $res->getExtension();
+			echo "\r\n";
+			echo 'getBasename		' .  $res->getBasename();
+			echo "\r\n";
+			echo 'getPathname		' .  $res->getPathname();
+			echo "\r\n";
+			echo 'getPerms		' .  $res->getPerms();
+			echo "\r\n";
+			echo 'getInode		' .  $res->getInode();
+			echo "\r\n";
+			echo 'getSize		' .  $res->getSize();
+			echo "\r\n";
+			echo 'getOwner		' .  $res->getOwner();
+			echo "\r\n";
+			echo 'getGroup		' .  $res->getGroup();
+			echo "\r\n";
+			echo 'getATime		' .  $res->getATime();
+			echo "\r\n";
+			echo 'getMTime		' .  $res->getMTime();
+			echo "\r\n";
+			echo 'getCTime		' .  $res->getCTime();
+			echo "\r\n";
+			echo 'getType		' .  $res->getType();
+			echo "\r\n";
+			echo 'isWritable		' .  $res->isWritable();
+			echo "\r\n";
+			echo 'isReadable		' .  $res->isReadable();
+			echo "\r\n";
+			echo 'isExecutable		' .  $res->isExecutable();
+			echo "\r\n";
+			echo 'isFile		' .  $res->isFile();
+			echo "\r\n";
+			echo 'isDir		' .  $res->isDir();
+			echo "\r\n";
+			echo 'isLink		' .  $res->isLink();
+			echo "\r\n";
+			echo 'getLinkTarget		' .  $res->getLinkTarget();
+			echo "\r\n";
+			echo 'getRealPath		' .  $res->getRealPath();
+			echo "\r\n";
+			echo 'getFileInfo		' .  $res->getFileInfo();
+			echo "\r\n";
+			echo 'getPathInfo		' .  $res->getPathInfo();
+			echo "\r\n";
+		}
+
+
+	*/
 
 
 

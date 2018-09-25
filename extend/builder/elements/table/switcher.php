@@ -59,10 +59,11 @@ js;
 				 */
 		function isAuto($is = 1)
 		{
-			$class = $is ? "class='js-switch'": "class='js-switch-notauto'";
+			$class = !!$is ? "js-switch": "js-switch-notauto";
 
 			$this->replaceTag(static::makeNodeName('class') , $class);
 		}
+
 
 		/**
 		 *--------------------------------------------------------------------------
@@ -78,10 +79,12 @@ js;
 			 */
 			$this->setNodeValue([
 				'checked'         => '' ,
+				'disabled'        => '' ,
 				'name'            => '' ,
-				'change_callback' => 'switcherUpdateField' ,//switcherUpdateFieldConfirm
+				'change_callback' => 'switcherUpdateField' , //switcherUpdateFieldConfirm
+				'success_callback' => '' , //refresh_page
 
-				'class'           => 'js-switch' ,
+				'class'  => 'js-switch' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -95,7 +98,7 @@ js;
 			 * ----------------------------------------自定义内容
 			 */
 			$contents = <<<'CONTENTS'
-			<input type="checkbox"  name="<!-- ~~~name~~~ -->"  data-change-callback="<!-- ~~~change_callback~~~ -->"  <!-- ~~~checked~~~ -->  <!-- ~~~class~~~ --> />
+			<input type="checkbox" name="<!-- ~~~name~~~ -->"  data-change-callback="<!-- ~~~change_callback~~~ -->" data-success-callback="<!-- ~~~success_callback~~~ -->" class="<!-- ~~~class~~~ -->"  <!-- ~~~checked~~~ -->  <!-- ~~~disabled~~~ --> />
 
 CONTENTS;
 			/**

@@ -16,13 +16,21 @@
 		/**
 		 * @return mixed
 		 * @throws \ReflectionException
+		 * @throws \Exception
 		 */
 		public function add()
 		{
 			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->jump($this->logic->add($this->param_post));
+				$this->jump($this->logic->add($this->param_post, [
+					[
+						function(&$param) {
+							list($param['salt'] , $param['password']) = array_values(buildPwd($param['password']));
+						} ,
+						[] ,
+					] ,
+				]));
 			}
 			else
 			{
@@ -104,6 +112,7 @@
 		}
 
 		/**
+		 * 列表页里编辑成用户信息
 		 * @return mixed
 		 * @throws \ReflectionException
 		 */
@@ -135,6 +144,17 @@
 							'name'        => 'user' ,
 						]) ,
 
+						integrationTags::staticText([
+							//'placeholder' => '' ,
+							//'tip'         => '' ,
+							//'attr'        => 'disabled' ,
+							//'name'        => 'user' ,
+
+							'field_name' => '用户名' ,
+							'value'       => $info['user'] ,
+						]) ,
+
+
 						integrationTags::text([
 							'field_name'  => '姓名' ,
 							'placeholder' => '请填写用户名' ,
@@ -199,6 +219,8 @@
 		}
 
 		/**
+		 * 自己修改自己信息
+		 *
 		 * @return mixed
 		 * @throws \ReflectionException
 		 */
@@ -209,13 +231,13 @@
 			{
 				$id = session(URL_MODULE);
 				$res = $this->logic->edit($this->param , $id);
-				$this->logic->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
+				$this->logic->updateSessionByUsername(getAdminSessionInfo(SESSOIN_TAG_USER , 'user'));
 				$this->jump($res);
 			}
 			else
 			{
 				$this->setPageTitle('修改资料');
-				$id = getAdminSessionInfo('user' , 'id');
+				$id = getAdminSessionInfo(SESSOIN_TAG_USER , 'id');
 
 				session(URL_MODULE , $id);
 				$info = $this->logic->getInfo(['id' => $id ,]);
@@ -223,13 +245,14 @@
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
 
-						integrationTags::text([
-							'field_name'  => '用户名' ,
-							'placeholder' => '请填写用户名' ,
-							'tip'         => '' ,
+						integrationTags::staticText([
+							//'placeholder' => '' ,
+							//'tip'         => '' ,
+							//'attr'        => 'disabled' ,
+							//'name'        => 'user' ,
+
+							'field_name' => '用户名' ,
 							'value'       => $info['user'] ,
-							'attr'        => 'disabled' ,
-							'name'        => 'user' ,
 						]) ,
 
 						integrationTags::text([
@@ -240,6 +263,9 @@
 							//'attr'        => 'disabled' ,
 							'name'        => 'nickname' ,
 						]) ,
+
+
+						integrationTags::inlineRadio($this->logic::$sexMap, 'gender' , '性别' , '' , $info['gender']) ,
 
 						integrationTags::text([
 							//随便写
@@ -297,6 +323,7 @@
 
 
 		/**
+		 * 自己修改自己密码
 		 * @return mixed
 		 * @throws \ReflectionException
 		 */
@@ -305,13 +332,12 @@
 			if(IS_POST)
 			{
 				$this->initLogic();
-				$this->param['id'] = session(URL_MODULE);
-				$this->jump($this->logic->editPwd($this->param));
+				$this->param['id'] = getAdminSessionInfo(SESSOIN_TAG_USER , 'id');
+				return $this->jump($this->logic->editPwd($this->param));
 			}
 			else
 			{
 				$this->setPageTitle('修改密码');
-				session(URL_MODULE , getAdminSessionInfo('user' , 'id'));
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -339,14 +365,16 @@
 		}
 
 		/**
+		 * 列表页里修改用户密码
 		 * @return mixed
 		 * @throws \ReflectionException
+		 * @throws \Exception
 		 */
 		public function editPwd()
 		{
+			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->initLogic();
 				$this->param['id'] = session(URL_MODULE);
 				$this->jump($this->logic->editPwd($this->param));
 			}
@@ -354,9 +382,31 @@
 			{
 				$this->setPageTitle('修改密码');
 				session(URL_MODULE , $this->param['id']);
+				$id = session(URL_MODULE);
+				$info = $this->logic->getInfo(['id' => $id ,]);
+
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
+
+						integrationTags::staticText([
+							//'placeholder' => '' ,
+							//'tip'         => '' ,
+							//'attr'        => 'disabled' ,
+							//'name'        => 'user' ,
+
+							'field_name' => '用户名' ,
+							'value'       => $info['user'] ,
+						]) ,
+						integrationTags::staticText([
+							//'placeholder' => '' ,
+							//'tip'         => '' ,
+							//'attr'        => 'disabled' ,
+							//'name'        => 'user' ,
+
+							'field_name' => '用户' ,
+							'value'       => $info['nickname'] ,
+						]) ,
 
 						integrationTags::password([
 							'tip'          => '（必填）密码允许字符为字母，数字，下划线，小数点，长度6-16位' ,
@@ -392,42 +442,45 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::rowButton([
+							[
+								[
+									'class' => 'btn-success  search-dom-btn-1' ,
+									'field' => '筛选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-all' ,
+									'field' => '全选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-rev' ,
+									'field' => '反选' ,
+								] ,
+								[
+									'class' => 'btn-danger  btn-add' ,
+									'field' => '添加数据' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
+								] ,
+								[
+									'class' => 'btn-danger  multi-op multi-op-del' ,
+									'field' => '批量删除' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
+								] ,
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
+									'field' => '批量启用' ,
+								] ,
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
+									'field' => '批量禁用' ,
+								] ,
+							],
+						]),
+
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							//$data = $this->logic->dataList($this->param);
 							$data = $this->logic->dataListWithPagination($this->param);
-
-
-							$_this->setMenu([
-								[
-									'class' => 'btn-success  search-dom-btn-1',
-									'field' => '筛选',
-								],
-								[
-									'class' => 'btn-info  se-all',
-									'field' => '全选',
-								],
-								[
-									'class' => 'btn-info  se-rev',
-									'field' => '反选',
-								],
-								[
-									'class' => 'btn-danger  btn-add',
-									'field' => '添加数据',
-								],
-								[
-									'class' => 'btn-danger  multi-op multi-op-del',
-									'field' => '批量删除',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-									'field' => '批量启用',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-									'field' => '批量禁用',
-								],
-							]);
 
 							/**
 							 * 设置表格头
@@ -454,15 +507,11 @@
 									'attr'  => '' ,
 								] ,
 								[
-									'field' => 'IP' ,
-									'attr'  => '' ,
-								] ,
-								[
 									'field' => '登陆次数' ,
 									'attr'  => '' ,
 								] ,
 								[
-									'field' => '状态' ,
+									'field' => '状态 (允许登陆)' ,
 									'attr'  => '' ,
 								] ,
 								[
@@ -480,13 +529,14 @@
 							 * 设置js请求api
 							 */
 							$_this->setApi([
-								'deleteUrl'      => url('delete') ,
-								'setFieldUrl'    => url('setField') ,
-								'detailUrl'      => url('detail') ,
-								'editUrl'        => url('edit') ,
-								'addUrl'         => url('add') ,
-								'editPwdUrl'     => url('editPwd') ,
-								'assignRolesUrl' => url('assignRoles') ,
+								'deleteUrl'               => url('delete') ,
+								'setFieldUrl'             => url('setField') ,
+								'detailUrl'               => url('detail') ,
+								'editUrl'                 => url('edit') ,
+								'addUrl'                  => url('add') ,
+								'editPwdUrl'              => url('editPwd') ,
+								'assignRolesUrl'          => url('assignRoles') ,
+								'assignJournalTypeMapUrl' => url('assignJournalTypeMap') ,
 							]);
 
 							/**
@@ -494,6 +544,7 @@
 							 *searchFormCol
 							 */
 							$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) {
+								$_this->setIsDisplay(1);
 
 								//用户账号
 								$t = integrationTags::searchFormCol([
@@ -544,6 +595,17 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
+
+								$roles_ = $this->logic__common_role->getFormatedData();
+								$k = $roles_;array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
+
+								//角色
+								$t = integrationTags::searchFormCol([
+									integrationTags::searchFormSelect($k , 'role_id' , '用户角色' , input('role_id' , -1)) ,
+								] , ['col' => '6']);
+								$doms = array_merge($doms , $t);
+
+
 								//排序字段
 								$t = integrationTags::searchFormCol([
 									integrationTags::searchFormSelect([
@@ -576,22 +638,13 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
+
 								//状态
+								$k = static::$statusMap;
+								array_pop($k);
+								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
 								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio([
-										[
-											'value' => '-1' ,
-											'field' => '全部' ,
-										] ,
-										[
-											'value' => '0' ,
-											'field' => static::$statusMap[0] ,
-										] ,
-										[
-											'value' => '1' ,
-											'field' => static::$statusMap[1] ,
-										] ,
-									] , 'status' , '状态' , input('status' , '-1')) ,
+									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
 
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
@@ -609,40 +662,62 @@
 
 									//checkbox
 									integrationTags::td([
-										integrationTags::tdCheckbox() ,
 										integrationTags::tdSimple([
-											'value' => $v['id'] ,
+											'value'      => $v['id'] ,
+											'is_display' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
 										]) ,
+										integrationTags::tdCheckbox((function() use ($v) {
+											//是管理员id 和 自己的id不显示复选框
+											return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+										})()) ,
 									]) ,
 
-									//checkbox
+									//头像
+									//data-href="/admin/User/editProfilePic" data-text="修改头像"
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'value' => elementsFactory::singleLabel(function(&$doms) use($v){
-												$attr = tagConstructor::buildKV([
-													'src'   => generateProfilePicPath($v['profile_pic'], 1) ,
-													'style' => 'height: 65px;' ,
-												]);
-
-												$doms[] = '<img '.$attr.'/>';
-											}) ,
+											'value' => elementsFactory::singleLabel(integrationTags::singleLabel('img' , [
+												'src'             => generateProfilePicPath($v['profile_pic'] , 1) ,
+												'style'           => 'height: 65px;' ,
+												'class'           => 'preview-img index_pop' ,
+												'data-origin-src' => generateProfilePicPath($v['profile_pic'] , 0) ,
+												'data-condition'  => formatMenu(CONTROLLER_NAME , 'profile_pic' , $v['id']) ,
+												'data-text'       => '修改图片' ,
+											])) ,
 										]) ,
 									]) ,
 
 									//用户名
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'name'  => '用户名 : ' ,
-											'value' => $v['user'] ,
-										]) ,
-										'<br/>' ,
-										integrationTags::tdSimple([
 											'name'     => '姓名 : ' ,
-											'editable' => '1' ,
 											'value'    => $v['nickname'] ,
 											'field'    => 'nickname' ,
 											//'reg'      => '/^\S+$/' ,
 											//'msg'      => '请填写合法手机号码' ,
+											'editable' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
+										]) ,
+										'<br/>' ,
+										integrationTags::tdSimple([
+											'name'       => '用户名 : ' ,
+											'value'      => $v['user'] ,
+											'is_display' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
+										]) ,
+										'<br/>' ,
+
+										integrationTags::tdSimple([
+											'name'     => '角色 : ' ,
+											'value'    => $v['role'] ,
+											'editable' => 0,
 										]) ,
 									]) ,
 
@@ -650,41 +725,41 @@
 									integrationTags::td([
 										integrationTags::tdSimple([
 											'name'     => 'email : ' ,
-											'editable' => '1' ,
 											'value'    => $v['email'] ,
 											'field'    => 'email' ,
 											'reg'      => '/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/' ,
 											'msg'      => '请填写合法email' ,
+											'editable' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
 										]) ,
 										'<br>' ,
 										integrationTags::tdSimple([
 											'name'     => '电话 : ' ,
-											'editable' => '1' ,
 											'value'    => $v['phone'] ,
 											'field'    => 'phone' ,
 											'reg'      => '/^1\d{10}$/' ,
 											'msg'      => '请填写合法手机号码' ,
+											'editable' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})(),
+
 										]) ,
 										'<br/>' ,
 										integrationTags::tdSelect([
-											'name'     => 'gender' ,
-											'field_name'     => '性别 :' ,
-											'selected' => $v['gender'] ,
-											'options'  => [
-												[
-													'value' => '0' ,
-													'field' => $this->logic::$sexMap[0] ,
-												] ,
-												[
-													'value' => '1' ,
-													'field' => $this->logic::$sexMap[1] ,
-												] ,
-												[
-													'value' => '2' ,
-													'field' => $this->logic::$sexMap[2] ,
-												] ,
-											] ,
+											'is_display' => 1 ,
+											'name'       => 'gender' ,
+											'field_name' => '性别 :' ,
+											'selected'   => $v['gender'] ,
+											'options'  => $this->logic::$sexMap ,
+											'disabled' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return (!isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'))) ? '' : 'disabled';
+											})() ,
 										]) ,
+
 									]) ,
 
 									//时间
@@ -700,10 +775,7 @@
 											'editable' => '0' ,
 											'value'    => formatTime($v['last_login_time']) ,
 										]) ,
-									]) ,
-
-									//IP
-									integrationTags::td([
+										'<br>' ,
 										integrationTags::tdSimple([
 											'name'     => '注册IP' ,
 											'editable' => '0' ,
@@ -717,6 +789,7 @@
 										]) ,
 									]) ,
 
+
 									//登陆次数
 									integrationTags::td([
 										integrationTags::tdSimple([
@@ -726,56 +799,72 @@
 										]) ,
 									]) ,
 
-
 									//用户状态
-									integrationTags::td((function($v) {
+									integrationTags::td([
+										integrationTags::tdSwitcher([
+											'params'  => [
+												'checked'         => $v['status'] ? 'checked' : '' ,
+												'disabled'        => '' ,
+												'name'            => 'status' ,
+												'change_callback' => 'switcherUpdateField' ,
+												//switcherUpdateFieldConfirm
+												//switcherUpdateField
+												'is_display'      => (function() use ($v) {
+													//是管理员id 和 自己的id不显示复选框
+													return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+												})() ,
+											] ,
+											'name'    => '' ,
+											'is_auto' => '1' ,
 
-											return !isGlobalManagerId($v['id']) ? [
-												integrationTags::tdSwitcher([
-													'params'  => [
-														'checked'         => $v['status'] ? 'checked' : '' ,
-														'name'            => 'status' ,
-														'change_callback' => 'switcherUpdateField' ,
-														//switcherUpdateFieldConfirm
-													] ,
-													'name'    => '' ,
-													'is_auto' => '1' ,
-												]) ,
-											] : [];
-
-										})($v)
-
-									) ,
+										]) ,
+									]) ,
 
 									//操作
-									integrationTags::td((function($v) {
+									integrationTags::td([
+										/*
+										integrationTags::tdButton([
+											'attr'  => ' btn-success btn-edit' ,
+											'value' => '编辑' ,
+										]) ,
+										*/
 
-											return !isGlobalManagerId($v['id']) ? [
-												integrationTags::tdButton([
-													'attr'  => ' btn-info btn-modify-pwd' ,
-													'value' => '修改密码' ,
-												]) ,
-												/*
-												integrationTags::tdButton([
-													'attr'  => ' btn-success btn-edit' ,
-													'value' => '编辑' ,
-												]) ,
-												*/
-												'<br>' ,
-												integrationTags::tdButton([
-													'attr'  => ' btn-info btn-assign-role' ,
-													'value' => '用户授权' ,
-												]) ,
+										integrationTags::tdButton([
+											'attr'       => ' btn-info btn-modify-pwd' ,
+											'value'      => '修改密码' ,
+											'is_display' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
+										]) ,
+										integrationTags::tdButton([
+											'attr'       => ' btn-info btn-assign-role' ,
+											'value'      => '用户授权' ,
+											'is_display' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
+										]) ,
 
-												integrationTags::tdButton([
-													'attr'  => ' btn-danger btn-delete' ,
-													'value' => '删除' ,
-												]) ,
-											] : [];
+										'<br>' ,
 
-										})($v)
+										integrationTags::tdButton([
+											'attr'       => ' btn-danger btn-delete' ,
+											'value'      => '删除' ,
+											'is_display' => (function() use ($v) {
+												//是管理员id 和 自己的id不显示复选框
+												return !isGlobalManagerId($v['id']) || ($v['id'] == getAdminSessionInfo('id'));
+											})() ,
+										]) ,
 
-									) ,
+										integrationTags::tdButton([
+											'attr'       => ' btn-primary btn-assignJournalTypeMap' ,
+											'value'      => '分配刊物' ,
+											'is_display' => $this->logic__common_Role->isUserHasRoles($v['id'], [3]),
+										]) ,
+
+
+									]) ,
 
 								] , ['id' => $v['id']]);
 
@@ -793,16 +882,6 @@
 			return $this->showPage();
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \Exception
-		 */
-		public function setField()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->updateField($this->param));
-		}
 
 		/**
 		 * @throws \Exception
@@ -812,20 +891,28 @@
 			$this->initLogic();
 
 			return $this->jump($this->logic->delete($this->param , [
+/*
 				[
-					function($ids) {
+					////////////////////////////////
+					/// 放置回收站
+					////////////////////////////////
+
+					function(&$param) {
 						//删除用户角色关联记录
 						return db('user_role')->where([
 								'user_id' => [
 									'in' ,
-									$ids ,
+									$param['ids'] ,
 								] ,
 							])->delete() !== false;
 					} ,
-					[$this->param['ids']] ,
-				] ,
+					[] ,
+				] ,*/
+
 			]));
 		}
+
+
 
 		public function assignRoles()
 		{
@@ -841,17 +928,10 @@
 				session(URL_MODULE , $this->param['id']);
 
 				//获取所有有效角色
-				$roles = $this->logic__common_role->getActivedData();
+				$roles_ = $this->logic__common_role->getFormatedData();
 
 				//获取当前用户有的角色
 				$currRoles = $this->logic->getUserRoles($this->param);
-
-				$roles_ = array_map(function($v) {
-					return [
-						'value' => $v['id'] ,
-						'field' => $v['name'] ,
-					];
-				} , $roles);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::row([
@@ -860,15 +940,65 @@
 							integrationTags::form([
 								//blockCheckbox
 								//inlineCheckbox
-								integrationTags::blockCheckbox($roles_ , 'roles[]' , '用户角色' , '每个用户可分配多个角色' , $currRoles) ,
+								integrationTags::blockCheckbox($roles_ , 'roles[]' , '用户角色' , '每个用户只能分配1个角色' , $currRoles) ,
+								//integrationTags::blockRadio($roles_ , 'roles[]' , '用户角色' , '为用户分配角色' , isset($currRoles[0]) ? $currRoles[0] : 0) ,
 							] , [
 								'id'     => 'form1' ,
 								'method' => 'post' ,
 								'action' => url() ,
 							]) ,
 						] , [
-							'width'      => '6' ,
+							'width'      => '12' ,
 							'main_title' => '用户授权' ,
+							'sub_title'  => '' ,
+						]) ,
+					]) ,
+
+				] , [
+					'animate_type' => 'fadeInRight' ,
+				]);
+
+				return $this->showPage();
+			}
+		}
+
+
+		public function assignJournalTypeMap()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$this->param['id'] = session(URL_MODULE);
+				$this->jump($this->logic->assignJournalTypeMap($this->param));
+			}
+			else
+			{
+				$this->setPageTitle('编辑分配稿件类型');
+				session(URL_MODULE , $this->param['id']);
+
+				//获取所有类型
+				$journalTypes = $this->logic__common_Journaltype->getFormatedData();
+
+				//获取当前用户有的类型
+				$currJournalTypes = $this->logic->getUserJournalTypes($this->param);
+
+				$this->displayContents = integrationTags::basicFrame([
+					integrationTags::row([
+
+						integrationTags::rowBlock([
+							integrationTags::form([
+								//blockCheckbox
+								//inlineCheckbox
+								integrationTags::blockCheckbox($journalTypes , 'roles[]' , '分配刊物' , '只能跟编辑角色分配，每个用户可分配多个刊物' , $currJournalTypes) ,
+								//integrationTags::blockRadio($roles_ , 'roles[]' , '用户角色' , '为用户分配角色' , isset($currRoles[0]) ? $currRoles[0] : 0) ,
+							] , [
+								'id'     => 'form1' ,
+								'method' => 'post' ,
+								'action' => url() ,
+							]) ,
+						] , [
+							'width'      => '12' ,
+							'main_title' => '分配刊物' ,
 							'sub_title'  => '' ,
 						]) ,
 					]) ,
@@ -892,6 +1022,16 @@
 
 					$result['url'] = URL_PICTURE . DS . $result['savename'];
 
+					$this->logic->updateField([
+						'ids'   => getAdminSessionInfo(SESSOIN_TAG_USER , 'id') ,
+						'val'   => $result['savename'] ,
+						'field' => 'profile_pic' ,
+					]);
+
+					//删除原图
+					delImg(getAdminSessionInfo(SESSOIN_TAG_USER, 'profile_pic'));
+
+					$this->logic->updateSessionByUsername(getAdminSessionInfo(SESSOIN_TAG_USER , 'user'));
 					return $result;
 				} , [
 					200 ,
@@ -901,13 +1041,6 @@
 
 				if($res['is_finished'])
 				{
-					$this->logic->updateField([
-						'ids'   => getAdminSessionInfo('user' , 'id') ,
-						'val'   => $res['savename'] ,
-						'field' => 'profile_pic' ,
-					]);
-					$this->logic->updateSessionByUsername(getAdminSessionInfo('user' , 'user'));
-
 					return $this->result($res, 1, '更新成功', 'json');
 				}
 				else
@@ -926,7 +1059,18 @@
 					integrationTags::row([
 						integrationTags::rowBlock([
 
-							integrationTags::upload(2 , [
+							integrationTags::rowButton([
+								[/*
+									[
+										'class' => 'btn-info ' ,
+										'field' => '重新上传' ,
+										'attr' => 'onclick="location.reload()"' ,
+									] ,*/
+								],
+							]),
+
+
+							integrationTags::upload(SINGLE_IMG , [
 								[
 									'title' => '上传须知' ,
 									'items' => [
@@ -967,6 +1111,7 @@ AAA
 								'server' => "'".url('editProfilePic')."'" ,
 								'accept' =>json_encode( [
 									'extensions' => 'jpg,jpeg,png,gif',
+									'mimeTypes' => 'image/*',
 								]) ,
 							]) ,
 
@@ -981,14 +1126,13 @@ AAA
 								elementsFactory::doubleLabel('div' , function(&$doms) {
 
 									$doms[] = elementsFactory::singleLabel(function(&$doms) {
-										$profile_pic = generateProfilePicPath(getAdminSessionInfo('user', 'profile_pic') , 0);
+										$profile_pic = generateProfilePicPath(getAdminSessionInfo(SESSOIN_TAG_USER , 'profile_pic') , 0);
 
-										$attr = tagConstructor::buildKV([
-											'src' => $profile_pic,
-											'class' => 'profile_pic_preview',
+										$doms = integrationTags::singleLabel('img' , [
+											'src'   => $profile_pic ,
+											'class' => 'profile_pic_preview' ,
 										]);
 
-										$doms[] = '<img '.$attr.'/>';
 									});
 
 								} , [
@@ -1004,6 +1148,9 @@ AAA
 							'sub_title'  => '' ,
 						]) ,
 					]) ,
+				],[
+					'animate_type' => 'fadeInRight' ,
+					'attr'         => '' ,
 				]);
 
 				return $this->showPage();

@@ -72,6 +72,15 @@ Css;
 		 */
 		function setEventMap($events)
 		{
+
+			$t = <<<AAAAA
+			
+					window.uploaderEventMap = {
+						___ccccccc___
+					};
+AAAAA;
+
+
 			$tmp1 = "__FIELD__ : __VALUE__ ,";
 			$str = '';
 			foreach ($events as $k => $v)
@@ -81,7 +90,9 @@ Css;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('eventsMap') , $str);
+			$this->replaceTag(static::makeNodeName('eventsMap') ,  strtr($t , [
+				'___ccccccc___' => $str,
+			]));
 		}
 
 
@@ -90,6 +101,14 @@ Css;
 		 */
 		function setOptionMap($option)
 		{
+			$t = <<<AAAAA
+			
+					window.uploaderOptionMap = {
+						___ccccccc___
+					};
+AAAAA;
+
+
 			$tmp1 = "__FIELD__ : __VALUE__ ,";
 			$str = '';
 			foreach ($option as $k => $v)
@@ -99,9 +118,11 @@ Css;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('optionsMap') , $str);
-		}
+			$this->replaceTag(static::makeNodeName('optionsMap') ,  strtr($t , [
+				'___ccccccc___' => $str,
+			]));
 
+		}
 
 		/**
 		 * @param        $options
@@ -140,7 +161,9 @@ Css;
 			/**
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
-			$this->setNodeValue([]);
+			$this->setNodeValue([
+				'default_img' =>generateProfilePicPath(config('default_img'), 0) ,
+			]);
 			/**
 			 *--------------------------------------------------------------------------
 			 */
@@ -166,7 +189,7 @@ Css;
 									<!--用来预览图片-->
 
 									<div class="uploader-preview">
-										<img src="./img/timg.jpg" alt="">
+										<img src="<!-- ~~~default_img~~~ -->" alt="">
 									</div>
 
 									<div class="uploader-btn-box">
@@ -190,15 +213,13 @@ Css;
 								<!--/单图片dom结构部分-->
 
 							</div>
-											
-							<script>
-								window.uploaderEventMap = {
-									<!-- ~~~eventsMap~~~ -->
-								};
-								window.uploaderOptionMap = {
-									<!-- ~~~optionsMap~~~ -->
-								};
 					
+							<script>
+							//<!-- ~~~eventsMap~~~ -->
+							
+							
+							//<!-- ~~~optionsMap~~~ -->
+						
 							</script>
 							<!--/单图片dom结构部分-->
 

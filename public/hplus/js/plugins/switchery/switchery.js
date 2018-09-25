@@ -6,8 +6,7 @@
 		if (!("exports" in module) && typeof module.definition === "function")
 		{
 			module.client = module.component = true;
-			module.definition.call(this, module.exports = {},
-				module);
+			module.definition.call(this, module.exports = {}, module);
 			delete module.definition
 		}
 		return module.exports
@@ -110,6 +109,8 @@
 			exports: exports
 		}
 	};
+
+
 	require.register("abpetkov~transitionize@0.0.3",
 		function (exports, module) {
 			module.exports = Transitionize;
@@ -896,6 +897,11 @@
 				}
 			}
 		});
+
+
+
+
+
 	require.register("switchery",
 		function (exports, module) {
 			var transitionize = require("abpetkov~transitionize@0.0.3"),
@@ -1081,11 +1087,6 @@
 			};
 
 			Switchery.prototype.bindClick = function () {
-				console.dir(this);
-				console.dir(this.isAuto);
-				console.dir(this.isChecked());
-				console.dir(this.markedAsSwitched());
-
 				if (this.isAuto)
 				{
 					this.toggleStatus();

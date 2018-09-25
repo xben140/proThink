@@ -41,7 +41,7 @@
 				] ,*/
 
 
-		'cmd' => [
+		'doc' => [
 			'__file__'   => [
 				'common.php' ,
 				'config.php' ,
@@ -56,17 +56,17 @@
 				'service' ,
 			] ,
 			'controller' => [
-				'HomeBase' ,
+				'DocBase' ,
 			] ,
 			'model'      => [
-				'HomeBase' ,
+				'DocBase' ,
 			] ,
 			'logic'      => [
-				'HomeBase' ,
+				'DocBase' ,
 			] ,
 			'behavior'   => [] ,
 			'validate'   => [
-				'HomeBase' ,
+				'DocBase' ,
 			] ,
 			'view'       => [
 				'index' ,

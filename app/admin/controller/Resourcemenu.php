@@ -15,13 +15,26 @@
 		/**
 		 * @return mixed
 		 * @throws \ReflectionException
+		 * @throws \Exception
 		 */
 		public function add()
 		{
 			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->jump($this->logic->add($this->param_post));
+				$this->jump($this->logic->add($this->param_post , [] , [
+					[
+						function(&$param) {
+							//菜单添加好后把菜单id添加到权限表里
+							return db('privilege_resource')->insert([
+									'resource_id'   => $param['_id'] ,
+									'resource_type' => RESOURCE_INDEX_MENU ,
+								]) !== false;
+						} ,
+						[] ,
+						'授权失败，请稍后再试...',
+					] ,
+				]));
 			}
 			else
 			{
@@ -213,7 +226,6 @@
 				session(md5(URL_MODULE) , $this->param['id']);
 
 
-
 				//获取可做父级的action
 				$parentsMenus = $this->logic->getDefaultAction();
 				$parentsMenus = makeTree($parentsMenus);
@@ -392,6 +404,41 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::rowButton([
+							[
+								[
+									'class' => 'btn-success  search-dom-btn-1' ,
+									'field' => '筛选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-all' ,
+									'field' => '全选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-rev' ,
+									'field' => '反选' ,
+								] ,
+								[
+									'class' => 'btn-danger  btn-add' ,
+									'field' => '添加数据' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
+								] ,
+								[
+									'class' => 'btn-danger  multi-op multi-op-del' ,
+									'field' => '批量删除' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
+								] ,
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
+									'field' => '批量启用' ,
+								] ,
+								[
+									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
+									'field' => '批量禁用' ,
+								] ,
+							],
+						]) ,
+
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							/**
@@ -399,38 +446,6 @@
 							 */
 							$data = $this->logic->dataList($this->param);
 							$data = makeTree($data);
-
-
-							$_this->setMenu([
-								[
-									'class' => 'btn-success  search-dom-btn-1',
-									'field' => '筛选',
-								],
-								[
-									'class' => 'btn-info  se-all',
-									'field' => '全选',
-								],
-								[
-									'class' => 'btn-info  se-rev',
-									'field' => '反选',
-								],
-								[
-									'class' => 'btn-danger  btn-add',
-									'field' => '添加数据',
-								],
-								[
-									'class' => 'btn-danger  multi-op multi-op-del',
-									'field' => '批量删除',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-									'field' => '批量启用',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-									'field' => '批量禁用',
-								],
-							]);
 
 							/**
 							 * 分页
@@ -600,22 +615,11 @@
 								$doms = array_merge($doms , $t);
 
 								//状态
+								$k = static::$statusMap;
+								array_pop($k);
+								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
 								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio([
-										[
-											'value' => '-1' ,
-											'field' => '全部' ,
-										] ,
-										[
-											'value' => '0' ,
-											'field' => static::$statusMap[0] ,
-										] ,
-										[
-											'value' => '1' ,
-											'field' => static::$statusMap[1] ,
-										] ,
-									] , 'status' , '状态' , input('status' , '-1')) ,
-
+									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
@@ -814,18 +818,48 @@
 			return $this->showPage();
 		}
 
-		public function setField()
-		{
-			$this->initLogic();
 
-			return $this->jump($this->logic->updateField($this->param));
-		}
-
+		/**
+		 * @throws \Exception
+		 */
 		public function delete()
 		{
 			$this->initLogic();
 
-			return $this->jump($this->logic->delete($this->param));
+			return $this->jump($this->logic->delete($this->param , [
+
+				[
+					function(&$param) {
+
+						//查询权限资源关联表id
+						$privilegeId = db('privilege_resource')->where([
+							'resource_id'   => [
+								'in' ,
+								$param['ids'] ,
+							] ,
+							'resource_type' => [
+								'=' ,
+								RESOURCE_INDEX_MENU ,
+							] ,
+						])->value('id');
+
+						//看有没有角色有这个权限，有的话就不能删除
+						$res = db('role_privilege')->where([
+							'privilege_id' => [
+								'in' ,
+								$privilegeId ,
+							] ,
+						])->find();
+
+						return !$res;
+
+					} ,
+					[] ,
+					'有角色被赋予此权限，不允许删除',
+				] ,
+
+
+			]));
 		}
 
 	}

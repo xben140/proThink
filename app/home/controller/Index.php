@@ -160,35 +160,61 @@ css;
 									'style'      => 'width:100%;height:200px;' ,
 								]);
 								$doms = array_merge($doms , $t);
-
-
 							} , [
 								'class' => 'test-div' ,
 								'id'    => 'div1' ,
 							]);
 
-							$path = $this->getTemplatePath(':test');
-
-							$doms[] = elementsFactory::customElementFormPath($path)->make(function(&$doms , $_this) {
-
-
-								$t = integrationTags::staticText([
+							$doms = array_merge($doms , integrationTags::customElementFormPath($this->getTemplatePath('test') , [
+								integrationTags::staticText([
 									'field_name' => 'staticText' ,
 									'value'      => 'value' ,
-								]);
-								$doms = array_merge($doms , $t);
-
-								$t = integrationTags::textarea([
+								]) ,
+								integrationTags::textarea([
 									'field_name' => 'textarea' ,
 									'name'       => 'textarea' ,
 									'value'      => '11' ,
 									'attr'       => '' ,
 									'style'      => 'width:100%;height:200px;' ,
+								]) ,
+							]));
+
+							$doms[] = elementsFactory::linkage()->make(function(&$doms , $_this) {
+								$_this->setNodeValue([
+									'placeholder' => '区域选择' ,
+									'field_name'  => '区域选择' ,
+									'tip'         => '' ,
+									'id'          => '__linkage__' ,
 								]);
-								$doms = array_merge($doms , $t);
+
+								$_this->setConfig([
+									'url'        => ('/portal/area/getAreaByPid') ,
+									'field'      => 'pid' ,
+									'method'     => 'post' ,
+									'defaultVal' => 1 ,
+									'disabled'   => 0 ,
+									'liValue'    => 'id' ,
+									'liField'    => 'area_name' ,
+									'dataType'   => 'json' ,
+									'size'       => [
+										200 ,
+										400 ,
+									] ,
+									'container'  => [
+										[
+											'pid'  => 1 ,
+											'name' => 'a' ,
+										] ,
+										[
+											'name' => 'b' ,
+										] ,
+										[
+											'name' => 'c' ,
+										] ,
+									] ,
+								]);
 
 							});
-
 						});
 						//----------------------------// 表单
 
@@ -668,6 +694,58 @@ css;
 							'main_title' => '大标题' ,
 							'sub_title'  => '小标题' ,
 						]);
+						$doms[] = elementsFactory::rowButton()->make(function(&$doms , $_this) {
+
+
+							$_this->setButton([
+								[
+									[
+										'class'      => 'btn-success  search-dom-btn-1' ,
+										'field'      => '筛选' ,
+										'is_display' => 1 ,
+									] ,
+									[
+										'class'      => 'btn-info  se-all' ,
+										'field'      => '全选' ,
+										'is_display' => 1 ,
+									] ,
+									[
+										'class'      => 'btn-info  se-rev' ,
+										'field'      => '反选' ,
+										'is_display' => 1 ,
+									] ,
+									[
+										'class'      => 'btn-primary  multi-op multi-set-info' ,
+										'field'      => '批量设置信息' ,
+										'is_display' => 1 ,
+									] ,
+									[
+										'class'      => 'btn-danger  btn-add' ,
+										'field'      => '添加' ,
+										'is_display' => 1,
+									] ,
+									[
+										'class'      => 'btn-danger  multi-op multi-op-del' ,
+										'field'      => '批量删除' ,
+										'is_display' => 1,
+									] ,
+									[
+										'class'      => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
+										'field'      => '批量启用' ,
+										'is_display' => 1 ,
+									] ,
+									[
+										'class'      => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
+										'field'      => '批量禁用' ,
+										'is_display' => 1 ,
+									] ,
+								] ,
+							]);
+						});
+
+
+
+
 						/*
 						 *
 						 *
@@ -799,7 +877,6 @@ css;
 										2 ,
 										1 ,
 									]) ,
-
 
 								] , ['col' => '12']);
 								$doms = array_merge($doms , $t);
@@ -1469,8 +1546,18 @@ css;
 
 		public function download()
 		{
+			$file = 'C:\Users\Administrator\Desktop\t.php';
+			$saveName = 'dd.php';
 
+			//$downloader = new downloader($file, $saveName);
+			//$downloader->send();
+
+			downloadFile($file , $saveName );
 		}
+
+
+
+
 
 		public function uploadTest1()
 		{
@@ -1511,39 +1598,38 @@ css;
 								'data-pid' => 6 ,
 							]));
 
-							$doms[] = elementsFactory::staticText()->make(function(&$doms , $_this) {
-								$_this->setNodeValue([
-									'field_name' => 'username' ,
-									'value'      => 'hello' ,
-								]);
-							});
-
-
-							//生成文本
-							$doms = array_merge($doms , integrationTags::hidden([
-								'id'    => 'upload-files' ,
-								'name'  => 'files' ,
-								'value' => '' ,
-							]));
 
 
 							//uploadSingleImg
 							$doms[] = elementsFactory::uploadSingleFile()->make(function(&$doms , $_this) {
 								$_this->setOption([
 									[
-										'title' => '111' ,
+										'title' => '上传须知' ,
 										'items' => [
-											'sdfsdfs1' ,
-											'sdfsdfs2' ,
-											'sdfsdfs3' ,
+											'单次最多添加300个文档' ,
+											'单个文档最大50M' ,
+											'所有文件总大小最大200M，如果需要上传的大文档过多，请分多次上传' ,
+											'允许的上传格式有.doc .docx .wps' ,
 										] ,
 									] ,
 									[
-										'title' => '222' ,
+										'title' => '命名规则（添加文档时如果弹出提示框，请对比下面的命名示例，仔细阅读此提示）' ,
 										'items' => [
-											'sdfsdfs12' ,
-											'sdfsdfs22' ,
-											'sdfsdfs32' ,
+											'文档名字开头必须为数字，即版数，可为小数或者整数，后面紧跟半角字母 P ，P不区分大小写，上传后此数字用于统计版数' ,
+											'字母P后面紧跟 - 符号或者作者名字' ,
+											'符号后面紧跟作者名字，多个作者名字用 & 符号分隔，不能用空格分隔，作者名字之间不能有空格，作者名字为两个字的需特别注意此情况' ,
+											'作者名字后面紧跟 - 符号，符号允许一个或者多个' ,
+											'符号后面紧跟文档标题，文档标题可以是除空格外的任意字符' ,
+											'文档标题后紧跟文档后缀，允许上传的文档后缀为 .doc .docx .wps 三种格式' ,
+										] ,
+									] ,
+									[
+										'title' => '命名示例（作者名字和文档名之间必须有最少一个 - 符号连接，否则将无法区分作者名和文档名）' ,
+										'items' => [
+											'1P--马玲--大众传播对少数民族地区青少年世界观影响的调查与思考.docx' ,
+											'1p-郑洪峰&郑洪峰-- 油田社区物业管理标准化和规范化策略探究.docx' ,
+											'1.5p - - 郑洪峰&郑洪峰&郑洪峰 - - 油田社区物业管理标准化和规范化策略探究.doc' ,
+											'1.0P郑洪峰-油田社区物业管理标准化和规范化策略探究.wps' ,
 										] ,
 									] ,
 								]);
@@ -1651,13 +1737,6 @@ AAA
 								'data-pid' => 6 ,
 							]));
 
-							$doms[] = elementsFactory::staticText()->make(function(&$doms , $_this) {
-								$_this->setNodeValue([
-									'field_name' => 'username' ,
-									'value'      => 'hello' ,
-								]);
-							});
-
 
 							//生成文本
 							$doms = array_merge($doms , integrationTags::hidden([
@@ -1667,24 +1746,37 @@ AAA
 							]));
 
 
-							//uploadMutilImg
+							//uploadMultiImg
 
-							$doms[] = elementsFactory::uploadMutilFile()->make(function(&$doms , $_this) {
+							$doms[] = elementsFactory::uploadMultiFile()->make(function(&$doms , $_this) {
 								$_this->setOption([
 									[
-										'title' => '111' ,
+										'title' => '上传须知' ,
 										'items' => [
-											'sdfsdfs1' ,
-											'sdfsdfs2' ,
-											'sdfsdfs3' ,
+											'单次最多添加300个文档' ,
+											'单个文档最大50M' ,
+											'所有文件总大小最大200M，如果需要上传的大文档过多，请分多次上传' ,
+											'允许的上传格式有.doc .docx .wps' ,
 										] ,
 									] ,
 									[
-										'title' => '222' ,
+										'title' => '命名规则（添加文档时如果弹出提示框，请对比下面的命名示例，仔细阅读此提示）' ,
 										'items' => [
-											'sdfsdfs12' ,
-											'sdfsdfs22' ,
-											'sdfsdfs32' ,
+											'文档名字开头必须为数字，即版数，可为小数或者整数，后面紧跟半角字母 P ，P不区分大小写，上传后此数字用于统计版数' ,
+											'字母P后面紧跟 - 符号或者作者名字' ,
+											'符号后面紧跟作者名字，多个作者名字用 & 符号分隔，不能用空格分隔，作者名字之间不能有空格，作者名字为两个字的需特别注意此情况' ,
+											'作者名字后面紧跟 - 符号，符号允许一个或者多个' ,
+											'符号后面紧跟文档标题，文档标题可以是除空格外的任意字符' ,
+											'文档标题后紧跟文档后缀，允许上传的文档后缀为 .doc .docx .wps 三种格式' ,
+										] ,
+									] ,
+									[
+										'title' => '命名示例（作者名字和文档名之间必须有最少一个 - 符号连接，否则将无法区分作者名和文档名）' ,
+										'items' => [
+											'1P--马玲--大众传播对少数民族地区青少年世界观影响的调查与思考.docx' ,
+											'1p-郑洪峰&郑洪峰-- 油田社区物业管理标准化和规范化策略探究.docx' ,
+											'1.5p - - 郑洪峰&郑洪峰&郑洪峰 - - 油田社区物业管理标准化和规范化策略探究.doc' ,
+											'1.0P郑洪峰-油田社区物业管理标准化和规范化策略探究.wps' ,
 										] ,
 									] ,
 								]);
@@ -1768,100 +1860,90 @@ AAA
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::doubleLabel('div', [
 
-						integrationTags::form([
-
-							integrationTags::staticText([
-								'field_name' => 'staticText' ,
-								'value'      => 'value' ,
-							]) ,
-
-							integrationTags::hidden([
-								'id'    => 'upload-files' ,
-								'name'  => 'files' ,
-								'value' => '' ,
-							]),
-
-							integrationTags::uediter([
-								'field_name' => '内容' ,
-								'name'       => 'uediter' ,
-								'value'      => 'sdfsdfsdfsdf' ,
-							]) ,
-
-							integrationTags::upload(3, [
+							integrationTags::upload(MULTI_IMG, [
 								[
-									'title' => '111' ,
+									'title' => '上传须知' ,
 									'items' => [
-										'sdfsdfs1' ,
-										'sdfsdfs2' ,
-										'sdfsdfs3' ,
+										'单次最多添加300个文档' ,
+										'单个文档最大50M' ,
+										'所有文件总大小最大200M，如果需要上传的大文档过多，请分多次上传' ,
+										'允许的上传格式有.doc .docx .wps' ,
 									] ,
 								] ,
 								[
-									'title' => '222' ,
+									'title' => '命名规则（添加文档时如果弹出提示框，请对比下面的命名示例，仔细阅读此提示）' ,
 									'items' => [
-										'sdfsdfs12' ,
-										'sdfsdfs22' ,
-										'sdfsdfs32' ,
+										'文档名字开头必须为数字，即版数，可为小数或者整数，后面紧跟半角字母 P ，P不区分大小写，上传后此数字用于统计版数' ,
+										'字母P后面紧跟 - 符号或者作者名字' ,
+										'符号后面紧跟作者名字，多个作者名字用 & 符号分隔，不能用空格分隔，作者名字之间不能有空格，作者名字为两个字的需特别注意此情况' ,
+										'作者名字后面紧跟 - 符号，符号允许一个或者多个' ,
+										'符号后面紧跟文档标题，文档标题可以是除空格外的任意字符' ,
+										'文档标题后紧跟文档后缀，允许上传的文档后缀为 .doc .docx .wps 三种格式' ,
+									] ,
+								] ,
+								[
+									'title' => '命名示例（作者名字和文档名之间必须有最少一个 - 符号连接，否则将无法区分作者名和文档名）' ,
+									'items' => [
+										'1P--马玲--大众传播对少数民族地区青少年世界观影响的调查与思考.docx' ,
+										'1p-郑洪峰&郑洪峰-- 油田社区物业管理标准化和规范化策略探究.docx' ,
+										'1.5p - - 郑洪峰&郑洪峰&郑洪峰 - - 油田社区物业管理标准化和规范化策略探究.doc' ,
+										'1.0P郑洪峰-油田社区物业管理标准化和规范化策略探究.wps' ,
 									] ,
 								] ,
 							], [
 								'beforeFileQueued' => <<<AAA
-function (file) {
-	var subject = $.trim(file.name);
-	console.dir(subject + 123456)
-}
+	function (file) {
+		var subject = $.trim(file.name);
+		layer.msg(subject + 123456);
+	}
 AAA
 								,
 
-
 								'uploadSuccess' => <<<AAA
-function (file, response) {
-	//等于2或1
-	if (response.sign)
-	{
-		if (response.is_finished == 1)
+	function (file, response) {
+		//等于2或1
+		if (response.sign)
 		{
-			console.dir(response)
-
-			window.upload_file.push({
-				"savename":response.savename,
-			});
-			
-			$(".uploader-preview").find('img').attr({
-				'src':response['thumb_url'],
-			});
-			$(".status-box-text").text('上传完成');
+			if (response.is_finished == 1)
+			{
+				console.dir(response)
+	
+				window.upload_file.push({
+					"savename":response.savename,
+				});
+				
+				$(".uploader-preview").find('img').attr({
+					'src':response['thumb_url'],
+				});
+				$(".status-box-text").text('上传完成');
+			}
+			else
+			{
+			}
 		}
 		else
 		{
+			//服务器处理出错
 		}
 	}
-	else
-	{
-		//服务器处理出错
-	}
-}
 AAA
 								,
 
-
-
 								'uploadFinished' => <<<AAA
-function () {
-	$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
-	layer.msg('处理完成111111111');
-}
+	function () {
+		$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
+		layer.msg('处理完成111111111');
+	}
 AAA
 								,
 							], [
-								'server' => url('upload') ,
+								'server'  => "'" . url('upload') . "'" ,
 							]) ,
 
-						] , [
-							'id'     => 'form122222' ,
-							'method' => 'post' ,
-							'action' => url('api') ,
+						], [
+							'class' => 'col-4' ,
 						]) ,
 
 

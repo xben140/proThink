@@ -29,6 +29,38 @@
 			return $roles;
 		}
 
+		/**
+		 * 获取当前用户对应分配的刊物类型id 编辑角色才有
+		 *
+		 * @param $param
+		 *
+		 * @return mixed
+		 */
+		public function getUserJournalTypes($param)
+		{
+			$id = $param['id'];
+
+			$roles = $this->model__common_Journaltype->getJournalTypeIdByUserId($id);
+
+			return $roles;
+		}
+
+		/**
+		 * 获取当前用户的角色全部信息
+		 *
+		 * @param $param
+		 *
+		 * @return mixed
+		 */
+		public function getUserRolesInfo($param)
+		{
+			$id = $param['id'];
+
+			$roles = $this->model__common_role->getRoleByUserId($id);
+
+			return $roles->toArray();
+		}
+
 
 		/**
 		 * 为用户分配角色
@@ -89,40 +121,65 @@
 		}
 
 
+
 		/**
-		 * 添加用户
+		 * 为用户分配刊物类型
 		 *
-		 * @param $data
+		 * @param $param
 		 *
 		 * @return array
 		 */
-		public function add($data)
+		public function assignJournalTypeMap($param)
 		{
-			$validateResult = $this->validate_->scene('add')->check($data);
+			//用户id
+			$id = $param['id'];
+			!isset($param['roles']) && $param['roles'] = [];
+			//新分配角色id
+			$juornaltypes = $param['roles'];
 
-			if($validateResult)
+			$res = execClosureList([
+				[
+					//删除之前的角色
+					function($id) {
+						return db('user_juornaltype')->where('user_id' , $id)->delete() !== false;
+					} ,
+					[$id] ,
+				] ,
+				[
+					//添加新角色
+					function($juornaltypes , $id) {
+						foreach ($juornaltypes as $v)
+						{
+							db('user_juornaltype')->insert([
+								'user_id' => $id ,
+								'type_id' => $v ,
+							]);
+						}
+
+						return true;
+					} ,
+					[
+						$juornaltypes ,
+						$id ,
+					] ,
+				] ,
+			] , $err);
+
+			if($res)
 			{
-				list($data['salt'] , $data['password']) = array_values(buildPwd($data['password']));
-				$id = $this->model_->insertData($data);
-				if(is_int($id))
-				{
-					$this->retureResult['message'] = '添加成功';
-					$this->retureResult['sign'] = RESULT_SUCCESS;
-				}
-				else
-				{
-					$this->retureResult['message'] = $this->model_->getError();
-					$this->retureResult['sign'] = RESULT_ERROR;
-				}
+				$this->retureResult['message'] = '分配成功';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
 			}
 			else
 			{
-				$this->retureResult['message'] = $this->validate_->getError();
+				$msg = $err ? $err : $this->model_->getError();
+				$this->retureResult['message'] = $msg;
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 
 			return $this->retureResult;
 		}
+
 
 
 		/**
@@ -181,6 +238,10 @@
 		{
 			$where = [];
 			$order = [];
+			$join = [];
+			$field = [];
+
+
 			$reg_time_begin = 0;
 			$reg_time_end = 99999999999999;
 
@@ -231,6 +292,16 @@
 						}
 						break;
 
+					case 'role_id' :
+						if($v != -1)
+						{
+							$where['c.id'] = [
+								'=' ,
+								$v ,
+							];
+						}
+						break;
+
 					default :
 						#...
 						break;
@@ -244,13 +315,30 @@
 					$reg_time_end ,
 				] ,
 			];
-
 			$order[$order_filed] = $order_;
 
+			$join[] = [
+				'ithink_user_role b',
+				$this->model_::makeSelfAliasField('id') . '  = b.user_id ' ,
+				'left',
+			];
+
+			$join[] = [
+				'ithink_role c',
+				'c.id = b.role_id',
+				'left',
+			];
+
+
+			$field[] = $this->model_::makeSelfAliasField('*');
+			$field[] = 'GROUP_CONCAT(c.`name`) as role';
 
 			return $condition = [
+				'group' => $this->model_::makeSelfAliasField('id'),
 				'where' => $where ,
 				'order' => $order ,
+				'join'  => $join ,
+				'field' => implode(', ' , $field) ,
 			];
 		}
 	}

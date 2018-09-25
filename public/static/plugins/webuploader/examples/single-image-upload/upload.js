@@ -95,9 +95,7 @@ $(function () {
 
 		//上传过程中触发，携带上传进度。
 		'uploadProgress': function (file, percentage) {
-			let progress = parseInt(percentage * 100) + '%';
-			$('.progress-bar').css('width', progress);
-			$(".status-box-progess").text(progress);
+			updateProcess(percentage * 100);
 		},
 
 		//当文件被加入队列以后触发。
@@ -148,11 +146,11 @@ $(function () {
 		//当 uploader 被重置的时候触发。
 		'reset': function (file) {
 
-
 		},
 		//某个文件开始上传前触发，一个文件只会触发一次。
 		'uploadStart': function (file) {
-			$("#filePicker").hide();
+			// $("#filePicker").hide();
+			updateProcess(0);
 			$(".status-box-text").text('上传中，请勿刷新...');
 		},
 		//当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开起分片上传的前提下此事件可能会触发多次。
@@ -270,6 +268,16 @@ $(function () {
 	 *
 	 *
 	 */
+
+
+
+
+	function updateProcess(percent)
+	{
+		let progress = parseInt(percent) + '%';
+		$('.progress-bar').css('width', progress);
+		$(".status-box-progess").text(progress);
+	}
 
 	function showMessage(code)
 	{

@@ -17,8 +17,9 @@
 		public function getAreaByPid($pid)
 		{
 			$this->setCondition([
+				'alias' => self::$currentTableAlias ,
 				'where' => [
-					self::$currentTableAlias . '.pid' => $pid ,
+					self::makeSelfAliasField('pid') => $pid ,
 				] ,
 			]);
 			$data = $this->select();

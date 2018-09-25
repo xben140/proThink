@@ -58,18 +58,26 @@ js;
 		 *
 		 * @param string $str
 				 */
-		function setOptions($arr = [], $selected = null)
+		function setOptions($arr = [] , $selected = null)
 		{
-			$tmp = "<option value='__K__' __SELECTED__>__V__</option>";
+			$tmp = "<option value='__K__' __SELECTED__ style='background: __C__'>__V__</option>";
 			$str = '';
 
 			foreach ($arr as $k => $v)
 			{
-				$replacement['__SELECTED__'] = '';
-				$selected == $v['value'] && ($replacement['__SELECTED__'] = 'selected');
 
 				$replacement['__K__'] = $v['value'];
 				$replacement['__V__'] = $v['field'];
+				$replacement['__C__'] = '#fff';
+				isset($v['color']) && $v['color'] && ($replacement['__C__'] = $v['color']);
+
+				$replacement['__SELECTED__'] = '';
+				if($selected == $v['value'])
+				{
+					($replacement['__SELECTED__'] = 'selected');
+					$this->replaceTag(static::makeNodeName('ccccc') , $replacement['__C__']);
+				}
+
 
 				$str .= strtr($tmp , $replacement);
 			}
@@ -90,8 +98,11 @@ js;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
-				'attr'  => '' ,
-				'field' => '' ,
+				'attr'             => '' ,
+				'field'            => '' ,
+				'disabled'         => '' ,
+				'success_callback' => 'updateColor' ,
+				'change_callback'  => 'registUpdate' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -106,7 +117,7 @@ js;
 			 */
 			$contents = <<<'CONTENTS'
 			
-		<select  data-field="<!-- ~~~field~~~ -->"  class="   td-select" <!-- ~~~attr~~~ -->>
+		<select style='background: <!-- ~~~ccccc~~~ -->'  data-field="<!-- ~~~field~~~ -->"  class=" td-select"   data-change-callback="<!-- ~~~change_callback~~~ -->"   data-success-callback="<!-- ~~~success_callback~~~ -->" <!-- ~~~attr~~~ --> <!-- ~~~disabled~~~ --> >
 			<!-- ~~~options~~~ -->
 		</select>
 

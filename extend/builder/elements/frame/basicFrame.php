@@ -106,7 +106,7 @@ Css;
 			 */
 			$contents = <<<'CONTENTS'
 			
-		<div class="wrapper wrapper-content animated <!-- ~~~animate_type~~~ -->  <!-- ~~~attr~~~ --> ">
+		<div class="wrapper wrapper-content animated <!-- ~~~animate_type~~~ -->  "  <!-- ~~~attr~~~ -->>
 
 	<!-- _____DEFAULT_CONTENTS_____ -->
 

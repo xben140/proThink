@@ -120,7 +120,7 @@
 												<span class="td-modify name" data-field="name" data-reg="/^\d{1,4}$/" data-msg="请填写合法手机号码"></span>
 											</td>
 											<td>
-												<select data-field="vas" class=" form-control  inline td-select">
+												<select data-field="vas" data-change-callback="registUpdate"  data-success-callback="refresh_page"  class=" form-control  inline td-select">
 													<option value="0">请选择</option>
 													<option value="1">选项1</option>
 													<option value="2">选项2</option>
@@ -136,10 +136,10 @@
 											</td>
 											<td>
 												<span class="pie">是否启用</span>
-												<input type="checkbox" class="js-switch" name="switch2[]" data-change-callback="switcherUpdateField" />
+												<input type="checkbox" class="js-switch" name="switch2[]" data-change-callback="switcherUpdateField" data-success-callback="refresh_page" />
 											</td>
 											<td>
-												<input type="checkbox" class="js-switch" name="switch2[]" data-change-callback="switcherUpdateField" />
+												<input type="checkbox" class="js-switch" name="switch2[]" data-change-callback="switcherUpdateField" data-success-callback="refresh_page" />
 											</td>
 										</tr>
 
@@ -163,10 +163,10 @@
 											</td>
 											<td>
 												<span class="pie">是否启用</span>
-												<input type="checkbox" checked class="js-switch-notauto" name="switch2[]" data-change-callback="switcherUpdateFieldConfirm" />
+												<input type="checkbox" checked class="js-switch-notauto" name="switch2[]" data-change-callback="switcherUpdateFieldConfirm" data-success-callback="refresh_page" />
 											</td>
 											<td>
-												<input type="checkbox" class="js-switch-notauto" name="switch2[]" data-change-callback="switcherUpdateFieldConfirm" />
+												<input type="checkbox" class="js-switch-notauto" name="switch2[]" data-change-callback="switcherUpdateFieldConfirm" data-success-callback="refresh_page" />
 											</td>
 										</tr>
 
@@ -280,10 +280,10 @@
 		</div>
 
 		<script>
-			window.deleteUrl = '/home/index/delete.html';
-			window.setFieldUrl = '/home/index/setfield.html';
-			window.detailUrl = '/home/index/detail.html';
-			window.editUrl = '/home/index/edit.html';
+			window.deleteUrl = '/home/Api/Api.html';
+			window.setFieldUrl = '/home/Api/Api.html';
+			window.detailUrl = '/home/Api/Api.html';
+			window.editUrl = '/home/Api/Api.html';
 		</script>
 
 

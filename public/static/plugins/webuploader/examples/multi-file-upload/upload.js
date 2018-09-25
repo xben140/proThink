@@ -173,6 +173,7 @@ $(function () {
 		//可以对文件名字做判断
 		'beforeFileQueued': function (file) {
 			var subject = $.trim(file.name);
+			console.dir(subject);
 		},
 
 		//上传过程中触发，携带上传进度。
@@ -236,7 +237,6 @@ $(function () {
 
 		//当所有文件上传结束时触发。
 		'uploadFinished': function () {
-			console.dir(window.upload_file)
 			$upload.remove();
 			showMessage('uploadComplete')
 
@@ -365,7 +365,8 @@ $(function () {
 	//自定义事件覆盖默认事件
 	if(window.uploaderEventMap !== 'undefined' && typeof window.uploaderEventMap === 'object')
 	{
-		for (var key in window.uploaderEventMap)
+
+		for (let key in window.uploaderEventMap)
 		{
 			eventMap[key] = window.uploaderEventMap[key];
 		}
@@ -374,7 +375,7 @@ $(function () {
 	//自定义选项覆盖默认选项
 	if(window.uploaderOptionMap !== 'undefined' && typeof window.uploaderOptionMap  === 'object')
 	{
-		for (var key in window.uploaderOptionMap)
+		for (let key in window.uploaderOptionMap)
 		{
 			options[key] = window.uploaderOptionMap[key];
 		}

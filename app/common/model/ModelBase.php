@@ -346,6 +346,15 @@
 			return !is_null($val) ? $val : 0;
 		}
 
+
+		public function getRemarkAttr($value)
+		{
+			$value = htmlspecialchars_decode($value);
+			$value = html_entity_decode($value);
+			$value = stripslashes($value);
+
+			return $value;
+		}
 	}
 
 

@@ -41,7 +41,7 @@
 		public $customJs = /** @lang text */
 			<<<'js'
 		<script>	
-		layer.alert(13213)
+		//layer.alert(13213)
 		</script>
 js;
 
@@ -165,31 +165,6 @@ js;
 		}
 
 
-
-
-		/**
-		 * 设置功能按钮
-		 *
-		 * @param array $menu
-		 */
-		function setMenu($menu = [])
-		{
-			$tmp = '<button type="button" class="btn __CLASS__">__FIELD__</button>'."\r\n";
-			$str = '';
-
-			foreach ($menu as $k => $v)
-			{
-				$replacement['__CLASS__'] = $v['class'];
-				$replacement['__FIELD__'] = $v['field'];
-
-				$str .= strtr($tmp , $replacement);
-			}
-
-			$this->replaceTag(static::makeNodeName('menu') , $str);
-		}
-
-
-
 		/**
 		 *--------------------------------------------------------------------------
 		 */
@@ -222,51 +197,26 @@ js;
 			 * ----------------------------------------自定义内容
 			 */
 			$contents = <<<'CONTENTS'
-						
-							<div class="row">
-								<div class="col-sm-4 m-b-xs">
-									<button type="button" class="btn btn-success" onclick="location.reload()"> 刷新页面</button>
-									<!--<a target="_self" href="" class="btn btn-success ">重置搜索条件</a>-->
-									<a target="_blank" href="#" class="btn btn-success "> 在新窗口中打开</a>
-								</div>
-							</div>
-							
-							<div class="row">
-								<div class="col-sm-12 m-b-xs">
-												<!-- ~~~menu~~~ -->
-									
-									<!--
-									<button type="button" class="btn btn-success  search-dom-btn-1"> 筛选</button>
-									<button type="button" class="btn btn-info  se-all"> 全选</button>
-									<button type="button" class="btn btn-info  se-rev"> 反选</button>
-									<button type="button" class="btn btn-danger  btn-add"> 添加数据</button>
-									<button type="button" class="btn btn-danger  multi-op multi-op-del"> 批量删除</button>
-									<button type="button" class="btn btn-primary  multi-op multi-op-toggle-status-enable"> 批量启用</button>
-									<button type="button" class="btn btn-warning  multi-op multi-op-toggle-status-disable"> 批量禁用</button>
-								-->
-								</div>
-							</div>
+			
+			<div class="table-responsive">
+			
+				<!-- ~~~pagination~~~ -->
 
-							
-							<div class="table-responsive">
-							
-								<!-- ~~~pagination~~~ -->
+				<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
+				<table class="table table-striped  table-bordered table-hover table-condensed ">
+					<thead>
+						<tr>
+							<!-- ~~~head~~~ -->
+						</tr>
+					</thead>
+					<tbody>
+							<!-- _____DEFAULT_CONTENTS_____ -->
+					</tbody>
+				</table>
 
-								<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
-								<table class="table table-striped  table-bordered table-hover table-condensed ">
-									<thead>
-										<tr>
-											<!-- ~~~head~~~ -->
-										</tr>
-									</thead>
-									<tbody>
-											<!-- _____DEFAULT_CONTENTS_____ -->
-									</tbody>
-								</table>
-		
-								<!-- ~~~pagination~~~ -->
+				<!-- ~~~pagination~~~ -->
 
-							</div>
+			</div>
 
 
 CONTENTS;

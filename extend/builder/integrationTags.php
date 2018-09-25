@@ -79,11 +79,17 @@
 
 		/**
 		 * 生成每个表格前的复选框
+		 *
+		 * @param bool $isDisplay
+		 *
 		 * @return array
 		 */
-		public static function tdCheckbox()
+		public static function tdCheckbox($isDisplay = true)
 		{
-			$doms = elementsFactory::rowCheckbox()->make(function(&$doms , $_this) { $_this->setNodeValue([]); });
+			$doms = elementsFactory::rowCheckbox()->make(function(&$doms , $_this) use ($isDisplay) {
+				$_this->setNodeValue([]);
+				$_this->setIsDisplay($isDisplay);
+			});
 
 			return $doms;
 		}
@@ -107,7 +113,7 @@
 			//如果设置标签名字
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , ['class' => 'name' ,]));
+			} , ['class' => 'name bold' ,]));
 
 			$attr = [];
 			//如果可以编辑
@@ -126,6 +132,8 @@
 			$doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['value'];
 			} , $attr);
+
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
 
 			return $doms;
 		}
@@ -150,7 +158,7 @@
 			//如果设置标签名字
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , ['class' => 'name' ,]));
+			} , ['class' => 'name bold' ,]));
 
 			$attr = [];
 			//如果可以编辑
@@ -163,7 +171,7 @@
 			}
 			else
 			{
-				$attr['disabled'] = "disabled";
+				//$attr['disabled'] = "disabled";
 				$attr['class'] = " name";
 			}
 
@@ -174,26 +182,54 @@
 				$doms[] = $params['value'];
 			} , $attr);
 
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
+
 			return $doms;
 		}
 
 		/**
 		 * 生成一个简单的td，里面加编辑删除详情等按钮
 		 *
-		 * @param array $buttons
+		 * @param array $params
 		 *
 		 * @return array
 		 */
-		public static function tdButton($buttons)
+		public static function tdButton($params)
 		{
 			$doms = [];
 
-			$doms[] = elementsFactory::button()->make(function(&$doms , $_this) use ($buttons) {
-				$_this->setNodeValue($buttons);
+			$doms[] = elementsFactory::button()->make(function(&$doms , $_this) use ($params) {
+				$_this->setNodeValue($params);
 			});
+
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
 
 			return $doms;
 
+		}
+
+		/**
+		 * 生成一个简单的td，里面加编辑删除详情等按钮
+		 *
+		 * @param       $name
+		 * @param array $attr
+		 * @param       $is_display
+		 *
+		 * @return array
+		 */
+		public static function a($name , $attr = [] , $is_display = true)
+		{
+			$doms = [];
+
+			$arr = array_merge([
+				'class'  => 'btn-xs ' ,
+				'target' => '_blank' ,
+			] , $attr);
+
+			$doms = integrationTags::doubleLabel('a' , [$name] , $arr);
+			isset($is_display) && !$is_display && ($doms = []);
+
+			return $doms;
 		}
 
 
@@ -210,12 +246,14 @@
 
 			isset($params['name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['name'];
-			} , []));
+			} , ['class' => 'name bold' ,]));
 
 			$doms[] = elementsFactory::switcher()->make(function(&$doms , $_this) use ($params) {
 				$_this->isAuto($params['is_auto']);
 				$_this->setNodeValue($params['params']);
 			});
+
+			isset($params['params']['is_display']) && !$params['params']['is_display'] && ($doms = []);
 
 			return $doms;
 		}
@@ -233,12 +271,43 @@
 
 			isset($params['field_name']) && ($doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
 				$doms[] = $params['field_name'];
-			} , ['class' => 'name',]));
+			} , ['class' => 'name bold' ,]));
 
-			$doms[] = elementsFactory::select()->make(function(&$doms , $_this) use ($params) {
-				$_this->setNodeValue(['field' => $params['name']]);
-				$_this->setOptions($params['options'] , $params['selected']);
-			});
+			$attr = [];
+			if(isset($params['disabled']) && ($params['disabled'] == 'disabled'))
+			{
+				$attr['class'] = " name";
+
+				$doms[] = elementsFactory::doubleLabel('span' , function(&$doms) use ($params) {
+					$doms[] = (function() use ($params) {
+						$res = 0;
+						foreach ($params['options'] as $k => $v)
+						{
+							if(isset($params['selected']) && $v['value'] == $params['selected'])
+							{
+								$res = $k;
+								break;
+							}
+						}
+
+						return isset($params['options'][$res]) ? $params['options'][$res]['field'] : 0;
+					})();
+				} , $attr);
+			}
+			else
+			{
+				$doms[] = elementsFactory::select()->make(function(&$doms , $_this) use ($params) {
+					$_this->setNodeValue([
+						'field'            => $params['name'] ,
+						'disabled'         => isset($params['disabled']) ? $params['disabled'] : '' ,
+						'success_callback' => isset($params['success_callback']) ? $params['success_callback'] : 'updateColor' ,
+						'change_callback'  => isset($params['change_callback']) ? $params['change_callback'] : 'registUpdate' ,
+					]);
+					$_this->setOptions($params['options'] , $params['selected']);
+				});
+			}
+
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
 
 			return $doms;
 		}
@@ -468,6 +537,31 @@
 			return $doms;
 		}
 
+
+		/**
+		 * 生成一个row
+		 *
+		 * @param array $option
+		 * @param int   $width
+		 *
+		 * @return array
+		 */
+		public static function rowButton($option = [] , $width = 12)
+		{
+			$doms = [];
+			$doms[] = elementsFactory::rowButton()->make(function(&$doms , $_this) use ($option , $width) {
+
+				$_this->setNodeValue([
+					'width' => $width ,
+				]);
+
+				$_this->setButton($option);
+			});
+
+			return $doms;
+		}
+
+
 		/**
 		 * 生成一个rowBlock
 		 *
@@ -502,15 +596,17 @@
 		 * 生成一个form
 		 *
 		 * @param string $contents
-		 * @param        $params
+		 * @param array  $params
+		 * @param array  $map
 		 *
 		 * @return array
 		 */
-		public static function form($contents = null , $params = null)
+		public static function form($contents = null , $params = [] , $map = [])
 		{
 			$doms = [];
-			$doms[] = elementsFactory::form()->make(function(&$doms , $_this) use ($contents , $params) {
+			$doms[] = elementsFactory::form()->make(function(&$doms , $_this) use ($contents , $params , $map) {
 				$_this->setNodeValue($params);
+				$_this->setAjaxSubmitEventMap($map);
 
 				foreach ($contents as $k => $v)
 				{
@@ -542,6 +638,27 @@
 
 			$doms[] = elementsFactory::staticText()->make(function(&$doms , $_this) use ($params) {
 				$_this->setNodeValue($params);
+			});
+
+			return $doms;
+		}
+
+
+		/**
+		 * switchery
+		 *
+		 * @param array $params
+		 * @param       $options
+		 *
+		 * @return array
+		 */
+		public static function linkage($params , $options)
+		{
+			$doms = [];
+
+			$doms[] = elementsFactory::linkage()->make(function(&$doms , $_this) use ($params, $options) {
+				$_this->setNodeValue($params);
+				$_this->setConfig($options);
 			});
 
 			return $doms;
@@ -827,14 +944,14 @@
 		public static function upload($type , $params = [] , $eventMap = [] , $optionMap = [])
 		{
 			$map = [
-				'uploadSingleFile',
-				'uploadMutilFile',
-				'uploadSingleImg',
-				'uploadMutilImg',
+				'uploadSingleFile' ,
+				'uploadMultiFile' ,
+				'uploadSingleImg' ,
+				'uploadMultiImg' ,
 			];
 
-			$class = isset($map[$type]) ? $map[$type]:$map[2];
-			$doms[] = elementsFactory::{$class}()->make(function(&$doms , $_this) use($params, $eventMap, $optionMap) {
+			$class = isset($map[$type]) ? $map[$type] : $map[2];
+			$doms[] = elementsFactory::{$class}()->make(function(&$doms , $_this) use ($params , $eventMap , $optionMap) {
 				$_this->setOption($params);
 				$_this->setEventMap($eventMap);
 				$_this->setOptionMap($optionMap);
@@ -843,6 +960,124 @@
 			return $doms;
 		}
 
+		/**
+		 * ********************************************************************************************************************************************************************
+		 * ********************************************************************************************************************************************************************
+		 *                                                基础段
+		 * ********************************************************************************************************************************************************************
+		 * ********************************************************************************************************************************************************************
+		 */
+
+		/**
+		 * doubleLabel
+		 *
+		 * @param  null|string $tag
+		 * @param null|string  $contents
+		 * @param array        $params
+		 *
+		 * @return array
+		 */
+		public static function doubleLabel($tag = null , $contents = null , $params = null)
+		{
+			$doms = [];
+			$doms[] = elementsFactory::doubleLabel($tag , function(&$doms) use ($contents , $tag , $params) {
+
+				foreach ($contents as $k => $v)
+				{
+					if(is_string($contents[$k]))
+					{
+						$doms[] = $contents[$k];
+					}
+					elseif(is_array($contents[$k]))
+					{
+						$doms = array_merge($doms , $contents[$k]);
+					}
+				}
+
+			} , $params);
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
+
+			return $doms;
+		}
+
+		/**
+		 * singleLabel
+		 *
+		 * @param  null|string $tag
+		 * @param array        $params
+		 *
+		 * @return array
+		 */
+		public static function singleLabel($tag = null , $params = null)
+		{
+			$doms = [];
+
+			$str = tagConstructor::buildKV($params);
+			$doms[] = elementsFactory::singleLabel("<{$tag} {$str} />");
+			isset($params['is_display']) && !$params['is_display'] && ($doms = []);
+
+			return $doms;
+		}
+
+
+		/**
+		 * customElementFormPath
+		 *
+		 * @param  string $path
+		 * @param array   $contents
+		 *
+		 * @return array
+		 */
+		public static function customElementFormPath($path = null , $contents = [])
+		{
+			$doms = [];
+
+			$doms[] = elementsFactory::customElementFormPath($path)->make(function(&$doms , $_this) use ($contents) {
+				foreach ($contents as $k => $v)
+				{
+					if(is_string($contents[$k]))
+					{
+						$doms[] = $contents[$k];
+					}
+					elseif(is_array($contents[$k]))
+					{
+						$doms = array_merge($doms , $contents[$k]);
+					}
+				}
+			});
+
+			return $doms;
+		}
+
+
+		/**
+		 * customElementFormText
+		 *
+		 * @param  null $text
+		 * @param array $contents
+		 *
+		 * @return array
+		 */
+		public static function customElementFormText($text = null , $contents = [])
+		{
+			$doms = [];
+
+			$doms[] = elementsFactory::customElementFormPath($text)->make(function(&$doms , $_this) use ($contents) {
+				foreach ($contents as $k => $v)
+				{
+					if(is_string($contents[$k]))
+					{
+						$doms[] = $contents[$k];
+					}
+					elseif(is_array($contents[$k]))
+					{
+						$doms = array_merge($doms , $contents[$k]);
+					}
+				}
+			});
+
+			return $doms;
+		}
 
 	}
 

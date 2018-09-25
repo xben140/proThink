@@ -21,6 +21,10 @@
 		<link href="css/plugins/switchery/switchery.css" rel="stylesheet">
 		<!--  /switchery-->
 
+		<!--  linkage-->
+		<link href="../static/plugins/linkage/style.css" rel="stylesheet">
+		<!--  /linkage-->
+
 
 		<style>
 			.error-tip {
@@ -69,12 +73,63 @@
 							<div class="hr-line-dashed"></div>
 
 
-							<form class="form-horizontal m-t" id="form1" method="post" action="/home/index/index">
+							<form class="form-horizontal m-t" id="form1" method="post" action="/doc/doc/previewattachment">
 
 								<div class="form-group">
 									<label class="col-sm-3 control-label">静态控制</label>
 									<div class="col-sm-8">
 										<p class="form-control-static">i@zi-han.net</p>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">联动选择 ：</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" placeholder="placeholder" name="text" class="form-control  " id="linkage" type="text">
+										<!--
+																				<div class="linkage-panel">
+																					<div class="linkage-box">
+																						<ul>
+																							<li class="active">1</li>
+																							<li>2</li>
+																							<li>3</li>
+																							<li>4</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																						</ul>
+																					</div>
+																					<div class="linkage-box">
+																						<ul>
+																							<li>1</li>
+																							<li>2</li>
+																							<li>3</li>
+																							<li>4</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																						</ul>
+																					</div>
+																					<div class="linkage-box">
+																						<ul>
+																							<li>1</li>
+																							<li>2</li>
+																							<li>3</li>
+																							<li>4</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																							<li>5</li>
+																						</ul>
+																					</div>
+																				</div>
+										-->
 									</div>
 								</div>
 
@@ -180,13 +235,13 @@
 
 										<div class="col-sm-4">
 											<span>是否开启</span>
-											<input type="checkbox" class="js-switch" name="switch1[]"  value="1" />
+											<input type="checkbox" class="js-switch" name="switch1[]" value="1" />
 										</div>
 
 
 										<div class="col-sm-8">
 											<span>是否开启</span>
-											<input type="checkbox" class="js-switch" name="switch2[]"  value="2" />
+											<input type="checkbox" class="js-switch" name="switch2[]" value="2" />
 										</div>
 
 
@@ -354,11 +409,60 @@
 		<script src="js/jquery.min.js?v=2.1.4"></script>
 		<script src="js/bootstrap.min.js?v=3.3.6"></script>
 		<script src="js/content.min.js?v=1.0.0"></script>
-		<script src="js/plugins/layer/layer.min.js"></script>
+		<script src="js/plugins/layer/layer.js"></script>
 
 		<!--  validate  -->
 		<script src="js/plugins/validate/jquery.validate.min.js"></script>
 		<!--  /validate  -->
+
+
+		<!--  linkage  -->
+		<script src="../static/plugins/linkage/linkage.js"></script>
+		<!--  /linkage  -->
+
+		<script>
+
+			var _linkage = linkage(document.getElementById('linkage'), {
+				//请求api
+				url       : '/portal/area/getAreaByPid',
+				//键
+				field     : 'pid',
+				//请求方法
+				method    : 'post',
+				//默认请求值
+				defaultVal: 1,
+				//禁用
+				disabled  : 0,
+				//返回数据类型
+				dataType  : 'json',
+				//传其他参数
+				data      : {},
+				//单个项宽和高
+				size      : [200, 400],
+
+				//返回数据填充到li的id的键
+				liValue  : 'id',
+				//返回数据填充到li的内容的键
+				liField  : 'area_name',
+				//ul框
+				container: [
+					{
+						pid : 1,
+						name: 'a',
+					},
+					{
+						// pid : -1,
+						name: 'b',
+					},
+					{
+						// pid : 420500000000,
+						name: 'c',
+					},
+				]
+
+			})
+		</script>
+
 
 		<!--  icheck-->
 		<script src="js/plugins/iCheck/icheck.min.js"></script>
@@ -374,7 +478,6 @@
 				// let sitcher = document.querySelectorAll(".js-switch");
 				let sitcher = document.getElementsByClassName("js-switch");
 				let switchery = [];
-				console.dir(sitcher)
 
 				for (let i = 0; i < sitcher.length; i++)
 				{
@@ -447,14 +550,29 @@
 
 		<script>
 
+
+		</script>
+		<script>
+
+
 			(function () {
 				let form1 = $("#form1");
 				form1.submit(function () {
+
 					let _this = $(this);
 					_this.find('button:submit').attr("disabled", true);
-					console.dir(this);
-					/*$(this).ajaxSubmit({
+					var loadIndex = layer.load()
 
+					window.ajaxSubmitEventMap = {
+						'success': function (responseText, statusText) {
+							layer.close(loadIndex)
+							_this.find('button:submit').attr("disabled", false);
+							console.dir(12111111111111111111111)
+							console.dir(456789)
+						},
+					};
+
+					let options = {
 						//把服务器返回的内容放入id为output的元素中
 						target: '#output',
 
@@ -477,8 +595,9 @@
 						},
 
 						//提交后的回调函数
-						success: successFunc = function (responseText, statusText) {
-							_this.find('button:submit').attr("disabled",false);
+						success: function (responseText, statusText) {
+							_this.find('button:submit').attr("disabled", false);
+							layer.close(loadIndex)
 							console.dir(responseText)
 							console.dir(statusText)
 						},
@@ -500,13 +619,37 @@
 
 						//限制请求的时间，当请求大于3秒后，跳出请求
 						timeout: 3000
-					});*/
+					};
+
+					//自定义事件覆盖默认事件
+					if (window.ajaxSubmitEventMap !== 'undefined' && typeof window.ajaxSubmitEventMap === 'object')
+					{
+						for (let key in window.ajaxSubmitEventMap) options[key] = window.ajaxSubmitEventMap[key];
+					}
+
+
+					$(this).ajaxSubmit(options);
 					return false;
 				})
 
-
+				/*
+				*
+				*
+				*
+				*
+				*			表单验证
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				* */
 				let rules = {
-					/*
 
 					text            : {
 						username: [],
@@ -531,11 +674,11 @@
 					switch2         : {
 						required: true,
 					},
-					checkbox_inline[] : {
+					checkbox_inline : {
 						required   : true,
 						rangelength: [2, 3]
 					},
-					checkbox_block[]  : {
+					checkbox_block  : {
 						required: true,
 					},
 					select          : {
@@ -545,7 +688,6 @@
 						required: true,
 					},
 
-					*/
 				};
 				let messages = {
 					confirm_password: {
@@ -583,7 +725,7 @@
 						},
 
 						//提交后的回调函数
-						success: successFunc = function (responseText, statusText) {
+						success: function (responseText, statusText) {
 							console.dir(responseText)
 							console.dir(statusText)
 						},
@@ -621,6 +763,7 @@
 					},
 					//单个元素验证成功
 					success       : function (label) {
+						// layer.alert(2132)
 						// label.html("&nbsp;").addClass("checked");
 						// label.addClass("valid").text("填写正确")
 					}
@@ -641,7 +784,7 @@
 				});
 
 				// 在键盘按下并释放及提交后验证提交表单
-				let validator = form1.validate(validateOptions);
+				// let validator = form1.validate(validateOptions);
 
 				// 重置表单
 				//使用了那个开关插件，不能重置

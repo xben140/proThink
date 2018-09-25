@@ -10,6 +10,10 @@
 	color : #0f0;
 }
 
+.bold {
+	font-weight : bold;
+}
+
 .tips {
 	display    : block;
 	background : #ececec;
@@ -38,4 +42,30 @@
 
 .profile_pic_preview {
 	width : 100%;
+}
+
+.error_remind {
+	margin : 10px;
+}
+
+.error_remind span {
+	display : block;
+	margin  : 3px 0;
+}
+
+.error-tip {
+	color       : #f00;
+	font-weight : bold;
+}
+
+label.valid {
+	color : #58c75d;
+}
+
+.preview-img {
+	cursor : pointer;
+}
+
+textarea.name {
+	cursor : pointer;
 }

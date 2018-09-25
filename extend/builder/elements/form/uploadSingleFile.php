@@ -72,6 +72,15 @@ Css;
 		 */
 		function setEventMap($events)
 		{
+
+			$t = <<<AAAAA
+			
+					window.uploaderEventMap = {
+						___ccccccc___
+					};
+AAAAA;
+
+
 			$tmp1 = "__FIELD__ : __VALUE__ ,";
 			$str = '';
 			foreach ($events as $k => $v)
@@ -81,7 +90,9 @@ Css;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('eventsMap') , $str);
+			$this->replaceTag(static::makeNodeName('eventsMap') ,  strtr($t , [
+				'___ccccccc___' => $str,
+			]));
 		}
 
 
@@ -90,6 +101,14 @@ Css;
 		 */
 		function setOptionMap($option)
 		{
+			$t = <<<AAAAA
+			
+					window.uploaderOptionMap = {
+						___ccccccc___
+					};
+AAAAA;
+
+
 			$tmp1 = "__FIELD__ : __VALUE__ ,";
 			$str = '';
 			foreach ($option as $k => $v)
@@ -99,7 +118,10 @@ Css;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('optionsMap') , $str);
+			$this->replaceTag(static::makeNodeName('optionsMap') ,  strtr($t , [
+				'___ccccccc___' => $str,
+			]));
+
 		}
 
 
@@ -170,7 +192,11 @@ Css;
 -->
 
 									<div class="uploader-btn-box">
-										<div id="filePicker">选择文件</div>
+										<div id="filePicker"></div>
+									</div>
+									
+									<div class="status-box">
+										<span class="status-box-filename"></span>
 									</div>
 
 									<div class="status-box">
@@ -189,18 +215,14 @@ Css;
 								</div>
 
 							</div>
-					
-									
+						
 							<script>
-								window.uploaderEventMap = {
-									<!-- ~~~eventsMap~~~ -->
-								};
-								window.uploaderOptionMap = {
-									<!-- ~~~optionsMap~~~ -->
-								};
-					
+							//<!-- ~~~eventsMap~~~ -->
+							
+							
+							//<!-- ~~~optionsMap~~~ -->
+						
 							</script>
-
 
 CONTENTS;
 			/**

@@ -50,6 +50,8 @@
 							//'attr'        => 'disabled' ,
 							'name'        => 'order' ,
 						]) ,
+
+
 						/*
 												integrationTags::switchery([
 													'isChecked'  => 'checked' ,
@@ -76,7 +78,6 @@
 							'attr'       => '' ,
 							'style'      => 'width:100%;height:150px;' ,
 						]) ,
-
 
 					] , [
 						'id'     => 'form1' ,
@@ -185,42 +186,43 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
+						integrationTags::rowButton([[
+							[
+								'class' => 'btn-success  search-dom-btn-1',
+								'field' => '筛选',
+							],
+							[
+								'class' => 'btn-info  se-all',
+								'field' => '全选',
+							],
+							[
+								'class' => 'btn-info  se-rev',
+								'field' => '反选',
+							],
+							[
+								'class' => 'btn-danger  btn-add',
+								'field' => '添加数据',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
+							],
+							[
+								'class' => 'btn-danger  multi-op multi-op-del',
+								'field' => '批量删除',
+								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
+								'field' => '批量启用',
+							],
+							[
+								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
+								'field' => '批量禁用',
+							],
+						]]),
+
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							//$data = $this->logic->dataList($this->param);
 							$data = $this->logic->dataListWithPagination($this->param);
-
-
-							$_this->setMenu([
-								[
-									'class' => 'btn-success  search-dom-btn-1',
-									'field' => '筛选',
-								],
-								[
-									'class' => 'btn-info  se-all',
-									'field' => '全选',
-								],
-								[
-									'class' => 'btn-info  se-rev',
-									'field' => '反选',
-								],
-								[
-									'class' => 'btn-danger  btn-add',
-									'field' => '添加数据',
-								],
-								[
-									'class' => 'btn-danger  multi-op multi-op-del',
-									'field' => '批量删除',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-									'field' => '批量启用',
-								],
-								[
-									'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-									'field' => '批量禁用',
-								],
-							]);
 
 							/**
 							 * 设置表格头
@@ -345,23 +347,13 @@
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
-								//状态
-								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio([
-										[
-											'value' => '-1' ,
-											'field' => '全部' ,
-										] ,
-										[
-											'value' => '0' ,
-											'field' => static::$statusMap[0] ,
-										] ,
-										[
-											'value' => '1' ,
-											'field' => static::$statusMap[1] ,
-										] ,
-									] , 'status' , '状态' , input('status' , '-1')) ,
 
+								//状态
+								$k = static::$statusMap;
+								array_pop($k);
+								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
+								$t = integrationTags::searchFormCol([
+									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
@@ -389,10 +381,12 @@
 										integrationTags::tdSimple([
 											'value'    => $v['name'] ,
 											'name'     => '' ,
-											'editable' => '1' ,
 											'field'    => 'name' ,
 											'reg'      => '/^\S+$/' ,
 											'msg'      => '角色名必填' ,
+											'editable' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
 									]) ,
 
@@ -400,11 +394,13 @@
 									integrationTags::td([
 										integrationTags::tdSimple([
 											'name'     => '' ,
-											'editable' => '1' ,
 											'value'    => $v['order'] ,
 											'field'    => 'order' ,
 											'reg'      => '/^\d+$/' ,
 											'msg'      => '必须为数字，确保前后无空格' ,
+											'editable' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
 									]) ,
 
@@ -424,16 +420,18 @@
 										integrationTags::tdTextarea([
 											'style'    => 'width:100%' ,
 											//'name'     => 'remark' ,
-											'editable' => '1' ,
 											'field'    => 'remark' ,
 											//'reg'      => '/^\d{1,4}$/' ,
 											//'msg'      => '请填写合法手机号码' ,
 											'value'    => $v['remark'] ,
+											'editable' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
 									]) ,
 
 
-									//用户状态
+									//状态
 									integrationTags::td([
 										integrationTags::tdSwitcher([
 											'params'  => [
@@ -441,27 +439,39 @@
 												'name'            => 'status' ,
 												'change_callback' => 'switcherUpdateField' ,
 												//switcherUpdateFieldConfirm
+												'is_display'      => (function() use ($v) {
+													return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+												})() ,
 											] ,
 											'name'    => '' ,
 											'is_auto' => '1' ,
+
 										]) ,
 									]) ,
 
 									//操作
 									integrationTags::td([
 										integrationTags::tdButton([
-											'attr'  => ' btn-success btn-edit' ,
-											'value' => '编辑' ,
+											'attr'       => ' btn-success btn-edit' ,
+											'value'      => '编辑' ,
+											'is_display' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
 										integrationTags::tdButton([
-											'attr'  => ' btn-info btn-assign-privileges' ,
-											'value' => '分配权限' ,
+											'attr'       => ' btn-info btn-assign-privileges' ,
+											'value'      => '分配权限' ,
+											'is_display' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
 										integrationTags::tdButton([
-											'attr'  => ' btn-danger btn-delete' ,
-											'value' => '删除' ,
+											'attr'       => ' btn-danger btn-delete' ,
+											'value'      => '删除' ,
+											'is_display' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
 										]) ,
-
 									]) ,
 
 								] , ['id' => $v['id']]);
@@ -481,21 +491,6 @@
 
 			return $this->showPage();
 		}
-
-		public function setField()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->updateField($this->param));
-		}
-
-		public function delete()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->delete($this->param));
-		}
-
 
 		public function assignPrivileges()
 		{
@@ -580,4 +575,55 @@
 				return $this->showPage();
 			}
 		}
+
+
+		/**
+		 * @throws \Exception
+		 */
+		public function delete()
+		{
+			$this->initLogic();
+
+			return $this->jump($this->logic->delete($this->param , [
+				[
+					//看有没有用户有这个角色，有的话就不能删除
+					function(&$param) {
+						$res = db('user_role')->where([
+							'role_id'   => [
+								'in' ,
+								$param['ids'],
+							] ,
+						])->find();
+
+						return !$res;
+					} ,
+					[] ,
+					'有用户被赋予此角色，不允许删除'
+				] ,
+/*
+				[
+					////////////////////////////////
+					/// 放置回收站
+					////////////////////////////////
+
+					//删除角色对应的授权
+					function(&$param) {
+						//看有没有角色有这个权限，有的话就不能删除
+						$res = db('role_privilege')->where([
+							'role_id'   => [
+								'in' ,
+								$param['ids'],
+							] ,
+						])->delete() !== false;
+
+						return $res;
+					} ,
+					[] ,
+					''
+				] ,
+
+*/
+			]));
+		}
+
 	}

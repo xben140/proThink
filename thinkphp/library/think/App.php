@@ -319,16 +319,13 @@ class App
         return $reflect->invokeArgs($args);
     }
 
-	/**
-	 * 调用反射执行类的方法 支持参数绑定
-	 * @access public
-	 *
-	 * @param string|array $method 方法
-	 * @param array        $vars   变量
-	 *
-	 * @return mixed
-	 * @throws \ReflectionException
-	 */
+    /**
+     * 调用反射执行类的方法 支持参数绑定
+     * @access public
+     * @param string|array $method 方法
+     * @param array        $vars   变量
+     * @return mixed
+     */
     public static function invokeMethod($method, $vars = [])
     {
         if (is_array($method)) {
@@ -346,16 +343,13 @@ class App
         return $reflect->invokeArgs(isset($class) ? $class : null, $args);
     }
 
-	/**
-	 * 调用反射执行类的实例化 支持依赖注入
-	 * @access public
-	 *
-	 * @param string $class 类名
-	 * @param array  $vars  变量
-	 *
-	 * @return mixed
-	 * @throws \ReflectionException
-	 */
+    /**
+     * 调用反射执行类的实例化 支持依赖注入
+     * @access public
+     * @param string $class 类名
+     * @param array  $vars  变量
+     * @return mixed
+     */
     public static function invokeClass($class, $vars = [])
     {
         $reflect     = new \ReflectionClass($class);

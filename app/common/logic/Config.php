@@ -17,7 +17,6 @@
 
 		/**
 		 * 有效的配置转为数组，可直接给config调
-		 *
 		 * @return array
 		 */
 		public function getAvailableConfig()
@@ -25,38 +24,81 @@
 			$data = $this->model_->getAvailableConfig()->toArray();
 			$data = array_map(function($v) {
 				$val = '';
-
 				switch ($v['type'])
 				{
 					case '1' :
 						#array
-						$t = explode("\n", $v['value']);
-						$tmpArr = [];
-						foreach ($t as $k1 => $v1)
-						{
-							$t1 = explode('=', $v1);
-							$tmpArr[trim($t1[0])] = trim($t1[1]);
-						}
-						$val = $tmpArr;
+						$val = preg_split('/[\r\n]/im' , $v['value'], -1, PREG_SPLIT_NO_EMPTY);
 						break;
-
 					case '2' :
 						#text
-					case '3' :
-						#switch
+					case '5' :
+						#image
 						$val = $v['value'];
 						break;
-
+					case '3' :
+						#switch
+						$val = !!$v['value'];
+						break;
+					case '4' :
+						#option
+						$t = self::makeOptionsVal($v);
+						$val = $t['options'][$t['selected']];
+						break;
 					default :
 						#...
 						break;
 				}
 
 				return [
-					'field' => $v['key'] ,
-					'value' => $val ,
+					'is_const' => $v['is_const'] ,
+					'field'    => $v['key'] ,
+					'value'    => $val ,
 				];
 			} , $data);
+
+			return $data;
+		}
+
+
+		/**
+		 * 针对option键值的处理
+		 * @param $v
+		 *
+		 * @return array
+		 */
+		public static function makeOptionsVal($v)
+		{
+			$selected = null;
+			$t = preg_split('/[\r\n]/im' , $v['value'] , -1 , PREG_SPLIT_NO_EMPTY);
+			$options = [];
+
+			foreach ($t as $k => $v1)
+			{
+				if(preg_match('/!!--!!$/im' , $v1))
+				{
+					$selected = $k;
+				}
+				$options[$k] = preg_replace('/!!--!!$/im' , '' , $v1);
+			}
+
+			(is_null($selected)) && ($selected = isset($t[0]) ? 0 : "");
+
+			return [
+				'options'  => $options ,
+				'selected' => $selected ,
+			];
+		}
+
+
+		/**
+		 * 获取所有类型为options的key
+		 *	没有使用
+		 * @return array
+		 */
+		public function getOptionsKey()
+		{
+			$data = $this->model_->getOptionsKey();
 
 			return $data;
 		}
@@ -101,6 +143,7 @@
 						break;
 
 					case 'group_id' :
+					case 'is_const' :
 					case 'type' :
 					case 'status' :
 						if($v != -1)

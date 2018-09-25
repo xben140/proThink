@@ -12,6 +12,7 @@
 	//php index.php /cmd/index/index
 
 
+	use base64\Base64;
 	use image\imageProcessor;
 	use PhpMyAdmin\SqlParser\Parser;
 	use PhpMyAdmin\SqlParser\Utils\Query;
@@ -54,7 +55,7 @@
 				else
 				{
 				}
-					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath)  . md5(uniqid($pathinfo['basename'], 1)).'.'.$pathinfo['extension'];
+				$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . md5(uniqid($pathinfo['basename'] , 1)) . '.' . $pathinfo['extension'];
 
 				$a = md5_file($path);
 				echo '++++++' . $relativePath . '  --  ' . $a . "\r\n";
@@ -116,6 +117,19 @@
 
 			rm_empty_dir($path);
 		}
+
+		public function baseTest1()
+		{
+			$base64 = Base64::getInstance('ABCDEFGHIJKLnopqrstuvwxyz012345MNOPQRSTUVWXYZabcdefghijklm6789+/' , '-');
+			$a = $base64->encode('你红扥零三扥HLKJLGksdfsd234234aaaf');
+			$b = $base64->decode('mLjNm7XPmVTS60bjmLPJmVTStEeLtReH1koR0UoRnQnhnQnhzxFO0N--');
+
+
+			$base64 = Base64::getInstance('ABCDEFGHIJKLnopqrsVWXYZabcdefghijklm6789+/tuvwxyz012345MNOPQRSTU' , '%');
+			$a = $base64->encode('你红扥零三扥HLKJLGksdfsd234234aaaf');
+			$b = $base64->decode('OL5jOQtlO+87Pcx5OLlJO+87VE0LV60HdMo6c9o6nmn3nmn3bZFkcj%%');
+		}
+
 
 		public function sqlParser()
 		{
@@ -180,7 +194,7 @@ VALUES
 
 		*/
 			$parser = new PHPSQLParser();
-			$parsed = $parser->parse($query1, true);
+			$parsed = $parser->parse($query1 , true);
 			print_r($parsed);
 		}
 

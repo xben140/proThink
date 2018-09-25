@@ -14,6 +14,54 @@
 			$this->initBaseClass();
 		}
 
+
+		public function getFormatedData($isPushDefault = 0)
+		{
+			$roles = $this->getActivedData([
+				'no_global_admin' => 1,
+			]);
+
+			$roles_ = array_map(function($v) {
+				return [
+					'value' => $v['id'] ,
+					'field' => $v['name'] ,
+				];
+			} , $roles);
+
+			$isPushDefault && array_unshift($roles_ , [
+				'value' => 0 ,
+				'field' => '请选择' ,
+			]);
+
+			return $roles_;
+		}
+
+		/**
+		 * 指定的用户是否有指定角色 。or关系
+		 *
+		 * @param        $uid
+		 * @param  array $roles
+		 *
+		 * @return mixed
+		 */
+		public function isUserHasRoles($uid, $roles = [])
+		{
+			$ids = $this->model_->getRoleIdByUserId($uid);
+
+			$flag = false;
+			foreach ($ids as $k => $v)
+			{
+				if(in_array($v , $roles))
+				{
+					$flag = true;
+					break;
+				}
+			}
+
+			return $flag;
+		}
+
+
 		/**
 		 * 获取当前角色有的权限
 		 *
@@ -116,6 +164,14 @@
 			{
 				switch ($k)
 				{
+					//不查全站管理
+					case 'no_global_admin' :
+						$v == 1 &&  $where[$this->model_::makeSelfAliasField('id')] = [
+							'<>' ,
+							'1',
+						];
+						break;
+
 					case 'order_filed' :
 						$v != '' && $order_filed = $v;
 						break;

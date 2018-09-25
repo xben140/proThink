@@ -1,6 +1,5 @@
 <?php
 
-	use think\App;
 	use think\Db;
 
 	/*
@@ -32,66 +31,6 @@
 			 *
 			 * */
 
-
-	/**
-	 * 原生查询
-	 *
-	 * @param $sql
-	 *
-	 * @return mixed
-	 */
-	function querySql($sql)
-	{
-		return Db::query($sql);
-	}
-
-	/**
-	 * 原生执行
-	 *
-	 * @param $sql
-	 *
-	 * @return int
-	 */
-	function executeSql($sql)
-	{
-		return Db::execute($sql);
-	}
-
-	/**
-	 * 通过类创建逻辑闭包
-	 *
-	 * @param null   $class
-	 * @param string $method
-	 * @param array  $parameter
-	 *
-	 * @return Closure
-	 */
-	function createClosureClass($class , $method , $parameter = [])
-	{
-		return function() use ($class , $method , $parameter) {
-			return App::invokeMethod([
-				App::invokeClass($class) ,
-				$method ,
-			] , $parameter);
-		};
-	}
-
-	/**
-	 * 通过函数创建逻辑闭包
-	 *
-	 * @param callable $func
-	 * @param array    $parameter
-	 *
-	 * @return Closure
-	 */
-	function createClosureFunc(callable $func , $parameter = [])
-	{
-		return function() use ($func , $parameter) {
-			return call_user_func_array($func , $parameter);
-		};
-
-	}
-
 	/**
 	 * 通过闭包控制缓存
 	 *
@@ -119,12 +58,13 @@
 	/**
 	 * 闭包事物构造器
 	 *
-	 * @param array $list
-	 * @param       $err
+	 * @param array  $list           事物列表
+	 * @param string $err            当事物执行失败时返回的错误信息
+	 * @param null   $globalVariable 每个事物都可以作用到的共享变量，会push到每个事物元素的参数上
 	 *
 	 * @return bool
 	 */
-	function execClosureList($list = [] , &$err = null)
+	function execClosureList($list = [] , &$err = null , &$globalVariable = null)
 	{
 		/*
 		 * 		[
@@ -136,6 +76,7 @@
 							1 ,
 							2 ,
 						) ,
+						'error massage'
 					] ,
 					[
 						function() {
@@ -154,13 +95,20 @@
 		{
 			$flag = true;
 
-			while ($flag && ($closure = array_shift($list)))
+			while (($flag !== false) && ($closure = array_shift($list)))
 			{
-				!isset($closure[1]) && $closure[1] = [];
+				//没传参数设置参数为空数组
+				!is_array($closure[1]) && $closure[1] = [];
+				//传全局全局变量吧全局变量push到参数列表
+				!is_null($globalVariable) && $closure[1][] = &$globalVariable;
+
+				//执行闭包
 				$flag = call_user_func_array($closure[0] , $closure[1]);
+
+				($flag === false) && is_string($closure[2]) && ($err = $closure[2]);
 			}
 
-			$flag ? Db::commit() : Db::rollback();
+			($flag !== false) ? Db::commit() : Db::rollback();
 
 			return $flag;
 		} catch (\Exception $e)
@@ -184,14 +132,14 @@
 	function formatBytes($size , $delimiter = '')
 	{
 
-		$units = array(
+		$units = [
 			'B' ,
 			'KB' ,
 			'MB' ,
 			'GB' ,
 			'TB' ,
 			'PB' ,
-		);
+		];
 
 		for ($i = 0; $size >= 1024 && $i < 5; $i++)
 		{
@@ -218,16 +166,29 @@
 
 
 	/**
-	 * 生成图片缩略图路径
+	 * 匹配出命名空间
+	 * app\common\tool\permission\Rule
 	 *
-	 * @param $path 20180717\a514e349fbb9233b3dc47d5ce2e0a82e.jpg
+	 * @param object|string $class
 	 *
-	 * @return null|string 20180717\thumb_a514e349fbb9233b3dc47d5ce2e0a82e.jpg
+	 * @return string
 	 */
-	function makeImgThumbName($path)
+	function getNamespace($class)
 	{
-		return preg_replace('%([^\\\\/]+$)%m' , 'thumb_$1' , $path);
+		preg_match('%^(.+)(?=[\\\\/][^\//]+$)%im' , $class, $result);
+
+		return $result[1];
 	}
+
+
+	/*
+	 *
+	 *
+	 * 						路径和url 相关
+	 *
+	 *
+	 *
+	 * */
 
 	/*
 	 *
@@ -237,6 +198,8 @@
 	 *
 	 *
 	 * */
+
+
 	/**
 	 * 计算文件路径
 	 * 以常量为基础
@@ -267,6 +230,18 @@
 		return replaceToSysSeparator(PATH_PICTURE . $path);
 	}
 
+	/**
+	 * 生成图片缩略图路径
+	 *
+	 * @param $path 20180717\a514e349fbb9233b3dc47d5ce2e0a82e.jpg
+	 *
+	 * @return null|string 20180717\thumb_a514e349fbb9233b3dc47d5ce2e0a82e.jpg
+	 */
+	function makeImgThumbName($path)
+	{
+		return preg_replace('%([^\\\\/]+$)%m' , 'thumb_$1' , $path);
+	}
+
 	/*
 	 *
 	 *
@@ -275,25 +250,6 @@
 	 *
 	 *
 	 * */
-
-
-	/**
-	 * 自动计算头像url
-	 *
-	 * @param      $path 20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt
-	 * @param int  $isThumb
-	 *
-	 * @return string 'http://local15.cc/upload/file/20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt'
-	 */
-	function generateProfilePicPath($path, $isThumb = 1)
-	{
-		$profile_pic =
-			is_file(makeImgPath($path, $isThumb))
-				? makeImgUrl($path , $isThumb)
-				: '/static/image/logo.gif';
-
-		return $profile_pic;
-	}
 
 
 	/**
@@ -326,6 +282,79 @@
 		return replaceToUrlSeparator(URL_PICTURE . $path);
 	}
 
+
+	/**
+	 * 自动计算头像url
+	 *
+	 * @param      $path 20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt
+	 * @param int  $isThumb
+	 *
+	 * @return string 'http://local15.cc/upload/file/20180717\a514e349fbb9233b3dc47d5ce2e0a82e.txt'
+	 */
+	function generateProfilePicPath($path , $isThumb = 1)
+	{
+		$profile_pic = isImgExists($path , $isThumb) ? $path : config('default_profile_pic');
+
+		return makeImgUrl($profile_pic , $isThumb);
+	}
+
+	/*
+	 *
+	 *
+	 * 通用
+	 *
+	 *
+	 *
+	 * */
+
+
+	/**
+	 *    根据路径删除图片和缩略图
+	 *
+	 * @param      $path
+	 */
+	function delImg($path)
+	{
+		isImgExists($path , 0) && unlink(makeImgPath($path , 0));
+		isImgExists($path , 1) && unlink(makeImgPath($path , 1));
+	}
+
+
+	/**
+	 *    根据路径删除文件
+	 *
+	 * @param      $path
+	 */
+	function delFile($path)
+	{
+		isFileExists($path) && unlink(makeFilePath($path));
+	}
+
+
+	/**
+	 *    根据路径判断指定图片文件在不在
+	 *
+	 * @param      $path
+	 * @param bool $isThumb
+	 *
+	 * @return bool
+	 */
+	function isImgExists($path , $isThumb = false)
+	{
+		return is_file(makeImgPath($path , $isThumb));
+	}
+
+	/**
+	 *    根据路径判断指定文件在不在
+	 *
+	 * @param      $path
+	 *
+	 * @return bool
+	 */
+	function isFileExists($path)
+	{
+		return is_file(makeFilePath($path));
+	}
 
 	/**
 	 * 地址里的分隔符替换为url里的符号
@@ -415,7 +444,7 @@
 	/*
 	 *
 	 *
-	 * 读session
+	 * session
 	 *
 	 *
 	 *
@@ -441,7 +470,7 @@
 	 */
 	function isGlobalManager()
 	{
-		return isGlobalManagerId(getAdminSessionInfo('user' , 'id'));
+		return isGlobalManagerId(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'));
 	}
 
 	/**
@@ -450,11 +479,11 @@
 	 */
 	function isAdminLogin()
 	{
-		return getAdminSessionInfo('user');
+		return getAdminSessionInfo(SESSOIN_TAG_USER);
 	}
 
 	/**
-	 * 构造用户密码
+	 * 获取用户session
 	 *
 	 * @param string $tag sesion 信息标签
 	 * @param        $key
@@ -473,7 +502,7 @@
 	 *
 	 *
 	 * 菜单相关
-	 *
+	 *	app\common\tool\permission\Auth
 	 *
 	 *
 	 * */
@@ -570,8 +599,8 @@
 		return $tree;
 	}
 
-	//统一格式化菜单
-	/**
+	/**统一格式化菜单
+	 *
 	 * @param $a
 	 * @param $b
 	 * @param $c
@@ -580,21 +609,7 @@
 	 */
 	function formatMenu($a , $b , $c)
 	{
-		return strtolower($a . '/' . $b . '/' . $c);
-	}
-
-	//获取用户拥有的菜单
-	/**
-	 * @param $data
-	 *
-	 * @return array
-	 */
-	function getMenu($data)
-	{
-		$menu = [];
-		foreach ($data as $k => $v) $menu[] = (formatMenu($v['module'] , $v['controller'] , $v['action']));
-
-		return $menu;
+		return \app\common\tool\permission\Auth::getInstance()::formatMenu($a , $b , $c);
 	}
 
 	//构造菜单的路径
@@ -608,8 +623,8 @@
 		return strtolower($data['action']) == 'none' ? '#' : url($data['path']);
 	}
 
-	//是否为默认菜单
-	/**
+	/**是否为默认菜单
+	 *
 	 * @param $data
 	 *
 	 * @return bool
@@ -619,10 +634,8 @@
 		return strtolower($data['action']) == 'none';
 	}
 
-	//返回是否为菜单
 	/**
-	 * @param $data
-	 *
+	 * 返回是否为菜单@param $data
 	 * @return mixed
 	 */
 	function isMenu($data)
@@ -635,8 +648,8 @@
 	 */
 
 
-	//权限列表里使用
-	/**
+	/**权限列表里使用
+	 *
 	 * @param     $data
 	 * @param int $level
 	 *
@@ -666,8 +679,14 @@
 		return str_repeat('&nbsp;' , ($level) * 8) . $s . $data;
 	}
 
-	//formatTime
+
 	/**
+	 *        工具函数
+	 */
+
+	/**
+	 * formatTime 格式化时间
+	 *
 	 * @param      $time
 	 * @param bool $isTime
 	 *
@@ -681,6 +700,86 @@
 		return date($format , $time);
 	}
 
+
+	/**
+	 * 计算时间间隔
+	 *
+	 * @param $timestamp
+	 *
+	 * @return false|string
+	 */
+	function humandate($timestamp)
+	{
+		$seconds = $_SERVER['REQUEST_TIME'] - $timestamp;
+		if($seconds > 31536000)
+		{
+			return date('Y-n-j' , $timestamp);
+		}
+		elseif($seconds > 2592000)
+		{
+			return floor($seconds / 2592000) . '月前';
+		}
+		elseif($seconds > 86400)
+		{
+			return floor($seconds / 86400) . '天前';
+		}
+		elseif($seconds > 3600)
+		{
+			return floor($seconds / 3600) . '小时前';
+		}
+		elseif($seconds > 60)
+		{
+			return floor($seconds / 60) . '分钟前';
+		}
+		else
+		{
+			return $seconds . '秒前';
+		}
+	}
+
+	/**
+	 *     * 计算时间间隔
+	 *
+	 * @param $timestamp
+	 *
+	 * @return false|string
+	 */
+	function humandateA($timestamp)
+	{
+		$seconds = $_SERVER['REQUEST_TIME'] - $timestamp;
+		if($seconds > 31536000)
+		{
+			return date('Y年m月d日' , $timestamp);
+		}
+		elseif($seconds > 2592000)
+		{
+			return floor($seconds / 2592000) . '月前';
+		}
+		elseif($seconds > 86400)
+		{
+			return floor($seconds / 86400) . '天前';
+		}
+		elseif($seconds > 3600)
+		{
+			return floor($seconds / 3600) . '小时前';
+		}
+		elseif($seconds > 60)
+		{
+			return floor($seconds / 60) . '分钟前';
+		}
+		else
+		{
+			return $seconds . '秒前';
+		}
+	}
+
+	/**
+	 * 更可靠的pathinfo函数代替
+	 *
+	 * @param $path
+	 *
+	 * @return mixed
+	 */
 	function pathinfo_($path)
 	{
 		preg_match("%^(?'dirname'.*?(?=[^.]+\.[^.]+$))(?'filename'[^\\\\/]*?)\.(?'extension'[a-z\d]*?)$%im" , $path , $res);
@@ -688,6 +787,68 @@
 
 		return $res;
 	}
+
+
+	/**
+	 * 原生查询
+	 *
+	 * @param $sql
+	 *
+	 * @return mixed
+	 */
+	function querySql($sql)
+	{
+		return Db::query($sql);
+	}
+
+	/**
+	 * 原生执行
+	 *
+	 * @param $sql
+	 *
+	 * @return int
+	 */
+	function executeSql($sql)
+	{
+		return Db::execute($sql);
+	}
+
+
+	//汉字转unicode
+	function toUnicode($subject , $encoding = 'utf-8')
+	{
+		$result = preg_replace_callback('/[\x{4e00}-\x{9fff}]/ium' , function($group) use ($encoding) {
+			$hex = ($group[0]);
+			$t = iconv($encoding , 'UCS-2' , $hex);
+			preg_match_all('/[\s\S]/' , $t , $res);
+
+			$tmp = array_map(function($v) {
+				return sprintf("%'02s" , base_convert(ord($v) , 10 , 16));
+			} , $res[0]);
+
+			return '\\u' . implode('' , $tmp);
+		} , $subject);
+
+		return $result;
+	}
+
+
+	//unicode转汉字
+	function formUnicode($subject)
+	{
+		$result = preg_replace_callback('/\\\\u([a-z\d]{4})/im' , function($group) {
+			$hex = $group[1];
+			$a = base_convert($hex[0] . $hex[1] , 16 , 10);
+			$b = base_convert($hex[2] . $hex[3] , 16 , 10);
+			$c = chr($a) . chr($b);
+			$c = iconv('UCS-2' , 'UTF-8' , $c);
+
+			return $c;
+		} , $subject);
+
+		return $result;
+	}
+
 
 	/**
 	 * 钩子
@@ -698,6 +859,19 @@
 	function hook($tag = '' , $params = [])
 	{
 		\think\Hook::listen($tag , $params);
+	}
+
+
+	/**
+	 * 跳过登陆的方法
+	 *
+	 * @param string $tag
+	 *
+	 * @return bool
+	 */
+	function skipAuth($tag)
+	{
+		return strtolower(substr($tag , -2 , 2)) == 'cc';
 	}
 
 
@@ -806,6 +980,8 @@
 
 
 	/**
+	 * 自动创建目录
+	 *
 	 * @param $path
 	 *
 	 * @return bool
@@ -896,6 +1072,11 @@
 		return true;
 	}
 
+	/**
+	 * 删除指定文件夹下空目录
+	 *
+	 * @param $path
+	 */
 	function rm_empty_dir($path)
 	{
 		if(is_dir($path) && (@$handle = opendir($path)) !== false)
@@ -924,7 +1105,6 @@
 			closedir($handle);
 		}
 	}
-
 
 
 	/*
@@ -977,3 +1157,4 @@
 			]);
 
 	*/
+

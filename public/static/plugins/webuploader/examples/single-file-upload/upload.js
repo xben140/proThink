@@ -87,14 +87,14 @@
 
 			//上传过程中触发，携带上传进度。
 			'uploadProgress': function (file, percentage) {
-				let progress = parseInt(percentage * 100) + '%';
-				$('.progress-bar').css('width', progress);
-				$(".status-box-progess").text(progress);
+				updateProcess(percentage*100);
+
 			},
 
 			//当文件被加入队列以后触发。
 			'fileQueued': function (file) {
-
+				console.dir(file)
+				$(".status-box-filename").text(file.name);
 			},
 
 			//当文件被移除队列后触发。
@@ -110,7 +110,6 @@
 
 			//当所有文件上传结束时触发。
 			'uploadFinished': function () {
-				console.dir(window.upload_file)
 				layer.msg('处理完成');
 
 			},
@@ -145,7 +144,7 @@
 
 			//某个文件开始上传前触发，一个文件只会触发一次。
 			'uploadStart': function (file) {
-				$("#filePicker").hide();
+				updateProcess(0);
 				$(".status-box-text").text('上传中，请勿刷新...');
 			},
 
@@ -262,6 +261,13 @@
 		 *
 		 *
 		 */
+
+		function updateProcess(percent)
+		{
+			let progress = parseInt(percent) + '%';
+			$('.progress-bar').css('width', progress);
+			$(".status-box-progess").text(progress);
+		}
 
 		function showMessage(code)
 		{
