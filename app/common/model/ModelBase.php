@@ -113,6 +113,8 @@
 		 */
 		public function recycle($where)
 		{
+			$this->updateField(['del_time' => TIME_NOW ,] , $where);
+
 			return $this->deleteData($where , 0);
 		}
 
@@ -211,6 +213,26 @@
 		}
 
 		/**
+		 * 按条件获取被删除数据
+		 *
+		 * @param array $condition
+		 * @param       $pagesize
+		 * @param       $params
+		 *
+		 * @return \think\Paginator
+		 * @throws \think\exception\DbException
+		 */
+		final public function selectDeletedDataWithPagination($condition , $pagesize , $params)
+		{
+			$this->getDeletedOnly();
+			$this->setCondition($condition);
+			//每个添加的数据都加入时间字段
+			$res = $this->fetchSql(0)->paginate($pagesize , false , $params);
+
+			return $res;
+		}
+
+		/**
 		 * 按条件获取单条数据
 		 *
 		 * @param array $condition
@@ -270,6 +292,23 @@
 		 */
 
 
+		/**
+		 * 设置所有表查询数据时候只返回回收站数据
+		 **/
+		public function getDeletedOnly()
+		{
+			$this->setCondition([
+				'alias' => self::$currentTableAlias ,
+				'where' => [
+					self::makeSelfAliasField(DATA_STATUS_NAME) => [
+						'=' ,
+						'2' ,
+					] ,
+				] ,
+			]);
+
+			return $this;
+		}
 		/**
 		 * 设置所有表查询数据时候不查回收站数据
 		 **/

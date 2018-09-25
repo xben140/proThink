@@ -1,8 +1,6 @@
 # ProThink
 
 
-##核心类未上传，下载以后先更新composer，再将根目录下的database.php复制到
-
 使用之前
 ==============
 

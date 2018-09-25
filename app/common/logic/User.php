@@ -2,6 +2,9 @@
 
 	namespace app\common\logic;
 
+	use builder\elementsFactory;
+	use builder\integrationTags;
+
 	/**
 	 * Class User
 	 * @package app\common\logic
@@ -121,7 +124,6 @@
 		}
 
 
-
 		/**
 		 * 为用户分配刊物类型
 		 *
@@ -179,7 +181,6 @@
 
 			return $this->retureResult;
 		}
-
 
 
 		/**
@@ -318,15 +319,15 @@
 			$order[$order_filed] = $order_;
 
 			$join[] = [
-				'ithink_user_role b',
+				'ithink_user_role b' ,
 				$this->model_::makeSelfAliasField('id') . '  = b.user_id ' ,
-				'left',
+				'left' ,
 			];
 
 			$join[] = [
-				'ithink_role c',
-				'c.id = b.role_id',
-				'left',
+				'ithink_role c' ,
+				'c.id = b.role_id' ,
+				'left' ,
 			];
 
 
@@ -334,11 +335,13 @@
 			$field[] = 'GROUP_CONCAT(c.`name`) as role';
 
 			return $condition = [
-				'group' => $this->model_::makeSelfAliasField('id'),
+				'group' => $this->model_::makeSelfAliasField('id') ,
 				'where' => $where ,
 				'order' => $order ,
 				'join'  => $join ,
 				'field' => implode(', ' , $field) ,
 			];
 		}
+
+
 	}

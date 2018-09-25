@@ -38,7 +38,7 @@
 				$_this->setWebSiteLogo([
 					[
 						'editable'        => 0 ,
-						'is_display'      => 1 ,
+						'is_display'      => 0 ,
 						'src'             => generateProfilePicPath(config('website_logo') , 1) ,
 						'data-origin-src' => generateProfilePicPath(config('website_logo') , 0) ,
 						'text'            => '修改logo' ,
@@ -46,7 +46,7 @@
 					] ,
 					[
 						'editable'        => 1 ,
-						'is_display'      => 0 ,
+						'is_display'      => 1 ,
 						'src'             => generateProfilePicPath(getAdminSessionInfo(SESSOIN_TAG_USER , 'profile_pic') , 1) ,
 						'data-origin-src' => generateProfilePicPath(getAdminSessionInfo(SESSOIN_TAG_USER , 'profile_pic') , 0) ,
 						'data-condition'  => formatMenu('user' , 'profile_pic' , getAdminSessionInfo(SESSOIN_TAG_USER , 'id')) ,
@@ -107,11 +107,11 @@
 						'field' => '修改密码' ,
 						'value' => url('admin/user/modifypwd') ,
 					] ,
-/*
+
 					[
 						'field' => '修改资料' ,
 						'value' => url('admin/user/modifyinfo'),
-					] ,*/
+					] ,
 
 				]);
 

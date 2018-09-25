@@ -36,8 +36,6 @@
 	 *
 	 *
 	 *
-	 *                  列表页
-	 *
 	 *                  User
 	 *
 	 *
@@ -46,12 +44,6 @@
 
 	//修改密码
 	$('.btn-modify-pwd').on({'click': function () {registerEditPwd(this)}});
-
-	/**
-	 * editPwdUrl
-	 *    传入一个编辑按钮，打开对应item修改密码框
-	 * @param  $obj
-	 */
 	function registerEditPwd($obj)
 	{
 		let _this = $($obj);
@@ -81,12 +73,6 @@
 
 	//分配角色
 	$('.btn-assign-role').on({'click': function () {registerAssignRoles(this)}});
-
-	/**
-	 * assignRolesUrl
-	 *    传入一个按钮，打开对应item分配角色框
-	 * @param  $obj
-	 */
 	function registerAssignRoles($obj)
 	{
 		let _this = $($obj);
@@ -115,12 +101,6 @@
 
 	//分配刊物
 	$('.btn-assignJournalTypeMap').on({'click': function () {registerAssignJournalTypeMap(this)}});
-
-	/**
-	 * assignRolesUrl
-	 *    传入一个按钮，打开对应item分配刊物框
-	 * @param  $obj
-	 */
 	function registerAssignJournalTypeMap($obj)
 	{
 		let _this = $($obj);
@@ -153,8 +133,6 @@
 	 *
 	 *
 	 *
-	 *                  列表页
-	 *
 	 *                  Role
 	 *
 	 *
@@ -163,12 +141,6 @@
 
 	//分配权限
 	$('.btn-assign-privileges').on({'click': function () {registerAssignPrivileges(this)}});
-
-	/**
-	 * assignPrivilegesUrl
-	 *    传入一个按钮，打开对应item分配权限框
-	 * @param  $obj
-	 */
 	function registerAssignPrivileges($obj)
 	{
 		let _this = $($obj);
@@ -199,8 +171,6 @@
 	 *
 	 *
 	 *
-	 *
-	 *                  稿件列表
 	 *
 	 *                  Doc
 	 *
@@ -248,12 +218,6 @@
 
 	//上传附件
 	$('.btn-upload-attachment').on({'click': function () {registerUploadAttachment(this)}});
-
-	/**
-	 * registerUploadAttachmentUrl
-	 * 上传附件
-	 * @param  $obj
-	 */
 	function registerUploadAttachment($obj)
 	{
 		let _this = $($obj);
@@ -281,14 +245,37 @@
 	}
 
 
+	//回收站查看数据
+	$('.btn-view-info').on({'click': function () {registerviewInfo(this)}});
+	function registerviewInfo($obj)
+	{
+		let _this = $($obj);
+		let data_id = getParentTr(_this).data('id');
+		// _this.attr("disabled", true);
+
+		layer.open({
+			type     : 2,
+			title    : '查看数据',
+			// shadeClose: true,
+			shade    : 0.1,
+			area     : ['85%', '85%'],
+			resize   : 1,
+			moveOut  : 1,
+			skin     : 'search-dom-pop', //样式类名
+			closeBtn : 1, //不显示关闭按钮
+			anim     : 0,
+			// anim      : randomNum(0, 6),
+			isOutAnim: 0,
+			content  : viewInfoUrl + "?id=" + data_id, //iframe的url
+			success  : function (_) {
+				_this.attr("disabled", false);
+			},
+		});
+	}
+
+
 	//查看附件
 	$('.btn-preview-attachment').on({'click': function () {registerPreviewAttachment(this)}});
-
-	/**
-	 * registerPreviewAttachmentUrl
-	 *
-	 * @param  $obj
-	 */
 	function registerPreviewAttachment($obj)
 	{
 		let _this = $($obj);
@@ -318,12 +305,6 @@
 
 	//替换稿件
 	$('.btn-replace-doc').on({'click': function () {replaceDoc(this)}});
-
-	/**
-	 * replaceDocUrl
-	 *
-	 * @param  $obj
-	 */
 	function replaceDoc($obj)
 	{
 		let _this = $($obj);
@@ -353,12 +334,6 @@
 
 	//分配地址淡出列表
 	$('.btn-assign-address').on({'click': function () {assignAddress(this)}});
-
-	/**
-	 *
-	 *
-	 * @param  $obj
-	 */
 	function assignAddress($obj)
 	{
 		let _this = $($obj);
@@ -391,12 +366,6 @@
 
 	//指定地址
 	$('.btn-use-address').on({'click': function () {useAddress(this)}});
-
-	/**
-	 * assignAddressUrl
-	 *
-	 * @param  $obj
-	 */
 	function useAddress($obj)
 	{
 		let _this = $($obj);
@@ -425,12 +394,6 @@
 
 	//设置为待定
 	$('.btn-set-stay').on({'click': function () {setStay(this)}});
-
-	/**
-	 * assignAddressUrl
-	 *
-	 * @param  $obj
-	 */
 	function setStay($obj)
 	{
 		let _this = $($obj);
@@ -1080,7 +1043,6 @@ function registerDetail($obj)
 {
 	let _this = $($obj);
 	let data_id = getParentTr(_this).data('id');
-	console.dir('detail ' + data_id);
 
 	layer.open({
 		type      : 2,
