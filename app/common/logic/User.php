@@ -14,7 +14,27 @@
 		public function __construct()
 		{
 			$this->initBaseClass();
+
+			//设置真正删除的前置回调
+			$this->setBeforeDelete([
+				[
+					function(&$param) {
+						$a = 1;
+
+						//删除用户角色关联记录
+						return db('user_role')->where([
+								'user_id' => [
+									'in' ,
+									$param['ids'] ,
+								] ,
+							])->delete() !== false;
+					} ,
+					[] ,
+				] ,
+
+			]);
 		}
+
 
 		/**
 		 * 获取当前用户的角色id
@@ -231,6 +251,8 @@
 
 
 		/**
+		 * 搜索条件生成
+		 *
 		 * @param $param
 		 *
 		 * @return array
@@ -341,6 +363,132 @@
 				'join'  => $join ,
 				'field' => implode(', ' , $field) ,
 			];
+		}
+
+
+		/**
+		 * ******************************************************************************************
+		 * ******************************************************************************************
+		 *                        回收站删除相关
+		 * ******************************************************************************************
+		 * ******************************************************************************************
+		 */
+		/*
+		 * 设置表格搜索框
+		 */
+		public function getSearchForm($params)
+		{
+
+			$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($params) {
+				$_this->setIsDisplay(1);
+
+
+				//用户账号
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormText([
+						'field'       => '用户账号' ,
+						'value'       => input('user' , '') ,
+						'name'        => 'user' ,
+						'placeholder' => '' ,
+					]) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+				//用户名
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormText([
+						'field'       => '用户名' ,
+						'value'       => input('nickname' , '') ,
+						'name'        => 'nickname' ,
+						'placeholder' => '' ,
+					]) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+				//注册时间
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormDate([
+						'field' => '注册时间' ,
+
+						'value1'       => input('reg_time_begin' , '') ,
+						'name1'        => 'reg_time_begin' ,
+						'placeholder1' => '' ,
+
+						'value2'       => input('reg_time_end' , '') ,
+						'name2'        => 'reg_time_end' ,
+						'placeholder2' => '' ,
+					]) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+				//每页显示条数
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormText([
+						'field'       => '每页显示条数' ,
+						'value'       => (isset($params['pagerow']) && is_numeric($params['pagerow'])) ? $params['pagerow'] : DB_LIST_ROWS ,
+						'name'        => 'pagerow' ,
+						'placeholder' => '' ,
+					]) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				$roles_ = $this->logic__common_role->getFormatedData();
+				$k = $roles_;
+				array_unshift($k , [
+					'value' => -1 ,
+					'field' => '全部' ,
+				]);
+
+				//角色
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormSelect($k , 'role_id' , '用户角色' , input('role_id' , -1)) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//排序字段
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormSelect([
+						[
+							'value' => 'id' ,
+							'field' => '默认' ,
+						] ,
+						[
+							'value' => 'last_login_time' ,
+							'field' => '最后登录时间' ,
+						] ,
+					] , 'order_filed' , '排序字段' , input('order_filed' , 'id')) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//排序方向
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormRadio([
+						[
+							'value' => 'asc' ,
+							'field' => '正序' ,
+						] ,
+						[
+							'value' => 'desc' ,
+							'field' => '反序' ,
+						] ,
+					] , 'order' , '排序方向' , input('order' , 'asc')) ,
+
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//表格id
+				$t = integrationTags::hidden([
+					'name'  => 'id' ,
+					'value' => $params['id'] ,
+				]);
+				$doms = array_merge($doms , $t);
+			});
+
+			return $searchForm;
 		}
 
 

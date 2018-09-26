@@ -727,15 +727,6 @@
 			return $this->showPage();
 		}
 
-		/**
-		 * @throws \Exception
-		 */
-		public function delete()
-		{
-			$this->initLogic();
-			return $this->jump($this->logic->delete($this->param));
-		}
-
 
 		/**
 		 * @return mixed

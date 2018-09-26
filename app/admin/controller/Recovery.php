@@ -12,10 +12,7 @@
 			parent::_initialize();
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
+
 		public function add()
 		{
 			if(IS_POST)
@@ -87,11 +84,6 @@
 			}
 		}
 
-
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
 		public function edit()
 		{
 			$this->initLogic();
@@ -115,7 +107,7 @@
 							'field_name'  => '表名字' ,
 							'placeholder' => '' ,
 							'tip'         => '表标题' ,
-							'value'      => $info['name'] ,
+							'value'       => $info['name'] ,
 							//'attr'        => 'disabled' ,
 							'name'        => 'name' ,
 						]) ,
@@ -125,7 +117,7 @@
 							'field_name'  => '表名' ,
 							'placeholder' => '' ,
 							'tip'         => '表在数据库里的英文标识' ,
-							'value'      => $info['tab_db'] ,
+							'value'       => $info['tab_db'] ,
 							//'attr'        => 'disabled' ,
 							'name'        => 'tab_db' ,
 						]) ,
@@ -136,7 +128,7 @@
 							'field_name'  => '字段' ,
 							'placeholder' => '' ,
 							'tip'         => '要预览的字段，用逗号分隔，直接拼接sql用' ,
-							'value'      => $info['field'] ,
+							'value'       => $info['field'] ,
 							//'attr'        => 'disabled' ,
 							'name'        => 'field' ,
 						]) ,
@@ -165,7 +157,6 @@
 			}
 		}
 
-
 		public function dataList()
 		{
 			$this->setPageTitle('回收站列表');
@@ -174,43 +165,39 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
-						integrationTags::rowButton([[
+						integrationTags::rowButton([
 							[
-								'class' => 'btn-success  search-dom-btn-1',
-								'field' => '筛选',
+								[
+									'class' => 'btn-success  search-dom-btn-1' ,
+									'field' => '筛选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-all' ,
+									'field' => '全选' ,
+								] ,
+								[
+									'class' => 'btn-info  se-rev' ,
+									'field' => '反选' ,
+								] ,
+								[
+									'class'      => 'btn-danger  btn-add' ,
+									'field'      => '添加数据' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add') ,
+								] ,
+								[
+									'class'      => 'btn-danger  multi-op multi-op-del' ,
+									'field'      => '批量删除' ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
+								] ,
+
+
 							],
-							[
-								'class' => 'btn-info  se-all',
-								'field' => '全选',
-							],
-							[
-								'class' => 'btn-info  se-rev',
-								'field' => '反选',
-							],
-							[
-								'class' => 'btn-danger  btn-add',
-								'field' => '添加数据',
-								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add'),
-							],
-							[
-								'class' => 'btn-danger  multi-op multi-op-del',
-								'field' => '批量删除',
-								'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete'),
-							],
-							[
-								'class' => 'btn-primary  multi-op multi-op-toggle-status-enable',
-								'field' => '批量启用',
-							],
-							[
-								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable',
-								'field' => '批量禁用',
-							],
-						]]),
+						]) ,
 
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 
 							//$data = $this->logic->dataList($this->param);
-							$data = $this->logic->getActivedDataWithPagination($this->param);
+							$data = $this->logic->dataListWithPagination($this->param);
 
 							/**
 							 * 设置表格头
@@ -331,9 +318,12 @@
 								//状态
 								$k = static::$statusMap;
 								array_pop($k);
-								array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
+								array_unshift($k , [
+									'value' => -1 ,
+									'field' => '全部' ,
+								]);
 								$t = integrationTags::searchFormCol([
-									integrationTags::searchFormRadio($k, 'status' , '状态' , input('status' , '-1')) ,
+									integrationTags::searchFormRadio($k , 'status' , '状态' , input('status' , '-1')) ,
 								] , ['col' => '6']);
 								$doms = array_merge($doms , $t);
 
@@ -374,41 +364,40 @@
 											'msg'      => '表名必填' ,
 											'editable' => 1 ,
 										]) ,
-										'<br />',
+										'<br />' ,
 										integrationTags::tdSimple([
 											'name'     => '字段 : ' ,
 											'value'    => $v['field'] ,
 											'field'    => 'field' ,
 											'reg'      => '/^\S+$/' ,
 											'msg'      => '字段必填' ,
-											'editable' => 1,
+											'editable' => 1 ,
 										]) ,
 									]) ,
 
 
-
-/*
-									//排序
-									integrationTags::td([
-										integrationTags::tdSimple([
-											'name'     => '' ,
-											'value'    => $v['order'] ,
-											'field'    => 'order' ,
-											'reg'      => '/^\d+$/' ,
-											'msg'      => '必须为数字，确保前后无空格' ,
-											'editable' => (function() use ($v) {
-												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-											})() ,
-										]) ,
-									]) ,
-*/
+									/*
+																		//排序
+																		integrationTags::td([
+																			integrationTags::tdSimple([
+																				'name'     => '' ,
+																				'value'    => $v['order'] ,
+																				'field'    => 'order' ,
+																				'reg'      => '/^\d+$/' ,
+																				'msg'      => '必须为数字，确保前后无空格' ,
+																				'editable' => (function() use ($v) {
+																					return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+																				})() ,
+																			]) ,
+																		]) ,
+									*/
 
 									//添加时间
 									integrationTags::td([
 										integrationTags::tdSimple([
 											//'name'     => '添加时间' ,
 											//'editable' => '0' ,
-											'value'    => formatTime($v['time']) ,
+											'value' => formatTime($v['time']) ,
 										]) ,
 									]) ,
 
@@ -426,46 +415,46 @@
 										]) ,
 									]) ,
 
-/*
-									//状态
-									integrationTags::td([
-										integrationTags::tdSwitcher([
-											'params'  => [
-												'checked'         => $v['status'] ? 'checked' : '' ,
-												'name'            => 'status' ,
-												'change_callback' => 'switcherUpdateField' ,
-												//switcherUpdateFieldConfirm
-												'is_display'      => (function() use ($v) {
-													return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-												})() ,
-											] ,
-											'name'    => '' ,
-											'is_auto' => '1' ,
+									/*
+																		//状态
+																		integrationTags::td([
+																			integrationTags::tdSwitcher([
+																				'params'  => [
+																					'checked'         => $v['status'] ? 'checked' : '' ,
+																					'name'            => 'status' ,
+																					'change_callback' => 'switcherUpdateField' ,
+																					//switcherUpdateFieldConfirm
+																					'is_display'      => (function() use ($v) {
+																						return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+																					})() ,
+																				] ,
+																				'name'    => '' ,
+																				'is_auto' => '1' ,
 
-										]) ,
-									]) ,
-									*/
+																			]) ,
+																		]) ,
+																		*/
 
 									//操作
 									integrationTags::td([
-/*
+										/*
 										integrationTags::tdButton([
 											'attr'       => ' btn-success btn-edit' ,
 											'value'      => '编辑' ,
 											'is_display' => 1,
 										]) ,*/
 
-										integrationTags::tdButton([
-											'attr'       => ' btn-danger btn-delete' ,
-											'value'      => '删除' ,
-											'is_display' => 1,
-										]) ,
-
 
 										integrationTags::tdButton([
 											'attr'       => ' btn-info btn-view-info' ,
 											'value'      => '查看数据' ,
-											'is_display' => 1,
+											'is_display' => 1 ,
+										]) ,
+
+										integrationTags::tdButton([
+											'attr'       => ' btn-danger btn-delete' ,
+											'value'      => '删除' ,
+											'is_display' => 1 ,
 										]) ,
 
 									]) ,
@@ -476,7 +465,6 @@
 							}
 
 						}) ,
-
 
 					] , [
 						'width'      => '12' ,
@@ -490,8 +478,15 @@
 			return $this->showPage();
 		}
 
-		public function viewInfo(){
+		/**
+		 * 查看每个表的数据
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
+		public function viewInfo()
+		{
 			$this->initLogic();
+			session(SESSION_TAG_ADMIN . 'tab_id' , $this->param['id']);
 
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
@@ -511,19 +506,19 @@
 									'field' => '反选' ,
 								] ,
 								[
-									'class'      => 'btn-danger multi-op multi-op-del' ,
+									'class'      => 'btn-danger multi-op multi-item-delete' ,
 									'field'      => '批量删除' ,
 									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 								] ,
 								[
-									'class'      => 'btn-success  multi-op multi-op-del' ,
+									'class'      => 'btn-danger multi-op multi-item-recover' ,
 									'field'      => '批量恢复' ,
 									'is_display' => 1 ,
 								] ,
 							] ,
 						]) ,
 
-						$this->logic->getDeletedTab($this->param),
+						$this->logic->getDeletedTab($this->param) ,
 
 					] , [
 						'width'      => '12' ,
@@ -537,21 +532,45 @@
 
 		}
 
-		public function detailInfo(){
+		/**
+		 * 每个表数据的详细信息
+		 */
+		public function detailInfo()
+		{
+			$this->initLogic();
 
+			$tableId = session(SESSION_TAG_ADMIN.'tab_id');
+			$data= $this->logic->getDetailInfo($this->param['ids'], $tableId) ;
+
+			return $this->jump($data);
 		}
 
 
 		/**
-		 * @throws \Exception
+		 * 彻底删除数据
+		 * 恢复数据
 		 */
-		public function delete()
+		public function setItem()
 		{
 			$this->initLogic();
+			$tableId = session(SESSION_TAG_ADMIN . 'tab_id');
+			$res = [];
 
-			return $this->jump($this->logic->delete($this->param , [
+			switch ($this->param['type'])
+			{
+				case 'recover' :
+					$res = $this->logic->recoverItem($this->param['ids'] , $tableId);
+					break;
+				case 'delete' :
+					$res = $this->logic->deleteItem($this->param['ids'] , $tableId);
+					break;
+				default :
+					#...
+					break;
+			}
 
-			]));
+			return $this->jump($res);
+
 		}
 
 	}

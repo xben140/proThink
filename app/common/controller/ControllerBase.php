@@ -268,7 +268,7 @@
 			{
 				case RESULT_SUCCESS  :
 				case RESULT_ERROR    :
-					return $this->{$jumpType['sign']}($jumpType['message'] , $jumpType['url']);
+					return $this->{$jumpType['sign']}($jumpType['message'] , $jumpType['url'], $jumpType['data']);
 				case RESULT_REDIRECT :
 					return $this->{$jumpType['sign']}($jumpType['url']);
 				default        :

@@ -72,13 +72,13 @@
 		 * 删除数据
 		 *
 		 * @param array $where
-		 * @param int   $isTurelyDelete 0进回收站，1彻底删除
+		 * @param int   $isTurlyDelete 0进回收站，1彻底删除
 		 *
 		 * @return ModelBase|int
 		 */
-		final protected function deleteData($where = [] , $isTurelyDelete = 0)
+		final protected function deleteData($where = [] , $isTurlyDelete = 0)
 		{
-			if($isTurelyDelete)
+			if($isTurlyDelete)
 			{
 				$this->setCondition(['where' => $where ,]);
 				$res = $this->delete();
@@ -102,7 +102,6 @@
 		{
 			return $this->deleteData($where , 1);
 		}
-
 
 		/**
 		 * 数据加入回收站
@@ -244,7 +243,6 @@
 		 */
 		final public function findData($condition = [])
 		{
-			$this->getAvailableOnly();
 			$this->setCondition($condition);
 			//每个添加的数据都加入时间字段
 			$res = $this->fetchSql(0)->find();
@@ -263,7 +261,7 @@
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		public function getRowById($id, $field = '*')
+		public function getRowById($id , $field = '*')
 		{
 			$where = [
 				'id' => [
@@ -309,6 +307,7 @@
 
 			return $this;
 		}
+
 		/**
 		 * 设置所有表查询数据时候不查回收站数据
 		 **/
@@ -364,14 +363,12 @@
 		 *
 		 * @return ModelBase
 		 */
-
 		public function setCondition(array $condition = [])
 		{
 			foreach ($condition as $k => $v) $this->$k($v);
 
 			return $this;
 		}
-
 
 		/**
 		 * 所有表添加时自动修正status字段
@@ -385,7 +382,13 @@
 			return !is_null($val) ? $val : 0;
 		}
 
-
+		/**
+		 * 所有表添加时自动修正remark字段
+		 *
+		 * @param $val
+		 *
+		 * @return int
+		 */
 		public function getRemarkAttr($value)
 		{
 			$value = htmlspecialchars_decode($value);

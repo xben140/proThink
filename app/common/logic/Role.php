@@ -12,6 +12,26 @@
 		public function __construct()
 		{
 			$this->initBaseClass();
+
+			//设置真正删除的前置回调
+			$this->setBeforeDelete([
+				[
+					//删除角色对应的授权
+					function(&$param) {
+						//看有没有角色有这个权限，有的话就不能删除
+						$res = db('role_privilege')->where([
+								'role_id'   => [
+									'in' ,
+									$param['ids'],
+								] ,
+							])->delete() !== false;
+
+						return $res;
+					} ,
+					[] ,
+				] ,
+
+			]);
 		}
 
 

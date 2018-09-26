@@ -18,11 +18,22 @@
 		//对应表的模型实例
 		public $model_ = null;
 
+		/**
+		 * 每个logic里自定义
+		 * @var null
+		 */
+		//回收站删除前置回调
+		public $beforeDelete= null;
+		//回收站删除后置回调
+		public $afterDelete = null;
+
+
 		//返回结果默认值
 		public $retureResult = [
 			'sign'    => RESULT_SUCCESS ,
 			'message' => '' ,
 			'url'     => '' ,
+			'data'    => [] ,
 		];
 
 		public function initBaseClass()
@@ -35,7 +46,11 @@
 
 
 		/**
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 *                        curl基础操作
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 */
 
 		/**
@@ -98,7 +113,6 @@
 
 			return $this->retureResult;
 		}
-
 
 		/**
 		 * 控制器编辑数据
@@ -178,10 +192,11 @@
 		 * @param            $param
 		 * @param null       $beforeClosureList
 		 * @param null       $afterClosureList
+		 * @param bool       $isTurlyDelte
 		 *
 		 * @return array
 		 */
-		public function delete($param , $beforeClosureList = null , $afterClosureList = null)
+		public function delete($param , $beforeClosureList = null , $afterClosureList = null, $isTurlyDelte=false)
 		{
 			//TODO 执行前置钩子，根据结果决定是否删除
 			//TODO 把删除语句加入闭包队列中最后一个都通过才删除
@@ -197,7 +212,7 @@
 
 			//处理方法
 			$closureList[] = [
-				function(&$globalVariable) {
+				function(&$globalVariable) use($isTurlyDelte){
 					$where = [
 						'id' => [
 							'in' ,
@@ -205,7 +220,7 @@
 						] ,
 					];
 
-					return $this->model_->recycle($where);
+					return $isTurlyDelte ? $this->model_->del($where) : $this->model_->recycle($where);
 				} ,
 				[] ,
 				'删除失败，请稍后再试...' ,
@@ -233,7 +248,6 @@
 
 			return $this->retureResult;
 		}
-
 
 		/**
 		 * @param      $param
@@ -303,9 +317,12 @@
 
 
 		/**
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 *                        查询数据通用信息
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 */
-
 
 		/**
 		 * 按id获取单条数据
@@ -406,6 +423,14 @@
 
 
 		/**
+		 * ******************************************************************************************
+		 * ******************************************************************************************
+		 *                        回收站
+		 * ******************************************************************************************
+		 * ******************************************************************************************
+		 */
+
+		/**
 		 * 已经被删除的数据
 		 * 分页获取当前表所有status为2的数据
 		 *
@@ -435,7 +460,7 @@
 
 
 		/**
-		 * 读取回收站里的数据
+		 * 读取回收站里的数据返回表格
 		 *
 		 * @param $params
 		 *
@@ -443,11 +468,15 @@
 		 */
 		public function getDeletedTab($params)
 		{
-
 			return elementsFactory::staticTable()->make(function(&$doms , $_this) use ($params) {
+
 				$info = $this->getInfo($params);
 				$logic = $this->{'logic__common_' . $info['tab_db']};
+
 				$data = $logic->getDeletedDataWithPagination($params);
+
+				$searchForm = $logic->getSearchForm($params);
+				$_this->setSearchForm($searchForm);
 
 				/**
 				 * 设置表格头
@@ -480,85 +509,15 @@
 				 * 设置js请求api
 				 */
 				$_this->setApi([
-					'deleteUrl'   => url('delete') ,
-					'setFieldUrl' => url('setField') ,
-					'detailUrl'   => url('detail') ,
-					'editUrl'     => url('edit') ,
-					'addUrl'      => url('add') ,
-					'viewInfoUrl' => url('viewInfo') ,
+					'deleteUrl'     => url('delete') ,
+					'setFieldUrl'   => url('setField') ,
+					'detailUrl'     => url('detail') ,
+					'editUrl'       => url('edit') ,
+					'addUrl'        => url('add') ,
+					'viewInfoUrl'   => url('viewInfo') ,
+					'detailInfoUrl' => url('detailInfo') ,
+					'setItemUrl'    => url('setItem') ,
 				]);
-
-
-				/*
-				 * 设置表格搜索框
-				 */
-				$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this)  use ($params) {
-					//角色名
-					$t = integrationTags::searchFormCol([
-						integrationTags::searchFormText([
-							'field'       => '角色名' ,
-							'value'       => input('name' , '') ,
-							'name'        => 'name' ,
-							'placeholder' => '' ,
-						]) ,
-					] , ['col' => '6']);
-					$doms = array_merge($doms , $t);
-
-					//添加时间
-					$t = integrationTags::searchFormCol([
-						integrationTags::searchFormDate([
-							'field'        => '添加时间' ,
-							'value1'       => input('reg_time_begin' , '') ,
-							'name1'        => 'reg_time_begin' ,
-							'placeholder1' => '' ,
-							'value2'       => input('reg_time_end' , '') ,
-							'name2'        => 'reg_time_end' ,
-							'placeholder2' => '' ,
-						]) ,
-					] , ['col' => '6']);
-					$doms = array_merge($doms , $t);
-
-					//每页显示条数
-					$t = integrationTags::searchFormCol([
-						integrationTags::searchFormText([
-							'field'       => '每页显示条数' ,
-							'value'       => (isset($params['pagerow']) && is_numeric($params['pagerow'])) ?$params['pagerow'] : DB_LIST_ROWS ,
-							'name'        => 'pagerow' ,
-							'placeholder' => '' ,
-						]) ,
-					] , ['col' => '6']);
-					$doms = array_merge($doms , $t);
-
-					//排序字段
-					$t = integrationTags::searchFormCol([
-						integrationTags::searchFormSelect([
-							[
-								'value' => 'id' ,
-								'field' => '默认' ,
-							] ,
-						] , 'order_filed' , '排序字段' , input('order_filed' , 'id')) ,
-					] , ['col' => '6']);
-					$doms = array_merge($doms , $t);
-
-					//排序方向
-					$t = integrationTags::searchFormCol([
-						integrationTags::searchFormRadio([
-							[
-								'value' => 'asc' ,
-								'field' => '正序' ,
-							] ,
-							[
-								'value' => 'desc' ,
-								'field' => '反序' ,
-							] ,
-						] , 'order' , '排序方向' , input('order' , 'asc')) ,
-					] , ['col' => '6']);
-					$doms = array_merge($doms , $t);
-
-
-				});
-				$_this->setSearchForm($searchForm);
-
 
 				foreach ($data['data'] as $k => $v)
 				{
@@ -642,8 +601,162 @@
 			});
 		}
 
+
 		/**
+		 * 获取每个删除表格的详细数据
+		 *
+		 * @param $dataId  string 用户表里数据id
+		 * @param $tableId string 用户表记录id
+		 *
+		 * @return array
+		 */
+		public function getDetailInfo($dataId , $tableId)
+		{
+			$info = $this->getInfo(['id' => $tableId ,]);
+			$logic = $this->{'logic__common_' . $info['tab_db']};
+			$data = $logic->getInfo(['id' => $dataId ,]);
+
+			if(($data) !== null)
+			{
+				$this->retureResult['data'] = $data->toArray();
+				$this->retureResult['message'] = '获取成功';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = '获取失败';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+		/**
+		 * 每个表格默认搜索条件，在子logic里重写
+		 *
+		 * @param $params
+		 *
+		 * @return
+		 */
+		public function getSearchForm($params)
+		{
+			$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($params) {
+				$_this->setIsDisplay(1);
+
+
+				//每页显示条数
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormText([
+						'field'       => '每页显示条数' ,
+						'value'       => (isset($params['pagerow']) && is_numeric($params['pagerow'])) ? $params['pagerow'] : DB_LIST_ROWS ,
+						'name'        => 'pagerow' ,
+						'placeholder' => '' ,
+					]) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//排序字段
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormSelect([
+						[
+							'value' => 'id' ,
+							'field' => '默认' ,
+						] ,
+					] , 'order_filed' , '排序字段' , input('order_filed' , 'id')) ,
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//排序方向
+				$t = integrationTags::searchFormCol([
+					integrationTags::searchFormRadio([
+						[
+							'value' => 'asc' ,
+							'field' => '正序' ,
+						] ,
+						[
+							'value' => 'desc' ,
+							'field' => '反序' ,
+						] ,
+					] , 'order' , '排序方向' , input('order' , 'asc')) ,
+
+				] , ['col' => '6']);
+				$doms = array_merge($doms , $t);
+
+
+				//表格id
+				$t = integrationTags::hidden([
+					'name'  => 'id' ,
+					'value' => $params['id'] ,
+				]);
+				$doms = array_merge($doms , $t);
+			});
+
+			return $searchForm;
+
+		}
+
+
+		/**
+		 * 删除回收站
+		 *
+		 * @param $ids
+		 * @param $tableId
+		 *
+		 * @return int
+		 */
+		public function deleteItem($ids, $tableId)
+		{
+			$info = $this->getInfo(['id' => $tableId,]);
+			$logic = $this->{'logic__common_' . $info['tab_db']};
+			return $logic->delete(['ids' => $ids,] , $logic->beforeDelete , $logic->afterDelete, 1);
+		}
+
+		/**
+		 * 恢复回收站
+		 *
+		 * @param $ids
+		 * @param $tableId
+		 *
+		 * @return
+		 */
+		public function recoverItem($ids , $tableId)
+		{
+			$info = $this->getInfo(['id' => $tableId ,]);
+			$logic = $this->{'logic__common_' . $info['tab_db']};
+			return $logic->updateField([
+				'field' => 'status' ,
+				'val'   => '0' ,
+				'ids'   => $ids ,
+			]);
+		}
+
+
+		/**
+		 * @param null $beforeDelete
+		 */
+		public function setBeforeDelete($beforeDelete)
+		{
+			$this->beforeDelete = $beforeDelete;
+		}
+
+		/**
+		 * @param null $afterDelete
+		 */
+		public function setAfterDelete($afterDelete)
+		{
+			$this->afterDelete = $afterDelete;
+		}
+
+
+		/**
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 *                        用户登陆通用信息
+		 * ******************************************************************************************
+		 * ******************************************************************************************
 		 */
 
 		/**
@@ -668,7 +781,6 @@
 
 			return $res;
 		}
-
 
 		/**
 		 * 用户菜单信息写到session

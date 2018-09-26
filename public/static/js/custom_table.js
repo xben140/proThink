@@ -44,6 +44,7 @@
 
 	//修改密码
 	$('.btn-modify-pwd').on({'click': function () {registerEditPwd(this)}});
+
 	function registerEditPwd($obj)
 	{
 		let _this = $($obj);
@@ -73,6 +74,7 @@
 
 	//分配角色
 	$('.btn-assign-role').on({'click': function () {registerAssignRoles(this)}});
+
 	function registerAssignRoles($obj)
 	{
 		let _this = $($obj);
@@ -101,6 +103,7 @@
 
 	//分配刊物
 	$('.btn-assignJournalTypeMap').on({'click': function () {registerAssignJournalTypeMap(this)}});
+
 	function registerAssignJournalTypeMap($obj)
 	{
 		let _this = $($obj);
@@ -141,6 +144,7 @@
 
 	//分配权限
 	$('.btn-assign-privileges').on({'click': function () {registerAssignPrivileges(this)}});
+
 	function registerAssignPrivileges($obj)
 	{
 		let _this = $($obj);
@@ -218,6 +222,7 @@
 
 	//上传附件
 	$('.btn-upload-attachment').on({'click': function () {registerUploadAttachment(this)}});
+
 	function registerUploadAttachment($obj)
 	{
 		let _this = $($obj);
@@ -245,37 +250,9 @@
 	}
 
 
-	//回收站查看数据
-	$('.btn-view-info').on({'click': function () {registerviewInfo(this)}});
-	function registerviewInfo($obj)
-	{
-		let _this = $($obj);
-		let data_id = getParentTr(_this).data('id');
-		// _this.attr("disabled", true);
-
-		layer.open({
-			type     : 2,
-			title    : '查看数据',
-			// shadeClose: true,
-			shade    : 0.1,
-			area     : ['85%', '85%'],
-			resize   : 1,
-			moveOut  : 1,
-			skin     : 'search-dom-pop', //样式类名
-			closeBtn : 1, //不显示关闭按钮
-			anim     : 0,
-			// anim      : randomNum(0, 6),
-			isOutAnim: 0,
-			content  : viewInfoUrl + "?id=" + data_id, //iframe的url
-			success  : function (_) {
-				_this.attr("disabled", false);
-			},
-		});
-	}
-
-
 	//查看附件
 	$('.btn-preview-attachment').on({'click': function () {registerPreviewAttachment(this)}});
+
 	function registerPreviewAttachment($obj)
 	{
 		let _this = $($obj);
@@ -305,6 +282,7 @@
 
 	//替换稿件
 	$('.btn-replace-doc').on({'click': function () {replaceDoc(this)}});
+
 	function replaceDoc($obj)
 	{
 		let _this = $($obj);
@@ -334,6 +312,7 @@
 
 	//分配地址淡出列表
 	$('.btn-assign-address').on({'click': function () {assignAddress(this)}});
+
 	function assignAddress($obj)
 	{
 		let _this = $($obj);
@@ -366,6 +345,7 @@
 
 	//指定地址
 	$('.btn-use-address').on({'click': function () {useAddress(this)}});
+
 	function useAddress($obj)
 	{
 		let _this = $($obj);
@@ -394,6 +374,7 @@
 
 	//设置为待定
 	$('.btn-set-stay').on({'click': function () {setStay(this)}});
+
 	function setStay($obj)
 	{
 		let _this = $($obj);
@@ -419,6 +400,187 @@
 		}, _this);
 	}
 
+
+	/**
+	 *
+	 *
+	 *
+	 *
+	 *                  回收站
+	 *
+	 *
+	 *
+	 */
+
+	//恢复数据
+	$('.btn-recover').on({'click': function () {registerSetItem(this, 'recover')}});
+	//彻底删除
+	$('.btn-complete-delete').on({'click': function () {registerSetItem(this, 'delete')}});
+
+
+	$('.multi-item-delete').on({
+		'click': function () {
+			let _this = this;
+			getSelecteedItemId(function (ids, callback_) {
+				itemSet(ids.join(','), _this, callback_, 'delete')
+			}, function (data) {
+				setTimeout(function () {
+					location.reload();
+				}, 500)
+			});
+		}
+	});
+
+	$('.multi-item-recover').on({
+		'click': function () {
+			let _this = this;
+			getSelecteedItemId(function (ids, callback_) {
+				itemSet(ids.join(','), _this, callback_, 'recover')
+			}, function (data) {
+				setTimeout(function () {
+					location.reload();
+				}, 500)
+			});
+		}
+	});
+
+	function registerSetItem($obj, opreation)
+	{
+		let _this = $($obj);
+		let data_id = getParentTr(_this).data('id');
+
+		itemSet(data_id, $obj, null, opreation)
+	}
+
+	function itemSet(ids, btn, callback_, opreation)
+	{
+		let url = setItemUrl;
+
+		layer.confirm('确定？此操作不可恢复', {
+			resize    : 1,
+			moveOut   : 1,
+			title     : '请确定当前操作',
+			shade     : 0.1,
+			closeBtn  : 0, //不显示关闭按钮
+			anim      : 0,
+			// anim      : randomNum(0, 6),
+			isOutAnim : 0,
+			shadeClose: true, //开启遮罩关闭
+			btn       : ['确定', '取消']
+		}, function (index, layero) {
+			layer.close(index)
+
+			ajaxPost(url, {ids: ids,type:opreation}, function (data) {
+				//成功返回回调
+				layer.msg(data.msg);
+				if (data.code)
+				{
+					getParentTr($(btn)).remove();
+				}
+				(typeof callback_ === "function") && callback_(data);
+			}, function (data) {
+				//错误返回回调
+
+			}, function (btn) {
+				//请求之前回调
+
+			}, btn);
+
+		}, function (index) {
+			layer.close(index)
+		});
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+	//回收站查看详细数据
+	$('.btn-view-detail').on({
+		'click': function () {
+			let _this = $(this);
+			let data_id = getParentTr(_this).data('id');
+
+			let url = detailInfoUrl;
+
+			ajaxPost(url, {doc_status: '0', ids: data_id}, function (data) {
+				//成功返回回调
+				if (data.code)
+				{
+					index_preview = layer.open({
+						type      : 1,
+						closeBtn  : 0,
+						shade     : 0.2,
+						shadeClose: 1,
+						area      : ['70%', '70%'],
+						// time      : 0,
+						content   : (function (_) {
+							let tmp = '<span class="name bold"> __name__ : </span><span class=" name"> __value__ </span><br>';
+							let str = '<div style="margin: 10px;">';
+							let replaceStr = function (tmpName, content) {
+								let t = tmpName;
+								for (let i in content) t = t.replace(i, content[i]);
+								return t;
+							}
+
+							for (let i in _)
+							{
+								str += replaceStr(tmp, {
+									__name__ : i,
+									__value__: _[i],
+								});
+							}
+							str += '</div>';
+							return str;
+						})(data.data)
+					});
+
+				}
+			}, function (data) {
+				//错误返回回调
+
+			}, function (btn) {
+				//请求之前回调
+
+			}, _this);
+		},
+	})
+
+
+	//回收站查看数据
+	$('.btn-view-info').on({'click': function () {registerviewInfo(this)}});
+	function registerviewInfo($obj)
+	{
+		let _this = $($obj);
+		let data_id = getParentTr(_this).data('id');
+		// _this.attr("disabled", true);
+
+		layer.open({
+			type     : 2,
+			title    : '查看数据',
+			// shadeClose: true,
+			shade    : 0.1,
+			area     : ['85%', '85%'],
+			resize   : 1,
+			moveOut  : 1,
+			skin     : 'search-dom-pop', //样式类名
+			closeBtn : 1, //不显示关闭按钮
+			anim     : 0,
+			// anim      : randomNum(0, 6),
+			isOutAnim: 0,
+			content  : viewInfoUrl + "?id=" + data_id, //iframe的url
+			success  : function (_) {
+				_this.attr("disabled", false);
+			},
+		});
+	}
 
 	/**
 	 *
@@ -636,7 +798,7 @@
 
 				layer.prompt({
 					closeBtn  : 0, //不显示关闭按钮
-					anim      : 5,
+					anim      : 0,
 					title     : '输入更新的值',
 					shadeClose: true, //开启遮罩关闭
 					formType  : openType,
@@ -716,10 +878,10 @@
 		'mouseout' : function () {
 			layer.close(index_tips);
 		},
-		'dblclick': function () {
+		'dblclick' : function () {
 			let _this = $(this);
 			layer.open({
-				area      : ['30%', '30%'],
+				area      : ['50%', '50%'],
 				type      : 1,
 				resize    : 1,
 				moveOut   : 1,
@@ -731,7 +893,7 @@
 				// anim      : randomNum(0, 6),
 				isOutAnim : 0,
 				shadeClose: true, //开启遮罩关闭
-				content   : '<div style="padding: 10px;" >'+_this.text()+'</div>', //dom
+				content   : '<div style="padding: 10px;" >' + _this.text() + '</div>', //dom
 				success   : function (layero, index) {
 					_this.attr("disabled", false);
 					// layero.alert(layero, index)

@@ -391,6 +391,7 @@
 				height: this.options.size[1],
 				width : this.options.size[0],
 			})
+
 			jQuery(this.element).on({
 				'click': function (e) {
 					__this.showBox();
