@@ -958,9 +958,7 @@ abstract class Connection
      */
     protected function trigger($sql, $runtime, $explain = [], $master = false)
     {
-		file_put_contents('./runtime.sql', $sql."\r\n", FILE_APPEND);
-
-		if (!empty(self::$event)) {
+        if (!empty(self::$event)) {
             foreach (self::$event as $callback) {
                 if (is_callable($callback)) {
                     call_user_func_array($callback, [$sql, $runtime, $explain, $master]);
