@@ -17,6 +17,7 @@
 	],
 	"require"     : {
 		"php"                         : ">=7.0.0",
+		"jenssegers/agent"            : "^2.6",
 		"topthink/framework"          : "5.0.*",
 		"topthink/think-captcha"      : "^1.0",
 		"topthink/think-cache"        : "^1.0",

@@ -34,17 +34,17 @@
 
 		/*
 
-				//email配置
-				//邮件服务器
-				'email_host'          => 'smtp.yeah.net' ,
-				//邮件服务器端口
-				'email_port'          => '25' ,
-				//邮件用户名
-				'email_username'      => 'wf585858@yeah.net' ,
-				//邮件用户登陆秘钥
-				'email_password'      => 'qq123456789' ,
-				//对方显示发件人
-				'email_user'          => '来自proThink的邮件' ,
+		//email配置
+		//邮件服务器
+		'email_host'          => 'smtp.yeah.net' ,
+		//邮件服务器端口
+		'email_port'          => '25' ,
+		//邮件用户名
+		'email_username'      => 'wf585858@yeah.net' ,
+		//邮件用户登陆秘钥
+		'email_password'      => 'qq123456789' ,
+		//对方显示发件人
+		'email_user'          => '来自proThink的邮件' ,
 		*/
 
 		// 扩展函数文件
@@ -164,7 +164,7 @@
 		// 是否开启多语言
 		'lang_switch_on'         => false ,
 		// 默认全局过滤方法 用逗号分隔多个
-		'default_filter'         => 'stripslashes,htmlentities,htmlspecialchars' ,
+		'default_filter'         => 'addslashes,htmlentities,htmlspecialchars' ,
 		// 默认语言
 		'default_lang'           => 'zh-cn' ,
 		// 应用类库后缀
@@ -282,6 +282,11 @@
 		// 异常页面的模板文件
 		//'exception_tmpl'        => APP_PATH . 'common' . DS . 'view' . DS . 'think_exception.php' ,
 		'exception_tmpl'        => THINK_PATH . 'tpl' . DS . 'think_exception.tpl' ,
+
+		//F:\localWeb\public_local14\thinkphp\tpl\think_exception.tpl
+		//F:\localWeb\public_local14\public/../app/common\view\think_exception.php
+
+
 
 		// 错误显示信息,非调试模式有效
 		'error_message'         => '页面错误！请稍后再试～' ,

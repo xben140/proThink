@@ -17,6 +17,11 @@
 			return json($b);
 		}
 
+		public function exception()
+		{
+			exception('未授权的访问', 403);
+		}
+
 		/**
 		 * @return mixed
 		 * @throws \ReflectionException

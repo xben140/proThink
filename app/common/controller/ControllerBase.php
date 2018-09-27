@@ -45,6 +45,8 @@
 		public function _initialize()
 		{
 
+			//print_r(config('exception_tmpl'));exit;;
+
 			// 初始化请求信息
 			$this->initRequestInfo();
 
