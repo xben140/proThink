@@ -2,9 +2,9 @@
 
 	namespace app\admin\controller;
 
-	use app\common\controller\AdminAuth;
+	use app\common\controller\ControllerBase;
 
-	class AdminBase extends AdminAuth
+	class AdminBase extends ControllerBase
 	{
 
 	}

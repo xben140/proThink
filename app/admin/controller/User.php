@@ -6,7 +6,7 @@
 	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	class User extends AdminBase
+	class User extends PermissionAuth
 	{
 		public function _initialize()
 		{
@@ -596,7 +596,7 @@
 								$doms = array_merge($doms , $t);
 
 
-								$roles_ = $this->logic__common_role->getFormatedData();
+								$roles_ = $this->logic__admin_role->getFormatedData();
 								$k = $roles_;array_unshift($k , ['value' => -1 , 'field' => '全部' ,]);
 
 								//角色
@@ -860,7 +860,7 @@
 										integrationTags::tdButton([
 											'attr'       => ' btn-primary btn-assignJournalTypeMap' ,
 											'value'      => '分配刊物' ,
-											'is_display' => $this->logic__common_Role->isUserHasRoles($v['id'], [3]),
+											'is_display' => $this->logic__admin_Role->isUserHasRoles($v['id'], [3]),
 										]) ,
 
 
@@ -896,7 +896,7 @@
 				session(URL_MODULE , $this->param['id']);
 
 				//获取所有有效角色
-				$roles_ = $this->logic__common_role->getFormatedData();
+				$roles_ = $this->logic__admin_role->getFormatedData();
 
 				//获取当前用户有的角色
 				$currRoles = $this->logic->getUserRoles($this->param);
@@ -945,7 +945,7 @@
 				session(URL_MODULE , $this->param['id']);
 
 				//获取所有类型
-				$journalTypes = $this->logic__common_Journaltype->getFormatedData();
+				$journalTypes = $this->logic__Journaltype->getFormatedData();
 
 				//获取当前用户有的类型
 				$currJournalTypes = $this->logic->getUserJournalTypes($this->param);

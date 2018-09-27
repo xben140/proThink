@@ -2,12 +2,11 @@
 
 	namespace app\admin\controller;
 
-
 	use builder\elementsFactory;
 	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	class Index extends AdminBase
+	class Index extends PermissionAuth
 	{
 
 		public function index()
@@ -170,7 +169,7 @@
 			{
 				$condition = explode('/' , $this->param['condition']);
 				$param = [
-					'logic' => 'logic__common_' . $condition[0] ,
+					'logic' => 'logic__' . $condition[0] ,
 					'field' => $condition[1] ,
 					'id'    => $condition[2] ,
 				];

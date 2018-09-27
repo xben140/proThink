@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Loginlog extends AdminBase
+	class Loginlog extends PermissionAuth
 	{
 		public function _initialize()
 		{

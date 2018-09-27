@@ -1446,3 +1446,1113 @@ SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON 
 SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
 SHOW COLUMNS FROM `ithink_role`
 SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT COUNT(*) AS tp_count FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT `curr_tab`.`id` FROM `ithink_doc_attachment` `curr_tab` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `curr_tab`.`doc_id` = '1'
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN ('')
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 2 LIMIT 1
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT `curr_tab`.`id` FROM `ithink_doc_attachment` `curr_tab` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `curr_tab`.`doc_id` = '2'
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN ('')
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+INSERT INTO `ithink_doc_attachment` (`doc_id` , `path` , `file_name` , `remark` , `status` , `time`) VALUES (1 , '' , '' , '动物防疫管理有关问题的' , 1 , 1538031036)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT `curr_tab`.`id` FROM `ithink_doc_attachment` `curr_tab` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `curr_tab`.`doc_id` = '1'
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+UPDATE `ithink_doc_attachment`  SET `del_time`=1538031043  WHERE  `id` IN (1)
+UPDATE `ithink_doc_attachment`  SET `status`=2  WHERE  `id` IN (1)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+INSERT INTO `ithink_doc_attachment` (`doc_id` , `path` , `file_name` , `remark` , `status` , `time`) VALUES (1 , '20180927\\1b9a8ec75ea9ad36a90e0f57827328fe.php' , 'd.php' , '\r\n1P--程胜杰--基层动物' , 1 , 1538031133)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT `curr_tab`.`id` FROM `ithink_doc_attachment` `curr_tab` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `curr_tab`.`doc_id` = '1'
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (2)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT * FROM `ithink_doc_attachment` WHERE  `id` = 2 LIMIT 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (2)
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+UPDATE `ithink_doc_attachment`  SET `del_time`=1538031141  WHERE  `id` IN (2)
+UPDATE `ithink_doc_attachment`  SET `status`=2  WHERE  `id` IN (2)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT COUNT(*) AS tp_count FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT COUNT(*) AS tp_count FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.*,prov.area_name prov_name,city.area_name city_name,county.area_name county_name FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '1'
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '5'
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '64'
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+INSERT INTO `ithink_address` (`name` , `tel` , `province_id` , `city_id` , `county_id` , `address` , `remark` , `user_id` , `time`) VALUES ('11' , '13355254423' , 5 , 64 , 623 , '详细' , '注' , 1 , 1538033746)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT COUNT(*) AS tp_count FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.*,prov.area_name prov_name,city.area_name city_name,county.area_name county_name FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT COUNT(*) AS tp_count FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT COUNT(*) AS tp_count FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.*,prov.area_name prov_name,city.area_name city_name,county.area_name county_name FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,50
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT COUNT(*) AS tp_count FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`doc_type` = '0'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`doc_type` = '0'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`doc_type` = '0'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`doc_type` = '0'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,50
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT COUNT(*) AS tp_count FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.*,prov.area_name prov_name,city.area_name city_name,county.area_name county_name FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT * FROM `ithink_address` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '1'
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '5'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '64'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '11'
+SHOW COLUMNS FROM `ithink_area`
+SELECT * FROM `ithink_area` `curr_tab` WHERE  `curr_tab`.`pid` = '154'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+UPDATE `ithink_address`  SET `province_id`=11,`city_id`=154,`county_id`=1307  WHERE  `id` IN (1)
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_address`
+SELECT COUNT(*) AS tp_count FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.*,prov.area_name prov_name,city.area_name city_name,county.area_name county_name FROM `ithink_address` `curr_tab` LEFT JOIN `ithink_area` `prov` ON `curr_tab`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `curr_tab`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `curr_tab`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT COUNT(*) AS tp_count FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_journal_type`
+SELECT * FROM `ithink_journal_type` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT COUNT(*) AS tp_count FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 LIMIT 1
+SELECT `curr_tab`.*,`b`.`nickname`,prov.area_name prov_name,city.area_name city_name,county.area_name county_name,`address`.`address`,address.name contacts,`address`.`tel` FROM `ithink_doc` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` LEFT JOIN `ithink_address` `address` ON `curr_tab`.`address_id`=`address`.`id` LEFT JOIN `ithink_area` `prov` ON `address`.`province_id`=`prov`.`id` LEFT JOIN `ithink_area` `county` ON `address`.`county_id`=`county`.`id` LEFT JOIN `ithink_area` `city` ON `address`.`city_id`=`city`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999  AND `curr_tab`.`page` BETWEEN 0 AND 50 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+INSERT INTO `ithink_doc_attachment` (`doc_id` , `path` , `file_name` , `remark` , `status` , `time`) VALUES (1 , '20180927\\ff0a5767d0d0aad7390140a1a1d40606.chw' , 'php_enhanced_zh.chw' , '疫管理有关问题' , 1 , 1538040843)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT `curr_tab`.`id` FROM `ithink_doc_attachment` `curr_tab` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `curr_tab`.`doc_id` = '1'
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (3)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_doc_attachment`
+SELECT * FROM `ithink_doc_attachment` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (3)
+SHOW COLUMNS FROM `ithink_doc`
+SELECT * FROM `ithink_doc` WHERE  `id` = 1 LIMIT 1
+UPDATE `ithink_doc_attachment`  SET `del_time`=1538040850  WHERE  `id` IN (3)
+UPDATE `ithink_doc_attachment`  SET `status`=2  WHERE  `id` IN (3)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT COUNT(*) AS tp_count FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+UPDATE `ithink_config_group`  SET `status`=1  WHERE  `id` IN (9)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config_group`
+UPDATE `ithink_config_group`  SET `status`=0  WHERE  `id` IN (9)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT * FROM `ithink_config` WHERE  `group_id` IN (10) LIMIT 1
+SHOW COLUMNS FROM `ithink_config_group`
+UPDATE `ithink_config_group`  SET `del_time`=1538040862  WHERE  `id` IN (10)
+UPDATE `ithink_config_group`  SET `status`=2  WHERE  `id` IN (10)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT * FROM `ithink_config` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config_group`
+SELECT * FROM `ithink_config_group` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT * FROM `ithink_recovery` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` = '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` = '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 13
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+UPDATE `ithink_user`  SET `nickname`='扥扥'  WHERE  `id` IN (13)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+UPDATE `ithink_user`  SET `del_time`=1538040904  WHERE  `id` IN (13)
+UPDATE `ithink_user`  SET `status`=2  WHERE  `id` IN (13)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT * FROM `ithink_recovery` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` = '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` = '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT * FROM `ithink_recovery` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_user_role`
+DELETE FROM `ithink_user_role`    WHERE  `user_id` IN (13)
+SHOW COLUMNS FROM `ithink_user`
+DELETE FROM `ithink_user`    WHERE  `id` IN (13)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = '12'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user_role`
+DELETE FROM `ithink_user_role`    WHERE  `user_id` = 12
+INSERT INTO `ithink_user_role` (`user_id` , `role_id`) VALUES (12 , 4)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = '12'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user_role`
+DELETE FROM `ithink_user_role`    WHERE  `user_id` = 12
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = '2'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role_privilege`
+SELECT `privilege_id` FROM `ithink_role_privilege` WHERE  `role_id` IN (10)
+SHOW COLUMNS FROM `ithink_privilege_resource`
+SELECT `curr_tab`.`resource_id` FROM `ithink_privilege_resource` `curr_tab` WHERE  `curr_tab`.`id` IN ('')  AND `curr_tab`.`resource_type` = '0'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role_privilege`
+SELECT `privilege_id` FROM `ithink_role_privilege` WHERE  `role_id` IN (3)
+SHOW COLUMNS FROM `ithink_privilege_resource`
+SELECT `curr_tab`.`resource_id` FROM `ithink_privilege_resource` `curr_tab` WHERE  `curr_tab`.`id` IN (41,43,44,45,46,53,54,55,56,57,58,59,61,62,66,75)  AND `curr_tab`.`resource_type` = '0'
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ) `_group_count_` LIMIT 1
+SELECT curr_tab.*, GROUP_CONCAT(c.`name`) as role FROM `ithink_user` `curr_tab` LEFT JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`user_id` LEFT JOIN `ithink_role` `c` ON `c`.`id`=`b`.`role_id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 GROUP BY `curr_tab`.`id` ORDER BY `id` ASC LIMIT 0,20
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`id` <> '1'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 2
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 3
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 4
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 5
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 6
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 7
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 8
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 10
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 11
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 12
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SELECT COUNT(*) AS tp_count FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  `curr_tab`.`status` <> '2' ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_recovery`
+SELECT COUNT(*) AS tp_count FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 1
+SELECT `curr_tab`.* FROM `ithink_recovery` `curr_tab` WHERE  `curr_tab`.`status` <> '2' LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 0,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_login_log`
+SELECT COUNT(*) AS tp_count FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 LIMIT 1
+SELECT `curr_tab`.`id`,`curr_tab`.`ip`,`curr_tab`.`remark`,`curr_tab`.`time`,`b`.`user`,`b`.`nickname` FROM `ithink_login_log` `curr_tab` LEFT JOIN `ithink_user` `b` ON `curr_tab`.`uid`=`b`.`id` WHERE  `curr_tab`.`status` <> '2'  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `curr_tab`.`id` DESC LIMIT 20,20
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `id` = 1 LIMIT 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_user`
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+UPDATE `ithink_user`  SET `last_login_ip`='127.0.0.1',`last_login_time`=1538041528,`login_count`=93  WHERE  `user` = 'qq123456'
+SHOW COLUMNS FROM `ithink_resource_menu`
+SELECT * FROM `ithink_resource_menu` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' ) ORDER BY `order` DESC
+SHOW COLUMNS FROM `ithink_role`
+SELECT `b`.`role_id` FROM `ithink_role` `curr_tab` INNER JOIN `ithink_user_role` `b` ON `curr_tab`.`id`=`b`.`role_id` WHERE  ( `curr_tab`.`status` <> '2' AND `curr_tab`.`status` = '1' )  AND `b`.`user_id` = 1
+SELECT * FROM `ithink_role` `curr_tab` WHERE  `curr_tab`.`status` <> '2'  AND `id` IN (1)
+SELECT * FROM `ithink_user` WHERE  `user` = 'qq123456' LIMIT 1
+SHOW COLUMNS FROM `ithink_login_log`
+INSERT INTO `ithink_login_log` (`uid` , `type` , `user_agent` , `remark` , `res` , `time` , `ip`) VALUES (1 , 2 , 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5221.400 QQBrowser/10.0.1125.400' , '登陆成功' , 1 , 1538041528 , '127.0.0.1')
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_role`
+SELECT * FROM `ithink_role` `curr_tab` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `curr_tab`.`time` BETWEEN 0 AND 99999999999999 ORDER BY `id` ASC
+SHOW COLUMNS FROM `ithink_config`
+SELECT * FROM `ithink_config` `curr_tab` LEFT JOIN `ithink_config_group` `b` ON `curr_tab`.`group_id`=`b`.`id` WHERE  ( `curr_tab`.`status` = '1' AND `curr_tab`.`status` <> '2' )  AND `b`.`status` = 1

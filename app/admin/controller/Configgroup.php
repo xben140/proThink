@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Configgroup extends AdminBase
+	class Configgroup extends PermissionAuth
 	{
 		public function _initialize()
 		{

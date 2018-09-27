@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Resourcemenu extends AdminBase
+	class Resourcemenu extends PermissionAuth
 	{
 		public function _initialize()
 		{

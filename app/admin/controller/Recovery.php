@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Recovery extends AdminBase
+	class Recovery extends PermissionAuth
 	{
 		public function _initialize()
 		{

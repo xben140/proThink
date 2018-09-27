@@ -2,9 +2,9 @@
 
 	namespace app\admin\validate;
 
-	use app\common\logic\LogicBase;
+	use think\Validate;
 
-	class AdminBase extends LogicBase
+	class AdminBase extends Validate
 	{
 
 	}

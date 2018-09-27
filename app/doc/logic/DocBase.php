@@ -1,7 +1,10 @@
 <?php
-namespace app\doc\logic;
 
-class DocBase
-{
+	namespace app\doc\logic;
 
-}
+	use app\common\logic\LogicBase;
+
+	class DocBase extends LogicBase
+	{
+
+	}

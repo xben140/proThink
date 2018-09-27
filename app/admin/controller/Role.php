@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Role extends AdminBase
+	class Role extends PermissionAuth
 	{
 		public function _initialize()
 		{
@@ -513,7 +513,7 @@
 
 				$resourceMenuIndex = RESOURCE_INDEX_MENU;
 				//获取所有有效菜单
-				$menus = $this->logic__common_Privilegeresource->getAssignableResource($resourceMenuIndex);
+				$menus = $this->logic__admin_Privilegeresource->getAssignableResource($resourceMenuIndex);
 				$menus = makeTree($menus);
 
 				foreach ($menus as $k => $v)

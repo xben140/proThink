@@ -21,6 +21,7 @@
 		 */
 		public function login()
 		{
+			$this->initLogic();
 			if(isAdminLogin())
 			{
 				$this->redirect(SYS_LOGIN_INDEX);
@@ -39,7 +40,7 @@
 		 */
 		public function doLogin()
 		{
-			$this->logic = $this->logic__login;
+			$this->initLogic();
 
 			return $this->jump($this->logic->doLogin($this->param));
 		}
@@ -52,8 +53,7 @@
 		 */
 		public function logout()
 		{
-			$this->logic = $this->logic__login;
-
+			$this->initLogic();
 			return $this->jump($this->logic->logout($this->param));
 		}
 
@@ -65,8 +65,7 @@
 		 */
 		public function refresh()
 		{
-			$this->logic = $this->logic__login;
-
+			$this->initLogic();
 			return $this->jump($this->logic->refresh($this->param));
 		}
 	}

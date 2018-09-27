@@ -1457,7 +1457,7 @@ css;
 		public function exportExcel()
 		{
 			$path = 'C:\Users\Administrator\Desktop\\';
-			$list = $this->logic__common_Resourcemenu->dataList();
+			$list = $this->logic__admin_Resourcemenu->dataList();
 
 			$titles = [
 				'id' ,

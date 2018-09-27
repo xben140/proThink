@@ -117,18 +117,21 @@
 		];
 
 		/**
-		 * @param string $name $this->model_User,
+		 * $this->model__common_User
+		 *
+		 * @param string $name
 		 *
 		 * @return \think\Model
 		 * @throws \Exception
 		 */
 		public function __get($name)
 		{
+			//  -- 属性命名不规范,示例: model__Admin_User, logic__User, logic__common_UserType ...
 			$result = explode('__' , $name);
 
 			if(!isset($result[0]) || !isset($result[1]))
 			{
-				$msg = $name . '  -- 属性命名不规范,示例: model__Admin_User, logic__User, logic__common_UserType ...';
+				$msg = '不正确的命名 : '.$name ;
 				exception($msg);
 			}
 
@@ -136,5 +139,16 @@
 			$modelName = strtr($result[1] , ['_' => '/']);
 
 			return model($modelName , $layerName);
+		}
+
+		public static function makeClassName($classNameWithNamespace , $layer)
+		{
+			$res = preg_split('#[\\\\/]#im' , $classNameWithNamespace , -1 , PREG_SPLIT_NO_EMPTY);
+			$res[2] = $layer;
+			$c = implode('\\' , $res);
+			$t = class_exists($c) ?
+				$layer . '__' . $res[1] . '_' . $res[3] :
+				$layer . '__common_' . $res[3];
+			return $t;
 		}
 	}

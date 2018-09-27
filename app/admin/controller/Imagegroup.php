@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Imagegroup extends AdminBase
+	class Imagegroup extends PermissionAuth
 	{
 		public function _initialize()
 		{

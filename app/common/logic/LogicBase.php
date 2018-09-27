@@ -40,8 +40,8 @@
 		{
 			//当前类名
 			//$this->model_ = $this->logic__common_User;
-			$this->model_ = $this->{'model__common_' . getClassBase(static::class)};
-			$this->validate_ = $this->{'validate__common_' . getClassBase(static::class)};
+			$this->model_ = $this->{static::makeClassName(static::class , 'model')};
+			$this->validate_ = $this->{static::makeClassName(static::class , 'validate')};
 		}
 
 
@@ -471,7 +471,7 @@
 			return elementsFactory::staticTable()->make(function(&$doms , $_this) use ($params) {
 
 				$info = $this->getInfo($params);
-				$logic = $this->{'logic__common_' . $info['tab_db']};
+				$logic = $this->{'logic__' . $info['tab_db']};
 
 				$data = $logic->getDeletedDataWithPagination($params);
 
@@ -613,7 +613,7 @@
 		public function getDetailInfo($dataId , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			$logic = $this->{'logic__common_' . $info['tab_db']};
+			$logic = $this->{'logic__' . $info['tab_db']};
 			$data = $logic->getInfo(['id' => $dataId ,]);
 
 			if(($data) !== null)
@@ -710,7 +710,7 @@
 		public function deleteItem($ids, $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId,]);
-			$logic = $this->{'logic__common_' . $info['tab_db']};
+			$logic = $this->{'logic__' . $info['tab_db']};
 			return $logic->delete(['ids' => $ids,] , $logic->beforeDelete , $logic->afterDelete, 1);
 		}
 
@@ -725,7 +725,7 @@
 		public function recoverItem($ids , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			$logic = $this->{'logic__common_' . $info['tab_db']};
+			$logic = $this->{'logic__' . $info['tab_db']};
 			return $logic->updateField([
 				'field' => 'status' ,
 				'val'   => '0' ,
@@ -773,7 +773,7 @@
 				] ,
 			];
 
-			$res = $this->model__user->updateData([
+			$res = $this->model__admin_user->updateData([
 				'last_login_ip'   => IP ,
 				'last_login_time' => TIME_NOW ,
 				'login_count'     => $info['login_count'] + 1 ,
@@ -791,14 +791,14 @@
 			if(isGlobalManager())
 			{
 				//如果id是admin的，直接查所有权限
-				$privilege = $this->logic__common_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU , [
+				$privilege = $this->logic__admin_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU , [
 					'order_filed' => 'order' ,
 					'order'       => 'desc' ,
 				]);
 			}
 			else
 			{
-				$privilege = $this->model__common_Privilegeresource->getMenusByUserId(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'))->toArray();
+				$privilege = $this->model__admin_Privilegeresource->getMenusByUserId(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'))->toArray();
 			}
 
 			$privilege = makeTree($privilege);
@@ -811,7 +811,7 @@
 		 */
 		public function initRole()
 		{
-			$roles = $this->logic__common_User->getUserRolesInfo(['id' => getAdminSessionInfo(SESSOIN_TAG_USER , 'id')]);
+			$roles = $this->logic__admin_User->getUserRolesInfo(['id' => getAdminSessionInfo(SESSOIN_TAG_USER , 'id')]);
 
 			$this->updateSession(SESSOIN_TAG_ROLE , $roles);
 
@@ -833,7 +833,7 @@
 		 */
 		public function updateSessionByUsername($username)
 		{
-			$this->updateSession(SESSOIN_TAG_USER , $this->model__common_user->getUserInfoByUsername($username)->toArray());
+			$this->updateSession(SESSOIN_TAG_USER , $this->model__admin_user->getUserInfoByUsername($username)->toArray());
 		}
 
 		/**

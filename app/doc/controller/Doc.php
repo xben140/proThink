@@ -260,7 +260,7 @@ AAA
 				session(md5(URL_MODULE) , $this->param['ids']);
 
 				//获取所有类型
-				$journalTypes = $this->logic__common_Journaltype->getFormatedData();
+				$journalTypes = $this->logic__Journaltype->getFormatedData();
 
 
 				$this->displayContents = integrationTags::basicFrame([
@@ -537,7 +537,7 @@ AAA
 				session(md5(URL_MODULE) , $this->param['id']);
 
 				//获取所有类型
-				$journalTypes = $this->logic__common_Journaltype->getFormatedData(1);
+				$journalTypes = $this->logic__Journaltype->getFormatedData(1);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -735,7 +735,7 @@ AAA
 										2,
 									] ,
 									'callback' => function()use(&$journalTypes) {
-										$journalTypes = $this->logic__common_Journaltype->getFormatedData(1);
+										$journalTypes = $this->logic__Journaltype->getFormatedData(1);
 									} ,
 									'params'   => [] ,
 								] ,
@@ -745,7 +745,7 @@ AAA
 									'callback' => function() use(&$journalTypes) {
 										//编辑获取指定
 										$this->param['uid'] = $this->adminInfo['id'];
-										$journalTypes = $this->logic__common_Journaltype->getFormatedData(1);
+										$journalTypes = $this->logic__Journaltype->getFormatedData(1);
 									} ,
 									'params'   => [] ,
 								] ,
@@ -754,7 +754,7 @@ AAA
 									'roles'    => [3] ,
 									'callback' => function() use(&$journalTypes) {
 										//采编获取所有类型
-										$journalTypes = $this->logic__common_Journaltype->getUserHasType(getAdminSessionInfo('user' , 'id'));
+										$journalTypes = $this->logic__Journaltype->getUserHasType(getAdminSessionInfo('user' , 'id'));
 										//$this->param['is_confirm'] = 1;
 									} ,
 									'params'   => [] ,
@@ -1345,7 +1345,7 @@ AAA
 								]);
 
 
-								$data = $this->logic__common_Address->dataListWithPagination($this->param);
+								$data = $this->logic__Address->dataListWithPagination($this->param);
 
 								/**
 								 * 设置表格头
@@ -1694,7 +1694,7 @@ AAA
 						foreach ($ids as $v)
 						{
 							//取出附件，吧所有附件删除
-							$attachments = $this->logic__common_Docattachment->getAttachmentsByDocId(['id' => $v,]);
+							$attachments = $this->logic__Docattachment->getAttachmentsByDocId(['id' => $v,]);
 							foreach ($attachments as $k1 => $v1) {
 								$where = [
 									'id' => [
@@ -1703,7 +1703,7 @@ AAA
 									] ,
 								];
 								delFile($v1['path']);
-								$this->logic__common_Docattachment->model_->del($where);
+								$this->logic__Docattachment->model_->del($where);
 							}
 							return true;
 						}
@@ -1737,7 +1737,7 @@ AAA
 			if(isset($condition['pagerow'])) unset($condition['pagerow']);
 
 			$data = $this->logic->dataList($condition);
-			$journalTypes = $this->logic__common_Journaltype->getFormatedData(1);
+			$journalTypes = $this->logic__Journaltype->getFormatedData(1);
 
 			$titles = [
 				'文档名' ,

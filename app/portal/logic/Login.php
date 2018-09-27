@@ -8,8 +8,12 @@
 
 		public function __construct()
 		{
-			$this->validate_ = $this->validate__login;
-			$this->model_ = $this->model__user;
+			//$this->validate_ = $this->validate__login;
+			//$this->model_ = $this->model__user;
+
+			//$this->model_ = $this->{static::makeClassName(static::class , 'model')};
+			//$this->validate_ = $this->{static::makeClassName(static::class , 'validate')};
+			$this->initBaseClass();
 		}
 
 		/**
@@ -24,6 +28,9 @@
 		 */
 		public function doLogin($param)
 		{
+			$this->validate_ = $this->validate__login;
+			$this->model_ = $this->model__admin_user;
+
 			//表单验证
 			$validateResult = $this->validate_->scene('login')->check($param);
 			if($validateResult)
@@ -57,7 +64,7 @@
 								$this->updateSessionByUsername($param['username']);
 
 								//登陆日志
-								$this->logic__common_loginlog->addLog($info['id'] , '2' , '登陆成功' , 1);
+								$this->logic__loginlog->addLog($info['id'] , '2' , '登陆成功' , 1);
 
 								$this->retureResult['url'] = url(SYS_LOGIN_INDEX);
 								$this->retureResult['message'] = '登陆成功';

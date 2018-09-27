@@ -1,9 +1,10 @@
 <?php
-namespace app\doc\model;
 
-use think\Model;
+	namespace app\doc\model;
 
-class DocBase extends Model
-{
+	use app\common\model\ModelBase;
 
-}
+	class DocBase extends ModelBase
+	{
+
+	}

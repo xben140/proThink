@@ -56,12 +56,6 @@
 			//初始化页面
 			$this->initPageGlobal();
 
-			// 初始化响应类型
-			//$this->initResponseType();
-
-			// 通用控制器钩子
-			//Hook::listen('hook_controller_common_base', $this->request);
-
 			parent::_initialize();
 
 		}
@@ -70,8 +64,7 @@
 		protected function initLogic()
 		{
 			//当前类名
-			//$this->logic = $this->logic__common_User;
-			$this->logic = $this->{'logic__common_' . getClassBase(static::class)};
+			$this->logic = $this->{static::makeClassName(static::class , 'logic')};
 		}
 
 

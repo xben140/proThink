@@ -2,9 +2,9 @@
 
 	namespace app\doc\controller;
 
-	use app\common\controller\AdminAuth;
+	use app\common\controller\PermissionAuth;
 
-	class DocBase extends AdminAuth
+	class DocBase extends PermissionAuth
 	{
 
 	}

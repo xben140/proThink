@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Config extends AdminBase
+	class Config extends PermissionAuth
 	{
 		public function _initialize()
 		{
@@ -29,7 +29,7 @@
 				$this->setPageTitle('添加配置项');
 
 				//配置组
-				$configGroup = $this->logic__common_Configgroup->getFormatedData();
+				$configGroup = $this->logic__admin_Configgroup->getFormatedData();
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -147,7 +147,7 @@
 				session(URL_MODULE , $this->param['id']);
 
 				//配置组
-				$configGroup = $this->logic__common_Configgroup->getFormatedData();
+				$configGroup = $this->logic__admin_Configgroup->getFormatedData();
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::form([
@@ -303,7 +303,7 @@
 							$data = $this->logic->dataListWithPagination($this->param);
 
 							//配置组
-							$configGroup = $this->logic__common_Configgroup->getFormatedData();
+							$configGroup = $this->logic__admin_Configgroup->getFormatedData();
 
 							/**
 							 * 设置表格头

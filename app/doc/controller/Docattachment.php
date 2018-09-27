@@ -58,7 +58,7 @@
 
 				//id
 				session(md5(URL_MODULE.'id') , $this->param['id']);
-				$docInfo = $this->logic__Common_doc->getInfo($this->param);
+				$docInfo = $this->logic__doc->getInfo($this->param);
 
 				$this->displayContents = integrationTags::basicFrame([
 					integrationTags::row([
@@ -187,7 +187,7 @@ AAA
 
 			$this->initLogic();
 
-			$docInfo = $this->logic__Common_doc->getInfo($this->param);
+			$docInfo = $this->logic__doc->getInfo($this->param);
 
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
@@ -471,7 +471,7 @@ AAA
 						$data = $this->logic->getAttachmentsByIds($param);
 						foreach ($data as $k => $v)
 						{
-							$docInfo = $this->logic__Common_doc->getInfo(['id' => $v['doc_id'] ]);
+							$docInfo = $this->logic__doc->getInfo(['id' => $v['doc_id'] ]);
 							if(in_array($docInfo['doc_status'] , [10]))
 							{
 								$res = false;
