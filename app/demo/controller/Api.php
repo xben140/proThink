@@ -1,8 +1,8 @@
 <?php
 
-	namespace app\home\controller;
+	namespace app\demo\controller;
 
-	class Api extends HomeBase
+	class Api extends DemoBase
 	{
 		public function Api()
 		{

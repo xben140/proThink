@@ -1,6 +1,6 @@
 <?php
 
-	namespace app\cmd\controller;
+	namespace app\demo\controller;
 	//压缩图片功能
 	//文件转义重命名
 	//删除空文件夹
@@ -18,7 +18,7 @@
 	use PhpMyAdmin\SqlParser\Utils\Query;
 	use PHPSQLParser\PHPSQLParser;
 
-	class Index
+	class Cmd
 	{
 
 		//public $testImg = 'C:\Users\Administrator\Desktop\pic\a.jpg';
@@ -28,7 +28,7 @@
 
 		public function rename()
 		{
-			$path = 'C:\Users\Administrator\Desktop\emo';
+			$path = 'C:\Users\Administrator\Desktop\tangcheng';
 
 			loop2($path , function($path , $dirs_ , $relativePath) {
 				//echo '------' . $relativePath . "\r\n";

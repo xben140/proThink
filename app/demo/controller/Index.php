@@ -1,12 +1,12 @@
 <?php
 
-	namespace app\home\controller;
+	namespace app\demo\controller;
 
 	use builder\elementsFactory;
 	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	class Index extends HomeBase
+	class Index extends DemoBase
 	{
 		public function api()
 		{
