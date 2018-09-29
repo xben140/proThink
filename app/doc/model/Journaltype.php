@@ -47,43 +47,6 @@
 
 
 
-		/**
-		 *  用户id  --> 拥有的刊物ids
-		 *
-		 * @param $id
-		 *
-		 * @return mixed
-		 */
-		public function getJournalTypeIdByUserId($id)
-		{
-			$where = [
-				'b.user_id' => [
-					'=' ,
-					$id ,
-				] ,
-			];
-
-			$join = [
-				[
-					'ithink_user_juornaltype b ' ,
-					self::makeSelfAliasField('id') . '  = b.type_id ' ,
-					'left',
-				] ,
-			];
-			$condition = [
-				'where' => $where ,
-				'join'  => $join ,
-			];
-
-			$this->getAvailableOnly();
-			$this->getActivedOnly();
-			$this->setCondition($condition);
-			$data = $this->column('b.type_id');
-			$data = array_flip(array_flip($data));
-
-			return $data;
-		}
-
 	}
 
 

@@ -101,36 +101,6 @@
 		});
 	}
 
-	//分配刊物
-	$('.btn-assignJournalTypeMap').on({'click': function () {registerAssignJournalTypeMap(this)}});
-
-	function registerAssignJournalTypeMap($obj)
-	{
-		let _this = $($obj);
-		let data_id = getParentTr(_this).data('id');
-		// _this.attr("disabled", true);
-
-		layer.open({
-			type     : 2,
-			title    : '分配刊物',
-			// shadeClose: true,
-			shade    : 0.1,
-			area     : ['85%', '85%'],
-			resize   : 1,
-			moveOut  : 1,
-			skin     : 'search-dom-pop', //样式类名
-			closeBtn : 1, //不显示关闭按钮
-			anim     : 0,
-			// anim      : randomNum(0, 6),
-			isOutAnim: 0,
-			content  : assignJournalTypeMapUrl + "?id=" + data_id, //iframe的url
-			success  : function (_) {
-				_this.attr("disabled", false);
-			},
-		});
-	}
-
-
 	/**
 	 *
 	 *

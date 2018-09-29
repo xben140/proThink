@@ -49,22 +49,6 @@
 		}
 
 		/**
-		 * 获取当前用户对应分配的刊物类型id 编辑角色才有
-		 *
-		 * @param $param
-		 *
-		 * @return mixed
-		 */
-		public function getUserJournalTypes($param)
-		{
-			$id = $param['id'];
-
-			$roles = $this->model__Journaltype->getJournalTypeIdByUserId($id);
-
-			return $roles;
-		}
-
-		/**
 		 * 获取当前用户的角色全部信息
 		 *
 		 * @param $param
@@ -138,66 +122,6 @@
 
 			return $this->retureResult;
 		}
-
-
-		/**
-		 * 为用户分配刊物类型
-		 *
-		 * @param $param
-		 *
-		 * @return array
-		 */
-		public function assignJournalTypeMap($param)
-		{
-			//用户id
-			$id = $param['id'];
-			!isset($param['roles']) && $param['roles'] = [];
-			//新分配角色id
-			$juornaltypes = $param['roles'];
-
-			$res = execClosureList([
-				[
-					//删除之前的角色
-					function($id) {
-						return db('user_juornaltype')->where('user_id' , $id)->delete() !== false;
-					} ,
-					[$id] ,
-				] ,
-				[
-					//添加新角色
-					function($juornaltypes , $id) {
-						foreach ($juornaltypes as $v)
-						{
-							db('user_juornaltype')->insert([
-								'user_id' => $id ,
-								'type_id' => $v ,
-							]);
-						}
-
-						return true;
-					} ,
-					[
-						$juornaltypes ,
-						$id ,
-					] ,
-				] ,
-			] , $err);
-
-			if($res)
-			{
-				$this->retureResult['message'] = '分配成功';
-				$this->retureResult['sign'] = RESULT_SUCCESS;
-			}
-			else
-			{
-				$msg = $err ? $err : $this->model_->getError();
-				$this->retureResult['message'] = $msg;
-				$this->retureResult['sign'] = RESULT_ERROR;
-			}
-
-			return $this->retureResult;
-		}
-
 
 		/**
 		 * @param $param

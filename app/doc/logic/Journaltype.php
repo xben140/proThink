@@ -10,34 +10,6 @@
 			$this->initBaseClass();
 		}
 
-		/**
-		 * 获取用户拥有的类型
-		 * 专门给编辑用的
-		 * @param $uid
-		 */
-		public function getUserHasType($uid)
-		{
-			$types = $this->model_->getJournalTypeIdByUserId($uid);
-
-			$journalTypes = $this->getActivedData();
-			$res = [];
-			array_unshift($res , [
-				'value' => 0 ,
-				'field' => '请选择' ,
-			]);
-			foreach ($journalTypes as $k => $v)
-			{
-				if(in_array($v['id'] , $types))
-				{
-					$res[] = [
-						'value' => $v['id'] ,
-						'field' => $v['name'] ,
-					];
-				}
-			}
-
-			return $res;
-		}
 
 		public function getFormatedData($isPushDefault = 0)
 		{

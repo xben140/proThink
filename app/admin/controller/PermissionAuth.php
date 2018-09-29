@@ -22,56 +22,7 @@
 
 		public function __construct()
 		{
-
 			parent::__construct();
-
-			/*
-
-						Auth::addRule('test1' , [
-							function() {
-								Auth::setGlobalParams('test1' , 'group1');
-
-								return true;
-							} ,
-							array(
-								1 ,
-								2 ,
-							) ,
-							'error massage111' ,
-						]);
-
-						Auth::addRule('test2' , [
-							function() {
-								$n = Auth::getGlobalParams('test1');
-
-								return false;
-							} ,
-							array(
-								1 ,
-								2 ,
-							) ,
-							'error massage222' ,
-						]);
-
-						Auth::pushGroup('test1' , 'group1');
-						Auth::pushGroup('test2' , 'group1');
-
-						Auth::pushGroup('test1' , 'group2');
-						Auth::pushGroup('test2' , 'group2');
-
-						$a = Auth::getGroup('group1');
-						$a = Auth::getGroup('group2');
-
-						Auth::delGroupRule('test1' , 'group1');
-						Auth::delGroup('group2');
-
-						$a = Auth::getGroup('group2');
-
-						$a = Auth::execRule('test1');
-						$a = Auth::execRule('test2');
-
-						$a = Auth::getError();
-			*/
 		}
 
 		/**
@@ -221,16 +172,16 @@
 		 */
 		protected function registerRoleEvent($option = [])
 		{
-			/*
-						[
-							'roles'    => [1, 2] ,
-							'callback' => function() {} ,
-							'params'   => [
-								'a' ,
-								'b',
-							] ,
-						];
-			*/
+
+			[
+				'roles'    => [1, 2] ,
+				'callback' => function() {} ,
+				'params'   => [
+					'a' ,
+					'b',
+				] ,
+			];
+
 
 			foreach ($option as $k => $v)
 			{

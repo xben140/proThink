@@ -258,6 +258,7 @@
 
 		/**
 		 * 取值
+		 *
 		 * @param string $key
 		 * @param string $group
 		 *
@@ -309,7 +310,6 @@
 
 		/**
 		 * 获取所有数据
-		 *
 		 * @return mixed
 		 */
 		public static function getAllGlobalParams()
@@ -332,12 +332,11 @@
 
 
 		/**
-		 *
 		 *清空所有变量
 		 * string 清空对应组
 		 * null 清空所有
 		 *
-		 * @param string|null  $group
+		 * @param string|null $group
 		 *
 		 * @return mixed
 		 */
@@ -421,3 +420,50 @@
 
 
 
+	/*
+
+							Auth::addRule('test1' , [
+								function() {
+									Auth::setGlobalParams('test1' , 'group1');
+
+									return true;
+								} ,
+								array(
+									1 ,
+									2 ,
+								) ,
+								'error massage111' ,
+							]);
+
+							Auth::addRule('test2' , [
+								function() {
+									$n = Auth::getGlobalParams('test1');
+
+									return false;
+								} ,
+								array(
+									1 ,
+									2 ,
+								) ,
+								'error massage222' ,
+							]);
+
+							Auth::pushGroup('test1' , 'group1');
+							Auth::pushGroup('test2' , 'group1');
+
+							Auth::pushGroup('test1' , 'group2');
+							Auth::pushGroup('test2' , 'group2');
+
+							$a = Auth::getGroup('group1');
+							$a = Auth::getGroup('group2');
+
+							Auth::delGroupRule('test1' , 'group1');
+							Auth::delGroup('group2');
+
+							$a = Auth::getGroup('group2');
+
+							$a = Auth::execRule('test1');
+							$a = Auth::execRule('test2');
+
+							$a = Auth::getError();
+				*/

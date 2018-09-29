@@ -172,7 +172,7 @@
 			!$theme && $theme = 'default';
 
 			$this->view->config([
-				'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
 
 			$base = $this->request->root();
@@ -337,14 +337,8 @@
 		 */
 		public function showPage()
 		{
-			//当前方法对应的模板路径
-			$tempPath = $this->getTemplatePath();
-			!is_dir(dirname($tempPath)) && mkdir(dirname($tempPath) , 0777 , 1);
-			$pathInfo = pathinfo($tempPath);
-
-			//缓存文件
-			//E:\localweb\public_local1\public\themes\home\default\index\test.cache.php
-			$cacheFileName = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.cache.' . $pathInfo['extension'];
+			$pathInfo = $this->makeViewPathInfo();
+			$cacheFileName = $this->makeCacheName($pathInfo);
 
 			if(config('enable_static_cache') && is_file($cacheFileName))
 			{
@@ -357,6 +351,38 @@
 			}
 
 			return $this->display($contents);
+		}
+		
+		public function makeView($__this)
+		{
+			$pathInfo = $this->makeViewPathInfo();
+			$viewFileName = $this->makeViewName($pathInfo);
+			$func = include $viewFileName;
+
+			return $func($__this);
+		}
+
+		public  function makeCacheName($pathInfo)
+		{
+			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.cache.' . $pathInfo['extension'];
+
+			return $name;
+		}
+
+		public  function makeViewName($pathInfo)
+		{
+			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.view.' . $pathInfo['extension'];
+
+			return $name;
+		}
+
+		public function makeViewPathInfo()
+		{
+			//当前方法对应的模板路径
+			$tempPath = $this->getTemplatePath();
+			!is_dir(dirname($tempPath)) && mkdir(dirname($tempPath) , 0777 , 1);
+
+			return pathinfo($tempPath);
 		}
 
 	}

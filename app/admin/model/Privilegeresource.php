@@ -171,7 +171,7 @@
 		public function getReourceByResourceIndexAndId($ids = [] , $index)
 		{
 			$ids = array_flip(array_flip($ids));
-			$model = $this->{'model__' . Loader::parseName(strtr(RESOURCE_MAP[$index] , ['_' => '']) , 1)};;
+			$model = $this->{'model__admin_' . Loader::parseName(strtr(RESOURCE_MAP[$index] , ['_' => '']) , 1)};;
 
 			$where = [
 				self::makeSelfAliasField('status') => [

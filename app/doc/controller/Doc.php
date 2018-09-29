@@ -716,7 +716,8 @@ AAA
 								[
 									'class'      => 'btn-warning btn-open-window' ,
 									'field'      => '导出execl ( 按当前查询条件 )' ,
-									'is_display' => $this->authClass->hasRoleByIds([1,2,3])  ,
+									//'is_display' => $this->authClass->hasRoleByIds([1,2,3])  ,
+									'is_display' => $this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'exportExecl') ,
 									'src'        => url('exportExecl') ,
 									'title'      => '导出execl ( 按当前查询条件 )' ,
 								] ,
@@ -725,6 +726,7 @@ AAA
 
 						elementsFactory::staticTable()->make(function(&$doms , $_this) {
 							$journalTypes = [];
+							$journalTypes = $this->logic__Journaltype->getFormatedData(1);
 
 							//角色机制注册
 							$this->registerRoleEvent([
@@ -735,7 +737,7 @@ AAA
 										2,
 									] ,
 									'callback' => function()use(&$journalTypes) {
-										$journalTypes = $this->logic__Journaltype->getFormatedData(1);
+
 									} ,
 									'params'   => [] ,
 								] ,
@@ -745,7 +747,7 @@ AAA
 									'callback' => function() use(&$journalTypes) {
 										//编辑获取指定
 										$this->param['uid'] = $this->adminInfo['id'];
-										$journalTypes = $this->logic__Journaltype->getFormatedData(1);
+
 									} ,
 									'params'   => [] ,
 								] ,
@@ -754,8 +756,6 @@ AAA
 									'roles'    => [3] ,
 									'callback' => function() use(&$journalTypes) {
 										//采编获取所有类型
-										$journalTypes = $this->logic__Journaltype->getUserHasType(getAdminSessionInfo('user' , 'id'));
-										//$this->param['is_confirm'] = 1;
 									} ,
 									'params'   => [] ,
 								] ,
