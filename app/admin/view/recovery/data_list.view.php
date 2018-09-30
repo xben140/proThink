@@ -320,5 +320,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

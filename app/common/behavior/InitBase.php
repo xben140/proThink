@@ -10,7 +10,7 @@
 // +---------------------------------------------------------------------+
 
 	namespace app\common\behavior;
-
+	use app\common\common\set;
 	use auth\Auth;
 	use think\Loader;
 
@@ -19,7 +19,7 @@
 	 */
 	class InitBase
 	{
-
+		use set;
 		/**
 		 * 初始化行为入口
 		 */
@@ -232,9 +232,10 @@
 		private function initConfig()
 		{
 			$configList = autoCache('config_list' , Auth::createClosure([
-				model('Common/Config' , 'logic') ,
+				$this->logic__Common_Config,
 				'getAvailableConfig' ,
 			]));
+
 			//print_r($configList);exit;;
 			array_map(function($info) {
 				($info['is_const']) ? defined($info['field']) or define($info['field'] , $info['value']) : config($info['field'] , $info['value']);

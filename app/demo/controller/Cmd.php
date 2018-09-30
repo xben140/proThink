@@ -1,16 +1,6 @@
 <?php
 
-	namespace app\cmd\controller;
-	//压缩图片功能
-	//文件转义重命名
-	//删除空文件夹
-	//文件去重
-
-	//spl接口
-
-
-	//php index.php /cmd/index/index
-
+	namespace app\demo\controller;
 
 	use base64\Base64;
 	use image\imageProcessor;
@@ -18,7 +8,10 @@
 	use PhpMyAdmin\SqlParser\Utils\Query;
 	use PHPSQLParser\PHPSQLParser;
 
-	class Index
+	//php index.php /cmd/index/index
+
+
+	class Cmd extends DemoBase
 	{
 
 		//public $testImg = 'C:\Users\Administrator\Desktop\pic\a.jpg';
@@ -26,6 +19,7 @@
 		public $testPath = 'C:\Users\Administrator\Desktop\test\\';
 		public static $hashMap = [];
 
+		//批量压缩图片
 		public function rename()
 		{
 			$path = 'C:\Users\Administrator\Desktop\emo';
@@ -52,9 +46,7 @@
 					$name = date('Y-m-d-H-i-s' , $data['FileDateTime']) . '-' . $data['FileSize'] . '-' . $pathinfo['basename'];
 					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . '/' . $name;
 				}
-				else
-				{
-				}
+
 				$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . md5(uniqid($pathinfo['basename'] , 1)) . '.' . $pathinfo['extension'];
 
 				$a = md5_file($path);
@@ -74,7 +66,6 @@
 						'jpg' ,
 					]))
 					{
-
 						$imageCompress = imageProcessor::getProcessor('compress');
 						$ratio = 8;
 						$imageCompress->form($path)->ratio($ratio)->to($dest);
@@ -88,19 +79,7 @@
 			});
 		}
 
-		/**
-		 * @throws \ReflectionException
-		 */
-		public function compress()
-		{
-			//https://blog.csdn.net/qq_36608163/article/details/73167284
-			$imageCompress = imageProcessor::getProcessor('compress');
-
-			$info = pathinfo($this->testImg);
-			$ratio = 10;
-			$imageCompress->form($this->testImg)->ratio($ratio)->to($this->testPath . '/' . $ratio . '_' . $info['basename']);
-		}
-
+		//图片缩略图测试
 		public function thumb()
 		{
 			$info = pathinfo($this->testImg);
@@ -110,7 +89,7 @@
 			$image->thumb(300 , 300)->save($this->testPath . '/thumb.png' , 'png');
 		}
 
-
+		//删除指定目录的所有空目录
 		public function removeEmpty()
 		{
 			$path = 'c:';
@@ -118,7 +97,7 @@
 			rm_empty_dir($path);
 		}
 
-		public function baseTest1()
+		public function base64Test()
 		{
 			$base64 = Base64::getInstance('ABCDEFGHIJKLnopqrstuvwxyz012345MNOPQRSTUVWXYZabcdefghijklm6789+/' , '-');
 			$a = $base64->encode('你红扥零三扥HLKJLGksdfsd234234aaaf');
@@ -131,37 +110,7 @@
 		}
 
 
-		public function sqlParser()
-		{
-			$query1 = "
-SELECT 
-    table1.customer_id,
-    city,
-    COUNT(order_id) 
-FROM
-    table1 
-    left JOIN table2 
-        ON table1.customer_id = table2.customer_id 
-WHERE table1.customer_id <> 'tx' 
-    AND table1.customer_id <> '9you' 
-GROUP BY customer_id 
-HAVING COUNT(order_id) > ANY 
-    (SELECT 
-        COUNT(order_id) 
-    FROM
-        table2 
-    WHERE customer_id = 'tx' 
-        OR customer_id = '9you' 
-    GROUP BY customer_id) ;
-";
-			$parser = new Parser($query1);
-
-			$flags = Query::getFlags($parser->statements[0]);
-			print_r($parser);;;
-			//print_r($flags);;;
-		}
-
-
+		//PHPSQLParser
 		public function sqlParser1()
 		{
 			$query1 = "
@@ -187,7 +136,7 @@ HAVING COUNT(order_id) > ANY
 ";
 			/*
 			$query1 = "
-INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`) 
+INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`)
 VALUES
     (9, 31, '上海市', 0, 1) ;
 ";
@@ -196,6 +145,48 @@ VALUES
 			$parser = new PHPSQLParser();
 			$parsed = $parser->parse($query1 , true);
 			print_r($parsed);
+		}
+
+
+		//PhpMyAdmin
+		public function sqlParser2()
+		{
+			$query1 = "
+SELECT 
+    table1.customer_id,
+    city,
+    COUNT(order_id) 
+FROM
+    table1 
+    left JOIN table2 
+        ON table1.customer_id = table2.customer_id 
+WHERE table1.customer_id <> 'tx' 
+    AND table1.customer_id <> '9you' 
+GROUP BY customer_id 
+HAVING COUNT(order_id) > ANY 
+    (SELECT 
+        COUNT(order_id) 
+    FROM
+        table2 
+    WHERE customer_id = 'tx' 
+        OR customer_id = '9you' 
+    GROUP BY customer_id) ;
+";
+			/*
+			$query1 = "
+INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`)
+VALUES
+    (9, 31, '上海市', 0, 1) ;
+";
+
+		*/
+			$parser = new Parser($query1);
+			//$flags = Query::getFlgs($parser->statements[0]);
+
+
+			//print_r($parser);;;
+			print_r($parser->statements[0]);;;
+			//print_r($flags);;;
 		}
 
 	}

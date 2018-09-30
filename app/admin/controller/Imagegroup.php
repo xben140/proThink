@@ -42,14 +42,6 @@
 
 
 		/**
-		 * @return mixed
-		 */
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
-
-		/**
 		 * @throws \Exception
 		 */
 		public function delete()

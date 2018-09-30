@@ -9,7 +9,7 @@
 	use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 	/**
-	 * 上传文件主方法
+	 * 上传文件主方法，不推荐直接调用，请调用下面已经封装的专门上传文件和图片的方法
 	 *
 	 * @param string        $fieldName 字段名字
 	 * @param  string       $toDir     上传到哪个文件夹
@@ -140,6 +140,13 @@
 	}
 
 
+	/**
+	 * 下载文件专用函数
+	 *
+	 * @param           $file
+	 * @param string    $saveName
+	 * @param float|int $buffer
+	 */
 	function downloadFile($file , $saveName = '' , $buffer = 4 * 1024)
 	{
 		$downloader = new \download\downloader($file , $saveName);

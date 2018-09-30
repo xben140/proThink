@@ -61,5 +61,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

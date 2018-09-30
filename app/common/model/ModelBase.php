@@ -48,18 +48,6 @@
 
 
 		/**
-		 * 批量添加数据
-		 *
-		 * @param array $data
-		 *
-		 * @return false|int
-		 */
-		final public function insertDataList($data = [])
-		{
-		}
-
-
-		/**
 		 * **********************************************************************************
 		 * **********************************************************************************
 		 *                                                删除
@@ -76,7 +64,7 @@
 		 *
 		 * @return ModelBase|int
 		 */
-		final protected function deleteData($where = [] , $isTurlyDelete = 0)
+		final private function deleteData($where = [] , $isTurlyDelete = 0)
 		{
 			if($isTurlyDelete)
 			{

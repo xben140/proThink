@@ -424,5 +424,5 @@
 			]) ,
 		]);
 
-		return $__this->showPage();
+
 	};

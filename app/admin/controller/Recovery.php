@@ -37,11 +37,6 @@
 			}
 		}
 
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
-
 		/**
 		 * 查看每个表的数据
 		 */

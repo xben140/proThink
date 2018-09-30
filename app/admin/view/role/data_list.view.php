@@ -318,5 +318,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

@@ -225,5 +225,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

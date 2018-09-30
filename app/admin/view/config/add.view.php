@@ -1,10 +1,8 @@
 <?php
 
-	use builder\elementsFactory;
 	use builder\integrationTags;
-	use builder\tagConstructor;
 
-	return function($__this){
+	return function($__this) {
 		$__this->setPageTitle('添加配置项');
 
 		//配置组
@@ -100,5 +98,5 @@
 			'animate_type' => 'fadeInRight' ,
 		]);
 
-		return $__this->showPage();
+
 	};

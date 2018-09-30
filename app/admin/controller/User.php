@@ -2,8 +2,6 @@
 
 	namespace app\admin\controller;
 
-	use builder\integrationTags;
-
 	class User extends PermissionAuth
 	{
 		public function _initialize()
@@ -115,11 +113,6 @@
 			}
 		}
 
-
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
 
 		public function assignRoles()
 		{

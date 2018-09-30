@@ -478,5 +478,4 @@
 			]) ,
 		]);
 
-		return $__this->showPage();
 	};

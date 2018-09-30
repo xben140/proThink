@@ -173,5 +173,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

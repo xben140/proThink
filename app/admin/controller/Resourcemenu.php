@@ -57,11 +57,6 @@
 		}
 
 
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
-
 		/**
 		 * @throws \Exception
 		 */

@@ -272,5 +272,5 @@
 			]) ,
 		]);
 
-		return $__this->showPage();
+
 	};

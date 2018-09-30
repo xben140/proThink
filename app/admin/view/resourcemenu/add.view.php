@@ -169,5 +169,5 @@
 		]);
 
 
-		return $__this->showPage();
+
 	};

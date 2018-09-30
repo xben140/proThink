@@ -7,10 +7,5 @@
 
 	class AdminBase extends ModelBase
 	{
-		public function hello()
-		{
-			//echo $this->logicalUser;
-			echo __METHOD__;
-			exit();
-		}
+
 	}

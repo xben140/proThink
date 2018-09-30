@@ -100,5 +100,5 @@ AAA
 
 
 
-		return $__this->showPage();
+
 	};

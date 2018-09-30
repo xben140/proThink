@@ -119,6 +119,6 @@ AAA
 			'attr'         => '' ,
 		]);
 
-		return $__this->showPage();
+
 
 	};

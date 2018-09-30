@@ -1,20 +1,16 @@
 <?php
 
-	namespace app\home\controller;
+	namespace app\demo\controller;
 
 	use builder\elementsFactory;
 	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	class Index extends HomeBase
+	class Example extends DemoBase
 	{
 		public function api()
 		{
-			//print_r($this->param['files']);
-			$a = (base64_decode($this->param['files'], 1));
-			$b = (json_decode($a, 1));
-
-			return json($b);
+			$this->success();
 		}
 
 		public function exception()
@@ -22,50 +18,12 @@
 			exception('未授权的访问', 403);
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
-		public function index()
-		{
-
-			//---------------------------- 设置标题
-			$this->setPageTitle('主页');
-
-			//---------------------------- 设置页面类属性
-			$this->makePage()->setNodeValue([
-				'BODY_ATTR'    => tagConstructor::buildKV([
-					'style' => 'overflow:hidden' ,
-					'class' => 'fixed-sidebar full-height-layout gray-bg' ,
-				]) ,
-				'default_page' => url("index") ,
-			]);
-
-			//---------------------------- 分配数据
-			$data = 'test-data';
-			$this->assign('data' , $data);
-
-
-			//---------------------------- 主体结构
-			$this->displayContents = elementsFactory::build('baseFrameWork')->make(function(&$doms , $_this) {
-
-			});
-
-			//---------------------------- 输出
-			return $this->showPage();
-		}
-
-
 		/*
 		 *
 		 * 使用示例
 		 *
 		 *
 		 * */
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
 		public function test()
 		{
 			$data = 'test-data';
@@ -1454,75 +1412,17 @@ css;
 		}
 
 
-		public function exportExcel()
-		{
-			$path = 'C:\Users\Administrator\Desktop\\';
-			$list = $this->logic__admin_Resourcemenu->dataList();
-
-			$titles = [
-				'id' ,
-				'name' ,
-				'pid' ,
-				'module' ,
-				'controller' ,
-				'action' ,
-				'ico' ,
-				'order' ,
-				'is_menu' ,
-				'is_common' ,
-				'remark' ,
-				'status' ,
-				'time' ,
-			];
-
-			array_unshift($list , $titles);
-
-			$fileName = $path . '测试.xlsx';
-
-			$func = function($v , &$data) {
-				//$v['is_menu'] && ($data[] =  $v);
-				($data[] = $v);
-			};
-			exportExcel($list , $fileName , $func , false);
-
-			return 'done';
-		}
 
 
-		public function importExcel()
-		{
-			$path = 'C:\Users\Administrator\Desktop\\';
-			$fileName = $path . '测试.xlsx';
-
-			$data = importExcel($fileName);
-			print_r($data);
-			exit;;
-		}
 
 
-		public function generateQrcode()
-		{
-			$path = 'C:\Users\Administrator\Desktop\\';
-			$fileName = $path . '3.png';
-
-			//generateQrcode('http://www.hao123.com' , false , 3 , 10);
-			generateQrcode('http://www.hao123.com' , $fileName , 3 , 10);
-		}
 
 
-		public function sendEmail()
-		{
-			$title = 'just title';
-			$body = '163邮件是支持普通连接和SSL连接两种方式的，这里我们推荐使用 ssl 连接方式。';
-			$to = [
-				'845875470@qq.com' => 'by hello' ,
-				'5496150@qq.com'   => 'by 5496150' ,
-			];
-			$res = sendEmail($title , $body , $to , $err);
-			print_r($res);
-			print_r($err);
-			exit;;
-		}
+
+
+
+
+
 
 
 		public function upload()
@@ -1548,18 +1448,6 @@ css;
 
 			return json($res);
 		}
-
-		public function download()
-		{
-			$file = 'C:\Users\Administrator\Desktop\t.php';
-			$saveName = 'dd.php';
-
-			//$downloader = new downloader($file, $saveName);
-			//$downloader->send();
-
-			downloadFile($file , $saveName );
-		}
-
 
 
 

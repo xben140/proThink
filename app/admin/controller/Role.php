@@ -37,10 +37,6 @@
 			}
 		}
 
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
 
 		public function assignPrivileges()
 		{

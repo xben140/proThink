@@ -46,6 +46,6 @@
 			]) ,
 		]);
 
-		return $__this->showPage();
+
 
 	};

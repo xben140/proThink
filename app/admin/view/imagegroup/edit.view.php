@@ -70,5 +70,5 @@
 			'animate_type' => 'fadeInRight' ,
 		]);
 
-		return $__this->showPage();
+
 	};

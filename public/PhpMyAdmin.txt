@@ -1,0 +1,214 @@
+PhpMyAdmin\SqlParser\Statements\SelectStatement Object
+(
+    [expr] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\Expression Object
+                (
+                    [database] => 
+                    [table] => table1
+                    [column] => customer_id
+                    [expr] => table1.customer_id
+                    [alias] => 
+                    [function] => 
+                    [subquery] => 
+                )
+
+            [1] => PhpMyAdmin\SqlParser\Components\Expression Object
+                (
+                    [database] => 
+                    [table] => 
+                    [column] => city
+                    [expr] => city
+                    [alias] => 
+                    [function] => 
+                    [subquery] => 
+                )
+
+            [2] => PhpMyAdmin\SqlParser\Components\Expression Object
+                (
+                    [database] => 
+                    [table] => 
+                    [column] => 
+                    [expr] => COUNT(order_id)
+                    [alias] => 
+                    [function] => COUNT
+                    [subquery] => 
+                )
+
+        )
+
+    [from] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\Expression Object
+                (
+                    [database] => 
+                    [table] => table1
+                    [column] => 
+                    [expr] => table1
+                    [alias] => 
+                    [function] => 
+                    [subquery] => 
+                )
+
+        )
+
+    [partition] => 
+    [where] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                            [0] => table1
+                            [1] => customer_id
+                            [2] => tx
+                        )
+
+                    [isOperator] => 
+                    [expr] => table1.customer_id <> 'tx'
+                )
+
+            [1] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                        )
+
+                    [isOperator] => 1
+                    [expr] => AND
+                )
+
+            [2] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                            [0] => table1
+                            [1] => customer_id
+                            [2] => 9you
+                        )
+
+                    [isOperator] => 
+                    [expr] => table1.customer_id <> '9you'
+                )
+
+        )
+
+    [group] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\GroupKeyword Object
+                (
+                    [expr] => PhpMyAdmin\SqlParser\Components\Expression Object
+                        (
+                            [database] => 
+                            [table] => 
+                            [column] => customer_id
+                            [expr] => customer_id
+                            [alias] => 
+                            [function] => 
+                            [subquery] => 
+                        )
+
+                )
+
+        )
+
+    [having] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                            [0] => COUNT
+                            [1] => order_id
+                            [2] => ANY
+                            [3] => table2
+                            [4] => customer_id
+                            [5] => tx
+                        )
+
+                    [isOperator] => 
+                    [expr] => COUNT(order_id) > ANY (SELECT COUNT(order_id) FROM table2 WHERE customer_id = 'tx'
+                )
+
+            [1] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                        )
+
+                    [isOperator] => 1
+                    [expr] => OR
+                )
+
+            [2] => PhpMyAdmin\SqlParser\Components\Condition Object
+                (
+                    [identifiers] => Array
+                        (
+                            [0] => customer_id
+                            [1] => 9you
+                        )
+
+                    [isOperator] => 
+                    [expr] => customer_id = '9you' GROUP BY customer_id)
+                )
+
+        )
+
+    [order] => 
+    [limit] => 
+    [procedure] => 
+    [into] => 
+    [join] => Array
+        (
+            [0] => PhpMyAdmin\SqlParser\Components\JoinKeyword Object
+                (
+                    [type] => LEFT
+                    [expr] => PhpMyAdmin\SqlParser\Components\Expression Object
+                        (
+                            [database] => 
+                            [table] => table2
+                            [column] => 
+                            [expr] => table2
+                            [alias] => 
+                            [function] => 
+                            [subquery] => 
+                        )
+
+                    [on] => Array
+                        (
+                            [0] => PhpMyAdmin\SqlParser\Components\Condition Object
+                                (
+                                    [identifiers] => Array
+                                        (
+                                            [0] => table1
+                                            [1] => customer_id
+                                            [2] => table2
+                                        )
+
+                                    [isOperator] => 
+                                    [expr] => table1.customer_id = table2.customer_id
+                                )
+
+                        )
+
+                    [using] => 
+                )
+
+        )
+
+    [union] => Array
+        (
+        )
+
+    [end_options] => 
+    [options] => PhpMyAdmin\SqlParser\Components\OptionsArray Object
+        (
+            [options] => Array
+                (
+                )
+
+        )
+
+    [first] => 0
+    [last] => 103
+)

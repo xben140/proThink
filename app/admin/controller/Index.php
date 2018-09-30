@@ -31,7 +31,7 @@
 						'field' => $param['field'] ,
 					]);
 
-					$imageUrl = generateProfilePicPath($info[$param['field']] , 0);
+					//$imageUrl = generateProfilePicPath($info[$param['field']] , 0);
 
 					//删除原图
 					delImg($info[$param['field']]);

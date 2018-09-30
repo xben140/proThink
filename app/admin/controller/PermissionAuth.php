@@ -174,11 +174,14 @@
 		{
 
 			[
-				'roles'    => [1, 2] ,
-				'callback' => function() {} ,
+				'roles'    => [
+					1 ,
+					2,
+				] ,
+				'callback' => function() { } ,
 				'params'   => [
 					'a' ,
-					'b',
+					'b' ,
 				] ,
 			];
 

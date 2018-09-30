@@ -46,12 +46,6 @@
 		}
 
 
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
-
-
 		/**
 		 * @return mixed
 		 * @throws \Exception
@@ -60,9 +54,9 @@
 		{
 			$this->initLogic();
 
-			return $this->jump($this->logic->updateField($this->param, [
+			return $this->jump($this->logic->updateField($this->param , [
 				[
-					function( &$globalVariable) {
+					function(&$globalVariable) {
 						//如果是更新值
 						if($globalVariable['field'] == 'value')
 						{

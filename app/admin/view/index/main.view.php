@@ -23,6 +23,6 @@
 		'attr'         => '' ,
 	]);
 
-	return $__this->showPage();
+
 
 };

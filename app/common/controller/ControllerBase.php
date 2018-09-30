@@ -68,7 +68,6 @@
 		}
 
 
-
 		/*
 		 *
 		 *
@@ -80,10 +79,6 @@
 		 *
 		 * */
 
-		/**
-		 * @return mixed
-		 * @throws \Exception
-		 */
 		public function setField()
 		{
 			$this->initLogic();
@@ -91,10 +86,6 @@
 			return $this->jump($this->logic->updateField($this->param));
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \Exception
-		 */
 		public function delete()
 		{
 			$this->initLogic();
@@ -102,6 +93,10 @@
 			return $this->jump($this->logic->delete($this->param));
 		}
 
+		public function dataList()
+		{
+			return $this->makeView($this);
+		}
 
 
 		/*
@@ -171,8 +166,7 @@
 			$theme = config(MODULE_NAME . '_themes');
 			!$theme && $theme = 'default';
 
-			$this->view->config([
-				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			$this->view->config([//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
 
 			$base = $this->request->root();
@@ -263,7 +257,7 @@
 			{
 				case RESULT_SUCCESS  :
 				case RESULT_ERROR    :
-					return $this->{$jumpType['sign']}($jumpType['message'] , $jumpType['url'], $jumpType['data']);
+					return $this->{$jumpType['sign']}($jumpType['message'] , $jumpType['url'] , $jumpType['data']);
 				case RESULT_REDIRECT :
 					return $this->{$jumpType['sign']}($jumpType['url']);
 				default        :
@@ -352,24 +346,26 @@
 
 			return $this->display($contents);
 		}
-		
+
 		public function makeView($__this)
 		{
 			$pathInfo = $this->makeViewPathInfo();
 			$viewFileName = $this->makeViewName($pathInfo);
-			$func = include $viewFileName;
 
-			return $func($__this);
+			$func = include $viewFileName;
+			$func($__this);
+
+			return $__this->showPage();
 		}
 
-		public  function makeCacheName($pathInfo)
+		public function makeCacheName($pathInfo)
 		{
 			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.cache.' . $pathInfo['extension'];
 
 			return $name;
 		}
 
-		public  function makeViewName($pathInfo)
+		public function makeViewName($pathInfo)
 		{
 			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.view.' . $pathInfo['extension'];
 
@@ -386,6 +382,7 @@
 		}
 
 	}
+
 	//var_export(get_defined_constants(1));exit;;
 
 	array(
