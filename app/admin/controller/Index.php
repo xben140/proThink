@@ -11,6 +11,16 @@
 		}
 
 
+		/**
+		 * 单图片更新统一方法
+		 *
+		 *
+		 * @throws \LogicException
+		 * @throws \RuntimeException
+		 * @throws \think\exception\HttpResponseException
+		 * @throws \think\image\Exception
+		 */
+
 		//?condition=user/profile_pic/3
 		public function updateImage()
 		{

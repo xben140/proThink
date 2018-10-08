@@ -16,18 +16,39 @@
 	 * Class Example
 	 * @package app\demo\controller
 	 */
+
+
 	class Example extends DemoBase
 	{
+
+		/**
+		 * ******************************************************************************************
+		 *                                基础测试
+		 *
+		 * ******************************************************************************************
+		 */
+		/**
+		 * @throws \think\exception\HttpResponseException
+		 */
 		public function api()
 		{
 			$this->success();
 		}
 
+		/**
+		 * @throws \Exception
+		 */
 		public function exception()
 		{
 			exception('未授权的访问' , 403);
 		}
 
+		/**
+		 * ******************************************************************************************
+		 *                                表格，表单
+		 *
+		 * ******************************************************************************************
+		 */
 		/**
 		 * 典型的列表示例
 		 * 自己写逻辑请参照admin模块下的写法
@@ -569,7 +590,6 @@
 				integrationTags::row([
 					integrationTags::rowBlock([
 
-
 						integrationTags::form([
 
 							integrationTags::staticText([
@@ -586,7 +606,6 @@
 								//'attr'        => 'disabled' ,
 								'name'        => 'text' ,
 							]) ,
-
 
 							integrationTags::password([
 								//随便写
@@ -616,7 +635,6 @@
 								3 ,
 							]) ,
 
-
 							integrationTags::inlineRadio([
 								[
 									'value' => '1' ,
@@ -631,7 +649,6 @@
 									'field' => '日3333' ,
 								] ,
 							] , 'dd2222' , 'inlineRadio' , '提示信息4411' , 2) ,
-
 
 							integrationTags::blockCheckbox([
 								[
@@ -650,7 +667,6 @@
 								1 ,
 								3 ,
 							]) ,
-
 
 							integrationTags::blockRadio([
 								[
@@ -682,6 +698,38 @@
 								] ,
 							] , 'namebbbb2222' , 'singleSelect111' , '提示信息4411' , 2) ,
 
+							integrationTags::linkage([] , [
+								'url'        => ('/portal/area/getAreaByPid') ,
+								'field'      => 'pid' ,
+								'method'     => 'post' ,
+								'defaultVal' => 1 ,
+								'disabled'   => 0 ,
+								'liValue'    => 'id' ,
+								'liField'    => 'area_name' ,
+								'dataType'   => 'json' ,
+								'size'       => [
+									200 ,
+									400 ,
+								] ,
+								'container' => [
+									[
+										'pid'      => 1 ,
+										'name'     => 'province_id' ,
+										'selected' => 11,
+									] ,
+									[
+										'pid'      => 11,
+										'selected' => 154,
+										'name'     => 'city_id' ,
+									] ,
+									[
+										'pid'      => 154,
+										'selected' => 1307,
+										'name'     => 'county_id' ,
+									] ,
+								] ,
+							]) ,
+
 
 							integrationTags::switchery([
 								//额外属性
@@ -699,6 +747,7 @@
 								//表单value对应名字,$data里的字段
 								'field'      => 'name' ,
 							]) ,
+
 
 							integrationTags::singleDate([
 								'field_name'  => '日期' ,
@@ -737,13 +786,11 @@
 								'value'      => 'sdfsdfsdfsdf' ,
 							]) ,
 
-
 						] , [
 							'id'     => 'form122222' ,
 							'method' => 'post' ,
 							'action' => '/home/index/index' ,
 						]) ,
-
 
 					]) ,
 				]) ,
@@ -752,6 +799,12 @@
 			return $this->showPage();
 		}
 
+		/**
+		 * ******************************************************************************************
+		 *                                execl导入，导出，邮件，二维码，下载
+		 *
+		 * ******************************************************************************************
+		 */
 
 		/**
 		 * 典型导出execl
@@ -868,21 +921,26 @@
 
 
 		/**
+		 * ******************************************************************************************
+		 *                                文件上传
+		 *
+		 * ******************************************************************************************
+		 */
+		/**
 		 * 上传文件测试用的api
 		 *
-		 * @return \think\response\Json
 		 * @throws \LogicException
 		 * @throws \RuntimeException
 		 * @throws \think\image\Exception
 		 */
-		public function upload()
+		public function uploadApi()
 		{
 			if(isset($_FILES['image']))
 			{
 				$res = uploadImg('image' , function($result) {
 					$result['url'] = URL_PICTURE . DS . $result['savename'];
 
-					//文件上传成功的回调，可以在这里添加写数据库的逻辑
+					//TODO 文件上传成功的回调，可以在这里添加写数据库的逻辑
 
 					return $result;
 				} , [
@@ -894,16 +952,17 @@
 			elseif(isset($_FILES['file']))
 			{
 				$res = uploadFile('file' , function($result) {
-					//文件上传成功的回调，可以在这里添加写数据库的逻辑
+					//TODO 文件上传成功的回调，可以在这里添加写数据库的逻辑
 					return $result;
 				});
 			}
-
-			return json($res);
+			return $this->result($res , 1 , '更新成功' , 'json');
 		}
-		
-		
 
+
+		/**
+		 * 单图 实时更新
+		 */
 		public function uploadImg1()
 		{
 
@@ -915,15 +974,15 @@
 				integrationTags::row([
 					integrationTags::rowBlock([
 						/*
-													integrationTags::rowButton([
-														[
-															[
-																'class' => 'btn-info ' ,
-																'field' => '重新上传' ,
-																'attr' => 'onclick="location.reload()"' ,
-															] ,
-														],
-													]),
+							integrationTags::rowButton([
+								[
+									[
+										'class' => 'btn-info ' ,
+										'field' => '重新上传' ,
+										'attr' => 'onclick="location.reload()"' ,
+									] ,
+								],
+							]),
 						*/
 
 
@@ -941,20 +1000,26 @@
 function (file, response) {
 	if (response.code == 1)
 	{
-	
-		$(".uploader-preview").find('img').attr({
-			'src':response.data.thumb_url,
-		});
-		
-		$(".profile_pic_preview").attr({
-			'src':response.data.url,
-		});
-		
-		$(".status-box-text").text('更新成功');
-		
-		setTimeout(function(){
-		//	layer.close()
-		}, 400);
+		if (response.is_finished == 1)
+		{
+			$(".uploader-preview").find('img').attr({
+				'src':response.data.thumb_url,
+			});
+			
+			$(".profile_pic_preview").attr({
+				'src':response.data.url,
+			});
+			
+			$(".status-box-text").text('更新成功');
+			
+			setTimeout(function(){
+			//	layer.close()
+			}, 400);
+		}
+		else
+		{
+			//分片上传完成
+		}
 	}
 	else
 	{
@@ -964,7 +1029,7 @@ function (file, response) {
 AAA
 							,
 						] , [
-							'server' => "'".url()."'" ,
+							'server' => "'".url('uploadApi')."'" ,
 							'accept' =>json_encode( [
 								'extensions' => 'jpg,jpeg,png,gif',
 								'mimeTypes' => 'image/*',
@@ -983,12 +1048,12 @@ AAA
 
 								$doms[] = elementsFactory::singleLabel(function(&$doms) {
 
-									$param = session(SESSION_TAG_ADMIN.'updateImage_condition');
-									$info = $this->logic->getInfo(['id' => $param['id']]);
-									$imageUrl = generateProfilePicPath($info[$param['field']], 0);
+									//$param = session(SESSION_TAG_ADMIN.'updateImage_condition');
+									//$info = $this->logic->getInfo(['id' => $param['id']]);
+									//$imageUrl = generateProfilePicPath($info[$param['field']], 0);
 
 									$doms = integrationTags::singleLabel('img' , [
-										'src'   => $imageUrl ,
+										'src'   => '' ,
 										'class' => 'profile_pic_preview' ,
 									]);
 
@@ -1012,21 +1077,378 @@ AAA
 				'attr'         => '' ,
 			]);
 
-
+			return $this->showPage();
 		}
 
 
+
+		/**
+		 * 单文件 实时更新
+		 */
+		public function uploadFile1()
+		{
+
+			//设置标题
+			$this->setPageTitle('上传测试');
+			$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
+
+			$this->displayContents = integrationTags::basicFrame([
+				integrationTags::row([
+					integrationTags::rowBlock([
+						/*
+							integrationTags::rowButton([
+								[
+									[
+										'class' => 'btn-info ' ,
+										'field' => '重新上传' ,
+										'attr' => 'onclick="location.reload()"' ,
+									] ,
+								],
+							]),
+						*/
+
+
+						integrationTags::upload(SINGLE_FILE, [
+							[
+								'title' => '上传须知' ,
+								'items' => [
+									'单个文件最大50M' ,
+									'如有附件则上传，没有附件则无需上传' ,
+									'备注必须填写，填写以后点击提交，如果上传附件后没有提交，记录将不会保存至服务器' ,
+									//'允许的上传格式有.doc .docx .wps' ,
+								] ,
+							] ,
+						], [
+							'beforeFileQueued' => /** @lang javascript */
+								<<<'AAA'
+	function (file) {
+		var subject = $.trim(file.name);
+	}
+AAA
+							,
+
+							'uploadSuccess' => /** @lang javascript */
+								<<<'AAA'
+function (file, response) {
+	if (response.code == 1)
+	{
+		if (response.data.is_finished == 1)
+		{
+		
+			$(".status-box-text").text('更新成功');
+			
+		}
+		else
+		{
+			//分片上传完成
+		}
+	}
+	else
+	{
+		//服务器处理出错
+	}
+}
+AAA
+							,
+
+
+							'uploadFinished' => /** @lang javascript */
+								<<<'AAA'
+	function () {
+		layer.msg('文件上传完成');
+	}
+AAA
+							,
+						] , [
+							'server' => "'".url('uploadApi')."'" ,
+							'threads' => 3 ,
+							'accept'  => json_encode([
+								'extensions' => '*' ,
+								'mimeTypes' => '*' ,
+							]) ,
+						]) ,
+
+					], [
+						'width'      => '12' ,
+						'main_title' => '' ,
+						'sub_title'  => '' ,
+					]) ,
+
+				]) ,
+			],[
+				'animate_type' => 'fadeInRight' ,
+				'attr'         => '' ,
+			]);
+
+			return $this->showPage();
+		}
+
+
+
+		/**
+		 * 多图 实时更新
+		 */
+		public function uploadImg2()
+		{
+
+			//设置标题
+			$this->setPageTitle('上传测试');
+			$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
+
+			$this->displayContents = integrationTags::basicFrame([
+				integrationTags::row([
+					integrationTags::rowBlock([
+						/*
+							integrationTags::rowButton([
+								[
+									[
+										'class' => 'btn-info ' ,
+										'field' => '重新上传' ,
+										'attr' => 'onclick="location.reload()"' ,
+									] ,
+								],
+							]),
+						*/
+
+
+						integrationTags::upload(MULTI_IMG, [
+							[
+								'title' => '上传须知' ,
+								'items' => [
+									'单次最多添加300个文档' ,
+									'单个文档最大50M' ,
+									'所有文件总大小最大200M，如果需要上传的大文档过多，请分多次上传' ,
+									'允许的上传格式有.doc .docx .wps' ,
+								] ,
+							] ,
+						], [
+							'beforeFileQueued' => <<<AAA
+	function (file) {
+		var subject = $.trim(file.name);
+		//layer.msg(subject + 123456);
+	}
+AAA
+							,
+
+							'uploadSuccess' => <<<AAA
+	function (file, response) {
+		//等于2或1
+		if (response.code)
+		{
+			if (response.data.is_finished == 1)
+			{
+				console.dir(response)
+	
+				window.upload_file.push({
+					"savename":response.data.savename,
+				});
+				
+				$(".uploader-preview").find('img').attr({
+					'src':response['thumb_url'],
+				});
+				$(".status-box-text").text('上传完成');
+			}
+			else
+			{
+			}
+		}
+		else
+		{
+			//服务器处理出错
+		}
+	}
+AAA
+							,
+
+							'uploadFinished' => <<<AAA
+	function () {
+		$('#upload-files').val( btoa(JSON.stringify(window.upload_file)));
+		layer.msg('处理完成111111111');
+	}
+AAA
+							,
+						], [
+							'server'  => "'" . url('uploadApi') . "'" ,
+						]) ,
+
+					], [
+						'width'      => '12' ,
+						'main_title' => '' ,
+						'sub_title'  => '' ,
+					]) ,
+
+				]) ,
+			],[
+				'animate_type' => 'fadeInRight' ,
+				'attr'         => '' ,
+			]);
+
+			return $this->showPage();
+		}
+
+
+
+		/**
+		 * 多图 实时更新
+		 */
+		public function uploadFile2()
+		{
+
+			//设置标题
+			$this->setPageTitle('上传测试');
+			$this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => ' gray-bg' ,]) ,]);
+
+			$this->displayContents = integrationTags::basicFrame([
+				integrationTags::row([
+					integrationTags::rowBlock([
+						integrationTags::rowButton([
+							[
+								[
+									'class' => 'btn-info ' ,
+									'field' => '继续上传' ,
+									'attr' => 'onclick="location.reload()"' ,
+								] ,
+							],
+						]),
+
+						integrationTags::upload(MULTI_FILE, [
+							[
+								'title' => '上传须知' ,
+								'items' => [
+									'单次最多添加300个文档' ,
+									'单个文档最大50M' ,
+									'所有文件总大小最大200M，如果需要上传的大文档过多，请分多次上传' ,
+									'允许的上传格式有.doc .docx .wps' ,
+								] ,
+							] ,
+						], [
+							'beforeFileQueued' => /** @lang javascript */
+								<<<'AAA'
+function (file) {
+	var subject = $.trim(file.name);
+	
+	if (!/^(\d+(?:\.\d+)?)p[\s-]*([^-\s]+)(?:(?=\s*-)[\s-]+)([^.\r\n]+)\.(?:docx?|wps)$/im.test(subject)) 
+	{
+		layer.open({
+			type     : 1
+			, title  : '此文件命名不规范,将不会添加到上传队列'
+			, area   : ['390px', '210px']
+			, shade  : 0
+			, skin: 'layui-layer-molv' //样式类名
+			, icon:1
+			, offset : [ //为了演示，随机坐标
+				Math.random() * ($(window).height() - 400)
+				, Math.random() * ($(window).width() - 400)
+			]
+			, maxmin : true
+			, content: '<div class="error_remind">' +
+			'<span style="color: #f00;font-weight:bold" >' + file.name + ' </span> ' +
+			'<span>确保字母p为半角</span>' +
+			'<span>确保字母p和作者名之间至少有一个 - 符号</span>' +
+			'<span>确保作者名和文档标题之间至少有一个 - 符号</span>' +
+			'<span>确保文档标题里不包含空格</span>' +
+			'<span>确保文档名后缀为 .docx </span>' +
+			'</div>'
+
 /*
- *
-	 * ******************************************************************************************
-	 * ******************************************************************************************
-	 *                                下面部分仅供参考不建议使用
-	 *
-	 * ******************************************************************************************
-	 * ******************************************************************************************
- *
- *
- * */
+			 , btn    : ['继续弹出', '全部关闭'] //只是为了演示
+			 , yes    : function ()
+			 {
+			 $(that).click(); //此处只是为了演示，实际使用可以剔除
+			 }
+			 , btn2   : function ()
+			 {
+			 layer.closeAll();
+			 }
+*/
+
+			, zIndex : layer.zIndex //重点1
+			, success: function (layero)
+			{
+				layer.setTop(layero); //重点2
+			}
+		});
+
+		return false;
+	}
+	
+}
+AAA
+							,
+
+							'uploadSuccess' => /** @lang javascript */
+								<<<'AAA'
+								
+		function (file, response) {
+
+			let map = [
+				'upload-status-failure',
+				'upload-status-success',
+				'upload-status-uploaded',
+			];
+			var oLi = $('#' + file.id);
+			if (response.code)
+			{
+				if (response.data.is_finished == 1)
+				{
+					oLi.append('<span class="upload-status '+map[response.data.sign]+'" >'+response.data.msg+'</span>');
+				}
+				else
+				{
+					//分片上传完成
+				}
+			}
+			else
+			{
+
+			}
+		}
+AAA
+							,
+
+							'uploadFinished' => /** @lang javascript */
+								<<<'AAA'
+function () {
+	layer.alert('全部文件处理完成');
+}
+AAA
+							,
+						] , [
+							'server'  => "'" . url('uploadApi') . "'" ,
+							'threads' => 10 ,
+							'accept'  => json_encode([
+								'extensions' => 'doc,docx,wps' ,
+								'mimeTypes'  => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+							]) ,
+						]) ,
+
+					] , [
+						'width'      => '12' ,
+						'main_title' => '上传稿件' ,
+						'sub_title'  => '' ,
+					]) ,
+				]) ,
+			] , [
+				'animate_type' => 'fadeInRight' ,
+			]);
+
+
+			return $this->showPage();
+		}
+
+
+
+		/*
+		 *
+			 * ******************************************************************************************
+			 * ******************************************************************************************
+			 *                                下面部分仅供参考不建议使用
+			 *
+			 * ******************************************************************************************
+			 * ******************************************************************************************
+		 *
+		 *
+		 * */
 
 
 		/**
@@ -1652,6 +2074,173 @@ AAA
 
 			return $this->showPage();
 		}
+
+		public function test()
+		{
+			$data = 'test-data';
+			$this->assign('data' , $data);
+
+
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'data-id' => 5 ,
+					'style'   => 'overflow:hidden' ,
+					'class'   => ' gray-bg' ,
+				]) ,
+			]);
+
+			//设置标题
+			$this->makePage()->setHead(elementsFactory::singleLabel('<title>主页</title>'));
+
+			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
+
+				$doms[] = elementsFactory::row()->make(function(&$doms , $_this) {
+
+					$doms[] = elementsFactory::rowBlock()->make(function(&$doms , $_this) {
+
+						//---------------------------- 下拉菜单
+						$contents = elementsFactory::doubleLabel('li' , function(&$doms) {
+
+							$doms[] = elementsFactory::singleLabel('<a href="http://hao123.com">1111</a>');
+
+							$doms[] = elementsFactory::singleLabel(function(&$doms) {
+								$doms[] = '<a href="http://hao123.com">2222</a>';
+							});
+
+							$doms[] = elementsFactory::singleLabel([
+								'<a href="http://baidu.com">33333</a>' ,
+								'<a href="http://baidu.com">44444</a>' ,
+							]);
+
+						} , [
+							'class' => 'test-li' ,
+							'id'    => 'li1' ,
+						]);
+
+						$_this->setNodeValue('option' , $contents);
+						//----------------------------// 下拉菜单
+
+
+						//---------------------------- 表单
+
+						$doms[] = elementsFactory::form()->make(function(&$doms , $_this) {
+							$_this->setNodeValue('method' , 'post');
+
+							$_this->setNodeValue([
+								//'class'  => 'form-inline' ,
+								'action' => 'http://hao123.com' ,
+							]);
+
+							$_this->setNodeValue('attr' , tagConstructor::buildKV([
+								'data-id'  => 5 ,
+								'data-pid' => 6 ,
+							]));
+
+
+							$js = elementsFactory::singleLabel(/** @lang text */
+								<<<css
+<script>
+//alert('css');
+</script>
+css
+							);
+
+							$css = /** @lang text */
+								<<<'css'
+									<style>
+									.div111{
+										background: #ccc;
+									}
+									</style>
+css;
+
+							$_this->addJs($js);
+							$_this->addCss($css);
+
+
+							$doms[] = elementsFactory::doubleLabel('div' , function(&$doms) {
+
+								$t = integrationTags::staticText([
+									'field_name' => 'staticText' ,
+									'value'      => 'value' ,
+								]);
+								$doms = array_merge($doms , $t);
+
+								$t = integrationTags::textarea([
+									'field_name' => 'textarea' ,
+									'name'       => 'textarea' ,
+									'value'      => '11' ,
+									'attr'       => '' ,
+									'style'      => 'width:100%;height:200px;' ,
+								]);
+								$doms = array_merge($doms , $t);
+							} , [
+								'class' => 'test-div' ,
+								'id'    => 'div1' ,
+							]);
+
+							$doms = array_merge($doms , integrationTags::customElementFormPath($this->getTemplatePath('test') , [
+								integrationTags::staticText([
+									'field_name' => 'staticText' ,
+									'value'      => 'value' ,
+								]) ,
+								integrationTags::textarea([
+									'field_name' => 'textarea' ,
+									'name'       => 'textarea' ,
+									'value'      => '11' ,
+									'attr'       => '' ,
+									'style'      => 'width:100%;height:200px;' ,
+								]) ,
+							]));
+
+							$doms[] = elementsFactory::linkage()->make(function(&$doms , $_this) {
+								$_this->setNodeValue([
+									'placeholder' => '区域选择' ,
+									'field_name'  => '区域选择' ,
+									'tip'         => '' ,
+									'id'          => '__linkage__' ,
+								]);
+
+								$_this->setConfig([
+									'url'        => ('/portal/area/getAreaByPid') ,
+									'field'      => 'pid' ,
+									'method'     => 'post' ,
+									'defaultVal' => 1 ,
+									'disabled'   => 0 ,
+									'liValue'    => 'id' ,
+									'liField'    => 'area_name' ,
+									'dataType'   => 'json' ,
+									'size'       => [
+										200 ,
+										400 ,
+									] ,
+									'container'  => [
+										[
+											'pid'  => 1 ,
+											'name' => 'a' ,
+										] ,
+										[
+											'name' => 'b' ,
+										] ,
+										[
+											'name' => 'c' ,
+										] ,
+									] ,
+								]);
+
+							});
+						});
+						//----------------------------// 表单
+
+					});
+
+				});
+
+			});
+
+			return $this->showPage();
+		}
+
 
 
 	}
