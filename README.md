@@ -7,7 +7,7 @@
 
 > 核心类未上传，下载以后先更新composer， 切换至根目录 执行 composer update
 > 
-> 将根目录下的ProThink.sql文件导入数据库
+> 将根目录下的iThink.sql文件导入数据库
 > 
 > 将根目录下的database.php复制到app目录下面，修改数据库连接配置
 > 
@@ -18,7 +18,7 @@
 
 初始的目录结构如下：
 
-~~~
+
 www  WEB部署目录（或者子目录）
 ├─application           应用目录
 │  ├─common             公共模块目录（可以更改）
@@ -64,31 +64,9 @@ www  WEB部署目录（或者子目录）
 ├─LICENSE.txt           授权说明文件
 ├─README.md             README 文件
 ├─think                 命令行入口文件
-~~~
 
-> router.php用于php自带webserver支持，可用于快速测试
-> 切换到public目录后，启动命令：php -S localhost:8888  router.php
-> 上面的目录结构和名称是可以改变的，这取决于你的入口文件和配置参数。
+
 
 ## 命名规范
 
 ThinkPHP5的命名规范遵循`PSR-2`规范以及`PSR-4`自动加载规范。
-
-## 参与开发
-注册并登录 Github 帐号， fork 本项目并进行改动。
-
-更多细节参阅 [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## 版权信息
-
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
-
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
-
-版权所有Copyright © 2006-2018 by ThinkPHP (http://thinkphp.cn)
-
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
