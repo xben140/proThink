@@ -175,7 +175,7 @@
 	 */
 	function getNamespace($class)
 	{
-		preg_match('%^(.+)(?=[\\\\/][^\//]+$)%im' , $class, $result);
+		preg_match('%^(.+)(?=[\\\\/][^\//]+$)%im' , $class , $result);
 
 		return $result[1];
 	}

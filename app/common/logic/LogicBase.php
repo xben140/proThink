@@ -534,7 +534,7 @@
 							]) ,
 						]) ,
 
-						//角色名
+						//字段
 						integrationTags::td((function() use ($v , $info) {
 							$res = [];
 							$res = array_map(function($v1) use ($v , $info) {
@@ -791,14 +791,14 @@
 			if(isGlobalManager())
 			{
 				//如果id是admin的，直接查所有权限
-				$privilege = $this->logic__admin_Privilegeresource->getResourceByIndex(RESOURCE_INDEX_MENU , [
+				$privilege = $this->logic__admin_Privilege->getActivedData([
 					'order_filed' => 'order' ,
 					'order'       => 'desc' ,
 				]);
 			}
 			else
 			{
-				$privilege = $this->model__admin_Privilegeresource->getMenusByUserId(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'))->toArray();
+				$privilege = $this->model__admin_Privilege->getPrivilegeByUserid(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'))->toArray();
 			}
 
 			$privilege = makeTree($privilege);

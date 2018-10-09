@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Resourcemenu extends AdminBase
+	class Privilege extends AdminBase
 	{
 		public function __construct()
 		{

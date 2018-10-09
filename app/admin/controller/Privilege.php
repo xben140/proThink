@@ -2,7 +2,7 @@
 
 	namespace app\admin\controller;
 
-	class Resourcemenu extends PermissionAuth
+	class Privilege extends PermissionAuth
 	{
 		public function _initialize()
 		{
@@ -19,6 +19,7 @@
 			if(IS_POST)
 			{
 				$this->jump($this->logic->add($this->param_post , [] , [
+/*
 					[
 						function(&$param) {
 							//菜单添加好后把菜单id添加到权限表里
@@ -30,6 +31,8 @@
 						[] ,
 						'授权失败，请稍后再试...' ,
 					] ,
+*/
+
 				]));
 			}
 			else
@@ -38,10 +41,7 @@
 			}
 		}
 
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
+
 		public function edit()
 		{
 			$this->initLogic();
@@ -68,29 +68,15 @@
 
 				[
 					function(&$param) {
-
-						//查询权限资源关联表id
-						$privilegeId = db('privilege_resource')->where([
-							'resource_id'   => [
-								'in' ,
-								$param['ids'] ,
-							] ,
-							'resource_type' => [
-								'=' ,
-								RESOURCE_INDEX_MENU ,
-							] ,
-						])->value('id');
-
 						//看有没有角色有这个权限，有的话就不能删除
 						$res = db('role_privilege')->where([
 							'privilege_id' => [
 								'in' ,
-								$privilegeId ,
+								$param['ids'] ,
 							] ,
 						])->find();
 
 						return !$res;
-
 					} ,
 					[] ,
 					'有角色被赋予此权限，不允许删除' ,

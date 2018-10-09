@@ -86,7 +86,7 @@
 				[
 					'ithink_user_role b ' ,
 					self::makeSelfAliasField('id') . '  = b.role_id ' ,
-					'inner',
+					'left',
 				] ,
 			];
 			$condition = [

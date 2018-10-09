@@ -172,7 +172,7 @@
 		 */
 		protected function registerRoleEvent($option = [])
 		{
-
+/*
 			[
 				'roles'    => [
 					1 ,
@@ -184,7 +184,7 @@
 					'b' ,
 				] ,
 			];
-
+*/
 
 			foreach ($option as $k => $v)
 			{

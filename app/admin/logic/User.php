@@ -15,8 +15,6 @@
 			$this->setBeforeDelete([
 				[
 					function(&$param) {
-						$a = 1;
-
 						//删除用户角色关联记录
 						return db('user_role')->where([
 								'user_id' => [

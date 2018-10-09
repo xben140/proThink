@@ -81,21 +81,16 @@
 		 * 获取当前角色有的权限
 		 *
 		 * @param $param
-		 * @param $index
 		 *
 		 * @return mixed
 		 */
-		public function getRolesResource($param, $index)
+		public function getRolesPrivilegesId($param)
 		{
 			$id = $param['id'];
 
 			//当前角色对应的权限id
-			$currPrivilegesId = $this->model__admin_Privilegeresource->getPrivilegeIdByroleid([$id]);
-
-			//根据当前权限id查对应资源
-			$menusId = $this->model__admin_Privilegeresource->getReourceIdByResourceIndexAndPrivilegeId($currPrivilegesId, $index);
-
-			return $menusId;
+			$currPrivilegesId = $this->model__admin_Privilege->getPrivilegeIdByRoleid([$id]);
+			return $currPrivilegesId;
 		}
 
 
@@ -110,11 +105,8 @@
 		{
 			//用户id
 			$id = $param['id'];
-			$resourceIndex = $param['type'];
-			!isset($param['privileges']) && $param['privileges'] = [];
 
-			//根据资源ids和资源类型查权限id
-			$privileges = $this->model__admin_Privilegeresource->getPrivilegesIdByResourceIndexAndResourceId($param['privileges'], $resourceIndex);
+			!isset($param['privileges']) && $param['privileges'] = [];
 
 			$res = execClosureList([
 				[
@@ -138,7 +130,7 @@
 						return true;
 					} ,
 					[
-						$privileges ,
+						$param['privileges'] ,
 						$id ,
 					] ,
 				] ,
