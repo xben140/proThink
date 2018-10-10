@@ -10,6 +10,9 @@
 	use think\Loader;
 
 	/**
+	 * 所有控制器的基类控制器
+	 *
+	 *
 	 * Class ControllerBase
 	 * @package app\common\controller
 	 */
@@ -135,7 +138,6 @@
 			defined('DOMAIN') or define('DOMAIN' , $this->request->domain());
 			defined('IP') or define('IP' , $this->request->ip());
 
-
 			defined('URL_ROOT') or define('URL_ROOT' , $this->request->root(true) . '/');
 			defined('URL_UPLOAD') or define('URL_UPLOAD' , URL_ROOT . 'upload/');
 			defined('URL_PICTURE') or define('URL_PICTURE' , URL_UPLOAD . 'picture/');
@@ -147,6 +149,8 @@
 			defined('URL_THEMES') or define('URL_THEMES' , URL_ROOT . 'themes/');
 
 			define('DB_LIST_ROWS' , config('paginate.list_rows'));
+
+			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , $this->makeModuleStaticUrl());
 
 			$this->param = $this->request->param();
 			$this->param_get = $this->request->get();
@@ -177,14 +181,16 @@
 			}
 
 			$this->view->replace([
-				'__HPLUS__'   => URL_HPLUS ,
-				'__IMAGE__'   => URL_IMAGE ,
-				'__PLUGINS__' => URL_PLUGINS ,
-				'__ROOT__'    => $root ,
-				'__URL__'     => $base . '/' . $this->request->module() . '/' . Loader::parseName($this->request->controller()) ,
-				'__STATIC__'  => $root . '/static/' ,
-				'__CSS__'     => $root . '/static/css/' ,
-				'__JS__'      => $root . '/static/js/' ,
+				//
+				'__CONTROLLER_STATIC_URL__' => CONTROLLER_STATIC_URL ,
+				'__HPLUS__'                 => URL_HPLUS ,
+				'__IMAGE__'                 => URL_IMAGE ,
+				'__PLUGINS__'               => URL_PLUGINS ,
+				'__ROOT__'                  => $root ,
+				'__URL__'                   => $base . '/' . $this->request->module() . '/' . Loader::parseName($this->request->controller()) ,
+				'__STATIC__'                => $root . '/static/' ,
+				'__CSS__'                   => $root . '/static/css/' ,
+				'__JS__'                    => $root . '/static/js/' ,
 			]);
 
 		}
@@ -347,6 +353,13 @@
 			return $this->display($contents);
 		}
 
+		/**
+		 * 渲染页面
+		 *
+		 * @param $__this
+		 *
+		 * @return mixed
+		 */
 		public function makeView($__this)
 		{
 			$pathInfo = $this->makeViewPathInfo();
@@ -358,6 +371,13 @@
 			return $__this->showPage();
 		}
 
+		/**
+		 * 计算页面缓存路径（调试使用）
+		 *
+		 * @param $pathInfo
+		 *
+		 * @return string
+		 */
 		public function makeCacheName($pathInfo)
 		{
 			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.cache.' . $pathInfo['extension'];
@@ -365,6 +385,13 @@
 			return $name;
 		}
 
+		/**
+		 * 计算对应方法的模板页面路径
+		 *
+		 * @param $pathInfo
+		 *
+		 * @return string
+		 */
 		public function makeViewName($pathInfo)
 		{
 			$name = $pathInfo['dirname'] . DS . $pathInfo['filename'] . '.view.' . $pathInfo['extension'];
@@ -372,6 +399,17 @@
 			return $name;
 		}
 
+		/**
+		 *         * 计算当前控制器的视图路径
+		 * ‌array (
+		 * 'dirname' => 'F:\\localWeb\\public_local17\\public/../app/admin\\view\\index',
+		 * 'basename' => 'index.php',
+		 * 'extension' => 'php',
+		 * 'filename' => 'index',
+		 * )
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
 		public function makeViewPathInfo()
 		{
 			//当前方法对应的模板路径
@@ -379,6 +417,16 @@
 			!is_dir(dirname($tempPath)) && mkdir(dirname($tempPath) , 0777 , 1);
 
 			return pathinfo($tempPath);
+		}
+
+		/**
+		 * 定位到控制器下的static目录
+		 * @return string
+		 * @throws \ReflectionException
+		 */
+		public function makeModuleStaticUrl()
+		{
+			return URL_STATIC . 'module/' . MODULE_NAME . '/';
 		}
 
 	}

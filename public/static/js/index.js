@@ -8,7 +8,7 @@
 			_this.attr({"disabled": true});
 
 			$.ajax({
-				"url"     : "/portal/Login/clear",
+				"url"     : "/admin/Login/clear",
 				"type"    : "post",
 				"dataType": "json",
 				"success" : function (_)
@@ -37,7 +37,7 @@
 			_this.attr({"disabled": true});
 
 			$.ajax({
-				"url"     : "/portal/Login/refresh",
+				"url"     : "/admin/Login/refresh",
 				"type"    : "post",
 				"dataType": "json",
 				"success" : function (data)

@@ -49,7 +49,7 @@
 
 
 						integrationTags::linkage([] , [
-							'url'        => ('/portal/area/getAreaByPid') ,
+							'url'        => ('/admin/area/getAreaByPid') ,
 							'field'      => 'pid' ,
 							'method'     => 'post' ,
 							'defaultVal' => 1 ,
@@ -474,7 +474,7 @@
 					integrationTags::form([
 
 						integrationTags::linkage([] , [
-							'url'        => ('/portal/area/getAreaByPid') ,
+							'url'        => ('/admin/area/getAreaByPid') ,
 							'field'      => 'pid' ,
 							'method'     => 'post' ,
 							'defaultVal' => 1 ,

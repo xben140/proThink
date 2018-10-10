@@ -156,7 +156,7 @@
 
 			define('SESSION_TAG_ADMIN' , 'admin_info');
 
-			define('SYS_NON_LOGIN_INDEX' , 'portal/login/login');
+			define('SYS_NON_LOGIN_INDEX' , 'admin/login/login');
 			define('SYS_LOGIN_INDEX' , 'admin/index/index');
 
 			$database_config = config('database');

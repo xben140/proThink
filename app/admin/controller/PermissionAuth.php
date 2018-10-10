@@ -156,7 +156,9 @@
 		/**
 		 * 设置是否显示对应按钮
 		 *
-		 * @param $method
+		 * @param $a
+		 * @param $b
+		 * @param $c
 		 *
 		 * @return mixed
 		 */

@@ -7,19 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="icon" href="">
 
-		<link href="__STATIC__/css/login.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="__HPLUS__js/jquery.min.js"></script>
-		<script type="text/javascript" src="__STATIC__js/jquery.SuperSlide.2.1.2.js"></script>
-		<script type="text/javascript" src="__STATIC__js/jquery.cookie.js"></script>
-		<script src="__HPLUS__js/plugins/layer/layer.js"></script>
+		<link href="__CONTROLLER_STATIC_URL__/css/login.css" rel="stylesheet" type="text/css">
+
+
+		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.min.js"></script>
+		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.SuperSlide.2.1.2.js"></script>
+		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.cookie.js"></script>
+
+		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__plugins/layer/layer.js"></script>
 
 	</head>
 
 	<body>
 		<div class="login-layout">
-			<!--
-			<div class="logo"><img src="./images/loginImg.png"></div>
-			-->
+		
 			<form action="/portal/login/dologin" name="loginForm" id="loginForm" method="post">
 				<div class="login-form" style="position: relative">
 					<div class="formContent">
@@ -58,15 +59,15 @@
 		<div id="bannerBox">
 			<ul id="slideBanner" class="slideBanner" style="position: relative; width: 1858px; height: 1014px;">
 				<li style="position: absolute; width: 1858px; left: 0px; top: 0px; display: none;">
-					<img src="__STATIC__/image/banner_1.jpg">
+					<img src="__CONTROLLER_STATIC_URL__/image/banner_1.jpg">
 				</li>
 				<li style="position: absolute; width: 1858px; left: 0px; top: 0px; display: block;">
-					<img src="__STATIC__/image/banner_2.jpg">
+					<img src="__CONTROLLER_STATIC_URL__/image/banner_2.jpg">
 				</li>
 			</ul>
 		</div>
 
-		<script src="__STATIC__/js/form.js"></script>
-		<script src="__STATIC__/js/login.js"></script>
+		<script src="__CONTROLLER_STATIC_URL__/js/form.js"></script>
+		<script src="__CONTROLLER_STATIC_URL__/js/login.js"></script>
 	</body>
 </html>

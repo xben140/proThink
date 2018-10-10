@@ -25,7 +25,7 @@
 		$__this->displayContents = elementsFactory::build('baseFrameWork')->make(function(&$doms , $_this) use($__this){
 
 			$_this->setNodeValue([
-				'logout_url'   => url('portal/login/logout') ,
+				'logout_url'   => url('admin/login/logout') ,
 				'default_page' => url('main') ,
 			]);
 

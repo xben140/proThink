@@ -1,12 +1,8 @@
 <?php
 
-	namespace app\portal\controller;
+	namespace app\admin\controller;
 
-	/**
-	 * Class Login
-	 * @package app\portal\controller
-	 */
-	class Login extends PortalBase
+	class Login extends AdminBase
 	{
 
 		public function _initialize()
@@ -28,7 +24,7 @@
 			}
 			else
 			{
-				return $this->fetch(':login');
+				return $this->fetch('login');
 			}
 		}
 

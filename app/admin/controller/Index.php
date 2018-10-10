@@ -7,6 +7,8 @@
 
 		public function index()
 		{
+			//exception('kljsdfjsdlfj');
+			//print_r(config('default_timezone'));exit;;
 			return $this->makeView($this);
 		}
 

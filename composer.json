@@ -34,7 +34,8 @@
 		"guzzlehttp/guzzle"           : ">=3.0",
 		"electrolinux/phpquery"       : "^0.9.6",
 		"phpmyadmin/sql-parser"       : "^4.2",
-		"greenlion/php-sql-parser"    : "^4.1"
+		"greenlion/php-sql-parser"    : "^4.1",
+		"workerman/workerman"         : "^3.5"
 	},
 	"autoload"    : {
 		"psr-4" : {
