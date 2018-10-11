@@ -2,7 +2,7 @@
 
 	namespace app\doc\validate;
 
-	class Address extends DocBase
+	class Address extends Base
 	{
 
 		// 验证规则

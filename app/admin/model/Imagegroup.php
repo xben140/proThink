@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Imagegroup extends AdminBase
+	class Imagegroup extends Base
 	{
 		public $name = 'image_group';
 

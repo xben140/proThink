@@ -3,7 +3,7 @@
 	namespace app\admin\logic;
 
 
-	class Image extends AdminBase
+	class Image extends Base
 	{
 		public function __construct()
 		{

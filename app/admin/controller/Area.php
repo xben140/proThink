@@ -2,7 +2,7 @@
 
 	namespace app\admin\controller;
 
-	class Area extends AdminBase
+	class Area extends Base
 	{
 		public function _initialize()
 		{

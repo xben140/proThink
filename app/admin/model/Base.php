@@ -5,7 +5,7 @@
 
 	use app\common\model\ModelBase;
 
-	class AdminBase extends ModelBase
+	class Base extends ModelBase
 	{
 
 	}

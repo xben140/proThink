@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Login extends AdminBase
+	class Login extends Base
 	{
 
 		public function __construct()

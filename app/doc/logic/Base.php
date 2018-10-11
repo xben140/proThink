@@ -4,7 +4,7 @@
 
 	use app\common\logic\LogicBase;
 
-	class DocBase extends LogicBase
+	class Base extends LogicBase
 	{
 
 	}

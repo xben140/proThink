@@ -3,7 +3,7 @@
 	namespace app\admin\model;
 
 
-	class Login extends AdminBase
+	class Login extends Base
 	{
 
 		protected function initialize()

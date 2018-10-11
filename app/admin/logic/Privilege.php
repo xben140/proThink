@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Privilege extends AdminBase
+	class Privilege extends Base
 	{
 		public function __construct()
 		{

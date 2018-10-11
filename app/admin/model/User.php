@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class User extends AdminBase
+	class User extends Base
 	{
 		/**
 		 *  初始化模型

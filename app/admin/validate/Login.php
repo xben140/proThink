@@ -3,7 +3,7 @@
 	namespace app\admin\validate;
 
 
-	class Login extends AdminBase
+	class Login extends Base
 	{
 
 		// 验证规则

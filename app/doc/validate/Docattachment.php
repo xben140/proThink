@@ -2,7 +2,7 @@
 
 	namespace app\doc\validate;
 
-	class Docattachment extends DocBase
+	class Docattachment extends Base
 	{
 		// 验证规则
 		protected $rule = [

@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Recovery extends AdminBase
+	class Recovery extends Base
 	{
 		public function __construct()
 		{

@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Image extends AdminBase
+	class Image extends Base
 	{
 		//public $name = '';
 

@@ -2,7 +2,7 @@
 
 	namespace app\admin\validate;
 
-	class Privilege extends AdminBase
+	class Privilege extends Base
 	{
 		// 验证规则
 		protected $rule = [

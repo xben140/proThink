@@ -2,7 +2,7 @@
 
 	namespace app\doc\logic;
 
-	class Address extends DocBase
+	class Address extends Base
 	{
 		public function __construct()
 		{

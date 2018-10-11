@@ -4,7 +4,7 @@
 
 	use app\common\logic\LogicBase;
 
-	class AdminBase extends LogicBase
+	class Base extends LogicBase
 	{
 
 	}

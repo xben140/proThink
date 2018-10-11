@@ -3,7 +3,7 @@
 	namespace app\doc\validate;
 
 
-	class Doc extends DocBase
+	class Doc extends Base
 	{
 		// 验证规则
 		protected $rule = [

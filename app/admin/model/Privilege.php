@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Privilege extends AdminBase
+	class Privilege extends Base
 	{
 		//public $name = '';
 

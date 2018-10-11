@@ -2,7 +2,7 @@
 
 	namespace app\doc\logic;
 
-	class Docattachment extends DocBase
+	class Docattachment extends Base
 	{
 		public function __construct()
 		{

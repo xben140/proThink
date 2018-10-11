@@ -6,7 +6,7 @@
 	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	class Doc extends DocBase
+	class Doc extends Base
 	{
 		public function add()
 		{
@@ -1321,10 +1321,10 @@ AAA
 									[
 										'class'      => 'btn-danger  btn-custom' ,
 										'field'      => '添加地址' ,
-										'is_display' => 1 ,
 
 										'src'        => url('doc/address/add') ,
 										'title'      => '添加地址' ,
+										'is_display' => 1 ,
 									] ,
 								] ,
 							]) ,

@@ -4,7 +4,7 @@
 
 	use app\common\validate\ValidateBase;
 
-	class AdminBase extends ValidateBase
+	class Base extends ValidateBase
 	{
 
 	}

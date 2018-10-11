@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Role extends AdminBase
+	class Role extends Base
 	{
 		public function __construct()
 		{

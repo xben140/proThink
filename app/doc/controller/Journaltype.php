@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Journaltype extends DocBase
+	class Journaltype extends Base
 	{
 		/**
 		 * @return mixed

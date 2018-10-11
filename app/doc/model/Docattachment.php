@@ -2,7 +2,7 @@
 
 	namespace app\doc\model;
 
-	class Docattachment extends DocBase
+	class Docattachment extends Base
 	{
 		public $name = 'doc_attachment';
 

@@ -2,7 +2,7 @@
 
 	namespace app\admin\validate;
 
-	class Configgroup extends AdminBase
+	class Configgroup extends Base
 	{
 		// 验证规则
 		protected $rule = [

@@ -4,7 +4,7 @@
 
 	use app\common\controller\ControllerBase;
 
-	class AdminBase extends ControllerBase
+	class Base extends ControllerBase
 	{
 
 	}

@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Configgroup extends AdminBase
+	class Configgroup extends Base
 	{
 		public $name = 'config_group';
 

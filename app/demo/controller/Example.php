@@ -18,7 +18,7 @@
 	 */
 
 
-	class Example extends DemoBase
+	class Example extends Base
 	{
 
 		/**

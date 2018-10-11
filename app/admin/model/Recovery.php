@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Recovery extends AdminBase
+	class Recovery extends Base
 	{
 		/**
 		 *  初始化模型

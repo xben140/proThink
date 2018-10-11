@@ -2,7 +2,7 @@
 
 	namespace app\admin\validate;
 
-	class Recovery extends AdminBase
+	class Recovery extends Base
 	{
 
 		// 验证规则

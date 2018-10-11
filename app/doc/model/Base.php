@@ -4,7 +4,7 @@
 
 	use app\common\model\ModelBase;
 
-	class DocBase extends ModelBase
+	class Base extends ModelBase
 	{
 
 	}

@@ -2,7 +2,7 @@
 
 	namespace app\doc\model;
 
-	class Address extends DocBase
+	class Address extends Base
 	{
 		//public $name = '';
 

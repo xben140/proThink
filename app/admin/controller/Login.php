@@ -2,7 +2,7 @@
 
 	namespace app\admin\controller;
 
-	class Login extends AdminBase
+	class Login extends Base
 	{
 
 		public function _initialize()

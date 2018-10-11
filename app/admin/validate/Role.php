@@ -2,7 +2,7 @@
 
 	namespace app\admin\validate;
 
-	class Role extends AdminBase
+	class Role extends Base
 	{
 
 		// 验证规则

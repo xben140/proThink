@@ -11,7 +11,7 @@
 	//php index.php /cmd/index/index
 
 
-	class Cmd extends DemoBase
+	class Cmd extends Base
 	{
 
 		//public $testImg = 'C:\Users\Administrator\Desktop\pic\a.jpg';

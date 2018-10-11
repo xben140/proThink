@@ -5,7 +5,7 @@
 	use app\common\tool\view\Auth as AuthTool;
 	use auth\Auth;
 
-	class PermissionAuth extends AdminBase
+	class PermissionAuth extends Base
 	{
 		//admin信息
 		public $adminInfo;

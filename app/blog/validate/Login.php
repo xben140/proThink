@@ -1,9 +1,9 @@
 <?php
 
-	namespace app\portal\validate;
+	namespace app\blog\validate;
 
 
-	class Login extends PortalBase
+	class Login extends Base
 	{
 
 		// 验证规则

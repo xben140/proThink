@@ -3,7 +3,7 @@
 	namespace app\doc\logic;
 
 
-	class Journaltype extends DocBase
+	class Journaltype extends Base
 	{
 		public function __construct()
 		{

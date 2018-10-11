@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class User extends AdminBase
+	class User extends Base
 	{
 		public function __construct()
 		{

@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Address extends DocBase
+	class Address extends Base
 	{
 		/**
 		 * @return mixed

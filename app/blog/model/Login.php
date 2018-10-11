@@ -1,18 +1,10 @@
 <?php
 
-	namespace app\portal\model;
+	namespace app\blog\model;
 
 
-	class Login extends PortalBase
+	class Login extends Base
 	{
 
-		/**
-		 *  初始化模型
-		 * @access protected
-		 * @return void
-		 */
-		protected function initialize()
-		{
-			parent::initialize();
-		}
+
 	}

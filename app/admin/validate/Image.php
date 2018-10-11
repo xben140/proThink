@@ -2,7 +2,7 @@
 
 	namespace app\admin\validate;
 
-	class Image extends AdminBase
+	class Image extends Base
 	{
 		// 验证规则
 		protected $rule = [

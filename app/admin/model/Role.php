@@ -2,7 +2,7 @@
 
 	namespace app\admin\model;
 
-	class Role extends AdminBase
+	class Role extends Base
 	{
 		/**
 		 *  初始化模型

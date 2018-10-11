@@ -4,7 +4,7 @@
 
 	use app\common\controller\CustomBackendBase;
 
-	class DocBase extends CustomBackendBase
+	class Base extends CustomBackendBase
 	{
 		public function __construct()
 		{

@@ -3,7 +3,7 @@
 	namespace app\doc\logic;
 
 
-	class Doc extends DocBase
+	class Doc extends Base
 	{
 		public function __construct()
 		{

@@ -3,7 +3,7 @@
 	namespace app\doc\model;
 
 
-	class Doc extends DocBase
+	class Doc extends Base
 	{
 		//public $name = '';
 

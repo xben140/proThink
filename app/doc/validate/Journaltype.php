@@ -2,7 +2,7 @@
 
 	namespace app\doc\validate;
 
-	class Journaltype extends DocBase
+	class Journaltype extends Base
 	{
 		// 验证规则
 		protected $rule = [

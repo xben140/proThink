@@ -2,7 +2,7 @@
 
 	namespace app\doc\model;
 
-	class Journaltype extends DocBase
+	class Journaltype extends Base
 	{
 		public $name = 'journal_type';
 

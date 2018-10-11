@@ -5,7 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	class Docattachment extends DocBase
+	class Docattachment extends Base
 	{
 
 		/**

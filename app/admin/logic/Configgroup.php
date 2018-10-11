@@ -2,7 +2,7 @@
 
 	namespace app\admin\logic;
 
-	class Configgroup extends AdminBase
+	class Configgroup extends Base
 	{
 		public function __construct()
 		{
