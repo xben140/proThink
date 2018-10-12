@@ -11,8 +11,6 @@
 
 	/**
 	 * 所有控制器的基类控制器
-	 *
-	 *
 	 * Class ControllerBase
 	 * @package app\common\controller
 	 */
@@ -81,6 +79,33 @@
 		 *
 		 *
 		 * */
+
+		public function add()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$this->jump($this->logic->add($this->param_post));
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+		public function edit()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$id = session(URL_MODULE);
+				$this->jump($this->logic->edit($this->param , $id));
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
 
 		public function setField()
 		{

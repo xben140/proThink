@@ -7,7 +7,8 @@
 	return function($__this){
 		$condition = explode('/' , $__this->param['condition']);
 		$param = [
-			'logic' => 'logic__' . $condition[0] ,
+			//'logic' => 'logic__' . $condition[0] ,
+			'logic' => $__this::makeClassName($condition[0], 'logic') ,
 			'field' => $condition[1] ,
 			'id'    => $condition[2] ,
 		];

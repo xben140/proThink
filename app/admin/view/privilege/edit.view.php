@@ -5,7 +5,7 @@
 	return function($__this) {
 		$__this->setPageTitle('权限编辑');
 		$info = $__this->logic->getInfo($__this->param);
-		session(md5(URL_MODULE) , $__this->param['id']);
+		session(URL_MODULE , $__this->param['id']);
 
 
 		//获取可做父级的action

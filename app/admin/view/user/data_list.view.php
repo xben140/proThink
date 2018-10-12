@@ -263,7 +263,7 @@
 											'style'           => 'height: 65px;' ,
 											'class'           => 'preview-img index_pop' ,
 											'data-origin-src' => generateProfilePicPath($v['profile_pic'] , 0) ,
-											'data-condition'  => formatMenu(CONTROLLER_NAME , 'profile_pic' , $v['id']) ,
+											'data-condition'  => formatMenu(static::class , 'profile_pic' , $v['id']) ,
 											'data-text'       => '修改图片' ,
 										])) ,
 									]) ,

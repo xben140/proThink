@@ -660,15 +660,18 @@
 	});
 
 
+	//抽象所有弹出按钮方法
+	//点击按钮调用他的回调
+	//弹出方法定义成一个回调
+	//想办法获取dataset
+
 	//自定义弹出打开页面
-	//addUrl
 	$('.btn-custom').on({
 		'click': function () {
 			let _this = $(this);
 			let url = _this.data('src');
 			let title = _this.data('title');
 
-			var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
 			layer.open({
 				type     : 2,
 				title    : title,
@@ -687,11 +690,16 @@
 					_this.attr("disabled", false);
 				},
 				end      : function () {
-					location.reload();
+					// location.reload();
 				}
 			});
 		}
 	});
+
+
+
+
+
 
 	//自定义新窗口打开页面
 	//addUrl

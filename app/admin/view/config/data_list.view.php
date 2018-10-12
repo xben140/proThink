@@ -384,7 +384,7 @@
 													'style'           => 'height: 35px;' ,
 													'class'           => 'preview-img index_pop' ,
 													'data-origin-src' => generateProfilePicPath($v['value'] , 0) ,
-													'data-condition'  => formatMenu(CONTROLLER_NAME , 'value' , $v['id']) ,
+													'data-condition'  => formatMenu(static::class , 'value' , $v['id']) ,
 													'data-text'       => '修改图片' ,
 												])) ,
 											]);

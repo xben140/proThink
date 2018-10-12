@@ -471,7 +471,8 @@
 			return elementsFactory::staticTable()->make(function(&$doms , $_this) use ($params) {
 
 				$info = $this->getInfo($params);
-				$logic = $this->{'logic__' . $info['tab_db']};
+				//$logic = $this->{'logic__' . $info['tab_db']};
+				$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 
 				$data = $logic->getDeletedDataWithPagination($params);
 
@@ -613,7 +614,8 @@
 		public function getDetailInfo($dataId , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			$logic = $this->{'logic__' . $info['tab_db']};
+			//$logic = $this->{'logic__' . $info['tab_db']};
+			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 			$data = $logic->getInfo(['id' => $dataId ,]);
 
 			if(($data) !== null)
@@ -710,7 +712,8 @@
 		public function deleteItem($ids, $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId,]);
-			$logic = $this->{'logic__' . $info['tab_db']};
+			//$logic = $this->{'logic__' . $info['tab_db']};
+			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 			return $logic->delete(['ids' => $ids,] , $logic->beforeDelete , $logic->afterDelete, 1);
 		}
 
@@ -725,7 +728,8 @@
 		public function recoverItem($ids , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			$logic = $this->{'logic__' . $info['tab_db']};
+			//$logic = $this->{'logic__' . $info['tab_db']};
+			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 			return $logic->updateField([
 				'field' => 'status' ,
 				'val'   => '0' ,

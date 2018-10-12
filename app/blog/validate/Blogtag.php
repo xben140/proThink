@@ -1,20 +1,21 @@
 <?php
 
-	namespace app\admin\validate;
+	namespace app\blog\validate;
 
-	class Configgroup extends Base
+
+	class Blogtag extends Base
 	{
 		// 验证规则
 		protected $rule = [
-			'name'       => 'unique:config_group|require' ,
-			'order'       => 'number' ,
+			'name'  => 'unique:blog_tag|require' ,
+			'order' => 'number' ,
 		];
 
 		// 验证提示
 		protected $message = [
 
 			'name.unique'  => '同样的记录已存在' ,
-			'name.require' => '权限名字必填' ,
+			'name.require' => '标签名字必填' ,
 
 			'order.number' => '排序必须为数字' ,
 		];
@@ -31,30 +32,4 @@
 			] ,
 
 		];
-
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,8 @@
 <?php
 
-	namespace app\admin\controller;
+	namespace app\blog\controller;
 
-	class Imagegroup extends PermissionAuth
+	class Blogtype extends BackendBase
 	{
 		public function _initialize()
 		{
@@ -18,6 +18,8 @@
 			$this->initLogic();
 
 			return $this->jump($this->logic->delete($this->param , [
+
+				/*
 				[
 					function($param) {
 						//当前组下还有配置就不许删除
@@ -31,6 +33,8 @@
 					[] ,
 					'当前组下还有配置，不能删除' ,
 				] ,
+
+				*/
 			]));
 		}
 

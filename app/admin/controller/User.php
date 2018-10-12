@@ -7,6 +7,8 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+
+
 		}
 
 		/**
@@ -34,28 +36,7 @@
 		}
 
 		/**
-		 * 列表页里编辑成用户信息
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
-		public function edit()
-		{
-			$this->initLogic();
-			if(IS_POST)
-			{
-				$id = session(URL_MODULE);
-				$this->jump($this->logic->edit($this->param , $id));
-			}
-			else
-			{
-				return $this->makeView($this);
-			}
-		}
-
-		/**
 		 * 自己修改自己信息
-		 * @return mixed
-		 * @throws \ReflectionException
 		 */
 		public function modifyInfo()
 		{
@@ -75,8 +56,6 @@
 
 		/**
 		 * 自己修改自己密码
-		 * @return mixed
-		 * @throws \ReflectionException
 		 */
 		public function modifyPwd()
 		{
@@ -95,8 +74,6 @@
 
 		/**
 		 * 列表页里修改用户密码
-		 * @return mixed
-		 * @throws \ReflectionException
 		 * @throws \Exception
 		 */
 		public function editPwd()

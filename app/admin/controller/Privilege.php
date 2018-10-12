@@ -42,21 +42,6 @@
 		}
 
 
-		public function edit()
-		{
-			$this->initLogic();
-			if(IS_POST)
-			{
-				$id = session(md5(URL_MODULE));
-				$this->jump($this->logic->edit($this->param , $id));
-			}
-			else
-			{
-				return $this->makeView($this);
-			}
-		}
-
-
 		/**
 		 * @throws \Exception
 		 */

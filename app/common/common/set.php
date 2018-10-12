@@ -145,6 +145,7 @@
 		{
 			$res = preg_split('#[\\\\/]#im' , $classNameWithNamespace , -1 , PREG_SPLIT_NO_EMPTY);
 			$res[2] = $layer;
+			$res[3] = ucwords($res[3]);
 			$c = implode('\\' , $res);
 			$t = class_exists($c) ?
 				$layer . '__' . $res[1] . '_' . $res[3] :

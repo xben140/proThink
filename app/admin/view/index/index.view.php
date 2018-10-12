@@ -43,7 +43,7 @@
 					'is_display'      => 1 ,
 					'src'             => generateProfilePicPath(getAdminSessionInfo(SESSOIN_TAG_USER , 'profile_pic') , 1) ,
 					'data-origin-src' => generateProfilePicPath(getAdminSessionInfo(SESSOIN_TAG_USER , 'profile_pic') , 0) ,
-					'data-condition'  => formatMenu('user' , 'profile_pic' , getAdminSessionInfo(SESSOIN_TAG_USER , 'id')) ,
+					'data-condition'  => formatMenu('app\admin\controller\User' , 'profile_pic' , getAdminSessionInfo(SESSOIN_TAG_USER , 'id')) ,
 					'text'            => '修改头像' ,
 				] ,
 			]);
