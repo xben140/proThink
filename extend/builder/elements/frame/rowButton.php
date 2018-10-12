@@ -71,7 +71,8 @@ Css;
 		 */
 		function setButton($menu = [])
 		{
-			$tmp = '<button type="button" class="btn __CLASS__" data-src="__SRC__" data-title="__TITLE__" __ATTR__>__FIELD__</button>' . "\r\n";
+			$tmp = '<button type="button" class="btn __CLASS__" __DATA__  __ATTR__>__FIELD__</button>' . "\r\n";
+			$dataTemp = 'data-_K_="_V_"';
 			$str = '';
 
 			foreach ($menu as $k1 => $v1)
@@ -81,14 +82,25 @@ Css;
 				{
 					if(isset($v['is_display']) && (!$v['is_display'])) continue;
 
-					$replacement['__ATTR__'] = '';
+					$t = '';
+					if(isset($v['data']) && is_array($v['data']))
+					{
+						foreach ($v['data'] as $k2 => $v2)
+						{
+							$t .= ' '. strtr($dataTemp , [
+								'_K_' => $k2 ,
+								'_V_' => $v2 ,
+							]) . ' ';
+						}
+					}
+
+					$replacement['__DATA__'] = $t;
 					$replacement['__FIELD__'] = $v['field'];
 					$replacement['__CLASS__'] = $v['class'];
 
-
+					$replacement['__ATTR__'] = '';
 					$replacement['__SRC__'] = '';
 					$replacement['__TITLE__'] = '';
-
 
 					isset($v['attr']) && $v['attr'] && ($replacement['__ATTR__'] = $v['attr']);
 					isset($v['src']) && $v['src'] && ($replacement['__SRC__'] = $v['src']);
@@ -97,7 +109,6 @@ Css;
 				}
 				$str .= '</div>' . "\r\n";
 			}
-
 
 			$this->replaceTag(static::makeNodeName('buttons') , $str);
 		}
@@ -133,9 +144,9 @@ Css;
 			$contents = <<<'CONTENTS'
 			<div class="row">
 				<div class="col-sm-4 m-b-xs">
-					<button type="button" class="btn btn-success" onclick="location.reload()"> 刷新页面</button>
-					<!--<a target="_self" href="" class="btn btn-success ">重置搜索条件</a>-->
-					<a target="_blank" href="#" class="btn btn-success "> 在新窗口中打开</a>
+					<button type="button" class="btn btn-primary" onclick="refresh_page()">刷新页面</button>
+					<button type="button" class="btn btn-primary" onclick="rowReload()">重置搜索条件</button>
+					<a target="_blank" href="#" class="btn btn-primary ">新窗口中打开</a>
 				</div>
 				<!-- ~~~buttons~~~ -->
 			</div>

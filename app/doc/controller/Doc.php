@@ -1319,12 +1319,13 @@ AAA
 							integrationTags::rowButton([
 								[
 									[
-										'class'      => 'btn-danger  btn-custom' ,
-										'field'      => '添加地址' ,
-
-										'src'        => url('doc/address/add') ,
-										'title'      => '添加地址' ,
 										'is_display' => 1 ,
+										'class'      => 'btn-danger btn-open-pop' ,
+										'field'      => '添加地址' ,
+										'data'       => [
+											'src'   => url('doc/address/add') ,
+											'title' => '添加地址' ,
+										] ,
 									] ,
 								] ,
 							]) ,

@@ -39,6 +39,7 @@
 								'field'      => '批量删除' ,
 								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 							] ,
+
 					/*		[
 								'class'      => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
 								'field'      => '批量启用' ,
@@ -52,18 +53,22 @@
 
 
 							[
-								'class'      => 'btn-info  btn-custom' ,
-								'field'      => '文章类型' ,
-								'src'        => url('blog/blogtype/datalist') ,
-								'title'      => '文章类型' ,
 								'is_display' => 1 ,
+								'class'      => 'btn-info btn-open-pop' ,
+								'field'      => '文章类型' ,
+								'data'       => [
+									'src'   => url('blog/blogtype/datalist') ,
+									'title' => '文章类型' ,
+								] ,
 							] ,
 							[
-								'class'      => 'btn-info  btn-custom' ,
-								'field'      => '文章标签' ,
-								'src'        => url('blog/blogtag/datalist') ,
-								'title'      => '文章标签' ,
 								'is_display' => 1 ,
+								'class'      => 'btn-info btn-open-pop' ,
+								'field'      => '文章标签' ,
+								'data'       => [
+									'src'   => url('blog/blogtag/datalist') ,
+									'title' => '文章标签' ,
+								] ,
 							] ,
 						] ,
 					]) ,

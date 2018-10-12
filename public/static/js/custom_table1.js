@@ -160,7 +160,7 @@
 			let parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
 
 			getSelecteedItemId(function (ids, callback_) {
-				let ids = ids.join(',');
+				var ids = ids.join(',');
 				layer.open({
 					type     : 2,
 					title    : '批量设置稿件信息',
@@ -179,7 +179,7 @@
 						_this.attr("disabled", false);
 					},
 					end      : function () {
-						refresh_page();
+						location.reload();
 					}
 				});
 
@@ -307,7 +307,7 @@
 				_this.attr("disabled", false);
 			},
 			end       : function () {
-				refresh_page();
+				location.reload();
 			}
 		});
 	}
@@ -329,7 +329,7 @@
 			layer.msg(data.msg);
 			if (data.code)
 			{
-				refresh_page();
+				location.reload();
 				// getParentTr($(btn)).remove();
 			}
 		}, function (data) {
@@ -358,7 +358,7 @@
 			layer.msg(data.msg);
 			if (data.code)
 			{
-				refresh_page();
+				location.reload();
 				// getParentTr($(btn)).remove();
 			}
 		}, function (data) {
@@ -395,7 +395,7 @@
 				itemSet(ids.join(','), _this, callback_, 'delete')
 			}, function (data) {
 				setTimeout(function () {
-					refresh_page();
+					location.reload();
 				}, 500)
 			});
 		}
@@ -408,7 +408,7 @@
 				itemSet(ids.join(','), _this, callback_, 'recover')
 			}, function (data) {
 				setTimeout(function () {
-					refresh_page();
+					location.reload();
 				}, 500)
 			});
 		}
@@ -544,192 +544,424 @@
 		});
 	}
 
+	/**
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 ***********************************************************************************************
+	 *
+	 *
+	 *
+	 *
+	 *                   通用方法
+	 *
+	 *
+	 *
+	 *
+	 ***********************************************************************************************
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 */
 
-}())
+	//自动搜索事件注册
+	$('.change_serach').on({'change': function () {$(this).parents('form').submit();}});
+	$('.btn-group').find('input[type="radio"]').on({'change': function () {$(this).parents('form').submit();}});
+	$('.btn-group').find('input[type="checkbox"]').on({'change': function () {$(this).parents('form').submit();}});
 
+	//编辑按钮事件注册
+	$('.btn-edit').on({'click': function () {registerEdit(this)}});
 
-/**
- *
- *
- *
- *
- *
- *
- ***********************************************************************************************
- *
- *
- *
- *
- *                   通用方法
- *
- *
- *
- *
- ***********************************************************************************************
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- */
+	//删除按钮事件注册
+	$('.btn-delete').on({'click': function () {registerDelete(this)}});
 
-
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   列表页搜索
- ******************************************************************************************
- ******************************************************************************************
- */
-//自动搜索事件注册
-$('.change_serach').on({'change': function () {$(this).parents('form').submit();}});
-$('.btn-group').find('input[type="radio"]').on({'change': function () {$(this).parents('form').submit();}});
-$('.btn-group').find('input[type="checkbox"]').on({'change': function () {$(this).parents('form').submit();}});
-
-
-//列表页搜索弹出框事件
-$('.search-dom-btn-1').mouseover(function () {
-	let _this = $(this);
-	_this.attr("disabled", true);
-	layer.open({
-		area      : ['65%', '65%'],
-		type      : 1,
-		resize    : 1,
-		moveOut   : 1,
-		title     : '条件筛选',
-		shade     : 0.1,
-		skin      : 'search-dom-pop', //样式类名
-		closeBtn  : 0, //不显示关闭按钮
-		anim      : 0,
-		// anim      : randomNum(0, 6),
-		isOutAnim : 0,
-		shadeClose: true, //开启遮罩关闭
-		content   : $('.search-dom-1'), //dom
-		success   : function (layero, index) {
-			_this.attr("disabled", false);
-			// layero.alert(layero, index)
+	//批量删除按钮事件注册
+	$('.multi-op-del').on({
+		'click': function () {
+			let _this = this;
+			getSelecteedItemId(function (ids, callback_) {
+				itemDelete(ids.join(','), _this, callback_);
+			}, function (data) {
+				setTimeout(function () {
+					location.reload();
+				}, 500)
+			});
 		}
 	});
-});
+
+	//批量禁用按钮事件注册
+	$('.multi-op-toggle-status-disable').on({
+		'click': function () {
+			let _this = this;
+			getSelecteedItemId(function (ids, callback_) {
+				itemDisable(ids.join(','), _this, callback_);
+			}, function (data) {
+				setTimeout(function () {
+					location.reload();
+				}, 500)
+			});
+		}
+	});
+
+	//批量启用按钮事件注册
+	$('.multi-op-toggle-status-enable').on({
+		'click': function () {
+			let _this = this;
+			getSelecteedItemId(function (ids, callback_) {
+				itemEnable(ids.join(','), _this, callback_);
+			}, function (data) {
+				setTimeout(function () {
+					location.reload();
+				}, 500)
+			});
+		}
+	});
 
 
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   表格其他功能事件
- ******************************************************************************************
- ******************************************************************************************
- */
+	//全选按钮事件注册
+	let isAllChecked = false;
+	$('.se-all').on({
+		'click': function () {
+			let checkboxs = $('.ids');
+			!isAllChecked ? checkboxs.iCheck('check') : checkboxs.iCheck('uncheck');
+			isAllChecked = !isAllChecked;
+		}
+	});
 
-//表格可修改列添加tips
-//表格双击修改事件注册
-//setFieldUrl
-$('.td-modify').on({
-	'mouseover': function () {
-		index_tips = layer.tips('双击修改', this, {
-			tips: [1, '#3f90fc'],
-			time: 1000
-		});
-	},
-	'mouseout' : function () {
-		layer.close(index_tips);
-	},
-	'dblclick' : function () {
-		let _this = $(this);
+	//反选按钮事件注册
+	$('.se-rev').on({
+		'click': function () {
+			let checkboxs = $('.ids');
+			checkboxs.each(function (k, v) {
+//			$(v).is(":checked") ? $(v).iCheck('uncheck') : $(v).iCheck('check');
+				$(v).iCheck('toggle');
+			});
+		}
+	});
 
-		let openType = this.nodeName == 'TEXTAREA' ? 2 : 0;
 
-		let url = setFieldUrl;
+	//抽象所有弹出按钮方法
+	//点击按钮调用他的回调
+	//弹出方法定义成一个回调
+	//想办法获取dataset
 
-		//当前td有data-field属性，父级tr有data-id字段
-		if (getParentTr(_this).data('id') && (_this.data('field')))
+	//自定义弹出打开页面
+	$('.btn-custom').on({
+		'click': function () {
+			let _this = $(this);
+			let url = _this.data('src');
+			let title = _this.data('title');
+
+			layer.open({
+				type     : 2,
+				title    : title,
+				// shadeClose: true,
+				shade    : 0.1,
+				area     : ['85%', '85%'],
+				resize   : 1,
+				moveOut  : 1,
+				skin     : 'search-dom-pop', //样式类名
+				closeBtn : 1, //不显示关闭按钮
+				anim     : 0,
+				// anim      : randomNum(0, 6),
+				isOutAnim: 0,
+				content  : url, //iframe的url
+				success  : function (_) {
+					_this.attr("disabled", false);
+				},
+				end      : function () {
+					// location.reload();
+				}
+			});
+		}
+	});
+
+
+	//自定义新窗口打开页面
+	$('.btn-open-window').on({
+		'click': function () {
+			openInNewWindows(this);
+		}
+	});
+
+	//自定义新窗口打开页面
+	$('.btn-open-pop').on({
+		'click': function () {
+			popWinddows(this);
+		}
+	});
+
+
+	//点击按钮新窗口打开页面
+	//data-src
+	//data-params
+	function openInNewWindows(obj)
+	{
+		let _this = $(obj);
+		let params = _this.data('params');
+		(typeof eval(params) === 'object') && (params = eval(params));
+		let url = _this.data('src') || _this.attr('src');
+
+		if (typeof params === 'object')
 		{
-			_this.addClass('blue')
-			let id = getParentTr(_this).data('id');
-			let field = (_this.data('field'));
+			url = url + '?'
+			for (let i in params)
+			{
+				url += i + '=' + params[i] + '&';
+			}
+		}
 
-			let oldVal = $.trim(_this.text());
+		open(url);
+	}
 
-			layer.prompt({
-				closeBtn  : 0, //不显示关闭按钮
-				anim      : 0,
-				title     : '输入更新的值',
-				shadeClose: true, //开启遮罩关闭
-				formType  : openType,
-				maxlength : 9999999999,
-				shade     : 0.1,
-				value     : oldVal,
-				area      : ['800px', '350px'], //自定义文本域宽高
-				end       : function () {
-					_this.removeClass('blue')
+	//点击按钮弹窗
+	//data-src
+	//data-title
+	//data-params
+	//data-options
+	//data-is_reload
+	function popWinddows(obj)
+	{
+		let _this = $(obj);
+		let url = _this.data('src') || _this.attr('src');
+		let title = _this.data('title') || "";
+		let is_reload = !!_this.data('is_reload');
+		let params = _this.data('params');
+		let options = _this.data('options');
+
+		(typeof eval(params) === 'object') && (params = eval(params));
+		(typeof eval(options) === 'object') && (options = eval(options));
+
+		let defaultOptions = {
+			type      : 2,
+			title     : title,
+			shadeClose: 1,
+			shade     : 0.1,
+			area      : ['85%', '85%'],
+			resize    : 1,
+			moveOut   : 1,
+			skin      : 'search-dom-pop', //样式类名
+			closeBtn  : 1, //不显示关闭按钮
+			anim      : 0,
+			// anim      : randomNum(0, 6),
+			isOutAnim : 0,
+			content   : url, //iframe的url
+			success   : function (_) {
+				_this.attr("disabled", false);
+			},
+			end       : function () {
+				is_reload && location.reload();
+			}
+		}
+
+		if (typeof params === 'object')
+		{
+			url = url + '?'
+			for (let i in params)
+			{
+				url += i + '=' + params[i] + '&';
+			}
+		}
+
+		if (typeof options === 'object')
+		{
+			for (let i in options)
+			{
+				(defaultOptions[i] !== undefined) && (defaultOptions[i] = options[i]);
+			}
+		}
+
+		layer.open(defaultOptions);
+	}
+
+
+	//添加记录按钮
+	//addUrl
+	$('.btn-add').on({
+		'click': function () {
+			let _this = $(this);
+			var parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+			layer.open({
+				type     : 2,
+				title    : '添加数据',
+				// shadeClose: true,
+				shade    : 0.1,
+				area     : ['85%', '85%'],
+				resize   : 1,
+				moveOut  : 1,
+				skin     : 'search-dom-pop', //样式类名
+				closeBtn : 1, //不显示关闭按钮
+				anim     : 0,
+				// anim      : randomNum(0, 6),
+				isOutAnim: 0,
+				content  : addUrl, //iframe的url
+				success  : function (_) {
+					_this.attr("disabled", false);
+				},
+				end      : function () {
+					location.reload();
 				}
-			}, function (value, index, elem) {
-				value = $.trim(value);
-				let reg = (_this.data('reg'));
-				let msg = (_this.data('msg')) ? (_this.data('msg')) : '输入格式不对';
+			});
+		}
+	});
 
-				if (reg && !eval(reg).test(value))
-				{
-					layer.msg(msg);
 
-					return false;
-				}
+	//表格可修改列添加tips
+	//表格双击修改事件注册
+	//setFieldUrl
+	$('.td-modify').on({
+		'mouseover': function () {
+			index_tips = layer.tips('双击修改', this, {
+				tips: [1, '#3f90fc'],
+				time: 1000
+			});
+		},
+		'mouseout' : function () {
+			layer.close(index_tips);
+		},
+		'dblclick' : function () {
+			let _this = $(this);
 
-				let params = {
-					id   : id,
-					field: field,
-					val  : value,
-				};
+			let openType = this.nodeName == 'TEXTAREA' ? 2 : 0;
 
-				updateField(params['id'], params['field'], params['val'], url, function (data) {
-					//成功返回回调
-					layer.msg(data.msg);
-					if (data.code)
-					{
-						_this.text(value)
-						layer.close(index);
+			let url = setFieldUrl;
+
+			//当前td有data-field属性，父级tr有data-id字段
+			if (getParentTr(_this).data('id') && (_this.data('field')))
+			{
+				_this.addClass('blue')
+				let id = getParentTr(_this).data('id');
+				let field = (_this.data('field'));
+
+				let oldVal = $.trim(_this.text());
+
+				layer.prompt({
+					closeBtn  : 0, //不显示关闭按钮
+					anim      : 0,
+					title     : '输入更新的值',
+					shadeClose: true, //开启遮罩关闭
+					formType  : openType,
+					maxlength : 9999999999,
+					shade     : 0.1,
+					value     : oldVal,
+					area      : ['800px', '350px'], //自定义文本域宽高
+					end       : function () {
+						_this.removeClass('blue')
 					}
-				}, function (data) {
-					//错误返回回调
-					layer.msg('请求未授权或者网络故障...');
+				}, function (value, index, elem) {
+					value = $.trim(value);
+					let reg = (_this.data('reg'));
+					let msg = (_this.data('msg')) ? (_this.data('msg')) : '输入格式不对';
 
-				}, function (btn) {
-					//请求之前回调
+					if (reg && !eval(reg).test(value))
+					{
+						layer.msg(msg);
+
+						return false;
+					}
+
+					let params = {
+						id   : id,
+						field: field,
+						val  : value,
+					};
+
+					updateField(params['id'], params['field'], params['val'], url, function (data) {
+						//成功返回回调
+						layer.msg(data.msg);
+						if (data.code)
+						{
+							_this.text(value)
+							layer.close(index);
+						}
+					}, function (data) {
+						//错误返回回调
+						layer.msg('请求未授权或者网络故障...');
+
+					}, function (btn) {
+						//请求之前回调
+
+					});
 
 				});
 
-			});
-
+			}
 		}
-	}
-});
+	});
 
+	//setFieldUrl
+	//表格可修改列添加tips
+	$('.td-select').on({
+		//下拉框修改事件注册
+		'change': function () {
 
-//禁用的textarea预览信息
-$('textarea.name').on({
-	'mouseover': function () {
-		index_tips = layer.tips('双击查看', this, {
-			tips: [1, '#fc8337'],
-			time: 1000
-		});
-	},
-	'mouseout' : function () {
-		layer.close(index_tips);
-	},
-	'dblclick' : function () {
+			let _this = $(this);
+			let beforeCallback = _this.data('change-callback');
+
+			if (typeof eval(beforeCallback) === 'function')
+			{
+				//注册回调
+				eval(beforeCallback)(this)
+			}
+		}
+	});
+
+	//禁用的textarea预览信息
+	$('textarea.name').on({
+		'mouseover': function () {
+			index_tips = layer.tips('双击查看', this, {
+				tips: [1, '#fc8337'],
+				time: 1000
+			});
+		},
+		'mouseout' : function () {
+			layer.close(index_tips);
+		},
+		'dblclick' : function () {
+			let _this = $(this);
+			layer.open({
+				area      : ['50%', '50%'],
+				type      : 1,
+				resize    : 1,
+				moveOut   : 1,
+				title     : '',
+				shade     : 0.1,
+				skin      : 'search-dom-pop', //样式类名
+				closeBtn  : 0, //不显示关闭按钮
+				anim      : 0,
+				// anim      : randomNum(0, 6),
+				isOutAnim : 0,
+				shadeClose: true, //开启遮罩关闭
+				content   : '<div style="padding: 10px;" >' + _this.text() + '</div>', //dom
+				success   : function (layero, index) {
+					_this.attr("disabled", false);
+					// layero.alert(layero, index)
+				}
+			});
+		}
+	});
+
+	//列表页搜索弹出框事件
+	$('.search-dom-btn-1').mouseover(function () {
 		let _this = $(this);
+		_this.attr("disabled", true);
 		layer.open({
-			area      : ['50%', '50%'],
+			area      : ['65%', '65%'],
 			type      : 1,
 			resize    : 1,
 			moveOut   : 1,
-			title     : '',
+			title     : '条件筛选',
 			shade     : 0.1,
 			skin      : 'search-dom-pop', //样式类名
 			closeBtn  : 0, //不显示关闭按钮
@@ -737,43 +969,93 @@ $('textarea.name').on({
 			// anim      : randomNum(0, 6),
 			isOutAnim : 0,
 			shadeClose: true, //开启遮罩关闭
-			content   : '<div style="padding: 10px;" >' + _this.text() + '</div>', //dom
+			content   : $('.search-dom-1'), //dom
 			success   : function (layero, index) {
 				_this.attr("disabled", false);
 				// layero.alert(layero, index)
 			}
 		});
+	});
+
+
+	//日期区间选择事件注册
+	$(".input-daterange").datepicker({
+		keyboardNavigation: !1,
+		forceParse        : !1,
+		autoclose         : !0
+	});
+
+
+	//注册switcher
+	registSwitcher('js-switch', 1)
+	registSwitcher('js-switch-notauto', 0)
+
+}())
+
+function refresh_page(aa)
+{
+	location.reload();
+}
+
+function updateColor(obj)
+{
+	let _this = $(obj);
+	_this.css({
+		'background': _this.find("option:selected").css('background')
+	});
+}
+
+function registUpdate(obj)
+{
+	let _this = $(obj);
+	let url = setFieldUrl;
+
+	//当前td有data-field属性，父级tr有data-id字段
+	if (getParentTr(_this).data('id') && _this.data('field'))
+	{
+		_this.addClass('blue')
+		let id = getParentTr(_this).data('id');
+		let field = _this.data('field');
+
+		let value = _this.val();
+
+		let params = {
+			id   : id,
+			field: field,
+			val  : value,
+		};
+
+		updateField(params['id'], params['field'], params['val'], url, function (data) {
+			//成功返回回调
+			_this.removeClass('blue')
+
+			layer.msg(data.msg);
+			if (data.code)
+			{
+
+				let beforeCallback = _this.data('success-callback');
+
+				if (typeof eval(beforeCallback) === 'function')
+				{
+					//注册回调
+					eval(beforeCallback)(_this[0])
+				}
+
+				// _this.text(value)
+			}
+		}, function (data) {
+			//错误返回回调
+			layer.msg('请求未授权或者网络故障...');
+			_this.removeClass('blue')
+
+		}, function (btn) {
+			//请求之前回调
+
+		})
+
 	}
-});
+}
 
-//setFieldUrl
-//表格可修改列添加tips
-$('.td-select').on({
-	//下拉框修改事件注册
-	'change': function () {
-
-		let _this = $(this);
-		let beforeCallback = _this.data('change-callback');
-
-		if (typeof eval(beforeCallback) === 'function')
-		{
-			//注册回调
-			eval(beforeCallback)(this)
-		}
-	}
-});
-
-
-/**
- ************************************
- *                   表格里的switcher
- ************************************
- */
-
-
-//注册switcher
-registSwitcher('js-switch', 1)
-registSwitcher('js-switch-notauto', 0)
 
 //注册switcher
 function registSwitcher(className, isAuto)
@@ -930,76 +1212,6 @@ function switcherUpdateField(switchery)
 
 
 /**
- * 获取swhtcher的各个参数
- **/
-function getSwitcherParams(obj)
-{
-	let obj_ = $(obj)
-	let val = obj_.val();
-	let isChecked = obj_.is(':checked');
-	let field = obj_.attr("name");
-	// let id = obj_.parents('tr').data('id')
-	let id = getParentTr(obj_).data('id')
-	return {
-		'id'   : id,
-		'val'  : isChecked + 0,
-		'field': field,
-	};
-}
-
-
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   添加按钮
- ******************************************************************************************
- ******************************************************************************************
- */
-
-
-//添加记录按钮
-//addUrl
-$('.btn-add').on({
-	'click': function () {
-		let _this = $(this);
-		let parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-		layer.open({
-			type     : 2,
-			title    : '添加数据',
-			// shadeClose: true,
-			shade    : 0.1,
-			area     : ['85%', '85%'],
-			resize   : 1,
-			moveOut  : 1,
-			skin     : 'search-dom-pop', //样式类名
-			closeBtn : 1, //不显示关闭按钮
-			anim     : 0,
-			// anim      : randomNum(0, 6),
-			isOutAnim: 0,
-			content  : addUrl, //iframe的url
-			success  : function (_) {
-				_this.attr("disabled", false);
-			},
-			end      : function () {
-				refresh_page();
-			}
-		});
-	}
-});
-
-
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   编辑按钮
- ******************************************************************************************
- ******************************************************************************************
- */
-
-//编辑按钮事件注册
-$('.btn-edit').on({'click': function () {registerEdit(this)}});
-
-/**
  * editUrl
  *    传入一个编辑按钮，打开对应item编辑框
  * @param  $obj
@@ -1010,7 +1222,6 @@ function registerEdit($obj)
 	let data_id = getParentTr(_this).data('id');
 	// _this.attr("disabled", true);
 
-	let url = setFieldUrl;
 	layer.open({
 		type     : 2,
 		title    : '编辑',
@@ -1024,53 +1235,15 @@ function registerEdit($obj)
 		anim     : 0,
 		// anim      : randomNum(0, 6),
 		isOutAnim: 0,
-		content  : url + "?id=" + data_id, //iframe的url
+		content  : editUrl + "?id=" + data_id, //iframe的url
 		success  : function (_) {
 			_this.attr("disabled", false);
 		},
 		end      : function () {
-			refresh_page();
+			location.reload();
 		}
 	});
 }
-
-
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   启用禁用数据
- ******************************************************************************************
- ******************************************************************************************
- */
-
-
-//批量禁用按钮事件注册
-$('.multi-op-toggle-status-disable').on({
-	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemDisable(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
-	}
-});
-
-//批量启用按钮事件注册
-$('.multi-op-toggle-status-enable').on({
-	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemEnable(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
-	}
-});
 
 
 /**
@@ -1124,43 +1297,6 @@ function itemDisable(ids, btn, callback_)
 	}, btn)
 }
 
-
-/**
- ******************************************************************************************
- ******************************************************************************************
- *                   删除数据
- ******************************************************************************************
- ******************************************************************************************
- */
-
-//删除按钮事件注册
-$('.btn-delete').on({'click': function () {registerDelete(this)}});
-
-//批量删除按钮事件注册
-$('.multi-op-del').on({
-	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemDelete(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
-	}
-});
-
-/**
- *    传入一个按钮，提示删除
- * @param  $obj
- */
-function registerDelete($obj)
-{
-	let _this = $($obj);
-	let data_id = getParentTr(_this).data('id');
-	itemDelete(data_id, $obj)
-}
-
 /**
  * deleteUrl
  *
@@ -1172,6 +1308,7 @@ function registerDelete($obj)
 function itemDelete(ids, btn, callback_)
 {
 	let url = deleteUrl;
+
 	layer.confirm('确定删除？此操作不可恢复', {
 		resize    : 1,
 		moveOut   : 1,
@@ -1209,210 +1346,45 @@ function itemDelete(ids, btn, callback_)
 }
 
 
+
 /**
- ******************************************************************************************
- ******************************************************************************************
- *                   通用
- ******************************************************************************************
- ******************************************************************************************
+ *    传入一个按钮，提示删除
+ * @param  $obj
  */
-
-
-	//全选按钮事件注册
-let isAllChecked = false;
-$('.se-all').on({
-	'click': function () {
-		let checkboxs = $('.ids');
-		!isAllChecked ? checkboxs.iCheck('check') : checkboxs.iCheck('uncheck');
-		isAllChecked = !isAllChecked;
-	}
-});
-
-//反选按钮事件注册
-$('.se-rev').on({
-	'click': function () {
-		let checkboxs = $('.ids');
-		checkboxs.each(function (k, v) {
-//			$(v).is(":checked") ? $(v).iCheck('uncheck') : $(v).iCheck('check');
-			$(v).iCheck('toggle');
-		});
-	}
-});
-//日期区间选择事件注册
-$(".input-daterange").datepicker({
-	keyboardNavigation: !1,
-	forceParse        : !1,
-	autoclose         : !0
-});
-
+function registerDelete($obj)
+{
+	let _this = $($obj);
+	let data_id = getParentTr(_this).data('id');
+	itemDelete(data_id, $obj)
+}
 
 /**
- * 表格里option用的，变换颜色
+ * 表格里元素获取父级tr
  * @param obj
+ * @returns {*}
  */
-function updateColor(obj)
+function getParentTr(obj)
 {
-	let _this = $(obj);
-	_this.css({
-		'background': _this.find("option:selected").css('background')
-	});
+	return obj.parents('tr');
 }
 
 /**
- *
- * 注册元素的update事件
- *
- * 多数写在元素data-callback里
- * @param obj
- */
-function registUpdate(obj)
+ * 获取swhtcher的各个参数
+ **/
+function getSwitcherParams(obj)
 {
-	let _this = $(obj);
-	let url = setFieldUrl;
-
-	//当前td有data-field属性，父级tr有data-id字段
-	if (getParentTr(_this).data('id') && _this.data('field'))
-	{
-		_this.addClass('blue')
-		let id = getParentTr(_this).data('id');
-		let field = _this.data('field');
-
-		let value = _this.val();
-
-		let params = {
-			id   : id,
-			field: field,
-			val  : value,
-		};
-
-		updateField(params['id'], params['field'], params['val'], url, function (data) {
-			//成功返回回调
-			_this.removeClass('blue')
-
-			layer.msg(data.msg);
-			if (data.code)
-			{
-
-				let beforeCallback = _this.data('success-callback');
-
-				if (typeof eval(beforeCallback) === 'function')
-				{
-					//注册回调
-					eval(beforeCallback)(_this[0])
-				}
-
-				// _this.text(value)
-			}
-		}, function (data) {
-			//错误返回回调
-			layer.msg('请求未授权或者网络故障...');
-			_this.removeClass('blue')
-
-		}, function (btn) {
-			//请求之前回调
-
-		})
-
-	}
+	let obj_ = $(obj)
+	let val = obj_.val();
+	let isChecked = obj_.is(':checked');
+	let field = obj_.attr("name");
+	// let id = obj_.parents('tr').data('id')
+	let id = getParentTr(obj_).data('id')
+	return {
+		'id'   : id,
+		'val'  : isChecked + 0,
+		'field': field,
+	};
 }
-
-//自定义新窗口打开页面
-$('.btn-open-window').on({
-	'click': function () {
-		openInNewWindows(this);
-	}
-});
-
-//自定义新窗口打开页面
-$('.btn-open-pop').on({
-	'click': function () {
-		popWinddows(this);
-	}
-});
-
-
-//点击按钮新窗口打开页面
-//data-src
-//data-params
-function openInNewWindows(obj)
-{
-	let _this = $(obj);
-	let params = _this.data('params');
-	(typeof eval(params) === 'object') && (params = eval(params));
-	let url = _this.data('src') || _this.attr('src');
-
-	if (typeof params === 'object')
-	{
-		url = url + '?'
-		for (let i in params)
-		{
-			url += i + '=' + params[i] + '&';
-		}
-	}
-
-	open(url);
-}
-
-//点击按钮弹窗
-//data-src
-//data-title
-//data-params
-//data-options
-//data-is_reload
-function popWinddows(obj)
-{
-	let _this = $(obj);
-	let url = _this.data('src') || _this.attr('src');
-	let title = _this.data('title') || "";
-	let is_reload = !!_this.data('is_reload');
-	let params = _this.data('params');
-	let options = _this.data('options');
-
-	(typeof eval(params) === 'object') && (params = eval(params));
-	(typeof eval(options) === 'object') && (options = eval(options));
-
-	let defaultOptions = {
-		type      : 2,
-		title     : title,
-		shadeClose: 1,
-		shade     : 0.1,
-		area      : ['85%', '85%'],
-		resize    : 1,
-		moveOut   : 1,
-		skin      : 'search-dom-pop', //样式类名
-		closeBtn  : 1, //不显示关闭按钮
-		anim      : 0,
-		// anim      : randomNum(0, 6),
-		isOutAnim : 0,
-		content   : url, //iframe的url
-		success   : function (_) {
-			_this.attr("disabled", false);
-		},
-		end       : function () {
-			is_reload && refresh_page();
-		}
-	}
-
-	if (typeof params === 'object')
-	{
-		url = url + '?'
-		for (let i in params)
-		{
-			url += i + '=' + params[i] + '&';
-		}
-	}
-
-	if (typeof options === 'object')
-	{
-		for (let i in options)
-		{
-			(defaultOptions[i] !== undefined) && (defaultOptions[i] = options[i]);
-		}
-	}
-
-	layer.open(defaultOptions);
-}
-
 
 /**
  获取所有选中的条目的id，用回调处理
@@ -1429,85 +1401,3 @@ function getSelecteedItemId(callback, callback_)
 	else
 	{layer.msg('没有选中的对象');}
 }
-
-
-/**
- * 表格里元素获取父级tr
- * @param obj
- * @returns {*}
- */
-function getParentTr(obj)
-{
-	return obj.parents('tr');
-}
-
-/**
- * 刷新页面
- *
- * @param obj
- */
-function refresh_page(obj)
-{
-	location.reload();
-}
-
-/**
- * 刷新页面
- *
- * @param obj
- */
-function rowReload()
-{
-	location.href = location.origin + location.pathname;
-}
-
-/**
- * 解析url
- * @param url
- * @returns {{source: *, protocol: string, host: string, port: string, query: string, params, file: string | *, hash: string, path: string, relative: string | *, segments: string[]}}
- */
-function parseURL(url)
-{
-	let a = document.createElement('a');
-	a.href = url;
-	return {
-		source  : url,
-		protocol: a.protocol.replace(':', ''),
-		host    : a.hostname,
-		port    : a.port,
-		query   : a.search,
-		params  : (function () {
-			let ret = {},
-				seg = a.search.replace(/^\?/, '').split('&'),
-				len = seg.length, i = 0, s;
-			for (; i < len; i++)
-			{
-				if (!seg[i])
-				{ continue; }
-				s = seg[i].split('=');
-				ret[s[0]] = s[1];
-			}
-			return ret;
-		})(),
-		file    : (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
-		hash    : a.hash.replace('#', ''),
-		path    : a.pathname.replace(/^([^\/])/, '/$1'),
-		relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
-		segments: a.pathname.replace(/^\//, '').split('/')
-	};
-}
-
-/**
- let myURL=parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top');
-
- myURL.file;     // = 'index.html'
- myURL.hash;     // = 'top'
- myURL.host;     // = 'abc.com'
- myURL.query;    // = '?id=255&m=hello'
- myURL.params;   // = Object = { id: 255, m: hello }
- myURL.path;     // = '/dir/index.html'
- myURL.segments; // = Array = ['dir', 'index.html']
- myURL.port;     // = '8080'
- myURL.protocol; // = 'http'
-
- */
