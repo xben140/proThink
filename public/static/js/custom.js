@@ -98,6 +98,217 @@
  *
  */
 
+/**
+ *
+ * 注册元素的update事件
+ *
+ * 多数写在元素data-callback里
+ * @param obj
+ */
+function registUpdate(obj)
+{
+	let _this = $(obj);
+	let url = setFieldUrl;
+
+	//当前td有data-field属性，父级tr有data-id字段
+	if (getParentTr(_this).data('id') && _this.data('field'))
+	{
+		_this.addClass('blue')
+		let id = getParentTr(_this).data('id');
+		let field = _this.data('field');
+
+		let value = _this.val();
+
+		let params = {
+			id   : id,
+			field: field,
+			val  : value,
+		};
+
+		updateField(params['id'], params['field'], params['val'], url, function (data) {
+			//成功返回回调
+			_this.removeClass('blue')
+
+			layer.msg(data.msg);
+			if (data.code)
+			{
+
+				let beforeCallback = _this.data('success-callback');
+
+				if (typeof eval(beforeCallback) === 'function')
+				{
+					//注册回调
+					eval(beforeCallback)(_this[0])
+				}
+
+				// _this.text(value)
+			}
+		}, function (data) {
+			//错误返回回调
+			layer.msg('请求未授权或者网络故障...');
+			_this.removeClass('blue')
+
+		}, function (btn) {
+			//请求之前回调
+
+		})
+
+	}
+}
+
+//自定义新窗口打开页面
+$('.btn-open-window').on({
+	'click': function () {
+		openInNewWindows(this);
+	}
+});
+
+//自定义新窗口打开页面
+$('.btn-open-pop').on({
+	'click': function () {
+		popWinddows(this);
+	}
+});
+
+
+//点击按钮新窗口打开页面
+//data-src
+//data-params
+function openInNewWindows(obj)
+{
+	let _this = $(obj);
+	let params = _this.data('params');
+	(typeof eval(params) === 'object') && (params = eval(params));
+	let url = _this.data('src') || _this.attr('src');
+
+	if (typeof params === 'object')
+	{
+		url = url + '?'
+		for (let i in params)
+		{
+			url += i + '=' + params[i] + '&';
+		}
+	}
+
+	open(url);
+}
+
+//点击按钮弹窗
+//data-src
+//data-title
+//data-params
+//data-options
+//data-is_reload
+function popWinddows(obj)
+{
+	let _this = $(obj);
+	let url = _this.data('src') || _this.attr('src');
+	let title = _this.data('title') || "";
+	let is_reload = !!_this.data('is_reload');
+	let params = _this.data('params');
+	let options = _this.data('options');
+
+	(typeof eval(params) === 'object') && (params = eval(params));
+	(typeof eval(options) === 'object') && (options = eval(options));
+
+	let defaultOptions = {
+		type      : 2,
+		title     : title,
+		shadeClose: 1,
+		shade     : 0.1,
+		area      : ['85%', '85%'],
+		resize    : 1,
+		moveOut   : 1,
+		skin      : 'search-dom-pop', //样式类名
+		closeBtn  : 1, //不显示关闭按钮
+		anim      : 0,
+		// anim      : randomNum(0, 6),
+		isOutAnim : 0,
+		content   : url, //iframe的url
+		success   : function (_) {
+			_this.attr("disabled", false);
+		},
+		end       : function () {
+			is_reload && refresh_page();
+		}
+	}
+
+	if (typeof params === 'object')
+	{
+		url = url + '?'
+		for (let i in params)
+		{
+			url += i + '=' + params[i] + '&';
+		}
+	}
+
+	if (typeof options === 'object')
+	{
+		for (let i in options)
+		{
+			(defaultOptions[i] !== undefined) && (defaultOptions[i] = options[i]);
+		}
+	}
+
+	layer.open(defaultOptions);
+}
+
+/**
+ * 刷新页面
+ *
+ * @param obj
+ */
+function refresh_page(obj)
+{
+	location.reload();
+}
+
+/**
+ * 刷新页面
+ *
+ * @param obj
+ */
+function rowReload()
+{
+	location.href = location.origin + location.pathname;
+}
+
+/**
+ * 解析url
+ * @param url
+ * @returns {{source: *, protocol: string, host: string, port: string, query: string, params, file: string | *, hash: string, path: string, relative: string | *, segments: string[]}}
+ */
+function parseURL(url)
+{
+	let a = document.createElement('a');
+	a.href = url;
+	return {
+		source  : url,
+		protocol: a.protocol.replace(':', ''),
+		host    : a.hostname,
+		port    : a.port,
+		query   : a.search,
+		params  : (function () {
+			let ret = {},
+				seg = a.search.replace(/^\?/, '').split('&'),
+				len = seg.length, i = 0, s;
+			for (; i < len; i++)
+			{
+				if (!seg[i])
+				{ continue; }
+				s = seg[i].split('=');
+				ret[s[0]] = s[1];
+			}
+			return ret;
+		})(),
+		file    : (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+		hash    : a.hash.replace('#', ''),
+		path    : a.pathname.replace(/^([^\/])/, '/$1'),
+		relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+		segments: a.pathname.replace(/^\//, '').split('/')
+	};
+}
+
 
 /**
  *
