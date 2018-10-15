@@ -5,7 +5,6 @@
 	use app\common\common\set;
 	use builder\elementsFactory;
 	use builder\makePage;
-	use builder\tagConstructor;
 	use think\Controller;
 	use think\Loader;
 
@@ -41,102 +40,25 @@
 		protected $displayContents;
 
 		/**
-		 * 基类初始化
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    初始化请求参数
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
 		 */
 		public function _initialize()
 		{
-
-			//print_r(config('exception_tmpl'));exit;;
-
 			// 初始化请求信息
 			$this->initRequestInfo();
 
 			//初始化模板参数
 			$this->initTemplateParam();
 
-			//初始化页面
-			$this->initPageGlobal();
-
+			//初始化静态资源
+			$this->initBaseStaticResource();
+			$this->initModuleStaticResource();
 			parent::_initialize();
-
 		}
-
-		//初始化当前模型
-		protected function initLogic()
-		{
-			//当前类名
-			$this->logic = $this->{static::makeClassName(static::class , 'logic')};
-		}
-
-
-		/*
-		 *
-		 *
-		 *
-		 *
-		 *		公共方法
-		 *
-		 *
-		 *
-		 * */
-
-		public function add()
-		{
-			$this->initLogic();
-			if(IS_POST)
-			{
-				$this->jump($this->logic->add($this->param_post));
-			}
-			else
-			{
-				return $this->makeView($this);
-			}
-		}
-
-		public function edit()
-		{
-			$this->initLogic();
-			if(IS_POST)
-			{
-				$id = session(URL_MODULE);
-				$this->jump($this->logic->edit($this->param , $id));
-			}
-			else
-			{
-				return $this->makeView($this);
-			}
-		}
-
-		public function setField()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->updateField($this->param));
-		}
-
-		public function delete()
-		{
-			$this->initLogic();
-
-			return $this->jump($this->logic->delete($this->param));
-		}
-
-		public function dataList()
-		{
-			return $this->makeView($this);
-		}
-
-
-		/*
-		 *
-		 *
-		 *
-		 *
-		 *		私有方法，初始化请求
-		 *
-		 *
-		 *
-		 * */
 
 
 		/**
@@ -220,46 +142,97 @@
 
 		}
 
-
 		/**
 		 * 初始化页面公用设置
 		 */
-		final protected function initPageGlobal()
+		final protected function initBaseStaticResource()
 		{
 			//注册自定义元素映射
 			elementsFactory::registerMap(config('elements_map'));
-
-			//公用mate
-			$mates[] = elementsFactory::singleLabel('<meta charset="utf-8">');
-			//$mates[] = elementsFactory::singleLabel('<link rel="shortcut icon" href="">');
-			$mates[] = elementsFactory::singleLabel('<!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->');
-			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-
-			$mates[] = tagConstructor::mate([
-				'name'    => 'viewport' ,
-				'content' => 'width=device-width' ,
-			]);
-			$mates[] = tagConstructor::mate([
-				'name'    => 'keywords' ,
-				'content' => '' ,
-			]);
-			$mates[] = tagConstructor::mate([
-				'name'    => 'description' ,
-				'content' => '' ,
-			]);
-			$mates[] = tagConstructor::mate('name="renderer" content="webkit"');
-
-			$this->makePage()->setHead($mates);
-
-			$this->makePage()->setNodeValue([
-				'BODY_ATTR' => tagConstructor::buildKV([
-					'class' => ' gray-bg' ,
-				]) ,
-			]);
-
 		}
 
+		/**
+		 * 每个独立模块实例化自己的静态资源
+		 */
+		public function initModuleStaticResource() { }
+
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    公共curd方法
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
+
+		public function add()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$this->jump($this->logic->add($this->param_post));
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+		public function edit()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$id = session(URL_MODULE);
+				$this->jump($this->logic->edit($this->param , $id));
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+		public function setField()
+		{
+			$this->initLogic();
+
+			return $this->jump($this->logic->updateField($this->param));
+		}
+
+		public function delete()
+		{
+			$this->initLogic();
+
+			return $this->jump($this->logic->delete($this->param));
+		}
+
+		public function dataList()
+		{
+			return $this->makeView($this);
+		}
+
+
+
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    公共其他方法
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
+
+		//初始化当前模型
+		protected function initLogic()
+		{
+			//当前类名
+			$this->logic = $this->{static::makeClassName(static::class , 'logic')};
+		}
+
+
+		/**
+		 * 设置页面标题
+		 *
+		 * @param $title
+		 */
 		public function setPageTitle($title)
 		{
 			//设置标题
@@ -295,26 +268,6 @@
 					exception('系统跳转失败 : ' . $jumpType['url']);
 			}
 		}
-
-
-		/**
-		 * 初始化角色id与常量标识
-		 */
-		final protected function initRolesConst()
-		{
-			defined('ROLE_EDIT') or define('ROLE_EDIT' , 2);
-		}
-
-		/*
-		 *
-		 *
-		 *
-		 *
-		 *		公用方法
-		 *
-		 *
-		 *
-		 * */
 
 		/**
 		 * 获取当前方法下对于路径下的模板路径
@@ -457,7 +410,6 @@
 	}
 
 	//var_export(get_defined_constants(1));exit;;
-
 	array(
 		'APP_PATH'               => 'F:\\localWeb\\public_local15\\public/../app/' ,
 		'THINK_VERSION'          => '5.0.20' ,

@@ -151,7 +151,7 @@
 			$obj = controller(static::makeRuleClassName());
 
 			AuthTool::addRule('setRules' , [
-				static::callDynamic($obj, 'setRules') ,
+				static::callDynamic($obj , 'setRules') ,
 				[
 					config('rule') ,
 				] ,
@@ -159,11 +159,11 @@
 			]);
 
 			AuthTool::addRule('getRule' , [
-				static::callDynamic($obj, 'getRule') ,
+				static::callDynamic($obj , 'getRule') ,
 				[
 					$this->currentUri ,
-					$this->status,
-					$element,
+					$this->status ,
+					$element ,
 				] ,
 				'规则获取出错' ,
 			]);
@@ -171,7 +171,7 @@
 			AuthTool::pushGroup('setRules' , 'calcRules');
 			AuthTool::pushGroup('getRule' , 'calcRules');
 
-			$rules =  AuthTool::execGroup('calcRules');
+			$rules = AuthTool::execGroup('calcRules');
 
 			$res = $rules[1]['result'][$type];
 

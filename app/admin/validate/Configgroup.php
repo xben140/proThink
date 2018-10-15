@@ -6,8 +6,8 @@
 	{
 		// 验证规则
 		protected $rule = [
-			'name'       => 'unique:config_group|require' ,
-			'order'       => 'number' ,
+			'name'  => 'unique:config_group|require' ,
+			'order' => 'number' ,
 		];
 
 		// 验证提示

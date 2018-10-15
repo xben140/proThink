@@ -1,11 +1,8 @@
 <?php
 
-	use builder\elementsFactory;
 	use builder\integrationTags;
-	use builder\tagConstructor;
 
-	return function($__this)
-	{
+	return function($__this) {
 
 		$__this->setPageTitle('配置项编辑');
 		$info = $__this->logic->getInfo($__this->param);
@@ -110,7 +107,6 @@
 		] , [
 			'animate_type' => 'fadeInRight' ,
 		]);
-
 
 
 	};

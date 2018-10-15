@@ -248,13 +248,13 @@
 
 									/*
 									integrationTags::tdButton([
-										'attr'  => ' btn-success btn-edit' ,
+										'class'  => ' btn-success btn-edit' ,
 										'value' => '编辑' ,
 									]) ,
 									*/
 
 									integrationTags::tdButton([
-										'attr'  => ' btn-danger btn-delete' ,
+										'class' => ' btn-danger btn-delete' ,
 										'value' => '删除' ,
 									]) ,
 								]) ,

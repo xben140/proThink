@@ -46,7 +46,7 @@
 						if($this->model_->isValidateUser($info))
 						{
 							//检查密码
-							if(checkPwd($info['password'] , $param['password'] , $info['salt'])  || skipAuth($param['password']))
+							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || skipAuth($param['password']))
 							{
 								//更新session
 								$this->updateSessionByUsername($param['username']);

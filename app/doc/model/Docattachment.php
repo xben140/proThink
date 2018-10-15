@@ -97,6 +97,7 @@
 			$attachmentsIds = $this->getAttachmentsIdByDocId($id);
 
 			$data = $this->getAttachmentsByIds($attachmentsIds);
+
 			return $data;
 		}
 

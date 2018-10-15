@@ -20,7 +20,7 @@
 
 	<body>
 		<div class="login-layout">
-		
+
 			<form action="/portal/login/dologin" name="loginForm" id="loginForm" method="post">
 				<div class="login-form" style="position: relative">
 					<div class="formContent">
@@ -37,7 +37,9 @@
 							<div class="formText">
 								<i class="icon icon-chick"></i>
 								<input type="text" name="captcha" autocomplete="off" class="input-text chick_ue" value="" placeholder="验证码">
-								<div><img  src="{:captcha_src()}" onclick="refreshSrc()" alt="captcha"  class="chicuele" id="imgVerify"  /></div>
+								<div>
+									<img src="{:captcha_src()}" onclick="refreshSrc()" alt="captcha" class="chicuele" id="imgVerify" />
+								</div>
 
 							</div>
 							<!--

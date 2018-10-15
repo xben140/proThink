@@ -17,17 +17,13 @@
 			return $this->makeView($this);
 		}
 
+
 		/**
 		 * 每个表数据的详细信息
 		 */
 		public function detailInfo()
 		{
-			$this->initLogic();
-
-			$tableId = session(SESSION_TAG_ADMIN . 'tab_id');
-			$data = $this->logic->getDetailInfo($this->param['ids'] , $tableId);
-
-			return $this->jump($data);
+			return $this->makeView($this);
 		}
 
 

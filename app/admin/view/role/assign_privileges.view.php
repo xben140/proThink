@@ -31,7 +31,7 @@
 
 
 		//获取当前角色有的菜单
-		$currMenu = $__this->logic->getRolesPrivilegesId($__this->param );
+		$currMenu = $__this->logic->getRolesPrivilegesId($__this->param);
 
 		$menusForms = integrationTags::rowBlock([
 			integrationTags::form([
@@ -40,7 +40,7 @@
 				//inlineCheckbox
 				integrationTags::blockCheckbox($availableMenus , 'privileges[]' , '分配菜单' , '每个角色可分配多个菜单' , $currMenu) ,
 				integrationTags::hidden([
-					'name'  => 'type' ,
+					'name' => 'type' ,
 					//'value' => $resourceMenuIndex ,
 				]) ,
 

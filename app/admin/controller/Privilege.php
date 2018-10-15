@@ -18,8 +18,7 @@
 			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->jump($this->logic->add($this->param_post , [] , [
-/*
+				$this->jump($this->logic->add($this->param_post , [] , [/*
 					[
 						function(&$param) {
 							//菜单添加好后把菜单id添加到权限表里

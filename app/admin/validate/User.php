@@ -10,14 +10,14 @@
 			'password' => 'require|checkName|confirm' ,
 			'email'    => 'email' ,
 			'phone'    => 'checkPhone' ,
-/*
+			/*
 
-			'user'     => 'require|checkName|unique:user' ,
-			'password' => 'require|checkName|confirm' ,
-			'email'    => 'require|email|unique:user' ,
-			'phone'    => 'checkPhone|unique:user' ,
+						'user'     => 'require|checkName|unique:user' ,
+						'password' => 'require|checkName|confirm' ,
+						'email'    => 'require|email|unique:user' ,
+						'phone'    => 'checkPhone|unique:user' ,
 
-			*/
+						*/
 		];
 
 		// 验证提示
@@ -41,7 +41,7 @@
 
 		// 应用场景
 		protected $scene = [
-			'add'  => [
+			'add' => [
 				'user' ,
 				'password' ,
 				'email' ,
@@ -58,7 +58,6 @@
 			'editPwd' => [
 				'password' ,
 			] ,
-
 
 
 		];

@@ -19,7 +19,7 @@
 
 				integrationTags::inlineRadio($__this->logic->model_::$articleCategory , 'category' , '文章类型' , '' , 1) ,
 
-				integrationTags::inlineRadio($__this->logic->model_::$articleSourceType , 'source_type' , '内容来源' , '' ,1) ,
+				integrationTags::inlineRadio($__this->logic->model_::$articleSourceType , 'source_type' , '内容来源' , '' , 1) ,
 
 
 				integrationTags::switchery([
@@ -74,7 +74,6 @@
 					'name'       => 'content' ,
 					'value'      => '' ,
 				]) ,
-
 
 
 			] , [

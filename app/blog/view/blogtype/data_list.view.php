@@ -42,10 +42,10 @@
 								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
 								'field' => '批量禁用' ,
 							] ,
-						],
+						] ,
 					]) ,
 
-					elementsFactory::staticTable()->make(function(&$doms , $_this) use($__this) {
+					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 
 						//$data = $__this->logic->dataList($__this->param);
 						$data = $__this->logic->dataListWithPagination($__this->param);
@@ -104,7 +104,7 @@
 						 * 设置表格搜索框
 						 *searchFormCol
 						 */
-						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this)  use($__this){
+						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($__this) {
 
 							//每页显示条数
 							$t = integrationTags::searchFormCol([
@@ -213,7 +213,7 @@
 										//'name'     => '' ,
 										'editable' => '0' ,
 										'value'    => formatTime($v['time']) ,
-									]),
+									]) ,
 								]) ,
 
 								//备注
@@ -248,16 +248,16 @@
 
 									/*
 									integrationTags::tdButton([
-										'attr'  => ' btn-success btn-edit' ,
+										'class'  => ' btn-success btn-edit' ,
 										'value' => '编辑' ,
 									]) ,
 									*/
 
 									integrationTags::tdButton([
-										'attr'  => ' btn-danger btn-delete' ,
+										'class' => ' btn-danger btn-delete' ,
 										'value' => '删除' ,
 									]) ,
-								]),
+								]) ,
 
 							] , ['id' => $v['id']]);
 

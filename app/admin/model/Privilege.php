@@ -60,12 +60,9 @@
 		 */
 		public function getPrivilegeByUserid($uid)
 		{
-			$ids = array_merge(
-				//角色id
-				$this->getPrivilegeIdByRoleid($this->model__admin_role->getRoleIdByUserId($uid)),
-				//公共权限id
-				$this->getCommonPrivilegesId()
-			);
+			$ids = array_merge(//角色id
+				$this->getPrivilegeIdByRoleid($this->model__admin_role->getRoleIdByUserId($uid)) , //公共权限id
+				$this->getCommonPrivilegesId());
 
 			$data = $this->getPrivilegesByPrivilegesId($ids);
 

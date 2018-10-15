@@ -36,7 +36,6 @@
 		}
 
 
-
 		protected function makeCondition($param)
 		{
 			$where = [];

@@ -93,12 +93,11 @@
 						 * 设置js请求api
 						 */
 						$_this->setApi([
-							'deleteUrl'           => url('delete') ,
-							'setFieldUrl'         => url('setField') ,
-							'detailUrl'           => url('detail') ,
-							'editUrl'             => url('edit') ,
-							'addUrl'              => url('add') ,
-							'assignPrivilegesUrl' => url('assignPrivileges') ,
+							'deleteUrl'   => url('delete') ,
+							'setFieldUrl' => url('setField') ,
+							'detailUrl'   => url('detail') ,
+							'editUrl'     => url('edit') ,
+							'addUrl'      => url('add') ,
 						]);
 
 						/**
@@ -281,21 +280,30 @@
 								//操作
 								integrationTags::td([
 									integrationTags::tdButton([
-										'attr'       => ' btn-success btn-edit' ,
+										'class'      => ' btn-success btn-edit' ,
 										'value'      => '编辑' ,
 										'is_display' => (function() use ($v) {
 											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
 										})() ,
 									]) ,
 									integrationTags::tdButton([
-										'attr'       => ' btn-info btn-assign-privileges' ,
-										'value'      => '分配权限' ,
+										'class' => ' btn-info btn-open-pop' ,
+										'value' => '分配权限' ,
+
+										'data'  => [
+											'src'   => url('assignPrivileges') ,
+											'title' => '分配权限' ,
+										] ,
+										'param' => [
+											'id' => $v['id'] ,
+										] ,
+
 										'is_display' => (function() use ($v) {
 											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
 										})() ,
 									]) ,
 									integrationTags::tdButton([
-										'attr'       => ' btn-danger btn-delete' ,
+										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
 										'is_display' => (function() use ($v) {
 											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
@@ -316,7 +324,6 @@
 				]) ,
 			]) ,
 		]);
-
 
 
 	};

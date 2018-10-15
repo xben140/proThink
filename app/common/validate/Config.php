@@ -18,9 +18,9 @@
 			'name.unique'  => '同样的配置名已存在' ,
 			'name.require' => '配置名字必填' ,
 
-			'key.unique'   => '同样的key已存在' ,
+			'key.unique'  => '同样的key已存在' ,
 			//'key.alphaNum' => 'key格式不合法' ,
-			'key.require'  => 'key必填' ,
+			'key.require' => 'key必填' ,
 
 			'type.number'  => '类型必填' ,
 			'type.require' => '类型必填' ,

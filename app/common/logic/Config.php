@@ -28,7 +28,7 @@
 				{
 					case '1' :
 						#array
-						$val = preg_split('/[\r\n]/im' , $v['value'], -1, PREG_SPLIT_NO_EMPTY);
+						$val = preg_split('/[\r\n]/im' , $v['value'] , -1 , PREG_SPLIT_NO_EMPTY);
 						break;
 					case '2' :
 						#text
@@ -63,6 +63,7 @@
 
 		/**
 		 * 针对option键值的处理
+		 *
 		 * @param $v
 		 *
 		 * @return array
@@ -93,7 +94,7 @@
 
 		/**
 		 * 获取所有类型为options的key
-		 *	没有使用
+		 *    没有使用
 		 * @return array
 		 */
 		public function getOptionsKey()

@@ -10,21 +10,17 @@
 	 * ******************************************************************************************
 	 * ******************************************************************************************
 	 *                                此类为页面构造器的使用示例
-	 *
 	 * ******************************************************************************************
 	 * ******************************************************************************************
 	 * Class Example
 	 * @package app\demo\controller
 	 */
-
-
-	class Example extends Base
+	class Example extends FrontendBase
 	{
 
 		/**
 		 * ******************************************************************************************
 		 *                                基础测试
-		 *
 		 * ******************************************************************************************
 		 */
 		/**
@@ -46,7 +42,6 @@
 		/**
 		 * ******************************************************************************************
 		 *                                表格，表单
-		 *
 		 * ******************************************************************************************
 		 */
 		/**
@@ -506,13 +501,13 @@
 									integrationTags::td([
 										/*
 										integrationTags::tdButton([
-											'attr'  => ' btn-success btn-edit' ,
+											'class'  => ' btn-success btn-edit' ,
 											'value' => '编辑' ,
 										]) ,
 										*/
 
 										integrationTags::tdButton([
-											'attr'       => ' btn-info btn-modify-pwd' ,
+											'class'      => ' btn-info btn-modify-pwd' ,
 											'value'      => '修改密码' ,
 											'is_display' => (function() use ($v) {
 												//是管理员的话所有人名字都可以改
@@ -523,7 +518,7 @@
 											})() ,
 										]) ,
 										integrationTags::tdButton([
-											'attr'       => ' btn-info btn-assign-role' ,
+											'class'      => ' btn-info btn-assign-role' ,
 											'value'      => '用户授权' ,
 											'is_display' => (function() use ($v) {
 												//管理员id 和 自己的
@@ -536,7 +531,7 @@
 										'<br>' ,
 
 										integrationTags::tdButton([
-											'attr'       => ' btn-danger btn-delete' ,
+											'class'      => ' btn-danger btn-delete' ,
 											'value'      => '删除' ,
 											'is_display' => (function() use ($v) {
 												//管理员id 和 自己的
@@ -576,7 +571,7 @@
 		/**
 		 * 典型的表单使用示例
 		 * 自己写逻辑请参照admin模块下的写法
-		* @return mixed
+		 * @return mixed
 		 * @throws \ReflectionException
 		 */
 		public function form()
@@ -711,20 +706,20 @@
 									200 ,
 									400 ,
 								] ,
-								'container' => [
+								'container'  => [
 									[
 										'pid'      => 1 ,
 										'name'     => 'province_id' ,
-										'selected' => 11,
+										'selected' => 11 ,
 									] ,
 									[
-										'pid'      => 11,
-										'selected' => 154,
+										'pid'      => 11 ,
+										'selected' => 154 ,
 										'name'     => 'city_id' ,
 									] ,
 									[
-										'pid'      => 154,
-										'selected' => 1307,
+										'pid'      => 154 ,
+										'selected' => 1307 ,
 										'name'     => 'county_id' ,
 									] ,
 								] ,
@@ -802,7 +797,6 @@
 		/**
 		 * ******************************************************************************************
 		 *                                execl导入，导出，邮件，二维码，下载
-		 *
 		 * ******************************************************************************************
 		 */
 
@@ -916,19 +910,17 @@
 			//$downloader = new downloader($file, $saveName);
 			//$downloader->send();
 
-			downloadFile($file , $saveName );
+			downloadFile($file , $saveName);
 		}
 
 
 		/**
 		 * ******************************************************************************************
 		 *                                文件上传
-		 *
 		 * ******************************************************************************************
 		 */
 		/**
 		 * 上传文件测试用的api
-		 *
 		 * @throws \LogicException
 		 * @throws \RuntimeException
 		 * @throws \think\image\Exception
@@ -956,6 +948,7 @@
 					return $result;
 				});
 			}
+
 			return $this->result($res , 1 , '更新成功' , 'json');
 		}
 
@@ -1029,20 +1022,20 @@ function (file, response) {
 AAA
 							,
 						] , [
-							'server' => "'".url('uploadApi')."'" ,
-							'accept' =>json_encode( [
-								'extensions' => 'jpg,jpeg,png,gif',
-								'mimeTypes' => 'image/*',
+							'server' => "'" . url('uploadApi') . "'" ,
+							'accept' => json_encode([
+								'extensions' => 'jpg,jpeg,png,gif' ,
+								'mimeTypes'  => 'image/*' ,
 							]) ,
 						]) ,
 
-					], [
+					] , [
 						'width'      => '6' ,
 						'main_title' => '' ,
 						'sub_title'  => '' ,
 					]) ,
 
-					integrationTags::rowBlock((function()  {
+					integrationTags::rowBlock((function() {
 						return [
 							elementsFactory::doubleLabel('div' , function(&$doms) {
 
@@ -1062,24 +1055,23 @@ AAA
 							} , [
 								'class' => 'test-div' ,
 								'id'    => 'div1' ,
-							]),
+							]) ,
 						];
 
 
-					})(), [
+					})() , [
 						'width'      => '6' ,
 						'main_title' => '' ,
 						'sub_title'  => '' ,
 					]) ,
 				]) ,
-			],[
+			] , [
 				'animate_type' => 'fadeInRight' ,
 				'attr'         => '' ,
 			]);
 
 			return $this->showPage();
 		}
-
 
 
 		/**
@@ -1108,7 +1100,7 @@ AAA
 						*/
 
 
-						integrationTags::upload(SINGLE_FILE, [
+						integrationTags::upload(SINGLE_FILE , [
 							[
 								'title' => '上传须知' ,
 								'items' => [
@@ -1118,7 +1110,7 @@ AAA
 									//'允许的上传格式有.doc .docx .wps' ,
 								] ,
 							] ,
-						], [
+						] , [
 							'beforeFileQueued' => /** @lang javascript */
 								<<<'AAA'
 	function (file) {
@@ -1160,29 +1152,28 @@ AAA
 AAA
 							,
 						] , [
-							'server' => "'".url('uploadApi')."'" ,
+							'server'  => "'" . url('uploadApi') . "'" ,
 							'threads' => 3 ,
 							'accept'  => json_encode([
 								'extensions' => '*' ,
-								'mimeTypes' => '*' ,
+								'mimeTypes'  => '*' ,
 							]) ,
 						]) ,
 
-					], [
+					] , [
 						'width'      => '12' ,
 						'main_title' => '' ,
 						'sub_title'  => '' ,
 					]) ,
 
 				]) ,
-			],[
+			] , [
 				'animate_type' => 'fadeInRight' ,
 				'attr'         => '' ,
 			]);
 
 			return $this->showPage();
 		}
-
 
 
 		/**
@@ -1211,7 +1202,7 @@ AAA
 						*/
 
 
-						integrationTags::upload(MULTI_IMG, [
+						integrationTags::upload(MULTI_IMG , [
 							[
 								'title' => '上传须知' ,
 								'items' => [
@@ -1221,14 +1212,14 @@ AAA
 									'允许的上传格式有.doc .docx .wps' ,
 								] ,
 							] ,
-						], [
+						] , [
 							'beforeFileQueued' => <<<AAA
 	function (file) {
 		var subject = $.trim(file.name);
 		//layer.msg(subject + 123456);
 	}
 AAA
-							,
+,
 
 							'uploadSuccess' => <<<AAA
 	function (file, response) {
@@ -1258,7 +1249,7 @@ AAA
 		}
 	}
 AAA
-							,
+,
 
 							'uploadFinished' => <<<AAA
 	function () {
@@ -1266,26 +1257,25 @@ AAA
 		layer.msg('处理完成111111111');
 	}
 AAA
-							,
-						], [
-							'server'  => "'" . url('uploadApi') . "'" ,
+,
+						] , [
+							'server' => "'" . url('uploadApi') . "'" ,
 						]) ,
 
-					], [
+					] , [
 						'width'      => '12' ,
 						'main_title' => '' ,
 						'sub_title'  => '' ,
 					]) ,
 
 				]) ,
-			],[
+			] , [
 				'animate_type' => 'fadeInRight' ,
 				'attr'         => '' ,
 			]);
 
 			return $this->showPage();
 		}
-
 
 
 		/**
@@ -1306,12 +1296,12 @@ AAA
 								[
 									'class' => 'btn-info ' ,
 									'field' => '继续上传' ,
-									'attr' => 'onclick="location.reload()"' ,
+									'attr'  => 'onclick="location.reload()"' ,
 								] ,
-							],
-						]),
+							] ,
+						]) ,
 
-						integrationTags::upload(MULTI_FILE, [
+						integrationTags::upload(MULTI_FILE , [
 							[
 								'title' => '上传须知' ,
 								'items' => [
@@ -1321,7 +1311,7 @@ AAA
 									'允许的上传格式有.doc .docx .wps' ,
 								] ,
 							] ,
-						], [
+						] , [
 							'beforeFileQueued' => /** @lang javascript */
 								<<<'AAA'
 function (file) {
@@ -1374,7 +1364,7 @@ function (file) {
 	
 }
 AAA
-							,
+,
 
 							'uploadSuccess' => /** @lang javascript */
 								<<<'AAA'
@@ -1404,7 +1394,7 @@ AAA
 			}
 		}
 AAA
-							,
+,
 
 							'uploadFinished' => /** @lang javascript */
 								<<<'AAA'
@@ -1412,13 +1402,13 @@ function () {
 	layer.alert('全部文件处理完成');
 }
 AAA
-							,
+,
 						] , [
 							'server'  => "'" . url('uploadApi') . "'" ,
 							'threads' => 10 ,
 							'accept'  => json_encode([
 								'extensions' => 'doc,docx,wps' ,
-								'mimeTypes'  => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+								'mimeTypes'  => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ,
 							]) ,
 						]) ,
 
@@ -1459,6 +1449,38 @@ AAA
 		public function tab1()
 		{
 			$this->setPageTitle('table测试');
+
+
+			//公用mate
+			$mates[] = elementsFactory::singleLabel('<meta charset="utf-8">');
+			//$mates[] = elementsFactory::singleLabel('<link rel="shortcut icon" href="">');
+			$mates[] = elementsFactory::singleLabel('<!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->');
+			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+			$mates[] = elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+
+			$mates[] = tagConstructor::mate([
+				'name'    => 'viewport' ,
+				'content' => 'width=device-width' ,
+			]);
+			$mates[] = tagConstructor::mate([
+				'name'    => 'keywords' ,
+				'content' => '' ,
+			]);
+			$mates[] = tagConstructor::mate([
+				'name'    => 'description' ,
+				'content' => '' ,
+			]);
+			$mates[] = tagConstructor::mate('name="renderer" content="webkit"');
+
+			$this->makePage()->setHead($mates);
+
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'class' => ' gray-bg' ,
+				]) ,
+			]);
+
+
 			$this->displayContents = elementsFactory::build('basicFrame')->make(function(&$doms , $_this) {
 				$_this->setNodeValue([
 					'animate_type' => 'fadeInRight' ,
@@ -1695,7 +1717,6 @@ AAA
 							 */
 							$doms[] = elementsFactory::tr()->make(function(&$doms , $_this) {
 								$_this->setNodeValue([
-									//'id'   => '{$vo1["id"]}' ,
 									'id' => '1' ,
 									//'attr' => 'data-pid="33"' ,
 								]);
@@ -1755,15 +1776,15 @@ AAA
 								//生成按钮
 								$doms = array_merge($doms , integrationTags::td([
 									integrationTags::tdButton([
-										'attr'  => ' btn-success btn-edit' ,
+										'class' => ' btn-success btn-edit' ,
 										'value' => '编辑' ,
 									]) ,
 									integrationTags::tdButton([
-										'attr'  => ' btn-info btn-detail' ,
+										'class' => ' btn-info btn-detail' ,
 										'value' => '详细' ,
 									]) ,
 									integrationTags::tdButton([
-										'attr'  => ' btn-danger btn-delete' ,
+										'class' => ' btn-danger btn-delete' ,
 										'value' => '删除' ,
 									]) ,
 								]));
@@ -2240,7 +2261,6 @@ css;
 
 			return $this->showPage();
 		}
-
 
 
 	}

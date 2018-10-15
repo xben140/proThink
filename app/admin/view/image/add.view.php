@@ -1,10 +1,8 @@
 <?php
 
-	use builder\elementsFactory;
 	use builder\integrationTags;
 
-	return function($__this)
-	{
+	return function($__this) {
 		$__this->setPageTitle('图片上传');
 
 		$__this->displayContents = integrationTags::basicFrame([
@@ -15,12 +13,12 @@
 							[
 								'class' => 'btn-info ' ,
 								'field' => '继续上传' ,
-								'attr' => 'onclick="location.reload()"' ,
+								'attr'  => 'onclick="location.reload()"' ,
 							] ,
-						],
-					]),
+						] ,
+					]) ,
 
-					integrationTags::upload(MULTI_IMG, [
+					integrationTags::upload(MULTI_IMG , [
 						[
 							'title' => '上传须知' ,
 							'items' => [
@@ -30,14 +28,13 @@
 								'允许的上传格式有.doc .docx .wps' ,
 							] ,
 						] ,
-					], [
+					] , [
 						'beforeFileQueued' => /** @lang javascript */
 							<<<'AAA'
 function (file) {
 	var subject = $.trim(file.name);
 }
-AAA
-						,
+AAA ,
 
 						'uploadSuccess' => /** @lang javascript */
 							<<<'AAA'
@@ -67,9 +64,7 @@ function (file, response) {
 		//服务器处理出错
 	}
 }
-AAA
-						,
-
+AAA ,
 
 
 						'uploadFinished' => /** @lang javascript */
@@ -77,14 +72,13 @@ AAA
 function () {
 	layer.alert('全部文件处理完成');
 }
-AAA
-						,
+AAA ,
 					] , [
 						'server'  => "'" . url('add') . "'" ,
 						'threads' => 10 ,
 						'accept'  => json_encode([
 							'extensions' => 'jpg,jpeg,gif,png' ,
-							'mimeTypes' => 'image/*'
+							'mimeTypes'  => 'image/*'
 						]) ,
 					]) ,
 
@@ -97,8 +91,6 @@ AAA
 		] , [
 			'animate_type' => 'fadeInRight' ,
 		]);
-
-
 
 
 	};

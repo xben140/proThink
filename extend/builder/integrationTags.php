@@ -199,7 +199,8 @@
 			$doms = [];
 
 			$doms[] = elementsFactory::button()->make(function(&$doms , $_this) use ($params) {
-				$_this->setNodeValue($params);
+				//$_this->setNodeValue($params);
+				$_this->setAttr($params);
 			});
 
 			isset($params['is_display']) && !$params['is_display'] && ($doms = []);

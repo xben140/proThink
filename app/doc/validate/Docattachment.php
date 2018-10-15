@@ -11,7 +11,7 @@
 			//'module'     => 'alpha|require' ,
 			//'controller' => 'alpha|require' ,
 			//'action'     => 'alpha|require' ,
-			'remark'       => 'require' ,
+			'remark' => 'require' ,
 		];
 
 		// 验证提示

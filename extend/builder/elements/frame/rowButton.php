@@ -71,7 +71,7 @@ Css;
 		 */
 		function setButton($menu = [])
 		{
-			$tmp = '<button type="button" class="btn __CLASS__" __DATA__  __ATTR__>__FIELD__</button>' . "\r\n";
+			$tmp = '<button type="button" class="btn __CLASS__" __DATA__  __ATTR__ __PARAM__ __OPTIONS__>__FIELD__</button>' . "\r\n";
 			$dataTemp = 'data-_K_="_V_"';
 			$str = '';
 
@@ -101,10 +101,15 @@ Css;
 					$replacement['__ATTR__'] = '';
 					$replacement['__SRC__'] = '';
 					$replacement['__TITLE__'] = '';
+					$replacement['__PARAM__'] = '';
+					$replacement['__OPTIONS__'] = '';
 
 					isset($v['attr']) && $v['attr'] && ($replacement['__ATTR__'] = $v['attr']);
 					isset($v['src']) && $v['src'] && ($replacement['__SRC__'] = $v['src']);
 					isset($v['title']) && $v['title'] && ($replacement['__TITLE__'] = $v['title']);
+					isset($v['param']) && $v['param'] && ($replacement['__PARAM__'] = json_encode($v['param']));
+					isset($v['options']) && $v['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__', ['__OPTIONS__' => json_encode($v['options']),]));
+
 					$str .= strtr($tmp , $replacement);
 				}
 				$str .= '</div>' . "\r\n";
@@ -143,7 +148,7 @@ Css;
 			 */
 			$contents = <<<'CONTENTS'
 			<div class="row">
-				<div class="col-sm-4 m-b-xs">
+				<div class="col-sm-12 m-b-xs">
 					<button type="button" class="btn btn-primary" onclick="refresh_page()">刷新页面</button>
 					<button type="button" class="btn btn-primary" onclick="rowReload()">重置搜索条件</button>
 					<a target="_blank" href="#" class="btn btn-primary ">新窗口中打开</a>

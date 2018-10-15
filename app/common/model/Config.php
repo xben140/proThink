@@ -45,7 +45,7 @@
 
 		//新增时自动验证
 		protected $insert = [
-			'status' => 1 ,
+			'status'   => 1 ,
 			'is_const' => 0 ,
 		];
 
@@ -73,7 +73,6 @@
 
 		/**
 		 *  获取当前有用的配置，分配到系统
-		 *
 		 * @return false|\PDOStatement|string|\think\Collection
 		 * @throws \think\db\exception\DataNotFoundException
 		 * @throws \think\db\exception\ModelNotFoundException

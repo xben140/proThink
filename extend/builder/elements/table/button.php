@@ -52,17 +52,46 @@ Css;
 		
 js;
 
-
 		/**
-		 * 设置字段头
+		 * 设置功能按钮
 		 *
-		 * @param string $str
-		 * function setPagination($str = '')
-		 * {
-		 * //<ul class="pagination"> <li class="disabled"> <span>«</span> </li> <li class="active"> <span>1</span> </li> <li> <a href="#">2</a> </li> <li> <a href="#">»</a> </li> </ul>
-		 * $this->replaceTag(static::makeNodeName('pagination') , $str);
-		 * }
+		 * @param array $attr
 		 */
+		function setAttr($attr = [])
+		{
+			$tmp = '<button type="button" class="btn btn-xs __CLASS__" __DATA__  __ATTR__ __PARAM__ __OPTIONS__>__FIELD__</button>';
+			$dataTemp = 'data-_K_="_V_"';
+			$str = '';
+
+			$t = '';
+			if(isset($attr['data']) && is_array($attr['data']))
+			{
+				foreach ($attr['data'] as $k2 => $v2)
+				{
+					$t .= ' ' . strtr($dataTemp , [
+							'_K_' => $k2 ,
+							'_V_' => $v2 ,
+						]) . ' ';
+				}
+			}
+
+			$replacement['__DATA__'] = $t;
+			$replacement['__FIELD__'] = $attr['value'];
+			$replacement['__CLASS__'] = $attr['class'];
+			$replacement['__ATTR__'] = '';
+			$replacement['__PARAM__'] = '';
+			$replacement['__OPTIONS__'] = '';
+
+			isset($attr['attr']) && $attr['attr'] && ($replacement['__ATTR__'] = $attr['attr']);
+			isset($attr['param']) && $attr['param'] && ($replacement['__PARAM__'] = strtr('data-params=__DATA___', ['__DATA___' => json_encode($attr['param']),]));
+			isset($attr['options']) && $attr['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__', ['__OPTIONS__' => json_encode($attr['options']),]));
+
+			$str .= strtr($tmp , $replacement);
+
+			if(isset($attr['is_display']) && (!$attr['is_display'])) $str = '';
+
+			$this->replaceTag(static::makeNodeName('button') , $str);
+		}
 
 
 		/**
@@ -93,9 +122,7 @@ js;
 			 * ----------------------------------------自定义内容
 			 */
 			$contents = <<<'CONTENTS'
-						
-			<button type="button" class="btn btn-xs  <!-- ~~~attr~~~ -->" ><!-- ~~~value~~~ --></button>
-
+			<!-- ~~~button~~~ -->
 CONTENTS;
 			/**
 			 *--------------------------------------------------------------------------

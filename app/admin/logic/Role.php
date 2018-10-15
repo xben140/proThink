@@ -15,9 +15,9 @@
 					function(&$param) {
 						//看有没有角色有这个权限，有的话就不能删除
 						$res = db('role_privilege')->where([
-								'role_id'   => [
+								'role_id' => [
 									'in' ,
-									$param['ids'],
+									$param['ids'] ,
 								] ,
 							])->delete() !== false;
 
@@ -33,7 +33,7 @@
 		public function getFormatedData($isPushDefault = 0)
 		{
 			$roles = $this->getActivedData([
-				'no_global_admin' => 1,
+				'no_global_admin' => 1 ,
 			]);
 
 			$roles_ = array_map(function($v) {
@@ -59,7 +59,7 @@
 		 *
 		 * @return mixed
 		 */
-		public function isUserHasRoles($uid, $roles = [])
+		public function isUserHasRoles($uid , $roles = [])
 		{
 			$ids = $this->model_->getRoleIdByUserId($uid);
 
@@ -90,6 +90,7 @@
 
 			//当前角色对应的权限id
 			$currPrivilegesId = $this->model__admin_Privilege->getPrivilegeIdByRoleid([$id]);
+
 			return $currPrivilegesId;
 		}
 
@@ -173,9 +174,9 @@
 				{
 					//不查全站管理
 					case 'no_global_admin' :
-						$v == 1 &&  $where[$this->model_::makeSelfAliasField('id')] = [
+						$v == 1 && $where[$this->model_::makeSelfAliasField('id')] = [
 							'<>' ,
-							'1',
+							'1' ,
 						];
 						break;
 

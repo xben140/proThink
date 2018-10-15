@@ -40,16 +40,16 @@
 								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 							] ,
 
-					/*		[
-								'class'      => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
-								'field'      => '批量启用' ,
-								'is_display' => 0 ,
-							] ,
-							[
-								'class'      => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
-								'field'      => '批量禁用' ,
-								'is_display' => 0 ,
-							] ,*/
+							/*		[
+										'class'      => 'btn-primary  multi-op multi-op-toggle-status-enable' ,
+										'field'      => '批量启用' ,
+										'is_display' => 0 ,
+									] ,
+									[
+										'class'      => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
+										'field'      => '批量禁用' ,
+										'is_display' => 0 ,
+									] ,*/
 
 
 							[
@@ -114,11 +114,11 @@
 						 * 设置js请求api
 						 */
 						$_this->setApi([
-							'deleteUrl'     => url('delete') ,
-							'setFieldUrl'   => url('setField') ,
-							'detailUrl'     => url('detail') ,
-							'editUrl'       => url('edit') ,
-							'addUrl'        => url('add') ,
+							'deleteUrl'   => url('delete') ,
+							'setFieldUrl' => url('setField') ,
+							'detailUrl'   => url('detail') ,
+							'editUrl'     => url('edit') ,
+							'addUrl'      => url('add') ,
 
 							'setDocInfoUrl' => url('setDocInfo') ,
 						]);
@@ -128,7 +128,7 @@
 						 * 设置表格搜索框
 						 *searchFormCol
 						 */
-						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this)  use($__this){
+						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($__this) {
 
 							//每页显示条数
 							$t = integrationTags::searchFormCol([
@@ -246,8 +246,8 @@
 										'field_name' => '稿件类型 :' ,
 										'selected'   => $v['category'] ,
 										'options'    => $__this->logic->model_::$articleCategory ,
-										'disabled'   => 1,
-										'is_display' => 1,
+										'disabled'   => 1 ,
+										'is_display' => 1 ,
 									]) ,
 
 									integrationTags::tdSelect([
@@ -255,19 +255,19 @@
 										'field_name' => '内容来源 :' ,
 										'selected'   => $v['source_type'] ,
 										'options'    => $__this->logic->model_::$articleSourceType ,
-										'disabled'   => 1,
-										'is_display' => 1,
+										'disabled'   => 1 ,
+										'is_display' => 1 ,
 									]) ,
 									'<br/>' ,
 
 									integrationTags::tdSwitcher([
 										'params'  => [
-											'checked'          => $v['is_published'] ? 'checked' : '' ,
-											'name'             => 'is_published' ,
-											'change_callback'  => 'switcherUpdateField' ,
+											'checked'         => $v['is_published'] ? 'checked' : '' ,
+											'name'            => 'is_published' ,
+											'change_callback' => 'switcherUpdateField' ,
 											//'success_callback' => 'refresh_page' ,
-											'disabled'         => '',
-											'is_display'       => 1,
+											'disabled'        => '' ,
+											'is_display'      => 1 ,
 										] ,
 										'name'    => '是否发布' ,
 										'is_auto' => '1' ,
@@ -276,12 +276,12 @@
 
 									integrationTags::tdSwitcher([
 										'params'  => [
-											'checked'          => $v['is_top'] ? 'checked' : '' ,
-											'name'             => 'is_top' ,
-											'change_callback'  => 'switcherUpdateField' ,
+											'checked'         => $v['is_top'] ? 'checked' : '' ,
+											'name'            => 'is_top' ,
+											'change_callback' => 'switcherUpdateField' ,
 											//'success_callback' => 'refresh_page' ,
-											'disabled'         => '',
-											'is_display'       => 1,
+											'disabled'        => '' ,
+											'is_display'      => 1 ,
 										] ,
 										'name'    => '是否置顶' ,
 										'is_auto' => '1' ,
@@ -295,7 +295,7 @@
 									integrationTags::tdTextarea([
 										'style'    => 'width:100%;height:100px' ,
 										//'name'     => 'remark' ,
-										'editable' => 1,
+										'editable' => 1 ,
 										'field'    => 'abstruct' ,
 										//'reg'      => '/^\d{1,4}$/' ,
 										//'msg'      => '请填写合法手机号码' ,
@@ -307,15 +307,15 @@
 								integrationTags::td([
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-danger btn-delete' ,
+										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
-										'is_display' => 1,
+										'is_display' => 1 ,
 									]) ,
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-info btn-preview' ,
+										'class'      => ' btn-info btn-preview' ,
 										'value'      => '预览' ,
-										'is_display' => 1,
+										'is_display' => 1 ,
 									]) ,
 
 								]) ,

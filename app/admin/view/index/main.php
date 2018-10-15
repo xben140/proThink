@@ -9,8 +9,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:$adminInfo['user'] }</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>
@@ -23,8 +23,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:$adminInfo['nickname'] }</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>
@@ -38,8 +38,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:$adminInfo['login_count'] }</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>
@@ -52,8 +52,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:$adminInfo['last_login_ip'] }</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>
@@ -67,8 +67,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:formatTime($adminInfo['last_login_time'] , 0)}</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>
@@ -81,8 +81,8 @@
 			</div>
 			<div class="ibox-content">
 				<h1 class="no-margins">{:implode(',' , getAdminSessionInfo(SESSOIN_TAG_ROLE_NAME))}</h1>
-<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
-<!--				<small>总收入</small>-->
+				<!--				<div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>-->
+				<!--				<small>总收入</small>-->
 			</div>
 		</div>
 	</div>

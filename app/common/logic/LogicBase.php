@@ -23,7 +23,7 @@
 		 * @var null
 		 */
 		//回收站删除前置回调
-		public $beforeDelete= null;
+		public $beforeDelete = null;
 		//回收站删除后置回调
 		public $afterDelete = null;
 
@@ -196,7 +196,7 @@
 		 *
 		 * @return array
 		 */
-		public function delete($param , $beforeClosureList = null , $afterClosureList = null, $isTurlyDelte=false)
+		public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
 		{
 			//TODO 执行前置钩子，根据结果决定是否删除
 			//TODO 把删除语句加入闭包队列中最后一个都通过才删除
@@ -212,7 +212,7 @@
 
 			//处理方法
 			$closureList[] = [
-				function(&$globalVariable) use($isTurlyDelte){
+				function(&$globalVariable) use ($isTurlyDelte) {
 					$where = [
 						'id' => [
 							'in' ,
@@ -510,14 +510,15 @@
 				 * 设置js请求api
 				 */
 				$_this->setApi([
-					'deleteUrl'     => url('delete') ,
-					'setFieldUrl'   => url('setField') ,
-					'detailUrl'     => url('detail') ,
-					'editUrl'       => url('edit') ,
-					'addUrl'        => url('add') ,
-					'viewInfoUrl'   => url('viewInfo') ,
-					'detailInfoUrl' => url('detailInfo') ,
-					'setItemUrl'    => url('setItem') ,
+					'deleteUrl'   => url('delete') ,
+					'setFieldUrl' => url('setField') ,
+					'detailUrl'   => url('detail') ,
+					'editUrl'     => url('edit') ,
+					'addUrl'      => url('add') ,
+
+
+					'viewInfoUrl' => url('viewInfo') ,
+					'setItemUrl'  => url('setItem') ,
 				]);
 
 				foreach ($data['data'] as $k => $v)
@@ -574,19 +575,26 @@
 						integrationTags::td([
 
 							integrationTags::tdButton([
-								'attr'       => ' btn-info btn-view-detail' ,
 								'value'      => '详细数据' ,
+								'class'      => ' btn-info btn-open-pop' ,
+								'data'       => [
+									'src'   => url('detailInfo') ,
+									'title' => '详细数据' ,
+								] ,
+								'param'      => [
+									'id' => $v['id'] ,
+								] ,
 								'is_display' => 1 ,
 							]) ,
 
 							integrationTags::tdButton([
-								'attr'       => ' btn-success btn-recover' ,
+								'class'      => ' btn-success btn-recover' ,
 								'value'      => '恢复记录' ,
 								'is_display' => 1 ,
 							]) ,
 
 							integrationTags::tdButton([
-								'attr'       => ' btn-danger btn-complete-delete' ,
+								'class'      => ' btn-danger btn-complete-delete' ,
 								'value'      => '彻底删除' ,
 								'is_display' => 1 ,
 							]) ,
@@ -709,12 +717,13 @@
 		 *
 		 * @return int
 		 */
-		public function deleteItem($ids, $tableId)
+		public function deleteItem($ids , $tableId)
 		{
-			$info = $this->getInfo(['id' => $tableId,]);
+			$info = $this->getInfo(['id' => $tableId ,]);
 			//$logic = $this->{'logic__' . $info['tab_db']};
 			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
-			return $logic->delete(['ids' => $ids,] , $logic->beforeDelete , $logic->afterDelete, 1);
+
+			return $logic->delete(['ids' => $ids ,] , $logic->beforeDelete , $logic->afterDelete , 1);
 		}
 
 		/**
@@ -730,6 +739,7 @@
 			$info = $this->getInfo(['id' => $tableId ,]);
 			//$logic = $this->{'logic__' . $info['tab_db']};
 			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
+
 			return $logic->updateField([
 				'field' => 'status' ,
 				'val'   => '0' ,

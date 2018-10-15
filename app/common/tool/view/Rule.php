@@ -22,7 +22,7 @@
 		public function getRule($uri , $status , $element)
 		{
 			$rule = $this->getRules($uri);
-			$results = $this->parseRules($rule , $status, $element);
+			$results = $this->parseRules($rule , $status , $element);
 
 			return $results;
 		}
@@ -36,7 +36,7 @@
 		 *
 		 * @return array
 		 */
-		public function parseRules($rules , $status, $element): array
+		public function parseRules($rules , $status , $element): array
 		{
 
 			$tempDatas = $rules['data'];
@@ -60,7 +60,7 @@
 			$res = [];
 			if(is_array($t))
 			{
-				$res = $t ;
+				$res = $t;
 			}
 			elseif(is_string($t))
 			{

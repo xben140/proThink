@@ -1,10 +1,9 @@
 <?php
 
 	use builder\elementsFactory;
-	use builder\integrationTags;
 	use builder\tagConstructor;
 
-	return function($__this){
+	return function($__this) {
 
 		$privilege = getAdminSessionInfo(SESSOIN_TAG_PRIVILEGES);;
 
@@ -22,7 +21,7 @@
 		]);
 
 		//---------------------------- 主体结构
-		$__this->displayContents = elementsFactory::build('baseFrameWork')->make(function(&$doms , $_this) use($__this){
+		$__this->displayContents = elementsFactory::build('baseFrameWork')->make(function(&$doms , $_this) use ($__this) {
 
 			$_this->setNodeValue([
 				'logout_url'   => url('admin/login/logout') ,
@@ -51,7 +50,6 @@
 
 			$_this->setMeta([
 
-
 				[
 					'field' => '账号 : ' ,
 					'value' => $__this->adminInfo['user'] ,
@@ -76,7 +74,6 @@
 					'field' => '角色 : ' ,
 					'value' => implode(',' , getAdminSessionInfo(SESSOIN_TAG_ROLE_NAME)) ,
 					//'value' => implode(',', $__this->authClass->getRolesFieldColumn('name')),
-
 				] ,
 
 
@@ -104,7 +101,7 @@
 
 				[
 					'field' => '修改资料' ,
-					'value' => url('admin/user/modifyinfo'),
+					'value' => url('admin/user/modifyinfo') ,
 				] ,
 
 			]);

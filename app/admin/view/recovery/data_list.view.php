@@ -39,7 +39,7 @@
 						] ,
 					]) ,
 
-					elementsFactory::staticTable()->make(function(&$doms , $_this)use($__this) {
+					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 
 						//$data = $__this->logic->dataList($__this->param);
 						$data = $__this->logic->dataListWithPagination($__this->param);
@@ -84,14 +84,13 @@
 							'detailUrl'   => url('detail') ,
 							'editUrl'     => url('edit') ,
 							'addUrl'      => url('add') ,
-							'viewInfoUrl' => url('viewInfo') ,
 						]);
 
 						/**
 						 * 设置表格搜索框
 						 *searchFormCol
 						 */
-						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this)use($__this) {
+						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($__this) {
 
 							//角色名
 							$t = integrationTags::searchFormCol([
@@ -222,19 +221,19 @@
 
 
 								/*
-																	//排序
-																	integrationTags::td([
-																		integrationTags::tdSimple([
-																			'name'     => '' ,
-																			'value'    => $v['order'] ,
-																			'field'    => 'order' ,
-																			'reg'      => '/^\d+$/' ,
-																			'msg'      => '必须为数字，确保前后无空格' ,
-																			'editable' => (function() use ($v) {
-																				return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-																			})() ,
-																		]) ,
-																	]) ,
+									//排序
+									integrationTags::td([
+										integrationTags::tdSimple([
+											'name'     => '' ,
+											'value'    => $v['order'] ,
+											'field'    => 'order' ,
+											'reg'      => '/^\d+$/' ,
+											'msg'      => '必须为数字，确保前后无空格' ,
+											'editable' => (function() use ($v) {
+												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+											})() ,
+										]) ,
+									]) ,
 								*/
 
 								//添加时间
@@ -261,43 +260,50 @@
 								]) ,
 
 								/*
-																	//状态
-																	integrationTags::td([
-																		integrationTags::tdSwitcher([
-																			'params'  => [
-																				'checked'         => $v['status'] ? 'checked' : '' ,
-																				'name'            => 'status' ,
-																				'change_callback' => 'switcherUpdateField' ,
-																				//switcherUpdateFieldConfirm
-																				'is_display'      => (function() use ($v) {
-																					return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-																				})() ,
-																			] ,
-																			'name'    => '' ,
-																			'is_auto' => '1' ,
+									//状态
+									integrationTags::td([
+										integrationTags::tdSwitcher([
+											'params'  => [
+												'checked'         => $v['status'] ? 'checked' : '' ,
+												'name'            => 'status' ,
+												'change_callback' => 'switcherUpdateField' ,
+												//switcherUpdateFieldConfirm
+												'is_display'      => (function() use ($v) {
+													return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+												})() ,
+											] ,
+											'name'    => '' ,
+											'is_auto' => '1' ,
 
-																		]) ,
-																	]) ,
-																	*/
+										]) ,
+									]) ,
+									*/
 
 								//操作
 								integrationTags::td([
 									/*
 									integrationTags::tdButton([
-										'attr'       => ' btn-success btn-edit' ,
+										'class'       => ' btn-success btn-edit' ,
 										'value'      => '编辑' ,
 										'is_display' => 1,
 									]) ,*/
 
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-info btn-view-info' ,
 										'value'      => '查看数据' ,
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('viewInfo') ,
+											'title' => '查看数据' ,
+										] ,
+										'param'      => [
+											'id' => $v['id'] ,
+										] ,
 										'is_display' => 1 ,
 									]) ,
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-danger btn-delete' ,
+										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
 										'is_display' => 1 ,
 									]) ,
@@ -318,7 +324,6 @@
 				]) ,
 			]) ,
 		]);
-
 
 
 	};

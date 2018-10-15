@@ -15,8 +15,7 @@
 		}
 
 		//自动完成[新增和修改时都会执行]
-		protected $auto = [
-		];
+		protected $auto = [];
 
 		//新增时自动验证
 		protected $insert = [
@@ -28,8 +27,7 @@
 			'user_type'        => 1 ,
 		];
 
-		public $update = [
-			//'status' ,
+		public $update = [//'status' ,
 		];
 
 
@@ -44,18 +42,18 @@
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		final public function getUserInfoByUsername($username, $field='*')
+		final public function getUserInfoByUsername($username , $field = '*')
 		{
 
 			$where = [
 				'user' => [
 					'=' ,
-					$username
+					$username,
 				] ,
 			];
 
-			$condition=[
-				'where' => $where,
+			$condition = [
+				'where' => $where ,
 				'field' => $field ,
 			];
 
@@ -75,9 +73,9 @@
 		 * @throws \think\db\exception\ModelNotFoundException
 		 * @throws \think\exception\DbException
 		 */
-		final public function getUserInfoByUserId($id, $field='*')
+		final public function getUserInfoByUserId($id , $field = '*')
 		{
-			return $this->getRowById($id, $field);
+			return $this->getRowById($id , $field);
 		}
 
 
@@ -97,7 +95,6 @@
 
 			return $this->isValidateUser($info->toArray());
 		}
-
 
 
 		/**

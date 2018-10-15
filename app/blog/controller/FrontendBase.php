@@ -6,7 +6,6 @@
 
 	/**
 	 * 前台基类
-	 *
 	 * Class BlogBase
 	 * @package app\portal\controller
 	 */

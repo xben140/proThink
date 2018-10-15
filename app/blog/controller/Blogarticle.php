@@ -14,10 +14,10 @@
 			$this->initLogic();
 			if(IS_POST)
 			{
-				$this->jump($this->logic->add($this->param_post, [
+				$this->jump($this->logic->add($this->param_post , [
 					[
 						function(&$param) {
-							$param['uid'] = getAdminSessionInfo('user', 'id');
+							$param['uid'] = getAdminSessionInfo('user' , 'id');
 						} ,
 						[] ,
 					] ,

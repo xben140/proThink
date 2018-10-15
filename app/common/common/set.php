@@ -131,7 +131,7 @@
 
 			if(!isset($result[0]) || !isset($result[1]))
 			{
-				$msg = '不正确的命名 : '.$name ;
+				$msg = '不正确的命名 : ' . $name;
 				exception($msg);
 			}
 
@@ -147,9 +147,8 @@
 			$res[2] = $layer;
 			$res[3] = ucwords($res[3]);
 			$c = implode('\\' , $res);
-			$t = class_exists($c) ?
-				$layer . '__' . $res[1] . '_' . $res[3] :
-				$layer . '__common_' . $res[3];
+			$t = class_exists($c) ? $layer . '__' . $res[1] . '_' . $res[3] : $layer . '__common_' . $res[3];
+
 			return $t;
 		}
 	}

@@ -21,7 +21,7 @@
 
 		//新增时自动验证
 		protected $insert = [
-			'ip'         => IP ,
+			'ip' => IP ,
 		];
 
 		public $update = [//'status' ,

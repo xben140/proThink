@@ -343,6 +343,7 @@
 		} catch (\Exception $e)
 		{
 			$err = $e->getMessage();
+
 			return false;
 		}
 	}

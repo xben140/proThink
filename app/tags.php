@@ -10,28 +10,28 @@
 // +---------------------------------------------------------------------+
 
 // 行为目录路径
-	define('BEHAVIOR_PATH', 'app\\common\\behavior\\');
+	define('BEHAVIOR_PATH' , 'app\\common\\behavior\\');
 
 	$data = [
 		// 模块初始化
-		'module_init'  => [],
+		'module_init'  => [] ,
 		// 操作开始执行
-		'action_begin' => [],
+		'action_begin' => [] ,
 		// 视图内容过滤
-		'view_filter'  => [],
+		'view_filter'  => [] ,
 		// 日志写入
-		'log_write'    => [],
+		'log_write'    => [] ,
 	];
 
 	$data['app_init'] = [
-		BEHAVIOR_PATH . 'InitBase',
+		BEHAVIOR_PATH . 'InitBase' ,
 		//BEHAVIOR_PATH . 'InitHook',
 	];
 	$data['app_begin'] = [
-		BEHAVIOR_PATH . 'AppBegin',
+		BEHAVIOR_PATH . 'AppBegin' ,
 	];
 	$data['app_end'] = [
-		BEHAVIOR_PATH . 'AppEnd',
+		BEHAVIOR_PATH . 'AppEnd' ,
 	];
 
 	return $data;

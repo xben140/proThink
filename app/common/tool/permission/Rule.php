@@ -8,7 +8,8 @@
 	{
 
 		/**
-		 *	验证是否访问的地址有没有权限
+		 *    验证是否访问的地址有没有权限
+		 *
 		 * @param $currentAction
 		 * @param $menuMap
 		 *
@@ -21,7 +22,8 @@
 
 
 		/**
-		 *	验证是否访问的地址有没有权限
+		 *    验证是否访问的地址有没有权限
+		 *
 		 * @param $currentAction
 		 * @param $menuMap
 		 *

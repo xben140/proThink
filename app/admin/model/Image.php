@@ -18,17 +18,14 @@
 		}
 
 		//自动完成[新增和修改时都会执行]
-		protected $auto = [
-			//'arrange_time' ,
+		protected $auto = [//'arrange_time' ,
 		];
 
 		//新增时自动验证
-		protected $insert = [
-			//'is_confirm' ,
+		protected $insert = [//'is_confirm' ,
 		];
 
-		protected $update = [
-			//'status' ,
+		protected $update = [//'status' ,
 		];
 
 
@@ -40,7 +37,7 @@
 		 *
 		 * @return array|false|\PDOStatement|string|\think\Model
 		 */
-		public function isFileExists($field, $value)
+		public function isFileExists($field , $value)
 		{
 			$where = [
 				$field => [
@@ -49,8 +46,9 @@
 				] ,
 			];
 			$this->getAvailableOnly();
+
 			return $this->findData([
-				'where' => $where,
+				'where' => $where ,
 			]);
 		}
 
@@ -68,11 +66,11 @@
 		 *
 		 *
 		 * */
-/*
-		public function setIsConfirmAttr($val)
-		{
-			return !is_null($val) ? $val : 0;
-		}*/
+		/*
+				public function setIsConfirmAttr($val)
+				{
+					return !is_null($val) ? $val : 0;
+				}*/
 
 	}
 

@@ -22,8 +22,7 @@
 		];
 
 		//新增时自动验证
-		protected $insert = [
-			//'status' ,
+		protected $insert = [//'status' ,
 		];
 
 		protected $update = [
@@ -44,7 +43,6 @@
 		 *
 		 *
 		 * */
-
 
 
 	}

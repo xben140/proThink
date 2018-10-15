@@ -2,14 +2,16 @@
 
 	namespace app\admin\controller;
 
+	use app\common\controller\ControllerBase;
 	use app\common\tool\view\Auth as AuthTool;
 	use auth\Auth;
+	use builder\elementsFactory;
+	use builder\tagConstructor;
 
-	class PermissionAuth extends Base
+	class PermissionAuth extends ControllerBase
 	{
 		//admin信息
 		public $adminInfo;
-
 
 		//当前uir admin/index/index
 		public $currentUri;
@@ -24,6 +26,81 @@
 		{
 			parent::__construct();
 		}
+
+
+		public function initModuleStaticResource()
+		{
+			parent::initModuleStaticResource();
+
+			/**
+			 * 设置head
+			 */
+			$this->makePage()->setHead([
+				tagConstructor::mate([
+					'name'    => 'viewport' ,
+					'content' => 'width=device-width' ,
+				]) ,
+				tagConstructor::mate([
+					'name'    => 'keywords' ,
+					'content' => '' ,
+				]) ,
+				tagConstructor::mate([
+					'name'    => 'description' ,
+					'content' => '' ,
+				]) ,
+				elementsFactory::singleLabel('<meta charset="utf-8">') ,
+				elementsFactory::singleLabel('<link rel="shortcut icon" href="">') ,
+				elementsFactory::singleLabel('<!--[if lt IE 9]><meta http-equiv="refresh" content="0;ie.html" /><![endif]-->') ,
+				elementsFactory::singleLabel('<meta name="viewport" content="width=device-width, initial-scale=1.0">') ,
+				tagConstructor::mate('name="renderer" content="webkit"') ,
+			]);
+
+			/**
+			 * 设置link标签
+			 */
+			$this->makePage()->setCss(tagConstructor::css([
+				'__HPLUS__css/bootstrap.min14ed.css' ,
+				'__HPLUS__css/font-awesome.min93e3.css' ,
+				"__HPLUS__css/animate.min.css" ,
+				"__HPLUS__css/style.min862f.css" ,
+				'__STATIC__/css/custom.css' ,
+			]));
+
+			/**
+			 * 设置head里的js
+			 */
+			$this->makePage()->setJsLib(tagConstructor::js([
+				'__HPLUS__js/jquery.min.js' ,
+				'__HPLUS__js/bootstrap.min.js' ,
+				'__HPLUS__js/content.min.js' ,
+				'__HPLUS__js/plugins/layer/layer.js' ,
+			]));
+
+			/**
+			 * 设置body之前的js始终加在setJsInvoke上面
+			 */
+			$this->makePage()->setScript(tagConstructor::js([
+				'__STATIC__/js/custom.js' ,
+			]));
+
+			/**
+			 * 设置body标签闭合之前的js
+			 */
+			$this->makePage()->setJsInvoke(tagConstructor::js([
+				'__CONTROLLER_STATIC_URL__/js/custom.js' ,
+			]));
+
+
+			/**
+			 * 设置body属性
+			 */
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'class' => ' gray-bg' ,
+				]) ,
+			]);
+		}
+
 
 		/**
 		 * @throws \Exception
@@ -174,19 +251,19 @@
 		 */
 		protected function registerRoleEvent($option = [])
 		{
-/*
-			[
-				'roles'    => [
-					1 ,
-					2,
-				] ,
-				'callback' => function() { } ,
-				'params'   => [
-					'a' ,
-					'b' ,
-				] ,
-			];
-*/
+			/*
+						[
+							'roles'    => [
+								1 ,
+								2,
+							] ,
+							'callback' => function($a, $b) { } ,
+							'params'   => [
+								'a' ,
+								'b' ,
+							] ,
+						];
+			*/
 
 			foreach ($option as $k => $v)
 			{

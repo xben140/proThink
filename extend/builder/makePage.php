@@ -17,15 +17,15 @@
 
 
 		/*
- *
- *
- *
- * 公共属性
- *
- *
- *
- *
- * */
+		 *
+		 *
+		 *
+		 * 公共属性
+		 *
+		 *
+		 *
+		 *
+		 * */
 
 		/**
 		 * 使用外界模板路径
@@ -59,10 +59,10 @@
 		 * @var array
 		 */
 		public $jsLib = [
-			'__HPLUS__js/jquery.min.js' ,
-			'__HPLUS__js/bootstrap.min.js' ,
-			'__HPLUS__js/content.min.js' ,
-			'__HPLUS__js/plugins/layer/layer.js' ,
+			//'__HPLUS__js/jquery.min.js' ,
+			//'__HPLUS__js/bootstrap.min.js' ,
+			//'__HPLUS__js/content.min.js' ,
+			//'__HPLUS__js/plugins/layer/layer.js' ,
 		];
 
 		/**
@@ -70,11 +70,11 @@
 		 * @var array
 		 */
 		public $css = [
-			'__HPLUS__css/bootstrap.min14ed.css' ,
-			'__HPLUS__css/font-awesome.min93e3.css' ,
-			"__HPLUS__css/animate.min.css" ,
-			"__HPLUS__css/style.min862f.css" ,
-			'__STATIC__/css/custom.css' ,
+			//'__HPLUS__css/bootstrap.min14ed.css' ,
+			//'__HPLUS__css/font-awesome.min93e3.css' ,
+			//"__HPLUS__css/animate.min.css" ,
+			//"__HPLUS__css/style.min862f.css" ,
+			//'__STATIC__/css/custom.css' ,
 		];
 
 		/**
@@ -82,7 +82,7 @@
 		 * @var array
 		 */
 		public $jsScript = [
-			'__STATIC__/js/custom.js' ,
+			//'__STATIC__/js/custom.js' ,
 		];
 
 		/*
@@ -185,7 +185,7 @@
 		 * @param $type
 		 * @param $uri
 		 */
-		private function mergeStatic($type , $uri)
+		public function mergeStatic($type , $uri)
 		{
 			switch (strtolower($type))
 			{
@@ -215,7 +215,6 @@
 			$css[] = tagConstructor::css($this->css);
 			$jsLib[] = tagConstructor::js($this->jsLib);
 			$jsScript[] = tagConstructor::js($this->jsScript);
-
 
 			$this->setCss($css)->setJsLib($jsLib)->setJsInvoke($jsScript)->setScript($this->customJsPool)->setCss($this->customCssPool);;
 		}

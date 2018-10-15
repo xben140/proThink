@@ -97,13 +97,11 @@
 						 * 设置js请求api
 						 */
 						$_this->setApi([
-							'deleteUrl'               => url('delete') ,
-							'setFieldUrl'             => url('setField') ,
-							'detailUrl'               => url('detail') ,
-							'editUrl'                 => url('edit') ,
-							'addUrl'                  => url('add') ,
-							'editPwdUrl'              => url('editPwd') ,
-							'assignRolesUrl'          => url('assignRoles') ,
+							'deleteUrl'   => url('delete') ,
+							'setFieldUrl' => url('setField') ,
+							'detailUrl'   => url('detail') ,
+							'editUrl'     => url('edit') ,
+							'addUrl'      => url('add') ,
 						]);
 
 						/**
@@ -421,13 +419,20 @@
 								integrationTags::td([
 									/*
 									integrationTags::tdButton([
-										'attr'  => ' btn-success btn-edit' ,
+										'class'  => ' btn-success btn-edit' ,
 										'value' => '编辑' ,
 									]) ,
 									*/
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-info btn-modify-pwd' ,
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('editPwd') ,
+											'title' => '修改密码' ,
+										] ,
+										'param'      => [
+											'id' => $v['id'] ,
+										] ,
 										'value'      => '修改密码' ,
 										'is_display' => (function() use ($v) {
 											//是管理员的话所有人名字都可以改
@@ -437,8 +442,17 @@
 											return !isGlobalManagerId($v['id']);
 										})() ,
 									]) ,
+
+
 									integrationTags::tdButton([
-										'attr'       => ' btn-info btn-assign-role' ,
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('assignRoles') ,
+											'title' => '用户授权' ,
+										] ,
+										'param'      => [
+											'id' => $v['id'] ,
+										] ,
 										'value'      => '用户授权' ,
 										'is_display' => (function() use ($v) {
 											//管理员id 和 自己的
@@ -451,7 +465,7 @@
 									'<br>' ,
 
 									integrationTags::tdButton([
-										'attr'       => ' btn-danger btn-delete' ,
+										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
 										'is_display' => (function() use ($v) {
 											//管理员id 和 自己的

@@ -10,6 +10,7 @@
 // +---------------------------------------------------------------------+
 
 	namespace app\common\behavior;
+
 	use app\common\common\set;
 	use auth\Auth;
 	use think\Loader;
@@ -20,6 +21,7 @@
 	class InitBase
 	{
 		use set;
+
 		/**
 		 * 初始化行为入口
 		 */
@@ -232,7 +234,7 @@
 		private function initConfig()
 		{
 			$configList = autoCache('config_list' , Auth::createClosure([
-				$this->logic__Common_Config,
+				$this->logic__Common_Config ,
 				'getAvailableConfig' ,
 			]));
 
@@ -242,7 +244,6 @@
 				//return true;
 			} , $configList);
 		}
-
 
 
 		/**

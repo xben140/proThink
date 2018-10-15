@@ -5,13 +5,12 @@
 	use base64\Base64;
 	use image\imageProcessor;
 	use PhpMyAdmin\SqlParser\Parser;
-	use PhpMyAdmin\SqlParser\Utils\Query;
 	use PHPSQLParser\PHPSQLParser;
 
 	//php index.php /cmd/index/index
 
 
-	class Cmd extends Base
+	class Cmd extends FrontendBase
 	{
 
 		//public $testImg = 'C:\Users\Administrator\Desktop\pic\a.jpg';

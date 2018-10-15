@@ -43,10 +43,10 @@
 		 *
 		 * @return array
 		 */
-		public static function callDynamic($obj, $method)
+		public static function callDynamic($obj , $method)
 		{
 			return [
-				$obj,
+				$obj ,
 				$method ,
 			];
 		}

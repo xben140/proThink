@@ -222,7 +222,6 @@
 
 		/**
 		 * 当前方法是否允许访问
-		 *
 		 * @return bool
 		 */
 		public function isAllowAccess()
@@ -284,8 +283,8 @@
 		 *    获取指定属性
 		 *
 		 * @param string $key
-		 * @param null $callback
-		 * @param      $parameters
+		 * @param null   $callback
+		 * @param        $parameters
 		 *
 		 * @return mixed
 		 */
