@@ -24,7 +24,7 @@
 		public $css = [];
 
 		public $jsScript = [
-			'__STATIC__/js/index.js' ,
+			'__CONTROLLER_STATIC_URL__/js/index.js' ,
 		];
 
 		/**

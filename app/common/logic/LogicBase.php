@@ -588,15 +588,23 @@
 							]) ,
 
 							integrationTags::tdButton([
-								'class'      => ' btn-success btn-recover' ,
-								'value'      => '恢复记录' ,
 								'is_display' => 1 ,
+								'class'      => ' btn-success btn-custom-event' ,
+								'data'       => [
+									'callback' => 'registerSetItem' ,
+									'action'   => 'recover' ,
+								] ,
+								'value'      => '恢复记录' ,
 							]) ,
 
 							integrationTags::tdButton([
-								'class'      => ' btn-danger btn-complete-delete' ,
-								'value'      => '彻底删除' ,
 								'is_display' => 1 ,
+								'class'      => ' btn-danger btn-custom-event' ,
+								'data'       => [
+									'callback' => 'registerSetItem' ,
+									'action'   => 'delete' ,
+								] ,
+								'value'      => '彻底删除' ,
 							]) ,
 
 
@@ -622,7 +630,6 @@
 		public function getDetailInfo($dataId , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			//$logic = $this->{'logic__' . $info['tab_db']};
 			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 			$data = $logic->getInfo(['id' => $dataId ,]);
 
@@ -720,7 +727,6 @@
 		public function deleteItem($ids , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			//$logic = $this->{'logic__' . $info['tab_db']};
 			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 
 			return $logic->delete(['ids' => $ids ,] , $logic->beforeDelete , $logic->afterDelete , 1);
@@ -737,7 +743,6 @@
 		public function recoverItem($ids , $tableId)
 		{
 			$info = $this->getInfo(['id' => $tableId ,]);
-			//$logic = $this->{'logic__' . $info['tab_db']};
 			$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 
 			return $logic->updateField([

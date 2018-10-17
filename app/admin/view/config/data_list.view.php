@@ -42,6 +42,16 @@
 								'class' => 'btn-primary  multi-op multi-op-toggle-status-disable' ,
 								'field' => '批量禁用' ,
 							] ,
+							[
+								'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'configgroup' , 'datalist')  ,
+								'class'      => 'btn-info btn-open-pop' ,
+								'field'      => '配置分组' ,
+								'data'       => [
+									'src'   => url('admin/configgroup/datalist') ,
+									'title' => '配置分组' ,
+								] ,
+							] ,
+
 						] ,
 					]) ,
 

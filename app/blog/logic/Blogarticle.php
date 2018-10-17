@@ -13,6 +13,12 @@
 			$this->initBaseClass();
 		}
 
+		public function getPreview($param)
+		{
+			$info = $this->getInfo($param);
+
+			return $info['content'];
+		}
 
 		/**
 		 * @param $param

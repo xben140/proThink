@@ -21,11 +21,7 @@ $('.btn-group').find('input[type="radio"]').on({
 		submitParentForm(this)
 	}
 });
-
-function submitParentForm(obj)
-{
-	$(obj).parents('form').submit();
-}
+function submitParentForm(obj) {$(obj).parents('form').submit();}
 
 //列表页搜索弹出框事件
 $('.search-dom-btn-1').mouseover(function () {
@@ -76,9 +72,7 @@ $('.td-modify').on({
 	},
 	'dblclick' : function () {
 		let _this = $(this);
-
 		let openType = this.nodeName == 'TEXTAREA' ? 2 : 0;
-
 		let url = setFieldUrl;
 
 		//当前td有data-field属性，父级tr有data-id字段
@@ -87,7 +81,6 @@ $('.td-modify').on({
 			_this.addClass('blue')
 			let id = getParentTr(_this).data('id');
 			let field = (_this.data('field'));
-
 			let oldVal = $.trim(_this.text());
 
 			layer.prompt({
@@ -99,7 +92,7 @@ $('.td-modify').on({
 				maxlength : 9999999999,
 				shade     : 0.1,
 				value     : oldVal,
-				area      : ['600px', '250px'], //自定义文本域宽高
+				area      : ['400px', '200px'],
 				end       : function () {
 					_this.removeClass('blue')
 				}
@@ -430,7 +423,8 @@ $('.btn-edit').on({
 $('.multi-op-toggle-status-disable').on({
 	'click': function () {
 		let _this = $(this);
-		_this.data('callback', 'itemDisable')
+		_this.data('event-callback', 'toggleItemStatus')
+		_this.data('status', '0')
 		_this.data('callback_', function () {refresh_page(300)})
 		regeditMulti(this)
 	}
@@ -440,7 +434,8 @@ $('.multi-op-toggle-status-disable').on({
 $('.multi-op-toggle-status-enable').on({
 	'click': function () {
 		let _this = $(this);
-		_this.data('callback', 'itemEnable')
+		_this.data('event-callback', 'toggleItemStatus')
+		_this.data('status', '1')
 		_this.data('callback_', function () {refresh_page(300)})
 		regeditMulti(this)
 	}
@@ -454,10 +449,10 @@ $('.multi-op-toggle-status-enable').on({
  * @param btn
  * @param callback_
  */
-function itemEnable(ids, btn, callback_)
+function toggleItemStatus(ids, btn, callback_)
 {
 	let url = setFieldUrl;
-	updateField(ids, 'status', '1', url, function (data) {
+	updateField(ids, 'status', $(btn).data('status'), url, function (data) {
 		//成功返回回调
 		layer.msg(data.msg);
 		(typeof callback_ === "function") && callback_(data);
@@ -471,28 +466,6 @@ function itemEnable(ids, btn, callback_)
 }
 
 
-/**
- * setFieldUrl
- *    传入item 的id，同一设置为禁用
- * @param ids 字符串，逗号分隔 1,23,4
- * @param btn
- * @param callback_
- */
-function itemDisable(ids, btn, callback_)
-{
-	let url = setFieldUrl;
-	updateField(ids, 'status', '0', url, function (data) {
-		//成功返回回调
-		layer.msg(data.msg);
-		(typeof callback_ === "function") && callback_(data);
-	}, function (data) {
-		//错误返回回调
-
-	}, function (btn) {
-		//请求之前回调
-
-	}, btn)
-}
 
 
 /**
@@ -516,7 +489,7 @@ $('.btn-delete').on({
 $('.multi-op-del').on({
 	'click': function () {
 		let _this = $(this);
-		_this.data('callback', 'itemDelete')
+		_this.data('event-callback', 'itemDelete')
 		_this.data('callback_', function () {refresh_page(500)})
 		regeditMulti(this)
 	}
@@ -619,24 +592,18 @@ $('.se-rev').on({
 
 
 //批处理抽象出的方法
-//data-callback 点击按钮的方法
+//data-event-callback 点击按钮的方法
 //data-callback_ 点击按钮之后传入方法里的方法
 function regeditMulti(obj)
 {
 	let _this = $(obj);
-	let callback = _this.data('callback');
+	let callback = _this.data('event-callback');
 	let callback_ = _this.data('callback_');
-	console.log( _this.data('action'));
 
 	(typeof eval(callback) === "function") && (callback = eval(callback));
 	(typeof eval(callback_) === "function") && (callback_ = eval(callback_));
 
 	getSelecteedItemId(function (ids, callback_) {
-		console.dir( _this.data('action'))
-		console.dir( _this.data('callback'))
-		console.dir( obj.dataset.action)
-		console.dir( obj.dataset.callback)
-
 		callback(ids.join(','), obj, callback_);
 	}, callback_);
 }

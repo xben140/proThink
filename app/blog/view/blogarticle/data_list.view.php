@@ -313,11 +313,17 @@
 									]) ,
 
 									integrationTags::tdButton([
-										'class'      => ' btn-info btn-preview' ,
-										'value'      => '预览' ,
+										'value'      => '预览博文' ,
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('preview') ,
+											'title' => '' ,
+										] ,
+										'param'      => [
+											'id' => $v['id'] ,
+										] ,
 										'is_display' => 1 ,
 									]) ,
-
 								]) ,
 
 							] , ['id' => $v['id']]);

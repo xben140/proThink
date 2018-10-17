@@ -23,16 +23,32 @@
 								'class' => 'btn-info  se-rev' ,
 								'field' => '反选' ,
 							] ,
+
 							[
-								'class'      => 'btn-danger multi-op multi-item-delete' ,
-								'field'      => '批量删除' ,
-								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
-							] ,
-							[
-								'class'      => 'btn-danger multi-op multi-item-recover' ,
-								'field'      => '批量恢复' ,
 								'is_display' => 1 ,
+								'class'      => 'btn-danger btn-custom-event' ,
+								'field'      => '批量删除' ,
+								'data'       => [
+									'callback'       => 'regeditMulti' ,
+									'event-callback' => 'itemSet' ,
+									'callback_'      => 'refresh_page' ,
+									'action'         => 'delete' ,
+								] ,
 							] ,
+
+							[
+								'is_display' => 1 ,
+								'class'      => 'btn-info btn-custom-event' ,
+								'field'      => '批量恢复' ,
+								'data'       => [
+									'callback'       => 'regeditMulti' ,
+									'event-callback' => 'itemSet' ,
+									'callback_'      => 'refresh_page' ,
+									'action'         => 'recover' ,
+								] ,
+							] ,
+
+
 						] ,
 					]) ,
 

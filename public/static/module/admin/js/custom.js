@@ -9,48 +9,17 @@
  *
  */
 
-$('.btn-recover').on({'click': function () {registerSetItem(this, 'recover')}});
-//
-$('.btn-complete-delete').on({'click': function () {registerSetItem(this, 'delete')}});
-
-
-//彻底删除
-$('.multi-item-delete').on({
-	'click': function () {
-		let _this = $(this);
-		_this.data('callback', 'itemSet')
-		_this.data('callback_', function () {refresh_page(300)})
-		_this.data('action', 'delete')
-		regeditMulti(this)
-	}
-});
-
-//恢复数据
-$('.multi-item-recover').on({
-	'click': function () {
-		let _this = $(this);
-		_this.data('callback', 'itemSet')
-		_this.data('callback_', function () {refresh_page(300)})
-		_this.data('action', 'recover')
-		console.dir( _this.data('action'))
-
-		regeditMulti(this)
-	}
-});
-
-
-function registerSetItem($obj, opreation)
+function registerSetItem($obj )
 {
 	let _this = $($obj);
 	let data_id = getParentTr(_this).data('id');
-	itemSet(data_id, $obj, null, opreation)
+	itemSet(data_id, $obj, null)
 }
 
 function itemSet(ids, btn, callback_)
 {
 
-	let _this = $(this);
-	console.dir( _this.data('action'))
+	let _this = $(btn);
 	let url = setItemUrl;
 
 	layer.confirm('确定？此操作不可恢复', {

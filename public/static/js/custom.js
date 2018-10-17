@@ -4,7 +4,7 @@
 	$('.index_pop').on({
 		'click': function () {
 			let _this = $(this);
-			if(_this.hasClass('preview-img'))
+			if (_this.hasClass('preview-img'))
 			{
 				let url = '/admin/Index/updateImage?condition=' + _this.data('condition');
 				_this.data('src', url);
@@ -25,7 +25,7 @@
 				// shadeClose: 1,
 				area    : ['auto', 'auto'],
 				// time      : 0,
-				content : ['<img style="height: auto;" src="' + src + '">', this] //数组第二项即吸附元素选择器或者DOM
+				content : ['<img style="height: 230px;width:auto" src="' + src + '">', this] //数组第二项即吸附元素选择器或者DOM
 			});
 		},
 		'mouseout' : function () {
@@ -56,7 +56,7 @@
 			regeditEventCallback(this);
 		}
 	});
-	
+
 })();
 
 /**
@@ -107,7 +107,7 @@ function openInNewWindows(obj)
 function popWinddows(obj)
 {
 	let _this = $(obj);
-	let url = _this.data('src') ||_this.data('href') || _this.attr('src') || _this.attr('href');
+	let url = _this.data('src') || _this.data('href') || _this.attr('src') || _this.attr('href');
 	let title = _this.data('title') || " ";
 	let is_reload = !!_this.data('is_reload');
 	let params = (_this.data('params'));
@@ -166,7 +166,7 @@ function popWinddows(obj)
  */
 function refresh_page(delay)
 {
-	!delay && (delay = 500)
+	!delay && (delay = 300)
 	setTimeout(function () {location.reload();}, delay)
 }
 
@@ -183,14 +183,12 @@ function rowReload()
  * 为元素注册事件回调
  * @param obj
  */
+// data-callback
 function regeditEventCallback(obj)
 {
 	let _this = $(obj);
 	let callback = _this.data('callback');
-	if (typeof eval(callback) === 'function')
-	{
-		eval(callback)(obj);
-	}
+	(typeof eval(callback) === 'function') && eval(callback)(obj);
 }
 
 /**

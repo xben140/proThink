@@ -45,6 +45,11 @@
 			}
 		}
 
+		public function preview()
+		{
+			return $this->makeView($this);
+		}
+
 
 		/**
 		 * @throws \Exception
@@ -54,7 +59,6 @@
 			$this->initLogic();
 
 			return $this->jump($this->logic->delete($this->param , [
-
 				/*
 				[
 					function($param) {
