@@ -82,7 +82,7 @@
 function openInNewWindows(obj)
 {
 	let _this = $(obj);
-	let params = _this.data('params');
+	let params = (_this.data('params'));
 	(typeof eval(params) === 'object') && (params = eval(params));
 	let url = _this.data('src') || _this.attr('src');
 
@@ -110,8 +110,8 @@ function popWinddows(obj)
 	let url = _this.data('src') ||_this.data('href') || _this.attr('src') || _this.attr('href');
 	let title = _this.data('title') || " ";
 	let is_reload = !!_this.data('is_reload');
-	let params = _this.data('params');
-	let options = _this.data('options');
+	let params = (_this.data('params'));
+	let options = (_this.data('options'));
 
 	(typeof eval(params) === 'object') && (params = eval(params));
 	(typeof eval(options) === 'object') && (options = eval(options));
@@ -162,17 +162,17 @@ function popWinddows(obj)
 /**
  * 刷新页面
  *
- * @param obj
+ * @param delay
  */
-function refresh_page(obj)
+function refresh_page(delay)
 {
-	location.reload();
+	!delay && (delay = 500)
+	setTimeout(function () {location.reload();}, delay)
 }
 
 /**
  * 刷新页面
  *
- * @param obj
  */
 function rowReload()
 {

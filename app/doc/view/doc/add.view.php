@@ -18,7 +18,6 @@
 						] ,
 					]) ,
 
-
 					integrationTags::upload(MULTI_FILE , [
 						[
 							'title' => '上传须知' ,
@@ -143,7 +142,6 @@ AAA
 							'mimeTypes'  => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 						]) ,
 					]) ,
-
 
 				] , [
 					'width'      => '12' ,

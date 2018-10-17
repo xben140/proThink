@@ -1,5 +1,3 @@
-
-
 /**
  ******************************************************************************************
  ******************************************************************************************
@@ -8,10 +6,26 @@
  ******************************************************************************************
  */
 //自动搜索事件注册
-$('.change_serach').on({'change': function () {$(this).parents('form').submit();}});
-$('.btn-group').find('input[type="radio"]').on({'change': function () {$(this).parents('form').submit();}});
-$('.btn-group').find('input[type="checkbox"]').on({'change': function () {$(this).parents('form').submit();}});
+$('.change_serach').on({
+	'change': function () {
+		submitParentForm(this)
+	}
+});
 
+$('.btn-group').find('input[type="radio"]').on({
+	'change': function () {
+		submitParentForm(this)
+	}
+}).find('input[type="checkbox"]').on({
+	'change': function () {
+		submitParentForm(this)
+	}
+});
+
+function submitParentForm(obj)
+{
+	$(obj).parents('form').submit();
+}
 
 //列表页搜索弹出框事件
 $('.search-dom-btn-1').mouseover(function () {
@@ -85,7 +99,7 @@ $('.td-modify').on({
 				maxlength : 9999999999,
 				shade     : 0.1,
 				value     : oldVal,
-				area      : ['800px', '350px'], //自定义文本域宽高
+				area      : ['600px', '250px'], //自定义文本域宽高
 				end       : function () {
 					_this.removeClass('blue')
 				}
@@ -171,15 +185,9 @@ $('textarea.name').on({
 $('.td-select').on({
 	//下拉框修改事件注册
 	'change': function () {
-
 		let _this = $(this);
-		let beforeCallback = _this.data('change-callback');
-
-		if (typeof eval(beforeCallback) === 'function')
-		{
-			//注册回调
-			eval(beforeCallback)(this)
-		}
+		_this.data('callback', _this.data('change-callback'))
+		regeditEventCallback(this);
 	}
 });
 
@@ -382,28 +390,9 @@ function getSwitcherParams(obj)
 $('.btn-add').on({
 	'click': function () {
 		let _this = $(this);
-		let parentIframeIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-		layer.open({
-			type     : 2,
-			title    : '添加数据',
-			// shadeClose: true,
-			shade    : 0.1,
-			area     : ['85%', '85%'],
-			resize   : 1,
-			moveOut  : 1,
-			skin     : 'search-dom-pop', //样式类名
-			closeBtn : 1, //不显示关闭按钮
-			anim     : 0,
-			// anim      : randomNum(0, 6),
-			isOutAnim: 0,
-			content  : addUrl, //iframe的url
-			success  : function (_) {
-				_this.attr("disabled", false);
-			},
-			end      : function () {
-				refresh_page();
-			}
-		});
+		_this.data('src', addUrl);
+		_this.data('is_reload', 1);
+		return popWinddows(this);
 	}
 });
 
@@ -417,42 +406,15 @@ $('.btn-add').on({
  */
 
 //编辑按钮事件注册
-$('.btn-edit').on({'click': function () {registerEdit(this)}});
-
-/**
- * editUrl
- *    传入一个编辑按钮，打开对应item编辑框
- * @param  $obj
- */
-function registerEdit($obj)
-{
-	let _this = $($obj);
-	let data_id = getParentTr(_this).data('id');
-	// _this.attr("disabled", true);
-
-	let url = editUrl;
-	layer.open({
-		type     : 2,
-		title    : '编辑',
-		// shadeClose: true,
-		shade    : 0.1,
-		area     : ['85%', '85%'],
-		resize   : 1,
-		moveOut  : 1,
-		skin     : 'search-dom-pop', //样式类名
-		closeBtn : 1, //不显示关闭按钮
-		anim     : 0,
-		// anim      : randomNum(0, 6),
-		isOutAnim: 0,
-		content  : url + "?id=" + data_id, //iframe的url
-		success  : function (_) {
-			_this.attr("disabled", false);
-		},
-		end      : function () {
-			refresh_page();
-		}
-	});
-}
+$('.btn-edit').on({
+	'click': function () {
+		let _this = $(this);
+		_this.data('src', editUrl);
+		_this.data('is_reload', 1);
+		_this.data('params', ({id: getParentTr(_this).data('id')}));
+		return popWinddows(this);
+	}
+});
 
 
 /**
@@ -467,28 +429,20 @@ function registerEdit($obj)
 //批量禁用按钮事件注册
 $('.multi-op-toggle-status-disable').on({
 	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemDisable(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
+		let _this = $(this);
+		_this.data('callback', 'itemDisable')
+		_this.data('callback_', function () {refresh_page(300)})
+		regeditMulti(this)
 	}
 });
 
 //批量启用按钮事件注册
 $('.multi-op-toggle-status-enable').on({
 	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemEnable(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
+		let _this = $(this);
+		_this.data('callback', 'itemEnable')
+		_this.data('callback_', function () {refresh_page(300)})
+		regeditMulti(this)
 	}
 });
 
@@ -506,7 +460,6 @@ function itemEnable(ids, btn, callback_)
 	updateField(ids, 'status', '1', url, function (data) {
 		//成功返回回调
 		layer.msg(data.msg);
-
 		(typeof callback_ === "function") && callback_(data);
 	}, function (data) {
 		//错误返回回调
@@ -531,7 +484,6 @@ function itemDisable(ids, btn, callback_)
 	updateField(ids, 'status', '0', url, function (data) {
 		//成功返回回调
 		layer.msg(data.msg);
-
 		(typeof callback_ === "function") && callback_(data);
 	}, function (data) {
 		//错误返回回调
@@ -552,19 +504,21 @@ function itemDisable(ids, btn, callback_)
  */
 
 //删除按钮事件注册
-$('.btn-delete').on({'click': function () {registerDelete(this)}});
+$('.btn-delete').on({
+	'click': function () {
+		let _this = $(this);
+		_this.data('callback', 'registerDelete');
+		regeditEventCallback(this)
+	}
+});
 
 //批量删除按钮事件注册
 $('.multi-op-del').on({
 	'click': function () {
-		let _this = this;
-		getSelecteedItemId(function (ids, callback_) {
-			itemDelete(ids.join(','), _this, callback_);
-		}, function (data) {
-			setTimeout(function () {
-				refresh_page();
-			}, 500)
-		});
+		let _this = $(this);
+		_this.data('callback', 'itemDelete')
+		_this.data('callback_', function () {refresh_page(500)})
+		regeditMulti(this)
 	}
 });
 
@@ -576,8 +530,11 @@ function registerDelete($obj)
 {
 	let _this = $($obj);
 	let data_id = getParentTr(_this).data('id');
-	itemDelete(data_id, $obj)
+	itemDelete(data_id, $obj, function (data) {
+		(data.code) && getParentTr($($obj)).remove();
+	})
 }
+
 
 /**
  * deleteUrl
@@ -590,7 +547,7 @@ function registerDelete($obj)
 function itemDelete(ids, btn, callback_)
 {
 	let url = deleteUrl;
-	layer.confirm('确定删除？此操作不可恢复', {
+	layer.confirm('确定删除？', {
 		resize    : 1,
 		moveOut   : 1,
 		title     : '请确定当前操作',
@@ -607,10 +564,6 @@ function itemDelete(ids, btn, callback_)
 		ajaxPost(url, {ids: ids}, function (data) {
 			//成功返回回调
 			layer.msg(data.msg);
-			if (data.code)
-			{
-				getParentTr($(btn)).remove();
-			}
 			(typeof callback_ === "function") && callback_(data);
 		}, function (data) {
 			//错误返回回调
@@ -636,14 +589,14 @@ function itemDelete(ids, btn, callback_)
  */
 
 
-//日期区间选择事件注册
+//搜索框时间选择器
 $(".input-daterange").datepicker({
 	keyboardNavigation: !1,
 	forceParse        : !1,
 	autoclose         : !0
 });
 
-	//全选按钮事件注册
+//全选按钮事件注册
 let isAllChecked = false;
 $('.se-all').on({
 	'click': function () {
@@ -665,6 +618,29 @@ $('.se-rev').on({
 });
 
 
+//批处理抽象出的方法
+//data-callback 点击按钮的方法
+//data-callback_ 点击按钮之后传入方法里的方法
+function regeditMulti(obj)
+{
+	let _this = $(obj);
+	let callback = _this.data('callback');
+	let callback_ = _this.data('callback_');
+	console.log( _this.data('action'));
+
+	(typeof eval(callback) === "function") && (callback = eval(callback));
+	(typeof eval(callback_) === "function") && (callback_ = eval(callback_));
+
+	getSelecteedItemId(function (ids, callback_) {
+		console.dir( _this.data('action'))
+		console.dir( _this.data('callback'))
+		console.dir( obj.dataset.action)
+		console.dir( obj.dataset.callback)
+
+		callback(ids.join(','), obj, callback_);
+	}, callback_);
+}
+
 /**
  * 表格里option用的，变换颜色
  * @param obj
@@ -680,8 +656,8 @@ function updateColor(obj)
 
 /**
  获取所有选中的条目的id，用回调处理
- * @param  callback
- * @param  callback_
+ * @param  callback 点击执行的回调
+ * @param  callback_ 传到回调里的回调
  */
 function getSelecteedItemId(callback, callback_)
 {
@@ -689,9 +665,13 @@ function getSelecteedItemId(callback, callback_)
 	$('.ids:checked').each(function (k, v) {ids.push($(v).parents('tr').data('id'));});
 
 	if (ids.length)
-	{callback(ids, callback_);}
+	{
+		(typeof callback_ === "function") && callback(ids, callback_);
+	}
 	else
-	{layer.msg('没有选中的对象');}
+	{
+		layer.msg('没有选中的对象');
+	}
 }
 
 

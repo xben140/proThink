@@ -10,11 +10,11 @@
 		<link href="__CONTROLLER_STATIC_URL__/css/login.css" rel="stylesheet" type="text/css">
 
 
-		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.min.js"></script>
-		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.SuperSlide.2.1.2.js"></script>
-		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="__HPLUS__js/jquery.min.js"></script>
+		<script type="text/javascript" src="__STATIC__js/jquery.SuperSlide.2.1.2.js"></script>
+		<script type="text/javascript" src="__STATIC__js/jquery.cookie.js"></script>
 
-		<script type="text/javascript" src="__CONTROLLER_STATIC_URL__plugins/layer/layer.js"></script>
+		<script type="text/javascript" src="__HPLUS__js/plugins/layer/layer.js"></script>
 
 	</head>
 
@@ -69,7 +69,7 @@
 			</ul>
 		</div>
 
-		<script src="__CONTROLLER_STATIC_URL__/js/form.js"></script>
-		<script src="__CONTROLLER_STATIC_URL__/js/login.js"></script>
+		<script src="__STATIC__js/form.js"></script>
+		<script src="__CONTROLLER_STATIC_URL__js/login.js"></script>
 	</body>
 </html>

@@ -29,7 +29,6 @@
 		 * @var array
 		 */
 		public $jsScript = [
-			'__STATIC__/js/custom.js' ,
 			'__STATIC__/js/custom_table.js' ,
 		];
 

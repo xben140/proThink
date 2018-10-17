@@ -150,7 +150,7 @@ input[type='text']:focus::-webkit-input-placeholder {
 	font-size  : 24px;
 	text-align : center;
 	padding    : 25px 0;
-	background : url(../image/xianbg.png) bottom no-repeat;
+	/*background : url(../image/xianbg.png) bottom no-repeat;*/
 }
 
 .formInfo {
@@ -181,7 +181,7 @@ input[type='text']:focus::-webkit-input-placeholder {
 }
 
 .icon {
-	background : url(../image/login_icon.png) no-repeat;
+	/*background : url(../image/login_icon.png) no-repeat;*/
 	position   : absolute;
 	top        : 14px;
 	left       : -42px;
