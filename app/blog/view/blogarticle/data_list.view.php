@@ -224,9 +224,13 @@
 								//博文信息
 								integrationTags::td([
 									integrationTags::tdSimple([
-										'name'  => '博文标题 : ' ,
+										'name'     => strtr("<span style='color: #2434ff;'>__1__</span>" , ['__1__' => '博文标题 : ' ,]) ,
+										'editable' => 1 ,
+										'field'    => 'title' ,
+										'reg'      => '/^\S+$/' ,
+										'msg'      => '标题不能为空' ,
 										//'value' => sprintf("<span style='color: #00f;'>%s</span>", $v['file_name']),
-										'value' => strtr("<span style='color: #00f;'>__1__</span>" , ['__1__' => $v['title'] ,]) ,
+										'value'    => $v['title'] ,
 									]) ,
 									'<br/>' ,
 									integrationTags::tdSimple([
@@ -307,23 +311,41 @@
 								integrationTags::td([
 
 									integrationTags::tdButton([
-										'class'      => ' btn-danger btn-delete' ,
-										'value'      => '删除' ,
-										'is_display' => 1 ,
-									]) ,
-
-									integrationTags::tdButton([
-										'value'      => '预览博文' ,
+										'value'      => '编辑博文' ,
+										//'class'      => ' btn-info btn-open-window' ,
 										'class'      => ' btn-info btn-open-pop' ,
 										'data'       => [
-											'src'   => url('preview') ,
-											'title' => '' ,
+											'src'   => url('editContent') ,
+											'title' => '编辑博文' ,
 										] ,
 										'param'      => [
 											'id' => $v['id'] ,
 										] ,
 										'is_display' => 1 ,
 									]) ,
+
+									integrationTags::tdButton([
+										'value'      => '预览博文' ,
+										//'class'      => ' btn-success btn-open-window' ,
+										'class'      => ' btn-success btn-open-pop' ,
+										'data'       => [
+											'src'   => url('preview') ,
+											'title' => '预览博文' ,
+										] ,
+										'param'      => [
+											'id' => $v['id'] ,
+										] ,
+										'is_display' => 1 ,
+									]) ,
+
+									'<br />' ,
+
+									integrationTags::tdButton([
+										'class'      => ' btn-danger btn-delete' ,
+										'value'      => '删除' ,
+										'is_display' => 1 ,
+									]) ,
+
 								]) ,
 
 							] , ['id' => $v['id']]);

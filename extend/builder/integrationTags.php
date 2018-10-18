@@ -543,20 +543,25 @@
 		 * 生成一个row
 		 *
 		 * @param array $option
-		 * @param int   $width
+		 * @param array   $baseButtons
 		 *
 		 * @return array
 		 */
-		public static function rowButton($option = [] , $width = 12)
+		public static function rowButton($option = [] , $baseButtons = [
+			0 ,
+			1 ,
+			2 ,
+		])
 		{
 			$doms = [];
-			$doms[] = elementsFactory::rowButton()->make(function(&$doms , $_this) use ($option , $width) {
+			$doms[] = elementsFactory::rowButton()->make(function(&$doms , $_this) use ($option , $baseButtons) {
 
 				$_this->setNodeValue([
-					'width' => $width ,
+					'width' => 12 ,
 				]);
 
 				$_this->setButton($option);
+				$_this->setBaseButton($baseButtons);
 			});
 
 			return $doms;

@@ -11,12 +11,12 @@
 		$__this->makePage()->setNodeValue(['BODY_ATTR' => tagConstructor::buildKV(['class' => '  ' ,]) ,]);
 
 		$__this->displayContents = integrationTags::basicFrame([
+			integrationTags::rowButton([], [0,2]) ,
 			integrationTags::customElementFormPath($__this->getTemplatePath('preview') , [
 				$__this->logic->getPreview($__this->param)
 			]),
-
 		] , [
-			'animate_type' => 'fadeInRight' ,
+			'animate_type' => 'fadeInRight-' ,
 			'attr'         => '' ,
 		]);
 	};

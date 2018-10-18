@@ -45,6 +45,12 @@
 			}
 		}
 
+		public function editContent()
+		{
+			session(URL_MODULE, $this->param['id']);
+			return $this->makeView($this);
+		}
+
 		public function preview()
 		{
 			return $this->makeView($this);
@@ -58,8 +64,7 @@
 		{
 			$this->initLogic();
 
-			return $this->jump($this->logic->delete($this->param , [
-				/*
+			return $this->jump($this->logic->delete($this->param , [/*
 				[
 					function($param) {
 						//当前组下还有配置就不许删除

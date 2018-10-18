@@ -87,10 +87,10 @@ Css;
 					{
 						foreach ($v['data'] as $k2 => $v2)
 						{
-							$t .= ' '. strtr($dataTemp , [
-								'_K_' => $k2 ,
-								'_V_' => $v2 ,
-							]) . ' ';
+							$t .= ' ' . strtr($dataTemp , [
+									'_K_' => $k2 ,
+									'_V_' => $v2 ,
+								]) . ' ';
 						}
 					}
 
@@ -108,7 +108,7 @@ Css;
 					isset($v['src']) && $v['src'] && ($replacement['__SRC__'] = $v['src']);
 					isset($v['title']) && $v['title'] && ($replacement['__TITLE__'] = $v['title']);
 					isset($v['param']) && $v['param'] && ($replacement['__PARAM__'] = json_encode($v['param']));
-					isset($v['options']) && $v['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__', ['__OPTIONS__' => json_encode($v['options']),]));
+					isset($v['options']) && $v['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__' , ['__OPTIONS__' => json_encode($v['options']) ,]));
 
 					$str .= strtr($tmp , $replacement);
 				}
@@ -118,6 +118,26 @@ Css;
 			$this->replaceTag(static::makeNodeName('buttons') , $str);
 		}
 
+		function setBaseButton($menu = [
+			0 ,
+			1 ,
+			2 ,
+		])
+		{
+			$str = [];
+			if(is_array($menu))
+			{
+				$buttons = [
+					'<button type="button" class="btn btn-primary" onclick="refresh_page()">刷新页面</button>' ,
+					'<button type="button" class="btn btn-primary" onclick="rowReload()">重置搜索条件</button>' ,
+					'<a target="_blank" href="#" class="btn btn-primary ">新窗口中打开</a>' ,
+				];
+				$str = array_map(function($v) use ($str , $buttons) {
+					return $buttons[$v];
+				} , $menu);
+			}
+			$this->replaceTag(static::makeNodeName('base-buttons') , implode("\r\n", $str));
+		}
 
 		/**
 		 *--------------------------------------------------------------------------
@@ -148,10 +168,8 @@ Css;
 			 */
 			$contents = <<<'CONTENTS'
 			<div class="row">
-				<div class="col-sm-12 m-b-xs">
-					<button type="button" class="btn btn-primary" onclick="refresh_page()">刷新页面</button>
-					<button type="button" class="btn btn-primary" onclick="rowReload()">重置搜索条件</button>
-					<a target="_blank" href="#" class="btn btn-primary ">新窗口中打开</a>
+				<div class="col-sm-<!-- ~~~width~~~ --> m-b-xs">
+					<!-- ~~~base-buttons~~~ -->
 				</div>
 				<!-- ~~~buttons~~~ -->
 			</div>

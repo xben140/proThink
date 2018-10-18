@@ -84,4 +84,18 @@
 			return !is_null($val) ? $val : 0;
 		}
 
+		/**
+		 * @param $value 
+		 *
+		 * @return string
+		 */
+		public function getContentAttr($value)
+		{
+			$value = htmlspecialchars_decode($value);
+			$value = html_entity_decode($value);
+			$value = stripslashes($value);
+
+			return $value;
+		}
+
 	}

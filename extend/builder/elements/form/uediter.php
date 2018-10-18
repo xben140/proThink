@@ -118,6 +118,8 @@ Css;
 				'field_name' => '' ,
 				'name'       => '' ,
 				'value'      => '' ,
+				'left'       => '3' ,
+				'right'      => '8' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -134,8 +136,8 @@ Css;
 			$contents = <<<'CONTENTS'
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<textarea id="editor" type="text/plain" style="width:100%;height:350px;" name="<!-- ~~~name~~~ -->"><!-- ~~~value~~~ --></textarea>
 				</div>
 			</div>
