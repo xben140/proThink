@@ -150,7 +150,7 @@
 						$journalTypes = $__this->logic__Journaltype->getFormatedData(1);
 
 						//角色机制注册
-						$__this->registerRoleEvent([
+						$__this->authClass->registerRoleEvent([
 							[
 								//管理员和全站管理
 								'roles'    => [

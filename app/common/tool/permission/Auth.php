@@ -229,6 +229,34 @@
 			return $this->hasPermission($this->currentUri);
 		}
 
+		/**
+		 * 角色事件注册机制
+		 * @param array $option
+		 *
+		 */
+		public function registerRoleEvent($option = [])
+		{
+			/*
+						[
+							'roles'    => [1, 2] ,
+							'callback' => function($a, $b) {} ,
+							'params'   => [
+								'a' ,
+								'b',
+							] ,
+						];
+			*/
+
+			foreach ($option as $k => $v)
+			{
+				if($this->hasRoleByIds($v['roles']))
+				{
+					!isset($v['params']) && $v['params'] = [];
+					call_user_func_array($v['callback'] , $v['params']);
+				}
+			}
+		}
+
 
 
 		/**

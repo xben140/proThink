@@ -46,7 +46,7 @@
 					]) ,
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 						//角色机制注册
-						$__this->registerRoleEvent([
+						$__this->authClass->registerRoleEvent([
 							[
 								//采编
 								'roles'    => [4] ,

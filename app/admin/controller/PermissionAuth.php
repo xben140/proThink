@@ -244,36 +244,6 @@
 			return $this->authClass->hasPermission($this->authClass::formatMenu($a , $b , $c));
 		}
 
-		/**
-		 * 角色事件注册机制
-		 *
-		 * @param array $option
-		 */
-		protected function registerRoleEvent($option = [])
-		{
-			/*
-						[
-							'roles'    => [
-								1 ,
-								2,
-							] ,
-							'callback' => function($a, $b) { } ,
-							'params'   => [
-								'a' ,
-								'b' ,
-							] ,
-						];
-			*/
-
-			foreach ($option as $k => $v)
-			{
-				if($this->authClass->hasRoleByIds($v['roles']))
-				{
-					!isset($v['params']) && $v['params'] = [];
-					call_user_func_array($v['callback'] , $v['params']);
-				}
-			}
-		}
 	}
 
 

@@ -58,7 +58,22 @@
 		 */
 		public static function makeRuleClassName()
 		{
-			return getNamespace(static::class) . '\Rule';
+			return self::getNamespace(static::class) . '\Rule';
+		}
+
+		/**
+		 * 匹配出命名空间
+		 * app\common\tool\permission\Rule
+		 *
+		 * @param object|string $class
+		 *
+		 * @return string
+		 */
+		public static function getNamespace($class)
+		{
+			preg_match('%^(.+)(?=[\\\\/][^\//]+$)%im' , $class , $result);
+
+			return $result[1];
 		}
 
 	}
