@@ -5,8 +5,28 @@
 	return function($__this) {
 		$__this->setPageTitle('添加配置组');
 
+		//所有分类
+		$types = $__this->logic->dataList();
+		$types = makeTree($types);
+
+		//顶级菜单
+		array_unshift($types , [
+			'id'    => '0' ,
+			'pid'   => '0' ,
+			'level' => '0' ,
+			'name'  => '顶级分类' ,
+		]);
+
+		$availableTypes = array_map(function($v) {
+			return [
+				'value' => $v['id'] ,
+				'field' => indentationOptionsByLevel($v['name'] , $v['level']) ,
+			];
+		} , $types);
+
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::form([
+				integrationTags::singleSelect($availableTypes , 'pid' , '上级分类' , '' , 0) ,
 
 				integrationTags::text([
 					'field_name'  => '类型名' ,
@@ -28,21 +48,21 @@
 					'name'        => 'order' ,
 				]) ,
 				/*
-										integrationTags::switchery([
-											'isChecked'  => 'checked' ,
-											//额外属性
-											//'attr'       => '{if 1 == 1}checked{/if}' ,
-											//随便写
-											'tip'        => '是否启用' ,
-											//随便写
-											'field_name' => '是否启用' ,
-											//表单name值
-											'name'       => 'status' ,
-											//表单value值,$data里的字段
-											'value'      => '1' ,
-											//表单value对应名字,$data里的字段
-											'field'      => '' ,
-										]) ,
+					integrationTags::switchery([
+						'isChecked'  => 'checked' ,
+						//额外属性
+						//'attr'       => '{if 1 == 1}checked{/if}' ,
+						//随便写
+						'tip'        => '是否启用' ,
+						//随便写
+						'field_name' => '是否启用' ,
+						//表单name值
+						'name'       => 'status' ,
+						//表单value值,$data里的字段
+						'value'      => '1' ,
+						//表单value对应名字,$data里的字段
+						'field'      => '' ,
+					]) ,
 				*/
 
 				integrationTags::textarea([

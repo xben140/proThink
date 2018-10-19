@@ -89,6 +89,7 @@
 					'left' ,
 				] ,
 			];
+
 			$condition = [
 				'where' => $where ,
 				'join'  => $join ,

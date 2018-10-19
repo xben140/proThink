@@ -36,8 +36,34 @@
 			$this->initLogic();
 			if(IS_POST)
 			{
-				$id = session(URL_MODULE);
-				$this->jump($this->logic->edit($this->param , $id));
+				$id = session('blog_id');
+				$this->jump($this->logic->edit($this->param , $id, [
+					[
+						//删除之前的标签
+						function($id) {
+							return db('blog_article_tag')->where('article_id' , $id)->delete() !== false;
+						} ,
+						[$id] ,
+					] ,
+					[
+						//添加新角色
+						function($tags , $id) {
+							foreach ($tags as $v)
+							{
+								db('blog_article_tag')->insert([
+									'article_id' => $id ,
+									'tag_id' => $v ,
+								]);
+							}
+
+							return true;
+						} ,
+						[
+							$this->param['tags'] ,
+							$id ,
+						] ,
+					] ,
+				]));
 			}
 			else
 			{
@@ -47,12 +73,13 @@
 
 		public function editContent()
 		{
-			session(URL_MODULE, $this->param['id']);
+			session('blog_id', $this->param['id']);
 			return $this->makeView($this);
 		}
 
 		public function preview()
 		{
+			session('blog_id', $this->param['id']);
 			return $this->makeView($this);
 		}
 

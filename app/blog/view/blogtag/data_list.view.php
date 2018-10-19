@@ -47,7 +47,6 @@
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 
-						//$data = $__this->logic->dataList($__this->param);
 						$data = $__this->logic->dataListWithPagination($__this->param);
 
 						/**

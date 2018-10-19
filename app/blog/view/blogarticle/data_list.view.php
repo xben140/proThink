@@ -74,10 +74,28 @@
 					]) ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
-						$blogtype = $__this->logic__Blogtype->getFormatedData(1);
+
+						//所有分类
+						$types = $__this->logic__blog_blogtype->dataList();
+						$types = makeTree($types);
+
+						//顶级菜单
+						array_unshift($types , [
+							'id'    => '0' ,
+							'pid'   => '0' ,
+							'level' => '0' ,
+							'name'  => '顶级分类' ,
+						]);
+
+						$types = array_map(function($v) {
+							return [
+								'value' => $v['id'] ,
+								'field' => indentationOptionsByLevel($v['name'] , $v['level']) ,
+							];
+						} , $types);
+
 
 						$data = $__this->logic->dataListWithPagination($__this->param);
-
 
 						/**
 						 * 设置表格头
@@ -191,7 +209,6 @@
 
 						$_this->setSearchForm($searchForm);
 
-
 						foreach ($data['data'] as $k => $v)
 						{
 
@@ -263,6 +280,15 @@
 										'is_display' => 1 ,
 									]) ,
 									'<br/>' ,
+									integrationTags::tdSelect([
+										'name'       => 'type' ,
+										'field_name' => '博文分类 :' ,
+										'selected'   => $v['type'] ,
+										'options'    => $types ,
+										'disabled'   => 1 ,
+										'is_display' => 1 ,
+									]) ,
+									'<br/>' ,
 
 									integrationTags::tdSwitcher([
 										'params'  => [
@@ -324,10 +350,12 @@
 										'is_display' => 1 ,
 									]) ,
 
+									'<br />' ,
+
 									integrationTags::tdButton([
 										'value'      => '预览博文' ,
-										//'class'      => ' btn-success btn-open-window' ,
-										'class'      => ' btn-success btn-open-pop' ,
+										//'class'      => ' btn-info btn-open-window' ,
+										'class'      => ' btn-info btn-open-pop' ,
 										'data'       => [
 											'src'   => url('preview') ,
 											'title' => '预览博文' ,
@@ -339,6 +367,11 @@
 									]) ,
 
 									'<br />' ,
+
+									integrationTags::tdButton([
+										'class' => ' btn-success btn-edit' ,
+										'value' => '编辑' ,
+									]) ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,

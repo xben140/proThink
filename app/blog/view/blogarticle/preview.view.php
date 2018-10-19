@@ -12,9 +12,18 @@
 
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::rowButton([], [0,2]) ,
+
+
+			integrationTags::a('编辑博文' , [
+				'class'  => ' btn btn-info' ,
+				'target' => '_self' ,
+				'href' => url('editContent' , ['id' => session('blog_id')]) ,
+			]) ,
+
 			integrationTags::customElementFormPath($__this->getTemplatePath('preview') , [
-				$__this->logic->getPreview($__this->param)
+				$__this->logic->getInfo($__this->param)['content']
 			]),
+
 		] , [
 			'animate_type' => 'fadeInRight-' ,
 			'attr'         => '' ,

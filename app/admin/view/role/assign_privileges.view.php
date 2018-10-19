@@ -29,7 +29,6 @@
 			];
 		}
 
-
 		//获取当前角色有的菜单
 		$currMenu = $__this->logic->getRolesPrivilegesId($__this->param);
 

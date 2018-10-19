@@ -13,12 +13,15 @@
 			$this->initBaseClass();
 		}
 
-		public function getPreview($param)
-		{
-			$info = $this->getInfo($param);
 
-			return $info['content'];
+		public function getArticleTags($param)
+		{
+			$id = $param['id'];
+			$tags = $this->model__blog_Blogtag->getTagsIdByArticleId($id);
+
+			return $tags;
 		}
+
 
 		/**
 		 * @param $param

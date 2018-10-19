@@ -47,8 +47,12 @@
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 
-						//$data = $__this->logic->dataList($__this->param);
-						$data = $__this->logic->dataListWithPagination($__this->param);
+						/**
+						 * 不分页
+						 */
+						$data = $__this->logic->dataList($__this->param);
+						$data = makeTree($data);
+
 
 						/**
 						 * 设置表格头
@@ -83,11 +87,6 @@
 								'attr'  => '' ,
 							] ,
 						]);
-
-						/**
-						 * 设置表分页按钮
-						 */
-						$_this->setPagination($data['pagination']);
 
 						/**
 						 * 设置js请求api
@@ -167,7 +166,7 @@
 
 						$_this->setSearchForm($searchForm);
 
-						foreach ($data['data'] as $k => $v)
+						foreach ($data as $k => $v)
 						{
 							/**
 							 * 构造tr
@@ -182,13 +181,12 @@
 									]) ,
 								]) ,
 
-								//用户名
 								integrationTags::td([
 
 									integrationTags::tdSimple([
 										//'name'     => '组名 : ' ,
 										'editable' => '1' ,
-										'value'    => $v['name'] ,
+										'value'    => indentationByLevel($v['name'] , $v['level']) ,
 										'field'    => 'name' ,
 										'reg'      => '/^\S+$/' ,
 										'msg'      => '必填' ,
