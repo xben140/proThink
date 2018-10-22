@@ -9,9 +9,11 @@
 	{
 		public static $instance = null;
 
+		const SESSOIN_TAG_ROLE = 'roles';
+		const SESSOIN_TAG_PRIVILEGES = 'privielges';
 		public $userInfo;
-		public $properties;
 		public $currentUri;
+
 
 
 		public static function getInstance($options = [])
@@ -86,7 +88,7 @@
 		 */
 		public function setRoles($data)
 		{
-			$this->setProperties(SESSOIN_TAG_ROLE , $data);
+			$this->setProperties(self::SESSOIN_TAG_ROLE , $data);
 
 			return $this;
 		}
@@ -97,7 +99,7 @@
 		 */
 		public function getRoles()
 		{
-			return $this->getProperties(SESSOIN_TAG_ROLE);
+			return $this->getProperties(self::SESSOIN_TAG_ROLE);
 		}
 
 
@@ -110,7 +112,7 @@
 		 */
 		public function getRolesFieldColumn($field)
 		{
-			return $this->getPropertiesFieldColumn(SESSOIN_TAG_ROLE , $field);;
+			return $this->getPropertiesFieldColumn(self::SESSOIN_TAG_ROLE , $field);;
 		}
 
 
@@ -123,7 +125,7 @@
 		 */
 		public function hasRoleByIds($roleIds = [])
 		{
-			return $this->hasPropertiesFieldOr(SESSOIN_TAG_ROLE , 'id' , $roleIds);
+			return $this->hasPropertiesFieldOr(self::SESSOIN_TAG_ROLE , 'id' , $roleIds);
 		}
 
 
@@ -136,103 +138,10 @@
 			return $this->getRolesFieldColumn('id');
 		}
 
-
-
-		/**
-		 * **********************************************************************************************************************
-		 *                               权限信息
-		 * **********************************************************************************************************************
-		 */
-
-		/**
-		 * 返回用户所有的权限信息数组
-		 * @return array
-		 */
-		public function getPrivileges()
-		{
-			return $this->getProperties(SESSOIN_TAG_PRIVILEGES);
-		}
-
-		/**
-		 * 设置用户拥有权限
-		 *
-		 * @param array $data
-		 *
-		 * @return Auth
-		 */
-		public function setPrivileges($data)
-		{
-			$this->setProperties(SESSOIN_TAG_PRIVILEGES , $data);
-
-			return $this;
-		}
-
-		/**
-		 * 获取权限字段
-		 *
-		 * @param $field
-		 *
-		 * @return array
-		 */
-		public function getPrivilegesFieldColumn($field)
-		{
-			return $this->getPropertiesFieldColumn(SESSOIN_TAG_PRIVILEGES , $field);;
-		}
-
-		/**
-		 * 权限生成数组
-		 * @return array
-		 */
-		public function getMenu()
-		{
-			$properties = $this->getProperties(SESSOIN_TAG_PRIVILEGES , function($data) {
-				return array_map(function($v) use ($data) {
-					return static::formatMenu($v['module'] , $v['controller'] , $v['action']);
-				} , $data);
-			});
-
-			return $properties;
-		}
-
-		/**
-		 * 判断是否有指定菜单权限
-		 *
-		 * @param $currentAction
-		 *
-		 * @return bool
-		 */
-		public function hasPermission($currentAction)
-		{
-			$menuMap = $this->getMenu();
-
-			AuthTool::addRule('authPrivilege' , [
-				static::callStatic('authPrivilege') ,
-				[
-					$currentAction ,
-					$menuMap ,
-				] ,
-				'未授权的访问' ,
-			]);
-
-			AuthTool::pushGroup('authPrivilege' , 'authPermission');
-
-			return AuthTool::execGroupAnd('authPermission');
-		}
-
-
-		/**
-		 * 当前方法是否允许访问
-		 * @return bool
-		 */
-		public function isAllowAccess()
-		{
-			return $this->hasPermission($this->currentUri);
-		}
-
 		/**
 		 * 角色事件注册机制
-		 * @param array $option
 		 *
+		 * @param array $option
 		 */
 		public function registerRoleEvent($option = [])
 		{
@@ -261,6 +170,154 @@
 
 		/**
 		 * **********************************************************************************************************************
+		 *                               权限信息
+		 * **********************************************************************************************************************
+		 */
+
+
+		/**
+		 * 当前方法是否允许访问
+		 * @return bool
+		 */
+		public function isAllowAccess()
+		{
+			return $this->hasPermission($this->currentUri);
+		}
+
+
+		/**
+		 * 返回用户所有的权限信息数组
+		 * @return array
+		 */
+		public function getPrivileges()
+		{
+			return self::addLevel($this->getProperties(self::SESSOIN_TAG_PRIVILEGES));
+		}
+
+		/**
+		 * 设置用户拥有权限
+		 *
+		 * @param array $data
+		 *
+		 * @return Auth
+		 */
+		public function setPrivileges($data)
+		{
+			$this->setProperties(self::SESSOIN_TAG_PRIVILEGES , $data);
+
+			return $this;
+		}
+
+		/**
+		 * 追加权限 直接从数据库查出来没处理的结构
+		 *
+		 * @param array $data
+		 *
+		 * @return Auth
+		 */
+		public function appendPrivileges($data)
+		{
+			$data_ = $this->getPrivileges();
+
+			$this->setProperties(self::SESSOIN_TAG_PRIVILEGES , array_merge($data_ , $data));
+
+			return $this;
+		}
+
+
+		/**
+		 * 获取权限字段
+		 *
+		 * @param $field
+		 *
+		 * @return array
+		 */
+		public function getPrivilegesFieldColumn($field)
+		{
+			return $this->getPropertiesFieldColumn(self::SESSOIN_TAG_PRIVILEGES , $field);;
+		}
+
+
+		/**
+		 * 权限生成数组
+		 * @return array
+		 */
+		public function getPrivilegesMap()
+		{
+			$properties = $this->getProperties(self::SESSOIN_TAG_PRIVILEGES , function($data) {
+				return array_map(function($v) use ($data) {
+					return static::formatMenu($v['module'] , $v['controller'] , $v['action']);
+				} , $data);
+			});
+
+			return $properties;
+		}
+
+		/**
+		 * 判断是否有指定菜单权限
+		 *
+		 * @param $currentAction
+		 *
+		 * @return bool
+		 */
+		public function hasPermission($currentAction)
+		{
+			$menuMap = $this->getPrivilegesMap();
+
+			AuthTool::addRule('authPrivilege' , [
+				static::callStatic('authPrivilege') ,
+				[
+					$currentAction ,
+					$menuMap ,
+				] ,
+				'未授权的访问' ,
+			]);
+
+			AuthTool::pushGroup('authPrivilege' , 'authPermission');
+
+			return AuthTool::execGroupAnd('authPermission');
+		}
+
+
+		/**
+		 * 生成菜单树
+		 * @return array
+		 */
+		public function getMenuTree()
+		{
+			$privileges = $this->getPrivileges();
+
+			return self::makeMenuTree($privileges);
+		}
+
+
+		/**
+		 * 添加等级段
+		 *
+		 * @param        $data
+		 * @param int    $id
+		 * @param int    $level
+		 * @param string $parentField
+		 *
+		 * @return array
+		 */
+		public static function addLevel($data , $id = 0 , $level = 1 , $parentField = 'pid')
+		{
+			static $result = [];
+			foreach ($data as $k => $v)
+			{
+				if($v[$parentField] == $id)
+				{
+					$v['level'] = $level;
+					$result[] = $v;
+					self::addLevel($data , $v['id'] , $level + 1 , $parentField);
+				}
+			}
+
+			return $result;
+		}
+		/**
+		 * **********************************************************************************************************************
 		 *                               当前uri
 		 * **********************************************************************************************************************
 		 */
@@ -286,130 +343,6 @@
 		}
 
 
-		/**
-		 * **********************************************************************************************************************
-		 *                               属性处理通用
-		 * **********************************************************************************************************************
-		 */
-
-		/**
-		 * 设置一个属性
-		 *
-		 * @param $key
-		 * @param $value
-		 *
-		 * @return Auth
-		 */
-		public function setProperties($key , $value)
-		{
-			$this->properties[static::makeKey($key)] = $value;
-
-			return $this;
-		}
-
-		/**
-		 *    获取指定属性
-		 *
-		 * @param string $key
-		 * @param null   $callback
-		 * @param        $parameters
-		 *
-		 * @return mixed
-		 */
-		public function getProperties($key = '' , $callback = null , $parameters = [])
-		{
-			$res = $data = isset($this->properties[static::makeKey($key)]) ? $this->properties[static::makeKey($key)] : $this->properties;
-
-			if(is_callable($callback))
-			{
-				array_unshift($parameters , $data);
-				$res = call_user_func_array($callback , $parameters);
-			}
-
-			return $res;
-		}
-
-		/**
-		 * 删除指定属性
-		 *
-		 * @param $key
-		 */
-		public function delProperties($key)
-		{
-			unset($this->properties[static::makeKey($key)]);
-		}
-
-
-		/**
-		 * 反回指定属性的指定列
-		 *
-		 * @param $key
-		 * @param $field
-		 *
-		 * @return array
-		 */
-		public function getPropertiesFieldColumn($key , $field)
-		{
-			$properties = $this->getProperties($key , function($data , $field) {
-				return array_map(function($v) use ($field) {
-					return $v[$field];
-				} , $data);
-			} , [$field]);
-
-			return $properties;
-		}
-
-		/**
-		 * @param string               $key
-		 * @param string               $field
-		 * @param integer|string|array $value
-		 *
-		 * @return bool
-		 */
-		public function hasPropertiesFieldAnd($key , $field , $value)
-		{
-			(!is_array($value) && ($value = [(int)$value]));
-			$propertiesColumn = $this->getPropertiesFieldColumn($key , $field);
-
-			$flag = true;
-			foreach ($value as $k => $v)
-			{
-				if(!in_array($propertiesColumn , $v))
-				{
-					$flag = false;
-					break;
-				}
-			}
-
-			return $flag;
-		}
-
-		/**
-		 * @param string               $key
-		 * @param string               $field
-		 * @param integer|string|array $value
-		 *
-		 * @return bool
-		 */
-		public function hasPropertiesFieldOr($key , $field , $value)
-		{
-			(!is_array($value) && ($value = [(int)$value]));
-			$propertiesColumn = $this->getPropertiesFieldColumn($key , $field);
-
-			$flag = false;
-			foreach ($value as $k => $v)
-			{
-				if(in_array($v , $propertiesColumn))
-				{
-					$flag = true;
-					break;
-				}
-			}
-
-			return $flag;
-		}
-
-
 
 		/**
 		 * **********************************************************************************************************************
@@ -427,6 +360,30 @@
 		public static function formatMenu($a , $b , $c)
 		{
 			return strtolower($a . '/' . $b . '/' . $c);
+		}
+
+		/**
+		 * 生成菜单树
+		 *
+		 * @param     $items
+		 * @param int $id
+		 *
+		 * @return array
+		 */
+		function makeMenuTree($items , $id = 0)
+		{
+			$tree = array();
+			foreach ($items as $k1 => $v1)
+			{
+				if($v1['pid'] == $id)
+				{
+					$v1['path'] = self::formatMenu($v1['module'] , $v1['controller'] , $v1['action']);
+					$v1['son'] = self::makeMenuTree($items , $v1['id']);
+					$tree[] = $v1;
+				}
+			}
+
+			return $tree;
 		}
 
 	}

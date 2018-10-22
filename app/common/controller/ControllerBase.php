@@ -39,6 +39,12 @@
 		 */
 		protected $displayContents;
 
+		public function __construct()
+		{
+			parent::__construct();
+			//var_export(get_defined_constants(1)['user']);exit;
+		}
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -97,7 +103,12 @@
 
 			define('DB_LIST_ROWS' , config('paginate.list_rows'));
 
-			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , $this->makeModuleStaticUrl());
+			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
+			defined('MODEL_STATIC_URL') or define('MODEL_STATIC_URL' , replaceToUrlSeparator(URL_STATIC . 'module/'));
+
+
+			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
+			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
 
 			$this->param = $this->request->param();
 			$this->param_get = $this->request->get();
@@ -397,38 +408,28 @@
 			return pathinfo($tempPath);
 		}
 
-		/**
-		 * 定位到控制器下的static目录
-		 * @return string
-		 * @throws \ReflectionException
-		 */
-		public function makeModuleStaticUrl()
-		{
-			return URL_STATIC . 'module/' . MODULE_NAME . '/';
-		}
-
 	}
 
-	//var_export(get_defined_constants(1));exit;;
+
 	array(
-		'APP_PATH'               => 'F:\\localWeb\\public_local15\\public/../app/' ,
+		'APP_PATH'               => 'F:\\localWeb\\public_local14\\public/../app/' ,
 		'THINK_VERSION'          => '5.0.20' ,
-		'THINK_START_TIME'       => 1537417426.394999 ,
-		'THINK_START_MEM'        => 406264 ,
+		'THINK_START_TIME'       => 1540197895.8345001 ,
+		'THINK_START_MEM'        => 406888 ,
 		'EXT'                    => '.php' ,
 		'DS'                     => '\\' ,
-		'THINK_PATH'             => 'F:\\localWeb\\public_local15\\thinkphp\\' ,
-		'LIB_PATH'               => 'F:\\localWeb\\public_local15\\thinkphp\\library\\' ,
-		'CORE_PATH'              => 'F:\\localWeb\\public_local15\\thinkphp\\library\\think\\' ,
-		'TRAIT_PATH'             => 'F:\\localWeb\\public_local15\\thinkphp\\library\\traits\\' ,
-		'ROOT_PATH'              => 'F:\\localWeb\\public_local15\\' ,
-		'EXTEND_PATH'            => 'F:\\localWeb\\public_local15\\extend\\' ,
-		'VENDOR_PATH'            => 'F:\\localWeb\\public_local15\\vendor\\' ,
-		'RUNTIME_PATH'           => 'F:\\localWeb\\public_local15\\runtime\\' ,
-		'LOG_PATH'               => 'F:\\localWeb\\public_local15\\runtime\\log\\' ,
-		'CACHE_PATH'             => 'F:\\localWeb\\public_local15\\runtime\\cache\\' ,
-		'TEMP_PATH'              => 'F:\\localWeb\\public_local15\\runtime\\temp\\' ,
-		'CONF_PATH'              => 'F:\\localWeb\\public_local15\\public/../app/' ,
+		'THINK_PATH'             => 'F:\\localWeb\\public_local14\\thinkphp\\' ,
+		'LIB_PATH'               => 'F:\\localWeb\\public_local14\\thinkphp\\library\\' ,
+		'CORE_PATH'              => 'F:\\localWeb\\public_local14\\thinkphp\\library\\think\\' ,
+		'TRAIT_PATH'             => 'F:\\localWeb\\public_local14\\thinkphp\\library\\traits\\' ,
+		'ROOT_PATH'              => 'F:\\localWeb\\public_local14\\' ,
+		'EXTEND_PATH'            => 'F:\\localWeb\\public_local14\\extend\\' ,
+		'VENDOR_PATH'            => 'F:\\localWeb\\public_local14\\vendor\\' ,
+		'RUNTIME_PATH'           => 'F:\\localWeb\\public_local14\\runtime\\' ,
+		'LOG_PATH'               => 'F:\\localWeb\\public_local14\\runtime\\log\\' ,
+		'CACHE_PATH'             => 'F:\\localWeb\\public_local14\\runtime\\cache\\' ,
+		'TEMP_PATH'              => 'F:\\localWeb\\public_local14\\runtime\\temp\\' ,
+		'CONF_PATH'              => 'F:\\localWeb\\public_local14\\public/../app/' ,
 		'CONF_EXT'               => '.php' ,
 		'ENV_PREFIX'             => 'PHP_' ,
 		'IS_CLI'                 => false ,
@@ -446,8 +447,8 @@
 		'QR_FORMAT_TEXT'         => 0 ,
 		'QR_FORMAT_PNG'          => 1 ,
 		'QR_CACHEABLE'           => true ,
-		'QR_CACHE_DIR'           => 'F:\\localWeb\\public_local15\\vendor\\kairos\\phpqrcode\\cache\\' ,
-		'QR_LOG_DIR'             => 'F:\\localWeb\\public_local15\\vendor\\kairos\\phpqrcode\\' ,
+		'QR_CACHE_DIR'           => 'F:\\localWeb\\public_local14\\vendor\\kairos\\phpqrcode\\cache\\' ,
+		'QR_LOG_DIR'             => 'F:\\localWeb\\public_local14\\vendor\\kairos\\phpqrcode\\' ,
 		'QR_FIND_BEST_MASK'      => true ,
 		'QR_FIND_FROM_RANDOM'    => false ,
 		'QR_DEFAULT_MASK'        => 2 ,
@@ -498,7 +499,7 @@
 		'SINGLE_IMG'             => 2 ,
 		'MULTI_IMG'              => 3 ,
 		'TIME_INSERT_FIELD_NAME' => 'time' ,
-		'TIME_NOW'               => 1537417426 ,
+		'TIME_NOW'               => 1540197895 ,
 		'SYS_APP_NAMESPACE'      => 'app' ,
 		'SYS_HOOK_DIR_NAME'      => 'hook' ,
 		'SYS_ADDON_DIR_NAME'     => 'addon' ,
@@ -510,20 +511,20 @@
 		'SYS_DS_PROS'            => '/' ,
 		'SYS_DS_CONS'            => '\\' ,
 		'SESSION_TAG_ADMIN'      => 'admin_info' ,
-		'SYS_NON_LOGIN_INDEX'    => 'portal/login/login' ,
+		'SYS_NON_LOGIN_INDEX'    => 'admin/login/login' ,
 		'SYS_LOGIN_INDEX'        => 'admin/index/index' ,
 		'SYS_DB_PREFIX'          => 'ithink_' ,
-		'PATH_ADDON'             => 'F:\\localWeb\\public_local15\\addon\\' ,
-		'PATH_PUBLIC'            => 'F:\\localWeb\\public_local15\\public\\' ,
-		'PATH_UPLOAD'            => 'F:\\localWeb\\public_local15\\public\\upload\\' ,
-		'PATH_PICTURE'           => 'F:\\localWeb\\public_local15\\public\\upload\\picture\\' ,
-		'PATH_FILE'              => 'F:\\localWeb\\public_local15\\public\\upload\\file\\' ,
-		'PATH_SERVICE'           => 'F:\\localWeb\\public_local15\\app\\common\\service\\' ,
+		'PATH_ADDON'             => 'F:\\localWeb\\public_local14\\addon\\' ,
+		'PATH_PUBLIC'            => 'F:\\localWeb\\public_local14\\public\\' ,
+		'PATH_UPLOAD'            => 'F:\\localWeb\\public_local14\\public\\upload\\' ,
+		'PATH_PICTURE'           => 'F:\\localWeb\\public_local14\\public\\upload\\picture\\' ,
+		'PATH_FILE'              => 'F:\\localWeb\\public_local14\\public\\upload\\file\\' ,
+		'PATH_SERVICE'           => 'F:\\localWeb\\public_local14\\app\\common\\service\\' ,
 		'PATH_COMMON_LOGIC'      => 'app\\common\\logic\\' ,
-		'PATH_HPLUS'             => 'F:\\localWeb\\public_local15\\public\\hplus\\' ,
-		'PATH_TEMP'              => 'F:\\localWeb\\public_local15\\public\\temp\\' ,
-		'PATH_STATIC'            => 'F:\\localWeb\\public_local15\\public\\static\\' ,
-		'PATH_THEMES'            => 'F:\\localWeb\\public_local15\\public\\themes\\' ,
+		'PATH_HPLUS'             => 'F:\\localWeb\\public_local14\\public\\hplus\\' ,
+		'PATH_TEMP'              => 'F:\\localWeb\\public_local14\\public\\temp\\' ,
+		'PATH_STATIC'            => 'F:\\localWeb\\public_local14\\public\\static\\' ,
+		'PATH_THEMES'            => 'F:\\localWeb\\public_local14\\public\\themes\\' ,
 		'API_CODE_NAME'          => 'code' ,
 		'API_MSG_NAME'           => 'msg' ,
 		'RESOURCE_INDEX_MENU'    => '0' ,
@@ -539,7 +540,6 @@
 		'SESSOIN_TAG_PRIVILEGES' => 'privileges' ,
 		'SESSOIN_TAG_ROLE_NAME'  => 'rolesName' ,
 		'SESSOIN_TAG_ROLE_IDS'   => 'rolesId' ,
-		'AAAAA'                  => '0' ,
 		'ADMIN_ID'               => 1 ,
 		'GLOBAL_ADMIN_ROLE_ID'   => 1 ,
 		'IS_POST'                => false ,
@@ -547,22 +547,28 @@
 		'IS_AJAX'                => false ,
 		'IS_PJAX'                => false ,
 		'IS_MOBILE'              => false ,
-		'MODULE_NAME'            => 'doc' ,
-		'CONTROLLER_NAME'        => 'doc' ,
+		'MODULE_NAME'            => 'admin' ,
+		'CONTROLLER_NAME'        => 'module' ,
 		'ACTION_NAME'            => 'datalist' ,
-		'URL'                    => 'doc/datalist' ,
-		'URL_MODULE'             => 'doc/doc/datalist' ,
-		'URL_TRUE'               => 'http://local15.cc/doc/doc/datalist.html' ,
-		'DOMAIN'                 => 'http://local15.cc' ,
+		'URL'                    => 'module/datalist' ,
+		'URL_MODULE'             => 'admin/module/datalist' ,
+		'URL_TRUE'               => 'http://local14.cc/admin/module/datalist.html' ,
+		'DOMAIN'                 => 'http://local14.cc' ,
 		'IP'                     => '127.0.0.1' ,
-		'URL_ROOT'               => 'http://local15.cc/' ,
-		'URL_UPLOAD'             => 'http://local15.cc/upload/' ,
-		'URL_PICTURE'            => 'http://local15.cc/upload/picture/' ,
-		'URL_FILE'               => 'http://local15.cc/upload/file/' ,
-		'URL_HPLUS'              => 'http://local15.cc/hplus/' ,
-		'URL_STATIC'             => 'http://local15.cc/static/' ,
-		'URL_IMAGE'              => 'http://local15.cc/static/image/' ,
-		'URL_PLUGINS'            => 'http://local15.cc/static/plugins/' ,
-		'URL_THEMES'             => 'http://local15.cc/themes/' ,
+		'URL_ROOT'               => 'http://local14.cc/' ,
+		'URL_UPLOAD'             => 'http://local14.cc/upload/' ,
+		'URL_PICTURE'            => 'http://local14.cc/upload/picture/' ,
+		'URL_FILE'               => 'http://local14.cc/upload/file/' ,
+		'URL_HPLUS'              => 'http://local14.cc/hplus/' ,
+		'URL_STATIC'             => 'http://local14.cc/static/' ,
+		'URL_IMAGE'              => 'http://local14.cc/static/image/' ,
+		'URL_PLUGINS'            => 'http://local14.cc/static/plugins/' ,
+		'URL_THEMES'             => 'http://local14.cc/themes/' ,
 		'DB_LIST_ROWS'           => '20' ,
+
+		'MODEL_STATIC_PATH'      => 'F:/localWeb/public_local14/public/static/module/' ,
+		'MODEL_STATIC_URL'       => 'http:\\\\local14.cc\\static\\module\\' ,
+
+		'CONTROLLER_STATIC_PATH' => 'F:/localWeb/public_local14/public/static/module/admin/' ,
+		'CONTROLLER_STATIC_URL'  => 'http:\\\\local14.cc\\static\\module\\admin\\' ,
 	);

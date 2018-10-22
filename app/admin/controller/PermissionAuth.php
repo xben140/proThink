@@ -176,11 +176,12 @@
 			//当前用户拥有的权限
 			$this->authClass->setPrivileges(getAdminSessionInfo(SESSOIN_TAG_PRIVILEGES));
 
+
 			/*
 						$a = $this->authClass->getPrivilegesFieldColumn('controller');
 						$a = $this->authClass->hasRoleByIds([1,2]);
 
-						$a = $this->authClass->getMenu();
+						$a = $this->authClass->getPrivilegesMap();
 
 						$this->authClass->getUserInfo('id', function($data, $d) {
 							return $data * $d;

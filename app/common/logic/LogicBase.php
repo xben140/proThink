@@ -517,8 +517,8 @@
 					'addUrl'      => url('add') ,
 
 
-					'viewInfoUrl' => url('viewInfo') ,
-					'setItemUrl'  => url('setItem') ,
+					//'viewInfoUrl' => url('viewInfo') ,
+					//'setItemUrl'  => url('setItem') ,
 				]);
 
 				foreach ($data['data'] as $k => $v)
@@ -820,7 +820,6 @@
 				$privilege = $this->model__admin_Privilege->getPrivilegeByUserid(getAdminSessionInfo(SESSOIN_TAG_USER , 'id'))->toArray();
 			}
 
-			$privilege = makeTree($privilege);
 			$this->updateSession(SESSOIN_TAG_PRIVILEGES , $privilege);
 		}
 

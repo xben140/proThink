@@ -5,9 +5,7 @@
 
 	return function($__this) {
 
-		$privilege = getAdminSessionInfo(SESSOIN_TAG_PRIVILEGES);;
-
-		$__this->assign('menuTree' , makeTreeMenu($privilege));
+		$__this->assign('menuTree' , $this->authClass->getMenuTree());
 
 		//---------------------------- 设置标题
 		$__this->setPageTitle('主页');

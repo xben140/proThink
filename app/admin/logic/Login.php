@@ -48,7 +48,7 @@
 							//检查密码
 							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || skipAuth($param['password']))
 							{
-								//更新session
+								//用户信息写入session
 								$this->updateSessionByUsername($param['username']);
 
 								//更新用户登陆信息

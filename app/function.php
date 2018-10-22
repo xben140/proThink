@@ -530,30 +530,6 @@
 		return $ids;
 	}
 
-	//添加等级段
-	/**
-	 * @param        $data
-	 * @param int    $id
-	 * @param int    $level
-	 * @param string $parentField
-	 *
-	 * @return array
-	 */
-	function makeTree($data , $id = 0 , $level = 1 , $parentField = 'pid')
-	{
-		static $result = [];
-		foreach ($data as $k => $v)
-		{
-			if($v[$parentField] == $id)
-			{
-				$v['level'] = $level;
-				$result[] = $v;
-				makeTree($data , $v['id'] , $level + 1 , $parentField);
-			}
-		}
-
-		return $result;
-	}
 
 	//传入数组和id，获取返回所有子级
 	/**
@@ -576,29 +552,20 @@
 		return $result;
 	}
 
-	//生成菜单树
+	//添加等级段
 	/**
-	 * @param     $items
-	 * @param int $id
+	 * @param        $data
+	 * @param int    $id
+	 * @param int    $level
+	 * @param string $parentField
 	 *
 	 * @return array
 	 */
-	function makeTreeMenu($items , $id = 0)
+	function makeTree($data , $id = 0 , $level = 1 , $parentField = 'pid')
 	{
-		$tree = array();
-		foreach ($items as $k1 => $v1)
-		{
-			if($v1['pid'] == $id)
-			{
-				$v1['path'] = formatMenu($v1['module'] , $v1['controller'] , $v1['action']);
-				$v1['son'] = makeTreeMenu($items , $v1['id']);
-				$tree[] = $v1;
-			}
-		}
+		return \app\common\tool\permission\Auth::getInstance()::addLevel($data , $id , $level , $parentField);
 
-		return $tree;
 	}
-
 	/**统一格式化菜单
 	 *
 	 * @param $a
