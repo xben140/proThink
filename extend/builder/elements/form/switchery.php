@@ -20,8 +20,7 @@
 			'__HPLUS__css/plugins/switchery/switchery.css' ,
 		];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -103,6 +102,8 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'      => '2' ,
+				'right'     => '8' ,
 				//'isChecked' => 'checked' ,
 				'isChecked' => '' ,
 
@@ -129,8 +130,8 @@ Css;
 			$contents = <<<'CONTENTS'
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<span><!-- ~~~field~~~ --></span>
 					<input type="checkbox" class="js-switch" value="<!-- ~~~value~~~ -->" name="<!-- ~~~name~~~ -->" <!-- ~~~attr~~~ --> <!-- ~~~isChecked~~~ --> >
 

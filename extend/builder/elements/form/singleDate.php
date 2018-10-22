@@ -12,13 +12,12 @@
 		 * @var array
 		 */
 		public $jsLib = [
-			'__HPLUS__js/plugins/layer/laydate/laydate.js'
+			'__HPLUS__js/plugins/layer/laydate/laydate.js' ,
 		];
 
 		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -104,6 +103,8 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'        => '2' ,
+				'right'       => '8' ,
 				'field_name'  => '' ,
 				'is_time'     => 'true' ,
 				'name'        => '' ,
@@ -128,8 +129,8 @@ Css;
 
 			
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-9">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<input name="<!-- ~~~name~~~ -->" value="<!-- ~~~value~~~ -->" class="form-control layer-date" placeholder="<!-- ~~~placeholder~~~ -->" onclick="laydate({istime: <!-- ~~~is_time~~~ -->, format: '<!-- ~~~format~~~ -->'})">
 					<label class="laydate-icon"></label>
 				</div>

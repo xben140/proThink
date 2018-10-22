@@ -22,17 +22,17 @@
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::row([
 				integrationTags::rowBlock([
-					/*
-												integrationTags::rowButton([
-													[
-														[
-															'class' => 'btn-info ' ,
-															'field' => '重新上传' ,
-															'attr' => 'onclick="location.reload()"' ,
-														] ,
-													],
-												]),
-					*/
+/*
+					integrationTags::rowButton([
+						[
+							[
+								'class' => 'btn-info ' ,
+								'field' => '重新上传' ,
+								'attr' => 'onclick="location.reload()"' ,
+							] ,
+						],
+					]),
+*/
 
 
 					integrationTags::upload(SINGLE_IMG , [
@@ -77,6 +77,7 @@ AAA
 							'mimeTypes'  => 'image/*' ,
 						]) ,
 					]) ,
+
 
 				] , [
 					'width'      => '6' ,

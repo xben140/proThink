@@ -16,11 +16,9 @@
 
 		];
 
-		public $css = [
-		];
+		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 		/**
 		 * 自定义的js，引用此模板必须的js，多次引用只加载一次
@@ -71,9 +69,9 @@ Css;
 		 * @param        $name
 		 * @param        $fieldName
 		 * @param string $tips
-		 * @param array $selected
+		 * @param array  $selected
 		 */
-		function setOption($options , $name, $fieldName, $tips='', $selected=[])
+		function setOption($options , $name , $fieldName , $tips = '' , $selected = [])
 		{
 			$tmp = <<<str
 				<div class="checkbox i-checks">
@@ -95,7 +93,7 @@ str;
 				$replacement['__VALUE__'] = $v['value'];
 				$replacement['__NAME__'] = $name;
 
-				in_array($v['value'], $selected) && ($replacement['__CHECKED__'] = 'checked');
+				in_array($v['value'] , $selected) && ($replacement['__CHECKED__'] = 'checked');
 
 				$str .= strtr($tmp , $replacement);
 			}
@@ -120,6 +118,8 @@ str;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'  => '2' ,
+				'right' => '8' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -136,10 +136,10 @@ str;
 			$contents = <<<'CONTENTS'
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label">
 					<!-- ~~~field_name~~~ -->
 				</label>
-				<div class="col-sm-9">
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<!-- ~~~options~~~ -->
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> <!-- ~~~tip~~~ --> <span class="error-tip"></span></span>
 				</div>

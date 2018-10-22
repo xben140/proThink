@@ -10,7 +10,6 @@ time, mark, audio, video, input {
 	border         : none;
 	outline        : 0;
 	font-size      : 100%;
-	font           : inherit;
 	vertical-align : baseline;
 }
 

@@ -8,11 +8,9 @@
 	{
 		public $path = __DIR__;
 
-		public $css = [
-		];
+		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 		/**
 		 * 自定义的js，引用此模板必须的js，多次引用只加载一次
@@ -91,8 +89,10 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'       => '2' ,
+				'right'      => '8' ,
 				'field_name' => '' ,
-				'value'       => '' ,
+				'value'      => '' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -110,8 +110,8 @@ Css;
 		
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<p class="form-control-static"><!-- ~~~value~~~ --></p>
 				</div>
 			</div>
@@ -120,7 +120,8 @@ Css;
 CONTENTS;
 			/**
 			 *--------------------------------------------------------------------------
-			 */parent::__construct($contents);
+			 */
+			parent::__construct($contents);
 			$this->_init();
 		}
 	}

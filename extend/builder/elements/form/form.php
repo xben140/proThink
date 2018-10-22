@@ -70,8 +70,6 @@ Css;
 		 */
 
 
-
-
 		/**
 		 * @param $option
 		 */
@@ -95,8 +93,8 @@ AAAAA;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('ajaxSubmitEventMap') ,  strtr($t , [
-				'___ccccccc___' => $str,
+			$this->replaceTag(static::makeNodeName('ajaxSubmitEventMap') , strtr($t , [
+				'___ccccccc___' => $str ,
 			]));
 		}
 
@@ -135,13 +133,23 @@ AAAAA;
 			$contents = <<<'CONTENTS'
 						
 			<form action="<!-- ~~~action~~~ -->" class="<!-- ~~~class~~~ -->" id="<!-- ~~~id~~~ -->" method="<!-- ~~~method~~~ -->" <!-- ~~~attr~~~ --> >
-					<!-- _____DEFAULT_CONTENTS_____ -->
 					<div class="form-group">
-						<div class="col-sm-8 col-sm-offset-3">
-							<button class="btn btn-primary" type="submit">提交</button>
+						<div class="col-sm-3 col-sm-offset-2">
+							<button class="btn btn-primary" type="submit">提交内容</button>
 							<!--<button class="btn btn-info reset" type="reset">重写填写</button>-->
 						</div>
 					</div>
+					
+										<!-- _____DEFAULT_CONTENTS_____ -->
+										
+										
+					<div class="form-group">
+						<div class="col-sm-3 col-sm-offset-2">
+							<button class="btn btn-primary" type="submit">提交内容</button>
+							<!--<button class="btn btn-info reset" type="reset">重写填写</button>-->
+						</div>
+					</div>
+
 			</form>
 			
 			

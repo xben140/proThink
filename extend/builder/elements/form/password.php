@@ -65,8 +65,8 @@ Css;
 			{
 				$this->replaceTag(static::makeNodeName('isNeedConfirm') , <<<tag
 				<div class="form-group">
-					<label class="col-sm-3 control-label">确认密码</label>
-					<div class="col-sm-8">
+					<label class="col-sm-<!-- ~~~left~~~ --> control-label">确认密码</label>
+					<div class="col-sm-<!-- ~~~right~~~ -->">
 						<input name="<!-- ~~~confirm_name~~~ -->" class="form-control input-sm " type="password"  <!-- ~~~confirm_attr~~~ -->>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请再次输入密码<span class="error-tip"></span></span>
 					</div>
@@ -92,6 +92,8 @@ tag
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'         => '2' ,
+				'right'        => '8' ,
 				'tip'          => '密码允许字符为字母，数字，下划线，小数点，长度6-16位' ,
 				'name'         => '' ,
 				'attr'         => '' ,
@@ -114,8 +116,8 @@ tag
 
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label">密码</label>
-					<div class="col-sm-8">
+					<label class="col-sm-<!-- ~~~left~~~ --> control-label">密码</label>
+					<div class="col-sm-<!-- ~~~right~~~ -->">
 						<input name="<!-- ~~~name~~~ -->" class="form-control input-sm " type="password"  <!-- ~~~attr~~~ -->>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><!-- ~~~tip~~~ --><span class="error-tip"></span></span>
 					</div>
@@ -125,8 +127,8 @@ tag
 <!--
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label">确认密码：</label>
-					<div class="col-sm-8">
+					<label class="col-sm-<!-- ~~~left~~~ --> control-label">确认密码：</label>
+					<div class="col-sm-<!-- ~~~right~~~ -->">
 						<input name="&lt;!&ndash; ~~~confirm_name~~~ &ndash;&gt;" class="form-control input-sm " type="password"  &lt;!&ndash; ~~~confirm_attr~~~ &ndash;&gt;>
 						<span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请再次输入密码<span class="error-tip"></span></span>
 					</div>

@@ -946,10 +946,11 @@
 		 * @param array  $params
 		 * @param array  $eventMap
 		 * @param array  $optionMap
+		 * @param array  $NodeValue
 		 *
 		 * @return array
 		 */
-		public static function upload($type , $params = [] , $eventMap = [] , $optionMap = [])
+		public static function upload($type , $params = [] , $eventMap = [] , $optionMap = [], $NodeValue = [])
 		{
 			$map = [
 				'uploadSingleFile' ,
@@ -959,10 +960,11 @@
 			];
 
 			$class = isset($map[$type]) ? $map[$type] : $map[2];
-			$doms[] = elementsFactory::{$class}()->make(function(&$doms , $_this) use ($params , $eventMap , $optionMap) {
+			$doms[] = elementsFactory::{$class}()->make(function(&$doms , $_this) use ($params , $eventMap , $optionMap, $NodeValue) {
 				$_this->setOption($params);
 				$_this->setEventMap($eventMap);
 				$_this->setOptionMap($optionMap);
+				$_this->setNodeValue($NodeValue);
 			});
 
 			return $doms;

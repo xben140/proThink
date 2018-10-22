@@ -47,6 +47,8 @@
 
 						integrationTags::upload(SINGLE_FILE , [
 							[
+								'left'  => '2' ,
+								'right' => '8' ,
 								'title' => '上传须知' ,
 								'items' => [
 									'单个文件最大50M' ,
@@ -56,16 +58,16 @@
 								] ,
 							] ,
 						] , [
-							'beforeFileQueued' => /** @lang javascript */
-								<<<'AAA'
+								'beforeFileQueued' => /** @lang javascript */
+									<<<'AAA'
 	function (file) {
 		var subject = $.trim(file.name);
 	}
 AAA
-							,
+,
 
-							'uploadSuccess' => /** @lang javascript */
-								<<<'AAA'
+								'uploadSuccess' => /** @lang javascript */
+									<<<'AAA'
 			function (file, response) {
 				console.dir(response)
 		
@@ -79,23 +81,26 @@ AAA
 				}
 			}
 AAA
-							,
+,
 
 
-							'uploadFinished' => /** @lang javascript */
-								<<<'AAA'
+								'uploadFinished' => /** @lang javascript */
+									<<<'AAA'
 	function () {
 		layer.msg('文件上传完成');
 	}
 AAA
-							,
-						] , [
-							'server'  => "'" . url('add') . "'" ,
-							'threads' => 10 ,
-							'accept'  => json_encode([
-								'extensions' => '*' ,
-								'mimeTypes'  => '*' ,
-							]) ,
+,
+							] , [
+								'server'  => "'" . url('add') . "'" ,
+								'threads' => 10 ,
+								'accept'  => json_encode([
+									'extensions' => '*' ,
+									'mimeTypes'  => '*' ,
+								]) ,
+							] , [
+							'left'  => '2' ,
+							'right' => '8' ,
 						]) ,
 
 					] , [
@@ -112,8 +117,8 @@ function (responseText, statusText) {
 	layer.msg(responseText.msg);	
 }
 AAA
-						,
-				]) ,
+,
+					]) ,
 
 
 				] , [

@@ -8,11 +8,9 @@
 	{
 		public $path = __DIR__;
 
-		public $css = [
-		];
+		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -69,7 +67,7 @@ Css;
 		 * @param string $tips
 		 * @param string $selected
 		 */
-		function setOption($options , $name, $fieldName, $tips='', $selected='')
+		function setOption($options , $name , $fieldName , $tips = '' , $selected = '')
 		{
 			$tmp = "<option value='__VALUE__' __SELECTED__>__FIELD__</option>";
 			$str = '';
@@ -80,7 +78,7 @@ Css;
 				$replacement['__FIELD__'] = $v['field'];
 				$replacement['__VALUE__'] = $v['value'];
 
-				$selected == $v['value'] &&  ($replacement['__SELECTED__'] = 'selected');
+				$selected == $v['value'] && ($replacement['__SELECTED__'] = 'selected');
 
 				$str .= strtr($tmp , $replacement);
 			}
@@ -105,6 +103,8 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'  => '2' ,
+				'right' => '8' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -121,10 +121,10 @@ Css;
 			$contents = <<<'CONTENTS'
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label">
+					<label class="col-sm-<!-- ~~~left~~~ --> control-label">
 						<!-- ~~~field_name~~~ -->
 					</label>
-					<div class="col-sm-8">
+					<div class="col-sm-<!-- ~~~right~~~ -->">
 						<select class="form-control  m-b" name="<!-- ~~~name~~~ -->">
 							<!-- ~~~options~~~ -->
 						</select>

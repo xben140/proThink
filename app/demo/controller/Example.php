@@ -18,6 +18,65 @@
 	class Example extends FrontendBase
 	{
 
+		public function __construct()
+		{
+
+			parent::__construct();
+		}
+
+		public function _initialize()
+		{
+			parent::_initialize();
+			elementsFactory::registerMap(config('elements_map'));
+
+			/**
+			 * 设置link标签
+			 */
+			$this->makePage()->setCss(tagConstructor::css([
+				'__HPLUS__css/bootstrap.min14ed.css' ,
+				'__HPLUS__css/font-awesome.min93e3.css' ,
+				"__HPLUS__css/animate.min.css" ,
+				"__HPLUS__css/style.min862f.css" ,
+				'__STATIC__/css/custom.css' ,
+			]));
+
+			/**
+			 * 设置head里的js
+			 */
+			$this->makePage()->setJsLib(tagConstructor::js([
+				'__HPLUS__js/jquery.min.js' ,
+				'__HPLUS__js/bootstrap.min.js' ,
+				'__HPLUS__js/content.min.js' ,
+				'__HPLUS__js/plugins/layer/layer.js' ,
+			]));
+
+			/**
+			 * 设置body之前的js始终加在setJsInvoke上面
+			 */
+			$this->makePage()->setScript(tagConstructor::js([
+				'__STATIC__/js/custom.js' ,
+			]));
+
+			/**
+			 * 设置body标签闭合之前的js
+			 */
+			$this->makePage()->setJsInvoke(tagConstructor::js([
+				'__CONTROLLER_STATIC_URL__/js/custom.js' ,
+			]));
+
+
+			/**
+			 * 设置body属性
+			 */
+			$this->makePage()->setNodeValue([
+				'BODY_ATTR' => tagConstructor::buildKV([
+					'class' => ' gray-bg' ,
+				]) ,
+			]);
+
+		}
+
+
 		/**
 		 * ******************************************************************************************
 		 *                                基础测试

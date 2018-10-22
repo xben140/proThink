@@ -97,8 +97,11 @@ Css;
 				'name'       => '' ,
 				'value'      => '' ,
 				'attr'       => '' ,
-				'tip'       => '' ,
+				'tip'        => '' ,
 				'style'      => 'width:100%;height:200px;' ,
+
+				'left'  => '2' ,
+				'right' => '8' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -115,8 +118,8 @@ Css;
 			$contents = <<<'CONTENTS'
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<textarea   type="text/plain" style="<!-- ~~~style~~~ -->" name="<!-- ~~~name~~~ -->" <!-- ~~~attr~~~ -->><!-- ~~~value~~~ --></textarea>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> <!-- ~~~tip~~~ --> <span class="error-tip"></span></span>
 				</div>

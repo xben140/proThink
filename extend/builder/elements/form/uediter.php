@@ -21,8 +21,7 @@
 			'__HPLUS__css/plugins/switchery/switchery.css' ,
 		];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -115,10 +114,11 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+
 				'field_name' => '' ,
 				'name'       => '' ,
 				'value'      => '' ,
-				'left'       => '3' ,
+				'left'       => '2' ,
 				'right'      => '8' ,
 			]);
 			/**

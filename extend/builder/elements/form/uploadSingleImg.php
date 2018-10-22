@@ -10,12 +10,12 @@
 
 		public $css = [
 			'__PLUGINS__webuploader/css/webuploader.css' ,
-			'__PLUGINS__webuploader/examples/single-image-upload/style.css',
+			'__PLUGINS__webuploader/examples/single-image-upload/style.css' ,
 		];
 
 		public $jsScript = [
 			'__PLUGINS__webuploader/dist/webuploader.min.js' ,
-			'__PLUGINS__webuploader/examples/single-image-upload/upload.js',
+			'__PLUGINS__webuploader/examples/single-image-upload/upload.js' ,
 		];
 
 
@@ -90,8 +90,8 @@ AAAAA;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('eventsMap') ,  strtr($t , [
-				'___ccccccc___' => $str,
+			$this->replaceTag(static::makeNodeName('eventsMap') , strtr($t , [
+				'___ccccccc___' => $str ,
 			]));
 		}
 
@@ -118,8 +118,8 @@ AAAAA;
 				$str .= strtr($tmp1 , $replacement);
 			}
 
-			$this->replaceTag(static::makeNodeName('optionsMap') ,  strtr($t , [
-				'___ccccccc___' => $str,
+			$this->replaceTag(static::makeNodeName('optionsMap') , strtr($t , [
+				'___ccccccc___' => $str ,
 			]));
 
 		}
@@ -162,7 +162,9 @@ AAAAA;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
-				'default_img' =>generateProfilePicPath(config('default_img'), 0) ,
+				'left'        => '0' ,
+				'right'       => '12' ,
+				'default_img' => generateProfilePicPath(config('default_img') , 0) ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -177,8 +179,10 @@ AAAAA;
 			 * ----------------------------------------自定义内容
 			 */
 			$contents = <<<'CONTENTS'
-
-					<!-- 单图片dom结构部分-->
+				<div class="form-group">
+					<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+					<div class="col-sm-<!-- ~~~right~~~ -->">
+						<!-- 单图片dom结构部分-->
 							<div class="page-container">
 
 								<!-- ~~~tips~~~ -->
@@ -213,15 +217,18 @@ AAAAA;
 								<!--/单图片dom结构部分-->
 
 							</div>
+						</div>
+						<div class="row"></div>
+				</div>
 					
-							<script>
-							//<!-- ~~~eventsMap~~~ -->
-							
-							
-							//<!-- ~~~optionsMap~~~ -->
-						
-							</script>
-							<!--/单图片dom结构部分-->
+				<script>
+				//<!-- ~~~eventsMap~~~ -->
+				
+				
+				//<!-- ~~~optionsMap~~~ -->
+			
+				</script>
+				<!--/单图片dom结构部分-->
 
 
 CONTENTS;

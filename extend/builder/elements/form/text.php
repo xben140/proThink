@@ -8,11 +8,9 @@
 	{
 		public $path = __DIR__;
 
-		public $css = [
-		];
+		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 		/**
 		 * 自定义的js，引用此模板必须的js，多次引用只加载一次
@@ -105,6 +103,8 @@ Css;
 				'value'       => '' ,
 				'attr'        => '' ,
 				'name'        => '' ,
+				'left'        => '2' ,
+				'right'       => '8' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -121,8 +121,8 @@ Css;
 			$contents = <<<'CONTENTS'
 		
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<input placeholder="<!-- ~~~placeholder~~~ -->"   name="<!-- ~~~name~~~ -->" class="form-control  " type="text" value="<!-- ~~~value~~~ -->"  <!-- ~~~attr~~~ -->>
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><!-- ~~~tip~~~ --><span class="error-tip"></span></span>
 				</div>
@@ -131,7 +131,8 @@ Css;
 CONTENTS;
 			/**
 			 *--------------------------------------------------------------------------
-			 */parent::__construct($contents);
+			 */
+			parent::__construct($contents);
 			$this->_init();
 		}
 	}

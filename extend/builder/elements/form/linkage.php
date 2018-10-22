@@ -69,7 +69,7 @@ Css;
 		 */
 		function setConfig($option)
 		{
-			$this->replaceTag(static::makeNodeName('config') ,  json_encode($option, 1));
+			$this->replaceTag(static::makeNodeName('config') , json_encode($option , 1));
 		}
 
 
@@ -94,6 +94,8 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'        => '2' ,
+				'right'       => '8' ,
 				'placeholder' => '区域选择' ,
 				'field_name'  => '区域选择' ,
 				'tip'         => '' ,
@@ -114,8 +116,8 @@ Css;
 			$contents = <<<'CONTENTS'
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<input autocomplete="off" placeholder="<!-- ~~~placeholder~~~ -->" name="text" class="form-control  " id="<!-- ~~~id~~~ -->" type="text">
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i><!-- ~~~tip~~~ --><span class="error-tip"></span></span>
 				</div>
@@ -131,7 +133,8 @@ Css;
 CONTENTS;
 			/**
 			 *--------------------------------------------------------------------------
-			 */parent::__construct($contents);
+			 */
+			parent::__construct($contents);
 			$this->_init();
 		}
 	}

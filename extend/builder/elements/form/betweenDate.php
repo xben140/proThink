@@ -12,13 +12,12 @@
 		 * @var array
 		 */
 		public $jsLib = [
-			'__HPLUS__js/plugins/layer/laydate/laydate.js'
+			'__HPLUS__js/plugins/layer/laydate/laydate.js' ,
 		];
 
 		public $css = [];
 
-		public $jsScript = [
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -128,6 +127,8 @@ Css;
 			 * ----------------------------------------设置表单里属性的默认值
 			 */
 			$this->setNodeValue([
+				'left'       => '2' ,
+				'right'      => '8' ,
 				'field_name' => '' ,
 				//'min'        => 'laydate.now()' ,
 				'min'        => '0' ,
@@ -157,8 +158,8 @@ Css;
 
 			
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><!-- ~~~field_name~~~ --></label>
-				<div class="col-sm-8">
+				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
+				<div class="col-sm-<!-- ~~~right~~~ -->">
 					<input placeholder="开始日期" class="form-control layer-date"   name="<!-- ~~~start_name~~~ -->" value="<!-- ~~~start_value~~~ -->" onclick="laydate({istime: <!-- ~~~is_time~~~ -->, format: '<!-- ~~~format~~~ -->', min    : <!-- ~~~min~~~ -->,})">
 					<input placeholder="结束日期" class="form-control layer-date"   name="<!-- ~~~end_name~~~ -->" value="<!-- ~~~end_value~~~ -->" onclick="laydate({istime: <!-- ~~~is_time~~~ -->, format: '<!-- ~~~format~~~ -->', min    : <!-- ~~~min~~~ -->,})">
 				</div>
