@@ -3,6 +3,8 @@
 	namespace app\demo\controller;
 
 	use base64\Base64;
+	use builder\elements\table\tr;
+	use file\FileTool;
 	use image\imageProcessor;
 	use PhpMyAdmin\SqlParser\Parser;
 	use PHPSQLParser\PHPSQLParser;
@@ -186,6 +188,61 @@ VALUES
 			//print_r($parser);;;
 			print_r($parser->statements[0]);;;
 			//print_r($flags);;;
+		}
+
+		public function file()
+		{
+
+			//$file = 'F:\WEB开发\开发软件';
+			$file = 'F:\KuGou\oh nannana.mp3';
+			$dir = 'F:\KuGou';
+
+			$to = 'C:\Users\Administrator\Desktop\test';
+
+
+			$to1 = 'C:\Users\Administrator\Desktop\test\oh nannana.mp3';
+			$to2 = 'C:\Users\Administrator\Desktop\test\oh nannana??.mp3';
+
+			//$size =  FileTool::fileSize($file);
+			//echo FileTool::byteFormat($size);
+
+			//$info = FileTool::fileInfo($file);
+			//FileTool::cp($file , $to1);
+
+			//FileTool::rm($to.'\ttt');
+			//FileTool::rm($to.'\PhpStorm 10 10.0.3.rar');
+
+			//FileTool::mv($to1 , $to2);
+
+			//FileTool::recursiveCp($file , $to);
+
+			/**
+			 * 过滤回调，返回真才会复制
+			 * 不填回调所有的都复制
+			 *
+			 * recursiveCp
+
+			FileTool::recursiveMv($file , $to , function($info , $relativePath) {
+				print_r([
+					$info->getPathname() ,
+					$relativePath ,
+				]);;;
+
+				return preg_match('#krc$#' , $info->getPathname());
+			});
+			 */
+
+
+			FileTool::recursiveRm($dir, function($info , $relativePath) {
+				print_r([
+					$info->getPathname() ,
+					$relativePath ,
+				]);;;
+				return true;
+				return preg_match('#krc$#' , $info->getPathname());
+			});
+
+
 		}
 
 	}
