@@ -83,7 +83,7 @@ js;
 			$replacement['__OPTIONS__'] = '';
 
 			isset($attr['attr']) && $attr['attr'] && ($replacement['__ATTR__'] = $attr['attr']);
-			isset($attr['param']) && $attr['param'] && ($replacement['__PARAM__'] = strtr('data-params=__DATA___', ['__DATA___' => json_encode($attr['param']),]));
+			isset($attr['params']) && $attr['params'] && ($replacement['__PARAM__'] = strtr('data-params=__DATA___', ['__DATA___' => json_encode($attr['params']),]));
 			isset($attr['options']) && $attr['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__', ['__OPTIONS__' => json_encode($attr['options']),]));
 
 			$str .= strtr($tmp , $replacement);

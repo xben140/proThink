@@ -47,58 +47,5 @@
 		}
 	});
 
-//设置为待定
-	$('.btn-set-stay').on({'click': function () {setStay(this)}});
-
-	function setStay($obj)
-	{
-		let _this = $($obj);
-		let data_id = getParentTr(_this).data('id');
-		// _this.attr("disabled", true);
-
-		let url = editUrl;
-
-		ajaxPost(url, {doc_status: '0', ids: data_id}, function (data) {
-			//成功返回回调
-			layer.msg(data.msg);
-			if (data.code)
-			{
-				refresh_page();
-				// getParentTr($(btn)).remove();
-			}
-		}, function (data) {
-			//错误返回回调
-
-		}, function (btn) {
-			//请求之前回调
-
-		}, _this);
-	}
-
 
 }())
-
-function useAddress($obj)
-{
-	let _this = $($obj);
-	let data_id = getParentTr(_this).data('id');
-	// _this.attr("disabled", true);
-
-	let url = assignAddressUrl;
-
-	ajaxPost(url, {address_id: data_id}, function (data) {
-		//成功返回回调
-		layer.msg(data.msg);
-		if (data.code)
-		{
-			refresh_page();
-			// getParentTr($(btn)).remove();
-		}
-	}, function (data) {
-		//错误返回回调
-
-	}, function (btn) {
-		//请求之前回调
-
-	}, _this);
-}

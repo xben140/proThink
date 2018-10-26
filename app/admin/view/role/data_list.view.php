@@ -294,7 +294,7 @@
 											'src'   => url('assignPrivileges') ,
 											'title' => '分配权限' ,
 										] ,
-										'param' => [
+										'params' => [
 											'id' => $v['id'] ,
 										] ,
 

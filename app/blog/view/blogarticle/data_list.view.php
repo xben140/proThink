@@ -344,7 +344,7 @@
 											'src'   => url('editContent') ,
 											'title' => '编辑博文' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'is_display' => 1 ,
@@ -360,7 +360,7 @@
 											'src'   => url('preview') ,
 											'title' => '预览博文' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'is_display' => 1 ,

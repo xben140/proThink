@@ -581,7 +581,7 @@
 									'src'   => url('detailInfo') ,
 									'title' => '详细数据' ,
 								] ,
-								'param'      => [
+								'params'      => [
 									'id' => $v['id'] ,
 								] ,
 								'is_display' => 1 ,

@@ -38,10 +38,11 @@
 
 			//F:/localWeb/public_local14/public/static/module/blog
 			$staticPath = (MODEL_STATIC_PATH . $moduleName);
-			//http:\\local14.cc\static\module\blog
-			$staticUrl = MODEL_STATIC_URL.(  $moduleName);
 
-			$makeImgPath = function($file) use ($staticPath, $staticUrl) {
+			//http:\\local14.cc\static\module\blog
+			$staticUrl = MODEL_STATIC_URL . ($moduleName);
+
+			$makeImgPath = function($file) use ($staticPath , $staticUrl) {
 				foreach ([
 							 'jpg' ,
 							 'png' ,
@@ -49,30 +50,61 @@
 							 'gif' ,
 						 ] as $k => $v)
 				{
-					if(is_file($staticPath . DS . 'image' . DS  . $file. '.'. $v))
+					if(is_file($staticPath . DS . 'image' . DS . $file . '.' . $v))
 					{
 						//http:\\local14.cc\static\module\doc\image\logo.gif
-						return $staticUrl . DS . 'image' . DS  . $file. '.'. $v;
+						return $staticUrl . DS . 'image' . DS . $file . '.' . $v;
 					}
 				}
+
 				//http://local14.cc/upload/picture/20181009/thumb_e42e2c89e73a2cef2b2b5ea894f974da.jpg
-				return  generateProfilePicPath(config('default_img'));
+				return generateProfilePicPath(config('default_img'));
 			};
 
 			return [
 				//小图标
-				'ico'   => $makeImgPath('logo') ,
+				'ico'        => $makeImgPath('logo') ,
+				'is_install' => !($this->model__admin_privilege->where(['category' => strtolower($moduleName) ,])->count() > 0) ,
 				//封面
-				'cover' => $makeImgPath('cover') ,
+				'cover'      => $makeImgPath('cover') ,
 				//应用信息
-				'info'  => include($appPath . DS . 'info.php') ,
+				'info'       => include($appPath . DS . 'info.php') ,
 				//应用信息
-				'conf'  => include($appPath . DS . 'conf.php') ,
+				'conf'       => include($appPath . DS . 'conf.php') ,
 				//应用信息
-				'menu'  => include($appPath . DS . 'menu.php') ,
+				'menu'       => include($appPath . DS . 'menu.php') ,
 				//安装sql语句
-				'sql'   => include($appPath . DS . 'sql.php') ,
+				'sql'        => include($appPath . DS . 'sql.php') ,
+				//备份的数据
+				//'backup'     => is_file($appPath . DS . 'data.json') ? include_once($appPath . DS . 'data.json') : '[]' ,
 			];
+
+		}
+
+		public function install($param)
+		{
+			switch ($param['type'])
+			{
+				case 'menu' :
+					//安装菜单调用
+
+					break;
+				case 'config' :
+					//安装配置调用
+
+					break;
+				case 'db' :
+					//安装数据调用
+
+					break;
+				default :
+					#...
+					break;
+			}
+		}
+
+		public function uninstall($param)
+		{
 
 		}
 

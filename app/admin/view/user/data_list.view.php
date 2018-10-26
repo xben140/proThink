@@ -430,7 +430,7 @@
 											'src'   => url('editPwd') ,
 											'title' => '修改密码' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '修改密码' ,
@@ -450,7 +450,7 @@
 											'src'   => url('assignRoles') ,
 											'title' => '用户授权' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '用户授权' ,

@@ -296,7 +296,7 @@
 											'src'   => url('viewInfo') ,
 											'title' => '查看数据' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'is_display' => 1 ,

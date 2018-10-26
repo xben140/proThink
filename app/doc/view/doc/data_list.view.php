@@ -672,7 +672,7 @@
 											'src'   => url('replaceDoc') ,
 											'title' => '替换稿件' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '替换稿件' ,
@@ -689,7 +689,7 @@
 											'src'   => url('assignAddress') ,
 											'title' => '设置地址' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '设置地址' ,
@@ -705,7 +705,7 @@
 											'src'   => url('doc/Docattachment/add') ,
 											'title' => '上传附件' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '上传附件' ,
@@ -718,7 +718,7 @@
 											'src'   => url('doc/Docattachment/dataList') ,
 											'title' => '查看附件' ,
 										] ,
-										'param'      => [
+										'params'      => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '查看附件' ,
@@ -728,9 +728,17 @@
 									'<br>' ,
 
 									integrationTags::tdButton([
-										'class'      => ' btn-success btn-set-stay' ,
-										'value'      => '设置待定' ,
 										'is_display' => $__this->viewClass->checkRule('VIEW_ASSIGE_ELEMENTS_doc_set_stay' , 'is_display') ,
+										'class'      => ' btn-success btn-custom-request' ,
+										'data'       => [
+											'src'        => url('edit') ,
+											'is_reload'  => 1 ,
+											'is_confirm' => 0 ,
+										] ,
+										'params'     => [
+											'doc_status' => 0 ,
+										] ,
+										'value'      => '设置待定' ,
 									]) ,
 
 									integrationTags::tdButton([

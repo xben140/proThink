@@ -163,13 +163,17 @@
 										if(!$isThisAddress)
 										{
 											$res = integrationTags::tdButton([
-												'class' => ' btn-warning btn-custom-event' ,
-												'data'  => [
-													'callback' => 'useAddress' ,
+												'class'  => ' btn-warning btn-custom-request' ,
+												'data'   => [
+													'src'        => 'assignAddress' ,
+													'is_reload'  => 1 ,
+													'is_confirm' => 0 ,
 												] ,
-												'value' => '使用此地址' ,
+												'params' => [
+													'address_id' => $v['id'] ,
+												] ,
+												'value'  => '使用此地址' ,
 											]);
-
 										}
 										else
 										{

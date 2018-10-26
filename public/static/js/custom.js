@@ -1,5 +1,8 @@
 (function () {
 
+	//icheck
+	$(document).ready(function () {typeof $(".i-checks").iCheck === "function" && $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})});
+
 	//图片用，点击可以直接替换图片
 	$('.index_pop').on({
 		'click': function () {
@@ -33,9 +36,6 @@
 		},
 	})
 
-	//icheck
-	$(document).ready(function () {typeof $(".i-checks").iCheck === "function" && $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})});
-
 	//自定义新窗口打开页面
 	$('.btn-open-window').on({
 		'click': function () {
@@ -57,7 +57,85 @@
 		}
 	});
 
+
+	//按钮定义请求事件
+	$('.btn-custom-request').on({
+		'click': function () {
+			doRuquest(this)
+		}
+	});
 })();
+
+
+//data-src
+//data-params
+//data-is_reload
+//data-is_confirm
+function doRuquest($obj)
+{
+	let _this = $($obj);
+	let data_id = getParentTr(_this).data('id');
+
+	let params = (_this.data('params'));
+	(typeof eval(params) === 'object') && (params = eval(params));
+	let url = _this.data('src') || _this.attr('src');
+	params['id'] = data_id;
+	params['ids'] = data_id;
+
+	if ((_this.data('is_confirm') !== undefined) && _this.data('is_confirm'))
+	{
+		layer.confirm('确定？', {
+			resize    : 1,
+			moveOut   : 1,
+			title     : '请确定当前操作',
+			shade     : 0.1,
+			closeBtn  : 0, //不显示关闭按钮
+			anim      : 0,
+			// anim      : randomNum(0, 6),
+			isOutAnim : 0,
+			shadeClose: true, //开启遮罩关闭
+			btn       : ['确定', '取消']
+		}, function (index, layero) {
+			layer.close(index)
+
+			ajaxPost(url, params, function (data) {
+				//成功返回回调
+				layer.msg(data.msg);
+				if (data.code)
+				{
+					_this.data('is_reload') && refresh_page();
+				}
+			}, function (data) {
+				//错误返回回调
+
+			}, function (btn) {
+				//请求之前回调
+
+			}, _this);
+
+		}, function (index) {
+			layer.close(index)
+		});
+
+	}
+	else
+	{
+		ajaxPost(url, params, function (data) {
+			//成功返回回调
+			layer.msg(data.msg);
+			if (data.code)
+			{
+				_this.data('is_reload') && refresh_page();
+			}
+		}, function (data) {
+			//错误返回回调
+
+		}, function (btn) {
+			//请求之前回调
+
+		}, _this);
+	}
+}
 
 /**
  *

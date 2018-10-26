@@ -349,9 +349,9 @@
 		 *
 		 * @return mixed
 		 */
-		public function makeView($__this)
+		public function makeView($__this, $temp = '')
 		{
-			$pathInfo = $this->makeViewPathInfo();
+			$pathInfo = $this->makeViewPathInfo($temp);
 			$viewFileName = $this->makeViewName($pathInfo);
 
 			$func = include $viewFileName;
@@ -399,10 +399,10 @@
 		 * @return mixed
 		 * @throws \ReflectionException
 		 */
-		public function makeViewPathInfo()
+		public function makeViewPathInfo($temp = '')
 		{
 			//当前方法对应的模板路径
-			$tempPath = $this->getTemplatePath();
+			$tempPath = $this->getTemplatePath($temp);
 			!is_dir(dirname($tempPath)) && mkdir(dirname($tempPath) , 0777 , 1);
 
 			return pathinfo($tempPath);

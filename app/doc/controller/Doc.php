@@ -126,15 +126,13 @@
 			if(IS_POST)
 			{
 				$id = session(md5(URL_MODULE));
-
+				unset($this->param['id']);
 				$this->jump($this->logic->edit($this->param , $id));
 			}
 			else
 			{
 				return $this->makeView($this);
 			}
-
-
 		}
 
 		public function setField()
