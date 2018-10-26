@@ -6,82 +6,132 @@
 
 	class FileTool
 	{
+
 		/**
 		 *
 		 */
 		const DS = DIRECTORY_SEPARATOR;
 
-
+		/**
+		 * 递归复制文件夹
+		 *
+		 * @param               $path
+		 * @param               $dest
+		 * @param callable|null $fitlerCallback
+		 */
 		public static function recursiveCp($path , $dest , callable $fitlerCallback = null)
 		{
 			$info = new \SplFileInfo($path);
+			$flag = true;
 
-			$info->isFile() ? self::cp($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorBFS($path , function($info , $relativePath) use ($dest , $fitlerCallback) {
-				$isCopy = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($isCopy = false);
-				$isCopy && self::cp($info->getPathname() , self::endDS($dest) . $relativePath);
-
-				return true;
-			});
-		}
-
-		public static function recursiveMv($path , $dest , callable $fitlerCallback = null)
-		{
-			$info = new \SplFileInfo($path);
-
-			$info->isFile() ? self::mv($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorBFS($path , function($info , $relativePath) use ($dest , $fitlerCallback) {
-				$isCopy = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($isCopy = false);
-				$isCopy && self::mv($info->getPathname() , self::endDS($dest) . $relativePath);
-
-				return true;
-			});
-		}
-
-		public static function recursiveRm($path , callable $fitlerCallback = null)
-		{
-			$info = new \SplFileInfo($path);
-
-			$info->isFile() ? self::rm($info->getPathname()) : self::itreatorBFS($path , function($info , $relativePath) use ($fitlerCallback) {
-				$isCopy = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($isCopy = false);
-				$isCopy && self::rm($info->getPathname());
+			$info->isFile() ? self::cp($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+				$flag = true;
+				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+				$flag && self::cp($info->getPathname() , self::endDS($dest) . $relativePath);
 
 				return true;
 			});
 		}
 
 		/**
+		 * 递归移动文件夹
+		 * * @param               $path
+		 *
+		 * @param               $dest
+		 * @param callable|null $fitlerCallback
+		 */
+		public static function recursiveMv($path , $dest , callable $fitlerCallback = null)
+		{
+			$info = new \SplFileInfo($path);
+			$flag = true;
+
+			$info->isFile() ? self::mv($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+				$flag = true;
+				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+				$flag && self::mv($info->getPathname() , self::endDS($dest) . $relativePath);
+
+				return true;
+			} , function($info , $relativePath) use (&$flag) {
+				$flag && self::rm($info->getPathname());
+			});
+		}
+
+		/**
+		 * 递归删除文件夹
+		 * * @param               $path
+		 *
+		 * @param callable|null $fitlerCallback
+		 */
+		public static function recursiveRm($path , callable $fitlerCallback = null)
+		{
+			$info = new \SplFileInfo($path);
+			$flag = true;
+
+			$info->isFile() ? self::rm($info->getPathname()) : self::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
+				$flag = true;
+				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+				$flag && self::rm($info->getPathname());
+
+				return true;
+			} , function($info , $relativePath) use (&$flag) {
+				$flag && self::rm($info->getPathname());
+			});
+		}
+
+		/**
+		 * 删除指定文件夹下所有空文件夹
+		 * * @param               $path
+		 *
+		 * @param callable|null $fitlerCallback
+		 */
+		public static function recursiveRmEmptyDir($path , callable $fitlerCallback = null)
+		{
+			$info = new \SplFileInfo($path);
+			$flag = true;
+
+			$info->isFile() ? self::rm($info->getPathname()) : self::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
+				$flag = self::isDirEmpty($info->getPathname());
+				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+
+				return true;
+			} , function($info , $relativePath) use (&$flag) {
+				$flag && self::rm($info->getPathname());
+			});
+		}
+
+		/**
 		 * 广度优先迭代
-		 * 带条件条件停止遍历功能
+		 * 带条件停止遍历功能
 		 *
 		 * @param          $path
 		 * @param callable $callback
+		 * @param callable $afterCallback
 		 */
-		public static function itreatorBFS($path , callable $callback)
+		public static function itreatorBFS($path , callable $callback , callable $afterCallback = null)
 		{
 			$dirs = [realpath($path)];
 			static $originPath = null;
 			!$originPath && $originPath = self::endDS($path);
 			do
 			{
-				$item = array_shift($dirs);
-				if(!$item) continue;
+				$fullPath = array_shift($dirs);
+				if(!$fullPath) continue;
 
-				if(is_dir($item))
+				$relativePath = '';
+				if(is_dir($fullPath) && is_readable($fullPath))
 				{
-					$item = self::endDS($item);
-					$relativePath = str_replace($originPath , '' , $item);
+					$fullPath = self::endDS($fullPath);
+					$relativePath = str_replace($originPath , '' , $fullPath);
 
-					$dirs_ = scandir($item);
-					$res = $callback(new \SplFileInfo($item) , $relativePath);
+					$dirs_ = @scandir($fullPath);
+					$res = $callback(new \SplFileInfo($fullPath) , $relativePath);
 					if($res)
 					{
-						$dirs_ = array_map(function($v) use ($item) {
+						$dirs_ = array_map(function($v) use ($fullPath) {
 							return (!in_array($v , [
 								'.' ,
 								'..' ,
-							])) ? $item . $v : '';
+							])) ? $fullPath . $v : '';
 						} , $dirs_);
 						$dirs = array_merge($dirs , $dirs_);
 					}
@@ -90,27 +140,29 @@
 						break;
 					}
 				}
-				elseif(is_file($item))
+				elseif(is_file($fullPath))
 				{
-					$relativePath = str_replace($originPath , '' , $item);
-					$callback(new \SplFileInfo($item) , $relativePath);
+					$relativePath = str_replace($originPath , '' , $fullPath);
+					$callback(new \SplFileInfo($fullPath) , $relativePath);
 				}
+				is_callable($afterCallback) && $afterCallback(new \SplFileInfo($fullPath) , $relativePath);
 
-				// file_put_contents('dd.txt', $item."\r\n", FILE_APPEND|LOCK_EX);
 			} while (count($dirs));
 		}
 
 		/**
 		 * 深度优先迭代
-		 * 带条件条件停止遍历功能
+		 * 带条件停止遍历功能
 		 *
 		 * @param          $path
 		 * @param callable $callback
+		 * @param callable $afterCallback
 		 *
 		 * @return void
 		 */
-		public static function itreatorDFS($path , callable $callback)
+		public static function itreatorDFS($path , callable $callback , callable $afterCallback = null)
 		{
+			if(!is_dir($path) || !is_readable($path)) return;
 			static $dep = 0;
 			static $originPath = null;
 
@@ -118,7 +170,7 @@
 			($dep === 0) && (!$originPath) && ($originPath = $path);
 			$dep++;
 
-			$dirs = scandir($path);
+			$dirs = @scandir($path);
 			foreach ($dirs as $k => $v)
 			{
 				if(!in_array($v , [
@@ -129,13 +181,10 @@
 					$fullPath = $path . $v;
 					$relativePath = str_replace($originPath , '' , $fullPath);
 
-					if(is_dir($fullPath))
+					if(is_dir($fullPath) && is_readable($fullPath))
 					{
 						$res = $callback(new \SplFileInfo($fullPath) , $relativePath);
-						if($res)
-						{
-							self::itreatorDFS($fullPath , $callback);
-						}
+						$res && self::itreatorDFS($fullPath , $callback , $afterCallback);
 					}
 					elseif(is_file($fullPath))
 					{
@@ -143,10 +192,11 @@
 						$callback(new \SplFileInfo($fullPath) , $relativePath);
 					}
 					//file_put_contents('cc.txt', $fullPath."\r\n", FILE_APPEND|LOCK_EX);
+					is_callable($afterCallback) && $afterCallback(new \SplFileInfo($fullPath) , $relativePath);
 				}
 			}
-			$dep--;
 
+			$dep--;
 			($dep === 0) && ($originPath = null);
 		}
 
@@ -213,9 +263,20 @@
 		/**
 		 * 获取文件详细信息
 		 * 文件名从程序编码转换成系统编码,传入utf8，系统函数需要为gbk
-		 *
-		 * @param $path
-		 *
+		 * [name] => cn_visio_professional_2016_x86_x64_dvd_6970929.iso
+		 * [path] => G:\迅雷下载\cn_visio_professional_2016_x86_x64_dvd_6970929.iso
+		 * [ext] => iso
+		 * [type] => file
+		 * [mode] => -rw- rw- rw-(0666)
+		 * [atime] => 1531204803
+		 * [ctime] => 1531204803
+		 * [mtime] => 1531205590
+		 * [isReadable] => 1
+		 * [isWritable] => 1
+		 * [isExecutable] =>
+		 * [size] => 2588262400
+		 * [error] =>
+		 * [dirpath] => G:\迅雷下载         * @param $path
 		 * @return array
 		 */
 		public static function fileInfo($path)
@@ -265,27 +326,11 @@
 
 			return $info;
 
-			/**
-			 * [name] => cn_visio_professional_2016_x86_x64_dvd_6970929.iso
-			 * [path] => G:\迅雷下载\cn_visio_professional_2016_x86_x64_dvd_6970929.iso
-			 * [ext] => iso
-			 * [type] => file
-			 * [mode] => -rw- rw- rw-(0666)
-			 * [atime] => 1531204803
-			 * [ctime] => 1531204803
-			 * [mtime] => 1531205590
-			 * [isReadable] => 1
-			 * [isWritable] => 1
-			 * [isExecutable] =>
-			 * [size] => 2588262400
-			 * [error] =>
-			 * [dirpath] => G:\迅雷下载
-			 */
 		}
 
 
 		/**
-		 * 获取文件(夹)权限 rwx_rwx_rwx
+		 * 获取文件(夹)权限 -rw- rw- rw-(0666)
 		 *
 		 * @param $file
 		 *
@@ -426,11 +471,14 @@
 			return $result;
 		}
 
+		/**
+		 * @param $path
+		 *
+		 * @return bool
+		 */
 		public static function isDirEmpty($path)
 		{
-			$t = scandir($path);
-
-			return count($t) == 2;
+			return is_dir($path) ? (count(@scandir($path)) == 2) : false;
 		}
 
 		/**
@@ -479,12 +527,26 @@
 		}
 
 		/**
-		 * @param     $size
-		 * @param int $dec
+		 * @param $path
 		 *
 		 * @return string
 		 */
-		public static function byteFormat($size , $dec = 2)
+		public static function replaceToUrlSeparator($path)
+		{
+			return strtr($path , [
+				'\\' => '/' ,
+			]);
+		}
+
+		/**
+		 * 格式化字节大小
+		 *
+		 * @param  number     $size 字节数
+		 * @param string |int $de
+		 *
+		 * @return string            格式化后的带单位的大小
+		 */
+		public static function byteFormat($size , $de = 2)
 		{
 			$a = array(
 				"B" ,
@@ -501,7 +563,7 @@
 				$pos++;
 			}
 
-			return round($size , $dec) . " " . $a[$pos];
+			return round($size , $de) . " " . $a[$pos];
 		}
 
 
@@ -526,6 +588,7 @@
 			if(is_dir($path))
 			{
 				self::mkdir_($dest);
+				self::rm($path);
 			}
 			else
 			{
@@ -537,7 +600,6 @@
 					self::rm($path);
 				}
 			}
-			self::rm(dirname($path));
 		}
 
 		/**
@@ -578,13 +640,12 @@
 			@chmod($path , 0777);
 			if(is_dir($path))
 			{
-				self::isDirEmpty(dirname($path)) && rmdir($path);
-
+				self::isDirEmpty(($path)) && is_writable($path) && @rmdir($path);
 				$res = !is_dir($path);
 			}
 			elseif(is_file($path))
 			{
-				unlink($path);
+				is_writable($path) && unlink($path);
 				$res = !is_file($path);
 			}
 

@@ -3,7 +3,6 @@
 	namespace app\demo\controller;
 
 	use base64\Base64;
-	use builder\elements\table\tr;
 	use file\FileTool;
 	use image\imageProcessor;
 	use PhpMyAdmin\SqlParser\Parser;
@@ -20,65 +19,6 @@
 		public $testPath = 'C:\Users\Administrator\Desktop\test\\';
 		public static $hashMap = [];
 
-		//批量压缩图片
-		public function rename()
-		{
-			$path = 'C:\Users\Administrator\Desktop\emo';
-
-			loop2($path , function($path , $dirs_ , $relativePath) {
-				//echo '------' . $relativePath . "\r\n";
-				//echo '------' . $path . "\r\n";
-				//echo "\r\n";
-
-				//返回真继续遍历下层，否则停止遍历此文件夹
-				return 1;
-
-			} , function($path , $pathinfo , $relativePath) {
-				$pathinfo = pathinfo_($path);
-
-				$reader = \PHPExif\Reader\Reader::factory(\PHPExif\Reader\Reader::TYPE_NATIVE);
-				$exif = $reader->read($path);
-
-				if($exif)
-				{
-					$data = $exif->getRawData();
-					//$data = \exif_read_data($path);
-
-					$name = date('Y-m-d-H-i-s' , $data['FileDateTime']) . '-' . $data['FileSize'] . '-' . $pathinfo['basename'];
-					$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . '/' . $name;
-				}
-
-				$dest = 'C:\Users\Administrator\Desktop\pic' . dirname($relativePath) . md5(uniqid($pathinfo['basename'] , 1)) . '.' . $pathinfo['extension'];
-
-				$a = md5_file($path);
-				echo '++++++' . $relativePath . '  --  ' . $a . "\r\n";
-				echo '++++++' . $path . "\r\n";
-				echo '------' . $dest . "\r\n";
-				echo "\r\n";
-
-				if(!in_array($a , self::$hashMap))
-				{
-					self::$hashMap[] = $a;
-
-					mkdir_(dirname($dest));
-
-					if(in_array(strtolower($pathinfo['extension']) , [
-						'jpeg' ,
-						'jpg' ,
-					]))
-					{
-						$imageCompress = imageProcessor::getProcessor('compress');
-						$ratio = 8;
-						$imageCompress->form($path)->ratio($ratio)->to($dest);
-					}
-					else
-					{
-						copy($path , $dest);
-					}
-
-				}
-			});
-		}
 
 		//图片缩略图测试
 		public function thumb()
@@ -86,7 +26,7 @@
 			$info = pathinfo($this->testImg);
 			$image = imageProcessor::Image()::open($this->testImg);
 
-			mkdir_($this->testPath);
+			FileTool::mkdir_($this->testPath);
 			$image->thumb(300 , 300)->save($this->testPath . '/thumb.png' , 'png');
 		}
 
@@ -95,7 +35,20 @@
 		{
 			$path = 'c:';
 
-			rm_empty_dir($path);
+			//删除空文件夹
+			FileTool::recursiveRmEmptyDir($path , function($info , $relativePath) {
+				echo $info->getPathname();
+				echo "\r\n";
+
+				if(FileTool::isDirEmpty($info->getPathname()))
+				{
+					echo '---------------- ---------------- ' . $info->getPathname();
+					echo "\r\n";
+					file_put_contents('dd.txt' , $info->getPathname() . "\r\n" , FILE_APPEND | LOCK_EX);
+				}
+
+				return true;
+			});
 		}
 
 		public function base64Test()
@@ -194,7 +147,7 @@ VALUES
 		{
 
 			//$file = 'F:\WEB开发\开发软件';
-			$file = 'F:\KuGou\oh nannana.mp3';
+			$file = 'F:\KuGou\普拉斯塔诺村.mp3';
 			$dir = 'F:\KuGou';
 
 			$to = 'C:\Users\Administrator\Desktop\test';
@@ -214,34 +167,89 @@ VALUES
 
 			//FileTool::mv($to1 , $to2);
 
-			//FileTool::recursiveCp($file , $to);
 
 			/**
 			 * 过滤回调，返回真才会复制
 			 * 不填回调所有的都复制
-			 *
 			 * recursiveCp
+			 **/
 
-			FileTool::recursiveMv($file , $to , function($info , $relativePath) {
-				print_r([
-					$info->getPathname() ,
-					$relativePath ,
-				]);;;
+			/*
+			 * //复制文件夹
+						FileTool::recursiveCp($dir , $to , function($info , $relativePath) {
+							echo $info->getPathname();
+							echo "\r\n";
+							return true;
+							//return preg_match('#krc#' , $info->getPathname());
+						});
 
-				return preg_match('#krc$#' , $info->getPathname());
-			});
-			 */
+			*/
+
+			/*
+				//删除文件夹
+						FileTool::recursiveMv($dir , $to , function($info , $relativePath) {
+							echo $info->getPathname();
+							echo "\r\n";
+							return true;
+							//return preg_match('#krc#' , $info->getPathname());
+						});
+			*/
+
+			/*
+				//删除文件夹
+						FileTool::recursiveRm($dir , function($info , $relativePath) {
+							echo $info->getPathname();
+							echo "\r\n";
+
+							return true;
+
+							return preg_match('#krc$#' , $info->getPathname());
+						});
+			*/
+
+		}
+
+		public function doImg()
+		{
+
+			$img = 'C:\Users\Administrator\Desktop\dd';
+			$dest = 'C:\Users\Administrator\Desktop\emo1';
+			//图片重命名
+			$hash = [];
+			FileTool::itreatorDFS($img , function($info , $relativePath) use ($dest , &$hash) {
+
+				if(is_file($info->getPathname()))
+				{
+					$a = md5_file($info->getPathname());
+
+					if(!in_array($a , $hash))
+					{
+						$hash[] = $a;
+
+						$de = FileTool::endDS($dest) . FileTool::endDS(dirname($relativePath)) . md5($info->getBaseName()) . '__.' . $info->getExtension();
+
+						if(in_array(strtolower($info->getExtension()) , [
+							'jpeg' ,
+							'jpg' ,
+						]))
+						{
+							$imageCompress = imageProcessor::getProcessor('compress');
+							$ratio = 8;
+							$imageCompress->form($info->getPathname())->ratio($ratio)->to($de);
+						}
+						else
+						{
+							FileTool::cp($info->getPathname() , $de);
+						}
+
+						echo $info->getPathname();
+						echo "\r\n";
+					}
+				}
 
 
-			FileTool::recursiveRm($dir, function($info , $relativePath) {
-				print_r([
-					$info->getPathname() ,
-					$relativePath ,
-				]);;;
 				return true;
-				return preg_match('#krc$#' , $info->getPathname());
 			});
-
 
 		}
 

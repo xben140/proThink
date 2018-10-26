@@ -232,9 +232,10 @@
 
 		if($isDownload)
 		{
-			$info = pathinfo_($fileName);
+
+			$info = new \SplFileInfo($fileName);
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="' . $info['basename']);
+			header('Content-Disposition: attachment;filename="' . $info->getBasename());
 			header('Cache-Control: max-age=0');
 			$writer->save('php://output');
 		}

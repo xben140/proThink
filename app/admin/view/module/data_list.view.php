@@ -280,11 +280,25 @@
 
 
 									integrationTags::tdButton([
-										'value'      => '查看数据' ,
+										'value'      => '安装' ,
 										'class'      => ' btn-info btn-open-pop' ,
 										'data'       => [
 											'src'   => url('viewInfo') ,
-											'title' => '查看数据' ,
+											'title' => '安装' ,
+										] ,
+										'param'      => [
+											'id' => $v['info']['id'] ,
+										] ,
+										'is_display' => 1 ,
+									]) ,
+
+
+									integrationTags::tdButton([
+										'value'      => '卸载' ,
+										'class'      => ' btn-primary btn-open-pop' ,
+										'data'       => [
+											'src'   => url('viewInfo') ,
+											'title' => '卸载' ,
 										] ,
 										'param'      => [
 											'id' => $v['info']['id'] ,
@@ -293,8 +307,28 @@
 									]) ,
 
 									integrationTags::tdButton([
+										'value'      => '备份' ,
+										'class'      => ' btn-success btn-open-pop' ,
+										'data'       => [
+											'src'   => url('viewInfo') ,
+											'title' => '备份' ,
+										] ,
+										'param'      => [
+											'id' => $v['info']['id'] ,
+										] ,
+										'is_display' => 1 ,
+									]) ,
+									'<br />',
+
+									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
+										'is_display' => 1 ,
+									]) ,
+
+									integrationTags::tdButton([
+										'class'      => ' btn-success btn-delete' ,
+										'value'      => '设为默认模块' ,
 										'is_display' => 1 ,
 									]) ,
 

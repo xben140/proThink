@@ -414,6 +414,76 @@
 			};
 		}
 
+
+		/**
+		 * 闭包事物构造器
+		 *
+		 * @param callable $startTrans     启动事物注册方法
+		 * @param callable $commit         提交事物注册方法
+		 * @param callable $rollback       回滚事物注册方法
+		 * @param array    $list           事物列表
+		 * @param string   $err            当事物执行失败时返回的错误信息
+		 * @param null     $globalVariable 每个事物都可以作用到的共享变量，会push到每个事物元素的参数上
+		 *
+		 * @return bool
+		 */
+		public static function execClosureList(callable $startTrans , callable $commit , callable $rollback , $list = [] , &$err = null , &$globalVariable = null)
+		{
+			/*	参数和错误信息可不传
+			 * 		[
+						[
+							function($a, $b) {
+								//执行成功返回真
+							} ,
+							array(
+								1 ,
+								2 ,
+							) ,
+							'error massage'
+						] ,
+						[
+							function($a, $b) {
+								//执行成功返回真
+							} ,
+							array(
+								1 ,
+								2 ,
+							) ,
+						] ,
+					];
+
+			 * */
+			call_user_func($startTrans);
+			try
+			{
+				$flag = true;
+
+				while (($flag !== false) && ($closure = array_shift($list)))
+				{
+					//没传参数设置参数为空数组
+					!is_array($closure[1]) && $closure[1] = [];
+					//传全局全局变量吧全局变量push到参数列表
+					!is_null($globalVariable) && $closure[1][] = &$globalVariable;
+
+					//执行闭包
+					$flag = call_user_func_array($closure[0] , $closure[1]);
+
+					($flag === false) && is_string($closure[2]) && ($err = $closure[2]);
+				}
+
+				($flag !== false) ? call_user_func($commit) : call_user_func($rollback);
+
+				return $flag;
+			} catch (\Exception $e)
+			{
+				call_user_func($rollback);
+				$err = $e->getMessage();
+
+				return false;
+			}
+		}
+
+
 	}
 
 
