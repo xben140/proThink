@@ -11,6 +11,34 @@
 		 *
 		 */
 		const DS = DIRECTORY_SEPARATOR;
+		const FILE = 1;
+		const DIRECTORY = 2;
+		const ALL = 3;
+
+
+		public static function listDir($path , $flag = self::ALL)
+		{
+			$directory = new \FilesystemIterator ($path);
+
+			$filter = new \CallbackFilterIterator ($directory , function($current , $key , $iterator) use ($flag) {
+				switch ($flag)
+				{
+					case self::FILE:
+						return $current->isFile();
+					case self::DIRECTORY:
+						return $current->isDir();
+					default:
+						return true;
+				}
+			});
+			$files = [];
+			foreach ($filter as $info)
+			{
+				$files[] = FileTool::fileInfo($info->getPathname());
+			}
+			return $files;
+		}
+
 
 		/**
 		 * 递归复制文件夹
@@ -98,6 +126,7 @@
 				$flag && self::rm($info->getPathname());
 			});
 		}
+
 
 		/**
 		 * 广度优先迭代

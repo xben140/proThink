@@ -31,21 +31,24 @@
 						2 ,
 					]) ,
 
+					'<p class="btn-danger">卸载过程会删除此应用数据库所有数据，如果此应用还有使用的可能，请先在列表页点击 <备份应用数据> 后再卸载</p>',
+					'<p class="btn-danger">在列表页点击 <备份应用数据> 会将此应用的数据写到应用的database目录下</p>',
+					'<p class="btn-danger"><备份安装包> 会将备份的应用数据一并打包，即使删除应用，仍然可以重新安装应用包恢复数据</p>',
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 						$data = [
 							[
-								'behavior' => '写入菜单' ,
+								'behavior' => '菜单信息' ,
 								'class'    => 'install-menu' ,
 								'type'     => 'menu' ,
 							] ,
 							[
-								'behavior' => '写入配置' ,
+								'behavior' => '配置信息' ,
 								'class'    => 'install-config' ,
 								'type'     => 'config' ,
 							] ,
 							[
-								'behavior' => '写入数据' ,
+								'behavior' => '数据信息' ,
 								'class'    => 'install-db' ,
 								'type'     => 'db' ,
 							] ,
@@ -57,15 +60,15 @@
 						$_this->setHead([
 							[
 								'field' => '行为' ,
-								'attr'  => 'style="width:150px;"' ,
+								'attr'  => 'style="width:100px;"' ,
 							] ,
 							[
 								'field' => '状态' ,
-								'attr'  => 'style="width:150px;"' ,
+								'attr'  => 'style="width:auto;"' ,
 							] ,
 							[
 								'field' => '操作' ,
-								'attr'  => 'style="width:150px;"' ,
+								'attr'  => 'style="width:100px;"' ,
 							] ,
 						]);
 

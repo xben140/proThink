@@ -30,6 +30,7 @@
 					case 'install' :
 					case 'uninstall' :
 						$res = $this->logic->{$action}($this->param);
+					break;
 					default :
 						$res['message'] = '安装出错，请重试';
 						$res['sign'] = RESULT_SUCCESS;

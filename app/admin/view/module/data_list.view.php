@@ -24,18 +24,6 @@
 								'class' => 'btn-info  se-rev' ,
 								'field' => '反选' ,
 							] ,
-							[
-								'class'      => 'btn-danger  btn-add' ,
-								'field'      => '添加数据' ,
-								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'add') ,
-							] ,
-							[
-								'class'      => 'btn-danger  multi-op multi-op-del' ,
-								'field'      => '批量删除' ,
-								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
-							] ,
-
-
 						] ,
 					]) ,
 
@@ -51,7 +39,7 @@
 								'attr'  => 'style="width:80px;"' ,
 							] ,
 							[
-								'field' => '封面' ,
+								'field' => '封面1' ,
 								'attr'  => '' ,
 							] ,
 							[
@@ -78,95 +66,6 @@
 							'editUrl'     => url('edit') ,
 							'addUrl'      => url('add') ,
 						]);
-
-						/**
-						 * 设置表格搜索框
-						 *searchFormCol
-						 */
-						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($__this) {
-
-							//角色名
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormText([
-									'field'       => '角色名' ,
-									'value'       => input('name' , '') ,
-									'name'        => 'name' ,
-									'placeholder' => '' ,
-								]) ,
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-							//添加时间
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormDate([
-									'field' => '添加时间' ,
-
-									'value1'       => input('reg_time_begin' , '') ,
-									'name1'        => 'reg_time_begin' ,
-									'placeholder1' => '' ,
-
-									'value2'       => input('reg_time_end' , '') ,
-									'name2'        => 'reg_time_end' ,
-									'placeholder2' => '' ,
-								]) ,
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-							//每页显示条数
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormText([
-									'field'       => '每页显示条数' ,
-									'value'       => (isset($__this->param['pagerow']) && is_numeric($__this->param['pagerow'])) ? $__this->param['pagerow'] : DB_LIST_ROWS ,
-									'name'        => 'pagerow' ,
-									'placeholder' => '' ,
-								]) ,
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-							//排序字段
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormSelect([
-									[
-										'value' => 'id' ,
-										'field' => '默认' ,
-									] ,
-								] , 'order_filed' , '排序字段' , input('order_filed' , 'id')) ,
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-
-							//排序方向
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormRadio([
-									[
-										'value' => 'asc' ,
-										'field' => '正序' ,
-									] ,
-									[
-										'value' => 'desc' ,
-										'field' => '反序' ,
-									] ,
-								] , 'order' , '排序方向' , input('order' , 'asc')) ,
-
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-
-							//状态
-							$k = static::$statusMap;
-							array_pop($k);
-							array_unshift($k , [
-								'value' => -1 ,
-								'field' => '全部' ,
-							]);
-							$t = integrationTags::searchFormCol([
-								integrationTags::searchFormRadio($k , 'status' , '状态' , input('status' , '-1')) ,
-							] , ['col' => '6']);
-							$doms = array_merge($doms , $t);
-
-						});
-
-						$_this->setSearchForm($searchForm);
 
 						foreach ($data as $k => $v)
 						{
@@ -279,7 +178,20 @@
 									]) ,*/
 
 									integrationTags::tdButton([
-										'value'      => '备份' ,
+										'value'      => '备份应用数据' ,
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('backup') ,
+											'title' => '备份' ,
+										] ,
+										'params'     => [
+											'id' => $v['info']['id'] ,
+										] ,
+										'is_display' => 1 ,
+									]) ,
+
+									integrationTags::tdButton([
+										'value'      => '备份安装包' ,
 										'class'      => ' btn-success btn-open-pop' ,
 										'data'       => [
 											'src'   => url('backup') ,
@@ -291,13 +203,15 @@
 										'is_display' => 1 ,
 									]) ,
 
+									'<br />' ,
+
 									(function($v) {
 										return !$v['is_install'] ? integrationTags::tdButton([
-											'value'      => '安装' ,
+											'value'      => '安装应用' ,
 											'class'      => ' btn-info btn-open-pop' ,
 											'data'       => [
 												'src'   => url('opearation') ,
-												'title' => '安装' ,
+												'title' => '安装应用' ,
 											] ,
 											'params'     => [
 												'id'     => $v['info']['id'] ,
@@ -305,11 +219,11 @@
 											] ,
 											'is_display' => 1 ,
 										]) : integrationTags::tdButton([
-											'value'      => '卸载' ,
+											'value'      => '卸载应用' ,
 											'class'      => ' btn-primary btn-open-pop' ,
 											'data'       => [
 												'src'   => url('opearation') ,
-												'title' => '卸载' ,
+												'title' => '卸载应用' ,
 											] ,
 											'params'     => [
 												'id'     => $v['info']['id'] ,
@@ -331,12 +245,12 @@
 										'params' => [
 											'address_id' => $v['info']['id'] ,
 										] ,
-										'value'  => '设为默认模块' ,
+										'value'  => '设为默认应用' ,
 									]) ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
-										'value'      => '删除' ,
+										'value'      => '删除应用' ,
 										'is_display' => 1 ,
 									]) ,
 								]) ,

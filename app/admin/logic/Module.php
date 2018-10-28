@@ -2,6 +2,9 @@
 
 	namespace app\admin\logic;
 
+	use file\FileTool;
+	use think\Exception;
+
 	class Module extends Base
 	{
 		public function __construct()
@@ -77,35 +80,100 @@
 				'sql'        => include($appPath . DS . 'sql.php') ,
 				//备份的数据
 				//'backup'     => is_file($appPath . DS . 'data.json') ? include_once($appPath . DS . 'data.json') : '[]' ,
+				'backup'     => (function($appPath){
+					$path = $appPath . DS . 'database'.DS;
+					$files = FileTool::listDir($path);
+					$res = [];
+					foreach ($files as $k => $v)
+					{
+						$res[] = file_get_contents($v['path']);
+					}
+					return $res;
+				})($appPath),
 			];
 
 		}
 
 		public function install($param)
 		{
-			switch ($param['type'])
-			{
-				case 'menu' :
-					//安装菜单调用
 
-					break;
-				case 'config' :
-					//安装配置调用
-
-					break;
-				case 'db' :
-					//安装数据调用
-
-					break;
-				default :
-					#...
-					break;
-			}
 		}
 
 		public function uninstall($param)
 		{
+			$info = $this->getModuleInfo($param['id']);
+			$transaction = [];
+			$_param = [];
+			switch ($param['type'])
+			{
+				case 'menu' :
+					//删除菜单
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$flag && $flag = ($this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete() !== false);
 
+							return $flag;
+						} ,
+						[] ,
+						'菜单信息删除出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '菜单信息删除成功';
+					break;
+
+				case 'config' :
+					//删除配置
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$flag && $flag = $gid = db('config_group')->where(['name' => strtolower($info['info']['id']) ,])->value('id');
+							$flag && $flag = ($this->model__admin_config->where(['group_id' => $gid ,])->delete() !== false);
+							$flag && $flag = db('config_group')->where(['name' => strtolower($info['info']['id']) ,])->delete();
+
+							return $flag !== false;
+						} ,
+						[] ,
+						'配置信息删除出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '配置删除成功';
+					break;
+
+				case 'db' :
+					//删除数据
+					$transaction[] = [
+						function($_param) use ($info) {
+							$uninstallSql =  $info['info']['database_tables'];
+							$flag = true;
+							foreach ($uninstallSql as $k => $v)
+							{
+								$sql = 'DROP TABLE IF EXISTS '.$v;
+								$flag && $flag = (executeSql($sql) !== false);
+							}
+
+							return $flag;
+						} ,
+						[] ,
+						'数据表删除出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '数据表删除成功';
+					break;
+				default :
+					break;
+			}
+
+			$res = execClosureList($transaction , $err , $_param);
+
+			if($res !== false)
+			{
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = $err;
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
 		}
 
 		/**
@@ -177,7 +245,7 @@
 									break;
 
 								default :
-									#...
+									#
 									break;
 							}
 						}*/

@@ -18,7 +18,7 @@
 		] ,
 		'option' => [
 			'type'     => '4' ,
-			'selected' => 2 ,
+			'selected' => 0 ,
 			'value'    => [
 				'111' ,
 				'222' ,
@@ -27,6 +27,11 @@
 		'image'  => [
 			'type'  => '5' ,
 			'value' => '' ,
+		] ,
+		'CONST'  => [
+			'is_const' => '1' ,
+			'type'     => '2' ,
+			'value'    => '33333' ,
 		] ,
 	];
 
