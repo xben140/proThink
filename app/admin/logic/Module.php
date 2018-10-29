@@ -93,7 +93,7 @@
 						$status = $this->model_::$appStatusMap[2]['value'];
 					}
 
-					return $status = 0;
+					return $status = 1;
 				})(include($appPath . DS . 'info.php')) ,
 
 				//封面
