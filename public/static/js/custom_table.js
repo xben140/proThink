@@ -385,7 +385,7 @@ $('.btn-add').on({
 		let _this = $(this);
 		_this.data('src', addUrl);
 		_this.data('is_reload', 1);
-		return popWinddows(this);
+		return popWindows(this);
 	}
 });
 
@@ -405,7 +405,7 @@ $('.btn-edit').on({
 		_this.data('src', editUrl);
 		_this.data('is_reload', 1);
 		_this.data('params', ({id: getParentTr(_this).data('id')}));
-		return popWinddows(this);
+		return popWindows(this);
 	}
 });
 

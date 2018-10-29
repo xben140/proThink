@@ -1,2 +1,0 @@
-insert  into `ithink_blog_type`(`id`,`pid`,`name`,`articel_numbers`,`order`,`del_time`,`time`,`remark`,`status`) values (1,0,'经验',0,1,0,1539224230,'',1),(2,0,'带',0,1,0,1539224282,'',1),(3,2,'类型名',0,1,0,1539935104,'',1),(4,3,'上级分类',0,1,0,1539935339,'',1);
-insert  into `ithink_blog_tag`(`id`,`name`,`articel_numbers`,`status`,`time`,`order`,`remark`) values (1,'php',0,1,1539223839,1,''),(2,'javaScript',0,1,1539223944,1,''),(3,'正则表达式',0,1,1539940417,1,''),(4,'jquery',0,1,1539940425,1,'');

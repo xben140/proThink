@@ -9,7 +9,7 @@
  *
  */
 
-function registerSetItem($obj )
+function registerSetItem($obj)
 {
 	let _this = $($obj);
 	let data_id = getParentTr(_this).data('id');
@@ -57,5 +57,74 @@ function itemSet(ids, btn, callback_)
 	});
 
 }
+
+
+/**
+ *
+ *
+ *
+ *
+ *                  应用操作
+ *
+ *
+ *
+ */
+
+
+
+function doAction()
+{
+	$('.install-action').click();
+}
+
+
+function beforeAction(obj)
+{
+
+	obj.parent().prev().text('正在执行。。。')
+}
+
+
+function successAction(obj, data)
+{
+	obj.parent().data('success', 1);
+	let count = 0;
+	$('.install-action').each(function (k, v) {
+		$(v).parent().data('success') && (count += 1)
+	});
+	if (count == 3)
+	{
+		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		layer.alert('处理成功', {
+			closeBtn: 0, //不显示关闭按钮
+			skin    : 'layui-layer-molv' //样式类名
+		}, function () {
+			parent.layer.close(index); //再执行关闭
+		});
+	}
+	obj.hide();
+	obj.parent().prev().text('执行成功。。。')
+}
+
+
+function errorAction(obj)
+{
+	obj.parent().prev().text('执行失败，请点击手动执行重试。。。')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -34,7 +34,8 @@
 function (file) {
 	var subject = $.trim(file.name);
 }
-AAA ,
+AAA
+,
 
 						'uploadSuccess' => /** @lang javascript */
 							<<<'AAA'
@@ -64,7 +65,8 @@ function (file, response) {
 		//服务器处理出错
 	}
 }
-AAA ,
+AAA
+,
 
 
 						'uploadFinished' => /** @lang javascript */
@@ -72,7 +74,8 @@ AAA ,
 function () {
 	layer.alert('全部文件处理完成');
 }
-AAA ,
+AAA
+,
 					] , [
 						'server'  => "'" . url('add') . "'" ,
 						'threads' => 10 ,

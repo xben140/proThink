@@ -8,6 +8,7 @@
 			'action'     => 'none' ,
 			'order'      => 190 ,
 			'remark'     => '' ,
+			'is_menu'    => 1 ,
 			'son'        => [
 				0 => [
 					'name'       => '添加博文' ,
@@ -16,6 +17,7 @@
 					'action'     => 'add' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				1 => [
@@ -25,6 +27,7 @@
 					'action'     => 'setField' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				2 => [
@@ -34,6 +37,7 @@
 					'action'     => 'edit' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				3 => [
@@ -43,6 +47,7 @@
 					'action'     => 'delete' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				4 => [
@@ -52,6 +57,7 @@
 					'action'     => 'dataList' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				5 => [
@@ -61,6 +67,7 @@
 					'action'     => 'preview' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				6 => [
@@ -70,6 +77,7 @@
 					'action'     => 'editContent' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 			] ,
@@ -81,6 +89,7 @@
 			'action'     => 'none' ,
 			'order'      => 188 ,
 			'remark'     => '' ,
+			'is_menu'    => 1 ,
 			'son'        => [
 				0 => [
 					'name'       => '添加文章类型' ,
@@ -89,6 +98,7 @@
 					'action'     => 'add' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				1 => [
@@ -98,6 +108,7 @@
 					'action'     => 'edit' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				2 => [
@@ -107,6 +118,7 @@
 					'action'     => 'setField' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				3 => [
@@ -116,6 +128,7 @@
 					'action'     => 'delete' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				4 => [
@@ -125,6 +138,7 @@
 					'action'     => 'dataList' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 			] ,
@@ -136,6 +150,7 @@
 			'action'     => 'none' ,
 			'order'      => 186 ,
 			'remark'     => '' ,
+			'is_menu'    => 1 ,
 			'son'        => [
 				0 => [
 					'name'       => '添加标签' ,
@@ -144,6 +159,7 @@
 					'action'     => 'add' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				1 => [
@@ -153,6 +169,7 @@
 					'action'     => 'delete' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				2 => [
@@ -162,6 +179,7 @@
 					'action'     => 'edit' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				3 => [
@@ -171,6 +189,7 @@
 					'action'     => 'setField' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 				4 => [
@@ -180,6 +199,7 @@
 					'action'     => 'dataList' ,
 					'order'      => 1 ,
 					'remark'     => '' ,
+					'is_menu'    => 1 ,
 					'son'        => [] ,
 				] ,
 			] ,

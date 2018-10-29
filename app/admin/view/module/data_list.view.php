@@ -13,10 +13,6 @@
 					integrationTags::rowButton([
 						[
 							[
-								'class' => 'btn-success  search-dom-btn-1' ,
-								'field' => '筛选' ,
-							] ,
-							[
 								'class' => 'btn-info  se-all' ,
 								'field' => '全选' ,
 							] ,
@@ -39,11 +35,15 @@
 								'attr'  => 'style="width:80px;"' ,
 							] ,
 							[
-								'field' => '封面1' ,
+								'field' => '封面' ,
 								'attr'  => '' ,
 							] ,
 							[
 								'field' => '信息' ,
+								'attr'  => '' ,
+							] ,
+							[
+								'field' => '' ,
 								'attr'  => '' ,
 							] ,
 							[
@@ -129,16 +129,43 @@
 									'<br />' ,
 									//添加时间
 									integrationTags::tdSimple([
-										'name'  => '更新时间' ,
+										'name'  => '更新时间 : ' ,
 										//'editable' => '0' ,
 										'value' => formatTime($v['info']['update_time']) ,
 									]) ,
 								]) ,
 
+								//信息
+								integrationTags::td([
+									integrationTags::tdSimple([
+										'value'    => (function($v) {
+											switch ($v['is_install'])
+											{
+												case '0' :
+													$class = 'btn-warning';
+													break;
+												case '1' :
+													$class = 'btn-info';
+													break;
+												case '2' :
+													$class = 'btn-danger';
+													break;
+											}
+											return '<span class="'.$class.'">'.$this->logic->model_::$appStatusMap[$v['is_install']]['field'].'</span>';
+										})($v) ,
+										'name'     => '状态 : ' ,
+										//'field'    => 'name' ,
+										//'reg'      => '/^\S+$/' ,
+										//'msg'      => '表名字必填' ,
+										'editable' => 0 ,
+									]) ,
+
+								]) ,
+
 								//描述
 								integrationTags::td([
 									integrationTags::tdTextarea([
-										'style'    => 'width:100%' ,
+										'style'    => 'width:100%;height:100%' ,
 										//'name'     => 'remark' ,
 										'field'    => 'description' ,
 										//'reg'      => '/^\d{1,4}$/' ,
@@ -178,6 +205,21 @@
 									]) ,*/
 
 									integrationTags::tdButton([
+										'value'      => '安装/卸载' ,
+										'class'      => ' btn-primary btn-open-pop' ,
+										'data'       => [
+											'src'       => url('operation') ,
+											'title'     => '安装/卸载' ,
+											'is_reload' => 1 ,
+										] ,
+										'params'     => [
+											'id' => $v['info']['id'] ,
+										] ,
+										'is_display' => 1 ,
+									]) ,
+									'<br />' ,
+
+									integrationTags::tdButton([
 										'value'      => '备份应用数据' ,
 										'class'      => ' btn-info btn-open-pop' ,
 										'data'       => [
@@ -204,38 +246,6 @@
 									]) ,
 
 									'<br />' ,
-
-									(function($v) {
-										return !$v['is_install'] ? integrationTags::tdButton([
-											'value'      => '安装应用' ,
-											'class'      => ' btn-info btn-open-pop' ,
-											'data'       => [
-												'src'   => url('opearation') ,
-												'title' => '安装应用' ,
-											] ,
-											'params'     => [
-												'id'     => $v['info']['id'] ,
-												'action' => 'install' ,
-											] ,
-											'is_display' => 1 ,
-										]) : integrationTags::tdButton([
-											'value'      => '卸载应用' ,
-											'class'      => ' btn-primary btn-open-pop' ,
-											'data'       => [
-												'src'   => url('opearation') ,
-												'title' => '卸载应用' ,
-											] ,
-											'params'     => [
-												'id'     => $v['info']['id'] ,
-												'action' => 'uninstall' ,
-											] ,
-											'is_display' => 1 ,
-										]);
-									})($v) ,
-
-
-									'<br />' ,
-
 
 									integrationTags::tdButton([
 										'class'  => ' btn-info btn-custom-request' ,

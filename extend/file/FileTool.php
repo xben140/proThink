@@ -15,7 +15,13 @@
 		const DIRECTORY = 2;
 		const ALL = 3;
 
-
+		/**
+		 * 列出文件夹里文件信息
+		 * @param     $path
+		 * @param int $flag
+		 *
+		 * @return array
+		 */
 		public static function listDir($path , $flag = self::ALL)
 		{
 			$directory = new \FilesystemIterator ($path);
@@ -34,7 +40,7 @@
 			$files = [];
 			foreach ($filter as $info)
 			{
-				$files[] = FileTool::fileInfo($info->getPathname());
+				$files[] = self::fileInfo($info->getPathname());
 			}
 			return $files;
 		}

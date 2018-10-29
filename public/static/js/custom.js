@@ -12,7 +12,7 @@
 				let url = '/admin/Index/updateImage?condition=' + _this.data('condition');
 				_this.data('src', url);
 			}
-			return popWinddows(this);
+			return popWindows(this);
 		}
 	});
 
@@ -43,10 +43,10 @@
 		}
 	});
 
-	//自定义新窗口打开页面
+	//自定义弹出窗打开页面
 	$('.btn-open-pop').on({
 		'click': function () {
-			popWinddows(this);
+			popWindows(this);
 		}
 	});
 
@@ -78,13 +78,15 @@ function doRuquest($obj)
 
 	let params = (_this.data('params'));
 	(typeof eval(params) === 'object') && (params = eval(params));
+
+	let msg = (_this.data('msg')) || '确定?';
 	let url = _this.data('src') || _this.attr('src');
 	params['id'] = data_id;
 	params['ids'] = data_id;
 
 	if ((_this.data('is_confirm') !== undefined) && _this.data('is_confirm'))
 	{
-		layer.confirm('确定？', {
+		layer.confirm(msg, {
 			resize    : 1,
 			moveOut   : 1,
 			title     : '请确定当前操作',
@@ -101,15 +103,22 @@ function doRuquest($obj)
 			ajaxPost(url, params, function (data) {
 				//成功返回回调
 				layer.msg(data.msg);
+				let success = (_this.data('success-request'));
+				(typeof eval(success) === 'function') && eval(success)(_this, data)
+
 				if (data.code)
 				{
 					_this.data('is_reload') && refresh_page();
 				}
 			}, function (data) {
 				//错误返回回调
+				let error = (_this.data('error-request'));
+				(typeof eval(error) === 'function') && eval(error)(_this)
 
 			}, function (btn) {
 				//请求之前回调
+				let before = (_this.data('before-request'));
+				(typeof eval(before) === 'function') && eval(before)(_this)
 
 			}, _this);
 
@@ -123,17 +132,25 @@ function doRuquest($obj)
 		ajaxPost(url, params, function (data) {
 			//成功返回回调
 			layer.msg(data.msg);
+			let success = (_this.data('success-request'));
+			(typeof eval(success) === 'function') && eval(success)(_this, data)
+
 			if (data.code)
 			{
 				_this.data('is_reload') && refresh_page();
 			}
 		}, function (data) {
 			//错误返回回调
+			let error = (_this.data('error-request'));
+			(typeof eval(error) === 'function') && eval(error)(_this)
 
 		}, function (btn) {
 			//请求之前回调
+			let before = (_this.data('before-request'));
+			(typeof eval(before) === 'function') && eval(before)(_this)
 
 		}, _this);
+
 	}
 }
 
@@ -182,7 +199,7 @@ function openInNewWindows(obj)
 //data-params
 //data-options
 //data-is_reload
-function popWinddows(obj)
+function popWindows(obj)
 {
 	let _this = $(obj);
 	let url = _this.data('src') || _this.data('href') || _this.attr('src') || _this.attr('href');

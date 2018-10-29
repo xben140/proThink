@@ -1,37 +1,51 @@
 <?php
 //配置文件,会写到配置表，自动添加一个分组，组名为这个应用的id
+
+
 	return [
-		'array'  => [
+		[
 			'type'  => '1' ,
+			'name'  => 'array-test' ,
+			'key'   => 'array' ,
 			'value' => [
 				'111' ,
 				'222' ,
 			] ,
 		] ,
-		'text'   => [
+		[
 			'type'  => '2' ,
+			'name'  => 'text-test' ,
+			'key'   => 'text' ,
 			'value' => 'texttexttext' ,
 		] ,
-		'switch' => [
+		[
 			'type'  => '3' ,
-			'value' => 1 ,
+			'name'  => 'switch-test' ,
+			'key'   => 'switch' ,
+			'value' => 0 ,
 		] ,
-		'option' => [
+		[
 			'type'     => '4' ,
+			'name'     => 'option-test' ,
+			'key'      => 'option' ,
 			'selected' => 0 ,
 			'value'    => [
 				'111' ,
 				'222' ,
 			] ,
 		] ,
-		'image'  => [
+		[
 			'type'  => '5' ,
-			'value' => '' ,
+			'name'  => 'image-test' ,
+			'key'   => 'image' ,
+			'value' => 'imageimageimage' ,
 		] ,
-		'CONST'  => [
+		[
+			'type'     => '5' ,
+			'name'     => 'is_const-test' ,
+			'key'      => 'const' ,
+			'value'    => 'constconstconst' ,
 			'is_const' => '1' ,
-			'type'     => '2' ,
-			'value'    => '33333' ,
 		] ,
 	];
 

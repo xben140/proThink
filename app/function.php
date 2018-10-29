@@ -702,6 +702,7 @@
 	}
 
 
+
 	//汉字转unicode
 	function toUnicode($subject , $encoding = 'utf-8')
 	{

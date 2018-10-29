@@ -13,7 +13,7 @@
 		 * 安装与卸载
 		 * @return mixed
 		 */
-		public function opearation()
+		public function operation()
 		{
 			$this->initLogic();
 			if(IS_POST)
@@ -40,7 +40,7 @@
 			}
 			else
 			{
-				return $this->makeView($this , $this->param['action']);
+				return $this->makeView($this , 'install');
 			}
 		}
 

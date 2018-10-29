@@ -2,16 +2,14 @@
 
 
 	/**
-	 * 此文件仅包含表结构的sql，不包含写入数据sql
+	 * 应用建表
 	 */
 
 
 	return [
 		//安装应用执行的sql
-		'install'   => [
-			<<<SQL
+		'install' => <<<SQL
 DROP TABLE IF EXISTS `ithink_blog_article`;
-
 CREATE TABLE `ithink_blog_article` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` char(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
@@ -42,11 +40,8 @@ CREATE TABLE `ithink_blog_article` (
   KEY `create_time` (`time`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
-SQL
-			,
-			<<<SQL
-DROP TABLE IF EXISTS `ithink_blog_article_tag`;
 
+DROP TABLE IF EXISTS `ithink_blog_article_tag`;
 CREATE TABLE `ithink_blog_article_tag` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `tag_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '标签 id',
@@ -54,12 +49,10 @@ CREATE TABLE `ithink_blog_article_tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='标签文章对应表';
 
-SQL
-			,
-			<<<SQL
+
+
 
 DROP TABLE IF EXISTS `ithink_blog_tag`;
-
 CREATE TABLE `ithink_blog_tag` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标签名称',
@@ -70,13 +63,11 @@ CREATE TABLE `ithink_blog_tag` (
   `remark` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章标签表';
+insert  into `ithink_blog_tag`(`id`,`name`,`articel_numbers`,`status`,`time`,`order`,`remark`) values (1,'php',0,1,1539223839,1,''),(2,'javaScript',0,1,1539223944,1,''),(3,'正则表达式',0,1,1539940417,1,''),(4,'jquery',0,1,1539940425,1,'');
 
-SQL
-			,
-			<<<SQL
+
 
 DROP TABLE IF EXISTS `ithink_blog_type`;
-
 CREATE TABLE `ithink_blog_type` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `pid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '分类父id',
@@ -89,8 +80,8 @@ CREATE TABLE `ithink_blog_type` (
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章分类表';
+insert  into `ithink_blog_type`(`id`,`pid`,`name`,`articel_numbers`,`order`,`del_time`,`time`,`remark`,`status`) values (1,0,'经验',0,1,0,1539224230,'',1),(2,0,'带',0,1,0,1539224282,'',1),(3,2,'类型名',0,1,0,1539935104,'',1),(4,3,'上级分类',0,1,0,1539935339,'',1);
 
 SQL
-			,
-		] ,
+		,
 	];

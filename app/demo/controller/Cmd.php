@@ -5,10 +5,11 @@
 	use base64\Base64;
 	use file\FileTool;
 	use image\imageProcessor;
+	use Phelium\Component\MySQLBackup;
 	use PhpMyAdmin\SqlParser\Parser;
 	use PHPSQLParser\PHPSQLParser;
 
-	//php index.php /cmd/index/index
+	//php index.php /demo/cmd/index
 
 
 	class Cmd extends FrontendBase
@@ -253,6 +254,21 @@ VALUES
 
 		}
 
+
+		public function backup()
+		{
+
+			$Dump = new MySQLBackup(config('database.hostname') , config('database.username') , config('database.password') , config('database.database'));
+			$Dump->addTables(array(
+				'ithink_login_log' ,
+				'ithink_config',
+			));
+			//$Dump->setCompress('zip');
+			$Dump->setDelete(false);
+			$Dump->setDownload(false);
+			$Dump->dump();
+
+		}
 	}
 
 
