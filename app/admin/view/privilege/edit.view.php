@@ -37,6 +37,16 @@
 
 				integrationTags::text([
 					//随便写
+					'field_name'  => '应用ID' ,
+					'placeholder' => '' ,
+					'tip'         => '这里填写应用id，同应用里的info.php里的id字段的值一致' ,
+					'value'       => $info['category'],
+					//'attr'        => 'disabled' ,
+					'name'        => 'category' ,
+				]) ,
+
+				integrationTags::text([
+					//随便写
 					'field_name'  => '权限名字' ,
 					'placeholder' => '' ,
 					'tip'         => '必填' ,

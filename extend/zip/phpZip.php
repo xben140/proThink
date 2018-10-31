@@ -6,21 +6,10 @@
 
 	class phpZip
 	{
-		/*
-		 * property
-		 *
-		 * */
+
+		const DS = DIRECTORY_SEPARATOR;
 		//zip实例
 		private static $zip = null;
-
-		//是否写日志
-		private static $isLog = 0;
-
-		//日志文件
-		private static $log = './log.log';
-
-		//是否echo
-		private static $isEcho = 0;
 
 		//保存位置
 		private static $fileName = null;
@@ -30,7 +19,6 @@
 
 		//源文件和重命名后文件映射
 		private static $copyMap = [];
-
 
 		//跳过不压缩的文件
 		private static $skipFilesReg = [];
@@ -63,10 +51,6 @@
 		private static function regainOptions()
 		{
 			self::$zip = null;
-			self::$isLog = 0;
-			self::$log = './log.log';
-			self::$isEcho = 0;
-			self::$fileName = null;
 			self::$isOverwrite = 0;
 			self::$copyMap = [];
 			self::$dirPath = [];
@@ -75,10 +59,8 @@
 		//遍历文件夹
 		private static function loopDir($path , callable $dirCallback , callable $fileCallback)
 		{
-			!in_array(substr($path , -1) , [
-				'/' ,
-				'\\' ,
-			]) && ($path .= DIRECTORY_SEPARATOR);
+			$path = self::endDS($path);
+			self::mkdir_($path);
 
 			$dirs = scandir($path);
 			foreach ($dirs as $k => $v)
@@ -133,15 +115,12 @@
 							!$v1 and exit('未指定保存名 -- file_name');
 							!is_dir(realpath(dirname($v1))) && mkdir(realpath(dirname($v1)) , 777 , 1);
 							self::$fileName = $v1 ? $v1 : time() . '.zip';
-							self::doRocord('指定保存名');
-
 						}
 						break;
 
 					//是否覆盖同名zip
 					case 'is_overwrite' :
 						{
-							self::doRocord(!!$v1 ? '设定覆盖同名zip' : '设定不覆盖同名zip');
 							self::$isOverwrite = !!$v1;
 						}
 						break;
@@ -157,7 +136,6 @@
 								$v2['name'] = (iconv('utf-8' , 'gbk//IGNORE' , $v2['name']));
 								if(!is_file($v2['path']) || !is_readable($v2['path']))
 								{
-									self::doRocord("文件不存在 -- " . $v2['path']);
 									continue;
 								}
 								$key = self::randomKey();
@@ -165,7 +143,7 @@
 								self::$dirPath[$key]['name'] = $v2['name'] ? $t . DIRECTORY_SEPARATOR . $v2['name']    //如果有设置name就更名为name
 									: $t . strrchr($v2['path'] , DIRECTORY_SEPARATOR);    //如果没有设置就使用原名
 								self::$dirPath[$key]['path'] = $v2['path'];
-								self::doRocord("添加自定义文件到任务队列 -- " . $v2['path']);
+
 							}
 						}
 						break;
@@ -177,7 +155,7 @@
 							foreach ($v1 as $k3 => $v3)
 							{
 								//传入路径后面追加目录分隔符
-								$v3 = self::addEndSeparator($v3);
+								$v3 = self::endDS($v3);
 								preg_match_all('%^.+?(?=[^\\\\/]+[\\\\/]?$)%im' , $v3 , $result , PREG_PATTERN_ORDER);
 								$needReplacement = $result[0][0];
 
@@ -207,7 +185,7 @@
 									$key = self::randomKey();
 									self::$dirPath[$key]['name'] = $name;
 									self::$dirPath[$key]['path'] = $path;
-									self::doRocord("添加文件到任务队列" . $path);
+
 
 									return 1;
 								});
@@ -221,10 +199,7 @@
 
 		private static function pushFileToZip()
 		{
-			self::doRocord('队列添加$zip->addFile...');
-
 			foreach (self::$dirPath as $k3 => $v3) self::addItem($v3['path'] , $v3['name']);
-			self::doRocord('队列添加$zip->addFile...完成');
 		}
 
 		private static function addItem($path , $name)
@@ -232,7 +207,7 @@
 			//$path = (iconv('utf-8', 'gbk//IGNORE', $path));
 			//$name = (iconv('utf-8', 'gbk//IGNORE', $name));
 
-			self::doRocord("添加任务队列" . $path);
+
 			preg_match_all('%(.*?)([^\\\\/\s]+)$%im' , $path , $origin);
 			preg_match_all('%(.*?)([^\\\\/\s]+)$%im' , $name , $destination);
 
@@ -289,17 +264,7 @@
 
 		private static function closeZip()
 		{
-			self::doRocord('添加完成，self::$zip->close()');
-
 			return self::$zip->close();
-		}
-
-		private static function addEndSeparator($path)
-		{
-			return !in_array(substr($path , -1 , 1) , [
-				'/' ,
-				'\\' ,
-			]) ? $path . DIRECTORY_SEPARATOR : $path;
 		}
 
 		private static function randomKey($len = 12)
@@ -309,16 +274,13 @@
 
 		private static function createZip()
 		{
-			self::doRocord('self::$zip->open...');
-
+			static::mkdir_(dirname(self::$fileName));
 			return self::$isOverwrite ? self::$zip->open(self::$fileName , \ZipArchive::CREATE | \ZipArchive::OVERWRITE) : self::$zip->open(self::$fileName , \ZipArchive::CREATE);
 		}
 
 		public static function zip()
 		{
 			$config = func_get_args()[0];
-			isset($config['is_log']) && self::initLog($config['is_log']);
-			isset($config['is_log']) && self::initEcho($config['is_echo']);
 			self::initZip();
 			self::initConfig($config);
 			if(self::createZip())
@@ -336,7 +298,6 @@
 			}
 		}
 
-
 		public static function unzip($config)
 		{
 			//http://www.jb51.net/article/61678.htm
@@ -346,12 +307,16 @@
 
 			self::initZip();
 			$res = self::$zip->open($zip);
+			$result = [
+				'sign' => 1 ,
+				'msg'  => '处理成功' ,
+			];
 			if($res === true)
 			{
 				if(isset($config['destination']) && $config['destination'])
 				{
 					preg_match_all('%[^\\\\/.]+?(?=\..+$)%im' , $zip , $result , PREG_PATTERN_ORDER);
-					$toDir = self::addEndSeparator($toDir) . $result[0][0];
+					$toDir = self::endDS($toDir) . $result[0][0];
 				}
 				else
 				{
@@ -368,7 +333,8 @@
 
 				if(self::closeZip())
 				{
-					return true;
+					$result['sign'] = ZipArchive::ER_EXISTS;
+					$result['msg'] = '文件已经存在';
 				};
 			}
 			else
@@ -376,63 +342,51 @@
 				switch ($res)
 				{
 					case ZipArchive::ER_EXISTS :
-						return [
-							'sign' => ZipArchive::ER_EXISTS ,
-							'msg'  => '文件已经存在' ,
-						];
+						$result['sign'] = ZipArchive::ER_EXISTS;
+						$result['msg'] = '文件已经存在';
 						break;
 					case ZipArchive::ER_INCONS :
-						return [
-							'sign' => ZipArchive::ER_INCONS ,
-							'msg'  => '压缩文件不一致' ,
-						];
+						$result['sign'] = ZipArchive::ER_INCONS;
+						$result['msg'] = '压缩文件不一致';
 						break;
 					case ZipArchive::ER_INVAL :
-						return [
-							'sign' => ZipArchive::ER_INVAL ,
-							'msg'  => '无效的参数' ,
-						];
+						$result['sign'] = ZipArchive::ER_INVAL;
+						$result['msg'] = '无效的参数';
 						break;
 					case ZipArchive::ER_MEMORY :
-						return [
-							'sign' => ZipArchive::ER_MEMORY ,
-							'msg'  => '内存错误' ,
-						];
+						$result['sign'] = ZipArchive::ER_MEMORY;
+						$result['msg'] = '内存错误';
+
 						break;
 					case ZipArchive::ER_NOENT :
-						return [
-							'sign' => ZipArchive::ER_NOENT ,
-							'msg'  => '没有这样的文件' ,
-						];
+						$result['sign'] = ZipArchive::ER_NOENT;
+						$result['msg'] = '没有这样的文件';
+
 						break;
 					case ZipArchive::ER_NOZIP :
-						return [
-							'sign' => ZipArchive::ER_NOZIP ,
-							'msg'  => '不是有效的压缩文件' ,
-						];
+						$result['sign'] = ZipArchive::ER_NOZIP;
+						$result['msg'] = '不是有效的压缩文件';
+
 						break;
 					case ZipArchive::ER_OPEN :
-						return [
-							'sign' => ZipArchive::ER_OPEN ,
-							'msg'  => '不能打开文件' ,
-						];
+						$result['sign'] = ZipArchive::ER_INCONS;
+						$result['msg'] = '压缩文件不一致';
+
 						break;
 					case ZipArchive::ER_READ :
-						return [
-							'sign' => ZipArchive::ER_READ ,
-							'msg'  => '读取错误' ,
-						];
+						$result['sign'] = ZipArchive::ER_INCONS;
+						$result['msg'] = '压缩文件不一致';
+
 						break;
 					case ZipArchive::ER_SEEK :
-						return [
-							'sign' => ZipArchive::ER_SEEK ,
-							'msg'  => '查找错误' ,
-						];
+						$result['sign'] = ZipArchive::ER_INCONS;
+						$result['msg'] = '压缩文件不一致';
+
 						break;
-						dufault: ;
+						dufault:;
 				}
 			}
-
+			return $result;
 		}
 
 		public static function unRar($config)
@@ -459,7 +413,7 @@
 			if(isset($config['destination']) && $config['destination'])
 			{
 				preg_match_all('%[^\\\\/.]+?(?=\..+$)%im' , $zip , $result , PREG_PATTERN_ORDER);
-				$toDir = self::addEndSeparator($toDir) . $result[0][0];
+				$toDir = self::endDS($toDir) . $result[0][0];
 			}
 			else
 			{
@@ -469,9 +423,7 @@
 
 			foreach ($rar_entries as $k => $v)
 			{
-				$fileName = $v->getName();
 
-				self::doRocord('解压' . $fileName . '到' . $toDir);
 				$v->extract($toDir);
 			}
 
@@ -482,44 +434,119 @@
 
 		}
 
-		/*
+		/**
+		 **************************************************
+		 **************************************************
+		 */
+
+		/**
+		 * @param $path
 		 *
+		 * @return bool
+		 */
+		public static function isDirEmpty($path)
+		{
+			return is_dir($path) ? (count(@scandir($path)) == 2) : false;
+		}
+
+		/**
+		 * 过滤文件里不支持命名的字符
 		 *
-		 * 日志
-		 * */
-
-		public static function initLogPath($logPath)
+		 * @param $path
+		 *
+		 * @return mixed
+		 */
+		public static function patFilter($path)
 		{
-			self::$log = $logPath;
+			return str_replace(array(
+				'*' ,
+				'?' ,
+				'"' ,
+				'<' ,
+				'>' ,
+				'|' ,
+				"'" ,
+			) , '_' , $path);
 		}
 
-		public static function initLog($isLog)
+		/**
+		 * 自动为路径后面加DIRECTORY_SEPARATORY
+		 *
+		 * @param string $path 文件夹路径
+		 *
+		 * @return string
+		 */
+		public static function endDS($path)
 		{
-			self::$isLog = $isLog;
+			return rtrim(rtrim(self::replaceToSysSeparator($path) , '/') , '\\') . self::DS;
 		}
 
-		public static function initEcho($isEcho)
+		/**
+		 * @param $path
+		 *
+		 * @return string
+		 */
+		public static function replaceToSysSeparator($path)
 		{
-			self::$isEcho = $isEcho;
+			return strtr($path , [
+				'\\' => self::DS ,
+				'/'  => self::DS ,
+			]);
 		}
 
-		public static function doLog($log)
+		/**
+		 * @param $path
+		 *
+		 * @return string
+		 */
+		public static function replaceToUrlSeparator($path)
 		{
-			if(self::$isLog) file_put_contents(self::$log , $log . "\r\n" , FILE_APPEND | LOCK_EX);
+			return strtr($path , [
+				'\\' => '/' ,
+			]);
 		}
 
-		public static function doEcho($echo)
+		/**
+		 * 格式化字节大小
+		 *
+		 * @param  number     $size 字节数
+		 * @param string |int $de
+		 *
+		 * @return string            格式化后的带单位的大小
+		 */
+		public static function byteFormat($size , $de = 2)
 		{
-			if(self::$isEcho)
+			$a = array(
+				"B" ,
+				"KB" ,
+				"MB" ,
+				"GB" ,
+				"TB" ,
+				"PB" ,
+			);
+			$pos = 0;
+			while ($size >= 1024)
 			{
-				echo $echo . "\r\n";
+				$size /= 1024;
+				$pos++;
 			}
+
+			return round($size , $de) . " " . $a[$pos];
 		}
 
-		public static function doRocord($msg)
+		/**
+		 * 创建文件夹
+		 *
+		 * @param     $path
+		 * @param int $mode
+		 *
+		 * @return bool
+		 */
+		public static function mkdir_($path , $mode = 0777)
 		{
-			self::doEcho($msg);
-			self::doLog($msg);
+			$path = self::patFilter($path);
+
+			return !is_dir(($path)) ? mkdir(($path) , $mode , 1) : @chmod($path , $mode);
 		}
 
 
@@ -527,12 +554,7 @@
 
 	/*
 		phpZip::zip([
-			//加密
-			'password'       => 'hello',
-			//是否记录日志
-			'is_log'       => 1,
-			//是否输出
-			'is_echo'      => 1,
+
 			//保存文件名字
 			'file_name'    => 'cc.zip',
 			//'file_name'    => 'F:\localWeb\test.zip',

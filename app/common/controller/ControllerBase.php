@@ -42,7 +42,8 @@
 		public function __construct()
 		{
 			parent::__construct();
-			//var_export(get_defined_constants(1)['user']);exit;
+			//var_export(get_defined_constants(1)['user']);
+			//exit;
 		}
 
 		/**
@@ -72,6 +73,8 @@
 		 */
 		final private function initRequestInfo()
 		{
+			define('DB_LIST_ROWS' , config('paginate.list_rows'));
+
 			//admin_id
 			defined('ADMIN_ID') or define('ADMIN_ID' , config('admin_id'));
 			//全站管理员角色id
@@ -92,23 +95,34 @@
 			defined('IP') or define('IP' , $this->request->ip());
 
 			defined('URL_ROOT') or define('URL_ROOT' , $this->request->root(true) . '/');
-			defined('URL_UPLOAD') or define('URL_UPLOAD' , URL_ROOT . 'upload/');
-			defined('URL_PICTURE') or define('URL_PICTURE' , URL_UPLOAD . 'picture/');
-			defined('URL_FILE') or define('URL_FILE' , URL_UPLOAD . 'file/');
 			defined('URL_HPLUS') or define('URL_HPLUS' , URL_ROOT . 'hplus/');
 			defined('URL_STATIC') or define('URL_STATIC' , URL_ROOT . 'static/');
 			defined('URL_IMAGE') or define('URL_IMAGE' , URL_STATIC . 'image/');
 			defined('URL_PLUGINS') or define('URL_PLUGINS' , URL_STATIC . 'plugins/');
-			defined('URL_THEMES') or define('URL_THEMES' , URL_ROOT . 'themes/');
 
-			define('DB_LIST_ROWS' , config('paginate.list_rows'));
+
+
+			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
+			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
+
 
 			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
 			defined('MODEL_STATIC_URL') or define('MODEL_STATIC_URL' , replaceToUrlSeparator(URL_STATIC . 'module/'));
 
-
 			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
 			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
+
+
+			//define('PATH_UPLOAD' , CONTROLLER_STATIC_PATH . 'upload' . DS);
+			define('PATH_UPLOAD' , PATH_PUBLIC . 'upload' . DS);
+			define('PATH_PICTURE' , PATH_UPLOAD . 'picture' . DS);
+			define('PATH_FILE' , PATH_UPLOAD . 'file' . DS);
+
+			//define('URL_UPLOAD' , CONTROLLER_STATIC_URL . 'upload/');
+			define('URL_UPLOAD' , URL_ROOT . 'upload/');
+			define('URL_PICTURE' , URL_UPLOAD . 'picture/');
+			define('URL_FILE' , URL_UPLOAD . 'file/');
+
 
 			$this->param = $this->request->param();
 			$this->param_get = $this->request->get();
@@ -349,7 +363,7 @@
 		 *
 		 * @return mixed
 		 */
-		public function makeView($__this, $temp = '')
+		public function makeView($__this , $temp = '')
 		{
 			$pathInfo = $this->makeViewPathInfo($temp);
 			$viewFileName = $this->makeViewName($pathInfo);
@@ -413,9 +427,9 @@
 
 	array(
 		'APP_PATH'               => 'F:\\localWeb\\public_local14\\public/../app/' ,
-		'THINK_VERSION'          => '5.0.20' ,
-		'THINK_START_TIME'       => 1540197895.8345001 ,
-		'THINK_START_MEM'        => 406888 ,
+		'THINK_VERSION'          => '5.0.22' ,
+		'THINK_START_TIME'       => 1540978181.3453 ,
+		'THINK_START_MEM'        => 406808 ,
 		'EXT'                    => '.php' ,
 		'DS'                     => '\\' ,
 		'THINK_PATH'             => 'F:\\localWeb\\public_local14\\thinkphp\\' ,
@@ -499,7 +513,7 @@
 		'SINGLE_IMG'             => 2 ,
 		'MULTI_IMG'              => 3 ,
 		'TIME_INSERT_FIELD_NAME' => 'time' ,
-		'TIME_NOW'               => 1540197895 ,
+		'TIME_NOW'               => 1540978181 ,
 		'SYS_APP_NAMESPACE'      => 'app' ,
 		'SYS_HOOK_DIR_NAME'      => 'hook' ,
 		'SYS_ADDON_DIR_NAME'     => 'addon' ,
@@ -514,32 +528,21 @@
 		'SYS_NON_LOGIN_INDEX'    => 'admin/login/login' ,
 		'SYS_LOGIN_INDEX'        => 'admin/index/index' ,
 		'SYS_DB_PREFIX'          => 'ithink_' ,
-		'PATH_ADDON'             => 'F:\\localWeb\\public_local14\\addon\\' ,
 		'PATH_PUBLIC'            => 'F:\\localWeb\\public_local14\\public\\' ,
-		'PATH_UPLOAD'            => 'F:\\localWeb\\public_local14\\public\\upload\\' ,
-		'PATH_PICTURE'           => 'F:\\localWeb\\public_local14\\public\\upload\\picture\\' ,
-		'PATH_FILE'              => 'F:\\localWeb\\public_local14\\public\\upload\\file\\' ,
 		'PATH_SERVICE'           => 'F:\\localWeb\\public_local14\\app\\common\\service\\' ,
-		'PATH_COMMON_LOGIC'      => 'app\\common\\logic\\' ,
 		'PATH_HPLUS'             => 'F:\\localWeb\\public_local14\\public\\hplus\\' ,
 		'PATH_TEMP'              => 'F:\\localWeb\\public_local14\\public\\temp\\' ,
 		'PATH_STATIC'            => 'F:\\localWeb\\public_local14\\public\\static\\' ,
 		'PATH_THEMES'            => 'F:\\localWeb\\public_local14\\public\\themes\\' ,
 		'API_CODE_NAME'          => 'code' ,
 		'API_MSG_NAME'           => 'msg' ,
-		'RESOURCE_INDEX_MENU'    => '0' ,
-		'RESOURCE_INDEX_ELEMENT' => '1' ,
-		'RESOURCE_MENU'          => 'resource_menu' ,
-		'RESOURCE_ELEMENT'       => 'resource_element' ,
-		'RESOURCE_MAP'           => array(
-			0 => 'resource_menu' ,
-			1 => 'resource_element' ,
-		) ,
 		'SESSOIN_TAG_USER'       => 'user' ,
 		'SESSOIN_TAG_ROLE'       => 'roles' ,
 		'SESSOIN_TAG_PRIVILEGES' => 'privileges' ,
 		'SESSOIN_TAG_ROLE_NAME'  => 'rolesName' ,
 		'SESSOIN_TAG_ROLE_IDS'   => 'rolesId' ,
+		'const'                  => 'constconstconst' ,
+		'DB_LIST_ROWS'           => '20' ,
 		'ADMIN_ID'               => 1 ,
 		'GLOBAL_ADMIN_ROLE_ID'   => 1 ,
 		'IS_POST'                => false ,
@@ -548,27 +551,28 @@
 		'IS_PJAX'                => false ,
 		'IS_MOBILE'              => false ,
 		'MODULE_NAME'            => 'admin' ,
-		'CONTROLLER_NAME'        => 'module' ,
-		'ACTION_NAME'            => 'datalist' ,
-		'URL'                    => 'module/datalist' ,
-		'URL_MODULE'             => 'admin/module/datalist' ,
-		'URL_TRUE'               => 'http://local14.cc/admin/module/datalist.html' ,
+		'CONTROLLER_NAME'        => 'index' ,
+		'ACTION_NAME'            => 'index' ,
+		'URL'                    => 'index/index' ,
+		'URL_MODULE'             => 'admin/index/index' ,
+		'URL_TRUE'               => 'http://local14.cc/admin/index/index.html' ,
 		'DOMAIN'                 => 'http://local14.cc' ,
 		'IP'                     => '127.0.0.1' ,
 		'URL_ROOT'               => 'http://local14.cc/' ,
-		'URL_UPLOAD'             => 'http://local14.cc/upload/' ,
-		'URL_PICTURE'            => 'http://local14.cc/upload/picture/' ,
-		'URL_FILE'               => 'http://local14.cc/upload/file/' ,
 		'URL_HPLUS'              => 'http://local14.cc/hplus/' ,
 		'URL_STATIC'             => 'http://local14.cc/static/' ,
 		'URL_IMAGE'              => 'http://local14.cc/static/image/' ,
 		'URL_PLUGINS'            => 'http://local14.cc/static/plugins/' ,
-		'URL_THEMES'             => 'http://local14.cc/themes/' ,
-		'DB_LIST_ROWS'           => '20' ,
-
-		'MODEL_STATIC_PATH'      => 'F:/localWeb/public_local14/public/static/module/' ,
-		'MODEL_STATIC_URL'       => 'http:\\\\local14.cc\\static\\module\\' ,
-
-		'CONTROLLER_STATIC_PATH' => 'F:/localWeb/public_local14/public/static/module/admin/' ,
-		'CONTROLLER_STATIC_URL'  => 'http:\\\\local14.cc\\static\\module\\admin\\' ,
+		'URL_BACKUP'             => 'http://local14.cc/backup/' ,
+		'PATH_BACKUP'            => 'F:\\localWeb\\public_local14\\public\\backup/' ,
+		'MODEL_STATIC_PATH'      => 'F:\\localWeb\\public_local14\\public\\static\\module\\' ,
+		'MODEL_STATIC_URL'       => 'http://local14.cc/static/module/' ,
+		'CONTROLLER_STATIC_PATH' => 'F:\\localWeb\\public_local14\\public\\static\\module\\admin\\' ,
+		'CONTROLLER_STATIC_URL'  => 'http://local14.cc/static/module/admin/' ,
+		'PATH_UPLOAD'            => 'F:\\localWeb\\public_local14\\public\\static\\module\\admin\\upload\\' ,
+		'PATH_PICTURE'           => 'F:\\localWeb\\public_local14\\public\\static\\module\\admin\\upload\\picture\\' ,
+		'PATH_FILE'              => 'F:\\localWeb\\public_local14\\public\\static\\module\\admin\\upload\\file\\' ,
+		'URL_UPLOAD'             => 'http://local14.cc/static/module/admin/upload/' ,
+		'URL_PICTURE'            => 'http://local14.cc/static/module/admin/upload/picture/' ,
+		'URL_FILE'               => 'http://local14.cc/static/module/admin/upload/file/' ,
 	);

@@ -65,10 +65,6 @@
 			// 初始化API常量
 			$this->initApiConst();
 
-			// 初始化资源数据表常量
-			$this->initResource();
-
-
 			// session键常量
 			$this->sessionConst();
 		}
@@ -172,13 +168,11 @@
 		private function initPathConst()
 		{
 
-			define('PATH_ADDON' , ROOT_PATH . SYS_ADDON_DIR_NAME . DS);
+
 			define('PATH_PUBLIC' , ROOT_PATH . 'public' . DS);
-			define('PATH_UPLOAD' , PATH_PUBLIC . 'upload' . DS);
-			define('PATH_PICTURE' , PATH_UPLOAD . 'picture' . DS);
-			define('PATH_FILE' , PATH_UPLOAD . 'file' . DS);
+
 			define('PATH_SERVICE' , ROOT_PATH . SYS_APP_NAMESPACE . DS . SYS_COMMON_DIR_NAME . DS . LAYER_SERVICE_NAME . DS);
-			define('PATH_COMMON_LOGIC' , SYS_APP_NAMESPACE . SYS_DS_CONS . SYS_COMMON_DIR_NAME . SYS_DS_CONS . LAYER_LOGIC_NAME . SYS_DS_CONS);
+
 
 
 			define('PATH_HPLUS' , PATH_PUBLIC . 'hplus' . DS);
@@ -188,22 +182,6 @@
 
 		}
 
-		/**
-		 * 初始化资源数据表常量
-		 */
-		private function initResource()
-		{
-			define('RESOURCE_INDEX_MENU' , '0');
-			define('RESOURCE_INDEX_ELEMENT' , '1');
-
-			define('RESOURCE_MENU' , 'resource_menu');
-			define('RESOURCE_ELEMENT' , 'resource_element');
-
-			define('RESOURCE_MAP' , [
-				RESOURCE_INDEX_MENU    => RESOURCE_MENU ,
-				RESOURCE_INDEX_ELEMENT => RESOURCE_ELEMENT ,
-			]);
-		}
 
 		/**
 		 * 初始化API常量
@@ -252,6 +230,6 @@
 		private function registerNamespace()
 		{
 			// 注册插件根命名空间
-			Loader::addNamespace(SYS_ADDON_DIR_NAME , PATH_ADDON);
+
 		}
 	}

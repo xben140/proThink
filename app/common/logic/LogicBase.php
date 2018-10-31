@@ -516,9 +516,7 @@
 					'editUrl'     => url('edit') ,
 					'addUrl'      => url('add') ,
 
-
-					//'viewInfoUrl' => url('viewInfo') ,
-					//'setItemUrl'  => url('setItem') ,
+					'setItemUrl' => url('setItem') ,
 				]);
 
 				foreach ($data['data'] as $k => $v)
@@ -581,7 +579,7 @@
 									'src'   => url('detailInfo') ,
 									'title' => '详细数据' ,
 								] ,
-								'params'      => [
+								'params'     => [
 									'id' => $v['id'] ,
 								] ,
 								'is_display' => 1 ,
@@ -591,8 +589,9 @@
 								'is_display' => 1 ,
 								'class'      => ' btn-success btn-custom-event' ,
 								'data'       => [
-									'callback' => 'registerSetItem' ,
-									'action'   => 'recover' ,
+									'callback'   => 'registerSetItem' ,
+									'action'     => 'recover' ,
+									'is_confirm' => 0 ,
 								] ,
 								'value'      => '恢复记录' ,
 							]) ,

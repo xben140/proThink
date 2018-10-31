@@ -8,6 +8,8 @@
 	use Phelium\Component\MySQLBackup;
 	use PhpMyAdmin\SqlParser\Parser;
 	use PHPSQLParser\PHPSQLParser;
+	use wapmorgan\UnifiedArchive\UnifiedArchive;
+	use zip\zip;
 
 	//php index.php /demo/cmd/index
 
@@ -261,12 +263,48 @@ VALUES
 			$Dump = new MySQLBackup(config('database.hostname') , config('database.username') , config('database.password') , config('database.database'));
 			$Dump->addTables(array(
 				'ithink_login_log' ,
-				'ithink_config',
+				'ithink_config' ,
 			));
 			//$Dump->setCompress('zip');
 			$Dump->setDelete(false);
 			$Dump->setDownload(false);
 			$Dump->dump();
+		}
+
+		public function zip()
+		{
+			$path1 = (MODEL_STATIC_PATH . 'blog');
+			$path2 = realpath(replaceToSysSeparator(APP_PATH . 'blog'));
+
+			$zip = new zip(new \PclZip('archive.zip'));
+
+			$zip->create([
+				$path1 ,
+				$path2 ,
+			] , [
+				[
+					PCLZIP_OPT_REMOVE_PATH ,
+					'localweb' ,
+				] ,
+				[
+					PCLZIP_OPT_ADD_PATH ,
+					'installpp/bb/cc' ,
+				] ,
+			]);
+
+			/*
+						$zip->extract([
+							[
+								PCLZIP_OPT_REMOVE_PATH ,
+								'localWeb' ,
+							] ,
+							[
+								PCLZIP_OPT_ADD_PATH ,
+								'installpp' ,
+							] ,
+						]);
+			*/
+
 
 		}
 	}

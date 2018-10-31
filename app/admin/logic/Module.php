@@ -4,15 +4,36 @@
 
 	use db\Db;
 	use file\FileTool;
+	use think\Exception;
+	use zip\phpZip;
 
 	class Module extends Base
 	{
+		/**
+		 * Module constructor.
+		 */
 		public function __construct()
 		{
 			$this->initBaseClass();
 		}
 
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    模块
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
 
+		/**
+		 * 模块列表
+		 *
+		 * @param array $param
+		 * @param null  $callback
+		 * @param bool  $isActivedOnly
+		 *
+		 * @return array|mixed
+		 */
 		public function dataList($param = [] , $callback = null , $isActivedOnly = false)
 		{
 			$modules = [];
@@ -34,95 +55,13 @@
 			return $modules;
 		}
 
-		public function getModuleInfo($moduleName)
-		{
-			//F:\localWeb\public_local14\public\..\app\blog
-			$appPath = realpath(replaceToSysSeparator(APP_PATH . $moduleName));
-
-			//F:/localWeb/public_local14/public/static/module/blog
-			$staticPath = (MODEL_STATIC_PATH . $moduleName);
-
-			//http:\\local14.cc\static\module\blog
-			$staticUrl = MODEL_STATIC_URL . ($moduleName);
-
-			$makeImgPath = function($file) use ($staticPath , $staticUrl) {
-				foreach ([
-							 'jpg' ,
-							 'png' ,
-							 'jpeg' ,
-							 'gif' ,
-						 ] as $k => $v)
-				{
-					if(is_file($staticPath . DS . 'image' . DS . $file . '.' . $v))
-					{
-						//http:\\local14.cc\static\module\doc\image\logo.gif
-						return $staticUrl . DS . 'image' . DS . $file . '.' . $v;
-					}
-				}
-
-				//http://local14.cc/upload/picture/20181009/thumb_e42e2c89e73a2cef2b2b5ea894f974da.jpg
-				return generateProfilePicPath(config('default_img'));
-			};
-
-			return [
-				//小图标
-				'ico'        => $makeImgPath('logo') ,
-				'is_install' => (function($info) {
-					$status = null;
-					$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($info['id']) ,])->count() > 0);
-					$tablesStatus = [];
-					foreach ($info['database_tables'] as $k => $v)
-					{
-						$sql = "SHOW TABLES LIKE '%{$v}%'";
-						$tablesStatus[] = (count(querySql($sql)) > 0);
-					}
-
-					//如果有权限，并且表状态里没有false -- 已安装
-					if($hasPrivileges && !in_array(false , $tablesStatus))
-					{
-						$status = $this->model_::$appStatusMap[1]['value'];
-					}
-					//如果没有权限，并且表个数大于0，并且一个也表也没有 -- 未安装
-					elseif(!$hasPrivileges && (count($tablesStatus) > 0) && !in_array(true , $tablesStatus))
-					{
-						$status = $this->model_::$appStatusMap[0]['value'];
-					}
-					//如果没有权限，或者表状态里有false -- 安装出错
-					else
-					{
-						$status = $this->model_::$appStatusMap[2]['value'];
-					}
-
-					return $status = 1;
-				})(include($appPath . DS . 'info.php')) ,
-
-				//封面
-				'cover'      => $makeImgPath('cover') ,
-				//应用信息
-				'info'       => include($appPath . DS . 'info.php') ,
-				//应用信息
-				'conf'       => include($appPath . DS . 'conf.php') ,
-				//应用信息
-				'menu'       => include($appPath . DS . 'menu.php') ,
-				//安装sql语句
-				'sql'        => include($appPath . DS . 'sql.php') ,
-				//备份的数据
-				//'backup'     => is_file($appPath . DS . 'data.json') ? include_once($appPath . DS . 'data.json') : '[]' ,
-				'backup'     => (function($appPath) {
-					$path = $appPath . DS . 'database' . DS;
-					$files = FileTool::listDir($path);
-					$res = [];
-					foreach ($files as $k => $v)
-					{
-						$res[] = file_get_contents($v['path']);
-					}
-
-					return $res;
-				})($appPath) ,
-			];
-
-		}
-
+		/**
+		 * 安装的方法
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function install($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
@@ -135,7 +74,31 @@
 					$transaction[] = [
 						function($_param) use ($info) {
 							$flag = true;
-							$flag && $flag = ($this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete() !== false);
+							$menu = $info['menu'];
+
+							//安装之前先卸载
+							$this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete();
+
+							function recusiveParse($menu , $moduleId , callable $callback , $level = 0)
+							{
+								static $pid;
+								$pid[0] = 0;
+
+								foreach ($menu as $k => $v)
+								{
+									$data = $v;
+									unset($data['son']);
+									$data['category'] = $moduleId;
+									$data['pid'] = $pid[$level];
+									$id = call_user_func_array($callback , [$data]);
+									$pid[$level + 1] = $id;
+									recusiveParse($v['son'] , $moduleId , $callback , $level + 1);
+								}
+							}
+
+							recusiveParse($menu , $info['info']['id'] , function($data) {
+								return $this->model__admin_privilege->insertGetId($data);
+							});
 
 							return $flag;
 						} ,
@@ -151,9 +114,20 @@
 						function($_param) use ($info) {
 							$flag = true;
 							$config = $info['conf'];
-							$id = db('configGroup')->insertGetId(['name' => $info['info']['id']]);
+
+							//安装之前先卸载
+							$flag && $flag = $gid = db('config_group')->where(['name' => strtolower($info['info']['id']) ,])->value('id');
+							$flag && $flag = ($this->model__admin_config->where(['group_id' => $gid ,])->delete() !== false);
+							$flag && $flag = db('config_group')->where(['name' => strtolower($info['info']['id']) ,])->delete();
+
+							$id = db('configGroup')->insertGetId([
+								'name'   => $info['info']['id'] ,
+								'status' => 1 ,
+							]);
+
 							$configModel = $this->model__common_config;
 							$val = '';
+							$data = [];
 							foreach ($config as $k => $v)
 							{
 								switch ($v['type'])
@@ -174,26 +148,28 @@
 										break;
 									case '4' :
 										#option
-										isset($v['selected']) && ($v['value']['selected'] .= '!!--!!');
+										isset($v['selected']) && ($v['value'][$v['selected']] .= '!!--!!');
 										$val = implode("\r\n" , $v['value']);
 										break;
 									default :
 										#...
 										break;
 								}
-								$flag && $flag = ($configModel->insertData([
+								$data[] = [
 									'type'     => $v['type'] ,
 									'name'     => $v['name'] ,
 									'key'      => $v['key'] ,
 									'value'    => $val ,
 									'is_const' => isset($v['is_const']) ? (int)$v['is_const'] : '0' ,
 									'group_id' => $id ,
-								]) !== false);
-
-								if(!$flag) break;
+									'status'   => 1 ,
+									'time'     => TIME_NOW ,
+								];
 							}
 
-							return $flag !== false;
+							$flag = ($configModel->insertAll($data));
+
+							return $flag !== 0;
 						} ,
 						[] ,
 						'配置信息安装出错，请尝试手动执行' ,
@@ -205,10 +181,9 @@
 					//数据
 					$transaction[] = [
 						function($_param) use ($info) {
+							//基础sql配置
 							$installSql = $info['sql']['install'];
-
 							$sqls = Db::parseSql($installSql);
-
 							$flag = true;
 							foreach ($sqls as $k => $sql)
 							{
@@ -217,10 +192,21 @@
 								} , $err);
 							}
 
+							//备份的数据sql
+							$dataSql = implode("\r\n" , $info['backup']);
+							$sqls = Db::parseSql($dataSql);
+							foreach ($sqls as $k => $sql)
+							{
+								$flag = Db::exec($sql , function($sql , &$err) {
+									return (querySql($sql) !== false);
+								} , $err);
+							}
+
+
 							return $flag;
 						} ,
 						[] ,
-						'数据表安装出错，请检查sql语法或者网络环境后尝试手动执行' ,
+						'数据表安装出错，请检查sql.php和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '数据表安装成功';
 					break;
@@ -243,6 +229,13 @@
 			return $this->retureResult;
 		}
 
+		/**
+		 * 卸载方法
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function uninstall($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
@@ -323,6 +316,591 @@
 			return $this->retureResult;
 		}
 
+
+		/**
+		 * 传入应用id，获取应用全部相关信息
+		 *
+		 * @param $moduleName
+		 *
+		 * @return array
+		 */
+		public function getModuleInfo($moduleName)
+		{
+
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			//F:\localWeb\public_local14\public\..\app\blog
+			$appPath = $pathInfo['appPath'];
+
+			//F:/localWeb/public_local14/public/static/module/blog
+			$staticPath = $pathInfo['staticPath'];
+			//http:\\local14.cc\static\module\blog
+			$staticUrl = $pathInfo['staticUrl'];
+
+			//F:\localWeb\public_local14\public\blog
+			$backupPath = $pathInfo['backupPath'];
+			//http://local14.cc/blog
+			$backupUrl = $pathInfo['backupUrl'];
+
+			$makeImgPath = function($file) use ($staticPath , $staticUrl) {
+				foreach ([
+							 'jpg' ,
+							 'png' ,
+							 'jpeg' ,
+							 'gif' ,
+						 ] as $k => $v)
+				{
+					if(is_file($staticPath . DS . 'image' . DS . $file . '.' . $v))
+					{
+						//http:\\local14.cc\static\module\doc\image\logo.gif
+						return $staticUrl . DS . 'image' . DS . $file . '.' . $v;
+					}
+				}
+
+				//http://local14.cc/upload/picture/20181009/thumb_e42e2c89e73a2cef2b2b5ea894f974da.jpg
+				return generateProfilePicPath(config('default_img'));
+			};
+
+			$info = [
+				'ico'         => '' ,
+				'is_install'  => '' ,
+				'cover'       => '' ,
+				'info'        => [] ,
+				'conf'        => [] ,
+				'menu'        => [] ,
+				'sql'         => [] ,
+				'backup'      => '' ,
+				'is_complete' => 1 ,
+				'error'       => [] ,
+			];
+
+			try
+			{
+				$field = [
+					'id' ,
+					'name' ,
+					'title' ,
+					'version' ,
+					'description' ,
+					'default_action' ,
+					'update_time' ,
+					'database_tables' ,
+				];
+
+				//应用信息
+				$info['info'] = include($appPath . DS . 'info.php');
+
+				if(!is_array($info['info']))
+				{
+					$info['error'][] = 'info.php必须返回数组';
+					$info['is_complete'] = 0;
+				}
+
+				foreach ($field as $k => $v)
+				{
+					if(!isset($info['info'][$v]))
+					{
+						$info['error'][] = "info.php 缺少 {$v} 字段";
+						$info['is_complete'] = 0;
+					}
+				}
+
+				if(!is_array($info['info']['database_tables']))
+				{
+					$info['error'][] = 'database_tables 必须为数组';
+					$info['is_complete'] = 0;
+				}
+
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//配置信息
+				$info['conf'] = include($appPath . DS . 'conf.php');
+
+				if(!is_array($info['conf']))
+				{
+					$info['error'][] = 'conf.php必须返回数组';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//菜单信息
+				$info['menu'] = include($appPath . DS . 'menu.php');
+
+				if(!is_array($info['menu']))
+				{
+					$info['error'][] = 'menu.php必须返回数组';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//安装sql语句
+				$info['sql'] = include($appPath . DS . 'sql.php');
+
+				if(!is_array($info['sql']) || !isset($info['sql']['install']))
+				{
+					$info['error'][] = 'sql.php必须返回数组格式，并且必须有键为 install 的值存在';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				$info['ico'] = $makeImgPath('logo');
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+
+			try
+			{
+				$info['cover'] = $makeImgPath('cover');
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+
+			try
+			{
+				//安装sql语句
+				$info['backup'] = (function($appPath) {
+					$path = $appPath . DS . 'database' . DS;
+					$res = [];
+					if(is_dir($path))
+					{
+						$res = FileTool::listDir($path , function($v) {
+							return file_get_contents($v['path']);
+						});
+					}
+
+					return $res;
+				})($appPath);
+
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				$info['is_install'] = (function($infoFormFile) use ($info) {
+					$status = null;
+					if(!$info['is_complete'])
+					{
+						$status = $this->model_::$appStatusMap[3]['value'];
+					}
+					else
+					{
+						$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($infoFormFile['id']) ,])->count() > 0);
+						$tablesStatus = [];
+						foreach ($infoFormFile['database_tables'] as $k => $v)
+						{
+							$sql = "SHOW TABLES LIKE '%{$v}%'";
+							$tablesStatus[] = (count(querySql($sql)) > 0);
+						}
+
+						//如果有安装菜单权限，并且每个应用表都存在 -- 已安装
+						if($hasPrivileges && !in_array(false , $tablesStatus))
+						{
+							$status = $this->model_::$appStatusMap[1]['value'];
+						}
+						//如果没有安装菜单权限，并且应用表个数大于0，并且一个也表也没有 -- 未安装
+						elseif(!$hasPrivileges && (count($tablesStatus) > 0) && !in_array(true , $tablesStatus))
+						{
+							$status = $this->model_::$appStatusMap[0]['value'];
+						}
+						//应用信息残缺，要重新安装
+						else
+						{
+							$status = $this->model_::$appStatusMap[2]['value'];
+						}
+					}
+
+					return $status;
+				})(include($appPath . DS . 'info.php'));
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			return $info;
+
+		}
+
+		/**
+		 * 删除应用
+		 *
+		 * @param      $param
+		 * @param null $beforeClosureList
+		 * @param null $afterClosureList
+		 * @param bool $isTurlyDelte
+		 *
+		 * @return array
+		 */
+		public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
+		{
+			$moduleName = $param['ids'];
+
+			$info = $this->getModuleInfo($moduleName);
+
+			if($info['is_install'] != 1)
+			{
+				$pathInfo = $this->getModulePathInfo($moduleName);
+				if(FileTool::isWritable($pathInfo['appPath']) && FileTool::isWritable($pathInfo['staticPath']))
+				{
+					$res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
+						return true;
+					});
+
+					$res['sign'] && $res = FileTool::recursiveRm($pathInfo['staticPath'] , function($info , $relativePath) {
+						return true;
+					});
+
+					if($res['sign'])
+					{
+						$this->retureResult['message'] = '删除成功 ';
+						$this->retureResult['sign'] = RESULT_SUCCESS;
+					}
+					else
+					{
+						$this->retureResult['message'] = $res['msg'];
+						$this->retureResult['sign'] = RESULT_ERROR;
+					}
+				}
+				else
+				{
+					$this->retureResult['message'] = '应用文件夹没有写权限，请检查';
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = '应用处于安装状态，无法删除';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    包管理
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
+		/**
+		 * 备份包
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function backup($param)
+		{
+			$moduleName = $param['id'];
+
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			//F:\localWeb\public_local14\public\..\app\blog
+			$appPath = $pathInfo['appPath'];
+
+			//F:/localWeb/public_local14/public/static/module/blog
+			$staticPath = $pathInfo['staticPath'];
+			//http:\\local14.cc\static\module\blog
+			$staticUrl = $pathInfo['staticUrl'];
+
+			//F:\localWeb\public_local14\public\blog
+			$backupPath = $pathInfo['backupPath'];
+			//http://local14.cc/blog
+			$backupUrl = $pathInfo['backupUrl'];
+
+
+			FileTool::mkdir_($backupPath);
+			if(FileTool::isDirAvailable($backupPath))
+			{
+				$dirs = [];
+				//构造应用资源路径
+				FileTool::itreatorDFS($appPath , function($info , $relativePath) use (&$dirs) {
+					$dirs[] = [
+						'name' => strtr($info->getPathname() , [replaceToSysSeparator(ROOT_PATH) => '' ,]) ,
+						'path' => $info->getPathname() ,
+					];
+
+					return true;
+				} , function($info , $relativePath) use (&$flag) {
+
+				});
+
+				//构造静态资源路径
+				FileTool::itreatorDFS($staticPath , function($info , $relativePath) use (&$dirs) {
+					$dirs[] = [
+						'name' => strtr($info->getPathname() , [replaceToSysSeparator(ROOT_PATH) => '' ,]) ,
+						'path' => $info->getPathname() ,
+					];
+
+					return true;
+				} , function($info , $relativePath) use (&$flag) {
+
+				});
+
+				$res = phpZip::zip([
+					//保存文件名字
+					'file_name'     => replaceToSysSeparator($backupPath . DS . 'backup.zip') ,
+					//'file_name'    => 'test.zip',
+					//是否覆盖同名zip
+					'is_overwrite'  => '1' ,
+
+					//指定文件夹，可递归
+					'dir_path'      => [] ,
+
+					//正则过滤文件
+					'skip_file_reg' => [//'#readme.txt#' ,
+					] ,
+
+					//正则过滤文件夹
+					'skip_dir_reg'  => [//'#ima(?=ge)#',
+					] ,
+
+					//具体文件路径
+					'file_path'     => [
+						//独立文件压缩路径
+						//'save_path' => '/a/b' ,
+						'file_path' => $dirs ,
+					] ,
+				]);
+
+
+				if(($res) !== false)
+				{
+					$this->unzipToCode($moduleName);
+					$this->retureResult['message'] = '备份成功 ';
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				}
+				else
+				{
+					$this->retureResult['message'] = '备份失败，请稍后重试...';
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = $backupUrl . ' 文件夹不可写，请检查权限';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+		/**
+		 * 获取安装包列表
+		 * @return array
+		 */
+		public function packageList()
+		{
+			$data = [];
+
+			$data = FileTool::listDir(PATH_BACKUP , function($v , $info) {
+				return [
+					'id'   => $v['name'] ,
+					'info' => '' ,
+				];
+			} , FileTool::DIRECTORY);
+
+			return $data;
+		}
+
+		/**
+		 * 删除包文件
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function delPackage($param)
+		{
+			$moduleName = $param['id'];
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			$res = FileTool::recursiveRm($pathInfo['backupPath'] , function($info , $relativePath) {
+				return true;
+			});
+
+			if($res['sign'])
+			{
+				$this->retureResult['message'] = '删除成功 ';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = $res['msg'];
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+		/**
+		 * 部署应用
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function apply($param)
+		{
+			$moduleName = $param['id'];
+			$pathInfo = $this->getModulePathInfo($moduleName);
+
+			if(!is_dir($pathInfo['appPath']))
+			{
+				$res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH  . DS . 'app' , function($info , $relativePath) {
+					return true;
+				});
+
+				$res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH  . DS . 'public' , function($info , $relativePath) {
+					return true;
+				});
+
+				if($res['sign'])
+				{
+					$this->retureResult['message'] = '部署成功';
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				}
+				else
+				{
+					$this->retureResult['message'] = $res['msg'];
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = '此应用已经存在，如果需要重新部署，请先删除应用';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+			return $this->retureResult;
+		}
+
+
+		/**
+		 * 指定包解压到相邻文件夹
+		 * 上传包和备份包后调用
+		 *
+		 * @param $moduleName
+		 *
+		 * @return array
+		 */
+		public function unzipToCode($moduleName)
+		{
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			$backupPath = $pathInfo['packagePath'];
+			$codePath = $pathInfo['backupPath'];
+
+			return phpZip::unzip([
+				'zip'         => $backupPath ,
+				'destination' => $codePath ,
+			]);
+		}
+
+
+		/**
+		 * 获取包信息
+		 *
+		 * @param $moduleName
+		 */
+		public function getPackageInfo($moduleName)
+		{
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			//F:\localWeb\public_local14\public\..\app\blog
+			$appPath = $pathInfo['appPath'];
+
+			//F:/localWeb/public_local14/public/static/module/blog
+			$staticPath = $pathInfo['staticPath'];
+			//http:\\local14.cc\static\module\blog
+			$staticUrl = $pathInfo['staticUrl'];
+
+			//F:\localWeb\public_local14\public\blog
+			$backupPath = $pathInfo['backupPath'];
+			//http://local14.cc/blog
+			$backupUrl = $pathInfo['backupUrl'];
+		}
+
+
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    其他
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *
+		 * @param $moduleName
+		 *
+		 * @return array
+		 */
+
+		public function getModulePathInfo($moduleName)
+		{
+			$data = [
+				//F:\localWeb\public_local14\app\blog
+				'appPath'     => realpath(replaceToSysSeparator(APP_PATH . $moduleName)) ,
+
+				//F:\localWeb\public_local14\public\static\module\blog
+				'staticPath'  => replaceToSysSeparator(MODEL_STATIC_PATH . $moduleName) ,
+				//http://local14.cc/static/module/blog
+				'staticUrl'   => replaceToUrlSeparator(MODEL_STATIC_URL . ($moduleName)) ,
+
+				//F:\localWeb\public_local14\public\backup\blog
+				'backupPath'  => replaceToSysSeparator(PATH_BACKUP . $moduleName) ,
+				//http://local14.cc/backup/blog
+				'backupUrl'   => replaceToUrlSeparator(URL_BACKUP . $moduleName) ,
+
+
+				//F:\localWeb\public_local14\public\backup\blog\backup.zip
+				'packagePath' => replaceToSysSeparator(PATH_BACKUP . $moduleName) . DS . 'backup.zip' ,
+				//http://local14.cc/backup/blog/backup.zip
+				'packageUrl'  => replaceToUrlSeparator(URL_BACKUP . $moduleName) . '/backup.zip' ,
+
+
+				//F:\localWeb\public_local14\public\backup\blog\code
+				'codePath'    => replaceToSysSeparator(PATH_BACKUP . $moduleName) . DS . 'backup' ,
+				//http://local14.cc/backup/blog/code
+				'codeUrl'     => replaceToUrlSeparator(URL_BACKUP . $moduleName) . '/backup' ,
+			];
+
+			return $data;
+		}
+
+
+		/**
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		protected function makeCondition($param)
 		{
 			$where = [];

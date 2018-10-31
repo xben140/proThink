@@ -36,8 +36,10 @@
 		"phpmyadmin/sql-parser"       : "^4.2",
 		"greenlion/php-sql-parser"    : "^4.1",
 		"workerman/workerman"         : "^3.5",
-		"jimmiw/php-time-ago": "^3.0",
-		"phelium/mysql-backup": "^1.0"
+		"jimmiw/php-time-ago"         : "^3.0",
+		"phelium/mysql-backup"        : "^1.0",
+		"wapmorgan/unified-archive"   : "~0.1.0",
+		"pclzip/pclzip"               : "^2.8"
 	},
 	"autoload"    : {
 		"psr-4" : {

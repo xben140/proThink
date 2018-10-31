@@ -43,6 +43,7 @@
 
 					case 'is_common' :
 					case 'module' :
+					case 'category' :
 					case 'controller' :
 					case 'action' :
 						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [

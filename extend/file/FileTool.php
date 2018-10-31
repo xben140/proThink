@@ -17,31 +17,52 @@
 
 		/**
 		 * 列出文件夹里文件信息
-		 * @param     $path
-		 * @param int $flag
+		 *
+		 * @param               $path
+		 * @param callable|null $callback
+		 * @param int           $flag
 		 *
 		 * @return array
 		 */
-		public static function listDir($path , $flag = self::ALL)
+		public static function listDir($path , callable $callback = null , $flag = self::ALL)
 		{
-			$directory = new \FilesystemIterator ($path);
-
-			$filter = new \CallbackFilterIterator ($directory , function($current , $key , $iterator) use ($flag) {
-				switch ($flag)
-				{
-					case self::FILE:
-						return $current->isFile();
-					case self::DIRECTORY:
-						return $current->isDir();
-					default:
-						return true;
-				}
-			});
-			$files = [];
-			foreach ($filter as $info)
+			try
 			{
-				$files[] = self::fileInfo($info->getPathname());
+				$directory = new \FilesystemIterator ($path);
+
+				$filter = new \CallbackFilterIterator ($directory , function($current , $key , $iterator) use ($flag) {
+					switch ($flag)
+					{
+						case static::FILE:
+							return $current->isFile();
+						case static::DIRECTORY:
+							return $current->isDir();
+						default:
+							return true;
+					}
+				});
+
+				$files = [];
+				foreach ($filter as $info)
+				{
+					if(is_callable($callback))
+					{
+						$files[] = call_user_func_array($callback , [
+							static::fileInfo($info->getPathname()) ,
+							$info,
+						]);
+					}
+					else
+					{
+						$files[] = static::fileInfo($info->getPathname());
+					}
+				}
+
+			} catch (Exception $e)
+			{
+				$files = [];
 			}
+
 			return $files;
 		}
 
@@ -55,16 +76,29 @@
 		 */
 		public static function recursiveCp($path , $dest , callable $fitlerCallback = null)
 		{
-			$info = new \SplFileInfo($path);
-			$flag = true;
-
-			$info->isFile() ? self::cp($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+			$res = [
+				'sign' => 1 ,
+				'msg'  => '操作成功' ,
+			];
+			try
+			{
+				$info = new \SplFileInfo($path);
 				$flag = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
-				$flag && self::cp($info->getPathname() , self::endDS($dest) . $relativePath);
 
-				return true;
-			});
+				$info->isFile() ? static::cp($info->getPathname() , static::endDS($dest) . $info->getBasename()) : static::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+					$flag = true;
+					(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+					$flag && static::cp($info->getPathname() , static::endDS($dest) . $relativePath);
+
+					return true;
+				});
+			} catch (Exception $e)
+			{
+				$res['sign'] = 0;
+				$res['msg'] = $e->getMessage();
+			}
+
+			return $res;
 		}
 
 		/**
@@ -76,18 +110,32 @@
 		 */
 		public static function recursiveMv($path , $dest , callable $fitlerCallback = null)
 		{
-			$info = new \SplFileInfo($path);
-			$flag = true;
 
-			$info->isFile() ? self::mv($info->getPathname() , self::endDS($dest) . $info->getBasename()) : self::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+			$res = [
+				'sign' => 1 ,
+				'msg'  => '操作成功' ,
+			];
+			try
+			{
+				$info = new \SplFileInfo($path);
 				$flag = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
-				$flag && self::mv($info->getPathname() , self::endDS($dest) . $relativePath);
 
-				return true;
-			} , function($info , $relativePath) use (&$flag) {
-				$flag && self::rm($info->getPathname());
-			});
+				$info->isFile() ? static::mv($info->getPathname() , static::endDS($dest) . $info->getBasename()) : static::itreatorDFS($path , function($info , $relativePath) use ($dest , $fitlerCallback , &$flag) {
+					$flag = true;
+					(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+					$flag && static::mv($info->getPathname() , static::endDS($dest) . $relativePath);
+
+					return true;
+				} , function($info , $relativePath) use (&$flag) {
+					$flag && static::rm($info->getPathname());
+				});
+			} catch (Exception $e)
+			{
+				$res['sign'] = 0;
+				$res['msg'] = $e->getMessage();
+			}
+
+			return $res;
 		}
 
 		/**
@@ -95,21 +143,36 @@
 		 * * @param               $path
 		 *
 		 * @param callable|null $fitlerCallback
+		 *
+		 * @return array
 		 */
 		public static function recursiveRm($path , callable $fitlerCallback = null)
 		{
-			$info = new \SplFileInfo($path);
-			$flag = true;
-
-			$info->isFile() ? self::rm($info->getPathname()) : self::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
+			$res = [
+				'sign' => 1 ,
+				'msg'  => '操作成功' ,
+			];
+			try
+			{
+				$info = new \SplFileInfo($path);
 				$flag = true;
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
-				$flag && self::rm($info->getPathname());
 
-				return true;
-			} , function($info , $relativePath) use (&$flag) {
-				$flag && self::rm($info->getPathname());
-			});
+				$info->isFile() ? static::rm($info->getPathname()) : static::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
+					$flag = true;
+					(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+					$flag && static::rm($info->getPathname());
+
+					return true;
+				} , function($info , $relativePath) use (&$flag) {
+					$flag && static::rm($info->getPathname());
+				});
+			} catch (Exception $e)
+			{
+				$res['sign'] = 0;
+				$res['msg'] = $e->getMessage();
+			}
+
+			return $res;
 		}
 
 		/**
@@ -120,17 +183,30 @@
 		 */
 		public static function recursiveRmEmptyDir($path , callable $fitlerCallback = null)
 		{
-			$info = new \SplFileInfo($path);
-			$flag = true;
+			$res = [
+				'sign' => 1 ,
+				'msg'  => '操作成功' ,
+			];
+			try
+			{
+				$info = new \SplFileInfo($path);
+				$flag = true;
 
-			$info->isFile() ? self::rm($info->getPathname()) : self::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
-				$flag = self::isDirEmpty($info->getPathname());
-				(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
+				$info->isFile() ? static::rm($info->getPathname()) : static::itreatorDFS($path , function($info , $relativePath) use ($fitlerCallback , &$flag) {
+					$flag = static::isDirEmpty($info->getPathname());
+					(is_callable($fitlerCallback) && !$fitlerCallback($info , $relativePath)) && ($flag = false);
 
-				return true;
-			} , function($info , $relativePath) use (&$flag) {
-				$flag && self::rm($info->getPathname());
-			});
+					return true;
+				} , function($info , $relativePath) use (&$flag) {
+					$flag && static::rm($info->getPathname());
+				});
+			} catch (Exception $e)
+			{
+				$res['sign'] = 0;
+				$res['msg'] = $e->getMessage();
+			}
+
+			return $res;
 		}
 
 
@@ -146,7 +222,7 @@
 		{
 			$dirs = [realpath($path)];
 			static $originPath = null;
-			!$originPath && $originPath = self::endDS($path);
+			!$originPath && $originPath = static::endDS($path);
 			do
 			{
 				$fullPath = array_shift($dirs);
@@ -155,7 +231,7 @@
 				$relativePath = '';
 				if(is_dir($fullPath) && is_readable($fullPath))
 				{
-					$fullPath = self::endDS($fullPath);
+					$fullPath = static::endDS($fullPath);
 					$relativePath = str_replace($originPath , '' , $fullPath);
 
 					$dirs_ = @scandir($fullPath);
@@ -201,7 +277,7 @@
 			static $dep = 0;
 			static $originPath = null;
 
-			$path = self::endDS($path);
+			$path = static::endDS($path);
 			($dep === 0) && (!$originPath) && ($originPath = $path);
 			$dep++;
 
@@ -219,7 +295,7 @@
 					if(is_dir($fullPath) && is_readable($fullPath))
 					{
 						$res = $callback(new \SplFileInfo($fullPath) , $relativePath);
-						$res && self::itreatorDFS($fullPath , $callback , $afterCallback);
+						$res && static::itreatorDFS($fullPath , $callback , $afterCallback);
 					}
 					elseif(is_file($fullPath))
 					{
@@ -230,6 +306,7 @@
 					is_callable($afterCallback) && $afterCallback(new \SplFileInfo($fullPath) , $relativePath);
 				}
 			}
+				is_callable($afterCallback) && $afterCallback(new \SplFileInfo($path) , '');
 
 			$dep--;
 			($dep === 0) && ($originPath = null);
@@ -242,7 +319,7 @@
 		 */
 		public static function getExt($path)
 		{
-			return self::fileInfo($path)['ext'];
+			return static::fileInfo($path)['ext'];
 		}
 
 		/**
@@ -256,7 +333,7 @@
 		 */
 		public static function getPath($path)
 		{
-			return self::fileInfo($path)['dirpath'];
+			return static::fileInfo($path)['dirpath'];
 		}
 
 		/**
@@ -270,7 +347,7 @@
 		 */
 		public static function getName($path)
 		{
-			return self::fileInfo($path)['name'];
+			return static::fileInfo($path)['name'];
 		}
 
 		/**
@@ -280,7 +357,7 @@
 		 */
 		public static function isWritable($path)
 		{
-			return self::fileInfo($path)['isWritable'];
+			return static::fileInfo($path)['isWritable'];
 		}
 
 
@@ -291,7 +368,20 @@
 		 */
 		public static function isReadable($path)
 		{
-			return self::fileInfo($path)['isReadable'];
+			return static::fileInfo($path)['isReadable'];
+		}
+
+
+		/**
+		 * 文件是否存在，是否可写
+		 *
+		 * @param $path
+		 *
+		 * @return bool|int
+		 */
+		public static function isDirAvailable($path)
+		{
+			return is_dir($path) && static::isWritable($path);
 		}
 
 
@@ -339,13 +429,13 @@
 				$info['dirpath'] = dirname($path);
 				$info['ext'] = $file->getExtension();
 				$info['type'] = $file->getType();
-				$info['mode'] = self::getMode($path);
+				$info['mode'] = static::getMode($path);
 				$info['atime'] = $file->getATime();
 				$info['ctime'] = $file->getCTime();
 				$info['mtime'] = $file->getMTime();
 				$info['isReadable'] = $file->isReadable();
 				$info['isWritable'] = $file->isWritable();
-				$info['size'] = $file->isDir() ? 0 : self::fileSize($path);
+				$info['size'] = $file->isDir() ? 0 : static::fileSize($path);
 				$info['isExecutable'] = $file->isExecutable();
 
 			} catch (Exception $e)
@@ -417,7 +507,7 @@
 		 */
 		public static function mkdir_($path , $mode = 0777)
 		{
-			$path = self::patFilter($path);
+			$path = static::patFilter($path);
 
 			return !is_dir(($path)) ? mkdir(($path) , $mode , 1) : @chmod($path , $mode);
 		}
@@ -545,7 +635,7 @@
 		 */
 		public static function endDS($path)
 		{
-			return rtrim(rtrim(self::replaceToSysSeparator($path) , '/') , '\\') . self::DS;
+			return rtrim(rtrim(static::replaceToSysSeparator($path) , '/') , '\\') . static::DS;
 		}
 
 		/**
@@ -556,8 +646,8 @@
 		public static function replaceToSysSeparator($path)
 		{
 			return strtr($path , [
-				'\\' => self::DS ,
-				'/'  => self::DS ,
+				'\\' => static::DS ,
+				'/'  => static::DS ,
 			]);
 		}
 
@@ -619,20 +709,20 @@
 		{
 			@chmod($path , 0777);
 			@chmod($dest , 0777);
-			$dest = self::patFilter($dest);
+			$dest = static::patFilter($dest);
 			if(is_dir($path))
 			{
-				self::mkdir_($dest);
-				self::rm($path);
+				static::mkdir_($dest);
+				static::rm($path);
 			}
 			else
 			{
-				self::mkdir_(dirname($dest));
+				static::mkdir_(dirname($dest));
 				$result = intval(@rename($path , $dest));
 				if(!$result)
 				{ // windows部分ing情况处理
 					FileTool::cp($path , $dest);
-					self::rm($path);
+					static::rm($path);
 				}
 			}
 		}
@@ -650,11 +740,11 @@
 			$res = false;
 			if(is_dir($path))
 			{
-				$res = self::mkdir_($dest);
+				$res = static::mkdir_($dest);
 			}
 			elseif(is_file($path))
 			{
-				self::mkdir_(dirname($dest));
+				static::mkdir_(dirname($dest));
 				$res = copy($path , $dest);
 			}
 			@chmod($dest , 0777);
@@ -675,7 +765,7 @@
 			@chmod($path , 0777);
 			if(is_dir($path))
 			{
-				self::isDirEmpty(($path)) && is_writable($path) && @rmdir($path);
+				static::isDirEmpty(($path)) && is_writable($path) && @rmdir($path);
 				$res = !is_dir($path);
 			}
 			elseif(is_file($path))

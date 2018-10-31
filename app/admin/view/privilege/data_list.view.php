@@ -136,12 +136,23 @@
 							//权限名字
 							$t = integrationTags::searchFormCol([
 								integrationTags::searchFormText([
+									'field'       => '应用ID' ,
+									'value'       => input('category' , '') ,
+									'name'        => 'category' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '6']);
+							$doms = array_merge($doms , $t);
+
+							//权限名字
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
 									'field'       => '权限名字' ,
 									'value'       => input('name' , '') ,
 									'name'        => 'name' ,
 									'placeholder' => '' ,
 								]) ,
-							] , ['col' => '12']);
+							] , ['col' => '6']);
 							$doms = array_merge($doms , $t);
 
 							//模块名
@@ -299,12 +310,24 @@
 									integrationTags::tdSimple([
 										//'name'     => '' ,
 										'editable' => '1' ,
+										'value'    => $v['category'] ,
+										'field'    => 'category' ,
+										//'reg'      => '/^$/' ,
+										//'msg'      => '方法名必填' ,
+									]) ,
+								]) ,
+/*
+								//图标
+								integrationTags::td([
+									integrationTags::tdSimple([
+										//'name'     => '' ,
+										'editable' => '1' ,
 										'value'    => $v['ico'] ,
 										'field'    => 'ico' ,
 										//'reg'      => '/^$/' ,
 										//'msg'      => '方法名必填' ,
 									]) ,
-								]) ,
+								]) ,*/
 
 								//排序
 								integrationTags::td([

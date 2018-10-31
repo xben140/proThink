@@ -8,6 +8,7 @@
 		protected $rule = [
 			'pid'        => 'number' ,
 			'name'       => 'require' ,
+			'category'   => 'require' ,
 			//'name'       => 'unique:resource_menu|require' ,
 			'module'     => 'alpha|require' ,
 			'controller' => 'alpha|require' ,
@@ -18,9 +19,10 @@
 		// 验证提示
 		protected $message = [
 
-			'name.number'  => '上级选择错误' ,
-			'name.unique'  => '同样的记录已存在' ,
-			'name.require' => '权限名字必填' ,
+			'name.number'      => '上级选择错误' ,
+			'name.unique'      => '同样的记录已存在' ,
+			'name.require'     => '权限名字必填' ,
+			'category.require' => '应用ID必填' ,
 
 			'module.require' => '权限名字必填' ,
 			'module.alpha'   => '允许为英文字母' ,
@@ -37,6 +39,7 @@
 		// 应用场景
 		protected $scene = [
 			'add'  => [
+				'category' ,
 				'name' ,
 				'module' ,
 				'controller' ,

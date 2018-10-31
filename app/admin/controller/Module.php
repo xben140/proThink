@@ -4,6 +4,9 @@
 
 	class Module extends PermissionAuth
 	{
+		/**
+		 * @throws \Exception
+		 */
 		public function _initialize()
 		{
 			parent::_initialize();
@@ -30,12 +33,11 @@
 					case 'install' :
 					case 'uninstall' :
 						$res = $this->logic->{$action}($this->param);
-					break;
+						break;
 					default :
 						$res['message'] = '安装出错，请重试';
 						$res['sign'] = RESULT_SUCCESS;
 				}
-
 				$this->jump($res);
 			}
 			else
@@ -44,13 +46,59 @@
 			}
 		}
 
+		/**
+		 *
+		 */
 		public function setDefault()
 		{
 
 		}
 
+		/**
+		 * 安装包列表
+		 * @return mixed
+		 */
+		public function packageList()
+		{
+			return $this->makeView($this);
+		}
+
+		/**
+		 * 删除包
+		 * @throws \Exception
+		 */
+		public function delPackage()
+		{
+			$this->initLogic();
+			$this->jump($this->logic->delPackage($this->param));
+		}
+
+		/**
+		 *
+		 */
+		public function downloadPackage()
+		{
+			$this->initLogic();
+			downloadFile($this->logic->getModulePathInfo($this->param['id'])['packagePath'] , $this->param['id'] . '.zip');
+		}
+
+		/**
+		 * 备份包
+		 * @throws \Exception
+		 */
 		public function backup()
 		{
+			$this->initLogic();
+			$this->jump($this->logic->backup($this->param));
+		}
 
+		/**
+		 * 解压包到应用文件夹
+		 * @throws \Exception
+		 */
+		public function apply()
+		{
+			$this->initLogic();
+			$this->jump($this->logic->apply($this->param));
 		}
 	}

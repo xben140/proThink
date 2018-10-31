@@ -18,7 +18,6 @@ function registerSetItem($obj)
 
 function itemSet(ids, btn, callback_)
 {
-
 	let _this = $(btn);
 	let url = setItemUrl;
 
@@ -95,7 +94,7 @@ function successAction(obj, data)
 	if (count == 3)
 	{
 		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-		layer.alert('处理成功', {
+		layer.alert('处理成功，请点击 全局刷新 更新菜单', {
 			closeBtn: 0, //不显示关闭按钮
 			skin    : 'layui-layer-molv' //样式类名
 		}, function () {

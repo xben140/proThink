@@ -60,7 +60,8 @@
 		// 管理自定义模块时候，忽略的模块，即系统模块
 		'system_module'      => [
 			'admin' ,
-			'doc' ,
+			//'doc' ,
+			//'blog' ,
 			'demo' ,
 			'extra' ,
 			'common' ,

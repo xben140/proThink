@@ -77,12 +77,20 @@ function doRuquest($obj)
 	let data_id = getParentTr(_this).data('id');
 
 	let params = (_this.data('params'));
-	(typeof eval(params) === 'object') && (params = eval(params));
+	if (typeof eval(params) === 'object')
+	{
+		(params = eval(params))
+	}
+	else
+	{
+		params = {};
+	}
+
+	params['id'] = data_id;
+	params['ids'] = data_id;
 
 	let msg = (_this.data('msg')) || '确定?';
 	let url = _this.data('src') || _this.attr('src');
-	params['id'] = data_id;
-	params['ids'] = data_id;
 
 	if ((_this.data('is_confirm') !== undefined) && _this.data('is_confirm'))
 	{
