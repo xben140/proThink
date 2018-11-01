@@ -724,12 +724,32 @@
 		public function packageList()
 		{
 			$data = [];
-
 			$data = FileTool::listDir(PATH_BACKUP , function($v , $info) {
-				return [
-					'id'   => $v['name'] ,
-					'info' => '' ,
+				$res = [
+					'is_available' => 1 ,
+					'info'         => [] ,
+					'error'        => [] ,
 				];
+				$id = $v['name'];
+				$appPath = $v['path'] . '\backup\app' . DS . $id . DS;
+
+				foreach ([
+							 'info' ,
+							 'conf' ,
+							 'menu' ,
+							 'sql' ,
+						 ] as $k => $v1)
+				{
+					if(!is_file(replaceToSysSeparator($appPath . $v1 . '.php')))
+					{
+						$res['is_available'] = 0;
+						$res['error'][] = '缺少文件'. $v1 . '.php';
+					}
+				}
+
+				$res['is_available'] && $res['info'] = include $appPath . 'info.php';
+
+				return $res;
 			} , FileTool::DIRECTORY);
 
 			return $data;
@@ -779,11 +799,11 @@
 
 			if(!is_dir($pathInfo['appPath']))
 			{
-				$res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH  . DS . 'app' , function($info , $relativePath) {
+				$res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH . DS . 'app' , function($info , $relativePath) {
 					return true;
 				});
 
-				$res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH  . DS . 'public' , function($info , $relativePath) {
+				$res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH . DS . 'public' , function($info , $relativePath) {
 					return true;
 				});
 
@@ -803,6 +823,7 @@
 				$this->retureResult['message'] = '此应用已经存在，如果需要重新部署，请先删除应用';
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
+
 			return $this->retureResult;
 		}
 

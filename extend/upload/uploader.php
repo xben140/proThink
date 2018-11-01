@@ -532,7 +532,7 @@
 		private function buildSaveName()
 		{
 			$savename = '';
-			is_callable($this->rule) && $savename = call_user_func($this->rule);
+			is_callable($this->rule) && $savename = call_user_func_array($this->rule, [$this->files['name']]);
 			(!$savename || !is_string($savename)) && $savename = date('Ymd') . self::DS . md5(microtime(true));
 
 			if(!strpos($savename , '.'))

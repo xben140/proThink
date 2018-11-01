@@ -33,7 +33,6 @@
 			]) ,
 
 			integrationTags::form([
-
 				integrationTags::hidden([
 					'name'  => 'field' ,
 					'value' => 'content' ,
@@ -45,7 +44,7 @@
 				]) ,
 
 				(function($info) {
-					return ($info['source_type'] == '1') ? integrationTags::uediter([
+					return ($info['source_type'] == '1') ? integrationTags::summernote([
 						'left'       => '0' ,
 						'right'      => '12' ,
 						'field_name' => '' ,

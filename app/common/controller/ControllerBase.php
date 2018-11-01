@@ -100,18 +100,14 @@
 			defined('URL_IMAGE') or define('URL_IMAGE' , URL_STATIC . 'image/');
 			defined('URL_PLUGINS') or define('URL_PLUGINS' , URL_STATIC . 'plugins/');
 
-
-
 			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
 			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
-
 
 			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
 			defined('MODEL_STATIC_URL') or define('MODEL_STATIC_URL' , replaceToUrlSeparator(URL_STATIC . 'module/'));
 
 			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
 			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
-
 
 			//define('PATH_UPLOAD' , CONTROLLER_STATIC_PATH . 'upload' . DS);
 			define('PATH_UPLOAD' , PATH_PUBLIC . 'upload' . DS);
@@ -142,7 +138,8 @@
 			$theme = config(MODULE_NAME . '_themes');
 			!$theme && $theme = 'default';
 
-			$this->view->config([//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			$this->view->config([
+				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
 
 			$base = $this->request->root();

@@ -58,7 +58,7 @@
 		] ,
 
 		// 管理自定义模块时候，忽略的模块，即系统模块
-		'system_module'      => [
+		'system_module'       => [
 			'admin' ,
 			//'doc' ,
 			//'blog' ,
@@ -108,6 +108,7 @@
 			'password'           => \builder\elements\form\password::class ,
 			'switchery'          => \builder\elements\form\switchery::class ,
 			'uediter'            => \builder\elements\form\uediter::class ,
+			'summernote'         => \builder\elements\form\summernote::class ,
 			'singleSelect'       => \builder\elements\form\singleSelect::class ,
 			'singleDate'         => \builder\elements\form\singleDate::class ,
 			'betweenDate'        => \builder\elements\form\betweenDate::class ,

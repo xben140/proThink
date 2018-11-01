@@ -68,12 +68,12 @@
 					'style'      => 'width:100%;height:150px;' ,
 				]) ,
 
-				integrationTags::uediter([
+
+				integrationTags::summernote([
 					'field_name' => '内容' ,
 					'name'       => 'content' ,
 					'value'      => '' ,
 				]) ,
-
 
 			] , [
 				'id'     => 'form1' ,

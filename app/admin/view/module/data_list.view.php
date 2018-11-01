@@ -29,6 +29,15 @@
 									'title' => '安装包管理' ,
 								] ,
 							] ,
+							[
+								'is_display' => 1 ,
+								'class'      => 'btn-success btn-open-pop' ,
+								'field'      => '上传安装包' ,
+								'data'       => [
+									'src'   => url('admin/Module/uploadPackage') ,
+									'title' => '上传安装包' ,
+								] ,
+							] ,
 						] ,
 					]) ,
 

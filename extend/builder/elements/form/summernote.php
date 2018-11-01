@@ -4,7 +4,7 @@
 
 	use builder\lib\makeBase;
 
-	class uediter extends makeBase
+	class summernote extends makeBase
 	{
 		public $path = __DIR__;
 
@@ -13,18 +13,16 @@
 		 * @var array
 		 */
 		public $jsLib = [
-			'__PLUGINS__uediter/ueditor.config.js' ,
-			'__PLUGINS__uediter/ueditor.all.min.js' ,
-
+			'__HPLUS__js/plugins/summernote/summernote.min.js' ,
+			'__HPLUS__js/plugins/summernote/summernote-zh-CN.js' ,
 		];
 
 		public $css = [
-			'__HPLUS__css/plugins/switchery/switchery.css' ,
+			'__HPLUS__css/plugins/summernote/summernote.css' ,
+			'__HPLUS__css/plugins/summernote/summernote-bs3.css' ,
 		];
 
-		public $jsScript = [
-			"__PLUGINS__plugins/uediter/lang/zh-cn/zh-cn.js",
-		];
+		public $jsScript = [];
 
 
 		/**
@@ -35,25 +33,43 @@
 		public $customJs = /** @lang text */
 			<<<'js'
 			
-			
-			
-<!--  ueditor -->
-<!--   
-		<script type="text/javascript" charset="utf-8" src="__PLUGINS__uediter/ueditor.config.js"></script>
-		<script type="text/javascript" charset="utf-8" src="__PLUGINS__uediter/ueditor.all.min.js"></script>
--->
+<!--  summernote -->
 
-		<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-		<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-		<!--
-		<script type="text/javascript" charset="utf-8" src="__PLUGINS__plugins/uediter/lang/zh-cn/zh-cn.js"></script>
-		-->
-		
-		
-		<script>
-			$(document).ready(function () {var ue = UE.getEditor('editor');});
-		</script>
-<!--  /ueditor-->
+<script>
+	$(document).ready(function () {
+		$(".summernote").summernote({
+			lang              : "zh-CN",
+			disableDragAndDrop: true,
+			height            : 500,                 // set editor height
+			minHeight         : null,             // set minimum height of editor
+			maxHeight         : null,             // set maximum height of editor
+			focus             : true,                 // set focus to editable area after initializing summernote
+			onChange: function (contents, $editable) {
+				($(".summernote").html($editable));
+			}
+		})
+		summernote_preview = function (obj) {
+			layer.open({
+				area      : ['80%', '80%'],
+				type      : 1,
+				resize    : 1,
+				moveOut   : 1,
+				title     : '预览',
+				shade     : 0.1,
+				skin      : 'search-dom-pop', //样式类名
+				closeBtn  : 0, //不显示关闭按钮
+				anim      : 0,
+				// anim      : randomNum(0, 6),
+				isOutAnim : 0,
+				shadeClose: true, //开启遮罩关闭
+				content   : $(obj).parent().find('.summernote').code(), //dom
+				success   : function (layero, index) {
+				}
+			});
+		};
+	});
+</script>
+<!--  /summernote-->
 
 
 
@@ -66,8 +82,7 @@ js;
 		 */
 		public $customCss = /** @lang text */
 			<<<'Css'
-
-
+		
 Css;
 
 
@@ -91,7 +106,6 @@ Css;
 		/**
 		 * ----------------------------------------自定义方法区
 		 */
-
 
 
 		/**
@@ -131,7 +145,8 @@ Css;
 			<div class="form-group">
 				<label class="col-sm-<!-- ~~~left~~~ --> control-label"><!-- ~~~field_name~~~ --></label>
 				<div class="col-sm-<!-- ~~~right~~~ -->">
-					<textarea id="editor" type="text/plain" style="width:100%;height:350px;" name="<!-- ~~~name~~~ -->"><!-- ~~~value~~~ --></textarea>
+					<button class="btn btn-primary  btn-xs" onclick="summernote_preview(this)" type="button">预览</button>
+					<textarea class="summernote wrapper "  type="text/plain" style="width:100%;background: #fff" name="<!-- ~~~name~~~ -->"><!-- ~~~value~~~ --></textarea>
 				</div>
 			</div>
 

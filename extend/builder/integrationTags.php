@@ -904,6 +904,25 @@
 
 
 		/**
+		 * summernote
+		 *
+		 * @param array $params
+		 *
+		 * @return array
+		 */
+		public static function summernote($params)
+		{
+			$doms = [];
+
+			$doms[] = elementsFactory::summernote()->make(function(&$doms , $_this) use ($params) {
+				$_this->setNodeValue($params);
+			});
+
+			return $doms;
+		}
+
+
+		/**
 		 * uediter
 		 *
 		 * @param array $params

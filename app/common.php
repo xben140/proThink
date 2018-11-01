@@ -14,12 +14,13 @@
 	 * @param string        $fieldName 字段名字
 	 * @param  string       $toDir     上传到哪个文件夹
 	 * @param callable|null $callback  文件移动成功后的回调
+	 * @param callable|null $rename    文件重命名的函数
 	 *
 	 * @return array
 	 * @throws LogicException
 	 * @throws RuntimeException
 	 */
-	function upload($fieldName , $toDir , callable $callback = null)
+	function upload($fieldName , $toDir , callable $callback = null , callable $rename = null)
 	{
 		//文件一共分了几块
 		$chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 1;
@@ -33,17 +34,19 @@
 			//第一个参数为input的name值
 			$chunkUpload = new \upload\uploader($fieldName , $chunks , $chunk);
 
-			$result = $chunkUpload//设置分块文件临时保存文件夹
+			$chunkUpload//设置分块文件临时保存文件夹
 			//'PATH_TEMP'           => 'F:\\localWeb\\public_local15\\public\\temp\\',
 			->setTempDir(PATH_TEMP)//接口是否允许跨域上传
 			->isAllowCors(1)//临时分块文件的保存时间
-			->setMaxFileAge(600)//脚本执行最大时间,没用
+			->setMaxFileAge(600);//脚本执行最大时间,没用
 			//->setMaxExecutionTime(52)
+
+
 			//保存文件的命名方式
-			->rule(function() {
-				//return sha1(uniqid('', 1));
-			})//最终文件夹要保存的位置
-			->moveTo($toDir);
+			is_callable($rename) && $chunkUpload->rule($rename);
+
+			//最终文件夹要保存的位置
+			$result = $chunkUpload->moveTo($toDir);
 			//file_put_contents('./ddd.txt' , json_encode($result));
 
 		} catch (\think\exception\ErrorException $exception)
@@ -70,15 +73,18 @@
 	 * @param string        $fieldName 图片字段
 	 * @param callable|null $callback
 	 * @param array         $thumbSize 数组，三个参数，为$image->thumb 的三个参数
+	 * @param null          $path
+	 * @param callable|null $rename
 	 *
 	 * @return array
 	 * @throws LogicException
 	 * @throws RuntimeException
 	 * @throws \think\image\Exception
 	 */
-	function uploadImg($fieldName , callable $callback = null , $thumbSize = null)
+	function uploadImg($fieldName , callable $callback = null , $thumbSize = null , $path = null , callable $rename = null)
 	{
-		$result = upload($fieldName , PATH_PICTURE , $callback);
+		!is_string($path) && ($path = PATH_PICTURE);
+		$result = upload($fieldName , $path , $callback ,  $rename );
 
 		if($result['is_finished'])
 		{
@@ -129,14 +135,18 @@
 	 *
 	 * @param   string      $fieldName 文件字段
 	 * @param callable|null $callback
+	 * @param null          $path
+	 * @param callable|null $rename
 	 *
 	 * @return array
 	 * @throws LogicException
 	 * @throws RuntimeException
 	 */
-	function uploadFile($fieldName , callable $callback = null)
+	function uploadFile($fieldName , callable $callback = null , $path = null , callable $rename = null)
 	{
-		return upload($fieldName , PATH_FILE , $callback);
+		!is_string($path) && ($path = PATH_FILE);
+
+		return upload($fieldName , $path , $callback ,  $rename  );
 	}
 
 

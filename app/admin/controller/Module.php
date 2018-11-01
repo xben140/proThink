@@ -2,6 +2,8 @@
 
 	namespace app\admin\controller;
 
+	use zip\phpZip;
+
 	class Module extends PermissionAuth
 	{
 		/**
@@ -101,4 +103,33 @@
 			$this->initLogic();
 			$this->jump($this->logic->apply($this->param));
 		}
+
+		public function uploadPackage()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$res = uploadFile('file' , function($result) {
+					$file = $result['dirname'].DS.$result['savename'];
+					$info = pathinfo($file);
+					$res =  phpZip::unzip([
+						'zip'         => $file ,
+						'destination' => PATH_TEMP ,
+					]);
+					$tmpHashPath = PATH_TEMP . $info['filename'];
+
+
+					return $result;
+				}, PATH_TEMP, function($fileName){
+					return md5($fileName).'.zip';
+				});
+
+				return json($res);
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
 	}

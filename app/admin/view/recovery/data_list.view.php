@@ -92,10 +92,9 @@
 						 */
 						$searchForm = elementsFactory::searchForm()->make(function(&$doms , $_this) use ($__this) {
 
-							//角色名
 							$t = integrationTags::searchFormCol([
 								integrationTags::searchFormText([
-									'field'       => '角色名' ,
+									'field'       => '表名' ,
 									'value'       => input('name' , '') ,
 									'name'        => 'name' ,
 									'placeholder' => '' ,
@@ -200,9 +199,10 @@
 										'msg'      => '表名字必填' ,
 										'editable' => 1 ,
 									]) ,
+									'<br />' ,
 									integrationTags::tdSimple([
 										'value'    => $v['tab_db'] ,
-										'name'     => '表名 : ' ,
+										'name'     => '表控制器 : ' ,
 										'field'    => 'tab_db' ,
 										'reg'      => '/^\S+$/' ,
 										'msg'      => '表名必填' ,

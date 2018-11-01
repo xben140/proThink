@@ -10,7 +10,19 @@
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::row([
 				integrationTags::rowBlock([
-					integrationTags::rowButton([] , [0]) ,
+					integrationTags::rowButton([
+						[
+							[
+								'is_display' => 1 ,
+								'class'      => 'btn-success btn-open-pop' ,
+								'field'      => '上传安装包' ,
+								'data'       => [
+									'src'   => url('admin/Module/uploadPackage') ,
+									'title' => '上传安装包' ,
+								] ,
+							] ,
+						],
+					] , [0]) ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 						$data = $__this->logic->packageList();
@@ -20,28 +32,12 @@
 						 */
 						$_this->setHead([
 							[
-								'field' => 'ID' ,
-								'attr'  => 'style="width:120px;"' ,
-							] ,
-							[
-								'field' => '封面' ,
-								'attr'  => '' ,
-							] ,
-							[
 								'field' => '信息' ,
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '' ,
-								'attr'  => '' ,
-							] ,
-							[
-								'field' => '描述' ,
-								'attr'  => 'style="width:150px;"' ,
-							] ,
-							[
 								'field' => '操作' ,
-								'attr'  => '' ,
+								'attr'  => 'style="width:150px;"' ,
 							] ,
 						]);
 
@@ -58,75 +54,74 @@
 
 						foreach ($data as $k => $v)
 						{
-							$t = integrationTags::tr([
+							$t = [];
+							if($v['is_available'])
+							{
+								$t = integrationTags::tr([
 
-								//checkbox
-								integrationTags::td([
-									integrationTags::tdCheckbox() ,
-									integrationTags::tdSimple([
-										'value' => $v['id'] ,
-									]) ,
-								]) ,
-
-
-								//封面
-								//data-href="/admin/User/editProfilePic" data-text="修改头像"
-								integrationTags::td([
-
-								]) ,
-
-								//信息
-								integrationTags::td([]/*
-									(function($info) {
-									return array_map(function($err) {
-										return '- '.$err . '<br/>';
-									} , $info['error']);
-								})($v)
-								*/) ,
-
-								//信息
-								integrationTags::td([
-
-								]) ,
-
-								//描述
-								integrationTags::td([]) ,
-
-								//操作
-								integrationTags::td([
-									integrationTags::tdButton([
-										'class'  => ' btn-primary btn-custom-request' ,
-										'data'   => [
-											'src'        => url('apply') ,
-											'is_reload'  => 1 ,
-											'is_confirm' => 1 ,
-										] ,
-										'params' => [
-											//'id' => $v['id'] ,
-										] ,
-										'value'  => '部署到应用' ,
+									//信息
+									integrationTags::td([
+										integrationTags::tdSimple([
+											'value' => $v['info']['id'] ,
+											'name' => 'ID : ',
+										]) ,
+										'<br />',
+										integrationTags::tdSimple([
+											'value' => $v['info']['name'] ,
+											'name' => '应用名 : ',
+										]) ,
+										'<br />',
+										integrationTags::tdSimple([
+											'value' => formatTime($v['info']['update_time']),
+											'name' => '更新时间 : ',
+										]) ,
+										'<br />',
+										integrationTags::tdSimple([
+											'value' => $v['info']['version'] ,
+											'name' => '版本 : ',
+										]) ,
+										'<br />',
+										integrationTags::tdSimple([
+											'value' => $v['info']['description'] ,
+											'name' => '描述 : ',
+										]) ,
 									]) ,
 
-									'<br />',
-									integrationTags::tdButton([
-										'class'  => ' btn-danger btn-custom-request' ,
-										'data'   => [
-											'src'        => url('delPackage') ,
-											'is_reload'  => 1 ,
-											'is_confirm' => 1 ,
-										] ,
-										'params' => [//'id' => $v['id'] ,
-										] ,
-										'value'  => '删除包文件' ,
+									//操作
+									integrationTags::td([
+										integrationTags::tdButton([
+											'class'  => ' btn-primary btn-custom-request' ,
+											'data'   => [
+												'src'        => url('apply') ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+											] ,
+											'params' => [//'id' => $v['id'] ,
+											] ,
+											'value'  => '部署到应用' ,
+										]) ,
+
+										'<br />' ,
+										integrationTags::tdButton([
+											'class'  => ' btn-danger btn-custom-request' ,
+											'data'   => [
+												'src'        => url('delPackage') ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+											] ,
+											'params' => [//'id' => $v['id'] ,
+											] ,
+											'value'  => '删除包文件' ,
+										]) ,
+										'<br />' ,
+
+										integrationTags::a('下载包文件' , [
+											'href' => url('downloadPackage' , ['id' => $v['info']['id']]) ,
+										]) ,
 									]) ,
 
-									integrationTags::a('下载包文件' , [
-										'href' => url('downloadPackage' , ['id' => $v['id']]) ,
-									]) ,
-								]) ,
-
-							] , ['id' => $v['id']]);
-
+								] , ['id' => $v['info']['id']]);
+							}
 
 							$doms = array_merge($doms , $t);
 						}

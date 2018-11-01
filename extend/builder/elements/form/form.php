@@ -139,10 +139,7 @@ AAAAA;
 							<!--<button class="btn btn-info reset" type="reset">重写填写</button>-->
 						</div>
 					</div>
-					
-										<!-- _____DEFAULT_CONTENTS_____ -->
-										
-										
+						<!-- _____DEFAULT_CONTENTS_____ -->
 					<div class="form-group">
 						<div class="col-sm-3 col-sm-offset-2">
 							<button class="btn btn-primary" type="submit">提交内容</button>
@@ -153,14 +150,13 @@ AAAAA;
 			</form>
 			
 			
+		<script>
+			$("#<!-- ~~~id~~~ -->").submit(function () {
+				let _this = $(this);
+				_this.find('button:submit').attr("disabled", true);
+				var loadIndex = layer.load()
 
-			<script>  
-				$("#<!-- ~~~id~~~ -->").submit(function () {
-						let _this = $(this);
-					_this.find('button:submit').attr("disabled", true);
-					var loadIndex = layer.load()
-					
-/*
+				/*
 					window.ajaxSubmitEventMap = {
 						'success': function (responseText, statusText) {
 							_this.find('button:submit').attr("disabled",false);
@@ -168,73 +164,87 @@ AAAAA;
 							console.dir(456789)
 						},
 					};
-*/
-					//<!-- ~~~ajaxSubmitEventMap~~~ -->
+				*/
+
+				//<!-- ~~~ajaxSubmitEventMap~~~ -->
+
+				let options = {
+
+					//把服务器返回的内容放入id为output的元素中
+					target         : '#output',
+					beforeSerialize: function ($form, options) {
+						//专门为兼容$(".summernote")加的，
+						for (var i in $form)
+						{
+							if (typeof  $form[0][i] === 'object')
+							{
+								let _obj = $($form[0][i])
+								if (_obj.hasClass('summernote'))
+								{
+									_obj.html($(".summernote").code())
+								}
+							}
+						}
+					},
 					
+					//提交前的回调函数
+					beforeSubmit   : function (formData, jqForm, options) {
+						// console.dir(formData)
+						// console.dir(jqForm)
+						// console.dir(options)
 
-					let options  = {
+						//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]
+						//jqForm:   jQuery对象，封装了表单的元素
+						//options:  options对象
 
-						//把服务器返回的内容放入id为output的元素中
-						target: '#output',
+						// var queryString = $.param(formData);   //name=1&address=2
+						// var formElement = jqForm[0];              //将jqForm转换为DOM对象
+						// var address = formElement.address.value;  //访问jqForm的DOM元素
 
-						//提交前的回调函数
-						beforeSubmit: function (formData, jqForm, options) {
-							// console.dir(formData)
-							// console.dir(jqForm)
-							// console.dir(options)
+						//只要不返回false，表单都会提交,在这里可以对表单元素进行验证
+						return true;
+					},
 
-							//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]
-							//jqForm:   jQuery对象，封装了表单的元素
-							//options:  options对象
+					//提交后的回调函数
+					success: function (responseText, statusText) {
+						_this.find('button:submit').attr("disabled", false);
+						layer.close(loadIndex)
+						layer.msg(responseText.msg);
+					},
 
-							// var queryString = $.param(formData);   //name=1&address=2
-							// var formElement = jqForm[0];              //将jqForm转换为DOM对象
-							// var address = formElement.address.value;  //访问jqForm的DOM元素
+					// 默认是form的action， 如果申明，则会覆盖
+					//url: url,
 
-							//只要不返回false，表单都会提交,在这里可以对表单元素进行验证
-							return true;
-						},
+					// 默认是form的method（get or post），如果申明，则会覆盖
+					//type: type,
 
-						//提交后的回调函数
-						success:  function (responseText, statusText) {
-							_this.find('button:submit').attr("disabled", false);
-							layer.close(loadIndex)
-							layer.msg(responseText.msg);	
-						},
+					// html(默认), xml, script, json...接受服务端返回的类型
+					dataType: 'json',
 
-						// 默认是form的action， 如果申明，则会覆盖
-						//url: url,
+					// 成功提交后，清除所有表单元素的值
+					//clearForm: true,
 
-						// 默认是form的method（get or post），如果申明，则会覆盖
-						//type: type,
+					// 成功提交后，重置所有表单元素的值
+					//resetForm: true,
 
-						// html(默认), xml, script, json...接受服务端返回的类型
-						dataType: 'json',
-
-						// 成功提交后，清除所有表单元素的值
-						//clearForm: true,
-
-						// 成功提交后，重置所有表单元素的值
-						//resetForm: true,
-
-						//限制请求的时间，当请求大于3秒后，跳出请求
-						timeout: 3000
-					};
-
-					//自定义事件覆盖默认事件
-					if(window.ajaxSubmitEventMap !== 'undefined' && typeof window.ajaxSubmitEventMap === 'object')
-					{
-						for (let key in window.ajaxSubmitEventMap) options[key] = window.ajaxSubmitEventMap[key];
-					}
+					//限制请求的时间，当请求大于3秒后，跳出请求
+					timeout: 3000
+				};
 
 
-					$(this).ajaxSubmit(options);
-				
-					window.ajaxSubmitEventMap = null;
-					return false;
-				})
+				//自定义事件覆盖默认事件
+				if (window.ajaxSubmitEventMap !== 'undefined' && typeof window.ajaxSubmitEventMap === 'object')
+				{
+					for (let key in window.ajaxSubmitEventMap) options[key] = window.ajaxSubmitEventMap[key];
+				}
+				$(this).ajaxSubmit(options);
+				window.ajaxSubmitEventMap = null;
+				return false;
+			})
 
-			</script>  
+		</script>
+
+
 
 CONTENTS;
 			/**
