@@ -1,0 +1,15 @@
+{
+	"id"              : "blog",
+	"name"            : "blogname",
+	"title"           : "blogtitle",
+	"version"         : "blogversion",
+	"description"     : "blogdescription",
+	"default_action"  : "blog\/blogarticle\/add",
+	"update_time"     : 1541131622,
+	"database_tables" : [
+		"ithink_blog_article",
+		"ithink_blog_article_tag",
+		"ithink_blog_tag",
+		"ithink_blog_type"
+	]
+}

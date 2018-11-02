@@ -15,12 +15,16 @@
 		public function __construct()
 		{
 			$this->initBaseClass();
+
+
 		}
+
+
 
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
-		 *                    模块
+		 *                    应用管理
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
 		 */
@@ -206,7 +210,7 @@
 							return $flag;
 						} ,
 						[] ,
-						'数据表安装出错，请检查sql.php和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
+						'数据表安装出错，请检查'.MODULE_FILE_SQL.'和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '数据表安装成功';
 					break;
@@ -316,7 +320,6 @@
 			return $this->retureResult;
 		}
 
-
 		/**
 		 * 传入应用id，获取应用全部相关信息
 		 *
@@ -387,11 +390,11 @@
 				];
 
 				//应用信息
-				$info['info'] = include($appPath . DS . 'info.php');
+				$info['info'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1);
 
 				if(!is_array($info['info']))
 				{
-					$info['error'][] = 'info.php必须返回数组';
+					$info['error'][] = MODULE_FILE_INFO.'必须返回数组';
 					$info['is_complete'] = 0;
 				}
 
@@ -399,7 +402,7 @@
 				{
 					if(!isset($info['info'][$v]))
 					{
-						$info['error'][] = "info.php 缺少 {$v} 字段";
+						$info['error'][] = MODULE_FILE_INFO." 缺少 {$v} 字段";
 						$info['is_complete'] = 0;
 					}
 				}
@@ -419,11 +422,11 @@
 			try
 			{
 				//配置信息
-				$info['conf'] = include($appPath . DS . 'conf.php');
+				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG), 1);;
 
 				if(!is_array($info['conf']))
 				{
-					$info['error'][] = 'conf.php必须返回数组';
+					$info['error'][] = MODULE_FILE_CONFIG. '必须返回数组';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -435,11 +438,11 @@
 			try
 			{
 				//菜单信息
-				$info['menu'] = include($appPath . DS . 'menu.php');
+				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU), 1);;
 
 				if(!is_array($info['menu']))
 				{
-					$info['error'][] = 'menu.php必须返回数组';
+					$info['error'][] = MODULE_FILE_MENU. '必须返回数组';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -451,11 +454,11 @@
 			try
 			{
 				//安装sql语句
-				$info['sql'] = include($appPath . DS . 'sql.php');
+				$info['sql'] = include($appPath . DS .MODULE_FILE_SQL);
 
 				if(!is_array($info['sql']) || !isset($info['sql']['install']))
 				{
-					$info['error'][] = 'sql.php必须返回数组格式，并且必须有键为 install 的值存在';
+					$info['error'][] = MODULE_FILE_SQL. '必须返回数组格式，并且必须有键为 install 的值存在';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -540,9 +543,8 @@
 							$status = $this->model_::$appStatusMap[2]['value'];
 						}
 					}
-
 					return $status;
-				})(include($appPath . DS . 'info.php'));
+				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1));
 			} catch (Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
@@ -607,6 +609,86 @@
 
 			return $this->retureResult;
 		}
+
+
+		/**
+		 * 开发者生成菜单
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function conf($param)
+		{
+			$info = $this->getModuleInfo($param['id']);
+			$infoPath = $this->getModulePathInfo($param['id']);
+			$configs = [];
+			$flag = true;
+			$flag && $flag = $gid = db('config_group')->where(['name' => strtolower($info['info']['id']) ,])->value('id');
+
+			if($flag)
+			{
+				$configs = $this->model__admin_config->where(['group_id' => $gid ,])->select();
+				$result = [];
+				foreach ($configs as $k => $v)
+				{
+					$val = [
+						'is_const' => $v['is_const'] ,
+						'type'     => $v['type'] ,
+						'name'     => $v['name'] ,
+						'key'      => $v['key'] ,
+					];
+
+					switch ($v['type'])
+					{
+						case '1' :
+							#array
+							$val['value'] = explode("\r\n" , $v['value']);
+							break;
+						case '2' :
+							#text
+						case '5' :
+							#image
+							$val['value'] = $v['value'];
+							break;
+						case '3' :
+							#switch
+							$val['value'] = (int)(!!$v['value']);
+							break;
+						case '4' :
+							#option
+							$temp = $this->logic__common_config->makeOptionsVal($v);
+							$val['value'] = $temp['options'];
+							$val['selected'] = $temp['selected'];
+							break;
+						default :
+							#...
+							break;
+					}
+					$result[] = $val;
+				}
+				$infoFile = $infoPath['appPath'] . DS . MODULE_FILE_CONFIG;
+				try
+				{
+					file_put_contents($infoFile , json_encode($result));
+					$this->retureResult['message'] = 'config_group 表里必须有一条 name字段的值为应用的id的记录，详细请参阅开发手册';
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				} catch (Exception $e)
+				{
+					$this->retureResult['message'] = '写入配置出错，检查文件夹是否可写 -- ' . $infoFile;
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+
+			}
+			else
+			{
+				$this->retureResult['message'] = 'config_group 表里必须有一条 name字段的值为应用的id的记录，详细请参阅开发手册';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -716,7 +798,6 @@
 			return $this->retureResult;
 		}
 
-
 		/**
 		 * 获取安装包列表
 		 * @return array
@@ -743,11 +824,11 @@
 					if(!is_file(replaceToSysSeparator($appPath . $v1 . '.php')))
 					{
 						$res['is_available'] = 0;
-						$res['error'][] = '缺少文件'. $v1 . '.php';
+						$res['error'][] = '缺少文件' . $v1 . '.php';
 					}
 				}
 
-				$res['is_available'] && $res['info'] = include $appPath . 'info.php';
+				$res['is_available'] && $res['info'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1);
 
 				return $res;
 			} , FileTool::DIRECTORY);
@@ -783,7 +864,6 @@
 
 			return $this->retureResult;
 		}
-
 
 		/**
 		 * 部署应用
@@ -827,7 +907,6 @@
 			return $this->retureResult;
 		}
 
-
 		/**
 		 * 指定包解压到相邻文件夹
 		 * 上传包和备份包后调用
@@ -847,7 +926,6 @@
 				'destination' => $codePath ,
 			]);
 		}
-
 
 		/**
 		 * 获取包信息
@@ -878,7 +956,10 @@
 		 *                    其他
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
-		 *
+		 */
+
+
+		/** *
 		 * @param $moduleName
 		 *
 		 * @return array

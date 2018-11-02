@@ -73,13 +73,19 @@
 		 */
 		final private function initRequestInfo()
 		{
+			/**
+			 * 通用信息
+			 */
 			define('DB_LIST_ROWS' , config('paginate.list_rows'));
-
 			//admin_id
 			defined('ADMIN_ID') or define('ADMIN_ID' , config('admin_id'));
 			//全站管理员角色id
 			defined('GLOBAL_ADMIN_ROLE_ID') or define('GLOBAL_ADMIN_ROLE_ID' , config('global_admin_role_id'));
 
+
+			/**
+			 * 通用信息
+			 */
 			defined('IS_POST') or define('IS_POST' , $this->request->isPost());
 			defined('IS_GET') or define('IS_GET' , $this->request->isGet());
 			defined('IS_AJAX') or define('IS_AJAX' , $this->request->isAjax());
@@ -88,11 +94,16 @@
 			defined('MODULE_NAME') or define('MODULE_NAME' , strtolower($this->request->module()));
 			defined('CONTROLLER_NAME') or define('CONTROLLER_NAME' , strtolower($this->request->controller()));
 			defined('ACTION_NAME') or define('ACTION_NAME' , strtolower($this->request->action()));
+			defined('DOMAIN') or define('DOMAIN' , $this->request->domain());
+			defined('IP') or define('IP' , $this->request->ip());
+
+
+			/**
+			 * 路径和url信息
+			 */
 			defined('URL') or define('URL' , CONTROLLER_NAME . SYS_DS_PROS . ACTION_NAME);
 			defined('URL_MODULE') or define('URL_MODULE' , MODULE_NAME . SYS_DS_PROS . URL);
 			defined('URL_TRUE') or define('URL_TRUE' , $this->request->url(true));
-			defined('DOMAIN') or define('DOMAIN' , $this->request->domain());
-			defined('IP') or define('IP' , $this->request->ip());
 
 			defined('URL_ROOT') or define('URL_ROOT' , $this->request->root(true) . '/');
 			defined('URL_HPLUS') or define('URL_HPLUS' , URL_ROOT . 'hplus/');
@@ -100,6 +111,10 @@
 			defined('URL_IMAGE') or define('URL_IMAGE' , URL_STATIC . 'image/');
 			defined('URL_PLUGINS') or define('URL_PLUGINS' , URL_STATIC . 'plugins/');
 
+
+			/**
+			 * 应用模块信息
+			 */
 			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
 			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
 
@@ -108,6 +123,17 @@
 
 			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
 			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
+
+			//模块必备文件信息
+			define('MODULE_FILE_CONFIG' , 'config.json');
+			define('MODULE_FILE_INFO' , 'info.json');
+			define('MODULE_FILE_MENU' , 'menu.json');
+			define('MODULE_FILE_SQL' , 'sql.sql');
+
+
+			/**
+			 * 上传路径信息
+			 */
 
 			//define('PATH_UPLOAD' , CONTROLLER_STATIC_PATH . 'upload' . DS);
 			define('PATH_UPLOAD' , PATH_PUBLIC . 'upload' . DS);
@@ -120,6 +146,9 @@
 			define('URL_FILE' , URL_UPLOAD . 'file/');
 
 
+			/**
+			 * 请求变量
+			 */
 			$this->param = $this->request->param();
 			$this->param_get = $this->request->get();
 			$this->param_post = $this->request->post();

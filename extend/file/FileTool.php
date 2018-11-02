@@ -49,7 +49,7 @@
 					{
 						$files[] = call_user_func_array($callback , [
 							static::fileInfo($info->getPathname()) ,
-							$info,
+							$info ,
 						]);
 					}
 					else
@@ -306,7 +306,7 @@
 					is_callable($afterCallback) && $afterCallback(new \SplFileInfo($fullPath) , $relativePath);
 				}
 			}
-				is_callable($afterCallback) && $afterCallback(new \SplFileInfo($path) , '');
+			is_callable($afterCallback) && $afterCallback(new \SplFileInfo($path) , '');
 
 			$dep--;
 			($dep === 0) && ($originPath = null);
@@ -738,17 +738,24 @@
 		public static function cp($path , $dest)
 		{
 			$res = false;
-			if(is_dir($path))
-			{
-				$res = static::mkdir_($dest);
-			}
-			elseif(is_file($path))
-			{
-				static::mkdir_(dirname($dest));
-				$res = copy($path , $dest);
-			}
-			@chmod($dest , 0777);
 
+			try
+			{
+				if(is_dir($path))
+				{
+					$res = static::mkdir_($dest);
+				}
+				elseif(is_file($path))
+				{
+					static::mkdir_(dirname($dest));
+					$res = copy($path , $dest);
+				}
+				@chmod($dest , 0777);
+
+			} catch (\Exception $exception)
+			{
+				$res = false;
+			}
 			return $res;
 		}
 
@@ -762,16 +769,23 @@
 		public static function rm($path)
 		{
 			$res = true;
-			@chmod($path , 0777);
-			if(is_dir($path))
+
+			try
 			{
-				static::isDirEmpty(($path)) && is_writable($path) && @rmdir($path);
-				$res = !is_dir($path);
-			}
-			elseif(is_file($path))
+				@chmod($path , 0777);
+				if(is_dir($path))
+				{
+					static::isDirEmpty(($path)) && is_writable($path) && @rmdir($path);
+					$res = !is_dir($path);
+				}
+				elseif(is_file($path))
+				{
+					is_writable($path) && unlink($path);
+					$res = !is_file($path);
+				}
+			} catch (\Exception $exception)
 			{
-				is_writable($path) && unlink($path);
-				$res = !is_file($path);
+				$res = false;
 			}
 
 			return $res;

@@ -84,7 +84,7 @@
 		 * 文件上传命名规则
 		 * @var string
 		 */
-		protected $rule = 'date';
+		protected $rule = '';
 
 		/**
 		 * 文件上传验证规则
@@ -533,7 +533,7 @@
 		{
 			$savename = '';
 			is_callable($this->rule) && $savename = call_user_func_array($this->rule, [$this->files['name']]);
-			(!$savename || !is_string($savename)) && $savename = date('Ymd') . self::DS . md5(microtime(true));
+			(!$savename||!is_string($savename)) && $savename = date('Ymd') . self::DS . md5(microtime(true));
 
 			if(!strpos($savename , '.'))
 			{

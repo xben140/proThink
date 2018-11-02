@@ -37,7 +37,7 @@
 					//随便写
 					'field_name'  => '应用ID' ,
 					'placeholder' => '' ,
-					'tip'         => '这里填写应用id，同应用里的info.php里的id字段的值一致' ,
+					'tip'         => '这里填写应用id，同应用里的'.MODULE_FILE_INFO.'里的id字段的值一致' ,
 					//'value'       => 'value' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'category' ,
