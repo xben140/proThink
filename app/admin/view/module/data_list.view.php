@@ -31,10 +31,13 @@
 								] ,
 							] ,
 						] ,
-					], [0,2]) ,
+					] , [
+						0 ,
+						2 ,
+					]) ,
 					'<p class="red"> <strong>开发者功能</strong> 仅在开发阶段供开发者使用，如果是使用别人开发好的包不要随意点击，此操作会影响应用文件，可能会导致包损坏</p>' ,
-					'<p class="red"> <生成菜单文件> 功能是在开发完成后，将ithink_privilege表里对应的应用的数据导出到应用文件下的'.MODULE_FILE_MENU.'，方便打包应用</p>' ,
-					'<p class="red"> <生成配置文件> 功能是在开发完成后，将ithink_config表里对应的应用的数据导出到应用文件下的'.MODULE_FILE_CONFIG.'，方便打包应用</p>' ,
+					'<p class="red"> <生成菜单文件> 功能是在开发完成后，将ithink_privilege表里对应的应用的数据导出到应用文件下的' . MODULE_FILE_MENU . '，方便打包应用</p>' ,
+					'<p class="red"> <生成配置文件> 功能是在开发完成后，将ithink_config表里对应的应用的数据导出到应用文件下的' . MODULE_FILE_CONFIG . '，方便打包应用</p>' ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 						$data = $__this->logic->dataList($__this->param);
@@ -284,11 +287,15 @@
 										integrationTags::tdButton([
 											'class'      => ' btn-info btn-custom-request' ,
 											'data'       => [
-												'src' => url('devTool') ,
+												'src'        => url('devTool') ,
+												'is_reload'  => 1 ,
+												'is_alert'   => 1 ,
+												'is_confirm' => 1 ,
+												'msg'        => '此功能为应用开发阶段使用，会影响应用文件结构，可能会导致应用损坏，除非你是开发者，明确知道当前操作的后果，否则请不要随意点击此按钮' ,
 											] ,
 											'params'     => [
 												'option' => 'menu' ,
-												'id' => $v['info']['id'] ,
+												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成菜单文件' ,
 											'is_display' => 1 ,
@@ -298,15 +305,38 @@
 										integrationTags::tdButton([
 											'class'      => ' btn-info btn-custom-request' ,
 											'data'       => [
-												'src' => url('devTool') ,
+												'src'        => url('devTool') ,
+												'is_alert'   => 1 ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+												'msg'        => '此功能为应用开发阶段使用，会影响应用文件结构，可能会导致应用损坏，除非你是开发者，明确知道当前操作的后果，否则请不要随意点击此按钮' ,
 											] ,
 											'params'     => [
 												'option' => 'conf' ,
-												'id' => $v['info']['id'] ,
+												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
 											'is_display' => 1 ,
 										]) ,
+
+										'<br />' ,
+										integrationTags::tdButton([
+											'class'      => ' btn-info btn-custom-request' ,
+											'data'       => [
+												'src'        => url('devTool') ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+												'is_alert'   => 1 ,
+												'msg'        => '确定生成安装sql文件？此操作仅在应用开发完成后使用' ,
+											] ,
+											'params'     => [
+												'option' => 'sql' ,
+												'id'     => $v['info']['id'] ,
+											] ,
+											'value'      => '生成安装sql文件' ,
+											'is_display' => 1 ,
+										]) ,
+
 									]) ,
 								] , ['id' => $v['info']['id']]);
 							}
@@ -331,7 +361,7 @@
 									//信息
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'value'    => $v['info']['id'] ,
+											'value'    => isset($v['info']['id']) ? $v['info']['id'] : '未定义' ,
 											'name'     => 'id : ' ,
 											//'field'    => 'name' ,
 											//'reg'      => '/^\S+$/' ,
@@ -340,7 +370,7 @@
 										]) ,
 										'<br />' ,
 										integrationTags::tdSimple([
-											'value'    => $v['info']['name'] ,
+											'value'    => isset($v['info']['name']) ? $v['info']['name'] : '未定义' ,
 											'name'     => '应用名 : ' ,
 											//'field'    => 'name' ,
 											//'reg'      => '/^\S+$/' ,
@@ -349,20 +379,14 @@
 										]) ,
 										'<br />' ,
 										integrationTags::tdSimple([
-											'value'    => $v['info']['title'] ,
+											'value'    => isset($v['info']['title']) ? $v['info']['title'] : '未定义' ,
 											'name'     => '标题 : ' ,
 											//'field'    => 'name' ,
 											//'reg'      => '/^\S+$/' ,
 											//'msg'      => '表名字必填' ,
 											'editable' => 0 ,
 										]) ,
-										'<br />' ,
-										//添加时间
-										integrationTags::tdSimple([
-											'name'  => '更新时间 : ' ,
-											//'editable' => '0' ,
-											'value' => formatTime($v['info']['update_time']) ,
-										]) ,
+
 									]) ,
 
 									//描述
@@ -390,34 +414,65 @@
 										]) ,
 									]) ,
 
+
 									//信息
 									integrationTags::td([
 										integrationTags::tdButton([
 											'class'      => ' btn-info btn-custom-request' ,
 											'data'       => [
-												'src' => url('setDefault') ,
+												'src'        => url('devTool') ,
+												'is_alert'   => 1 ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+												'msg'        => '此功能为应用开发阶段使用，会影响应用文件结构，可能会导致应用损坏，除非你是开发者，明确知道当前操作的后果，否则请不要随意点击此按钮' ,
 											] ,
 											'params'     => [
-												'address_id' => $v['info']['id'] ,
+												'option' => 'menu' ,
+												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成菜单文件' ,
 											'is_display' => 1 ,
 										]) ,
+
 										'<br />' ,
 										integrationTags::tdButton([
 											'class'      => ' btn-info btn-custom-request' ,
 											'data'       => [
-												'src' => url('setDefault') ,
+												'src'        => url('devTool') ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+												'is_alert'   => 1 ,
+												'msg'        => '此功能为应用开发阶段使用，会影响应用文件结构，可能会导致应用损坏，除非你是开发者，明确知道当前操作的后果，否则请不要随意点击此按钮' ,
 											] ,
 											'params'     => [
-												'address_id' => $v['info']['id'] ,
+												'option' => 'conf' ,
+												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
 											'is_display' => 1 ,
 										]) ,
-									]) ,
 
-								] );
+										'<br />' ,
+										integrationTags::tdButton([
+											'class'      => ' btn-info btn-custom-request' ,
+											'data'       => [
+												'src'        => url('devTool') ,
+												'is_reload'  => 1 ,
+												'is_confirm' => 1 ,
+												'is_alert'   => 1 ,
+												'msg'        => '确定生成安装sql文件？此操作仅在应用开发完成后使用' ,
+											] ,
+											'params'     => [
+												'option' => 'sql' ,
+												'id'     => $v['info']['id'] ,
+											] ,
+											'value'      => '生成安装sql文件' ,
+											'is_display' => 1 ,
+										]) ,
+
+
+									]) ,
+								] , ['id' => $v['info']['id']]);
 							}
 
 

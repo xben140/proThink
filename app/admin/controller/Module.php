@@ -61,6 +61,7 @@
 			{
 				case 'menu' :
 				case 'conf' :
+				case 'sql' :
 					$res = $this->logic->{$action}($this->param);
 					break;
 				default :

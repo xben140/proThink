@@ -15,7 +15,6 @@
 		public $currentUri;
 
 
-
 		public static function getInstance($options = [])
 		{
 			is_null(static::$instance) && (static::$instance = new static($options));
@@ -370,7 +369,7 @@
 		 *
 		 * @return array
 		 */
-		function makeMenuTree($items , $id = 0)
+		public static function makeMenuTree($items , $id = 0)
 		{
 			$tree = array();
 			foreach ($items as $k1 => $v1)

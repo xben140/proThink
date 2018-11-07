@@ -91,7 +91,12 @@
 								foreach ($menu as $k => $v)
 								{
 									$data = $v;
-									unset($data['son']);
+									if(isset($data['son'])) unset($data['son']);
+									if(isset($data['id'])) unset($data['id']);
+									if(isset($data['pid'])) unset($data['pid']);
+									if(isset($data['path'])) unset($data['path']);
+									if(isset($data['level'])) unset($data['level']);
+
 									$data['category'] = $moduleId;
 									$data['pid'] = $pid[$level];
 									$id = call_user_func_array($callback , [$data]);
@@ -210,7 +215,7 @@
 							return $flag;
 						} ,
 						[] ,
-						'数据表安装出错，请检查'.MODULE_FILE_SQL.'和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
+						'数据表安装出错，请检查' . MODULE_FILE_SQL . '和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '数据表安装成功';
 					break;
@@ -365,7 +370,7 @@
 
 			$info = [
 				'ico'         => '' ,
-				'is_install'  => '' ,
+				'is_install'  => 3 ,
 				'cover'       => '' ,
 				'info'        => [] ,
 				'conf'        => [] ,
@@ -388,29 +393,41 @@
 					'update_time' ,
 					'database_tables' ,
 				];
-
-				//应用信息
-				$info['info'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1);
-
-				if(!is_array($info['info']))
+				$infoFile = $appPath . DS . MODULE_FILE_INFO;
+				if(is_file($infoFile))
 				{
-					$info['error'][] = MODULE_FILE_INFO.'必须返回数组';
-					$info['is_complete'] = 0;
-				}
-
-				foreach ($field as $k => $v)
-				{
-					if(!isset($info['info'][$v]))
+					//应用信息
+					$info['info'] = json_decode(file_get_contents($infoFile) , 1);
+					if(!is_array($info['info']))
 					{
-						$info['error'][] = MODULE_FILE_INFO." 缺少 {$v} 字段";
+						$info['error'][] = MODULE_FILE_INFO . '必须返回数组';
 						$info['is_complete'] = 0;
+						$info['info'] = [];
+						$info['info']['id'] = $moduleName;
+					}
+					else
+					{
+
+						foreach ($field as $k => $v)
+						{
+							if(!isset($info['info'][$v]))
+							{
+								$info['error'][] = MODULE_FILE_INFO . " 缺少 {$v} 字段";
+								$info['is_complete'] = 0;
+							}
+						}
+
+						if(!is_array($info['info']['database_tables']))
+						{
+							$info['error'][] = 'database_tables 必须为数组';
+							$info['is_complete'] = 0;
+						}
 					}
 				}
-
-				if(!is_array($info['info']['database_tables']))
+				else
 				{
-					$info['error'][] = 'database_tables 必须为数组';
-					$info['is_complete'] = 0;
+					$info['info'] = [];
+					$info['info']['id'] = $moduleName;
 				}
 
 			} catch (Exception $e)
@@ -422,11 +439,11 @@
 			try
 			{
 				//配置信息
-				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG), 1);;
+				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG) , 1);;
 
 				if(!is_array($info['conf']))
 				{
-					$info['error'][] = MODULE_FILE_CONFIG. '必须返回数组';
+					$info['error'][] = MODULE_FILE_CONFIG . '必须返回数组';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -438,11 +455,11 @@
 			try
 			{
 				//菜单信息
-				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU), 1);;
+				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU) , 1);;
 
 				if(!is_array($info['menu']))
 				{
-					$info['error'][] = MODULE_FILE_MENU. '必须返回数组';
+					$info['error'][] = MODULE_FILE_MENU . '必须返回数组';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -454,11 +471,11 @@
 			try
 			{
 				//安装sql语句
-				$info['sql'] = include($appPath . DS .MODULE_FILE_SQL);
+				$info['sql'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_SQL) , 1);;
 
 				if(!is_array($info['sql']) || !isset($info['sql']['install']))
 				{
-					$info['error'][] = MODULE_FILE_SQL. '必须返回数组格式，并且必须有键为 install 的值存在';
+					$info['error'][] = MODULE_FILE_SQL . '必须返回数组格式，并且必须有键为 install 的值存在';
 					$info['is_complete'] = 0;
 				}
 			} catch (Exception $e)
@@ -543,8 +560,9 @@
 							$status = $this->model_::$appStatusMap[2]['value'];
 						}
 					}
+
 					return $status;
-				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1));
+				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1));
 			} catch (Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
@@ -610,13 +628,15 @@
 			return $this->retureResult;
 		}
 
-
 		/**
 		 * 开发者生成菜单
 		 *
 		 * @param $param
 		 *
 		 * @return array
+		 * @throws \think\db\exception\DataNotFoundException
+		 * @throws \think\db\exception\ModelNotFoundException
+		 * @throws \think\exception\DbException
 		 */
 		public function conf($param)
 		{
@@ -671,7 +691,7 @@
 				try
 				{
 					file_put_contents($infoFile , json_encode($result));
-					$this->retureResult['message'] = 'config_group 表里必须有一条 name字段的值为应用的id的记录，详细请参阅开发手册';
+					$this->retureResult['message'] = '配置文件已生成 ' . $infoFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				} catch (Exception $e)
 				{
@@ -683,6 +703,120 @@
 			else
 			{
 				$this->retureResult['message'] = 'config_group 表里必须有一条 name字段的值为应用的id的记录，详细请参阅开发手册';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+		public function menu($param)
+		{
+			$info = $this->getModuleInfo($param['id']);
+			$infoPath = $this->getModulePathInfo($param['id']);
+
+			$data = $this->model__admin_privilege->selectData([
+				'where' => [
+					'category' => [
+						'=' ,
+						$info['info']['id'] ,
+					] ,
+				] ,
+				'field' => 'name,module,controller,action,order,remark,is_menu,id,pid' ,
+			]);;
+
+			if(!$data->isEmpty())
+			{
+				$result = makeTree($data);
+				$result = \app\common\tool\permission\Auth::getInstance()::makeMenuTree($result);
+				$flag = true;
+				$menuFile = $infoPath['appPath'] . DS . MODULE_FILE_MENU;
+				try
+				{
+					file_put_contents($menuFile , json_encode($result));
+					$this->retureResult['message'] = '菜单文件文件已生成 ' . $menuFile;
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				} catch (Exception $e)
+				{
+					$this->retureResult['message'] = '写入菜单出错，检查文件夹是否可写 -- ' . $menuFile;
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = '请确保当前应用已经添加菜单记录，即数据库里 ithink_privilege 表里有 category 字段值为 ' . $info['info']['id'] . '的记录';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+		public function sql($param)
+		{
+			$info = $this->getModuleInfo($param['id']);
+			$infoPath = $this->getModulePathInfo($param['id']);
+
+			//获取表对应应用所拥有的表
+			$tables = $info['info']['database_tables'];
+			$flag = true;
+			$err = null;
+			$installSqls = [];
+			foreach ($tables as $k => $v)
+			{
+				if($flag)
+				{
+					//显示表结构的sql
+					$createTableSql = 'SHOW CREATE TABLE  ' . $v;
+					$flag = Db::exec($createTableSql , function($sql , &$err) use (&$installSqls , $v) {
+						$res = null;
+						if($res = querySql($sql))
+						{
+							$installSqls[] = '-- start of table ' . $v . "";
+							//先删除表
+							$installSqls[] = 'DROP TABLE IF EXISTS ' . $v . ";";
+							//表结构
+							$installSqls[] = $res[0]['Create Table'] . ";";
+
+							//构造插入数据sql
+							$installSqls[] = (function($v) {
+								$data = \think\Db::table($v)->select()->toArray();
+								$insertSql = \think\Db::table($v)->fetchSql(1)->insertAll($data);
+
+								return $insertSql !== false ? addslashes($insertSql) : "-- {$v} 表没有需要插入的数据";
+							})($v);
+							$installSqls[] = '-- end of table ' . $v;
+
+							$installSqls[] = "\r\n\r\n";
+						}
+
+						return $res;
+					} , $err);
+				}else
+				{
+					break;
+				}
+			}
+
+			if(!$err)
+			{
+				$sql = [
+					'install' => implode("\r\n" , $installSqls),
+				];
+				$sqlFile = $infoPath['appPath'] . DS . MODULE_FILE_SQL;
+				try
+				{
+					file_put_contents($sqlFile , json_encode($sql));
+					$this->retureResult['message'] = 'sql文件文件已生成 ' . $sqlFile;
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				} catch (Exception $e)
+				{
+					$this->retureResult['message'] = '写入sql文件出错，检查文件夹是否可写 -- ' . $sqlFile;
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = $err;
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 
@@ -815,20 +949,20 @@
 				$appPath = $v['path'] . '\backup\app' . DS . $id . DS;
 
 				foreach ([
-							 'info' ,
-							 'conf' ,
-							 'menu' ,
-							 'sql' ,
+							 MODULE_FILE_CONFIG ,
+							 MODULE_FILE_INFO ,
+							 MODULE_FILE_MENU ,
+							 MODULE_FILE_SQL ,
 						 ] as $k => $v1)
 				{
-					if(!is_file(replaceToSysSeparator($appPath . $v1 . '.php')))
+					if(!is_file(replaceToSysSeparator($appPath . $v1)))
 					{
 						$res['is_available'] = 0;
-						$res['error'][] = '缺少文件' . $v1 . '.php';
+						$res['error'][] = '缺少文件' . $v1;
 					}
 				}
 
-				$res['is_available'] && $res['info'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO), 1);
+				$res['is_available'] && $res['info'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1);
 
 				return $res;
 			} , FileTool::DIRECTORY);

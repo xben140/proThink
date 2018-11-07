@@ -128,7 +128,7 @@
 			define('MODULE_FILE_CONFIG' , 'config.json');
 			define('MODULE_FILE_INFO' , 'info.json');
 			define('MODULE_FILE_MENU' , 'menu.json');
-			define('MODULE_FILE_SQL' , 'sql.sql');
+			define('MODULE_FILE_SQL' , 'sql.json');
 
 
 			/**
@@ -447,7 +447,6 @@
 
 			return pathinfo($tempPath);
 		}
-
 	}
 
 

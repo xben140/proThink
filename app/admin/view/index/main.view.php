@@ -15,7 +15,7 @@
 									'value'      => 'value' ,
 								]) ,
 							*/
-			]),
+			]) ,
 
 		] , [
 			'animate_type' => 'fadeInRight' ,

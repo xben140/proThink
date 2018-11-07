@@ -93,8 +93,9 @@
 											'class'  => ' btn-primary btn-custom-request' ,
 											'data'   => [
 												'src'        => url('apply') ,
-												'is_reload'  => 1 ,
+												'is_reload'  => 0 ,
 												'is_confirm' => 1 ,
+												'msg'        => '确定部署到应用？' ,
 											] ,
 											'params' => [//'id' => $v['id'] ,
 											] ,
