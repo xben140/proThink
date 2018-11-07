@@ -42,11 +42,11 @@
 		//邮件服务器端口
 		'email_port'          => '25' ,
 		//邮件用户名
-		'email_username'      => 'wf585858@yeah.net' ,
+		'email_username'      => '' ,
 		//邮件用户登陆秘钥
-		'email_password'      => 'qq123456789' ,
+		'email_password'      => '' ,
 		//对方显示发件人
-		'email_user'          => '来自proThink的邮件' ,
+		'email_user'          => '来自iThink的邮件' ,
 		*/
 
 		// 扩展函数文件
