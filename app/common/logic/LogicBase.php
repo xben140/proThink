@@ -38,9 +38,17 @@
 
 		public function initBaseClass()
 		{
-			//当前类名
-			//$this->model_ = $this->logic__common_User;
+			$this->initModel();
+			$this->initValidate();
+		}
+
+		public function initModel()
+		{
 			$this->model_ = $this->{static::makeClassName(static::class , 'model')};
+		}
+
+		public function initValidate()
+		{
 			$this->validate_ = $this->{static::makeClassName(static::class , 'validate')};
 		}
 

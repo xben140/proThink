@@ -76,7 +76,8 @@
 		 */
 		public function setDefault()
 		{
-
+			$this->initLogic();
+			$this->jump($this->logic->setDefault($this->param));
 		}
 
 		/**

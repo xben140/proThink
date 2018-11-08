@@ -10,4 +10,17 @@
 	class CustomFrontendBase extends ControllerBase
 	{
 		use CustomBase;
+
+		/**
+		 * 初始化模板路径
+		 */
+		public function initTemplatePath()
+		{
+			//F:\localWeb\public_local14\public\static\module\blog\template\default\index\index.php
+			$theme = config('themes');
+			!$theme && $theme = 'default';
+			$this->view->config([
+				'view_path' => CONTROLLER_STATIC_PATH_TEMPLATE . $theme .DS ,
+			]);
+		}
 	}

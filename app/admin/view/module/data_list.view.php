@@ -233,20 +233,6 @@
 											'is_display' => 1 ,
 										]) ,
 										'<br />' ,
-
-										integrationTags::tdButton([
-											'value'      => '备份应用数据' ,
-											'class'      => ' btn-info btn-open-pop' ,
-											'data'       => [
-												'src'   => url('backup') ,
-												'title' => '备份' ,
-											] ,
-											'params'     => [
-												'id' => $v['info']['id'] ,
-											] ,
-											'is_display' => 0 ,
-										]) ,
-
 										integrationTags::tdButton([
 											'value'      => '备份安装包' ,
 											'class'      => ' btn-success btn-custom-request' ,
@@ -263,15 +249,17 @@
 										'<br />' ,
 
 										integrationTags::tdButton([
-											'class'      => ' btn-info btn-custom-request' ,
+											'class'      => ' btn-warning btn-custom-request' ,
 											'data'       => [
-												'src' => url('setDefault') ,
+												'src'       => url('setDefault') ,
+												'is_alert'  => 1 ,
+												'is_reload' => 1 ,
 											] ,
 											'params'     => [
-												'address_id' => $v['info']['id'] ,
+												'id' => $v['info']['id'] ,
 											] ,
 											'value'      => '设为默认应用' ,
-											'is_display' => 0 ,
+											'is_display' => $v['is_install'] ,
 										]) ,
 
 										integrationTags::tdButton([

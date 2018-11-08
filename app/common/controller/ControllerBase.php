@@ -60,13 +60,13 @@
 
 			//初始化模板参数
 			$this->initTemplateParam();
+			$this->initTemplatePath();
 
 			//初始化静态资源
 			$this->initBaseStaticResource();
 			$this->initModuleStaticResource();
 			parent::_initialize();
 		}
-
 
 		/**
 		 * 初始化请求信息，定义请求信息常量
@@ -81,7 +81,6 @@
 			defined('ADMIN_ID') or define('ADMIN_ID' , config('admin_id'));
 			//全站管理员角色id
 			defined('GLOBAL_ADMIN_ROLE_ID') or define('GLOBAL_ADMIN_ROLE_ID' , config('global_admin_role_id'));
-
 
 			/**
 			 * 通用信息
@@ -118,18 +117,23 @@
 			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
 			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
 
+			//F:\localWeb\public_local14\public\static\module\blog
 			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
 			defined('MODEL_STATIC_URL') or define('MODEL_STATIC_URL' , replaceToUrlSeparator(URL_STATIC . 'module/'));
 
+
+
 			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
 			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
+
+			//F:\localWeb\public_local14\public\static\module\blog\template\default\index\index.php
+			defined('CONTROLLER_STATIC_PATH_TEMPLATE') or define('CONTROLLER_STATIC_PATH_TEMPLATE' , replaceToSysSeparator(CONTROLLER_STATIC_PATH . 'template/'));
 
 			//模块必备文件信息
 			define('MODULE_FILE_CONFIG' , 'config.json');
 			define('MODULE_FILE_INFO' , 'info.json');
 			define('MODULE_FILE_MENU' , 'menu.json');
 			define('MODULE_FILE_SQL' , 'sql.json');
-
 
 			/**
 			 * 上传路径信息
@@ -163,14 +167,6 @@
 		 */
 		final protected function initTemplateParam()
 		{
-			//E:\localweb\public_local1\public\themes\home\default
-			$theme = config(MODULE_NAME . '_themes');
-			!$theme && $theme = 'default';
-
-			$this->view->config([
-				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
-			]);
-
 			$base = $this->request->root();
 			$root = strpos($base , '.') ? ltrim(dirname($base) , DS) : $base;
 			if('' != $root)
@@ -190,7 +186,16 @@
 				'__CSS__'                   => $root . '/static/css/' ,
 				'__JS__'                    => $root . '/static/js/' ,
 			]);
+		}
 
+		/**
+		 * 初始化模板路径
+		 */
+		public function initTemplatePath()
+		{
+			$this->view->config([
+				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			]);
 		}
 
 		/**
@@ -277,7 +282,6 @@
 			//当前类名
 			$this->logic = $this->{static::makeClassName(static::class , 'logic')};
 		}
-
 
 		/**
 		 * 设置页面标题
@@ -388,6 +392,7 @@
 		 * @param $__this
 		 *
 		 * @return mixed
+		 * @throws \ReflectionException
 		 */
 		public function makeView($__this , $temp = '')
 		{
@@ -429,7 +434,7 @@
 		}
 
 		/**
-		 *         * 计算当前控制器的视图路径
+		 *   计算当前控制器的视图路径
 		 * ‌array (
 		 * 'dirname' => 'F:\\localWeb\\public_local17\\public/../app/admin\\view\\index',
 		 * 'basename' => 'index.php',

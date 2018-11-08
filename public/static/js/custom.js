@@ -92,7 +92,7 @@ function doRuquest($obj)
 	params['ids'] = data_id;
 
 	let msg = (_this.data('msg')) || '确定当前操作?';
-	let is_alert = (_this.data('is_alert')) || true;
+	let is_alert = (_this.data('is_alert') !== undefined) ? _this.data('is_alert') : '0';
 	let url = _this.data('src') || _this.attr('src');
 
 	if ((_this.data('is_confirm') !== undefined) && _this.data('is_confirm'))
@@ -161,24 +161,35 @@ function doRuquest($obj)
 	else
 	{
 		ajaxPost(url, params, function (data) {
+
+			let success = (_this.data('success-request'));
+			(typeof eval(success) === 'function') && eval(success)(_this, data)
+
 			//成功返回回调
 			if (is_alert)
 			{
-				layer.alert(data.msg, {
-					skin: 'layui-layer-molv' //样式类名
+				index_preview = layer.alert(data.msg, {
+					skin : 'layui-layer-molv' //样式类名
+					, yes: function () {
+						if (data.code)
+						{
+							layer.close(index_preview)
+							_this.data('is_reload') && refresh_page();
+						}
+					}
 				});
 			}
 			else
 			{
 				layer.msg(data.msg);
-			}
-			let success = (_this.data('success-request'));
-			(typeof eval(success) === 'function') && eval(success)(_this, data)
 
-			if (data.code)
-			{
-				_this.data('is_reload') && refresh_page();
+				if (data.code)
+				{
+					_this.data('is_reload') && refresh_page();
+				}
 			}
+
+
 		}, function (data) {
 			//错误返回回调
 			let error = (_this.data('error-request'));
@@ -190,7 +201,6 @@ function doRuquest($obj)
 			(typeof eval(before) === 'function') && eval(before)(_this)
 
 		}, _this);
-
 	}
 }
 

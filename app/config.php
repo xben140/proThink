@@ -197,7 +197,6 @@
 		// 默认操作名
 		'default_action'         => 'login' ,
 
-
 		// 禁止访问模块
 		'deny_module_list'       => ['common'] ,
 		// 默认验证器

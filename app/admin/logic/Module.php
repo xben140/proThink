@@ -21,6 +21,10 @@
 
 
 
+
+
+
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -258,6 +262,15 @@
 						function($_param) use ($info) {
 							$flag = true;
 							$flag && $flag = ($this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete() !== false);
+
+							$flag && $flag = $this->logic__common_config->model_->updateField([
+								'status' => '0',
+							] , [
+								'key' => [
+									'in' ,
+									'default_module,default_controller,default_action,'
+								],
+							]);
 
 							return $flag;
 						} ,
@@ -629,7 +642,7 @@
 		}
 
 		/**
-		 * 开发者生成菜单
+		 * 开发者生成配置文件 config.json
 		 *
 		 * @param $param
 		 *
@@ -709,6 +722,13 @@
 			return $this->retureResult;
 		}
 
+		/**
+		 * 开发者生成菜单 menu.json
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function menu($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
@@ -750,7 +770,13 @@
 			return $this->retureResult;
 		}
 
-
+		/**
+		 * 生成安装sql文件 sql.json
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function sql($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
@@ -791,7 +817,8 @@
 
 						return $res;
 					} , $err);
-				}else
+				}
+				else
 				{
 					break;
 				}
@@ -800,7 +827,7 @@
 			if(!$err)
 			{
 				$sql = [
-					'install' => implode("\r\n" , $installSqls),
+					'install' => implode("\r\n" , $installSqls) ,
 				];
 				$sqlFile = $infoPath['appPath'] . DS . MODULE_FILE_SQL;
 				try
@@ -823,6 +850,55 @@
 			return $this->retureResult;
 		}
 
+		public function setDefault($param)
+		{
+			$info = $this->getModuleInfo($param['id']);
+
+			$route = explode('/' , strtr($info['info']['default_action'] , [
+				'\\' => '/' ,
+			]));
+
+			$flag = $this->logic__common_config->model_->updateField([
+				'value' => $route[0] ,
+			] , [
+				'key' => 'default_module' ,
+			]);
+			$flag && $flag = $this->logic__common_config->model_->updateField([
+				'value' => $route[1] ,
+			] , [
+				'key' => 'default_controller' ,
+			]);
+			$flag && $flag = $this->logic__common_config->model_->updateField([
+				'value' => $route[2] ,
+			] , [
+				'key' => 'default_action' ,
+			]);
+
+			$flag && $flag = $this->logic__common_config->model_->updateField([
+				'status' => '1',
+			] , [
+				'key' => [
+					'in' ,
+					'default_module,default_controller,default_action,'
+				],
+			]);
+
+			if($flag)
+			{
+				$this->retureResult['message'] = '更新成功';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = '更新失败';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -830,6 +906,7 @@
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
 		 */
+
 		/**
 		 * 备份包
 		 *
@@ -1084,6 +1161,9 @@
 		}
 
 
+
+
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -1091,7 +1171,6 @@
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
 		 */
-
 
 		/** *
 		 * @param $moduleName
@@ -1130,7 +1209,6 @@
 
 			return $data;
 		}
-
 
 		/**
 		 * @param $param
