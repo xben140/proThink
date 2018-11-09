@@ -179,6 +179,18 @@
 							] , ['col' => '12']);
 							$doms = array_merge($doms , $t);
 
+
+							//	标题，摘要，内容 模糊搜索
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '标题，摘要，内容' ,
+									'value'       => input('keyword' , '') ,
+									'name'        => 'keyword' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '12']);
+							$doms = array_merge($doms , $t);
+
 							//博文分类
 							array_unshift($types , [
 								'value' => -1 ,

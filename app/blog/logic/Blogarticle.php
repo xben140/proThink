@@ -53,6 +53,7 @@
 		{
 			$where = [];
 			$order = [];
+			$whereOr = [];
 
 			$order_filed = 'id';
 			$order_ = 'asc';
@@ -66,17 +67,24 @@
 				{
 					case 'title' :
 					case 'abstruct' :
-						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
-							'like' ,
-							"%" . $v . "%" ,
-						];
+						if($v != '')
+						{
+							$where[$this->model_::makeSelfAliasField($k)] = [
+								'like' ,
+								"%" . $v . "%" ,
+							];
+						}
+
 						break;
 
-					case 'type1' :
-						$v != '' && $where[$this->model_::makeSelfAliasField($k)] = [
-							'=' ,
-							$v ,
-						];
+					case 'id' :
+						if($v != '')
+						{
+							$where[$this->model_::makeSelfAliasField($k)] = [
+								'=' ,
+								$v ,
+							];
+						}
 						break;
 
 					case 'order_filed' :
@@ -113,18 +121,31 @@
 						{
 							$where['b.id'] = [
 								'=' ,
-								$v,
+								$v ,
 							];
 						}
 						break;
 
-						
+					case 'keyword' :
+						if($v)
+						{
+							$where[
+								$this->model_::makeSelfAliasField('title') . '|'
+								. $this->model_::makeSelfAliasField('content') . '|'
+								. $this->model_::makeSelfAliasField('abstruct')
+							] = [
+								'like' ,
+								"%" . $v . "%" ,
+							];
+						}
+						break;
+
+
 					default :
 						#...
 						break;
 				}
 			}
-
 			$where[$this->model_::makeSelfAliasField('time')] = [
 				'between' ,
 				[
@@ -135,7 +156,7 @@
 
 			$join[] = [
 				'ithink_blog_article_tag a' ,
-				$this->model_::makeSelfAliasField('id').' = a.article_id' ,
+				$this->model_::makeSelfAliasField('id') . ' = a.article_id' ,
 				'left' ,
 			];
 
@@ -146,7 +167,7 @@
 			];
 			$join[] = [
 				'ithink_user u' ,
-				$this->model_::makeSelfAliasField('uid').' = u.id' ,
+				$this->model_::makeSelfAliasField('uid') . ' = u.id' ,
 				'left' ,
 			];
 
@@ -158,11 +179,12 @@
 			$order[$order_filed] = $order_;
 
 			return $condition = [
-				'group' => $this->model_::makeSelfAliasField('id') ,
-				'where' => $where ,
-				'order' => $order ,
-				'join'  => $join ,
-				'field' => implode(', ' , $field) ,
+				'group'   => $this->model_::makeSelfAliasField('id') ,
+				'where'   => $where ,
+				'whereOr' => $whereOr ,
+				'order'   => $order ,
+				'join'    => $join ,
+				'field'   => implode(', ' , $field) ,
 			];
 		}
 

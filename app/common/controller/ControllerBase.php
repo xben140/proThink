@@ -100,34 +100,48 @@
 			/**
 			 * 路径和url信息
 			 */
-			defined('URL') or define('URL' , CONTROLLER_NAME . SYS_DS_PROS . ACTION_NAME);
-			defined('URL_MODULE') or define('URL_MODULE' , MODULE_NAME . SYS_DS_PROS . URL);
-			defined('URL_TRUE') or define('URL_TRUE' , $this->request->url(true));
 
+			//index/index
+			defined('URL') or define('URL' , CONTROLLER_NAME . SYS_DS_PROS . ACTION_NAME);
+			//blog/index/index
+			defined('URL_MODULE') or define('URL_MODULE' , MODULE_NAME . SYS_DS_PROS . URL);
+			//http://local14.cc/
+			defined('URL_TRUE') or define('URL_TRUE' , $this->request->url(true));
+			//http://local14.cc/
 			defined('URL_ROOT') or define('URL_ROOT' , $this->request->root(true) . '/');
+			//http://local14.cc/hplus/
 			defined('URL_HPLUS') or define('URL_HPLUS' , URL_ROOT . 'hplus/');
+			//http://local14.cc/static/
 			defined('URL_STATIC') or define('URL_STATIC' , URL_ROOT . 'static/');
+			//http://local14.cc/static/image/
 			defined('URL_IMAGE') or define('URL_IMAGE' , URL_STATIC . 'image/');
+			//http://local14.cc/static/plugins/
 			defined('URL_PLUGINS') or define('URL_PLUGINS' , URL_STATIC . 'plugins/');
 
 
 			/**
 			 * 应用模块信息
 			 */
+			//http://local14.cc/backup/
 			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
+			//F:\localWeb\public_local14\public\backup/
 			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
 
-			//F:\localWeb\public_local14\public\static\module\blog
+			//F:\localWeb\public_local14\public\static\module\
 			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
+			//http://local14.cc/static/module/
 			defined('MODEL_STATIC_URL') or define('MODEL_STATIC_URL' , replaceToUrlSeparator(URL_STATIC . 'module/'));
 
 
-
+			//F:\localWeb\public_local14\public\static\module\blog\
 			defined('CONTROLLER_STATIC_PATH') or define('CONTROLLER_STATIC_PATH' , replaceToSysSeparator(MODEL_STATIC_PATH . MODULE_NAME . '/'));
+			//http://local14.cc/static/module/blog/
 			defined('CONTROLLER_STATIC_URL') or define('CONTROLLER_STATIC_URL' , replaceToUrlSeparator(MODEL_STATIC_URL . MODULE_NAME . '/'));
 
-			//F:\localWeb\public_local14\public\static\module\blog\template\default\index\index.php
+			//F:\localWeb\public_local14\public\static\module\blog\template\
 			defined('CONTROLLER_STATIC_PATH_TEMPLATE') or define('CONTROLLER_STATIC_PATH_TEMPLATE' , replaceToSysSeparator(CONTROLLER_STATIC_PATH . 'template/'));
+			//http:\\local14.cc\static\module\blog\template\
+			defined('CONTROLLER_STATIC_URL_TEMPLATE') or define('CONTROLLER_STATIC_URL_TEMPLATE' , replaceToSysSeparator(CONTROLLER_STATIC_URL . 'template/'));
 
 			//模块必备文件信息
 			define('MODULE_FILE_CONFIG' , 'config.json');

@@ -3,6 +3,7 @@
 	namespace app\blog\controller;
 
 	use app\common\controller\CustomFrontendBase;
+	use think\Route;
 
 	/**
 	 * 前台基类
@@ -15,6 +16,5 @@
 		{
 			parent::_initialize();
 		}
-
 
 	}
