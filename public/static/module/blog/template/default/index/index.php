@@ -6,9 +6,9 @@
 		<article class="post tag-android tag-ke-hu-duan">
 
 			<div class="post-head">
-				<h1 class="post-title">
+				<h3 class="post-title">
 					<a target="_blank" href="{:url('/', ['detail'=>$vo['id']])}">{:$vo['title']}</a>
-				</h1>
+				</h3>
 				<div class="post-meta">
 					<span class="author">{:$vo['user']} &bull;</span>
 					<time class="post-date" datetime="{:formatTime($vo['time'])}" title="{:formatTime($vo['time'])}">{:formatTime($vo['time'])}</time>
