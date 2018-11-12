@@ -13,7 +13,7 @@
 
 	use app\common\common\set;
 	use auth\Auth;
-	use think\Loader;
+	use think\Route;
 
 	/**
 	 * 初始化基础信息行为
@@ -33,6 +33,9 @@
 
 			// 初始化配置
 			$this->initConfig();
+
+			// 初始化自定义模块路由
+			$this->initRoute();
 
 			// 注册命名空间
 			//$this->registerNamespace();
@@ -63,7 +66,7 @@
 			$this->initPathConst();
 
 			// 初始化API常量
-			$this->initApiConst();
+			$this->initModuleConst();
 
 			// session键常量
 			$this->sessionConst();
@@ -151,6 +154,7 @@
 			define('SYS_DS_PROS' , '/');
 			define('SYS_DS_CONS' , '\\');
 
+			define('SYS_ADMIN_MODULE_NAEM' , 'system');
 
 			define('SESSION_TAG_ADMIN' , 'admin_info');
 
@@ -167,29 +171,27 @@
 		 */
 		private function initPathConst()
 		{
-
-
 			define('PATH_PUBLIC' , ROOT_PATH . 'public' . DS);
 
 			define('PATH_SERVICE' , ROOT_PATH . SYS_APP_NAMESPACE . DS . SYS_COMMON_DIR_NAME . DS . LAYER_SERVICE_NAME . DS);
-
-
-
 			define('PATH_HPLUS' , PATH_PUBLIC . 'hplus' . DS);
 			define('PATH_TEMP' , PATH_PUBLIC . 'temp' . DS);
 			define('PATH_STATIC' , PATH_PUBLIC . 'static' . DS);
 			define('PATH_THEMES' , PATH_PUBLIC . 'themes' . DS);
-
 		}
 
 
 		/**
 		 * 初始化API常量
 		 */
-		private function initApiConst()
+		private function initModuleConst()
 		{
-			define('API_CODE_NAME' , 'code');
-			define('API_MSG_NAME' , 'msg');
+			//模块必备文件信息
+			define('MODULE_FILE_CONFIG' , 'config.json');
+			define('MODULE_FILE_INFO' , 'info.json');
+			define('MODULE_FILE_MENU' , 'menu.json');
+			define('MODULE_FILE_SQL' , 'sql.json');
+			define('MODULE_FILE_ROUTE' , 'route.php');
 		}
 
 		/**
@@ -221,6 +223,16 @@
 				($info['is_const']) ? defined($info['field']) or define($info['field'] , $info['value']) : config($info['field'] , $info['value']);
 				//return true;
 			} , $configList);
+		}
+
+
+		/**
+		 * 初始化自定义模块路由
+		 */
+		private function initRoute()
+		{
+			$res = db('route')->column('route');
+			foreach ($res as $k => $v) Route::rule(json_decode($v , 1));
 		}
 
 

@@ -66,6 +66,11 @@
 								'class'    => 'install-db' ,
 								'type'     => 'db' ,
 							] ,
+							[
+								'behavior' => '路由文件' ,
+								'class'    => 'install-route' ,
+								'type'     => 'route' ,
+							] ,
 						];
 
 						/**

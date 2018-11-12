@@ -146,10 +146,9 @@ pre {
 ====================================================*/
 .main-header {
 	text-align    : center;
-	padding       : 42px 0;
+	padding: 40px 0;
 	background    : #fff;
-	margin-bottom : 35px;
-
+	margin-bottom: 10px;
 }
 
 .main-header .branding {
@@ -197,9 +196,9 @@ pre {
 	main post area
 ====================================================*/
 .post {
-	padding       : 35px;
+	padding: 10px;
 	background    : #fff;
-	margin-bottom : 35px;
+	margin-bottom: 10px;
 	position      : relative;
 	overflow      : hidden;
 }
@@ -233,7 +232,7 @@ pre {
 
 .post .post-head .post-title {
 	margin      : 0;
-	font-size   : 2.5em;
+	/*font-size   : 2.5em;*/
 	line-height : 1em;
 }
 
@@ -266,13 +265,13 @@ pre {
 }
 
 .post .post-content {
-	margin : 30px 0;
+	margin: 5px 0;
 }
 
 .post .post-footer {
-	margin-top : 30px;
+	margin-top: 10px;
 	border-top : 1px solid #ebebeb;
-	padding    : 21px 0 0;
+	padding: 10px 0 0;
 }
 
 .post .post-footer .tag-list {
@@ -341,7 +340,7 @@ pre {
 
 .post-content p {
 	margin-top    : 0;
-	margin-bottom : 1.46em;
+	margin-bottom: 1em;
 }
 
 .post-content a {
@@ -658,7 +657,7 @@ pre {
 ====================================================*/
 .sidebar .widget {
 	background : #fff;
-	padding    : 21px 30px;
+	padding: 10px 30px;
 }
 
 .main-footer .widget {
@@ -666,7 +665,7 @@ pre {
 }
 
 .widget {
-	margin-bottom : 35px;
+	margin-bottom: 10px;
 }
 
 .widget .title {

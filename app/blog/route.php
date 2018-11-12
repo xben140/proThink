@@ -1,6 +1,7 @@
 <?php
-	return array(
-		'blog' => 'blog/Index/index' ,
+	return [
+
+		'article' => 'blog/Index/index' ,
 
 		'detail/:id' => [
 			'blog/Index/detail' ,
@@ -11,4 +12,4 @@
 			] ,
 		] ,
 		//'tags/:id' => 'blog/Index/index/tags' ,
-	);
+	];

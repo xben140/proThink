@@ -200,7 +200,7 @@ pre {
 	background    : #fff;
 	margin-bottom: 10px;
 	position      : relative;
-	overflow      : hidden;
+	overflow      : auto;
 }
 
 .post .featured {

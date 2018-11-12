@@ -286,7 +286,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成菜单文件' ,
-											'is_display' => 1 ,
+											'is_display' => ($v['is_install']) ,
 										]) ,
 										'<br />' ,
 
@@ -304,7 +304,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
-											'is_display' => 1 ,
+											'is_display' => ($v['is_install']) ,
 										]) ,
 
 										'<br />' ,
@@ -322,7 +322,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成安装sql文件' ,
-											'is_display' => 1 ,
+											'is_display' => ($v['is_install']) ,
 										]) ,
 
 									]) ,

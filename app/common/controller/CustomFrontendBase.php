@@ -36,7 +36,6 @@
 			]);
 
 			$this->view->replace([
-
 				'__CURRENT_THEME_STATIC_URL__' => CURRENT_THEME_STATIC_URL ,
 			]);
 		}

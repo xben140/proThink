@@ -21,20 +21,26 @@
 	</head>
 	<body class="home-template">
 
-		<!-- start header -->
 		{include file="index/header" /}
-		<!-- end header -->
 
 		<section class="content-wrap">
 			<div class="container">
 				<div class="row">
+					{if $mate}
+					<div class="col-md-8 main-content">
+						<article class="post ">
+							<footer class="post-footer clearfix">
+								<h4>{:$mate}</h4>
+							</footer>
+						</article>
+					</div>
+					{/if}
 
 					{block name="main"}
 					<main class="col-md-8 main-content"></main>
 					{/block}
 
 					{include file="index/aside" /}
-
 				</div>
 			</div>
 		</section>

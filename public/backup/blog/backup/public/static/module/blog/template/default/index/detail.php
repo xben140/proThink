@@ -16,7 +16,7 @@
 		<footer class="post-footer clearfix">
 			<div class="pull-left tag-list">
 				<i class="fa fa-folder-open-o"></i> {foreach $content['tagsArray'] as $content1}
-				<a target="_blank"  href="{:url('/blog', ['tags'=>$content1['id']])}">{:$content1['name']}</a>
+				<a target="_blank"  href="{:url('/article', ['tags'=>$content1['id']])}">{:$content1['name']}</a>
 				, {/foreach}
 			</div>
 			<div class="pull-right share"></div>

@@ -15,15 +15,7 @@
 		public function __construct()
 		{
 			$this->initBaseClass();
-
-
 		}
-
-
-
-
-
-
 
 		/**
 		 * ***********************************************************************************************
@@ -45,20 +37,10 @@
 		public function dataList($param = [] , $callback = null , $isActivedOnly = false)
 		{
 			$modules = [];
-			//F:\\localWeb\\public_local15\\public/../app/
-			$dirs = scandir(APP_PATH);
-			foreach ($dirs as $k => $v)
-			{
-				//F:\localWeb\public_local14\app\doc
-				$path = replaceToSysSeparator(APP_PATH . $v);
-				if(is_dir($path) && !in_array($v , [
-						'.' ,
-						'..' ,
-					]) && !in_array($v , config('system_module')))
-				{
-					$modules[] = $this->getModuleInfo($v);
-				}
-			}
+
+			$res = FileTool::listDir(APP_PATH , function($v) use (&$modules) {
+				(!in_array($v['name'] , config('system_module'))) && ($modules[] = $this->getModuleInfo($v['name']));
+			} , FileTool::DIRECTORY);
 
 			return $modules;
 		}
@@ -119,6 +101,29 @@
 						'菜单信息安装出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '菜单信息安装成功';
+					break;
+
+				case 'route' :
+					//菜单
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$route = $info['route'];
+
+							//安装之前先卸载
+							db('route')->where(['name' => strtolower($info['info']['id']) ,])->delete();
+							//路由写入表
+							$flag = db('route')->insertGetId([
+								'name'  => $info['info']['id'] ,
+								'route' => json_encode($route) ,
+							]);
+
+							return $flag !== false;
+						} ,
+						[] ,
+						'路由信息安装出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '路由信息安装成功';
 					break;
 
 				case 'config' :
@@ -264,12 +269,12 @@
 							$flag && $flag = ($this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete() !== false);
 
 							$flag && $flag = $this->logic__common_config->model_->updateField([
-								'status' => '0',
+								'status' => '0' ,
 							] , [
 								'key' => [
 									'in' ,
-									'default_module,default_controller,default_action,'
-								],
+									'default_module,default_controller,default_action,' ,
+								] ,
 							]);
 
 							return $flag;
@@ -278,6 +283,22 @@
 						'菜单信息删除出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '菜单信息删除成功';
+					break;
+
+				case 'route' :
+					//菜单
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$route = $info['route'];
+							$flag = db('route')->where(['name' => strtolower($info['info']['id']) ,])->delete();
+
+							return $flag !== false;
+						} ,
+						[] ,
+						'路由信息安装出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '路由信息安装成功';
 					break;
 
 				case 'config' :
@@ -336,254 +357,6 @@
 			}
 
 			return $this->retureResult;
-		}
-
-		/**
-		 * 传入应用id，获取应用全部相关信息
-		 *
-		 * @param $moduleName
-		 *
-		 * @return array
-		 */
-		public function getModuleInfo($moduleName)
-		{
-
-			$pathInfo = $this->getModulePathInfo($moduleName);
-			//F:\localWeb\public_local14\public\..\app\blog
-			$appPath = $pathInfo['appPath'];
-
-			//F:/localWeb/public_local14/public/static/module/blog
-			$staticPath = $pathInfo['staticPath'];
-			//http:\\local14.cc\static\module\blog
-			$staticUrl = $pathInfo['staticUrl'];
-
-			//F:\localWeb\public_local14\public\blog
-			$backupPath = $pathInfo['backupPath'];
-			//http://local14.cc/blog
-			$backupUrl = $pathInfo['backupUrl'];
-
-			$makeImgPath = function($file) use ($staticPath , $staticUrl) {
-				foreach ([
-							 'jpg' ,
-							 'png' ,
-							 'jpeg' ,
-							 'gif' ,
-						 ] as $k => $v)
-				{
-					if(is_file($staticPath . DS . 'image' . DS . $file . '.' . $v))
-					{
-						//http:\\local14.cc\static\module\doc\image\logo.gif
-						return $staticUrl . DS . 'image' . DS . $file . '.' . $v;
-					}
-				}
-
-				//http://local14.cc/upload/picture/20181009/thumb_e42e2c89e73a2cef2b2b5ea894f974da.jpg
-				return generateProfilePicPath(config('default_img'));
-			};
-
-			$info = [
-				'ico'         => '' ,
-				'is_install'  => 3 ,
-				'cover'       => '' ,
-				'info'        => [] ,
-				'conf'        => [] ,
-				'menu'        => [] ,
-				'sql'         => [] ,
-				'backup'      => '' ,
-				'is_complete' => 1 ,
-				'error'       => [] ,
-			];
-
-			try
-			{
-				$field = [
-					'id' ,
-					'name' ,
-					'title' ,
-					'version' ,
-					'description' ,
-					'default_action' ,
-					'update_time' ,
-					'database_tables' ,
-				];
-				$infoFile = $appPath . DS . MODULE_FILE_INFO;
-				if(is_file($infoFile))
-				{
-					//应用信息
-					$info['info'] = json_decode(file_get_contents($infoFile) , 1);
-					if(!is_array($info['info']))
-					{
-						$info['error'][] = MODULE_FILE_INFO . '必须返回数组';
-						$info['is_complete'] = 0;
-						$info['info'] = [];
-						$info['info']['id'] = $moduleName;
-					}
-					else
-					{
-
-						foreach ($field as $k => $v)
-						{
-							if(!isset($info['info'][$v]))
-							{
-								$info['error'][] = MODULE_FILE_INFO . " 缺少 {$v} 字段";
-								$info['is_complete'] = 0;
-							}
-						}
-
-						if(!is_array($info['info']['database_tables']))
-						{
-							$info['error'][] = 'database_tables 必须为数组';
-							$info['is_complete'] = 0;
-						}
-					}
-				}
-				else
-				{
-					$info['info'] = [];
-					$info['info']['id'] = $moduleName;
-				}
-
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				//配置信息
-				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG) , 1);;
-
-				if(!is_array($info['conf']))
-				{
-					$info['error'][] = MODULE_FILE_CONFIG . '必须返回数组';
-					$info['is_complete'] = 0;
-				}
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				//菜单信息
-				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU) , 1);;
-
-				if(!is_array($info['menu']))
-				{
-					$info['error'][] = MODULE_FILE_MENU . '必须返回数组';
-					$info['is_complete'] = 0;
-				}
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				//安装sql语句
-				$info['sql'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_SQL) , 1);;
-
-				if(!is_array($info['sql']) || !isset($info['sql']['install']))
-				{
-					$info['error'][] = MODULE_FILE_SQL . '必须返回数组格式，并且必须有键为 install 的值存在';
-					$info['is_complete'] = 0;
-				}
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				$info['ico'] = $makeImgPath('logo');
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-
-			try
-			{
-				$info['cover'] = $makeImgPath('cover');
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-
-			try
-			{
-				//安装sql语句
-				$info['backup'] = (function($appPath) {
-					$path = $appPath . DS . 'database' . DS;
-					$res = [];
-					if(is_dir($path))
-					{
-						$res = FileTool::listDir($path , function($v) {
-							return file_get_contents($v['path']);
-						});
-					}
-
-					return $res;
-				})($appPath);
-
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				$info['is_install'] = (function($infoFormFile) use ($info) {
-					$status = null;
-					if(!$info['is_complete'])
-					{
-						$status = $this->model_::$appStatusMap[3]['value'];
-					}
-					else
-					{
-						$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($infoFormFile['id']) ,])->count() > 0);
-						$tablesStatus = [];
-						foreach ($infoFormFile['database_tables'] as $k => $v)
-						{
-							$sql = "SHOW TABLES LIKE '%{$v}%'";
-							$tablesStatus[] = (count(querySql($sql)) > 0);
-						}
-
-						//如果有安装菜单权限，并且每个应用表都存在 -- 已安装
-						if($hasPrivileges && !in_array(false , $tablesStatus))
-						{
-							$status = $this->model_::$appStatusMap[1]['value'];
-						}
-						//如果没有安装菜单权限，并且应用表个数大于0，并且一个也表也没有 -- 未安装
-						elseif(!$hasPrivileges && (count($tablesStatus) > 0) && !in_array(true , $tablesStatus))
-						{
-							$status = $this->model_::$appStatusMap[0]['value'];
-						}
-						//应用信息残缺，要重新安装
-						else
-						{
-							$status = $this->model_::$appStatusMap[2]['value'];
-						}
-					}
-
-					return $status;
-				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1));
-			} catch (Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			return $info;
-
 		}
 
 		/**
@@ -850,6 +623,13 @@
 			return $this->retureResult;
 		}
 
+		/**
+		 * 模块设置为默认模块
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function setDefault($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
@@ -873,14 +653,13 @@
 			] , [
 				'key' => 'default_action' ,
 			]);
-
 			$flag && $flag = $this->logic__common_config->model_->updateField([
-				'status' => '1',
+				'status' => '1' ,
 			] , [
 				'key' => [
 					'in' ,
-					'default_module,default_controller,default_action,'
-				],
+					'default_module,default_controller,default_action,' ,
+				] ,
 			]);
 
 			if($flag)
@@ -895,6 +674,273 @@
 			}
 
 			return $this->retureResult;
+		}
+
+		/**
+		 * 传入应用id，获取应用全部相关信息
+		 *
+		 * @param $moduleName
+		 *
+		 * @return array
+		 */
+		public function getModuleInfo($moduleName)
+		{
+			$pathInfo = $this->getModulePathInfo($moduleName);
+			//F:\localWeb\public_local14\public\..\app\blog
+			$appPath = $pathInfo['appPath'];
+
+			//F:/localWeb/public_local14/public/static/module/blog
+			$staticPath = $pathInfo['staticPath'];
+			//http:\\local14.cc\static\module\blog
+			$staticUrl = $pathInfo['staticUrl'];
+
+			//F:\localWeb\public_local14\public\blog
+			$backupPath = $pathInfo['backupPath'];
+			//http://local14.cc/blog
+			$backupUrl = $pathInfo['backupUrl'];
+
+			$makeImgPath = function($file) use ($staticPath , $staticUrl) {
+				foreach ([
+							 'jpg' ,
+							 'png' ,
+							 'jpeg' ,
+							 'gif' ,
+						 ] as $k => $v)
+				{
+					if(is_file($staticPath . DS . 'image' . DS . $file . '.' . $v))
+					{
+						//http:\\local14.cc\static\module\doc\image\logo.gif
+						return $staticUrl . DS . 'image' . DS . $file . '.' . $v;
+					}
+				}
+
+				//http://local14.cc/upload/picture/20181009/thumb_e42e2c89e73a2cef2b2b5ea894f974da.jpg
+				return generateProfilePicPath(config('default_img'));
+			};
+
+			$info = [
+				'ico'         => '' ,
+				'is_install'  => 3 ,
+				'cover'       => '' ,
+				'info'        => [] ,
+				'conf'        => [] ,
+				'menu'        => [] ,
+				'sql'         => [] ,
+				'backup'      => '' ,
+				'is_complete' => 1 ,
+				'error'       => [] ,
+				'route'       => [] ,
+			];
+
+			try
+			{
+				$field = [
+					'id' ,
+					'name' ,
+					'title' ,
+					'version' ,
+					'description' ,
+					'default_action' ,
+					'update_time' ,
+					'database_tables' ,
+				];
+				$infoFile = $appPath . DS . MODULE_FILE_INFO;
+				if(is_file($infoFile))
+				{
+					//应用信息
+					$info['info'] = json_decode(file_get_contents($infoFile) , 1);
+					if(!is_array($info['info']))
+					{
+						$info['error'][] = MODULE_FILE_INFO . '必须返回数组';
+						$info['is_complete'] = 0;
+						$info['info'] = [];
+						$info['info']['id'] = $moduleName;
+					}
+					else
+					{
+
+						foreach ($field as $k => $v)
+						{
+							if(!isset($info['info'][$v]))
+							{
+								$info['error'][] = MODULE_FILE_INFO . " 缺少 {$v} 字段";
+								$info['is_complete'] = 0;
+							}
+						}
+
+						if(!is_array($info['info']['database_tables']))
+						{
+							$info['error'][] = 'database_tables 必须为数组';
+							$info['is_complete'] = 0;
+						}
+					}
+				}
+				else
+				{
+					$info['info'] = [];
+					$info['info']['id'] = $moduleName;
+				}
+
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//配置信息
+				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG) , 1);;
+
+				if(!is_array($info['conf']))
+				{
+					$info['error'][] = MODULE_FILE_CONFIG . '必须返回数组';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//应用路由信息
+				$routeFile = $appPath . DS . MODULE_FILE_ROUTE;
+				if(is_file($routeFile))
+				{
+					$info['route'] = include_once $routeFile;
+
+					if(!is_array($info['conf']))
+					{
+						$info['error'][] = MODULE_FILE_ROUTE . '必须返回数组';
+						$info['is_complete'] = 0;
+					}
+				}
+
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//菜单信息
+				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU) , 1);;
+
+				if(!is_array($info['menu']))
+				{
+					$info['error'][] = MODULE_FILE_MENU . '必须返回数组';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//安装sql语句
+				$info['sql'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_SQL) , 1);;
+
+				if(!is_array($info['sql']) || !isset($info['sql']['install']))
+				{
+					$info['error'][] = MODULE_FILE_SQL . '必须返回数组格式，并且必须有键为 install 的值存在';
+					$info['is_complete'] = 0;
+				}
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				$info['ico'] = $makeImgPath('logo');
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				$info['cover'] = $makeImgPath('cover');
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//安装sql语句
+				$info['backup'] = (function($appPath) {
+					$path = $appPath . DS . 'database' . DS;
+					$res = [];
+					if(is_dir($path))
+					{
+						$res = FileTool::listDir($path , function($v) {
+							return file_get_contents($v['path']);
+						});
+					}
+
+					return $res;
+				})($appPath);
+
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				$info['is_install'] = (function($infoFormFile) use ($info) {
+					$status = null;
+					if(!$info['is_complete'])
+					{
+						$status = $this->model_::$appStatusMap[3]['value'];
+					}
+					else
+					{
+						$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($infoFormFile['id']) ,])->count() > 0);
+						$tablesStatus = [];
+						foreach ($infoFormFile['database_tables'] as $k => $v)
+						{
+							$sql = "SHOW TABLES LIKE '%{$v}%'";
+							$tablesStatus[] = (count(querySql($sql)) > 0);
+						}
+
+						//如果有安装菜单权限，并且每个应用表都存在 -- 已安装
+						if($hasPrivileges && !in_array(false , $tablesStatus))
+						{
+							$status = $this->model_::$appStatusMap[1]['value'];
+						}
+						//如果没有安装菜单权限，并且应用表个数大于0，并且一个也表也没有 -- 未安装
+						elseif(!$hasPrivileges && (count($tablesStatus) > 0) && !in_array(true , $tablesStatus))
+						{
+							$status = $this->model_::$appStatusMap[0]['value'];
+						}
+						//应用信息残缺，要重新安装
+						else
+						{
+							$status = $this->model_::$appStatusMap[2]['value'];
+						}
+					}
+
+					return $status;
+				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1));
+			} catch (Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			return $info;
+
 		}
 
 

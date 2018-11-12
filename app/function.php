@@ -765,6 +765,17 @@
 
 
 	/**
+	 * 是否安装
+	 *
+	 * @return bool
+	 */
+	function isInstalled()
+	{
+		return is_file('ROOT_PATH'.'installed.lock');
+	}
+
+
+	/**
 	 * 更可靠的pathinfo函数代替
 	 *
 	 * @param $path

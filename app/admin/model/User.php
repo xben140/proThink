@@ -127,6 +127,19 @@
 			return $info['status'] == 1;
 		}
 
+
+		/**
+		 * 是不是后台用户
+		 *
+		 * @param array $info
+		 *
+		 * @return bool
+		 */
+		final public function isSystemUser($info)
+		{
+			return $info['module'] == SYS_ADMIN_MODULE_NAEM;
+		}
+
 	}
 
 

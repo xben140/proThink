@@ -8,8 +8,8 @@
 		{
 			parent::__construct();
 			$this->logic = $this->logic__blog_blogarticle;
+			$this->param['is_published'] = '1';
 			$this->initCommon();
-			//print_r(CONF_PATH);exit;;
 		}
 
 		/**
@@ -42,6 +42,10 @@
 				$item['thumb'] = generateProfilePicPath($item['thumbnail'] , 1);
 			});
 
+			if(input('type') > 0) $this->assign('mate' , '类型‘'.$this->logic__blog_blogtype->model_->where(['id' => input('type') ,])->value('name').'’的结果');
+			if(input('tags') > 0) $this->assign('mate' , '标签‘'.$this->logic__blog_Blogtag->model_->where(['id' => input('tags') ,])->value('name').'’的结果');
+			if(input('keyword') ) $this->assign('mate' , '‘'.input('keyword').'’的搜索结果');
+
 			//print_r($data);exit;;
 			$this->assign('data' , $data['data']);
 			$this->assign('title' , 'bolg');
@@ -61,7 +65,7 @@
 
 			$data = $this->logic->dataListWithPagination($this->param , function($item) {
 				$item['tagsArray'] = $this->logic->getArticleTags(['id' => $item['id']]);
-				$item['tumb'] = generateProfilePicPath($item['thumbnail'] , 0);
+				$item['thumb'] = generateProfilePicPath($item['thumbnail'] , 0);
 			});
 
 			$this->assign('title' , 'bolg');
@@ -72,17 +76,18 @@
 
 		private function initCommon()
 		{
+			$this->assign('mate', '');
+
 			//博客名
 			$blog_name = config('blog_name');
 			$this->assign('blog_name' , $blog_name);
 
 			//关键词
-			$this->assign('keyword' , input('keyword', ''));
+			$this->assign('keyword' , input('keyword' , ''));
 
 			//所有标签
 			$tags = $this->logic__blog_Blogtag->getActivedData();
 			$this->assign('tags' , $tags);
-
 
 			//所有类型
 			$types = $this->logic__blog_blogtype->dataList();
