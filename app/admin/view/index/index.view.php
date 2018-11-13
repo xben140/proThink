@@ -96,14 +96,11 @@
 					'field' => '修改密码' ,
 					'value' => url('admin/user/modifypwd') ,
 				] ,
-
 				[
 					'field' => '修改资料' ,
 					'value' => url('admin/user/modifyinfo') ,
 				] ,
-
 			]);
-
 
 		});
 

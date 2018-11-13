@@ -60,6 +60,7 @@
 		// 管理自定义模块时候，忽略的模块，即系统模块
 		'system_module'       => [
 			'admin' ,
+			'install' ,
 			//'doc' ,
 			//'blog' ,
 			'demo' ,
@@ -234,7 +235,7 @@
 		'route_complete_match'   => false ,
 		// 路由配置文件（支持配置多个）
 		'route_config_file'      => [
-			'route',
+			'route' ,
 		] ,
 		// 是否强制使用路由
 		'url_route_must'         => false ,

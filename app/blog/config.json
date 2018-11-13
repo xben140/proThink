@@ -32,7 +32,7 @@
 	"value"    : "imageimageimage"
 }, {
 	"is_const" : 1,
-	"type"     : 5,
+	"type"     : 2,
 	"name"     : "is_const-test",
 	"key"      : "const",
 	"value"    : "constconstconst"

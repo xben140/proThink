@@ -449,7 +449,6 @@
 		 */
 		public function getDeletedDataWithPagination($param = [] , $callback = null)
 		{
-
 			$condition = $this->makeCondition($param);
 			$pageSize = (isset($param['pagerow']) && is_numeric($param['pagerow'])) ? $param['pagerow'] : DB_LIST_ROWS;
 
@@ -482,7 +481,11 @@
 				//$logic = $this->{'logic__' . $info['tab_db']};
 				$logic = $this->{static::makeClassName($info['tab_db'] , 'logic')};
 
-				$data = $logic->getDeletedDataWithPagination($params);
+				$param = $params;
+				unset($param['id']);
+				unset($param['ids']);
+
+				$data = $logic->getDeletedDataWithPagination($param);
 
 				$searchForm = $logic->getSearchForm($params);
 				$_this->setSearchForm($searchForm);

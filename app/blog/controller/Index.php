@@ -8,7 +8,6 @@
 		{
 			parent::__construct();
 			$this->logic = $this->logic__blog_blogarticle;
-			$this->param['is_published'] = '1';
 			$this->initCommon();
 		}
 
@@ -61,8 +60,6 @@
 
 			//详情
 			//?id=7
-			$a = $this->param;
-
 			$data = $this->logic->dataListWithPagination($this->param , function($item) {
 				$item['tagsArray'] = $this->logic->getArticleTags(['id' => $item['id']]);
 				$item['thumb'] = generateProfilePicPath($item['thumbnail'] , 0);
@@ -76,6 +73,8 @@
 
 		private function initCommon()
 		{
+			//只查已经发布的文章
+			$this->param['is_published'] = '1';
 			$this->assign('mate', '');
 
 			//博客名

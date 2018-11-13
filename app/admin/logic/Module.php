@@ -101,6 +101,8 @@
 						'菜单信息安装出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '菜单信息安装成功';
+					$res = execClosureList($transaction , $err , $_param);
+
 					break;
 
 				case 'route' :
@@ -124,6 +126,8 @@
 						'路由信息安装出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '路由信息安装成功';
+					$res = execClosureList($transaction , $err , $_param);
+
 					break;
 
 				case 'config' :
@@ -193,46 +197,51 @@
 						'配置信息安装出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '配置安装成功';
+					$res = execClosureList($transaction , $err , $_param);
+
 					break;
 
 				case 'db' :
 					//数据
-					$transaction[] = [
-						function($_param) use ($info) {
-							//基础sql配置
-							$installSql = $info['sql']['install'];
-							$sqls = Db::parseSql($installSql);
-							$flag = true;
-							foreach ($sqls as $k => $sql)
-							{
-								$flag = Db::exec($sql , function($sql , &$err) {
-									return (querySql($sql) !== false);
-								} , $err);
-							}
-
-							//备份的数据sql
-							$dataSql = implode("\r\n" , $info['backup']);
-							$sqls = Db::parseSql($dataSql);
-							foreach ($sqls as $k => $sql)
-							{
-								$flag = Db::exec($sql , function($sql , &$err) {
-									return (querySql($sql) !== false);
-								} , $err);
-							}
-
-
-							return $flag;
-						} ,
-						[] ,
-						'数据表安装出错，请检查' . MODULE_FILE_SQL . '和database文件夹下备份sql的语法或者网络环境后尝试手动执行' ,
-					];
 					$this->retureResult['message'] = '数据表安装成功';
+
+					//基础sql配置
+					$installSql = $info['sql']['install'];
+					$sqls = Db::parseSql($installSql);
+					$flag = true;
+					foreach ($sqls as $k => $sql)
+					{
+						$flag && $flag = Db::exec($sql , function($sql , &$err) {
+							return (querySql($sql) !== false);
+						} , $err);
+
+						if(!$flag)
+						{
+							break;
+						}
+					}
+
+					//备份的数据sql
+					$dataSql = implode("\r\n" , $info['backup']);
+					$sqls = Db::parseSql($dataSql);
+					foreach ($sqls as $k => $sql)
+					{
+						$flag && $flag = Db::exec($sql , function($sql , &$err) {
+							return (querySql($sql) !== false);
+						} , $err);
+
+						if(!$flag)
+						{
+							break;
+						}
+					}
+
+					$res = $flag;
 					break;
 				default :
 					break;
 			}
 
-			$res = execClosureList($transaction , $err , $_param);
 
 			if($res !== false)
 			{
@@ -326,7 +335,7 @@
 							$flag = true;
 							foreach ($uninstallSql as $k => $v)
 							{
-								$sql = 'DROP TABLE IF EXISTS ' . $v;
+								$sql = 'DROP TABLE IF EXISTS `' . $v . '`;';
 
 								$flag && $flag = Db::exec($sql , function($sql , &$err) {
 									return (executeSql($sql) !== false);
@@ -572,7 +581,7 @@
 						{
 							$installSqls[] = '-- start of table ' . $v . "";
 							//先删除表
-							$installSqls[] = 'DROP TABLE IF EXISTS ' . $v . ";";
+							$installSqls[] = 'DROP TABLE IF EXISTS `' . $v . "`;";
 							//表结构
 							$installSqls[] = $res[0]['Create Table'] . ";";
 
@@ -581,7 +590,7 @@
 								$data = \think\Db::table($v)->select()->toArray();
 								$insertSql = \think\Db::table($v)->fetchSql(1)->insertAll($data);
 
-								return $insertSql !== false ? addslashes($insertSql) : "-- {$v} 表没有需要插入的数据";
+								return is_string($insertSql) ? ($insertSql) : "\r\n";
 							})($v);
 							$installSqls[] = '-- end of table ' . $v;
 

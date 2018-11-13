@@ -46,6 +46,7 @@
 			//exit;
 		}
 
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -61,6 +62,9 @@
 			//初始化模板参数
 			$this->initTemplateParam();
 			$this->initTemplatePath();
+
+			//没安装就跳安装页面
+			//$this->isInstalled();
 
 			//初始化静态资源
 			$this->initBaseStaticResource();
@@ -204,6 +208,28 @@
 				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
 		}
+
+		/**
+		 * 安装检测
+		 */
+		private function isInstalled()
+		{
+			//没安装都跳到安装页面
+			if(!isInstalled() && (MODULE_NAME !== strtolower('install')))
+			{
+				//makeInstallLockFile();
+				header('Location: /install');
+				exit;
+			}
+
+			//安装了还访问安装页面就跳主页
+			if(isInstalled() && (MODULE_NAME === strtolower('install')))
+			{
+				header('Location: /');
+				exit;
+			}
+		}
+
 
 		/**
 		 * 初始化页面公用设置

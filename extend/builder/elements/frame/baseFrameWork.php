@@ -213,8 +213,7 @@ str;
 			/**
 			 * ----------------------------------------自定义内容
 			 */
-			$contents =
-				<<<'CONTENTS'
+			$contents = <<<'CONTENTS'
 <div id="wrapper">
 
 	<!--左侧导航开始-->
@@ -232,6 +231,10 @@ str;
 				<!-- ~~~profile_pop_link~~~ -->
 				
 				<!-- ~~~profile_link~~~ -->
+				
+				<div class="profile-item">
+					<span><a href="/" target="_blank" class=" font-bold">访问首页</a></span>
+				</div>
 				
 				<div class="profile-item">
 					<span><a href="<!-- ~~~logout_url~~~ -->" class=" font-bold">退出登陆</a></span>

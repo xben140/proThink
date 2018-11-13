@@ -702,7 +702,6 @@
 	}
 
 
-
 	//汉字转unicode
 	function toUnicode($subject , $encoding = 'utf-8')
 	{
@@ -766,12 +765,20 @@
 
 	/**
 	 * 是否安装
-	 *
 	 * @return bool
 	 */
 	function isInstalled()
 	{
-		return is_file('ROOT_PATH'.'installed.lock');
+		return is_file(PATH_PUBLIC . 'installed.lock');
+	}
+
+	/**
+	 * 创建安装锁文件
+	 * @return bool
+	 */
+	function makeInstallLockFile()
+	{
+		return file_put_contents(PATH_PUBLIC . 'installed.lock' , '');
 	}
 
 

@@ -79,8 +79,7 @@ function doAction()
 
 function beforeAction(obj)
 {
-
-	obj.parent().prev().text('正在执行。。。')
+	obj.parent().prev().text('正在执行...')
 }
 
 
@@ -91,18 +90,20 @@ function successAction(obj, data)
 	$('.install-action').each(function (k, v) {
 		$(v).parent().data('success') && (count += 1)
 	});
-	if (count == 3)
+	if (count == 4)
 	{
 		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 		layer.alert('处理成功，请点击 全局刷新 更新菜单', {
-			closeBtn: 0, //不显示关闭按钮
-			skin    : 'layui-layer-molv' //样式类名
+			shadeClose: false,
+			shade     : 0,
+			closeBtn  : 0, //不显示关闭按钮
+			skin      : 'layui-layer-molv' //样式类名
 		}, function () {
 			parent.layer.close(index); //再执行关闭
 		});
 	}
 	obj.hide();
-	obj.parent().prev().text('执行成功。。。')
+	obj.parent().prev().text(data.msg)
 }
 
 

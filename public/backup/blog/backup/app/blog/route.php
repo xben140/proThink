@@ -5,7 +5,8 @@
 
 		'detail/:id' => [
 			'blog/Index/detail' ,
-			[//'ext' => 'html' ,
+			[
+				//'ext' => 'html' ,
 			] ,
 			[
 				'id' => '\d+' ,

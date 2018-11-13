@@ -27,7 +27,6 @@
 		 */
 		public function run()
 		{
-
 			// 初始化常量
 			$this->initConst();
 
@@ -40,6 +39,8 @@
 			// 注册命名空间
 			//$this->registerNamespace();
 		}
+
+
 
 		/**
 		 * 初始化常量

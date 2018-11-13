@@ -112,16 +112,75 @@ function doRuquest($obj)
 			layer.close(index)
 
 			ajaxPost(url, params, function (data) {
-
-				let success = (_this.data('success-request'));
-				(typeof eval(success) === 'function') && eval(success)(_this, data)
-
 				//成功返回回调
+				let success = (_this.data('success-request'));
+				if ((typeof eval(success) === 'function'))
+				{
+					eval(success)(_this, data)
+				}
+				else
+				{
+					if (is_alert)
+					{
+						index_preview = layer.alert(data.msg, {
+							shadeClose: false,
+							shade     : 0,
+							skin      : 'layui-layer-molv' //样式类名
+							, yes     : function () {
+								if (data.code)
+								{
+									layer.close(index_preview)
+									_this.data('is_reload') && refresh_page();
+								}
+							}
+						});
+					}
+					else
+					{
+						layer.msg(data.msg);
+
+						if (data.code)
+						{
+							_this.data('is_reload') && refresh_page();
+						}
+					}
+				}
+
+			}, function (data) {
+				//错误返回回调
+				let error = (_this.data('error-request'));
+				(typeof eval(error) === 'function') && eval(error)(_this)
+
+			}, function (btn) {
+				//请求之前回调
+				let before = (_this.data('before-request'));
+				(typeof eval(before) === 'function') && eval(before)(_this)
+			}, _this);
+
+		}, function (index) {
+			layer.close(index)
+		});
+
+	}
+	else
+	{
+
+		ajaxPost(url, params, function (data) {
+			//成功返回回调
+			let success = (_this.data('success-request'));
+			if ((typeof eval(success) === 'function'))
+			{
+				eval(success)(_this, data)
+			}
+			else
+			{
 				if (is_alert)
 				{
 					index_preview = layer.alert(data.msg, {
-						skin : 'layui-layer-molv' //样式类名
-						, yes: function () {
+						shadeClose: false,
+						shade     : 0,
+						skin      : 'layui-layer-molv' //样式类名
+						, yes     : function () {
 							if (data.code)
 							{
 								layer.close(index_preview)
@@ -139,56 +198,7 @@ function doRuquest($obj)
 						_this.data('is_reload') && refresh_page();
 					}
 				}
-
-
-			}, function (data) {
-				//错误返回回调
-				let error = (_this.data('error-request'));
-				(typeof eval(error) === 'function') && eval(error)(_this)
-
-			}, function (btn) {
-				//请求之前回调
-				let before = (_this.data('before-request'));
-				(typeof eval(before) === 'function') && eval(before)(_this)
-
-			}, _this);
-
-		}, function (index) {
-			layer.close(index)
-		});
-
-	}
-	else
-	{
-		ajaxPost(url, params, function (data) {
-
-			let success = (_this.data('success-request'));
-			(typeof eval(success) === 'function') && eval(success)(_this, data)
-
-			//成功返回回调
-			if (is_alert)
-			{
-				index_preview = layer.alert(data.msg, {
-					skin : 'layui-layer-molv' //样式类名
-					, yes: function () {
-						if (data.code)
-						{
-							layer.close(index_preview)
-							_this.data('is_reload') && refresh_page();
-						}
-					}
-				});
 			}
-			else
-			{
-				layer.msg(data.msg);
-
-				if (data.code)
-				{
-					_this.data('is_reload') && refresh_page();
-				}
-			}
-
 
 		}, function (data) {
 			//错误返回回调
@@ -199,8 +209,8 @@ function doRuquest($obj)
 			//请求之前回调
 			let before = (_this.data('before-request'));
 			(typeof eval(before) === 'function') && eval(before)(_this)
-
 		}, _this);
+
 	}
 }
 
