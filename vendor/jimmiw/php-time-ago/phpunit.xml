@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    colors="true"
+    forceCoversAnnotation="false"
+    bootstrap="vendor/autoload.php">
+
+    <testsuite name="php-time-ago">
+        <directory>./tests/</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+            <exclude>
+                <directory suffix=".php">./vendor</directory>
+                <directory suffix=".php">./translations</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="./report" lowUpperBound="50" highLowerBound="80" />
+        <log type="testdox-html" target="./report/testdox.html" />
+    </logging>
+</phpunit>
