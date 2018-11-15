@@ -217,7 +217,7 @@
 		 *
 		 * @return array
 		 */
-		public static function recursiveChmod($path, $mode = 0777)
+		public static function recursiveChmod($path , $mode = 0777)
 		{
 			$res = [
 				'sign' => 1 ,
@@ -225,10 +225,11 @@
 			];
 			try
 			{
-				static::itreatorDFS($path , function($info , $relativePath)use($mode) {
-					chmod($info->getPathname(), $mode);
+				static::itreatorDFS($path , function($info , $relativePath) use ($mode) {
+					chmod($info->getPathname() , $mode);
+
 					return true;
-				} , function($info , $relativePath){
+				} , function($info , $relativePath) {
 
 				});
 
@@ -527,6 +528,35 @@
 			return $Mode . '(' . $theMode . ')';
 		}
 
+		/**
+		 * 测试指定文件夹有没有apache写文件的权限
+		 *
+		 * @param $path
+		 *
+		 * @return bool
+		 */
+		public static function testWrite($path)
+		{
+			$res = true;
+			if(is_dir($path))
+			{
+				try
+				{
+					$fileName = static::endDS($path) . md5(uniqid('__' , true));
+					file_put_contents($fileName, '_'  );
+					is_file($fileName) && unlink($fileName);
+				} catch (\Exception $e)
+				{
+					$res = false;
+				}
+			}
+			elseif(!is_file($path))
+			{
+				$res = false;
+			}
+
+			return $res;
+		}
 
 		/**
 		 * 创建文件夹
@@ -787,6 +817,7 @@
 			{
 				$res = false;
 			}
+
 			return $res;
 		}
 

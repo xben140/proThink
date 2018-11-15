@@ -172,20 +172,22 @@
 			];
 
 			$t = (function() {
-				FileTool::recursiveChmod(PATH_BACKUP , '0777');
-				FileTool::recursiveChmod(PATH_UPLOAD , '0777');
+				$flag = true;
+				$flag && $flag = FileTool::testWrite(APP_PATH);
+				$flag && $flag = FileTool::testWrite(PATH_BACKUP );
+				$flag && $flag = FileTool::testWrite(PATH_UPLOAD );
 
-				return FileTool::recursiveChmod(APP_PATH , '0777');
+				return $flag;
 			})();
 			$info = FileTool::fileInfo(ROOT_PATH);
 			$data[] = [
 				'item'    => '根目录写权限' ,
 				'require' => ROOT_PATH ,
-				'value'   => $t['sign'] ? $info['mode'] : '登陆SSH执行：<span style="color: #00f">chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) . '</span>' ,
-				'result'  => $t['sign'] ? 1 : ($isEvnOk = 0) ,
+				'value'   => $t ? $info['mode'] : '登陆SSH执行：<span style="color: #00f">chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) . '</span>' ,
+				'result'  => $t ? 1 : ($isEvnOk = 0) ,
 			];
 
-			if(!$t['sign'])
+			if(!$t)
 			{
 				$data[] = [
 					'item'    => '' ,
