@@ -94,11 +94,7 @@
 				'item'    => 'exec 函数' ,
 				'require' => '可执行' ,
 				'value'   => $t ? '可执行' : '必须开启exec函数 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
-				'result'  => $t ? (function() {
-					@exec('chmod -R 777 ' . realpath(APP_PATH));
-
-					return 1;
-				})() : ($isEvnOk = 0) ,
+				'result'  => $t ? 1 : ($isEvnOk = 0) ,
 			];
 
 
@@ -175,12 +171,15 @@
 				})($t) ? 1 : ($isEvnOk = 0) ,
 			];
 
-			$t = FileTool::isWritable(ROOT_PATH);
+			$t = (function() {
+				return FileTool::recursiveChmod(APP_PATH, '0777');
+			})();
+			$info = FileTool::fileInfo(ROOT_PATH);
 			$data[] = [
 				'item'    => '根目录写权限' ,
 				'require' => ROOT_PATH ,
-				'value'   => $t ? '可写' : '请登陆ssh执行：chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) ,
-				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+				'value'   => $t['sign'] ? $info['mode'] : '请登陆SSH执行：chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) .'<br />某些上传代码至服务器的方式会因为代码所属用户及组与apache所属用户及组不一致导致apache没有写的权限，如使用git下载程序',
+				'result'  => $t ? $info['mode'] : ($isEvnOk = 0) ,
 			];
 
 			$tmp = <<<AA

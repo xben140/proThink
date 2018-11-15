@@ -209,6 +209,37 @@
 			return $res;
 		}
 
+		/**
+		 * 递归修改文件权限
+		 *
+		 * @param     $path
+		 * @param int $mode
+		 *
+		 * @return array
+		 */
+		public static function recursiveChmod($path, $mode = 0777)
+		{
+			$res = [
+				'sign' => 1 ,
+				'msg'  => '操作成功' ,
+			];
+			try
+			{
+				static::itreatorDFS($path , function($info , $relativePath)use($mode) {
+					chmod($info->getPathname(), $mode);
+					return true;
+				} , function($info , $relativePath){
+
+				});
+
+			} catch (Exception $e)
+			{
+				$res['sign'] = 0;
+				$res['msg'] = $e->getMessage();
+			}
+
+			return $res;
+		}
 
 		/**
 		 * 广度优先迭代
