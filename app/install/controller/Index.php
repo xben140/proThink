@@ -34,7 +34,7 @@
 		{
 			$isDbOk = true;
 			$data = [];
-			$msg = '数据库连接成功，配置信息填写正确，点击下一步安装';
+			$msg = '数据库连接成功，配置信息填写正确<br />点击下一步安装';
 
 
 			if(!preg_match('#^[^@]+@[^.]+\.[a-z]{2,6}$#i' , $this->param['email']))
@@ -78,7 +78,7 @@
 				} catch (\Exception $e)
 				{
 					$isDbOk = false;
-					$msg = '数据库无法连接，请检查主机，账号，密码和端口信息';
+					$msg = '数据库无法连接<br />请检查主机，账号，密码和端口信息';
 				}
 			}
 			if($isDbOk)
@@ -117,7 +117,7 @@
 		{
 			$isDbOk = true;
 			$data = [];
-			$msg = 'iThink 安装成功！enjoy...';
+			$msg = 'iThink 已成功安装！enjoy...';
 
 			//F:\localWeb\public_local14\app\install
 			$modulePath = realpath(replaceToSysSeparator(APP_PATH . MODULE_NAME)) . DS;
@@ -143,7 +143,7 @@
 			} catch (\Exception $e)
 			{
 				$isDbOk = false;
-				$msg = '数据库无法连接，请检查主机，账号，密码和端口信息';
+				$msg = '数据库无法连接<br />请检查主机，账号，密码和端口信息';
 			}
 
 
@@ -213,15 +213,13 @@
 				} catch (\Exception $e)
 				{
 					$isDbOk = false;
-					$msg = '数据库配置写入出错，请检查文件夹权限  <br />' . APP_PATH;
+					$msg = '数据库配置写入出错<br />请检查文件夹权限  <br />' . APP_PATH;
 				}
 
 			}
 
 			if($isDbOk)
 			{
-				//加安装锁
-				@exec('chmod -R 777 ' . realpath(APP_PATH . '/../'));
 				$this->success($msg , null , $data);
 			}
 			else

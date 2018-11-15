@@ -172,15 +172,29 @@
 			];
 
 			$t = (function() {
-				return FileTool::recursiveChmod(APP_PATH, '0777');
+				FileTool::recursiveChmod(PATH_BACKUP , '0777');
+				FileTool::recursiveChmod(PATH_UPLOAD , '0777');
+
+				return FileTool::recursiveChmod(APP_PATH , '0777');
 			})();
 			$info = FileTool::fileInfo(ROOT_PATH);
 			$data[] = [
 				'item'    => '根目录写权限' ,
 				'require' => ROOT_PATH ,
-				'value'   => $t['sign'] ? $info['mode'] : '请登陆SSH执行：chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) .'<br />某些上传代码至服务器的方式会因为代码所属用户及组与apache所属用户及组不一致导致apache没有写的权限，如使用git下载程序',
-				'result'  => $t ? $info['mode'] : ($isEvnOk = 0) ,
+				'value'   => $t['sign'] ? $info['mode'] : '登陆SSH执行：<span style="color: #00f">chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) . '</span>' ,
+				'result'  => $t['sign'] ? 1 : ($isEvnOk = 0) ,
 			];
+
+			if(!$t['sign'])
+			{
+				$data[] = [
+					'item'    => '' ,
+					'require' => '' ,
+					'value'   => '某些情况下会因为代码所属用户及组与apache所属用户及组不一致导致apache没有写的权限而无法正常安装' ,
+					'result'  => 0 ,
+				];
+			}
+
 
 			$tmp = <<<AA
 <tr>
@@ -199,7 +213,7 @@ AA;
 				return strtr($tmp , [
 					'__ITEM__'    => $v['item'] ,
 					'__REQUIRE__' => $v['require'] ,
-					'__VALUE__'   => $v['value'] ,
+					'__VALUE__'   => !$v['result'] ? "<span style='color: #f00;font-weight: bold;'>{$v['value'] }</span>" : $v['value'] ,
 					'__AAA__'     => $v['result'] ? 'success' : 'danger' ,
 					'__BBB__'     => $v['result'] ? 'check' : 'times' ,
 				]);

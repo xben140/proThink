@@ -8,5 +8,4 @@
 		{
 			parent::_initialize();
 		}
-
 	}
