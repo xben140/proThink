@@ -94,7 +94,11 @@
 				'item'    => 'exec 函数' ,
 				'require' => '可执行' ,
 				'value'   => $t ? '可执行' : '必须开启exec函数 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
-				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+				'result'  => $t ? (function() {
+					@chmod(ROOT_PATH , 0777);
+
+					return 1;
+				})() : ($isEvnOk = 0) ,
 			];
 
 
@@ -174,8 +178,8 @@
 			$t = (function() {
 				$flag = true;
 				$flag && $flag = FileTool::testWrite(APP_PATH);
-				$flag && $flag = FileTool::testWrite(PATH_BACKUP );
-				$flag && $flag = FileTool::testWrite(PATH_UPLOAD );
+				$flag && $flag = FileTool::testWrite(PATH_BACKUP);
+				$flag && $flag = FileTool::testWrite(PATH_UPLOAD);
 
 				return $flag;
 			})();
