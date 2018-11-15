@@ -39,7 +39,8 @@
 		"jimmiw/php-time-ago"         : "^3.0",
 		"phelium/mysql-backup"        : "^1.0",
 		"wapmorgan/unified-archive"   : "~0.1.0",
-		"pclzip/pclzip"               : "^2.8"
+		"pclzip/pclzip"               : "^2.8",
+		"overtrue/wechat"             : "~4.0"
 	},
 	"autoload"    : {
 		"psr-4" : {

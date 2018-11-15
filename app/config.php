@@ -11,7 +11,6 @@
 
 	return [
 
-
 		// +----------------------------------------------------------------------
 		// | 应用设置
 		// +----------------------------------------------------------------------
@@ -20,19 +19,10 @@
 		'app_debug'           => true ,
 
 		// 应用Trace
-		'app_trace'           => true ,
-
-		//每添加一个模块这里要加个配置
-		//前台默认皮肤
-		//'admin_themes'        => 'default' ,
-		//后台默认皮肤
-		//'home_themes'         => 'default' ,
-		//后台默认皮肤
-		//'portal_themes'       => 'default' ,
+		'app_trace'           => false ,
 
 		//后台页面构造器页面是否缓存
 		'enable_static_cache' => 0 ,
-
 
 		/*
 
@@ -148,8 +138,12 @@
 		'admin_id'             => 1 ,
 		'global_admin_role_id' => 1 ,
 
-
 		'app_namespace'          => 'app' ,
+
+		//默认没登陆的跳转页面
+		'admin_none_login_index'          => 'admin/login/login' ,
+		//默认登陆后的跳转页面
+		'admin_login_index'          => 'admin/index/index' ,
 
 		//默认头像
 		//'default_profile_pic'    => '/static/image/default_pic.gif' ,

@@ -66,6 +66,26 @@
 	});
 })();
 
+function checkEvn()
+{
+	let loadIndex = layer.load();
+	$.ajax({
+		type    : "get",      //data 传送数据类型。post 传递
+		dataType: 'json',  // 返回数据的数据类型json
+		url     : "/evnCheck",  // yii 控制器/方法
+		cache   : false,
+		success : function (data) {
+			layer.close(loadIndex);
+			$('#isEvnOk').val(data.code)
+			$('#tb').html(data.msg);
+		},
+		error   : function () {
+			layer.close(loadIndex);
+			layer.alert('请检测网络。。。');
+		}
+	})
+}
+
 
 //data-src
 //data-params
@@ -127,9 +147,9 @@ function doRuquest($obj)
 							shade     : 0,
 							skin      : 'layui-layer-molv' //样式类名
 							, yes     : function () {
+								layer.close(index_preview)
 								if (data.code)
 								{
-									layer.close(index_preview)
 									_this.data('is_reload') && refresh_page();
 								}
 							}
@@ -181,9 +201,9 @@ function doRuquest($obj)
 						shade     : 0,
 						skin      : 'layui-layer-molv' //样式类名
 						, yes     : function () {
+							layer.close(index_preview)
 							if (data.code)
 							{
-								layer.close(index_preview)
 								_this.data('is_reload') && refresh_page();
 							}
 						}

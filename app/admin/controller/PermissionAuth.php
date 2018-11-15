@@ -125,7 +125,7 @@
 		 */
 		private function _authIsLogin()
 		{
-			!isAdminLogin() && $this->redirect(SYS_NON_LOGIN_INDEX);
+			!isAdminLogin() && $this->redirect(SYS_NONE_LOGIN_INDEX);
 		}
 
 

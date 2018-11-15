@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>H+ 后台主题UI框架 - 表单向导</title>
-		<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-		<meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+		<title>iThink 安装向导</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
 		<link rel="shortcut icon" href="favicon.ico">
 		<link href="__HPLUS__css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
 		<link href="__HPLUS__css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
@@ -27,7 +27,6 @@
 	</head>
 	<body class="">
 		<div class="container">
-
 			<div class="ibox-content">
 				<div class="row">
 					<div class="col-lg-12">
@@ -43,57 +42,45 @@
 				<div id="step">
 					<h1>iThink</h1>
 					<fieldset>
-						<p>iThink 安装向导</p>
-						<p>iThink 安装向导</p>
-						<p>iThink 安装向导</p>
-						<p>iThink 安装向导5</p>
-						<p>iThink 安装向导6</p>
-						<p>iThink 安装向导7</p>
-						<p>iThink 安装向导7</p>
-						<p>iThink 安装向导</p>
-						<p>iThink 安装向导</p>
+						<h3 class="text-center">iThink 安装协议</h3>
+						<p>iThink是一个基于thinkphp5.0开发的模块化，应用化，自动构建化的WEB应用开发框架(Web Application Framework)，旨在为广大web开发者提供一套简单、快速、高效的web应用解决方案。</p>
+						<p>iThink拥有全部知识产权，包括商标和著作权。</p>
+						<p>版权所有 © 2016~2020，iThink开源社区保留所有权利。</p>
+						<p>iThink遵循Apache Licence2开源协议，并且免费使用，但不能未经授权抹除产品标志再次用于开源。Apache Licence是著名的非盈利开源组织Apache采用的协议，该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，允许代码修改，再作为开源或商业软件发布。需要满足的条件：</p>
+						<p>1． 需要给用户一份Apache Licence；</p>
+						<p>2． 如果你修改了代码，需要在被修改的文件中说明；</p>
+						<p>3． 在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明；</p>
+						<p>4． 如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有本协议内容。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</p>
 
-						<div class="checkbox i-checks">
-							<label> <input id="agreement" type="checkbox" name="agreement" value="1">
-								<i></i> 我同意注册条款</label>
+						<h3 class="text-center">iThink免责声明</h3>
+						<p>1、使用iThink构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，iThink官方不承担任何责任。</p>
+						<p>2、您一旦安装使用iThink，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。</p>
+
+						<div class="well">
+							<div class="checkbox i-checks">
+								<label> <input id="agreement" type="checkbox" name="agreement" value="1"><i></i> 我同意注册条款</label>
+							</div>
 						</div>
 					</fieldset>
-
 
 					<h1>安装环境检测</h1>
 					<fieldset>
 						<div class="row">
 							<div class="col-sm-12">
+								<div class="form-group">
+									<button type="button" id="recheckEvn" class="btn btn-w-m btn-primary">重新检测</button>
+								</div>
 								<table class="table">
 									<thead>
 										<tr>
-											<th style="width: 150px;">项目</th>
-											<th>最低要求</th>
-											<th>当前配置</th>
+											<th style="width: 130px;">项目</th>
+											<th style="width: 220px;">要求</th>
+											<th>当前</th>
 											<th style="width: 50px;">结果</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>操作系统</td>
-											<td>（windows/类unix）</td>
-											<td>windows</td>
-											<td>
-												<button class="btn btn-xs btn-success " type="button">
-													<i class="fa fa-check"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>操作系统</td>
-											<td>（windows/类unix）</td>
-											<td>windows</td>
-											<td>
-												<button class="btn btn-xs btn-danger " type="button">
-													<i class="fa fa-times"></i>
-												</button>
-											</td>
-										</tr>
+									<tbody id="tb">
+
 									</tbody>
 								</table>
 							</div>
@@ -110,11 +97,11 @@
 									<h2>数据库信息</h2>
 									<div class="form-group">
 										<label>数据库服务器IP,如 : 127.0.0.1</label>
-										<input id="host" name="host" type="text" class="form-control ">
+										<input id="host" name="host" type="text" class="form-control " value="127.0.0.1">
 									</div>
 									<div class="form-group">
-										<label>数据库名称,如 :iThink </label>
-										<input id="dbname" name="dbname" type="text" class="form-control">
+										<label>数据库名称,如 :iThink (如果此数据库不存在会自动创建)</label>
+										<input id="dbname" name="dbname" type="text" class="form-control" value="iThink">
 									</div>
 									<div class="form-group">
 										<label>数据库用户名,如 : root</label>
@@ -127,10 +114,6 @@
 									<div class="form-group">
 										<label>数据库端口,默认3306</label>
 										<input id="port" name="port" type="text" class="form-control" value="3306">
-									</div>
-									<div class="form-group">
-										<label>数据表前缀,默认ithink_</label>
-										<input id="tabprefix" name="tabprefix" type="text" class="form-control" value="ithink_">
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -163,7 +146,7 @@
 
 					<h1>完成</h1>
 					<fieldset>
-						<div class="createing">
+						<div class="createing" style="display: none;">
 							<h1 class="text-center">正在创建数据表中...</h1>
 							<div class="spiner-example">
 								<div class="sk-spinner sk-spinner-cube-grid">
@@ -181,17 +164,58 @@
 						</div>
 
 						<div class="createFinish" style="display: none;">
-							<h1 class="text-center">系统安装成功</h1>
+							<h1 class="text-center">iThink 安装成功！enjoy...</h1>
+							<div class="col-sm-12">
+								<table class="table">
+									<thead>
+										<tr>
+											<th style="width: auto;">产品信息</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody id="tb">
+										<tr>
+											<td>产品名称</td>
+											<td>{:ITHINK_NAME}</td>
+										</tr>
+										<tr>
+											<td>产品版本</td>
+											<td>{:ITHINK_VERSION}</td>
+										</tr>
+										<tr>
+											<td>交流QQ群</td>
+											<td>419395011</td>
+										</tr>
+										<tr>
+											<td>官方网站</td>
+											<td>
+												<a target="_blank" href="http://www.ithinkphp.org">www.ithinkphp.org</a>
+											</td>
+										</tr>
+										<tr>
+											<td>码云仓库</td>
+											<td>
+												<a target="_blank" href="https://gitee.com/wf5858585858/iThink">https://gitee.com/wf5858585858/iThink</a>
+											</td>
+										</tr>
+										<tr>
+											<td>开发手册</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>联系邮箱</td>
+											<td>wf585858@yeah.net</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							<div class="text-center">
-								<a href="#" class="btn btn-w-m btn-primary">访问首页</a>
+								<a href="/" class="btn btn-w-m btn-primary">访问主页</a>
 							</div>
 						</div>
 
 						<div class="createError" style="display: none;">
-							<h1 class="text-center">系统安装失败，请重新检查环境再安装</h1>
-							<div class="text-center">
-								<a href="/" class="btn btn-w-m btn-info">重新安装</a>
-							</div>
+							<h1 class="text-center">系统安装失败，请返回上一步重新检查配置数据再安装</h1>
 						</div>
 					</fieldset>
 				</div>
@@ -215,7 +239,7 @@
 					// contentContainerTag: "div", // 指定包装所有内容的HTML标签
 					// actionContainerTag : "div", // 指定包装分页导航的HTML标签
 					// stepsContainerTag  : "div", // 指定包装步骤内容的HTML标签
-					stepsOrientation: 'vertical', // 指定步骤为水平--vertical（垂直） horizontal（水平）
+					stepsOrientation: 'horizontal', // 指定步骤为水平--vertical（垂直） horizontal（水平）
 					transitionEffect: "slideLeft", // 步骤切换动画
 					autoFocus       : true, // 将焦点设置为第一个向导实例，以便从一开始就启用关键导航 if true  优先级在startIndex之下
 					forceMoveForward: false, // 防止跳转到下一步
@@ -230,11 +254,6 @@
 
 					onStepChanging: function (event, currentIndex, newIndex) {
 						let allowNext = true;
-
-						console.dir(event.type)
-						console.dir(currentIndex);
-						console.dir(newIndex)
-
 						//条款
 						if ((currentIndex === 0) && (newIndex === 1))
 						{
@@ -246,7 +265,7 @@
 							else
 							{
 								allowNext = false;
-								layer.msg('请先阅读条款，并同意');
+								layer.msg('请先阅读条款，并勾选同意复选框');
 							}
 						}
 
@@ -277,7 +296,6 @@
 							else
 							{
 								allowNext = false;
-								allowNext = true;
 								layer.alert('请填写完整相关配置并点击 测试数据库配置<br>确保数据库配置无误');
 							}
 						}
@@ -285,18 +303,17 @@
 						//填写了数据库
 						if ((currentIndex === 3) && (newIndex === 2))
 						{
-							allowNext = false;
-							layer.alert('正在安装中，请不要刷新页面和做其他操作');
+							allowNext = ($('#isDbOk').val() === '0');
+							if (!allowNext)
+							{
+								layer.alert('正在安装中，请不要刷新页面和做其他操作');
+							}
 						}
 
 						return allowNext;
 					}
 					,
 					onStepChanged : function (event, currentIndex, priorIndex) {
-						console.dir(event.type)
-						console.dir(currentIndex)
-						console.dir(priorIndex)
-
 						//环境检测
 						if ((currentIndex === 1) && (priorIndex === 0))
 						{
@@ -311,20 +328,24 @@
 					}
 					,
 					onFinishing   : function (event, currentIndex) {
-						console.dir(event.type)
-						console.dir(currentIndex)
 						return true;
 					}
 					,
 					onFinished    : function (event, currentIndex) {
-						console.dir(event.type)
-						console.dir(currentIndex)
 					}
 				});
 
 				$("#checkDbConfig").on({
 					click: function () {
-						checkDb();
+						$('#form').validate();
+						let isAgreed = ($('#form').valid());
+						isAgreed && checkDb();
+					},
+				});
+
+				$("#recheckEvn").on({
+					click: function () {
+						checkEvn();
 					},
 				});
 
@@ -377,12 +398,12 @@
 							required: 'email必填',
 							email   : '请输入合法的email地址'
 						},
-						username : "后台管理员账号必填",
+						username : "后台管理员账号长度为5到16个字符允许字母，数字，下划线",
 						pwd      : {
-							required: '密码必填',
+							required: '密码长度为5到16个字符允许字母，数字，下划线',
 						},
 						repwd    : {
-							required   : '密码必须填写',
+							required   : '确认密码必须填写',
 							equalTo    : "两次密码输入不一致",
 							rangelength: "密码长度为5到16个字符允许字母，数字，下划线"
 						}
@@ -400,11 +421,8 @@
 						success : function (data) {
 							layer.close(loadIndex);
 							$('#isEvnOk').val(data.code)
-							if (data.code)
-							{
-								layer.msg('安装环境满足要求，请点击下一步继续安装');
-							}
-							else
+							$('#tb').html(data.msg);
+							if (!data.code)
 							{
 								layer.alert('安装环境不满足要求，无法安装');
 							}
@@ -428,14 +446,7 @@
 						success : function (data) {
 							layer.close(loadIndex);
 							$('#isDbOk').val(data.code)
-							if (data.code)
-							{
-								layer.alert('数据库连接成功，请点击下一步安装');
-							}
-							else
-							{
-								layer.alert('数据库配置连接异常，请检查连接参数');
-							}
+							layer.alert(data.msg);
 						},
 						error   : function () {
 							layer.close(loadIndex);
@@ -447,28 +458,36 @@
 
 				function createDb()
 				{
-					let loadIndex = layer.load();
+					// let loadIndex = layer.load();
+					$('.createing').show()
+					$('.createError').hide()
+					$('.createFinish').hide()
 					$.ajax({
 						type    : "get",
 						dataType: 'json',
 						url     : "/createDb",
+						data    : $('#form').serialize(),
 						cache   : false,
 						success : function (data) {
-							layer.close(loadIndex);
+							// layer.close(loadIndex);
 							$('.createing').hide()
-							$('div.actions').hide()
 							if (data.code)
 							{
+								$('div.actions').hide()
 								$('.createFinish').show()
+								$('.steps').hide()
 							}
 							else
 							{
 								$('.createError').show()
+								$('#isDbOk').val(0)
 								layer.alert('安装失败，请重新检查环境');
 							}
 						},
 						error   : function () {
-							layer.close(loadIndex);
+							$('.createError').show()
+							$('#isDbOk').val(0)
+							// layer.close(loadIndex);
 							layer.alert('请检测网络。。。');
 						}
 					})

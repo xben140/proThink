@@ -113,7 +113,7 @@
 		public function logout()
 		{
 			session(null);
-			$this->retureResult['url'] = url(SYS_NON_LOGIN_INDEX);
+			$this->retureResult['url'] = url(SYS_NONE_LOGIN_INDEX);
 			$this->retureResult['message'] = '成功退出';
 			$this->retureResult['sign'] = RESULT_REDIRECT;
 

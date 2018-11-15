@@ -1,1 +1,0 @@
--- insert  into `ithink_blog_article_tag`(`id`,`tag_id`,`article_id`) values (13,1,1),(14,2,1),(15,4,1),(18,2,2),(19,3,2);

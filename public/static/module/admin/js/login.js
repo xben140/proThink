@@ -2,8 +2,8 @@
 	$("#bannerBox").slide({
 		mainCell : ".slideBanner",
 		effect   : "fold",
-		interTime: 3500,
-		delayTime: 500,
+		interTime: 3000,
+		delayTime: 800,
 		autoPlay : true,
 		autoPage : true,
 		endFun   : function (i, c, s) {
@@ -30,18 +30,6 @@
 
 			//提交前的回调函数
 			beforeSubmit: function (formData, jqForm, options) {
-				// console.dir(formData)
-				// console.dir(jqForm)
-				// console.dir(options)
-
-				//formData: 数组对象，提交表单时，Form插件会以Ajax方式自动提交这些数据，格式如：[{name:user,value:val },{name:pwd,value:pwd}]
-				//jqForm:   jQuery对象，封装了表单的元素
-				//options:  options对象
-
-				// var queryString = $.param(formData);   //name=1&address=2
-				// var formElement = jqForm[0];              //将jqForm转换为DOM对象
-				// var address = formElement.address.value;  //访问jqForm的DOM元素
-
 				//只要不返回false，表单都会提交,在这里可以对表单元素进行验证
 				return true;
 			},

@@ -23,6 +23,6 @@
 		public function run()
 		{
 
-			debug('app_begin');
+
 		}
 	}

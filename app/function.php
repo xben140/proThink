@@ -546,6 +546,73 @@
 		return $data['is_menu'];
 	}
 
+
+	/**
+	 *        数据备份相关
+	 */
+
+	/**
+	 * 根据表名，生成备份表语句
+	 *
+	 * @param $tableName
+	 * @param $err
+	 *
+	 * @return array
+	 */
+	function makeSqlByTableName($tableName , &$err = null)
+	{
+		$installSqls = [];
+		//显示表结构的sql
+		$createTableSql = 'SHOW CREATE TABLE  ' . $tableName;
+		\db\Db::exec($createTableSql , function($sql , &$err) use (&$installSqls , $tableName) {
+			$res = null;
+			if($res = querySql($sql))
+			{
+				//先删除表
+				$installSqls[] = 'DROP TABLE IF EXISTS `' . $tableName . "`;";
+				//表结构
+				$installSqls[] = $res[0]['Create Table'] . ";";
+
+				//构造插入数据sql
+				$data = \think\Db::table($tableName)->select()->toArray();
+				$insertSql = \think\Db::table($tableName)->fetchSql(1)->insertAll($data);
+				if(is_string($insertSql))
+				{
+					$installSqls[] = $insertSql . ";\r\n";
+				}
+
+				$installSqls[] = "\r\n";
+			}
+
+			return $res;
+		} , $err);
+
+		return $installSqls;
+	}
+
+	/**
+	 * 执行sql数组
+	 *
+	 * @param array $sqls
+	 * @param null  $err
+	 *
+	 * @return bool|mixed
+	 */
+	function execSqlBySqlArray(array $sqls , &$err = null)
+	{
+		$flag = true;
+		foreach ($sqls as $k => $sql)
+		{
+			$flag && $flag = \db\Db::exec($sql , function($sql , &$err) {
+				return (querySql($sql) !== false);
+			} , $err);
+
+			if(!$flag) break;
+		}
+
+		return $flag;
+	}
+
 	/**
 	 *        杂项
 	 */
@@ -603,6 +670,16 @@
 		return date($format , $time);
 	}
 
+	/**
+	 * 返回毫秒时间戳
+	 * @return float
+	 */
+	function msTime()
+	{
+		list($t1 , $t2) = explode(' ' , microtime());
+
+		return (float)sprintf('%.0f' , (floatval($t1) + floatval($t2)) * 1000);
+	}
 
 	/**
 	 * 计算时间间隔
@@ -769,17 +846,10 @@
 	 */
 	function isInstalled()
 	{
-		return is_file(PATH_PUBLIC . 'installed.lock');
+		return is_file(APP_PATH . 'database.php');
 	}
 
-	/**
-	 * 创建安装锁文件
-	 * @return bool
-	 */
-	function makeInstallLockFile()
-	{
-		return file_put_contents(PATH_PUBLIC . 'installed.lock' , '');
-	}
+
 
 
 	/**

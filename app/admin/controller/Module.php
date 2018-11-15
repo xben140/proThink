@@ -71,6 +71,44 @@
 			$this->jump($res);
 		}
 
+
+		/**
+		 *
+		 */
+		public function baseFunc()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$action = $this->param['option'];
+				switch (($action))
+				{
+					case 'backup_database' :
+					case 'recoverData' :
+					case 'deleteData' :
+						$res = $this->logic->{$action}($this->param);
+						break;
+					default :
+						$res['message'] = '操作出错，请重试';
+						$res['sign'] = RESULT_ERROR;
+				}
+				$this->jump($res);
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+		/**
+		 * 查看备份sql文件
+		 * @return mixed
+		 */
+		public function viewSql()
+		{
+			return $this->makeView($this);
+		}
+
 		/**
 		 *
 		 */
@@ -100,12 +138,22 @@
 		}
 
 		/**
-		 *
+		 *	下载安装包
 		 */
 		public function downloadPackage()
 		{
 			$this->initLogic();
 			downloadFile($this->logic->getModulePathInfo($this->param['id'])['packagePath'] , $this->param['id'] . '.zip');
+		}
+
+		/**
+		 *	下载sql文件
+		 */
+		public function downloadSql()
+		{
+			$this->initLogic();
+			$sqlFile = (PATH_DATABASE_BACKUP.base64_decode($this->param['id']));
+			downloadFile($sqlFile, base64_decode($this->param['id']));
 		}
 
 		/**

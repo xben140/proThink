@@ -23,8 +23,7 @@
 		public function run()
 		{
 
-			debug('app_end');
 
-			//write_exe_log('app_begin', 'app_end');
+
 		}
 	}

@@ -28,9 +28,9 @@
 		public static function parseSql($sql)
 		{
 			//读取SQL文件
-			$sql = preg_replace('/(^\s*|\s*$)/im' , '' , $sql);
+			$sql = preg_replace('/(^[ \t]*|[ \t]*$)/im', '', $sql);
 			$sql = str_replace("\r" , "\n" , $sql);
-			$sql = preg_split('/;[\r\n]/im' , $sql , -1 , PREG_SPLIT_NO_EMPTY);
+			$sql = preg_split('/;[\r\n]+/im' , $sql , -1 , PREG_SPLIT_NO_EMPTY);
 
 			return $sql;
 		}

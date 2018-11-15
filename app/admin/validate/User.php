@@ -23,12 +23,12 @@
 		// 验证提示
 		protected $message = [
 
-			'user.require'   => '用户名允许字符为字母，数字，下划线，小数点，长度6-16位' ,
-			'user.checkName' => '用户名允许字符为字母，数字，下划线，小数点，长度6-16位' ,
+			'user.require'   => '用户名允许字符为字母，数字，下划线，小数点，长度5-16位' ,
+			'user.checkName' => '用户名允许字符为字母，数字，下划线，小数点，长度5-16位' ,
 			'user.unique'    => '用户名已存在' ,
 
-			'password.require'   => '密码允许字符为字母，数字，下划线，小数点，长度6-16位' ,
-			'password.checkName' => '密码允许字符为字母，数字，下划线，小数点，长度6-16位' ,
+			'password.require'   => '密码允许字符为字母，数字，下划线，小数点，长度5-16位' ,
+			'password.checkName' => '密码允许字符为字母，数字，下划线，小数点，长度5-16位' ,
 			'password.confirm'   => '两次密码不一致' ,
 
 			'email.require' => '邮箱不能为空' ,

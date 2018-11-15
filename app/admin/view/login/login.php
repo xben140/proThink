@@ -24,7 +24,7 @@
 			<form action="/admin/login/dologin" name="loginForm" id="loginForm" method="post">
 				<div class="login-form" style="position: relative">
 					<div class="formContent">
-						<div class="title">管理中心</div>
+						<div class="title">iThink后台管理中心</div>
 						<div class="formInfo">
 							<div class="formText">
 								<i class="icon icon-user"></i>
@@ -59,12 +59,17 @@
 			</form>
 		</div>
 		<div id="bannerBox">
-			<ul id="slideBanner" class="slideBanner" style="position: relative; width: 1858px; height: 1014px;">
-				<li style="position: absolute; width: 1858px; left: 0px; top: 0px; display: none;">
-					<img src="__CONTROLLER_STATIC_URL__/image/banner_1.jpg">
+			<ul id="slideBanner" class="slideBanner" >
+				<!--
+				<li >
+					<img src="__CONTROLLER_STATIC_URL__/image/banner_3.jpg">
 				</li>
-				<li style="position: absolute; width: 1858px; left: 0px; top: 0px; display: block;">
-					<img src="__CONTROLLER_STATIC_URL__/image/banner_2.jpg">
+				<li >
+					<img src="__CONTROLLER_STATIC_URL__/image/banner_4.jpg">
+				</li>
+				-->
+				<li >
+					<img src="__CONTROLLER_STATIC_URL__/image/banner_5.jpg">
 				</li>
 			</ul>
 		</div>

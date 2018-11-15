@@ -57,6 +57,7 @@
 			$info = $this->getModuleInfo($param['id']);
 			$transaction = [];
 			$_param = [];
+			$err = null;
 			switch ($param['type'])
 			{
 				case 'menu' :
@@ -100,7 +101,7 @@
 						[] ,
 						'菜单信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '菜单信息安装成功';
+					$this->retureResult['message'] = '菜单信息写入成功，位于 ithink_privilege 表中 字段category，值为 ' . $info['info']['id'] . ' 的记录';
 					$res = execClosureList($transaction , $err , $_param);
 
 					break;
@@ -125,7 +126,8 @@
 						[] ,
 						'路由信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '路由信息安装成功';
+					$this->retureResult['message'] = '路由数据写入成功，位于 ithink_route 表中 字段name，值为 ' . $info['info']['id'] . ' 的记录';
+
 					$res = execClosureList($transaction , $err , $_param);
 
 					break;
@@ -194,48 +196,29 @@
 							return $flag !== 0;
 						} ,
 						[] ,
-						'配置信息安装出错，请尝试手动执行' ,
+						'配置数据安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '配置安装成功';
+					$this->retureResult['message'] = '配置数据写入成功，位于 ithink_config 表中 分组为 ' . $info['info']['id'] . ' 的记录';
+
 					$res = execClosureList($transaction , $err , $_param);
 
 					break;
 
 				case 'db' :
 					//数据
-					$this->retureResult['message'] = '数据表安装成功';
+					$flag = true;
 
 					//基础sql配置
 					$installSql = $info['sql']['install'];
 					$sqls = Db::parseSql($installSql);
-					$flag = true;
-					foreach ($sqls as $k => $sql)
-					{
-						$flag && $flag = Db::exec($sql , function($sql , &$err) {
-							return (querySql($sql) !== false);
-						} , $err);
-
-						if(!$flag)
-						{
-							break;
-						}
-					}
+					$flag = execSqlBySqlArray($sqls, $err);
 
 					//备份的数据sql
 					$dataSql = implode("\r\n" , $info['backup']);
 					$sqls = Db::parseSql($dataSql);
-					foreach ($sqls as $k => $sql)
-					{
-						$flag && $flag = Db::exec($sql , function($sql , &$err) {
-							return (querySql($sql) !== false);
-						} , $err);
+					$flag = execSqlBySqlArray($sqls, $err);
 
-						if(!$flag)
-						{
-							break;
-						}
-					}
-
+					$this->retureResult['message'] = '数据表安装成功';
 					$res = $flag;
 					break;
 				default :
@@ -486,14 +469,13 @@
 				try
 				{
 					file_put_contents($infoFile , json_encode($result));
-					$this->retureResult['message'] = '配置文件已生成 ' . $infoFile;
+					$this->retureResult['message'] = '配置文件已生成  <br /> ' . $infoFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				} catch (Exception $e)
 				{
-					$this->retureResult['message'] = '写入配置出错，检查文件夹是否可写 -- ' . $infoFile;
+					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入配置出错，检查文件夹是否可写 <br /> ' . $infoFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
 				}
-
 			}
 			else
 			{
@@ -535,11 +517,11 @@
 				try
 				{
 					file_put_contents($menuFile , json_encode($result));
-					$this->retureResult['message'] = '菜单文件文件已生成 ' . $menuFile;
+					$this->retureResult['message'] = '菜单文件文件已生成  <br /> ' . $menuFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				} catch (Exception $e)
 				{
-					$this->retureResult['message'] = '写入菜单出错，检查文件夹是否可写 -- ' . $menuFile;
+					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入菜单出错，检查文件夹是否可写 <br /> ' . $menuFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
 				}
 			}
@@ -571,39 +553,7 @@
 			$installSqls = [];
 			foreach ($tables as $k => $v)
 			{
-				if($flag)
-				{
-					//显示表结构的sql
-					$createTableSql = 'SHOW CREATE TABLE  ' . $v;
-					$flag = Db::exec($createTableSql , function($sql , &$err) use (&$installSqls , $v) {
-						$res = null;
-						if($res = querySql($sql))
-						{
-							$installSqls[] = '-- start of table ' . $v . "";
-							//先删除表
-							$installSqls[] = 'DROP TABLE IF EXISTS `' . $v . "`;";
-							//表结构
-							$installSqls[] = $res[0]['Create Table'] . ";";
-
-							//构造插入数据sql
-							$installSqls[] = (function($v) {
-								$data = \think\Db::table($v)->select()->toArray();
-								$insertSql = \think\Db::table($v)->fetchSql(1)->insertAll($data);
-
-								return is_string($insertSql) ? ($insertSql) : "\r\n";
-							})($v);
-							$installSqls[] = '-- end of table ' . $v;
-
-							$installSqls[] = "\r\n\r\n";
-						}
-
-						return $res;
-					} , $err);
-				}
-				else
-				{
-					break;
-				}
+				$installSqls = array_merge($installSqls , makeSqlByTableName($v , $err));
 			}
 
 			if(!$err)
@@ -614,12 +564,13 @@
 				$sqlFile = $infoPath['appPath'] . DS . MODULE_FILE_SQL;
 				try
 				{
+					file_put_contents($sqlFile . '.sql' , implode("\r\n" , $sql));
 					file_put_contents($sqlFile , json_encode($sql));
-					$this->retureResult['message'] = 'sql文件文件已生成 ' . $sqlFile;
+					$this->retureResult['message'] = 'sql文件文件已生成 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				} catch (Exception $e)
 				{
-					$this->retureResult['message'] = '写入sql文件出错，检查文件夹是否可写 -- ' . $sqlFile;
+					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
 				}
 			}
@@ -1046,7 +997,7 @@
 				if(($res) !== false)
 				{
 					$this->unzipToCode($moduleName);
-					$this->retureResult['message'] = '备份成功 ';
+					$this->retureResult['message'] = '备份成功，点击 安装包管理 查看 <br /> 位置 ：' . $backupPath;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				}
 				else
@@ -1216,7 +1167,101 @@
 		}
 
 
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    通用功能
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
 
+		/**
+		 * 备份数据库
+		 *
+		 * @return array
+		 */
+		public function backup_database()
+		{
+			$res = querySql('SHOW TABLEs;');
+			//获取表对应应用所拥有的表
+			$tables = array_map(function($v) {
+				return array_values($v)[0];
+			} , $res);
+
+			$flag = true;
+			$err = null;
+			$installSqls = [];
+			foreach ($tables as $k => $v)
+			{
+				$installSqls = array_merge($installSqls , makeSqlByTableName($v , $err));
+			}
+
+			if(!$err)
+			{
+				$sqlFile = (PATH_DATABASE_BACKUP.strtr(formatTime(time(), 1), [' ' => '_',':' => '_',]).'.sql');
+				FileTool::mkdir_(dirname($sqlFile));
+				try
+				{
+					file_put_contents($sqlFile , implode("\r\n" , $installSqls));
+					$this->retureResult['message'] = 'sql文件文件已生成 <br /> ' . $sqlFile;
+					$this->retureResult['sign'] = RESULT_SUCCESS;
+				} catch (Exception $e)
+				{
+					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
+					$this->retureResult['sign'] = RESULT_ERROR;
+				}
+			}
+			else
+			{
+				$this->retureResult['message'] = $err;
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+			return $this->retureResult;
+		}
+
+		/**
+		 * 备份的sql文件列表
+		 *
+		 * @param array $param
+		 * @param null  $callback
+		 * @param bool  $isActivedOnly
+		 *
+		 * @return array|mixed
+		 */
+		public function viewSql()
+		{
+			$sqlFiles = [];
+
+			$res = FileTool::listDir(PATH_DATABASE_BACKUP , function($v) use (&$sqlFiles) {
+				$sqlFiles[] = $v;
+			} , FileTool::FILE);
+
+			return $sqlFiles;
+		}
+
+		public function recoverData($param)
+		{
+			$this->retureResult['message'] = RESULT_ERROR;
+			$this->retureResult['sign'] = RESULT_ERROR;
+			return $this->retureResult;
+
+		}
+
+		public function deleteData($param)
+		{
+			$sqlFile = (PATH_DATABASE_BACKUP.$param['id']);
+			try
+			{
+				FileTool::rm(($sqlFile));
+				$this->retureResult['message'] = 'sql文件文件已删除 <br /> ' . $sqlFile;
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			} catch (Exception $e)
+			{
+				$this->retureResult['message'] = $e->getMessage() . ' <br /> 删除sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+			return $this->retureResult;
+		}
 
 
 		/**

@@ -64,7 +64,7 @@
 			$this->initTemplatePath();
 
 			//没安装就跳安装页面
-			//$this->isInstalled();
+			$this->isInstalled();
 
 			//初始化静态资源
 			$this->initBaseStaticResource();
@@ -123,13 +123,18 @@
 			defined('URL_PLUGINS') or define('URL_PLUGINS' , URL_STATIC . 'plugins/');
 
 
+			//http://local14.cc/database_backup/
+			defined('URL_DATABASE_BACKUP') or define('URL_DATABASE_BACKUP' , replaceToUrlSeparator(URL_ROOT . 'database_backup/'));
+			//F:\localWeb\public_local14\public\database_backup/
+			defined('PATH_DATABASE_BACKUP') or define('PATH_DATABASE_BACKUP' , replaceToSysSeparator(PATH_PUBLIC . 'database_backup/'));
+
 			/**
 			 * 应用模块信息
 			 */
 			//http://local14.cc/backup/
-			defined('URL_BACKUP') or define('URL_BACKUP' , URL_ROOT . 'backup/');
+			defined('URL_BACKUP') or define('URL_BACKUP' , replaceToUrlSeparator(URL_ROOT . 'backup/'));
 			//F:\localWeb\public_local14\public\backup/
-			defined('PATH_BACKUP') or define('PATH_BACKUP' , PATH_PUBLIC . 'backup/');
+			defined('PATH_BACKUP') or define('PATH_BACKUP' , replaceToSysSeparator(PATH_PUBLIC . 'backup/'));
 
 			//F:\localWeb\public_local14\public\static\module\
 			defined('MODEL_STATIC_PATH') or define('MODEL_STATIC_PATH' , replaceToSysSeparator(PATH_STATIC . 'module/'));
@@ -204,8 +209,7 @@
 		 */
 		public function initTemplatePath()
 		{
-			$this->view->config([
-				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			$this->view->config([//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
 		}
 
@@ -215,15 +219,23 @@
 		private function isInstalled()
 		{
 			//没安装都跳到安装页面
-			if(!isInstalled() && (MODULE_NAME !== strtolower('install')))
+			if(!isInstalled() && (!in_array(strtolower(URL_MODULE) , [
+					'install/index/install' ,
+					'admin/login/evncheck' ,
+					'install/index/dbcheck' ,
+					'install/index/createdb' ,
+				])))
 			{
-				//makeInstallLockFile();
 				header('Location: /install');
 				exit;
 			}
 
 			//安装了还访问安装页面就跳主页
-			if(isInstalled() && (MODULE_NAME === strtolower('install')))
+			if(isInstalled() && (in_array(strtolower(URL_MODULE) , [
+					'install/index/install' ,
+					'install/index/dbcheck' ,
+					'install/index/createdb' ,
+				])))
 			{
 				header('Location: /');
 				exit;
@@ -589,7 +601,7 @@
 		'SYS_DS_CONS'                     => '\\' ,
 		'SYS_ADMIN_MODULE_NAEM'           => 'system' ,
 		'SESSION_TAG_ADMIN'               => 'admin_info' ,
-		'SYS_NON_LOGIN_INDEX'             => 'admin/login/login' ,
+		'SYS_NONE_LOGIN_INDEX'            => 'admin/login/login' ,
 		'SYS_LOGIN_INDEX'                 => 'admin/index/index' ,
 		'SYS_DB_PREFIX'                   => 'ithink_' ,
 		'PATH_PUBLIC'                     => 'F:\\localWeb\\public_local14\\public\\' ,

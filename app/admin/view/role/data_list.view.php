@@ -198,7 +198,9 @@
 
 								//checkbox
 								integrationTags::td([
-									integrationTags::tdCheckbox() ,
+									integrationTags::tdCheckbox((function($v) {
+										return $v['id'] != 1;
+									})($v)) ,
 									integrationTags::tdSimple([
 										'value' => $v['id'] ,
 									]) ,
@@ -290,7 +292,7 @@
 										'class' => ' btn-info btn-open-pop' ,
 										'value' => '分配权限' ,
 
-										'data'  => [
+										'data'   => [
 											'src'   => url('assignPrivileges') ,
 											'title' => '分配权限' ,
 										] ,

@@ -92,14 +92,17 @@ function successAction(obj, data)
 	});
 	if (count == 4)
 	{
+		$('.btn-custom-event').hide()
 		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-		layer.alert('处理成功，请点击 全局刷新 更新菜单', {
+
+		$index = layer.alert('处理成功，请点击 全局刷新 更新菜单', {
 			shadeClose: false,
 			shade     : 0,
 			closeBtn  : 0, //不显示关闭按钮
 			skin      : 'layui-layer-molv' //样式类名
 		}, function () {
-			parent.layer.close(index); //再执行关闭
+			layer.close($index); //再执行关闭
+			// parent.layer.close(index); //再执行关闭
 		});
 	}
 	obj.hide();

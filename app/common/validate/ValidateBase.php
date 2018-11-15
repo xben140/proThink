@@ -18,7 +18,7 @@
 		 */
 		protected function checkName($value , $rule , $data)
 		{
-			return (boolean)preg_match('#^[a-z\d._]{6,16}$#i' , $value);
+			return (boolean)preg_match('#^[a-z\d._]{5,16}$#i' , $value);
 		}
 
 		/**

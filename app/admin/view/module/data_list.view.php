@@ -36,8 +36,9 @@
 						2 ,
 					]) ,
 					'<p class="red"> <strong>开发者功能</strong> 仅在开发阶段供开发者使用，如果是使用别人开发好的包不要随意点击，此操作会影响应用文件，可能会导致包损坏</p>' ,
-					'<p class="red"> <生成菜单文件> 功能是在开发完成后，将ithink_privilege表里对应的应用的数据导出到应用文件下的' . MODULE_FILE_MENU . '，方便打包应用</p>' ,
-					'<p class="red"> <生成配置文件> 功能是在开发完成后，将ithink_config表里对应的应用的数据导出到应用文件下的' . MODULE_FILE_CONFIG . '，方便打包应用</p>' ,
+					'<p class="red"> <span class=" btn-xs btn-primary">生成菜单文件</span> 功能是在开发完成后，将 ithink_privilege 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_MENU . ' ，只有在应用所有功能开发完才使用</p>' ,
+					'<p class="red"> <span class=" btn-xs btn-primary">生成配置文件</span> 功能是在开发完成后，将 ithink_config 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_CONFIG . ' ，只有在应用所有功能开发完才使用</p>' ,
+					'<p class="red"> <span class=" btn-xs btn-primary">生成安装sql文件</span> 功能是在开发完成后，将 ' . MODULE_FILE_INFO . ' 里 database_tables 对应表数据导出到应用文件下的 ' . MODULE_FILE_SQL . ' ，只有在应用所有功能开发完才使用</p>' ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
 						$data = $__this->logic->dataList($__this->param);
@@ -190,35 +191,8 @@
 
 									]) ,
 
-									/*
-											//状态
-											integrationTags::td([
-												integrationTags::tdSwitcher([
-													'params'  => [
-														'checked'         => $v['status'] ? 'checked' : '' ,
-														'name'            => 'status' ,
-														'change_callback' => 'switcherUpdateField' ,
-														//switcherUpdateFieldConfirm
-														'is_display'      => (function() use ($v) {
-															return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-														})() ,
-													] ,
-													'name'    => '' ,
-													'is_auto' => '1' ,
-
-												]) ,
-											]) ,
-									*/
-
 									//操作
 									integrationTags::td([
-										/*
-										integrationTags::tdButton([
-											'class'       => ' btn-success btn-edit' ,
-											'value'      => '编辑' ,
-											'is_display' => 1,
-										]) ,*/
-
 										integrationTags::tdButton([
 											'value'      => '安装/卸载' ,
 											'class'      => ' btn-primary btn-open-pop' ,

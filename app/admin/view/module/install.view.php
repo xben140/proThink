@@ -45,9 +45,9 @@
 
 					integrationTags::rowButton($btn , []) ,
 
-					'<p class="red">卸载过程会删除此应用数据库所有数据，如果此应用还有使用的可能，请先在列表页点击 <备份应用数据> 后再卸载</p>' ,
-					'<p class="red">在列表页点击 <备份应用数据> 会将此应用的数据写到应用的database目录下</p>' ,
-					'<p class="red"><备份安装包> 会将备份的应用数据一并打包，即使删除应用，仍然可以重新安装应用包恢复数据</p>' ,
+					'<p class="red">卸载过程会删除此应用' . MODULE_FILE_INFO . ' 里 database_tables 对应表所有数据</p>' ,
+					//'<p class="red">在列表页点击 <备份应用数据> 会将此应用的数据写到应用的database目录下</p>' ,
+					//'<p class="red"><备份安装包> 会将备份的应用数据一并打包，即使删除应用，仍然可以重新安装应用包恢复数据</p>' ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this, $info) {
 						$data = [

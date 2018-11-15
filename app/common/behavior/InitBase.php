@@ -30,16 +30,16 @@
 			// 初始化常量
 			$this->initConst();
 
-			// 初始化配置
-			$this->initConfig();
+			if(isInstalled())
+			{
+				// 初始化配置
+				$this->initConfig();
 
-			// 初始化自定义模块路由
-			$this->initRoute();
+				// 初始化自定义模块路由
+				$this->initRoute();
+			}
 
-			// 注册命名空间
-			//$this->registerNamespace();
 		}
-
 
 
 		/**
@@ -132,8 +132,6 @@
 		 */
 		private function initTimeConst()
 		{
-			//define('TIME_CT_NAME', 'create_time');
-			//define('TIME_UT_NAME', 'update_time');
 			define('TIME_INSERT_FIELD_NAME' , 'time');
 			define('TIME_NOW' , time());
 		}
@@ -159,12 +157,11 @@
 
 			define('SESSION_TAG_ADMIN' , 'admin_info');
 
-			define('SYS_NON_LOGIN_INDEX' , 'admin/login/login');
-			define('SYS_LOGIN_INDEX' , 'admin/index/index');
+			define('SYS_NONE_LOGIN_INDEX' , config('admin_none_login_index'));
+			define('SYS_LOGIN_INDEX' , config('admin_login_index'));
 
 			$database_config = config('database');
 			define('SYS_DB_PREFIX' , $database_config['prefix']);
-			//define('SYS_ENCRYPT_KEY', $database_config['sys_data_key']);
 		}
 
 		/**
@@ -237,12 +234,4 @@
 		}
 
 
-		/**
-		 * 注册命名空间
-		 */
-		private function registerNamespace()
-		{
-			// 注册插件根命名空间
-
-		}
 	}
