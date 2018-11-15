@@ -1231,7 +1231,7 @@
 		public function viewSql()
 		{
 			$sqlFiles = [];
-
+			FileTool::mkdir_(PATH_DATABASE_BACKUP);
 			$res = FileTool::listDir(PATH_DATABASE_BACKUP , function($v) use (&$sqlFiles) {
 				$sqlFiles[] = $v;
 			} , FileTool::FILE);

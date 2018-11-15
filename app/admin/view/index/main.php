@@ -88,7 +88,7 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-6">
 
 		<table class="table">
 			<thead>
@@ -104,7 +104,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<table class="table">
 			<thead>
 				<tr>
@@ -120,10 +120,6 @@
 				<tr>
 					<td>产品版本</td>
 					<td>{:ITHINK_VERSION}</td>
-				</tr>
-				<tr>
-					<td>交流QQ群</td>
-					<td>419395011</td>
 				</tr>
 				<tr>
 					<td>官方网站</td>
@@ -142,11 +138,14 @@
 					<td></td>
 				</tr>
 				<tr>
+					<td>交流QQ群</td>
+					<td>419395011</td>
+				</tr>
+				<tr>
 					<td>联系邮箱</td>
 					<td>wf585858@yeah.net</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-</div>
-<!-- _____DEFAULT_CONTENTS_____ -->
+</div><!-- _____DEFAULT_CONTENTS_____ -->
