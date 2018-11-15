@@ -94,8 +94,13 @@
 				'item'    => 'exec 函数' ,
 				'require' => '可执行' ,
 				'value'   => $t ? '可执行' : '必须开启exec函数 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
-				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+				'result'  => $t ? (function() {
+					@exec('chmod -R 777 ' . realpath(APP_PATH));
+
+					return 1;
+				})() : ($isEvnOk = 0) ,
 			];
+
 
 			$t = function_exists('gd_info');
 			$data[] = [
