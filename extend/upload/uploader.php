@@ -396,7 +396,7 @@
 					return $this->getInfo();
 				}
 
-				system('chmod -R 777 ' . $this->uploadDir . '/*');
+				exec('chmod -R 777 ' . $this->uploadDir . '/*');
 
 				if(!is_writable($this->uploadDir))
 				{
@@ -452,7 +452,7 @@
 			{
 				$this->setInfo('is_finished' , 0);
 			}
-			system('chmod -R 777 ' . $this->uploadDir . '/*');
+			exec('chmod -R 777 ' . $this->uploadDir . '/*');
 
 			return $this->getInfo();
 		}
