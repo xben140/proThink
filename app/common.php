@@ -52,7 +52,7 @@
 		} catch (\think\exception\ErrorException $exception)
 		{
 			$result = [
-				'error'       => $exception->getMessage() ,
+				'msg'       => '处理出错：'.$exception->getMessage() ,
 				'sign'        => 0 ,
 				'is_finished' => 0 ,
 			];

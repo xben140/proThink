@@ -189,7 +189,7 @@ VALUES
 			*/
 
 			/*
-				//删除文件夹
+				//移动文件夹
 						FileTool::recursiveMv($dir , $to , function($info , $relativePath) {
 							echo $info->getPathname();
 							echo "\r\n";
@@ -212,7 +212,7 @@ VALUES
 
 		}
 
-		public function doImg()
+		public function img()
 		{
 
 			$img = 'C:\Users\Administrator\Desktop\dd';

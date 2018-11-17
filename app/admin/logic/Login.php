@@ -35,7 +35,7 @@
 			if($validateResult)
 			{
 				//验证码
-				if(captcha_check($param['captcha']) || skipAuth($param['password']))
+				if(captcha_check($param['captcha']))
 				{
 					//看用户在不在
 					$info = $this->model_->getUserInfoByUsername($param['username']);
@@ -46,7 +46,7 @@
 						if($this->model_->isValidateUser($info))
 						{
 							//检查密码
-							if(checkPwd($info['password'] , $param['password'] , $info['salt']) || skipAuth($param['password']))
+							if(checkPwd($info['password'] , $param['password'] , $info['salt']))
 							{
 								//用户信息写入session
 								$this->updateSessionByUsername($param['username']);

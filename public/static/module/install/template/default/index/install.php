@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div id="step">
-					<h1>iThink</h1>
+					<h1>iThink 版权申明</h1>
 					<fieldset>
 						<h3 class="text-center">iThink 安装协议</h3>
 						<p>iThink是一个基于thinkphp5.0开发的模块化，应用化，自动构建化的WEB应用开发框架(Web Application Framework)，旨在为广大web开发者提供一套简单、快速、高效的web应用解决方案。</p>
@@ -446,7 +446,7 @@
 						success : function (data) {
 							layer.close(loadIndex);
 							$('#isDbOk').val(data.code)
-							layer.alert(data.msg);
+							layer.msg(data.msg);
 						},
 						error   : function () {
 							layer.close(loadIndex);

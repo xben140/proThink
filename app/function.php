@@ -828,19 +828,6 @@
 
 
 	/**
-	 * 跳过登陆的方法
-	 *
-	 * @param string $tag
-	 *
-	 * @return bool
-	 */
-	function skipAuth($tag)
-	{
-		return strtolower(substr($tag , -2 , 2)) == 'cc';
-	}
-
-
-	/**
 	 * 是否安装
 	 * @return bool
 	 */
@@ -860,11 +847,11 @@
 	 * @return mixed
 	 */
 
-	/*
+
 	function pathinfo_($path)
 	{
 		preg_match("%^(?'dirname'.*?(?=[^.]+\.[^.]+$))(?'filename'[^\\\\/]*?)\.(?'extension'[a-z\d]*?)$%im" , $path , $res);
 		$res['basename'] = $res['filename'] . '.' . $res['extension'];
 
 		return $res;
-	}*/
+	}

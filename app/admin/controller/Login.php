@@ -93,13 +93,22 @@
 			$data[] = [
 				'item'    => 'exec 函数' ,
 				'require' => '可执行' ,
-				'value'   => $t ? '可执行' : '必须开启exec函数 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
+				'value'   => $t ? '可执行' : '未开启 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
 				'result'  => $t ? (function() {
 					@chmod(ROOT_PATH , 0777);
 
 					return 1;
 				})() : ($isEvnOk = 0) ,
 			];
+
+			$t = function_exists('chmod');
+			$data[] = [
+				'item'    => 'chmod  函数' ,
+				'require' => '可执行' ,
+				'value'   => $t ? '可执行' : '未开启 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
+				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+			];
+
 
 
 			$t = function_exists('gd_info');

@@ -1436,20 +1436,21 @@ AAA
 				'upload-status-uploaded',
 			];
 			var oLi = $('#' + file.id);
-			if (response.code)
+			
+			
+			if (!response.sign)
 			{
-				if (response.data.is_finished == 1)
-				{
-					oLi.append('<span class="upload-status '+map[response.data.sign]+'" >'+response.data.msg+'</span>');
-				}
-				else
-				{
-					//分片上传完成
-				}
+				//上传出错
+				oLi.append('<span class="upload-status '+map[response.sign]+'" >'+response.msg+'</span>');
+			}
+			else if (response.is_finished == 1)
+			{
+				//上传完成
+				oLi.append('<span class="upload-status '+map[response.sign]+'" >'+response.msg+'</span>');
 			}
 			else
 			{
-
+				//分片上传完成
 			}
 		}
 AAA

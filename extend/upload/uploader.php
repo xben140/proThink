@@ -441,7 +441,7 @@
 				@fclose($finalUploadFileHandler);
 
 
-				$fileObj = new \SplFileObject($filePath);
+				$fileObj = new \SplFileInfo($filePath);
 				$this->setError('文件上传成功', 2);
 				$this->setInfo('size' , $fileObj->getSize());
 				$this->setInfo('is_finished' , 1);

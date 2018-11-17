@@ -220,7 +220,7 @@ class App
             date_default_timezone_set($config['default_timezone']);
 
             // 监听 app_init
-            Hook::listen('app_init');
+			Hook::listen('app_init');
 
             self::$init = true;
         }

@@ -68,9 +68,14 @@ AAA
 				'upload-status-uploaded',
 			];
 			var oLi = $('#' + file.id);
-			
-			if (response.is_finished == 1)
+			if (!response.sign)
 			{
+				//上传出错
+				oLi.append('<span class="upload-status '+map[response.sign]+'" >'+response.msg+'</span>');
+			}
+			else if (response.is_finished == 1)
+			{
+				//上传完成
 				oLi.append('<span class="upload-status '+map[response.sign]+'" >'+response.msg+'</span>');
 			}
 			else

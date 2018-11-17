@@ -1029,7 +1029,8 @@
 					'error'        => [] ,
 				];
 				$id = $v['name'];
-				$appPath = $v['path'] . '\backup\app' . DS . $id . DS;
+				$appPath = replaceToSysSeparator($v['path'] . '\backup\app' . DS . $id . DS);
+
 
 				foreach ([
 							 MODULE_FILE_CONFIG ,

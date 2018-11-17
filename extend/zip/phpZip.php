@@ -213,7 +213,10 @@
 
 			//源文件复制到当前文件夹
 			$tpmDir = __DIR__ . DIRECTORY_SEPARATOR . 'copy_tpm' . DIRECTORY_SEPARATOR;
-			!is_dir($tpmDir) && mkdir($tpmDir , 777 , 1);
+			!is_dir($tpmDir) && mkdir($tpmDir , 0777 , 1);
+			//chmod($tpmDir , '777');
+			exec('chmod -R 777 '. $tpmDir);
+			 
 
 			//源文件位置
 			//C:\Users\Administrator\Desktop\process_zip\package\1024px\1024px\1024px.css
@@ -227,7 +230,9 @@
 			//1024px\1024px.css
 
 			//1024px\
-			$destinationPath = $destination[1][0];
+			$destinationPath = strtr($destination[1][0] , [
+				'\\' => '/' ,
+			]);
 			//1024px.css
 			$destinationName = $destination[2][0];
 			$encryptedName = md5($path);
@@ -259,7 +264,13 @@
 		{
 			foreach (self::$copyMap as $v) is_file($v['destination']) && unlink($v['destination']);
 			$tpmDir = __DIR__ . DIRECTORY_SEPARATOR . 'copy_tpm' . DIRECTORY_SEPARATOR;
-			is_dir($tpmDir) && rmdir($tpmDir);
+			try
+			{
+				is_dir($tpmDir) && rmdir($tpmDir);
+
+			} catch (\Exception $exception)
+			{
+			}
 		}
 
 		private static function closeZip()
@@ -275,6 +286,7 @@
 		private static function createZip()
 		{
 			static::mkdir_(dirname(self::$fileName));
+
 			return self::$isOverwrite ? self::$zip->open(self::$fileName , \ZipArchive::CREATE | \ZipArchive::OVERWRITE) : self::$zip->open(self::$fileName , \ZipArchive::CREATE);
 		}
 
@@ -298,94 +310,126 @@
 			}
 		}
 
+		public static function isWin()
+		{
+			return (strtoupper(substr(PHP_OS , 0 , 3)) == 'WIN');
+		}
+
+
 		public static function unzip($config)
 		{
 			//http://www.jb51.net/article/61678.htm
 			$zip = isset($config['zip']) ? $config['zip'] : exit('未指定目标zip');
 			$toDir = isset($config['destination']) ? $config['destination'] : '';
 			$password = isset($config['password']) ? $config['password'] : '';
-
-			self::initZip();
-			$res = self::$zip->open($zip);
 			$result = [
 				'sign' => 1 ,
 				'msg'  => '处理成功' ,
 			];
-			if($res === true)
+
+			$iswin = static::isWin();
+			$hasUnzip = (function() {
+				exec('unzip   -hh' , $b , $c);
+
+				return isset($b[0]);
+			})();
+
+			static::mkdir_($config['destination']);
+			chmod($config['destination'] , '0777');
+
+			 
+
+			if(isset($config['destination']) && $config['destination'])
 			{
-				if(isset($config['destination']) && $config['destination'])
-				{
-					preg_match_all('%[^\\\\/.]+?(?=\..+$)%im' , $zip , $result , PREG_PATTERN_ORDER);
-					$toDir = self::endDS($toDir) . $result[0][0];
-				}
-				else
-				{
-					preg_match_all('/^[^.]+/im' , $zip , $result , PREG_PATTERN_ORDER);
-					$toDir = $result[0][0];
-				}
-
-				$t = (!preg_match('/\.\S+$/im' , $toDir)) ? $toDir : dirname($toDir);
-				!is_dir($t) && mkdir($t , 777 , 1);
-				//$t = iconv('utf-8', 'gbk', $t);
-
-				$password && self::$zip->setPassword($password);
-				self::$zip->extractTo($toDir);
-
-				if(self::closeZip())
-				{
-					$result['sign'] = ZipArchive::ER_EXISTS;
-					$result['msg'] = '文件已经存在';
-				};
+				preg_match('%[^\\\\/.]+?(?=\.[^.]+$)%im' , $zip , $matches);
+				$toDir = self::endDS($toDir) . $matches[0];
 			}
 			else
 			{
-				switch ($res)
+				preg_match_all('/^[^.]+/im' , $zip , $matches , PREG_PATTERN_ORDER);
+				$toDir = $matches[0][0];
+			}
+
+			//$t = (!preg_match('/\.\S+$/im' , $toDir)) ? $toDir : dirname($toDir);
+			//!is_dir($t) && mkdir($t , 777 , 1);
+			//$t = iconv('utf-8', 'gbk', $t);
+
+			$toDir = static::replaceToSysSeparator($toDir);
+			static::mkdir_(dirname($toDir));
+
+
+			//if(!$iswin)
+			if(0)
+			{
+				$command = "unzip -o {$zip} -d {$toDir}";
+				$password && $command .= ' -P ' . $password;
+				 
+
+				exec($command , $b , $c);
+			}
+			else
+			{
+				self::initZip();
+				$res = self::$zip->open($zip);
+
+				if($res === true)
 				{
-					case ZipArchive::ER_EXISTS :
-						$result['sign'] = ZipArchive::ER_EXISTS;
-						$result['msg'] = '文件已经存在';
-						break;
-					case ZipArchive::ER_INCONS :
-						$result['sign'] = ZipArchive::ER_INCONS;
-						$result['msg'] = '压缩文件不一致';
-						break;
-					case ZipArchive::ER_INVAL :
-						$result['sign'] = ZipArchive::ER_INVAL;
-						$result['msg'] = '无效的参数';
-						break;
-					case ZipArchive::ER_MEMORY :
-						$result['sign'] = ZipArchive::ER_MEMORY;
-						$result['msg'] = '内存错误';
 
-						break;
-					case ZipArchive::ER_NOENT :
-						$result['sign'] = ZipArchive::ER_NOENT;
-						$result['msg'] = '没有这样的文件';
+					$password && self::$zip->setPassword($password);
 
-						break;
-					case ZipArchive::ER_NOZIP :
-						$result['sign'] = ZipArchive::ER_NOZIP;
-						$result['msg'] = '不是有效的压缩文件';
+					 
 
-						break;
-					case ZipArchive::ER_OPEN :
-						$result['sign'] = ZipArchive::ER_INCONS;
-						$result['msg'] = '压缩文件不一致';
+					self::$zip->extractTo($toDir);
+					if(!self::closeZip())
+					{
+						$result['sign'] = 0;
+						$result['msg'] = '关闭zip句柄失败';
+					};
+				}
+				else
+				{
+					$result['sign'] = 0;
 
-						break;
-					case ZipArchive::ER_READ :
-						$result['sign'] = ZipArchive::ER_INCONS;
-						$result['msg'] = '压缩文件不一致';
+					switch ($res)
+					{
+						case ZipArchive::ER_EXISTS :
+							$result['msg'] = '文件已经存在';
+							break;
+						case ZipArchive::ER_INCONS :
+							$result['msg'] = '压缩文件不一致';
+							break;
+						case ZipArchive::ER_INVAL :
+							$result['msg'] = '无效的参数';
+							break;
+						case ZipArchive::ER_MEMORY :
+							$result['msg'] = '内存错误';
 
-						break;
-					case ZipArchive::ER_SEEK :
-						$result['sign'] = ZipArchive::ER_INCONS;
-						$result['msg'] = '压缩文件不一致';
+							break;
+						case ZipArchive::ER_NOENT :
+							$result['msg'] = '没有这样的文件';
 
-						break;
-						dufault:;
+							break;
+						case ZipArchive::ER_NOZIP :
+							$result['msg'] = '不是有效的压缩文件';
+
+							break;
+						case ZipArchive::ER_OPEN :
+							$result['msg'] = '压缩文件不一致';
+
+							break;
+						case ZipArchive::ER_READ :
+							$result['msg'] = '压缩文件不一致';
+
+							break;
+						case ZipArchive::ER_SEEK :
+							$result['msg'] = '压缩文件不一致';
+
+							break;
+							dufault:;
+					}
 				}
 			}
+
 			return $result;
 		}
 
@@ -423,7 +467,8 @@
 
 			foreach ($rar_entries as $k => $v)
 			{
-
+				$toDir = static::replaceToSysSeparator($toDir);
+				static::mkdir_(dirname($toDir));
 				$v->extract($toDir);
 			}
 
@@ -456,18 +501,11 @@
 		 *
 		 * @return mixed
 		 */
-		public static function patFilter($path)
+		public static function pathFilter($path)
 		{
-			return str_replace(array(
-				'*' ,
-				'?' ,
-				'"' ,
-				'<' ,
-				'>' ,
-				'|' ,
-				"'" ,
-			) , '_' , $path);
+			return preg_replace('/(?<!^[a-z])[:*?"<>|]/im' , '_' , $path);
 		}
+
 
 		/**
 		 * 自动为路径后面加DIRECTORY_SEPARATORY
@@ -544,7 +582,7 @@
 		 */
 		public static function mkdir_($path , $mode = 0777)
 		{
-			$path = self::patFilter($path);
+			$path = self::pathFilter($path);
 
 			return !is_dir(($path)) ? mkdir(($path) , $mode , 1) : @chmod($path , $mode);
 		}

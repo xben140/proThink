@@ -26,41 +26,44 @@
 		 */
 		public static function listDir($path , callable $callback = null , $flag = self::ALL)
 		{
-			try
+			$files = [];
+			if(is_dir($path) && is_readable($path))
 			{
-				$directory = new \FilesystemIterator ($path);
-
-				$filter = new \CallbackFilterIterator ($directory , function($current , $key , $iterator) use ($flag) {
-					switch ($flag)
-					{
-						case static::FILE:
-							return $current->isFile();
-						case static::DIRECTORY:
-							return $current->isDir();
-						default:
-							return true;
-					}
-				});
-
-				$files = [];
-				foreach ($filter as $info)
+				try
 				{
-					if(is_callable($callback))
-					{
-						$files[] = call_user_func_array($callback , [
-							static::fileInfo($info->getPathname()) ,
-							$info ,
-						]);
-					}
-					else
-					{
-						$files[] = static::fileInfo($info->getPathname());
-					}
-				}
+					$directory = new \FilesystemIterator ($path);
 
-			} catch (Exception $e)
-			{
-				$files = [];
+					$filter = new \CallbackFilterIterator ($directory , function($current , $key , $iterator) use ($flag) {
+						switch ($flag)
+						{
+							case static::FILE:
+								return $current->isFile();
+							case static::DIRECTORY:
+								return $current->isDir();
+							default:
+								return true;
+						}
+					});
+
+					foreach ($filter as $info)
+					{
+						if(is_callable($callback))
+						{
+							$files[] = call_user_func_array($callback , [
+								static::fileInfo($info->getPathname()) ,
+								$info ,
+							]);
+						}
+						else
+						{
+							$files[] = static::fileInfo($info->getPathname());
+						}
+					}
+
+				} catch (Exception $e)
+				{
+					$files = [];
+				}
 			}
 
 			return $files;
@@ -543,7 +546,7 @@
 				try
 				{
 					$fileName = static::endDS($path) . md5(uniqid('__' , true));
-					file_put_contents($fileName, '_'  );
+					file_put_contents($fileName , '_');
 					is_file($fileName) && unlink($fileName);
 				} catch (\Exception $e)
 				{
@@ -568,7 +571,7 @@
 		 */
 		public static function mkdir_($path , $mode = 0777)
 		{
-			$path = static::patFilter($path);
+			$path = static::pathFilter($path);
 
 			return !is_dir(($path)) ? mkdir(($path) , $mode , 1) : @chmod($path , $mode);
 		}
@@ -657,6 +660,11 @@
 			return $result;
 		}
 
+		public static function isWin()
+		{
+			return (strtoupper(substr(PHP_OS , 0 , 3)) == 'WIN');
+		}
+
 		/**
 		 * @param $path
 		 *
@@ -674,17 +682,9 @@
 		 *
 		 * @return mixed
 		 */
-		public static function patFilter($path)
+		public static function pathFilter($path)
 		{
-			return str_replace(array(
-				'*' ,
-				'?' ,
-				'"' ,
-				'<' ,
-				'>' ,
-				'|' ,
-				"'" ,
-			) , '_' , $path);
+			return preg_replace('/(?<!^[a-z])[:*?"<>|]/im' , '_' , $path);
 		}
 
 		/**
@@ -770,7 +770,7 @@
 		{
 			@chmod($path , 0777);
 			@chmod($dest , 0777);
-			$dest = static::patFilter($dest);
+			$dest = static::pathFilter($dest);
 			if(is_dir($path))
 			{
 				static::mkdir_($dest);

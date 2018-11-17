@@ -77,18 +77,25 @@
 
 			]);
 
-			/*
-							$_this->setLink([
-								[
-									'field' => 'hao123' ,
-									'value' => 'http://hao123.com' ,
-								] ,
-								[
-									'field' => '百度' ,
-									'value'   => 'http://baidu.com' ,
-								] ,
-							]);
-			*/
+
+			$_this->setLink([
+				[
+					'field' => '应用管理' ,
+					'value' => '/admin/module/datalist' ,
+				] ,
+				[
+					'field' => '配置列表' ,
+					'value' => '/admin/config/datalist' ,
+				] ,
+				[
+					'field' => '回收站' ,
+					'value' => '/admin/recovery/datalist' ,
+				] ,
+				[
+					'field' => '系统工具' ,
+					'value' => '/admin/module/basefunc' ,
+				] ,
+			]);
 
 
 			$_this->setLinkPop([
@@ -99,6 +106,10 @@
 				[
 					'field' => '修改资料' ,
 					'value' => url('admin/user/modifyinfo') ,
+				] ,
+				[
+					'field' => '登录日志' ,
+					'value' => url('admin/loginlog/datalist') ,
 				] ,
 			]);
 

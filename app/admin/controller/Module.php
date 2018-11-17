@@ -223,7 +223,6 @@
 						return true;
 					});
 
-
 					return $result;
 				} , PATH_TEMP , function($fileName) {
 					return md5($fileName) . '.zip';

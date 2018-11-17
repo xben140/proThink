@@ -79,7 +79,7 @@
 							] ,
 
 							[
-								'field' => '图标' ,
+								'field' => '应用ID' ,
 								'attr'  => '' ,
 							] ,
 
@@ -305,7 +305,7 @@
 									' ' ,
 								]) ,
 
-								//图标
+								//应用ID
 								integrationTags::td([
 									integrationTags::tdSimple([
 										//'name'     => '' ,

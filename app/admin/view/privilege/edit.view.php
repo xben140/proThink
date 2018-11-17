@@ -100,12 +100,12 @@
 
 				integrationTags::text([
 					//随便写
-					'field_name'  => '图标' ,
+					'field_name'  => '应用ID' ,
 					'placeholder' => '' ,
 					'tip'         => '' ,
-					'value'       => $info['ico'] ,
+					'value'       => $info['category'] ,
 					//'attr'        => 'disabled' ,
-					'name'        => 'ico' ,
+					'name'        => 'category' ,
 				]) ,
 
 
