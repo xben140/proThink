@@ -76,6 +76,8 @@
 		 * @param               $path
 		 * @param               $dest
 		 * @param callable|null $fitlerCallback
+		 *
+		 * @return array
 		 */
 		public static function recursiveCp($path , $dest , callable $fitlerCallback = null)
 		{
@@ -110,6 +112,8 @@
 		 *
 		 * @param               $dest
 		 * @param callable|null $fitlerCallback
+		 *
+		 * @return array
 		 */
 		public static function recursiveMv($path , $dest , callable $fitlerCallback = null)
 		{
@@ -183,6 +187,8 @@
 		 * * @param               $path
 		 *
 		 * @param callable|null $fitlerCallback
+		 *
+		 * @return array
 		 */
 		public static function recursiveRmEmptyDir($path , callable $fitlerCallback = null)
 		{

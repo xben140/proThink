@@ -78,6 +78,20 @@
 			]);
 
 
+			$_this->setLinkPop([
+				[
+					'field' => '修改密码' ,
+					'value' => url('admin/user/modifypwd') ,
+				] ,
+				[
+					'field' => '修改资料' ,
+					'value' => url('admin/user/modifyinfo') ,
+				] ,
+				[
+					'field' => '登录日志' ,
+					'value' => url('admin/loginlog/datalist') ,
+				] ,
+			]);
 			$_this->setLink([
 				[
 					'field' => '应用管理' ,
@@ -98,20 +112,6 @@
 			]);
 
 
-			$_this->setLinkPop([
-				[
-					'field' => '修改密码' ,
-					'value' => url('admin/user/modifypwd') ,
-				] ,
-				[
-					'field' => '修改资料' ,
-					'value' => url('admin/user/modifyinfo') ,
-				] ,
-				[
-					'field' => '登录日志' ,
-					'value' => url('admin/loginlog/datalist') ,
-				] ,
-			]);
 
 		});
 
