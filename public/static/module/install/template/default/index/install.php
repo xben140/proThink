@@ -53,12 +53,13 @@
 						<p>4． 如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有本协议内容。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</p>
 
 						<h3 class="text-center">iThink免责声明</h3>
-						<p>1、使用iThink构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，iThink官方不承担任何责任。</p>
-						<p>2、您一旦安装使用iThink，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。</p>
+						<p>1、警告：按照我国法律，在未取得相关资源（影片、动画、图书、音乐等）授权的情况下，请不要传播任何形式的相关资源（资源数据文件、种子文件、网盘文件、FTP 文件等）！否则后果自负。</p>
+						<p>2、使用iThink构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，iThink官方不承担任何责任。</p>
+						<p>3、一旦您安装使用iThink，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。</p>
 
 						<div class="well">
 							<div class="checkbox i-checks">
-								<label> <input id="agreement" type="checkbox" name="agreement" value="1"><i></i> 我同意注册条款</label>
+								<label> <input id="agreement" type="checkbox" name="agreement" value="1"><i></i> 我同意注册条款 </label>
 							</div>
 						</div>
 					</fieldset>
