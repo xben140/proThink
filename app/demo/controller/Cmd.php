@@ -8,10 +8,11 @@
 	use Phelium\Component\MySQLBackup;
 	use PhpMyAdmin\SqlParser\Parser;
 	use PHPSQLParser\PHPSQLParser;
+	use pingyin\PingYin;
 	use wapmorgan\UnifiedArchive\UnifiedArchive;
 	use zip\zip;
 
-	//php index.php /demo/cmd/index
+	//php index.php /demo/cmd/pinyin
 
 
 	class Cmd extends FrontendBase
@@ -22,6 +23,15 @@
 		public $testPath = 'C:\Users\Administrator\Desktop\test\\';
 		public static $hashMap = [];
 
+		public function pinyin()
+		{
+			print_r(PingYin::Transformation('对多音字无能为力'));
+			print_r(PingYin::Transformation('最全的PHP汉字转拼音库，比百度词典还全（dict.baidu.com）'));
+			print_r(PingYin::Transformation('试试：㐀㐁㐄㐅㐆㐌㐖㐜'));
+			print_r(PingYin::Transformation('数字：12345'));
+			print_r(PingYin::Transformation('海南'));
+			print_r(PingYin::Transformation('乌鲁木齐'));
+		}
 
 		//图片缩略图测试
 		public function thumb()

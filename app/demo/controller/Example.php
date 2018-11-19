@@ -5,6 +5,7 @@
 	use builder\elementsFactory;
 	use builder\integrationTags;
 	use builder\tagConstructor;
+	use pingyin\PingYin;
 
 	/**
 	 * ******************************************************************************************
@@ -1485,7 +1486,6 @@ AAA
 
 			return $this->showPage();
 		}
-
 
 
 		/*
