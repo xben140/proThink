@@ -27,7 +27,7 @@ CREATE TABLE `ithink_config` (
   `del_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='系统配置表';
-INSERT INTO `ithink_config` (`id` , `name` , `key` , `value` , `type` , `group_id` , `is_const` , `remark` , `status` , `time` , `del_time`) VALUES ( 1,'应用调试模式','app_debug','1',3,1,0,'应用调试模式',1,1534393510,0 ) , ( 2,'应用Trace','app_trace','0',3,1,0,'应用Trace',1,1534393553,0 ) , ( 3,'分页配置','paginate.type','bootstrap',2,2,0,'',1,1534393577,0 ) , ( 4,'分页变量','paginate.var_page','page',2,2,0,'',1,1535333811,0 ) , ( 5,'每页记录条数','paginate.list_rows','20',2,2,0,'',1,1535333877,0 ) , ( 6,'邮件服务器端口','email_port','25',2,7,0,'',1,1534393577,0 ) , ( 7,'邮件用户名','email_username','-',2,7,0,'邮箱账号',1,1534393577,0 ) , ( 8,'邮件用户登陆秘钥','email_password','-',2,7,0,'用于登陆第三方客户端的密码',1,1534393577,0 ) , ( 9,'对方显示发件人','email_user','来自iThink的测试邮件',2,7,0,'',1,1534393577,0 ) , ( 10,'邮件服务器','email_host','smtp.yeah.net',2,7,0,'',1,1534482480,0 ) , ( 11,'缓存类型','cache.type','File!!--!!\r\nMemcache\r\nRedis',4,8,0,'设置缓存驱动\n暂未配置redis和memcache\n使用File',1,1534482480,0 ) , ( 14,'错误页面模板','exception_tmpl','../thinkphp/tpl/think_exception.tpl!!--!!\r\n../app/common/view/think_exception.php',4,1,0,'报错模板页面',1,1535507309,1537952833 ) , ( 15,'IP白名单','white_list','127.0.0.1',1,1,0,'',1,1537495275,0 ) , ( 16,'网站形象图片','website_logo','20181101\\288f0e424bc5390b742f8dc1624e9c4f.gif',5,1,0,'',1,1537495654,0 ) , ( 17,'默认占位图','default_img','20181101\\0da07458240195b0e5332a4947c5bf76.jpg',5,1,0,'',1,1537510228,0 ) , ( 18,'默认头像','default_profile_pic','20181101\\ed0e101bc21b86b80796678ff6997806.jpg',5,1,0,'',1,1537510244,0 ) , ( 297,'默认模块','default_module','blog',2,1,0,'',0,1541581045,0 ) , ( 298,'默认控制器名','default_controller','index',2,1,0,'',0,1541582756,0 ) , ( 299,'默认操作名','default_action','index',2,1,0,'',0,1541582770,0 );
+INSERT INTO `ithink_config` (`id` , `name` , `key` , `value` , `type` , `group_id` , `is_const` , `remark` , `status` , `time` , `del_time`) VALUES ( 1,'应用调试模式','app_debug','1',3,1,0,'应用调试模式',1,1534393510,0 ) , ( 2,'应用Trace','app_trace','0',3,1,0,'应用Trace',1,1534393553,0 ) , ( 3,'分页配置','paginate.type','bootstrap',2,2,0,'',1,1534393577,0 ) , ( 4,'分页变量','paginate.var_page','page',2,2,0,'',1,1535333811,0 ) , ( 5,'每页记录条数','paginate.list_rows','20',2,2,0,'',1,1535333877,0 ) , ( 6,'邮件服务器端口','email_port','25',2,7,0,'',1,1534393577,0 ) , ( 7,'邮箱账号','email_username','-',2,7,0,'邮箱账号',1,1534393577,0 ) , ( 8,'邮件用户登陆秘钥','email_password','-',2,7,0,'用于登陆第三方客户端的密码',1,1534393577,0 ) , ( 9,'对方显示发件人','email_user','来自iThink的测试邮件',2,7,0,'',1,1534393577,0 ) , ( 10,'邮件服务器','email_host','smtp.yeah.net',2,7,0,'',1,1534482480,0 ) , ( 11,'缓存类型','cache.type','File!!--!!\r\nMemcache\r\nRedis',4,8,0,'设置缓存驱动\n暂未配置redis和memcache\n使用File',1,1534482480,0 ) , ( 14,'错误页面模板','exception_tmpl','../thinkphp/tpl/think_exception.tpl!!--!!\r\n../app/common/view/think_exception.php',4,1,0,'报错模板页面',1,1535507309,1537952833 ) , ( 15,'IP白名单','white_list','127.0.0.1',1,1,0,'',1,1537495275,0 ) , ( 16,'网站形象图片','website_logo','20181101\\288f0e424bc5390b742f8dc1624e9c4f.gif',5,1,0,'',1,1537495654,0 ) , ( 17,'默认占位图','default_img','20181101\\0da07458240195b0e5332a4947c5bf76.jpg',5,1,0,'',1,1537510228,0 ) , ( 18,'默认头像','default_profile_pic','20181101\\ed0e101bc21b86b80796678ff6997806.jpg',5,1,0,'',1,1537510244,0 ) , ( 297,'默认模块','default_module','blog',2,1,0,'',0,1541581045,0 ) , ( 298,'默认控制器名','default_controller','index',2,1,0,'',0,1541582756,0 ) , ( 299,'默认操作名','default_action','index',2,1,0,'',0,1541582770,0 );
 
 
 
@@ -88,6 +88,7 @@ CREATE TABLE `ithink_login_log` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='登陆日志表';
+INSERT INTO `ithink_login_log` (`id` , `ip` , `uid` , `type` , `user_agent` , `remark` , `res` , `time` , `status`) VALUES ( 1,'127.0.0.1',1,2,'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2263.400 QQBrowser/9.5.10432.400','登陆成功',1,1542467896,1 );
 
 
 
@@ -134,6 +135,7 @@ CREATE TABLE `ithink_recovery` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '表名字',
   `tab_db` varchar(255) NOT NULL DEFAULT '' COMMENT '表在库的英文名',
+  `category` varchar(32) NOT NULL DEFAULT 'system' COMMENT '插件id，默认是系统system',
   `field` varchar(255) NOT NULL DEFAULT '' COMMENT '要读的字段',
   `order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
@@ -142,7 +144,7 @@ CREATE TABLE `ithink_recovery` (
   `time` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='回收站';
-INSERT INTO `ithink_recovery` (`id` , `name` , `tab_db` , `field` , `order` , `remark` , `status` , `del_time` , `time`) VALUES ( 1,'用户表','app\\\\admin\\\\controller\\\\User','user,nickname',0,'用户表的数据',1,1537926433,1537848381 ) , ( 3,'角色表','app\\\\admin\\\\controller\\\\Role','name',0,'',1,0,1537952607 ) , ( 4,'菜单表','app\\\\admin\\\\controller\\\\Privilege','name',0,'',0,1537953403,1537952643 ) , ( 5,'配置表','app\\\\admin\\\\controller\\\\Config','name,key',0,'',1,0,1537952700 ) , ( 6,'配置分组','app\\\\admin\\\\controller\\\\Configgroup','name',0,'',1,0,1537952723 ) , ( 7,'回收站表','app\\\\admin\\\\controller\\\\Recovery','name,tab_db',0,'',1,0,1537953150 );
+INSERT INTO `ithink_recovery` (`id` , `name` , `tab_db` , `category` , `field` , `order` , `remark` , `status` , `del_time` , `time`) VALUES ( 1,'用户表','app\\\\admin\\\\controller\\\\User','system','user,nickname',0,'用户表的数据',1,1537926433,1537848381 ) , ( 3,'角色表','app\\\\admin\\\\controller\\\\Role','system','name',0,'',1,0,1537952607 ) , ( 4,'菜单表','app\\\\admin\\\\controller\\\\Privilege','system','name',0,'',1,1537953403,1537952643 ) , ( 5,'配置表','app\\\\admin\\\\controller\\\\Config','system','name,key',0,'',1,0,1537952700 ) , ( 6,'配置分组','app\\\\admin\\\\controller\\\\Configgroup','system','name',0,'',1,0,1537952723 ) , ( 7,'回收站表','app\\\\admin\\\\controller\\\\Recovery','system','name,tab_db',0,'',1,0,1537953150 );
 
 
 
@@ -178,7 +180,7 @@ CREATE TABLE `ithink_route` (
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '应用id',
   `route` text NOT NULL COMMENT '路由数组，json',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用路由信息表';
+) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='应用路由信息表';
 
 
 DROP TABLE IF EXISTS `ithink_user`;
@@ -210,6 +212,7 @@ CREATE TABLE `ithink_user` (
   KEY `user_login_key` (`user`),
   KEY `user_nicename` (`nickname`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='后台用户表';
+INSERT INTO `ithink_user` (`id` , `user` , `module` , `password` , `salt` , `gender` , `phone` , `email` , `birthday` , `nickname` , `score` , `reg_ip` , `last_login_ip` , `last_online_time` , `last_login_time` , `user_url` , `user_type` , `profile_pic` , `signature` , `login_count` , `status` , `del_time` , `time`) VALUES ( 1,'admin','system','3f5675792b9a61c46ca3e1c52d051dff','ce2b1e',0,'','ssf@cd.cc',0,'',0,'127.0.0.1','127.0.0.1',0,1542467896,'',1,'','',1,1,0,1542467869 );
 
 
 
@@ -220,6 +223,6 @@ CREATE TABLE `ithink_user_role` (
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8 COMMENT='用户角色映射表';
-insert into `ithink_user_role` (`id`, `user_id`, `role_id`) values('1','1','1');
+INSERT INTO `ithink_user_role` (`id` , `user_id` , `role_id`) VALUES ( 1,1,1 );
 
 
