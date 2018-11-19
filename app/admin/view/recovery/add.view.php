@@ -11,9 +11,9 @@
 
 				integrationTags::text([
 					//随便写
-					'field_name'  => '表名字' ,
+					'field_name'  => '表名' ,
 					'placeholder' => '' ,
-					'tip'         => '表标题' ,
+					'tip'         => '' ,
 					//'value'       => 'value' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'name' ,
@@ -21,9 +21,9 @@
 
 				integrationTags::text([
 					//随便写
-					'field_name'  => '表名' ,
+					'field_name'  => '控制器' ,
 					'placeholder' => '' ,
-					'tip'         => '表在数据库里的英文标识' ,
+					'tip'         => '表对应控制器，带命名空间，例如：app\admin\controller\User' ,
 					//'value'       => 'value' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'tab_db' ,
@@ -38,6 +38,16 @@
 					//'value'       => 'value' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'field' ,
+				]) ,
+
+				integrationTags::text([
+					//随便写
+					'field_name'  => '应用Id' ,
+					'placeholder' => '' ,
+					'tip'         => '必须和info.php里id字段一致' ,
+					//'value'       => 'value' ,
+					//'attr'        => 'disabled' ,
+					'name'        => 'category' ,
 				]) ,
 
 

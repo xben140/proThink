@@ -67,9 +67,14 @@
 								'type'     => 'db' ,
 							] ,
 							[
-								'behavior' => '路由文件' ,
+								'behavior' => '路由信息' ,
 								'class'    => 'install-route' ,
 								'type'     => 'route' ,
+							] ,
+							[
+								'behavior' => '回收信息' ,
+								'class'    => 'install-recovery' ,
+								'type'     => 'recovery' ,
 							] ,
 						];
 

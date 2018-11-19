@@ -7,17 +7,19 @@
 
 		// 验证规则
 		protected $rule = [
-			'name'   => 'require|unique:recovery' ,
-			'tab_db' => 'require' ,
-			'field'  => 'require' ,
+			'name'     => 'require|unique:recovery' ,
+			'tab_db'   => 'require' ,
+			'field'    => 'require' ,
+			'category' => 'require' ,
 		];
 
 		// 验证提示
 		protected $message = [
-			'name.require'   => '表名必须填写' ,
-			'name.unique'    => '表名已存在' ,
-			'tab_db.require' => '表明必须填写' ,
-			'field.require'  => '字段必须填写' ,
+			'name.require'     => '表名必须填写' ,
+			'name.unique'      => '表名已存在' ,
+			'tab_db.require'   => '表明必须填写' ,
+			'field.require'    => '字段必须填写' ,
+			'category.require' => '应用Id必须填写' ,
 		];
 
 		// 应用场景
@@ -26,6 +28,7 @@
 				'name' ,
 				'tab_db' ,
 				'field' ,
+				'category' ,
 			] ,
 			'edit' => [
 				//'name' ,
@@ -34,6 +37,7 @@
 				'name' ,
 				'tab_db' ,
 				'field' ,
+				'category' ,
 			] ,
 		];
 

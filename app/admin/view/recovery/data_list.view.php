@@ -220,31 +220,23 @@
 								]) ,
 
 
-								/*
-									//排序
-									integrationTags::td([
-										integrationTags::tdSimple([
-											'name'     => '' ,
-											'value'    => $v['order'] ,
-											'field'    => 'order' ,
-											'reg'      => '/^\d+$/' ,
-											'msg'      => '必须为数字，确保前后无空格' ,
-											'editable' => (function() use ($v) {
-												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-											})() ,
-										]) ,
-									]) ,
-								*/
-
 								//添加时间
 								integrationTags::td([
 									integrationTags::tdSimple([
-										//'name'     => '添加时间' ,
-										//'editable' => '0' ,
+										'name'     => '添加时间 : ' ,
+										'editable' => '0' ,
 										'value' => formatTime($v['time']) ,
 									]) ,
+									'<br />' ,
+									integrationTags::tdSimple([
+										'name'     => '应用ID : ' ,
+										'value'    => $v['category'] ,
+										'field'    => 'category' ,
+										'reg'      => '/^\S+$/' ,
+										'msg'      => '应用ID必填' ,
+										'editable' => 1 ,
+									]) ,
 								]) ,
-
 
 								//备注
 								integrationTags::td([
@@ -258,26 +250,6 @@
 										'editable' => 1 ,
 									]) ,
 								]) ,
-
-								/*
-									//状态
-									integrationTags::td([
-										integrationTags::tdSwitcher([
-											'params'  => [
-												'checked'         => $v['status'] ? 'checked' : '' ,
-												'name'            => 'status' ,
-												'change_callback' => 'switcherUpdateField' ,
-												//switcherUpdateFieldConfirm
-												'is_display'      => (function() use ($v) {
-													return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
-												})() ,
-											] ,
-											'name'    => '' ,
-											'is_auto' => '1' ,
-
-										]) ,
-									]) ,
-									*/
 
 								//操作
 								integrationTags::td([

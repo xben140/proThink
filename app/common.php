@@ -52,7 +52,7 @@
 		} catch (\think\exception\ErrorException $exception)
 		{
 			$result = [
-				'msg'       => '处理出错：'.$exception->getMessage() ,
+				'msg'         => '处理出错：' . $exception->getMessage() ,
 				'sign'        => 0 ,
 				'is_finished' => 0 ,
 			];
@@ -84,7 +84,7 @@
 	function uploadImg($fieldName , callable $callback = null , $thumbSize = null , $path = null , callable $rename = null)
 	{
 		!is_string($path) && ($path = PATH_PICTURE);
-		$result = upload($fieldName , $path , $callback ,  $rename );
+		$result = upload($fieldName , $path , $callback , $rename);
 
 		if($result['is_finished'])
 		{
@@ -146,7 +146,7 @@
 	{
 		!is_string($path) && ($path = PATH_FILE);
 
-		return upload($fieldName , $path , $callback ,  $rename  );
+		return upload($fieldName , $path , $callback , $rename);
 	}
 
 
@@ -322,32 +322,32 @@
 //https://swiftmailer.symfony.com/docs/messages.html
 //https://www.helloweba.net/php/457.html
 
-		// 邮箱服务器
-		$transport = new Swift_SmtpTransport(config('email_host') , config('email_port'));
-		// 邮箱用户名
-		$transport->setUsername(config('email_username'));
-		// 邮箱密码，有的邮件服务器是授权码
-		$transport->setPassword(config('email_password'));
-
-		// 邮件标题
-		$message = new Swift_Message();
-		//邮件标题
-		$message->setSubject($title);
-		// 发送者
-		$message->setFrom([config('email_username') => config('email_user')]);
-
-		//发送对象，数组形式支持多个
-		$message->setTo($to);
-		//邮件内容
-		$message->setBody($body);
-
-		$mailer = new Swift_Mailer($transport);
-
-		//$path = 'C:\Users\Administrator\Desktop\test.png';
-		//$message->attach(Swift_Attachment::fromPath($path , 'image/jpeg')->setFilename('rename_pic.jpg'));//附件图片
-
 		try
 		{
+			// 邮箱服务器
+			$transport = new Swift_SmtpTransport(config('email_host') , config('email_port'));
+			// 邮箱用户名
+			$transport->setUsername(config('email_username'));
+			// 邮箱密码，有的邮件服务器是授权码
+			$transport->setPassword(config('email_password'));
+
+			// 邮件标题
+			$message = new Swift_Message();
+			//邮件标题
+			$message->setSubject($title);
+			// 发送者
+			$message->setFrom([config('email_username') => config('email_user')]);
+
+			//发送对象，数组形式支持多个
+			$message->setTo($to);
+			//邮件内容
+			$message->setBody($body);
+
+			$mailer = new Swift_Mailer($transport);
+
+			//$path = 'C:\Users\Administrator\Desktop\test.png';
+			//$message->attach(Swift_Attachment::fromPath($path , 'image/jpeg')->setFilename('rename_pic.jpg'));//附件图片
+
 			$res = $mailer->send($message);
 
 			return $res;

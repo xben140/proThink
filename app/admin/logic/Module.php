@@ -132,6 +132,33 @@
 
 					break;
 
+				case 'recovery' :
+					//回收表
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$recovery = $info['recovery'];
+
+							//安装之前先卸载
+							db('recovery')->where(['category' => strtolower($info['info']['id']) ,])->delete();
+							foreach ($recovery as $k => $v)
+							{
+								//回收表
+								$v['category'] = $info['info']['id'];
+								$flag && $flag = db('recovery')->insertGetId($v);
+							}
+
+							return $flag !== false;
+						} ,
+						[] ,
+						'回收信息安装出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '回收数据写入成功，位于 ithink_rcovery 表中 字段 category，值为 ' . $info['info']['id'] . ' 的记录';
+
+					$res = execClosureList($transaction , $err , $_param);
+
+					break;
+
 				case 'config' :
 					//配置
 					$transaction[] = [
@@ -211,12 +238,12 @@
 					//基础sql配置
 					$installSql = $info['sql']['install'];
 					$sqls = Db::parseSql($installSql);
-					$flag = execSqlBySqlArray($sqls, $err);
+					$flag = execSqlBySqlArray($sqls , $err);
 
 					//备份的数据sql
 					$dataSql = implode("\r\n" , $info['backup']);
 					$sqls = Db::parseSql($dataSql);
-					$flag = execSqlBySqlArray($sqls, $err);
+					$flag = execSqlBySqlArray($sqls , $err);
 
 					$this->retureResult['message'] = '数据表安装成功';
 					$res = $flag;
@@ -291,6 +318,22 @@
 						'路由信息安装出错，请尝试手动执行' ,
 					];
 					$this->retureResult['message'] = '路由信息安装成功';
+					break;
+
+				case 'recovery' :
+					//菜单
+					$transaction[] = [
+						function($_param) use ($info) {
+							$flag = true;
+							$recovery = $info['recovery'];
+							$flag = db('recovery')->where(['category' => strtolower($info['info']['id']) ,])->delete();
+
+							return $flag !== false;
+						} ,
+						[] ,
+						'回收信息安装出错，请尝试手动执行' ,
+					];
+					$this->retureResult['message'] = '回收信息安装成功';
 					break;
 
 				case 'config' :
@@ -471,7 +514,7 @@
 					file_put_contents($infoFile , json_encode($result));
 					$this->retureResult['message'] = '配置文件已生成  <br /> ' . $infoFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
-				} catch (Exception $e)
+				} catch (\Exception $e)
 				{
 					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入配置出错，检查文件夹是否可写 <br /> ' . $infoFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
@@ -519,7 +562,7 @@
 					file_put_contents($menuFile , json_encode($result));
 					$this->retureResult['message'] = '菜单文件文件已生成  <br /> ' . $menuFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
-				} catch (Exception $e)
+				} catch (\Exception $e)
 				{
 					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入菜单出错，检查文件夹是否可写 <br /> ' . $menuFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
@@ -568,7 +611,7 @@
 					file_put_contents($sqlFile , json_encode($sql));
 					$this->retureResult['message'] = 'sql文件文件已生成 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
-				} catch (Exception $e)
+				} catch (\Exception $e)
 				{
 					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
@@ -690,6 +733,7 @@
 				'is_complete' => 1 ,
 				'error'       => [] ,
 				'route'       => [] ,
+				'recovery'    => [] ,
 			];
 
 			try
@@ -741,7 +785,7 @@
 					$info['info']['id'] = $moduleName;
 				}
 
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -757,7 +801,7 @@
 					$info['error'][] = MODULE_FILE_CONFIG . '必须返回数组';
 					$info['is_complete'] = 0;
 				}
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -771,14 +815,35 @@
 				{
 					$info['route'] = include_once $routeFile;
 
-					if(!is_array($info['conf']))
+					if(!is_array($info['route']))
 					{
 						$info['error'][] = MODULE_FILE_ROUTE . '必须返回数组';
 						$info['is_complete'] = 0;
 					}
 				}
 
-			} catch (Exception $e)
+			} catch (\Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			try
+			{
+				//应用回收信息
+				$recoveryFile = $appPath . DS . MODULE_FILE_RECOVERY;
+				if(is_file($recoveryFile))
+				{
+					$info['recovery'] = include_once $recoveryFile;
+
+					if(!is_array($info['recovery']))
+					{
+						$info['error'][] = MODULE_FILE_RECOVERY . '必须返回数组';
+						$info['is_complete'] = 0;
+					}
+				}
+
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -794,7 +859,7 @@
 					$info['error'][] = MODULE_FILE_MENU . '必须返回数组';
 					$info['is_complete'] = 0;
 				}
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -810,7 +875,7 @@
 					$info['error'][] = MODULE_FILE_SQL . '必须返回数组格式，并且必须有键为 install 的值存在';
 					$info['is_complete'] = 0;
 				}
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -819,7 +884,7 @@
 			try
 			{
 				$info['ico'] = $makeImgPath('logo');
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -828,7 +893,7 @@
 			try
 			{
 				$info['cover'] = $makeImgPath('cover');
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -850,7 +915,7 @@
 					return $res;
 				})($appPath);
 
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -893,7 +958,7 @@
 
 					return $status;
 				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1));
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$info['error'][] = $e->getMessage();
 				$info['is_complete'] = 0;
@@ -1178,7 +1243,6 @@
 
 		/**
 		 * 备份数据库
-		 *
 		 * @return array
 		 */
 		public function backup_database()
@@ -1199,14 +1263,17 @@
 
 			if(!$err)
 			{
-				$sqlFile = (PATH_DATABASE_BACKUP.strtr(formatTime(time(), 1), [' ' => '_',':' => '_',]).'.sql');
+				$sqlFile = (PATH_DATABASE_BACKUP . strtr(formatTime(time() , 1) , [
+						' ' => '_' ,
+						':' => '_' ,
+					]) . '.sql');
 				FileTool::mkdir_(dirname($sqlFile));
 				try
 				{
 					file_put_contents($sqlFile , implode("\r\n" , $installSqls));
 					$this->retureResult['message'] = 'sql文件文件已生成 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
-				} catch (Exception $e)
+				} catch (\Exception $e)
 				{
 					$this->retureResult['message'] = $e->getMessage() . ' <br /> 写入sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_ERROR;
@@ -1217,6 +1284,7 @@
 				$this->retureResult['message'] = $err;
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
+
 			return $this->retureResult;
 		}
 
@@ -1244,27 +1312,50 @@
 		{
 			$this->retureResult['message'] = RESULT_ERROR;
 			$this->retureResult['sign'] = RESULT_ERROR;
+
 			return $this->retureResult;
 
 		}
 
 		public function deleteData($param)
 		{
-			$sqlFile = (PATH_DATABASE_BACKUP.$param['id']);
+			$sqlFile = (PATH_DATABASE_BACKUP . $param['id']);
 			try
 			{
 				FileTool::rm(($sqlFile));
 				$this->retureResult['message'] = 'sql文件文件已删除 <br /> ' . $sqlFile;
 				$this->retureResult['sign'] = RESULT_SUCCESS;
-			} catch (Exception $e)
+			} catch (\Exception $e)
 			{
 				$this->retureResult['message'] = $e->getMessage() . ' <br /> 删除sql文件出错，检查文件夹是否可写 <br /> ' . $sqlFile;
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
+
 			return $this->retureResult;
 		}
 
+		public function test_email()
+		{
+			$title = '来自 iThink 的测试邮件';
+			$body = '来自 iThink 的测试邮件';
+			$to = [
+				getAdminSessionInfo(SESSOIN_TAG_USER , 'email') => 'by hello' ,
+			];
+			$res = sendEmail($title , $body , $to , $err);
 
+			if($res)
+			{
+				$this->retureResult['message'] = '发送成功，登录管理员邮箱查收';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = $err;
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************

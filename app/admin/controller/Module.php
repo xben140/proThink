@@ -86,6 +86,7 @@
 					case 'backup_database' :
 					case 'recoverData' :
 					case 'deleteData' :
+					case 'test_email' :
 						$res = $this->logic->{$action}($this->param);
 						break;
 					default :

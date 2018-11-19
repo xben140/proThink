@@ -47,7 +47,6 @@
 
 
 			$_this->setMeta([
-
 				[
 					'field' => '账号 : ' ,
 					'value' => $__this->adminInfo['user'] ,
@@ -73,44 +72,56 @@
 					'value' => implode(',' , getAdminSessionInfo(SESSOIN_TAG_ROLE_NAME)) ,
 					//'value' => implode(',', $__this->authClass->getRolesFieldColumn('name')),
 				] ,
-
-
 			]);
 
 
 			$_this->setLinkPop([
 				[
-					'field' => '修改密码' ,
-					'value' => url('admin/user/modifypwd') ,
+					[
+						'field' => '修改密码' ,
+						'value' => url('admin/user/modifypwd') ,
+					] ,
+					[
+						'field' => '修改资料' ,
+						'value' => url('admin/user/modifyinfo') ,
+					] ,
 				] ,
 				[
-					'field' => '修改资料' ,
-					'value' => url('admin/user/modifyinfo') ,
-				] ,
-				[
-					'field' => '登录日志' ,
-					'value' => url('admin/loginlog/datalist') ,
-				] ,
-			]);
-			$_this->setLink([
-				[
-					'field' => '应用管理' ,
-					'value' => '/admin/module/datalist' ,
-				] ,
-				[
-					'field' => '配置列表' ,
-					'value' => '/admin/config/datalist' ,
-				] ,
-				[
-					'field' => '回收站' ,
-					'value' => '/admin/recovery/datalist' ,
-				] ,
-				[
-					'field' => '系统工具' ,
-					'value' => '/admin/module/basefunc' ,
+					[
+						'field'      => '登录日志' ,
+						'value'      => url('admin/loginlog/datalist') ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'loginlog' , 'datalist') ,
+					] ,
 				] ,
 			]);
 
+
+			$_this->setLink([
+				[
+					[
+						'field'      => '应用管理' ,
+						'value'      => '/admin/module/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'datalist') ,
+					] ,
+					[
+						'field'      => '配置列表' ,
+						'value'      => '/admin/config/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'config' , 'datalist') ,
+					] ,
+				] ,
+				[
+					[
+						'field'      => '回收管理' ,
+						'value'      => '/admin/recovery/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'recovery' , 'datalist') ,
+					] ,
+					[
+						'field'      => '系统工具' ,
+						'value'      => '/admin/module/basefunc' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'basefunc') ,
+					] ,
+				] ,
+			]);
 
 
 		});

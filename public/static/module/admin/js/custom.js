@@ -90,7 +90,7 @@ function successAction(obj, data)
 	$('.install-action').each(function (k, v) {
 		$(v).parent().data('success') && (count += 1)
 	});
-	if (count == 4)
+	if (count == 5)
 	{
 		$('.btn-custom-event').hide()
 		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

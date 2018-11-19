@@ -891,7 +891,7 @@
 			$fileName = $path . '测试.xlsx';
 
 			/**
-			 * 如果设置了这个回答，则只有添加在data上的数据会被导出
+			 * 如果设置了这个回调，则只有添加在data上的数据会被导出
 			 *
 			 * @param $v
 			 * @param $data
@@ -904,6 +904,7 @@
 
 			return 'done';
 		}
+
 
 		/**
 		 * 典型读取execl
@@ -948,8 +949,7 @@
 			$title = 'just title';
 			$body = '163邮件是支持普通连接和SSL连接两种方式的，这里我们推荐使用 ssl 连接方式。';
 			$to = [
-				'845875470@qq.com' => 'by hello' ,
-				'5496150@qq.com'   => 'by 5496150' ,
+				getAdminSessionInfo(SESSOIN_TAG_USER , 'email')  => 'by hello' ,
 			];
 			$res = sendEmail($title , $body , $to , $err);
 			print_r($res);

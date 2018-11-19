@@ -190,6 +190,7 @@
 			define('MODULE_FILE_MENU' , 'menu.json');
 			define('MODULE_FILE_SQL' , 'sql.json');
 			define('MODULE_FILE_ROUTE' , 'route.php');
+			define('MODULE_FILE_RECOVERY' , 'recovery.php');
 		}
 
 		/**

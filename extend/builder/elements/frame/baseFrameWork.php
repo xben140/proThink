@@ -102,16 +102,21 @@ str;
 		function setLink($options = [])
 		{
 			$tmp = <<<str
-		<div class="profile-item">
 			<span><a href="__URL__" class="J_menuItem font-bold">__FIELD__</a></span>
-		</div>
 str;
 			$str = '';
-			foreach ($options as $k => $v)
+			foreach ($options as $k1 => $v1)
 			{
-				$replacement['__FIELD__'] = $v['field'];
-				$replacement['__URL__'] = $v['value'];
-				$str .= strtr($tmp , $replacement);
+				$str .= '<div class="profile-item">';
+				foreach ($v1 as $k => $v)
+				{
+					if(isset($v['is_display']) && (!$v['is_display'])) continue;
+
+					$replacement['__FIELD__'] = $v['field'];
+					$replacement['__URL__'] = $v['value'];
+					$str .= strtr($tmp , $replacement);
+				}
+				$str .= '</div>';
 			}
 
 			$this->replaceTag(static::makeNodeName('profile_link') , $str);
@@ -124,16 +129,21 @@ str;
 		function setLinkPop($options = [])
 		{
 			$tmp = <<<str
-		<div class="profile-item">
 			<span><a href="__URL__" class="index_pop font-bold">__FIELD__</a></span>
-		</div>
 str;
 			$str = '';
-			foreach ($options as $k => $v)
+			foreach ($options as $k1 => $v1)
 			{
-				$replacement['__FIELD__'] = $v['field'];
-				$replacement['__URL__'] = $v['value'];
-				$str .= strtr($tmp , $replacement);
+				$str .= '<div class="profile-item">';
+				foreach ($v1 as $k => $v)
+				{
+					if(isset($v['is_display']) && (!$v['is_display'])) continue;
+
+					$replacement['__FIELD__'] = $v['field'];
+					$replacement['__URL__'] = $v['value'];
+					$str .= strtr($tmp , $replacement);
+				}
+				$str .= '</div>';
 			}
 
 			$this->replaceTag(static::makeNodeName('profile_pop_link') , $str);
