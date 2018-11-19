@@ -269,7 +269,6 @@ VALUES
 
 		public function backup()
 		{
-
 			$Dump = new MySQLBackup(config('database.hostname') , config('database.username') , config('database.password') , config('database.database'));
 			$Dump->addTables(array(
 				'ithink_login_log' ,

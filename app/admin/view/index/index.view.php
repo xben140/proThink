@@ -52,9 +52,11 @@
 					'value' => $__this->adminInfo['user'] ,
 				] ,
 				[
-					'field' => '名字 : ' ,
+					'field' => '昵称 : ' ,
 					'value' => $__this->adminInfo['nickname'] ,
 				] ,
+
+				/*
 				[
 					'field' => '登陆次数 : ' ,
 					'value' => $__this->adminInfo['login_count'] ,
@@ -72,6 +74,8 @@
 					'value' => implode(',' , getAdminSessionInfo(SESSOIN_TAG_ROLE_NAME)) ,
 					//'value' => implode(',', $__this->authClass->getRolesFieldColumn('name')),
 				] ,
+
+				*/
 			]);
 
 
@@ -86,17 +90,22 @@
 						'value' => url('admin/user/modifyinfo') ,
 					] ,
 				] ,
-				[
-					[
-						'field'      => '登录日志' ,
-						'value'      => url('admin/loginlog/datalist') ,
-						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'loginlog' , 'datalist') ,
-					] ,
-				] ,
 			]);
 
 
 			$_this->setLink([
+				[
+					[
+						'field'      => '安装包管理' ,
+						'value'      => '/admin/module/packageList' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'packageList') ,
+					] ,
+					[
+						'field'      => '安装包上传' ,
+						'value'      => '/admin/module/uploadPackage' ,
+						'is_display' => 0,
+					] ,
+				] ,
 				[
 					[
 						'field'      => '应用管理' ,
@@ -119,6 +128,35 @@
 						'field'      => '系统工具' ,
 						'value'      => '/admin/module/basefunc' ,
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'basefunc') ,
+					] ,
+				] ,
+
+
+				[
+					[
+						'field'      => '用户管理' ,
+						'value'      => '/admin/user/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'user' , 'datalist') ,
+					] ,
+					[
+						'field'      => '角色管理' ,
+						'value'      => '/admin/role/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'role' , 'datalist') ,
+					] ,
+				] ,
+
+
+				[
+					[
+						'field'      => '菜单管理' ,
+						'value'      => url('admin/privilege/datalist') ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'privilege' , 'datalist') ,
+					] ,
+
+					[
+						'field'      => '登录日志' ,
+						'value'      => url('admin/loginlog/datalist') ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'loginlog' , 'datalist') ,
 					] ,
 				] ,
 			]);

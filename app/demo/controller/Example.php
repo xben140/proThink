@@ -1706,7 +1706,7 @@ AAA
 
 									$doms[] = elementsFactory::searchFormText()->make(function(&$doms , $_this) {
 										$_this->setNodeValue([
-											'field'       => '名字' ,
+											'field'       => '昵称' ,
 											'value'       => 'gaag' ,
 											'name'        => 'name11' ,
 											'placeholder' => '随便写' ,
@@ -1720,7 +1720,7 @@ AAA
 
 									$doms[] = elementsFactory::searchFormText()->make(function(&$doms , $_this) {
 										$_this->setNodeValue([
-											'field'       => '名字' ,
+											'field'       => '昵称' ,
 											'value'       => 'gaag' ,
 											'name'        => 'name11' ,
 											'placeholder' => '随便写' ,
@@ -1734,9 +1734,9 @@ AAA
 
 									$doms[] = elementsFactory::searchFormRange()->make(function(&$doms , $_this) {
 										$_this->setNodeValue([
-											'field' => '名字' ,
+											'field' => '昵称' ,
 
-											'value1'       => '名字' ,
+											'value1'       => '昵称' ,
 											'name1'        => 'name1' ,
 											'placeholder1' => 'placeholder1' ,
 
@@ -1753,7 +1753,7 @@ AAA
 
 									$doms[] = elementsFactory::searchFormDate()->make(function(&$doms , $_this) {
 										$_this->setNodeValue([
-											'field' => '名字' ,
+											'field' => '昵称' ,
 
 											'value1'       => '' ,
 											'name1'        => 'name111' ,

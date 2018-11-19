@@ -216,7 +216,6 @@
 					$isDbOk = false;
 					$msg = '数据库配置写入出错<br />请检查文件夹权限  <br />' . APP_PATH;
 				}
-
 			}
 
 			if($isDbOk)

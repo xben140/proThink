@@ -17,7 +17,7 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<!--				<span class="label label-success pull-right">月</span>-->
-				<h5>名字</h5>
+				<h5>昵称</h5>
 			</div>
 			<div class="ibox-content">
 				<h3 class="no-margins">{:$adminInfo['nickname'] }</h3>
@@ -118,13 +118,15 @@
 					<td>{:ITHINK_NAME}</td>
 				</tr>
 				<tr>
-					<td>产品版本</td>
-					<td>{:ITHINK_VERSION}</td>
-				</tr>
-				<tr>
 					<td>官方网站</td>
 					<td>
 						<a target="_blank" href="http://www.ithinkphp.org">www.ithinkphp.org</a>
+					</td>
+				</tr>
+				<tr>
+					<td>交流社区</td>
+					<td>
+						<a target="_blank" href="http://forum.ithinkphp.org">forum.ithinkphp.org</a>
 					</td>
 				</tr>
 				<tr>
