@@ -3,10 +3,10 @@
 	namespace app\admin\controller;
 
 	use file\FileTool;
+	use utility\tool;
 
 	class Login extends FrontendBase
 	{
-
 		public function _initialize()
 		{
 			parent::_initialize();
@@ -68,6 +68,23 @@
 
 
 		/**
+		 * 更新检查
+		 * @throws \think\exception\HttpResponseException
+		 */
+		public function checkUpdate()
+		{
+			$res = tool::getUpdate();
+			if($res['sign'])
+			{
+				$this->success($res['data'] , null ,[] );
+			}
+			else
+			{
+				$this->error($res['data'] , null ,[] );
+			}
+		}
+
+		/**
 		 * 环境检测
 		 */
 		public function evnCheck()
@@ -97,14 +114,29 @@
 			];
 
 			$data[] = [
-				'item'    => '脚本最长执行时间' ,
+				'item'    => '操作系统' ,
+				'require' => '(windows/类unix)' ,
+				'value'   => PHP_OS ,
+				'result'  => 1 ,
+			];
+
+			$t = function_exists('disk_free_space') ? disk_free_space(APP_PATH) : 0;
+			$data[] = [
+				'item'    => '磁盘剩余空间' ,
 				'require' => '' ,
-				'value'   => ini_get('max_execution_time').'秒' ,
+				'value'   => $t ? FileTool::byteFormat($t) : '未知' ,
 				'result'  => 1 ,
 			];
 
 			$data[] = [
-				'item'    => '最大post数据<br />（post_max_size）' ,
+				'item'    => '脚本最长执行时间' ,
+				'require' => '' ,
+				'value'   => ini_get('max_execution_time') . '秒' ,
+				'result'  => 1 ,
+			];
+
+			$data[] = [
+				'item'    => '最大post数据<br />(post_max_size)' ,
 				'require' => '' ,
 				'value'   => ini_get('post_max_size') ,
 				'result'  => 1 ,
@@ -112,8 +144,8 @@
 
 			$t = ini_get('file_uploads');
 			$data[] = [
-				'item'    => '最大允许上传数据<br />（upload_max_filesize）' ,
-				'require' => '8M以上' ,
+				'item'    => '最大允许上传数据<br />(upload_max_filesize)' ,
+				'require' => '8M及以上' ,
 				'value'   => ini_get('upload_max_filesize') ,
 				'result'  => (function($t) {
 					$res = false;
@@ -123,12 +155,6 @@
 				})($t) ? 1 : ($isEvnOk = 0) ,
 			];
 
-			$data[] = [
-				'item'    => '操作系统' ,
-				'require' => '(windows/类unix)' ,
-				'value'   => PHP_OS ,
-				'result'  => 1 ,
-			];
 
 			$data[] = [
 				'item'    => 'PHP版本' ,
@@ -137,13 +163,13 @@
 				'result'  => (int)version_compare(phpversion() , '7.0.0' , '>=') ,
 			];
 
-			$t = function_exists('disk_free_space') ? disk_free_space(APP_PATH) : 0;
 			$data[] = [
-				'item'    => '磁盘剩余空间' ,
-				'require' => '512M' ,
-				'value'   => $t ? FileTool::byteFormat($t) : '未知' ,
-				'result'  => 1 ,
+				'item'    => '服务器环境' ,
+				'require' => 'apache/nginx' ,
+				'value'   => $_SERVER["SERVER_SOFTWARE"] ,
+				'result'  => (int)version_compare(phpversion() , '7.0.0' , '>=') ,
 			];
+
 
 			$t = (function_exists('exec') && !ini_get('safe_mode') && @exec('echo EXEC') == 'EXEC');
 			$data[] = [
@@ -252,7 +278,6 @@
 				];
 			}
 
-
 			$tmp = <<<AA
 <tr>
 	<td>__ITEM__</td>
@@ -270,7 +295,7 @@ AA;
 				return strtr($tmp , [
 					'__ITEM__'    => $v['item'] ,
 					'__REQUIRE__' => $v['require'] ,
-					'__VALUE__'   => !$v['result'] ? "<span style='color: #f00;font-weight: bold;'>{$v['value'] }</span>" : $v['value'] ,
+					'__VALUE__'   => !$v['result'] ? "<span style='color: #f00;font-weight: bold;'>{$v['value'] }</span>" : "<span style='color: #09F;font-weight: bold;'>{$v['value'] }</span>" ,
 					'__AAA__'     => $v['result'] ? 'success' : 'danger' ,
 					'__BBB__'     => $v['result'] ? 'check' : 'times' ,
 				]);

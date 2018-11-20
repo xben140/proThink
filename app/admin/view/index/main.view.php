@@ -9,18 +9,18 @@
 		$__this->makePage()->setNodeValue([
 			'BODY_ATTR' => tagConstructor::buildKV([
 				'class' => ' gray-bg' ,
-				'onload' => 'checkEvn()' ,
+				'onload' => 'checkEvn();checkUpdate();' ,
 			]) ,
 		]);
 
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::customElementFormPath($__this->getTemplatePath('main') , [
 				/*
-								integrationTags::staticText([
-									'field_name' => 'staticText' ,
-									'value'      => 'value' ,
-								]) ,
-							*/
+					integrationTags::staticText([
+						'field_name' => 'staticText' ,
+						'value'      => 'value' ,
+					]) ,
+				*/
 			]) ,
 
 		] , [

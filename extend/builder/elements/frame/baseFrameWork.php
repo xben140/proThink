@@ -338,6 +338,12 @@ str;
 			<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="<!-- ~~~default_page~~~ -->" frameborder="0" data-id="<!-- ~~~default_page~~~ -->" ></iframe>
 		</div>
 		
+		<div class="footer">
+            <div class="pull-right">Copyright © 2016 - 2018  All Rights Reserved.iThink 版权所有 powered by 
+                <a href="http://www.ithinkphp.org/" target="_blank">iThink www.ithinkphp.org</a>
+            </div>
+        </div>
+		
 	</div>
 </div>
 

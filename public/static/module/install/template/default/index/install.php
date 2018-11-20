@@ -169,50 +169,7 @@
 
 						<div class="createFinish" style="display: none;">
 							<h1 class="text-center">iThink 安装成功！enjoy...</h1>
-							<div class="col-sm-12">
-								<table class="table">
-									<thead>
-										<tr>
-											<th style="width: auto;">产品信息</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody id="tb">
-										<tr>
-											<td>产品名称</td>
-											<td>{:ITHINK_NAME}</td>
-										</tr>
-										<tr>
-											<td>产品版本</td>
-											<td>{:ITHINK_VERSION}</td>
-										</tr>
-										<tr>
-											<td>交流QQ群</td>
-											<td>419395011</td>
-										</tr>
-										<tr>
-											<td>官方网站</td>
-											<td>
-												<a target="_blank" href="http://www.ithinkphp.org">www.ithinkphp.org</a>
-											</td>
-										</tr>
-										<tr>
-											<td>码云仓库</td>
-											<td>
-												<a target="_blank" href="https://gitee.com/wf5858585858/iThink">https://gitee.com/wf5858585858/iThink</a>
-											</td>
-										</tr>
-										<tr>
-											<td>开发手册</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>联系邮箱</td>
-											<td>wf585858@yeah.net</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							{:$notification}
 							<div class="text-center">
 								<a href="/" class="btn btn-w-m btn-primary">访问主页</a>
 							</div>

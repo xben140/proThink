@@ -24,6 +24,7 @@
 		 */
 		public function install()
 		{
+			$this->assign('notification', file_get_contents('./static/defaultTemp.html'));
 			return $this->fetch();
 		}
 

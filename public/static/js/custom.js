@@ -68,20 +68,31 @@
 
 function checkEvn()
 {
-	let loadIndex = layer.load();
 	$.ajax({
 		type    : "get",      //data 传送数据类型。post 传递
 		dataType: 'json',  // 返回数据的数据类型json
 		url     : "/evnCheck",  // yii 控制器/方法
 		cache   : false,
 		success : function (data) {
-			layer.close(loadIndex);
 			$('#isEvnOk').val(data.code)
 			$('#tb').html(data.msg);
 		},
 		error   : function () {
-			layer.close(loadIndex);
-			layer.alert('请检测网络。。。');
+		}
+	})
+}
+
+function checkUpdate()
+{
+	$.ajax({
+		type    : "get",      //data 传送数据类型。post 传递
+		dataType: 'json',  // 返回数据的数据类型json
+		url     : "/checkUpdate",  // yii 控制器/方法
+		cache   : false,
+		success : function (data) {
+			$('#formServer').html(data.msg);
+		},
+		error   : function () {
 		}
 	})
 }
