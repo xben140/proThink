@@ -1,79 +1,25 @@
-# iThink
+# iThink web开发框架
 
+#### iThink是一个基于thinkphp5.0开发的模块化，应用化，自动化的WEB应用开发框架（Web Application Framework），集成高可用，高稳定的页面构造器，可以及其方便的构造后台页面包括表单，表格，上传等组件在内的各种元素。
 
-使用之前
-==============
+#### iThink实现应用与框架核心分离，可以将开发的应用打包，以免费或者收费的形式分享其他人使用。
 
+#### 服务器端CURD操作不需要修改前端html页面，前端页面所有元素都通过php构造完成，历时两个月倾心打造的页面构造器，只为省去修改前端页面的烦恼。
 
-> iThink 基于ThinkPHP 5.0开发，前端框架使用hplus
-> 
-> 如果你是开发者，在使用iThink之前请先阅读ThinkPHP 5.0完全开发手册,确保有一定的ThinkPHP开发经验
-> 
-> 如果你是仅仅是使用其他开发者开发好的应用搭建web应用(即网站)，那么只需要有运营网站的经验即可
-> 
-> 设置web站点根目录为public目录，开启web服务器和数据库服务器后访问站点
-> 
-安装方法
-==============
+#### 页面所有元素都可定制，极大提高开发效率，10分钟即可完成一个表的curd功能，十分高效。
 
-> 将源码上传至web目录
->
-> 设置web站点根目录为public目录，开启web服务器和数据库服务器后访问站点
-> 
+#### 服务器端架构遵循十分先进的设计思想，灵活应用各种设计模式，拥有一套自定义的依赖注入机制，将“抽象”的思想发挥的淋漓尽致，最大限度的实现代码复用，让你不需要多写一行重复代码，将全部精力投入编写应用逻辑！
 
-## 目录结构
+官方网站 : 	http://www.ithinkphp.org
 
-初始的目录结构如下：
+iThink FAQ : 	http://forum.ithinkphp.org
 
-````
-www  WEB部署目录（或者子目录）
-├─application           应用目录
-│  ├─common             公共模块目录（可以更改）
-│  ├─module_name        模块目录
-│  │  ├─config.php      模块配置文件
-│  │  ├─common.php      模块函数文件
-│  │  ├─controller      控制器目录
-│  │  ├─model           模型目录
-│  │  ├─view            视图目录
-│  │  └─ ...            更多类库目录
-│  │
-│  ├─command.php        命令行工具配置文件
-│  ├─common.php         公共函数文件
-│  ├─config.php         公共配置文件
-│  ├─route.php          路由配置文件
-│  ├─tags.php           应用行为扩展定义文件
-│  └─database.php       数据库配置文件
-│
-├─public                WEB目录（对外访问目录）
-│  ├─index.php          入口文件
-│  ├─router.php         快速测试文件
-│  └─.htaccess          用于apache的重写
-│
-├─thinkphp              框架系统目录
-│  ├─lang               语言文件目录
-│  ├─library            框架类库目录
-│  │  ├─think           Think类库包目录
-│  │  └─traits          系统Trait目录
-│  │
-│  ├─tpl                系统模板目录
-│  ├─base.php           基础定义文件
-│  ├─console.php        控制台入口文件
-│  ├─convention.php     框架惯例配置文件
-│  ├─helper.php         助手函数文件
-│  ├─phpunit.xml        phpunit配置文件
-│  └─start.php          框架入口文件
-│
-├─extend                扩展类库目录
-├─runtime               应用的运行时目录（可写，可定制）
-├─vendor                第三方类库目录（Composer依赖库）
-├─build.php             自动生成定义文件（参考）
-├─composer.json         composer 定义文件
-├─LICENSE.txt           授权说明文件
-├─README.md             README 文件
-├─think                 命令行入口文件
+交流社区 : 	http://forum.ithinkphp.org
 
-````
+码云仓库 : 	https://gitee.com/wf5858585858/iThink
 
-## 命名规范
+开发手册(持续更新中) : 	https://www.kancloud.cn/wf00568/main
 
-ThinkPHP5的命名规范遵循`PSR-2`规范以及`PSR-4`自动加载规范。
+交流QQ群 : 	 419395011
+
+联系邮箱 : 	wf585858@yeah.net

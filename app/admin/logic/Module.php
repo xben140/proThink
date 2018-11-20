@@ -1172,7 +1172,7 @@
 
 				if($res['sign'])
 				{
-					$this->retureResult['message'] = '部署成功';
+					$this->retureResult['message'] = '部署成功，请前往应用列表查看';
 					$this->retureResult['sign'] = RESULT_SUCCESS;
 				}
 				else
@@ -1183,7 +1183,7 @@
 			}
 			else
 			{
-				$this->retureResult['message'] = '此应用已经存在，如果需要重新部署，请先删除应用';
+				$this->retureResult['message'] = '此应用已经存在，如需重新部署，请先到应用列表删除应用';
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 
@@ -1267,9 +1267,9 @@
 						' ' => '_' ,
 						':' => '_' ,
 					]) . '.sql');
-				FileTool::mkdir_(dirname($sqlFile));
 				try
 				{
+					FileTool::mkdir_(dirname($sqlFile));
 					file_put_contents($sqlFile , implode("\r\n" , $installSqls));
 					$this->retureResult['message'] = 'sql文件文件已生成 <br /> ' . $sqlFile;
 					$this->retureResult['sign'] = RESULT_SUCCESS;
