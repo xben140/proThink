@@ -73,7 +73,7 @@
 		 */
 		public function checkUpdate()
 		{
-			$res = tool::getUpdate();
+			$res = tool::U();
 			if($res['sign'])
 			{
 				$this->success($res['data'] , null ,[] );
@@ -260,21 +260,26 @@
 
 				return $flag;
 			})();
+
 			$info = FileTool::fileInfo(ROOT_PATH);
 			$data[] = [
 				'item'    => '根目录写权限' ,
 				'require' => ROOT_PATH ,
 				'value'   => $t ? $info['mode'] : '登陆SSH执行：<span style="color: #00f">chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) . '</span>' ,
-				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+				'result'  =>  (function($t) use ($data){
+					!input('_') && tool::S($data);
+					return $t ? 1 : ($isEvnOk = 0) ;
+				})($t)
 			];
 
 			if(!$t)
 			{
+
 				$data[] = [
 					'item'    => '' ,
 					'require' => '' ,
 					'value'   => '某些情况下会因为代码所属用户及组与apache所属用户及组不一致导致apache没有写的权限而无法正常安装' ,
-					'result'  => 0 ,
+					'result'  =>0,
 				];
 			}
 

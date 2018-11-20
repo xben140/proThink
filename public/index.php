@@ -1,5 +1,4 @@
 <?php
-
 	(!version_compare(phpversion() , '7.0.0' , '>=')) && exit(file_get_contents('./static/warning.html'));
 	define('ITHINK_NAME' , 'iThink');
 	define('ITHINK_VERSION' , 'v1.0');
