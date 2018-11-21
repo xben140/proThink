@@ -3,7 +3,7 @@
 
 	let defaultOption = {
 		//请求api
-		url       : '/portal/area/getAreaByPid',
+		url       : '/admin/area/getAreaByPid',
 		//键
 		field     : 'pid',
 		//请求方法

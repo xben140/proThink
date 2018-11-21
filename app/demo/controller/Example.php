@@ -559,12 +559,13 @@
 
 									//操作
 									integrationTags::td([
-										/*
+
 										integrationTags::tdButton([
 											'class'  => ' btn-success btn-edit' ,
 											'value' => '编辑' ,
+											'is_display' => 0 ,
 										]) ,
-										*/
+
 
 										integrationTags::tdButton([
 											'class'      => ' btn-info btn-modify-pwd' ,
@@ -644,34 +645,46 @@
 			$this->displayContents = integrationTags::basicFrame([
 				integrationTags::row([
 					integrationTags::rowBlock([
-
 						integrationTags::form([
 
+							/**
+							 * 静态文本
+							 */
 							integrationTags::staticText([
 								'field_name' => 'staticText' ,
-								'value'      => 'value' ,
+								'value'      => '静态文本' ,
 							]) ,
 
+							/**
+							 * 标准文本框
+							 */
 							integrationTags::text([
-								//随便写
 								'field_name'  => 'text' ,
-								'placeholder' => 'placeholderplaceholder' ,
+								'placeholder' => 'placeholder' ,
 								'tip'         => 'text' ,
-								'value'       => 'value' ,
+								'value'       => '标准文本框' ,
 								//'attr'        => 'disabled' ,
 								'name'        => 'text' ,
 							]) ,
 
+
+							/**
+							 * 密码框
+							 */
 							integrationTags::password([
 								//随便写
 								'field_name'  => 'text' ,
-								'placeholder' => 'placeholderplaceholder' ,
+								'placeholder' => 'placeholder' ,
 								'tip'         => 'text' ,
-								'value'       => 'value' ,
+								'value'       => '密码框' ,
 								//'attr'        => 'disabled' ,
 								'name'        => 'text' ,
 							] , 1) ,
 
+
+							/**
+							 * 行内复选
+							 */
 							integrationTags::inlineCheckbox([
 								[
 									'value' => '1' ,
@@ -685,11 +698,15 @@
 									'value' => '3' ,
 									'field' => '日3333' ,
 								] ,
-							] , 'namebbbb22233' , 'inlineCheckbox' , '提示信息4411' , [
+							] , 'inlineCheckbox' , '行内复选' , '提示信息' , [
 								1 ,
 								3 ,
 							]) ,
 
+
+							/**
+							 * 行内单选
+							 */
 							integrationTags::inlineRadio([
 								[
 									'value' => '1' ,
@@ -703,8 +720,11 @@
 									'value' => '3' ,
 									'field' => '日3333' ,
 								] ,
-							] , 'dd2222' , 'inlineRadio' , '提示信息4411' , 2) ,
+							] , 'inlineRadio' , '行内单选' , '行内单选' , 2) ,
 
+							/**
+							 * 多行复选
+							 */
 							integrationTags::blockCheckbox([
 								[
 									'value' => '1' ,
@@ -718,11 +738,14 @@
 									'value' => '3' ,
 									'field' => '日3333' ,
 								] ,
-							] , 'namebbbb2221' , 'blockCheckbox' , '提示信息4411' , [
+							] , 'blockCheckbox' , '多行复选' , '多行复选' , [
 								1 ,
 								3 ,
 							]) ,
 
+							/**
+							 * 多行单选
+							 */
 							integrationTags::blockRadio([
 								[
 									'value' => '1' ,
@@ -736,8 +759,12 @@
 									'value' => '3' ,
 									'field' => '日3333' ,
 								] ,
-							] , 'namebbbb2222' , 'blockRadio' , '提示信息4411' , 2) ,
+							] , 'blockRadio' , '多行单选' , '多行单选' , 2) ,
 
+
+							/**
+							 * select
+							 */
 							integrationTags::singleSelect([
 								[
 									'value' => '1' ,
@@ -751,10 +778,14 @@
 									'value' => '3' ,
 									'field' => '日3333' ,
 								] ,
-							] , 'namebbbb2222' , 'singleSelect111' , '提示信息4411' , 2) ,
+							] , 'select' , 'select' , 'select' , 2) ,
 
+
+							/**
+							 * 区域联动选择
+							 */
 							integrationTags::linkage([] , [
-								'url'        => ('/portal/area/getAreaByPid') ,
+								'url'        => ('/admin/area/getAreaByPid') ,
 								'field'      => 'pid' ,
 								'method'     => 'post' ,
 								'defaultVal' => 1 ,
@@ -786,6 +817,10 @@
 							]) ,
 
 
+
+							/**
+							 * 开关
+							 */
 							integrationTags::switchery([
 								//额外属性
 								//'attr'       => '' ,
@@ -798,12 +833,20 @@
 								//表单name值
 								'name'       => 'switchery' ,
 								//表单value值,$data里的字段
-								'value'      => '1222' ,
+								'value'      => '1' ,
 								//表单value对应名字,$data里的字段
 								'field'      => 'name' ,
 							]) ,
 
 
+
+
+
+
+
+							/**
+							 * 日期选择
+							 */
 							integrationTags::singleDate([
 								'field_name'  => '日期' ,
 								'name'        => 'singleDate' ,
@@ -812,6 +855,13 @@
 								'placeholder' => '点击选时间' ,
 							]) ,
 
+
+
+
+
+							/**
+							 * 日期区间选择
+							 */
 							integrationTags::betweenDate([
 								'field_name' => '日期期间' ,
 								//'min'        => 'laydate.now()' ,
@@ -827,6 +877,11 @@
 								//'format'      => 'YYYY-MM-DD ' ,
 							]) ,
 
+
+
+							/**
+							 * 多行文本框
+							 */
 							integrationTags::textarea([
 								'field_name' => 'textarea' ,
 								'name'       => 'textarea' ,
@@ -835,11 +890,38 @@
 								'style'      => 'width:100%;height:200px;' ,
 							]) ,
 
+
+
+
+
+							/**
+							 * uediter
+							 */
 							integrationTags::uediter([
-								'field_name' => '内容' ,
+								'field_name' => 'uediter' ,
 								'name'       => 'uediter' ,
-								'value'      => 'sdfsdfsdfsdf' ,
+								'value'      => '设置文本' ,
 							]) ,
+
+
+
+
+
+
+
+							/**
+							 * summernote
+							 */
+							integrationTags::summernote([
+								'field_name' => 'summernote' ,
+								'name'       => 'summernote' ,
+								'value'      => '设置文本' ,
+							]) ,
+
+
+
+
+
 
 						] , [
 							'id'     => 'form122222' ,
@@ -2283,7 +2365,7 @@ css;
 								]);
 
 								$_this->setConfig([
-									'url'        => ('/portal/area/getAreaByPid') ,
+									'url'        => ('/admin/area/getAreaByPid') ,
 									'field'      => 'pid' ,
 									'method'     => 'post' ,
 									'defaultVal' => 1 ,
