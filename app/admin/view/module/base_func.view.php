@@ -72,7 +72,8 @@
 									] ,
 									'params'     => [] ,
 									'value'      => '查看备份文件' ,
-									'is_display' => 1 ,
+									'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'viewSql') ,
+
 								]) ,
 							]) ,
 

@@ -316,18 +316,18 @@
 										//'msg'      => '方法名必填' ,
 									]) ,
 								]) ,
-/*
-								//图标
-								integrationTags::td([
-									integrationTags::tdSimple([
-										//'name'     => '' ,
-										'editable' => '1' ,
-										'value'    => $v['ico'] ,
-										'field'    => 'ico' ,
-										//'reg'      => '/^$/' ,
-										//'msg'      => '方法名必填' ,
-									]) ,
-								]) ,*/
+								/*
+																//图标
+																integrationTags::td([
+																	integrationTags::tdSimple([
+																		//'name'     => '' ,
+																		'editable' => '1' ,
+																		'value'    => $v['ico'] ,
+																		'field'    => 'ico' ,
+																		//'reg'      => '/^$/' ,
+																		//'msg'      => '方法名必填' ,
+																	]) ,
+																]) ,*/
 
 								//排序
 								integrationTags::td([
@@ -414,8 +414,10 @@
 
 
 									integrationTags::tdButton([
-										'class' => ' btn-success btn-edit' ,
-										'value' => '编辑' ,
+										'class'      => ' btn-success btn-edit' ,
+										'value'      => '编辑' ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'edit') ,
+
 									]) ,
 
 
@@ -427,8 +429,10 @@
 									*/
 
 									integrationTags::tdButton([
-										'class' => ' btn-danger btn-delete' ,
-										'value' => '删除' ,
+										'class'      => ' btn-danger btn-delete' ,
+										'value'      => '删除' ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
+
 									]) ,
 
 								]) ,

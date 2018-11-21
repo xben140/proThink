@@ -43,7 +43,7 @@
 								'field' => '批量禁用' ,
 							] ,
 							[
-								'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'configgroup' , 'datalist')  ,
+								'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'configgroup' , 'datalist') ,
 								'class'      => 'btn-info btn-open-pop' ,
 								'field'      => '配置分组' ,
 								'data'       => [
@@ -463,12 +463,14 @@
 								//操作
 								integrationTags::td([
 									integrationTags::tdButton([
-										'class' => ' btn-success btn-edit' ,
-										'value' => '编辑' ,
+										'class'      => ' btn-success btn-edit' ,
+										'value'      => '编辑' ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'edit') ,
 									]) ,
 									integrationTags::tdButton([
-										'class' => ' btn-danger btn-delete' ,
-										'value' => '删除' ,
+										'class'      => ' btn-danger btn-delete' ,
+										'value'      => '删除' ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 									]) ,
 								]) ,
 

@@ -271,13 +271,14 @@
 										'params'      => [
 											'id' => $v['id'] ,
 										] ,
-										'is_display' => 1 ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'viewInfo') ,
+
 									]) ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
-										'is_display' => 1 ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 									]) ,
 
 								]) ,

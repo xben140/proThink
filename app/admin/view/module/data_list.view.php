@@ -204,7 +204,8 @@
 											'params'     => [
 												'id' => $v['info']['id'] ,
 											] ,
-											'is_display' => 1 ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'operation') ,
+
 										]) ,
 										'<br />' ,
 										integrationTags::tdButton([
@@ -217,7 +218,7 @@
 											'params'     => [
 												'id' => $v['info']['id'] ,
 											] ,
-											'is_display' => 1 ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'backup') ,
 										]) ,
 
 										'<br />' ,
@@ -233,13 +234,13 @@
 												'id' => $v['info']['id'] ,
 											] ,
 											'value'      => '设为默认应用' ,
-											'is_display' => $v['is_install'] ,
+											'is_display' => $v['is_install'] && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'setDefault') ,
 										]) ,
 
 										integrationTags::tdButton([
 											'class'      => ' btn-danger btn-delete' ,
 											'value'      => '删除应用' ,
-											'is_display' => ($v['is_install'] != 1) ,
+											'is_display' => ($v['is_install'] != 1) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 										]) ,
 									]) ,
 
@@ -260,7 +261,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成菜单文件' ,
-											'is_display' => ($v['is_install']) ,
+											'is_display' => ($v['is_install']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 										'<br />' ,
 
@@ -278,7 +279,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
-											'is_display' => ($v['is_install']) ,
+											'is_display' => ($v['is_install']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 										'<br />' ,
@@ -296,7 +297,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成安装sql文件' ,
-											'is_display' => ($v['is_install']) ,
+											'is_display' => ($v['is_install']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 									]) ,
@@ -372,7 +373,7 @@
 										integrationTags::tdButton([
 											'class'      => ' btn-danger btn-delete' ,
 											'value'      => '删除应用' ,
-											'is_display' => ($v['is_install'] != 1) ,
+											'is_display' => ($v['is_install'] != 1) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 										]) ,
 									]) ,
 
@@ -393,7 +394,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成菜单文件' ,
-											'is_display' => 1 ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 										'<br />' ,
@@ -411,7 +412,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
-											'is_display' => 1 ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 										'<br />' ,
@@ -429,7 +430,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成安装sql文件' ,
-											'is_display' => 1 ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 

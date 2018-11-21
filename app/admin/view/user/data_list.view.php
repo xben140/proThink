@@ -430,16 +430,17 @@
 											'src'   => url('editPwd') ,
 											'title' => '修改密码' ,
 										] ,
-										'params'      => [
+										'params'     => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '修改密码' ,
-										'is_display' => (function() use ($v) {
+										'is_display' => (function() use ($v , $__this) {
 											//是管理员的话所有人名字都可以改
 											if(isGlobalManager()) return true;
 
 											//除管理员的只能自己，其他人都可以改
-											return !isGlobalManagerId($v['id']);
+											return !isGlobalManagerId($v['id']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'editPwd');;
+
 										})() ,
 									]) ,
 
@@ -450,15 +451,15 @@
 											'src'   => url('assignRoles') ,
 											'title' => '用户授权' ,
 										] ,
-										'params'      => [
+										'params'     => [
 											'id' => $v['id'] ,
 										] ,
 										'value'      => '用户授权' ,
-										'is_display' => (function() use ($v) {
+										'is_display' => (function() use ($v , $__this) {
 											//管理员id 和 自己的
 											if(isGlobalManagerId($v['id'])) return false;
 
-											return true;
+											return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'assignRoles');;
 										})() ,
 									]) ,
 
@@ -467,12 +468,12 @@
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
-										'is_display' => (function() use ($v) {
+										'is_display' => (function() use ($v , $__this) {
 											//管理员id 和 自己的
 											if(isGlobalManagerId($v['id'])) return false;
 											if($v['id'] == getAdminSessionInfo('user' , 'id')) return false;
 
-											return true;
+											return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete');;
 										})() ,
 									]) ,
 

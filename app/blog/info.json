@@ -1,0 +1,15 @@
+{
+	"id"              : "blog",
+	"name"            : "博客系统",
+	"title"           : "博客系统v1.0",
+	"version"         : "1.0",
+	"description"     : "功能强大，操作傻瓜的博客管理系统",
+	"default_action"  : "blog/index/index",
+	"update_time"     : 1541131622,
+	"database_tables" : [
+		"ithink_blog_article",
+		"ithink_blog_article_tag",
+		"ithink_blog_tag",
+		"ithink_blog_type"
+	]
+}

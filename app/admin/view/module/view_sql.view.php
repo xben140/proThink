@@ -56,7 +56,7 @@
 									'<br />' ,
 
 									integrationTags::tdSimple([
-										'value'    => $v['mode'],
+										'value'    => $v['mode'] ,
 										'name'     => '权限 : ' ,
 										//'field'    => 'name' ,
 										//'reg'      => '/^\S+$/' ,
@@ -80,7 +80,7 @@
 											'option' => 'recoverData' ,
 										] ,
 										'value'      => '恢复数据' ,
-										'is_display' => 1 ,
+										'is_display' => 0 ,
 									]) ,
 									'<br />' ,
 									integrationTags::tdButton([
@@ -96,12 +96,17 @@
 											'option' => 'deleteData' ,
 										] ,
 										'value'      => '删除备份' ,
-										'is_display' => 1 ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'baseFunc') ,
 									]) ,
 									'<br />' ,
-									integrationTags::a('下载sql文件' , [
-										'href' => url('downloadSql' , ['id' => base64_encode($v['name'])]) ,
-									]) ,
+									(function($v) use ($__this) {
+										return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'downloadSql') ?
+
+											integrationTags::a('下载sql文件' , [
+												'href' => url('downloadSql' , ['id' => base64_encode($v['name'])]) ,
+											]) : [];
+									})($v) ,
+
 								]) ,
 
 							] , ['id' => $v['name']]);

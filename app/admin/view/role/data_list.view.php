@@ -284,8 +284,8 @@
 									integrationTags::tdButton([
 										'class'      => ' btn-success btn-edit' ,
 										'value'      => '编辑' ,
-										'is_display' => (function() use ($v) {
-											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+										'is_display' => (function() use ($v , $__this) {
+											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'edit');
 										})() ,
 									]) ,
 									integrationTags::tdButton([
@@ -300,15 +300,15 @@
 											'id' => $v['id'] ,
 										] ,
 
-										'is_display' => (function() use ($v) {
-											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+										'is_display' => (function() use ($v , $__this) {
+											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'assignPrivileges');
 										})() ,
 									]) ,
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
-										'is_display' => (function() use ($v) {
-											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
+										'is_display' => (function() use ($v , $__this) {
+											return ($v['id'] != GLOBAL_ADMIN_ROLE_ID) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete');
 										})() ,
 									]) ,
 								]) ,

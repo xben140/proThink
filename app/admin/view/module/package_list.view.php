@@ -100,6 +100,8 @@
 											'params' => [//'id' => $v['id'] ,
 											] ,
 											'value'  => '部署到应用' ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'apply') ,
+
 										]) ,
 
 										'<br />' ,
@@ -113,12 +115,19 @@
 											'params' => [//'id' => $v['id'] ,
 											] ,
 											'value'  => '删除包文件' ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delPackage') ,
+
 										]) ,
 										'<br />' ,
+										(function($v) use ($__this) {
+											return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'downloadPackage') ?
 
-										integrationTags::a('下载包文件' , [
-											'href' => url('downloadPackage' , ['id' => $v['info']['id']]) ,
-										]) ,
+												integrationTags::a('下载包文件' , [
+													'href' => url('downloadPackage' , ['id' => $v['info']['id']]) ,
+												]) : [];
+										})($v),
+
+
 									]) ,
 
 								] , ['id' => $v['info']['id']]);
