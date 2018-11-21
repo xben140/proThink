@@ -171,14 +171,21 @@
 
 *****
 ### :-: **鸣谢**
-### 
+
 感谢以下优秀的开源项目,排名不分先后
  * [ ] ThinkPHP：http://www.thinkphp.cn
  * [ ] Bootstrap：http://getbootstrap.com
  * [ ] jQuery：http://jquery.com
  * [ ] layer：https://www.layui.com
 
+# 几张图诠释高效开发
+![](public/static/image/form.png)
 
+# 完成效果图
+![](public/static/image/form_view.png)
 
-
+# 预览图
+![](public/static/image/1.png)
+![](public/static/image/2.png)
+![](public/static/image/3.png)
 
