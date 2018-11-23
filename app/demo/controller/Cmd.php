@@ -43,6 +43,12 @@
 			$image->thumb(300 , 300)->save($this->testPath . '/thumb.png' , 'png');
 		}
 
+		public function imgEncrypt()
+		{
+			imageProcessor::encrpty()::en($this->testImg, $this->testPath, 'xxx');
+			imageProcessor::encrpty()::de($this->testPath.'ab0199108680aa2f875c6546bff0f323', $this->testPath.'\\fff', 'xxx');
+		}
+
 		//删除指定目录的所有空目录
 		public function removeEmpty()
 		{

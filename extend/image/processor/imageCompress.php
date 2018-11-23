@@ -4,6 +4,10 @@
 
 	use think\Image;
 
+	/**压缩图片用
+	 * Class imageCompress
+	 * @package image\processor
+	 */
 	class imageCompress
 	{
 		public $imagePath;
@@ -47,8 +51,38 @@
 		public function to($imagePath)
 		{
 			$image = Image::open($this->imagePath);
-			mkdir_(dirname($imagePath));
+			static::mkdir_(dirname($imagePath));
 
 			return $image->thumb($image->width() * $this->ratio , $image->height() * $this->ratio , Image::THUMB_SCALING)->save($imagePath);
 		}
+
+
+		/**
+		 * 创建文件夹
+		 *
+		 * @param     $path
+		 * @param int $mode
+		 *
+		 * @return bool
+		 */
+		public static function mkdir_($path , $mode = 0777)
+		{
+			$path = static::pathFilter($path);
+
+			return !is_dir(($path)) ? mkdir(($path) , $mode , 1) : @chmod($path , $mode);
+		}
+
+
+		/**
+		 * 过滤文件里不支持命名的字符
+		 *
+		 * @param $path
+		 *
+		 * @return mixed
+		 */
+		public static function pathFilter($path)
+		{
+			return preg_replace('/(?<!^[a-z])[:*?"<>|]/im' , '_' , $path);
+		}
+
 	}

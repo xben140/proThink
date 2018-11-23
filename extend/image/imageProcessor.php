@@ -11,6 +11,7 @@
 			'image'    => 'think\Image' ,
 			'compress' => 'image\processor\imageCompress' ,
 			'exif'     => 'image\processor\imageExif' ,
+			'encrpty'  => 'image\processor\encrpty' ,
 		];
 
 		/**
