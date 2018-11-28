@@ -100,6 +100,7 @@
 				(is_array($afterClosureList)) && $closureList = array_merge($closureList , $afterClosureList);
 
 				$res = execClosureList($closureList , $err , $globalVariable);
+				$this->model_->data([]);
 
 				if($res !== false && (((int)$globalVariable['_id']) > 0))
 				{
@@ -171,6 +172,7 @@
 				}
 
 				$res = execClosureList($closureList , $err , $globalVariable);
+				$this->model_->data([]);
 
 				if(($res) !== false)
 				{
@@ -241,6 +243,7 @@
 			}
 
 			$res = execClosureList($closureList , $err , $globalVariable);
+			$this->model_->data([]);
 
 			if(($res) !== false)
 			{
@@ -307,6 +310,7 @@
 			}
 
 			$res = execClosureList($closureList , $err , $globalVariable);
+			$this->model_->data([]);
 
 			if(($res) !== false)
 			{
