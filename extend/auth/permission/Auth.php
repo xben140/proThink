@@ -1,8 +1,8 @@
 <?php
 
-	namespace app\common\tool\permission;
+	namespace auth\permission;
 
-	use app\common\tool\BaseAuth;
+	use auth\BaseAuth;
 	use auth\Auth as AuthTool;
 
 	class Auth extends BaseAuth

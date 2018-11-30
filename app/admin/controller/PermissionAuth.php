@@ -3,7 +3,8 @@
 	namespace app\admin\controller;
 
 	use app\common\controller\ControllerBase;
-	use app\common\tool\view\Auth as AuthTool;
+
+
 	use auth\Auth;
 	use builder\elementsFactory;
 	use builder\tagConstructor;
@@ -161,7 +162,7 @@
 			 */
 
 			//权限验证类
-			$this->authClass = \app\common\tool\permission\Auth::getInstance();
+			$this->authClass =\auth\permission\Auth::getInstance();
 
 			//当前请求方法
 			$this->currentUri = $this->authClass::formatMenu(MODULE_NAME , CONTROLLER_NAME , ACTION_NAME);
@@ -196,7 +197,7 @@
 			 */
 
 			//视图分配处理类
-			$this->viewClass = AuthTool::getInstance();
+			$this->viewClass = \auth\view\Auth::getInstance();
 
 			//角色
 			$roles = $this->logic__admin_role->getActivedData(['no_global_admin' => 0 ,]);

@@ -437,7 +437,6 @@
 	 *
 	 *
 	 * 菜单相关
-	 *	app\common\tool\permission\Auth
 	 *
 	 *
 	 * */
@@ -498,7 +497,7 @@
 	 */
 	function makeTree($data , $id = 0 , $level = 1 , $parentField = 'pid')
 	{
-		return \app\common\tool\permission\Auth::getInstance()::addLevel($data , $id , $level , $parentField);
+		return \auth\permission\Auth::getInstance()::addLevel($data , $id , $level , $parentField);
 
 	}
 
@@ -512,7 +511,7 @@
 	 */
 	function formatMenu($a , $b , $c)
 	{
-		return \app\common\tool\permission\Auth::getInstance()::formatMenu($a , $b , $c);
+		return \auth\permission\Auth::getInstance()::formatMenu($a , $b , $c);
 	}
 
 	//构造菜单的路径

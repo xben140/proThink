@@ -1,8 +1,8 @@
 <?php
 
-	namespace app\common\tool\view;
+	namespace auth\view;
 
-	use app\common\tool\BaseRule;
+	use auth\BaseRule;
 
 	class Rule extends BaseRule
 	{

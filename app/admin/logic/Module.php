@@ -566,7 +566,7 @@
 			if(!$data->isEmpty())
 			{
 				$result = makeTree($data);
-				$result = \app\common\tool\permission\Auth::getInstance()::makeMenuTree($result);
+				$result = \auth\permission\Auth::getInstance()::makeMenuTree($result);
 				$flag = true;
 				$menuFile = $infoPath['appPath'] . DS . MODULE_FILE_MENU;
 				try

@@ -1,12 +1,10 @@
 <?php
 
-	namespace app\common\tool;
+	namespace auth;
 
-	use app\common\common\set;
 
 	class BaseAuth
 	{
-		use set;
 
 		/**
 		 * **********************************************************************************************************************
