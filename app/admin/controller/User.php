@@ -7,8 +7,7 @@
 		public function _initialize()
 		{
 			parent::_initialize();
-
-
+			$this->initLogic();
 		}
 
 		/**
@@ -17,7 +16,7 @@
 		 */
 		public function add()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$this->jump($this->logic->add($this->param_post , [
@@ -40,7 +39,7 @@
 		 */
 		public function modifyInfo()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$id = session(URL_MODULE);
@@ -61,7 +60,7 @@
 		{
 			if(IS_POST)
 			{
-				$this->initLogic();
+				
 				$this->param['id'] = getAdminSessionInfo(SESSOIN_TAG_USER , 'id');
 
 				return $this->jump($this->logic->editPwd($this->param));
@@ -78,7 +77,7 @@
 		 */
 		public function editPwd()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);
@@ -93,7 +92,7 @@
 
 		public function assignRoles()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);

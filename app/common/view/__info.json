@@ -1,0 +1,14 @@
+{
+	"id"              : "____ID__",
+	"author"          : "____AUTHOR__",
+	"page_url"        : "____PAGE_URL__",
+	"name"            : "____NAME__",
+	"title"           : "",
+	"version"         : "1.0",
+	"description"     : "____DESCRIPTION__",
+	"default_action"  : "",
+	"update_time"     : ____TIME__,
+	"database_tables" : [
+
+	]
+}

@@ -24,7 +24,8 @@
 		 */
 		public function install()
 		{
-			$this->assign('notification', file_get_contents('./static/defaultTemp.html'));
+			$this->assign('notification' , file_get_contents('./static/defaultTemp.html'));
+
 			return $this->fetch();
 		}
 
@@ -82,7 +83,7 @@
 					$msg = '数据库无法连接<br />请检查主机，账号，密码和端口信息';
 				}
 			}
-			
+
 			if($isDbOk)
 			{
 				try
@@ -184,6 +185,7 @@
 					'password' => $password ,
 					'email'    => $this->param['email'] ,
 					'salt'     => $salt ,
+					'nickname' => '全站管理员' ,
 					'time'     => time() ,
 					'reg_ip'   => IP ,
 				]);

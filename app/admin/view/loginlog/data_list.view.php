@@ -6,7 +6,6 @@
 	return function($__this) {
 		$__this->setPageTitle('日志列表');
 
-		$__this->initLogic();
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::row([
 				integrationTags::rowBlock([

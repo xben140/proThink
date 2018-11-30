@@ -7,11 +7,11 @@
 		public function _initialize()
 		{
 			parent::_initialize();
-		}
+			$this->initLogic();}
 
 		public function add()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$res = uploadImg('image' , function($result) {

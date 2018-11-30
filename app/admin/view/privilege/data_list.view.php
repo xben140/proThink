@@ -5,8 +5,6 @@
 
 	return function($__this) {
 		$__this->setPageTitle('菜单列表');
-
-		$__this->initLogic();
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::row([
 				integrationTags::rowBlock([

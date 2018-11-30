@@ -8,6 +8,7 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+			$this->initLogic();
 		}
 
 
@@ -17,7 +18,7 @@
 		 */
 		public function setField()
 		{
-			$this->initLogic();
+			
 
 			return $this->jump($this->logic->updateField($this->param , [
 				[

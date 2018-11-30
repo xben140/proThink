@@ -292,12 +292,15 @@
 			}
 		}
 
+
+
 		public function setField()
 		{
 			$this->initLogic();
 
 			return $this->jump($this->logic->updateField($this->param));
 		}
+
 
 		public function delete()
 		{

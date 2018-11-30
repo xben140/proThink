@@ -108,6 +108,13 @@
 				] ,
 				[
 					[
+						'field'      => '应用生成器' ,
+						'value'      => '/admin/module/appGenerator' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'appGenerator') ,
+					] ,
+				] ,
+				[
+					[
 						'field'      => '应用管理' ,
 						'value'      => '/admin/module/datalist' ,
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'datalist') ,

@@ -7,6 +7,7 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+			$this->initLogic();
 		}
 
 		/**
@@ -15,7 +16,6 @@
 		 */
 		public function add()
 		{
-			$this->initLogic();
 			if(IS_POST)
 			{
 				$this->jump($this->logic->add($this->param_post , [] , [/*
@@ -46,8 +46,6 @@
 		 */
 		public function delete()
 		{
-			$this->initLogic();
-
 			return $this->jump($this->logic->delete($this->param , [
 
 				[

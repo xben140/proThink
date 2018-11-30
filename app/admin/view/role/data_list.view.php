@@ -6,7 +6,6 @@
 	return function($__this) {
 		$__this->setPageTitle('角色列表');
 
-		$__this->initLogic();
 		$__this->displayContents = integrationTags::basicFrame([
 			integrationTags::row([
 				integrationTags::rowBlock([

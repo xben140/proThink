@@ -7,12 +7,14 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+			$this->initLogic();
+
 		}
 
 
 		public function assignPrivileges()
 		{
-			$this->initLogic();
+			
 			if(IS_POST)
 			{
 				$this->param['id'] = session(URL_MODULE);
@@ -30,7 +32,7 @@
 		 */
 		public function delete()
 		{
-			$this->initLogic();
+			
 
 			return $this->jump($this->logic->delete($this->param , [
 				[

@@ -316,10 +316,10 @@ function popWindows(obj)
 		title     : title,
 		shadeClose: 1,
 		shade     : 0.1,
-		area      : ['85%', '85%'],
+		area      : ['90%', '90%'],
 		resize    : 1,
 		moveOut   : 1,
-		skin      : 'search-dom-pop', //样式类名
+		skin      : 'layui-layer-molv', //样式类名
 		closeBtn  : 1, //不显示关闭按钮
 		anim      : 0,
 		// anim      : randomNum(0, 6),

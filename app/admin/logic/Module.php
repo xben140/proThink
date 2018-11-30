@@ -413,7 +413,20 @@
 			if($info['is_install'] != 1)
 			{
 				$pathInfo = $this->getModulePathInfo($moduleName);
-				if(FileTool::isWritable($pathInfo['appPath']) && FileTool::isWritable($pathInfo['staticPath']))
+				$flag = true;
+				if($flag && is_dir($pathInfo['appPath']) && !FileTool::isWritable($pathInfo['appPath']))
+				{
+					$flag = false;
+					$this->retureResult['message'] = $pathInfo['appPath'] . '</ br>目录权限不足不能删除';
+				}
+
+				if($flag && is_dir($pathInfo['staticPath']) && !FileTool::isWritable($pathInfo['staticPath']))
+				{
+					$flag = false;
+					$this->retureResult['message'] = $pathInfo['staticPath'] . '</ br>目录权限不足不能删除';
+				}
+
+				if($flag)
 				{
 					$res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
 						return true;
@@ -436,7 +449,6 @@
 				}
 				else
 				{
-					$this->retureResult['message'] = '应用文件夹没有写权限，请检查';
 					$this->retureResult['sign'] = RESULT_ERROR;
 				}
 			}
@@ -968,6 +980,328 @@
 
 		}
 
+		/**
+		 * 生成应用骨架
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function appGeneratorFramework($param)
+		{
+			$flag = true;
+			$msg = '';
+			if($flag && !preg_match('#^[a-z]+$#i' , $param['id']))
+			{
+				$flag = false;
+				$msg = '应用ID格式不合法';
+			}
+
+			if($flag && !preg_match('#^\S+$#i' , $param['name']))
+			{
+				$flag = false;
+				$msg = '应用名称必填';
+			}
+
+			$modulePathInfo = $this->getModulePathInfo($param['id']);
+			!isset($param['is_cover']) && ($param['is_cover'] = 0);
+
+			if($flag)
+			{
+				$fileConfig = [
+					//控制器
+					[
+						//后台基类控制器
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\BackendBase.php') ,
+						'content'     => file_get_contents('../app/common/view/__controller_backend_base.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__' => $param['id'] ,
+						] ,
+					] ,
+					[
+						//前台基类控制器
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\FrontendBase.php') ,
+						'content'     => file_get_contents('../app/common/view/__controller_frontend_base.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__' => $param['id'] ,
+						] ,
+					] ,
+					[
+						//前台通用控制器
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\Index.php') ,
+						'content'     => file_get_contents('../app/common/view/__controller_frontend.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__'              => $param['id'] ,
+							'____CONTEOLLER_NAME__' => 'Index' ,
+						] ,
+					] ,
+
+					//模型
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\model\Base.php') ,
+						'content'     => file_get_contents('../app/common/view/__model_base.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__' => $param['id'] ,
+						] ,
+					] ,
+
+					//logic 基类
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\logic\Base.php') ,
+						'content'     => file_get_contents('../app/common/view/__logic_base.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__' => $param['id'] ,
+						] ,
+					] ,
+
+					//validate 基类
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\validate\Base.php') ,
+						'content'     => file_get_contents('../app/common/view/__validate_base.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							'____ID__' => $param['id'] ,
+						] ,
+					] ,
+					//回收站配置 文件
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\recovery.php') ,
+						'content'     => file_get_contents('../app/common/view/__recovery.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//路由配置 文件
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\route.php') ,
+						'content'     => file_get_contents('../app/common/view/__route.php') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//info.json
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\info.json') ,
+						'content'     => file_get_contents('../app/common/view/__info.json') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							"____ID__"          => $param['id'] ,
+							"____AUTHOR__"      => $param['author'] ,
+							"____NAME__"        => $param['name'] ,
+							"____DESCRIPTION__" => $param['description'] ,
+							"____PAGE_URL__"    => $param['page_url'] ,
+							"____TIME__"        => TIME_NOW ,
+						] ,
+					] ,
+					//common.php
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\common.php') ,
+						'content'     => "<?php \r\n//自定义函数文件\r\n" ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [
+							"____ID__"          => $param['id'] ,
+							"____AUTHOR__"      => $param['author'] ,
+							"____NAME__"        => $param['name'] ,
+							"____DESCRIPTION__" => $param['description'] ,
+							"____PAGE_URL__"    => $param['page_url'] ,
+							"____TIME__"        => TIME_NOW ,
+						] ,
+					] ,
+
+
+					//custom.css
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['staticPath'] . '\css\custom.css') ,
+						'content'     => "" ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//custom.js
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['staticPath'] . '\js\custom.js') ,
+						'content'     => "" ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//image
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['staticPath'] . '\image\\') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//template
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['staticPath'] . '\template\default\\') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+
+				];
+
+				$flag = static::writeFile($fileConfig , $msg);
+			}
+
+			if($flag)
+			{
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+				$this->retureResult['message'] = implode('', [
+					'生成成功 </br>',
+					'应用目录 : ' . $modulePathInfo['appPath'].' </br>',
+					'资源目录 : ' . $modulePathInfo['staticPath'],
+				]);
+			}
+			else
+			{
+				$this->retureResult['sign'] = RESULT_ERROR;
+				$this->retureResult['message'] = $msg;
+			}
+
+			return $this->retureResult;
+		}
+
+		/**
+		 * 生成应用逻辑文件
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
+		public function appGeneratorCode($param)
+		{
+			$flag = true;
+			$msg = '';
+			$modulePathInfo = $this->getModulePathInfo($param['id']);
+			!isset($param['is_cover']) && ($param['is_cover'] = 0);
+
+			if($flag && !preg_match('#^[a-z]+$#i' , $param['id']))
+			{
+				$flag = false;
+				$msg = '应用ID格式不合法';
+			}
+
+			if($flag && !is_dir($modulePathInfo['appPath']))
+			{
+				$flag = false;
+				$msg = '应用不存在，先在左边的应用生成器生成应用';
+			}
+
+			$tables = preg_split('/[\r\n]/im' , $param['tables'] , -1 , PREG_SPLIT_NO_EMPTY);
+			if($flag && !count($tables))
+			{
+				$flag = false;
+				$msg = '请填写表名，每行一个';
+			}
+
+			if($flag)
+			{
+				array_map(function($v) use (&$flag , &$msg , $param, $modulePathInfo) {
+					$name = ucwords(strtr($v , ['_' => '' ,]));
+
+					$fileConfig = [
+						//控制器
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\\' . $name . '.php') ,
+							'content'     => file_get_contents('../app/common/view/__controller_backend.php') ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [
+								'____ID__'              => $param['id'] ,
+								'____CONTEOLLER_NAME__' => $name ,
+							] ,
+						] ,
+						//模型
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\model\\' . $name . '.php') ,
+							'content'     => file_get_contents('../app/common/view/__model.php') ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [
+								'____ID__'              => $param['id'] ,
+								'____CONTEOLLER_NAME__' => $name ,
+								'____TABLE_NAME__'      => $v ,
+							] ,
+						] ,
+						//logic
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\logic\\' . $name . '.php') ,
+							'content'     => file_get_contents('../app/common/view/__logic.php') ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [
+								'____ID__'              => $param['id'] ,
+								'____CONTEOLLER_NAME__' => $name ,
+							] ,
+						] ,
+						//validate
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\validate\\' . $name . '.php') ,
+							'content'     => file_get_contents('../app/common/view/__validate.php') ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [
+								'____ID__'              => $param['id'] ,
+								'____CONTEOLLER_NAME__' => $name ,
+							] ,
+						] ,
+					];
+
+
+					$flag = static::writeFile($fileConfig , $msg);
+				} , $tables);
+
+			}
+
+			if($flag)
+			{
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+				$this->retureResult['message'] = '生成成功';
+			}
+			else
+			{
+				$this->retureResult['sign'] = RESULT_ERROR;
+				$this->retureResult['message'] = $msg;
+			}
+
+			return $this->retureResult;
+		}
+
+
+		public static function writeFile($config = [] , &$msg = null)
+		{
+			$flag = true;
+			try
+			{
+				array_map(function($v) {
+
+					if(isset($v['content']))
+					{
+						FileTool::mkdir_(dirname($v['path']));
+						if(!is_file($v['path']) || (is_file($v['path']) && isset($v['is_cover']) && ($v['is_cover'])))
+						{
+							file_put_contents($v['path'] , strtr(($v['content']) , $v['replacement']));
+						}
+					}
+					else
+					{
+						FileTool::mkdir_(($v['path']));
+					}
+
+				} , $config);
+
+			} catch (\Exception $exception)
+			{
+				$flag = false;
+				$msg = $exception->getMessage();
+			}
+
+			return $flag;
+
+		}
 
 
 		/**
@@ -1369,12 +1703,12 @@
 		 *
 		 * @return array
 		 */
-
 		public function getModulePathInfo($moduleName)
 		{
+			//FileTool::mkdir_(replaceToSysSeparator(APP_PATH . $moduleName));
 			$data = [
 				//F:\localWeb\public_local14\app\blog
-				'appPath'     => realpath(replaceToSysSeparator(APP_PATH . $moduleName)) ,
+				'appPath'     => (replaceToSysSeparator(APP_PATH . $moduleName)) ,
 
 				//F:\localWeb\public_local14\public\static\module\blog
 				'staticPath'  => replaceToSysSeparator(MODEL_STATIC_PATH . $moduleName) ,

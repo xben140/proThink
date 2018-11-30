@@ -34,7 +34,7 @@ $('.search-dom-btn-1').mouseover(function () {
 		moveOut   : 1,
 		title     : '条件筛选',
 		shade     : 0.1,
-		skin      : 'search-dom-pop', //样式类名
+		skin      : 'layui-layer-molv', //样式类名
 		closeBtn  : 0, //不显示关闭按钮
 		anim      : 0,
 		// anim      : randomNum(0, 6),
@@ -158,7 +158,7 @@ $('textarea.name').on({
 			moveOut   : 1,
 			title     : '',
 			shade     : 0.1,
-			skin      : 'search-dom-pop', //样式类名
+			skin      : 'layui-layer-molv', //样式类名
 			closeBtn  : 0, //不显示关闭按钮
 			anim      : 0,
 			// anim      : randomNum(0, 6),

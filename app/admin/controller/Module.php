@@ -72,9 +72,6 @@
 		}
 
 
-		/**
-		 *
-		 */
 		public function baseFunc()
 		{
 			$this->initLogic();
@@ -139,7 +136,7 @@
 		}
 
 		/**
-		 *	下载安装包
+		 *    下载安装包
 		 */
 		public function downloadPackage()
 		{
@@ -148,13 +145,13 @@
 		}
 
 		/**
-		 *	下载sql文件
+		 *    下载sql文件
 		 */
 		public function downloadSql()
 		{
 			$this->initLogic();
-			$sqlFile = (PATH_DATABASE_BACKUP.base64_decode($this->param['id']));
-			downloadFile($sqlFile, base64_decode($this->param['id']));
+			$sqlFile = (PATH_DATABASE_BACKUP . base64_decode($this->param['id']));
+			downloadFile($sqlFile , base64_decode($this->param['id']));
 		}
 
 		/**
@@ -230,6 +227,31 @@
 				});
 
 				return json($res);
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+
+		public function appGenerator()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$action = $this->param['option'];
+				switch (($action))
+				{
+					case 'appGeneratorCode' :
+					case 'appGeneratorFramework' :
+						$res = $this->logic->{$action}($this->param);
+						break;
+					default :
+						$res['message'] = '操作出错，请重试';
+						$res['sign'] = RESULT_ERROR;
+				}
+				$this->jump($res);
 			}
 			else
 			{

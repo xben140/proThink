@@ -7,5 +7,6 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+			$this->initLogic();
 		}
 	}

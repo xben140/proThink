@@ -7,12 +7,12 @@
 		public function _initialize()
 		{
 			parent::_initialize();
+			$this->initLogic();
 		}
 
 		//pid=1
 		public function getAreaByPid()
 		{
-			$this->initLogic();
 			$data = $this->logic->getAreaByPid($this->param);
 
 			return json($data);
