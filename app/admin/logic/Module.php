@@ -1625,10 +1625,6 @@
 		/**
 		 * 备份的sql文件列表
 		 *
-		 * @param array $param
-		 * @param null  $callback
-		 * @param bool  $isActivedOnly
-		 *
 		 * @return array|mixed
 		 */
 		public function viewSql()

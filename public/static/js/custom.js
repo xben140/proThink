@@ -314,9 +314,9 @@ function popWindows(obj)
 	let defaultOptions = {
 		type      : 2,
 		title     : title,
-		shadeClose: 1,
+		shadeClose: 0,
 		shade     : 0.1,
-		area      : ['90%', '90%'],
+		area      : ['80%', '80%'],
 		resize    : 1,
 		moveOut   : 1,
 		skin      : 'layui-layer-molv', //样式类名
@@ -341,7 +341,7 @@ function popWindows(obj)
 		}
 	}
 
-	layer.open(defaultOptions);
+	parent.layer.open(defaultOptions);
 	return false;
 }
 
