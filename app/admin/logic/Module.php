@@ -1708,7 +1708,7 @@
 			//FileTool::mkdir_(replaceToSysSeparator(APP_PATH . $moduleName));
 			$data = [
 				//F:\localWeb\public_local14\app\blog
-				'appPath'     => (replaceToSysSeparator(APP_PATH . $moduleName)) ,
+				'appPath'     => (replaceToSysSeparator(realpath(APP_PATH) .DS. $moduleName)) ,
 
 				//F:\localWeb\public_local14\public\static\module\blog
 				'staticPath'  => replaceToSysSeparator(MODEL_STATIC_PATH . $moduleName) ,
