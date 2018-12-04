@@ -69,3 +69,6 @@ label.valid {
 textarea.name {
 	cursor : pointer;
 }
+.install-action  {
+	display : none;
+}

@@ -315,17 +315,17 @@
 									]) ,
 								]) ,
 								/*
-																//图标
-																integrationTags::td([
-																	integrationTags::tdSimple([
-																		//'name'     => '' ,
-																		'editable' => '1' ,
-																		'value'    => $v['ico'] ,
-																		'field'    => 'ico' ,
-																		//'reg'      => '/^$/' ,
-																		//'msg'      => '方法名必填' ,
-																	]) ,
-																]) ,*/
+									//图标
+									integrationTags::td([
+										integrationTags::tdSimple([
+											//'name'     => '' ,
+											'editable' => '1' ,
+											'value'    => $v['ico'] ,
+											'field'    => 'ico' ,
+											//'reg'      => '/^$/' ,
+											//'msg'      => '方法名必填' ,
+										]) ,
+									]) ,*/
 
 								//排序
 								integrationTags::td([

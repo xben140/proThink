@@ -96,18 +96,19 @@
 					//'attr'        => 'disabled' ,
 					'name'        => 'order' ,
 				]) ,
-
-
+/*
 				integrationTags::text([
 					//随便写
-					'field_name'  => '应用ID' ,
+					'field_name'  => '图标' ,
 					'placeholder' => '' ,
 					'tip'         => '' ,
-					'value'       => $info['category'] ,
+					'value'       => $info['ico'] ,
+					//'value'       => 'fa-edit' ,
 					//'attr'        => 'disabled' ,
-					'name'        => 'category' ,
+					'name'        => 'ico' ,
 				]) ,
 
+				*/
 
 				/*
 										integrationTags::switchery([

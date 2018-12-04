@@ -289,7 +289,7 @@
 						host     : "required",
 						dbname   : "required",
 						dbuser   : "required",
-						dbpwd    : "required",
+						// dbpwd    : "required",
 						tabprefix: "required",
 						port     : {
 							required: true,

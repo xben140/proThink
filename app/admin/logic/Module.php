@@ -55,11 +55,42 @@
 		public function install($param)
 		{
 			$info = $this->getModuleInfo($param['id']);
+			$pathInfo = $this->getModulePathInfo($param['id']);
+
 			$transaction = [];
 			$_param = [];
 			$err = null;
 			switch ($param['type'])
 			{
+				case 'apply' :
+					//代码从backup文件夹复制到app
+					if(!is_dir($pathInfo['appPath']))
+					{
+						$res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH . DS . 'app' , function($info , $relativePath) {
+							return true;
+						});
+						$res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH . DS . 'public' , function($info , $relativePath) {
+							return true;
+						});
+
+						if($res['sign'])
+						{
+							$res = 1;
+							$this->retureResult['message'] = '部署成功，请前往应用列表查看';
+						}
+						else
+						{
+							$res = false;
+							$err = $res['msg'];
+						}
+					}
+					else
+					{
+						$res = false;
+						$err = '此应用已经存在，如需重新部署，请先到应用列表删除应用';
+					}
+					break;
+
 				case 'menu' :
 					//菜单
 					$transaction[] = [
@@ -173,6 +204,7 @@
 
 							$id = db('configGroup')->insertGetId([
 								'name'   => $info['info']['id'] ,
+								'remark' => '' ,
 								'status' => 1 ,
 							]);
 
@@ -213,6 +245,7 @@
 									'value'    => $val ,
 									'is_const' => isset($v['is_const']) ? (int)$v['is_const'] : '0' ,
 									'group_id' => $id ,
+									'remark'   => '' ,
 									'status'   => 1 ,
 									'time'     => TIME_NOW ,
 								];
@@ -280,6 +313,50 @@
 			$_param = [];
 			switch ($param['type'])
 			{
+
+				case 'apply' :
+					$pathInfo = $this->getModulePathInfo($param['id']);
+					$flag = true;
+					if($flag && is_dir($pathInfo['appPath']) && !FileTool::isWritable($pathInfo['appPath']))
+					{
+						$flag = false;
+						$this->retureResult['message'] = $pathInfo['appPath'] . '</ br>目录权限不足不能删除';
+					}
+
+					if($flag && is_dir($pathInfo['staticPath']) && !FileTool::isWritable($pathInfo['staticPath']))
+					{
+						$flag = false;
+						$this->retureResult['message'] = $pathInfo['staticPath'] . '</ br>目录权限不足不能删除';
+					}
+
+					if($flag)
+					{
+						$res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
+							return true;
+						});
+
+						$res['sign'] && $res = FileTool::recursiveRm($pathInfo['staticPath'] , function($info , $relativePath) {
+							return true;
+						});
+
+						if($res['sign'])
+						{
+							$this->retureResult['message'] = '删除成功 ';
+							$this->retureResult['sign'] = RESULT_SUCCESS;
+						}
+						else
+						{
+							$this->retureResult['message'] = $res['msg'];
+							$this->retureResult['sign'] = RESULT_ERROR;
+						}
+					}
+					else
+					{
+						$this->retureResult['sign'] = RESULT_ERROR;
+					}
+
+					break;
+
 				case 'menu' :
 					//删除菜单
 					$transaction[] = [
@@ -410,7 +487,7 @@
 
 			$info = $this->getModuleInfo($moduleName);
 
-			if($info['is_install'] != 1)
+			if(!$info['is_install'])
 			{
 				$pathInfo = $this->getModulePathInfo($moduleName);
 				$flag = true;
@@ -734,20 +811,33 @@
 			};
 
 			$info = [
-				'ico'         => '' ,
-				'is_install'  => 3 ,
+				//安装状态 0-信息残缺，需重新安装 1-已安装
+				'is_install'  => 0 ,
+				//封面图路径
 				'cover'       => '' ,
+				//logo图片位置
+				'ico'         => '' ,
+				//info.json 里的数据
 				'info'        => [] ,
+				//config.json 里的数据
 				'conf'        => [] ,
+				//menu.json 里的数据
 				'menu'        => [] ,
+				//sql.json 里的数据
 				'sql'         => [] ,
+				//database  文件夹里的数据
 				'backup'      => '' ,
-				'is_complete' => 1 ,
+				//报错信息，信息残缺时显示
 				'error'       => [] ,
+				//route.php 里的配置
 				'route'       => [] ,
+				//recovery.php 里的配置
 				'recovery'    => [] ,
+				//
+				'is_complete' => 1 ,
 			];
 
+			//应用信息
 			try
 			{
 				$field = [
@@ -760,21 +850,21 @@
 					'update_time' ,
 					'database_tables' ,
 				];
+
 				$infoFile = $appPath . DS . MODULE_FILE_INFO;
 				if(is_file($infoFile))
 				{
-					//应用信息
 					$info['info'] = json_decode(file_get_contents($infoFile) , 1);
 					if(!is_array($info['info']))
 					{
-						$info['error'][] = MODULE_FILE_INFO . '必须返回数组';
+						$info['error'][] = MODULE_FILE_INFO . '必须返回合法的 json ，格式参考开发手册';
 						$info['is_complete'] = 0;
 						$info['info'] = [];
 						$info['info']['id'] = $moduleName;
 					}
 					else
 					{
-
+						!isset($info['info']['is_deving']) && ($info['info']['is_deving'] = 0);
 						foreach ($field as $k => $v)
 						{
 							if(!isset($info['info'][$v]))
@@ -795,22 +885,7 @@
 				{
 					$info['info'] = [];
 					$info['info']['id'] = $moduleName;
-				}
-
-			} catch (\Exception $e)
-			{
-				$info['error'][] = $e->getMessage();
-				$info['is_complete'] = 0;
-			}
-
-			try
-			{
-				//配置信息
-				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG) , 1);;
-
-				if(!is_array($info['conf']))
-				{
-					$info['error'][] = MODULE_FILE_CONFIG . '必须返回数组';
+					$info['error'][] = '缺少 ' . MODULE_FILE_INFO . '文件';
 					$info['is_complete'] = 0;
 				}
 			} catch (\Exception $e)
@@ -819,9 +894,25 @@
 				$info['is_complete'] = 0;
 			}
 
+			//配置信息
 			try
 			{
-				//应用路由信息
+				$info['conf'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_CONFIG) , 1);;
+
+				if(!is_array($info['conf']))
+				{
+					$info['error'][] = MODULE_FILE_CONFIG . '必须是合法json';
+					$info['is_complete'] = 0;
+				}
+			} catch (\Exception $e)
+			{
+				$info['error'][] = $e->getMessage();
+				$info['is_complete'] = 0;
+			}
+
+			//应用路由信息
+			try
+			{
 				$routeFile = $appPath . DS . MODULE_FILE_ROUTE;
 				if(is_file($routeFile))
 				{
@@ -840,9 +931,9 @@
 				$info['is_complete'] = 0;
 			}
 
+			//应用回收信息
 			try
 			{
-				//应用回收信息
 				$recoveryFile = $appPath . DS . MODULE_FILE_RECOVERY;
 				if(is_file($recoveryFile))
 				{
@@ -861,14 +952,14 @@
 				$info['is_complete'] = 0;
 			}
 
+			//菜单信息
 			try
 			{
-				//菜单信息
 				$info['menu'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_MENU) , 1);;
 
 				if(!is_array($info['menu']))
 				{
-					$info['error'][] = MODULE_FILE_MENU . '必须返回数组';
+					$info['error'][] = MODULE_FILE_MENU . '必须返回合法json';
 					$info['is_complete'] = 0;
 				}
 			} catch (\Exception $e)
@@ -877,14 +968,14 @@
 				$info['is_complete'] = 0;
 			}
 
+			//安装sql语句
 			try
 			{
-				//安装sql语句
 				$info['sql'] = json_decode(file_get_contents($appPath . DS . MODULE_FILE_SQL) , 1);;
 
 				if(!is_array($info['sql']) || !isset($info['sql']['install']))
 				{
-					$info['error'][] = MODULE_FILE_SQL . '必须返回数组格式，并且必须有键为 install 的值存在';
+					$info['error'][] = MODULE_FILE_SQL . '必须返回合法json，并且必须有键为 install 的项存在';
 					$info['is_complete'] = 0;
 				}
 			} catch (\Exception $e)
@@ -893,6 +984,9 @@
 				$info['is_complete'] = 0;
 			}
 
+			//logo文件，放置于应用静态资源 image目录下，名为logo.png即可,运行格式为 png，jpg，jpeg，gif
+			//没有此文会自动引用系统默认占位图
+			//E:\localweb\public_local2\public\static\module\admin\image
 			try
 			{
 				$info['ico'] = $makeImgPath('logo');
@@ -902,6 +996,10 @@
 				$info['is_complete'] = 0;
 			}
 
+			//封面图
+			//封面图文件，放置于应用静态资源 image目录下，名为cover.png即可,运行格式为 png，jpg，jpeg，gif
+			//没有此文会自动引用系统默认占位图
+			//E:\localweb\public_local2\public\static\module\admin\image
 			try
 			{
 				$info['cover'] = $makeImgPath('cover');
@@ -911,9 +1009,13 @@
 				$info['is_complete'] = 0;
 			}
 
+			//附加sql语句
+			//位于应用的database文件夹下
+			//会扫描里面所有文件
+			//通常用不上
+			//E:\localweb\public_local2\app\ccc\database
 			try
 			{
-				//安装sql语句
 				$info['backup'] = (function($appPath) {
 					$path = $appPath . DS . 'database' . DS;
 					$res = [];
@@ -935,40 +1037,66 @@
 
 			try
 			{
-				$info['is_install'] = (function($infoFormFile) use ($info) {
+				(function($infoFormFile) use (&$info) {
+					$info['is_install'] = 1;
 					$status = null;
-					if(!$info['is_complete'])
+					$tablesStatus = [];
+
+					//菜单表有没有对应id的记录
+					$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($infoFormFile['id']) ,])->count() > 0);
+					if(!$hasPrivileges)
 					{
-						$status = $this->model_::$appStatusMap[3]['value'];
+						$info['error'][] = '应用没有添加菜单，前往 菜单管理 中添加';
+						$info['is_install'] = 0;
 					}
+
+
+					//config_group表里有没有分组为 id 的记录
+					$hasConfig = ($this->model__admin_Configgroup->where(['name' => strtolower($infoFormFile['id']) ,])->count() > 0);
+					if(!$hasConfig)
+					{
+						$info['error'][] = '在 配置列表 -> 配置分组 中添加一个组名为此应用 ID 的记录';
+						$info['is_install'] = 0;
+					}
+
+					/*
+										//路由表里有没有 name 为 id 的记录
+										$hasRoute = (db('route')->where(['name' => strtolower($infoFormFile['id']) ,])->count() > 0);
+										if(!$hasConfig)
+										{
+											$info['error'][] = '在 配置列表 > 配置分组 中添加一个组名为此应用 ID 的记录';
+											$info['is_install'] = 0;
+										}
+					*/
+
+
+					//info.json 里 database_tables 每个表是不是都在数据库有存在
+					foreach ($infoFormFile['database_tables'] as $k => $v)
+					{
+						$sql = "SHOW TABLES LIKE '%{$v}%'";
+						$tablesStatus[] = (count(querySql($sql)) > 0);
+					}
+					if(in_array(false , $tablesStatus))
+					{
+						$info['error'][] = '数据库缺少 info.json 中 database_tables 指定的表，请确认每个表都已被创建';
+						$info['is_install'] = 0;
+					}
+
+					//config_group 表里有对应配置分组
+					//info.json database_tables 每个应用表都存在
+					//privilege 表有对应记录
+					//rout 表有对应记录
+					// -- 已安装
+					if($hasPrivileges && $hasConfig && $hasRoute && !in_array(false , $tablesStatus))
+					{
+						$info['is_install'] = (int)$this->model_::$appStatusMap[1]['value'];
+					}
+					//应用信息残缺，要重新安装
 					else
 					{
-						$hasPrivileges = ($this->model__admin_privilege->where(['category' => strtolower($infoFormFile['id']) ,])->count() > 0);
-						$tablesStatus = [];
-						foreach ($infoFormFile['database_tables'] as $k => $v)
-						{
-							$sql = "SHOW TABLES LIKE '%{$v}%'";
-							$tablesStatus[] = (count(querySql($sql)) > 0);
-						}
-
-						//如果有安装菜单权限，并且每个应用表都存在 -- 已安装
-						if($hasPrivileges && !in_array(false , $tablesStatus))
-						{
-							$status = $this->model_::$appStatusMap[1]['value'];
-						}
-						//如果没有安装菜单权限，并且应用表个数大于0，并且一个也表也没有 -- 未安装
-						elseif(!$hasPrivileges && (count($tablesStatus) > 0) && !in_array(true , $tablesStatus))
-						{
-							$status = $this->model_::$appStatusMap[0]['value'];
-						}
-						//应用信息残缺，要重新安装
-						else
-						{
-							$status = $this->model_::$appStatusMap[2]['value'];
-						}
+						$info['is_install'] = (int)$this->model_::$appStatusMap[0]['value'];
 					}
 
-					return $status;
 				})(json_decode(file_get_contents($appPath . DS . MODULE_FILE_INFO) , 1));
 			} catch (\Exception $e)
 			{
@@ -1002,6 +1130,13 @@
 				$flag = false;
 				$msg = '应用名称必填';
 			}
+
+			$flag && $this->model__admin_configgroup->insertGetId([
+				'name'   => $param['id'] ,
+				'remark' => $param['id'] . ' 应用的配置分组' ,
+				'time'   => TIME_NOW ,
+				'status' => '1' ,
+			]);
 
 			$modulePathInfo = $this->getModulePathInfo($param['id']);
 			!isset($param['is_cover']) && ($param['is_cover'] = 0);
@@ -1098,21 +1233,39 @@
 							"____TIME__"        => TIME_NOW ,
 						] ,
 					] ,
+
+					//menu.json
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\menu.json') ,
+						'content'     => file_get_contents('../app/common/view/__menu.json') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//config.json
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\config.json') ,
+						'content'     => file_get_contents('../app/common/view/__config.json') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//sql.json
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\sql.json') ,
+						'content'     => file_get_contents('../app/common/view/__sql.json') ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+
 					//common.php
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\common.php') ,
 						'content'     => "<?php \r\n//自定义函数文件\r\n" ,
 						'is_cover'    => $param['is_cover'] ,
-						'replacement' => [
-							"____ID__"          => $param['id'] ,
-							"____AUTHOR__"      => $param['author'] ,
-							"____NAME__"        => $param['name'] ,
-							"____DESCRIPTION__" => $param['description'] ,
-							"____PAGE_URL__"    => $param['page_url'] ,
-							"____TIME__"        => TIME_NOW ,
-						] ,
+						'replacement' => [] ,
 					] ,
-
 
 					//custom.css
 					[
@@ -1153,10 +1306,10 @@
 			if($flag)
 			{
 				$this->retureResult['sign'] = RESULT_SUCCESS;
-				$this->retureResult['message'] = implode('', [
-					'生成成功 </br>',
-					'应用目录 : ' . $modulePathInfo['appPath'].' </br>',
-					'资源目录 : ' . $modulePathInfo['staticPath'],
+				$this->retureResult['message'] = implode('' , [
+					'生成成功 </br>' ,
+					'应用目录 : ' . $modulePathInfo['appPath'] . ' </br>' ,
+					'资源目录 : ' . $modulePathInfo['staticPath'] ,
 				]);
 			}
 			else
@@ -1203,7 +1356,7 @@
 
 			if($flag)
 			{
-				array_map(function($v) use (&$flag , &$msg , $param, $modulePathInfo) {
+				array_map(function($v) use (&$flag , &$msg , $param , $modulePathInfo) {
 					$name = ucwords(strtr($v , ['_' => '' ,]));
 
 					$fileConfig = [
@@ -1271,6 +1424,14 @@
 		}
 
 
+		/**
+		 * 代码生成器 写文件方法
+		 *
+		 * @param array $config
+		 * @param null  $msg
+		 *
+		 * @return bool
+		 */
 		public static function writeFile($config = [] , &$msg = null)
 		{
 			$flag = true;
@@ -1424,13 +1585,20 @@
 			$data = FileTool::listDir(PATH_BACKUP , function($v , $info) {
 				$res = [
 					'is_available' => 1 ,
+					'is_applyed'   => 0 ,
 					'info'         => [] ,
 					'error'        => [] ,
 				];
+
 				$id = $v['name'];
+				$info = $this->getModuleInfo($id);
+
+				$infoPath = $this->getModulePathInfo($id);
+
+				$res['is_applyed'] = !!is_dir($infoPath['appPath']);
+
+				//E:\localweb\public_local2\public\backup\blog\backup\app\blog\
 				$appPath = replaceToSysSeparator($v['path'] . '\backup\app' . DS . $id . DS);
-
-
 				foreach ([
 							 MODULE_FILE_CONFIG ,
 							 MODULE_FILE_INFO ,
@@ -1624,7 +1792,6 @@
 
 		/**
 		 * 备份的sql文件列表
-		 *
 		 * @return array|mixed
 		 */
 		public function viewSql()
@@ -1686,6 +1853,8 @@
 
 			return $this->retureResult;
 		}
+
+
 		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
@@ -1704,7 +1873,7 @@
 			//FileTool::mkdir_(replaceToSysSeparator(APP_PATH . $moduleName));
 			$data = [
 				//F:\localWeb\public_local14\app\blog
-				'appPath'     => (replaceToSysSeparator(realpath(APP_PATH) .DS. $moduleName)) ,
+				'appPath'     => (replaceToSysSeparator(realpath(APP_PATH) . DS . $moduleName)) ,
 
 				//F:\localWeb\public_local14\public\static\module\blog
 				'staticPath'  => replaceToSysSeparator(MODEL_STATIC_PATH . $moduleName) ,

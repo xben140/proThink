@@ -38,7 +38,6 @@
 			$data = [];
 			$msg = '数据库连接成功，配置信息填写正确<br />点击下一步安装';
 
-
 			if(!preg_match('#^[^@]+@[^.]+\.[a-z]{2,6}$#i' , $this->param['email']))
 			{
 				$isDbOk = false;

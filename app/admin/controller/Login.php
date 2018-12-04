@@ -176,11 +176,7 @@
 				'item'    => 'exec 函数' ,
 				'require' => '可执行' ,
 				'value'   => $t ? '可执行' : '未开启 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
-				'result'  => $t ? (function() {
-					@chmod(ROOT_PATH , 0777);
-
-					return 1;
-				})() : ($isEvnOk = 0) ,
+				'result'  => $t ? 1 : ($isEvnOk = 0) ,
 			];
 
 			$t = function_exists('chmod');
@@ -188,7 +184,11 @@
 				'item'    => 'chmod 函数' ,
 				'require' => '可执行' ,
 				'value'   => $t ? '可执行' : '未开启 <a target="_blank" href="https://zhidao.baidu.com/question/217070038.html">开启方法</a>' ,
-				'result'  => $t ? 1 : ($isEvnOk = 0) ,
+				'result'  => $t ? (function() {
+					@chmod(ROOT_PATH , 0777);
+
+					return 1;
+				})() : ($isEvnOk = 0) ,
 			];
 
 
@@ -274,7 +274,6 @@
 
 			if(!$t)
 			{
-
 				$data[] = [
 					'item'    => '' ,
 					'require' => '' ,
@@ -289,7 +288,7 @@
 	<td>__REQUIRE__</td>
 	<td>__VALUE__</td>
 	<td>
-		<button class="btn btn-xs btn-__AAA__ " type="button">
+		<button class="btn btn-sm btn-__AAA__ " type="button">
 			<i class="fa fa-__BBB__"></i>
 		</button>
 	</td>
@@ -312,7 +311,7 @@ AA;
 			}
 			else
 			{
-				$this->error($tmp , null , $data);
+				$this->error(implode(' ' , $tmp)  , null , $data);
 			}
 		}
 

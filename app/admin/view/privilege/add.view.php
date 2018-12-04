@@ -96,9 +96,13 @@
 				]) ,
 
 
+
+
+				/*
+				 *
 				integrationTags::text([
 					//随便写
-					'field_name'  => '应用ID' ,
+					'field_name'  => '图标' ,
 					'placeholder' => '' ,
 					'tip'         => '' ,
 					'value'       => '-' ,
@@ -106,8 +110,6 @@
 					//'attr'        => 'disabled' ,
 					'name'        => 'ico' ,
 				]) ,
-
-				/*
 
 										integrationTags::switchery([
 											//额外属性

@@ -71,31 +71,41 @@ function itemSet(ids, btn, callback_)
 
 
 
-function doAction()
+/**
+ * 安装
+ */
+function install_1()
 {
-	$('.install-action').click();
+	$('.install-apply').click();
 }
 
 
-function beforeAction(obj)
+function install_2(obj, data)
 {
-	obj.parent().prev().text('正在执行...')
+	$('.install-apply').parent().prev().text(data.msg)
+	$('.install-menu').click();
+	$('.install-config').click();
+	$('.install-db').click();
+	$('.install-route').click();
+	$('.install-recovery').click();
 }
 
 
-function successAction(obj, data)
+function install_3(obj, data)
 {
 	obj.parent().data('success', 1);
 	let count = 0;
 	$('.install-action').each(function (k, v) {
 		$(v).parent().data('success') && (count += 1)
 	});
+	// obj.hide();
+	obj.parent().prev().text(data.msg)
 	if (count == 5)
 	{
-		$('.btn-custom-event').hide()
-		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		// $('.btn-custom-event').hide()
+		// let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
-		$index = layer.alert('处理成功，请点击 全局刷新 更新菜单', {
+		$index = layer.alert('安装成，点击 全局刷新 更新菜单', {
 			shadeClose: false,
 			shade     : 0,
 			closeBtn  : 0, //不显示关闭按钮
@@ -105,29 +115,53 @@ function successAction(obj, data)
 			// parent.layer.close(index); //再执行关闭
 		});
 	}
-	obj.hide();
-	obj.parent().prev().text(data.msg)
 }
 
 
-function errorAction(obj)
+/**
+ * 卸载
+ */
+
+function uninstall_1()
 {
-	obj.parent().prev().text('执行失败，请点击手动执行重试。。。')
+	$('.install-menu').click();
+	$('.install-config').click();
+	$('.install-db').click();
+	$('.install-route').click();
+	$('.install-recovery').click();
 }
 
 
 
+function uninstall_2(obj, data)
+{
+	obj.parent().data('success', 1);
+	let count = 0;
+	$('.install-action').each(function (k, v) {
+		$(v).parent().data('success') && (count += 1)
+	});
+	// obj.hide();
+	obj.parent().prev().text(data.msg)
+	if (count == 5)
+	{
+		$('.install-apply').click();
+	}
+}
+function uninstall_3(obj, data)
+{
+	$('.install-apply').parent().prev().text(data.msg)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	$index = layer.alert('卸载完成，点击 全局刷新 更新菜单', {
+		shadeClose: false,
+		shade     : 0,
+		closeBtn  : 0, //不显示关闭按钮
+		skin      : 'layui-layer-molv' //样式类名
+	}, function () {
+		layer.close($index); //再执行关闭
+		// parent.layer.close(index); //再执行关闭
+	});
+}
+function beforeAction(obj)
+{
+	obj.parent().prev().text('正在执行...')
+}

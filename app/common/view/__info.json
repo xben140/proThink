@@ -4,6 +4,7 @@
 	"page_url"        : "____PAGE_URL__",
 	"name"            : "____NAME__",
 	"title"           : "",
+	"is_deving"       : "1",
 	"version"         : "1.0",
 	"description"     : "____DESCRIPTION__",
 	"default_action"  : "",

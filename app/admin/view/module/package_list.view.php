@@ -21,7 +21,7 @@
 									'title' => '上传安装包' ,
 								] ,
 							] ,
-						],
+						] ,
 					] , [0]) ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
@@ -34,6 +34,10 @@
 							[
 								'field' => '信息' ,
 								'attr'  => '' ,
+							] ,
+							[
+								'field' => '状态' ,
+								'attr'  => 'style="width:250px;"' ,
 							] ,
 							[
 								'field' => '操作' ,
@@ -63,69 +67,88 @@
 									integrationTags::td([
 										integrationTags::tdSimple([
 											'value' => $v['info']['id'] ,
-											'name' => 'ID : ',
+											'name'  => 'ID : ' ,
 										]) ,
-										'<br />',
+										'<br />' ,
 										integrationTags::tdSimple([
 											'value' => $v['info']['name'] ,
-											'name' => '应用名 : ',
+											'name'  => '应用名 : ' ,
 										]) ,
-										'<br />',
+										'<br />' ,
 										integrationTags::tdSimple([
-											'value' => formatTime($v['info']['update_time']),
-											'name' => '更新时间 : ',
+											'value' => formatTime($v['info']['update_time']) ,
+											'name'  => '更新时间 : ' ,
 										]) ,
-										'<br />',
+										'<br />' ,
 										integrationTags::tdSimple([
 											'value' => $v['info']['version'] ,
-											'name' => '版本 : ',
+											'name'  => '版本 : ' ,
 										]) ,
-										'<br />',
+										'<br />' ,
 										integrationTags::tdSimple([
 											'value' => $v['info']['description'] ,
-											'name' => '描述 : ',
+											'name'  => '描述 : ' ,
+										]) ,
+									]) ,
+
+									//信息
+									integrationTags::td([
+										integrationTags::tdSimple([
+											'value' => (function($v) {
+												$status = '';
+												switch (!!$v['is_applyed'])
+												{
+													case true :
+														$class = 'btn-success';
+														$status = '已安装';
+														break;
+													case false :
+														$class = 'btn-danger';
+														$status = '未安装';
+														break;
+												}
+
+												return '<span class="btn-sm ' . $class . '">' .$status . '</span>';
+											})($v)  ,
 										]) ,
 									]) ,
 
 									//操作
 									integrationTags::td([
-										integrationTags::tdButton([
-											'class'  => ' btn-primary btn-custom-request' ,
-											'data'   => [
-												'src'        => url('apply') ,
-												'is_reload'  => 0 ,
-												'is_confirm' => 1 ,
-												'msg'        => '确定部署到应用？' ,
-											] ,
-											'params' => [//'id' => $v['id'] ,
-											] ,
-											'value'  => '部署到应用' ,
-											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'apply') ,
 
+										integrationTags::tdButton([
+											'value'      => $v['is_applyed'] ? '卸载' :'安装',
+											'class'      => ' btn-primary btn-open-pop' ,
+											'data'       => [
+												'src'       => url('operation') ,
+												'title'     =>  $v['is_applyed'] ? '卸载' :'安装',
+												'is_reload' => 1 ,
+											] ,
+											'params'     => [
+												'id' => $v['info']['id'] ,
+											] ,
+											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'operation') ,
 										]) ,
 
 										'<br />' ,
 										integrationTags::tdButton([
-											'class'  => ' btn-danger btn-custom-request' ,
-											'data'   => [
+											'class'      => ' btn-danger btn-custom-request' ,
+											'data'       => [
 												'src'        => url('delPackage') ,
 												'is_reload'  => 1 ,
 												'is_confirm' => 1 ,
 											] ,
-											'params' => [//'id' => $v['id'] ,
+											'params'     => [//'id' => $v['id'] ,
 											] ,
-											'value'  => '删除包文件' ,
+											'value'      => '删除包文件' ,
 											'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delPackage') ,
-
 										]) ,
 										'<br />' ,
 										(function($v) use ($__this) {
-											return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'downloadPackage') ?
-
-												integrationTags::a('下载包文件' , [
-													'href' => url('downloadPackage' , ['id' => $v['info']['id']]) ,
-												]) : [];
-										})($v),
+											return $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'downloadPackage') ? integrationTags::a('下载包文件' , [
+												'href' => url('downloadPackage' , ['id' => $v['info']['id']]) ,
+											]) : [];
+										})($v) ,
 
 
 									]) ,

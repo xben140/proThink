@@ -5,36 +5,36 @@
 
 	return function($__this) {
 		$__this->initLogic();
+
 		session(URL_MODULE , $__this->param['id']);
 		$info = $__this->logic->getModuleInfo($__this->param['id']);
+		$infoPath = $__this->logic->getModulePathInfo($__this->param['id']);
 
 		$btn = [];
-		switch ($info['is_install'])
+		if(is_dir($infoPath['appPath']))
 		{
-			case '1' :
-			case '2' :
-				session(URL_MODULE . 'action' , 'uninstall');
-				$btn[0][] = [
+			session(URL_MODULE . 'action' , 'uninstall');
+			$btn[0][] = [
+				'is_display' => 1 ,
+				'class'      => ' btn-danger btn-custom-event ' ,
+				'data'       => [
+					'callback' => 'uninstall_1' ,
+				] ,
+				'field'      => '卸载应用' ,
+			];
+		}
+		else
+		{
+			session(URL_MODULE . 'action' , 'install');
+			$btn[0][] = [
 
-					'is_display' => 1 ,
-					'class'      => ' btn-danger btn-custom-event ' ,
-					'data'       => [
-						'callback' => 'doAction' ,
-					] ,
-					'field'      => '卸载应用' ,
-				];
-				break;
-			case '0' :
-				session(URL_MODULE . 'action' , 'install');
-				$btn[0][] = [
-
-					'is_display' => 1 ,
-					'class'      => ' btn-info btn-custom-event ' ,
-					'data'       => [
-						'callback' => 'doAction' ,
-					] ,
-					'field'      => '安装应用' ,
-				];
+				'is_display' => 1 ,
+				'class'      => ' btn-info btn-custom-event ' ,
+				'data'       => [
+					'callback' => 'install_1' ,
+				] ,
+				'field'      => '安装应用' ,
+			];
 		}
 
 		$__this->setPageTitle('应用');
@@ -45,36 +45,47 @@
 
 					integrationTags::rowButton($btn , []) ,
 
-					'<p class="red">卸载过程会删除此应用' . MODULE_FILE_INFO . ' 里 database_tables 对应表所有数据</p>' ,
+					//'<p class="red">卸载过程会删除此应用' . MODULE_FILE_INFO . ' 里 database_tables 对应表所有数据</p>' ,
 					//'<p class="red">在列表页点击 <备份应用数据> 会将此应用的数据写到应用的database目录下</p>' ,
 					//'<p class="red"><备份安装包> 会将备份的应用数据一并打包，即使删除应用，仍然可以重新安装应用包恢复数据</p>' ,
 
-					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this, $info) {
+					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this , $info) {
 						$data = [
+							[
+								'behavior' => (session(URL_MODULE . 'action') == 'install') ? '部署应用' : '删除应用' ,
+								'class'    => 'install-apply' ,
+								'type'     => 'apply' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_2' : 'uninstall_3' ,
+							] ,
 							[
 								'behavior' => '菜单信息' ,
 								'class'    => 'install-menu' ,
 								'type'     => 'menu' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_3' : 'uninstall_2' ,
 							] ,
 							[
 								'behavior' => '配置信息' ,
 								'class'    => 'install-config' ,
 								'type'     => 'config' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_3' : 'uninstall_2' ,
 							] ,
 							[
 								'behavior' => '数据信息' ,
 								'class'    => 'install-db' ,
 								'type'     => 'db' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_3' : 'uninstall_2' ,
 							] ,
 							[
 								'behavior' => '路由信息' ,
 								'class'    => 'install-route' ,
 								'type'     => 'route' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_3' : 'uninstall_2' ,
 							] ,
 							[
 								'behavior' => '回收信息' ,
 								'class'    => 'install-recovery' ,
 								'type'     => 'recovery' ,
+								'after'    => (session(URL_MODULE . 'action') == 'install') ? 'install_3' : 'uninstall_2' ,
 							] ,
 						];
 
@@ -91,7 +102,7 @@
 								'attr'  => 'style="width:auto;"' ,
 							] ,
 							[
-								'field' => '操作' ,
+								'field' => '' ,
 								'attr'  => 'style="width:100px;"' ,
 							] ,
 						]);
@@ -119,7 +130,7 @@
 								integrationTags::td([
 
 									integrationTags::tdSimple([
-										'value'    => '',
+										'value'    => '' ,
 										//'value'    => $v['class'] ,
 										'editable' => 0 ,
 									]) ,
@@ -127,12 +138,13 @@
 								]) ,
 
 								integrationTags::td([
+
 									integrationTags::tdButton([
-										'class'  => ' btn-info btn-custom-request install-action' ,
+										'class'  => ' btn-info btn-custom-request install-action ' . $v['class'] ,
 										'data'   => [
 											'src'             => url('operation') ,
 											'before-request'  => 'beforeAction' ,
-											'success-request' => 'successAction' ,
+											'success-request' => $v['after'] ,
 											'error-request'   => 'errorAction' ,
 										] ,
 										'params' => [
@@ -152,6 +164,8 @@
 											}
 										})($info) ,
 									]) ,
+
+
 								]) ,
 
 							]);

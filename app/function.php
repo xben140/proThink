@@ -67,11 +67,17 @@
 	function execClosureList($list = [] , &$err = null , &$globalVariable = null)
 	{
 		return \auth\Auth::execClosureList(function() {
+
 			Db::startTrans();
+
 		} , function() {
+
 			Db::commit();
+
 		} , function() {
+
 			Db::rollback();
+
 		} , $list , $err , $globalVariable);
 	}
 
