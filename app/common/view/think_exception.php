@@ -16,7 +16,7 @@
 			<h2 class="font-bold"><?php echo htmlentities($message); ?></h2>
 			<div class="error-desc">
 				<button onclick="history.back()" class="btn btn-primary m-t btn-lg">返回</button>
-				<a href="/portal/login/logout.html" class="btn btn-danger m-t btn-lg">重新登录</a>
+				<a href="/admin/login/logout" class="btn btn-danger m-t btn-lg">重新登录</a>
 			</div>
 		</div>
 		<script src="/hplus/js/jquery.min.js?v=2.1.4"></script>

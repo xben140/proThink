@@ -26,21 +26,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td>iThink FAQ</td>
+					<td>后台演示</td>
 					<td>
-						<a target="_blank" href="http://forum.ithinkphp.org">forum.ithinkphp.org</a>
+						<a target="_blank" href="http://demo.ithinkphp.org/admin">demo.ithinkphp.org/admin</a>（输入验证码即可登录）
 					</td>
 				</tr>
 				<tr>
-					<td>交流社区</td>
+					<td>前台演示</td>
 					<td>
-						<a target="_blank" href="http://forum.ithinkphp.org">forum.ithinkphp.org</a>
+						<a target="_blank" href="http://demo.ithinkphp.org">demo.ithinkphp.org</a>
 					</td>
 				</tr>
 				<tr>
 					<td>码云仓库</td>
 					<td>
 						<a target="_blank" href="https://gitee.com/wf5858585858/iThink">https://gitee.com/wf5858585858/iThink</a>
+					</td>
+				</tr>
+				<tr>
+					<td>交流社区</td>
+					<td>
+						<a target="_blank" href="http://forum.ithinkphp.org">forum.ithinkphp.org</a>
 					</td>
 				</tr>
 				<tr>

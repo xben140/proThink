@@ -24,6 +24,17 @@
 					] , [
 						0 ,
 					]) ,
+					'<p class="red"> <strong><a target="_blank" href="https://www.kancloud.cn/wf00568/main/866944">参考文档</a></strong></p>' ,
+
+					'<p class="red">* 此功能是开发新应用的第一步，生成应用骨架文件，包括基类 controller， model，logic等</p>' ,
+					'<p class="red">* 应用ID必填 必须为纯小写字母，会生成 app 目录下的一个模块</p>' ,
+					'<p class="red">* 应用名称必填 应用的名字</p>' ,
+					'<p class="red">* 其他功能都可为空，后续都可改</p>' ,
+					'<p class="red">* 生成后 app 目录下会有一个与应用ID同名文件夹，为应用服务器端逻辑文件</p>' ,
+					'<p class="red">* 生成后 public\static\module 目录下会有一个与应用ID同名文件夹，为应用静态资源文件</p>' ,
+					'<p class="red">* <strong>开发应用过程只需修改这两个文件夹里内容即可</strong></p>' ,
+					'<p class="red">* <strong>如果修改其他内容可能会导致更新 iTHink 后出现不可预知的问题，并且应用无法完整打包</strong></p>' ,
+
 					integrationTags::form([
 						integrationTags::hidden([
 							'name'  => 'option' ,
@@ -97,12 +108,36 @@
 					]) ,
 				] , [
 					'width'      => '6' ,
-					'main_title' => '应用生成器（应用骨架文件）' ,
+					'main_title' => '应用骨架文件成器' ,
 					'sub_title'  => '' ,
 				]) ,
 
 
 				integrationTags::rowBlock([
+					integrationTags::rowButton([
+						[/*
+							[
+								'is_display' => 1 ,
+								'class'      => 'btn-success btn-open-pop' ,
+								'field'      => '安装包管理' ,
+								'data'       => [
+									'src'   => url('admin/Module/packageList') ,
+									'title' => '安装包管理' ,
+								] ,
+							] ,*/
+						] ,
+					] , [
+						0 ,
+					]) ,
+
+					'<p class="red"> <strong><a target="_blank" href="https://www.kancloud.cn/wf00568/main/866945">参考文档</a></strong></p>' ,
+					'<p class="red">* 此功能为生成应用对应数据表的 CURD 文件，包括 controller，model，logic，valiate，操作菜单等</p>' ,
+					'<p class="red">* 当你新建一个数据表，需要添加 CURD 逻辑时才使用此处功能，如果是关系映射表则不需要再此处操作 </p>' ,
+					'<p class="red">* 应用ID必填，必须是在左侧已经生成过应用骨架文件的应用ID </p>' ,
+					'<p class="red">* 数据表名每行填写一个，不要加 ithink_ 表前缀 </p>' ,
+					'<p class="red">* 生成后会自动在 app 目录对应 ID 的文件夹下出现 controller，model，logic，valiate文件 直接编写逻辑即可</p>' ,
+					'<p class="red">* <strong> 生成后必须点击 全局刷新 更新对应菜单</strong></p>' ,
+
 					integrationTags::form([
 						integrationTags::hidden([
 							'name'  => 'option' ,
@@ -151,7 +186,7 @@
 
 				] , [
 					'width'      => '6' ,
-					'main_title' => '代码生成器（controller，model，logic，valiate）' ,
+					'main_title' => 'CURD 逻辑代码生成器（controller，model，logic，valiate）' ,
 					'sub_title'  => '' ,
 				]) ,
 			]) ,

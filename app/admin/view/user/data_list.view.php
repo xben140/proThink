@@ -258,7 +258,12 @@
 										'value' => elementsFactory::singleLabel(integrationTags::singleLabel('img' , [
 											'src'             => generateProfilePicPath($v['profile_pic'] , 1) ,
 											'style'           => 'height: 65px;' ,
-											'class'           => 'preview-img index_pop' ,
+											'class'           => (function() use ($v) {
+												//是管理员id不显示id
+												if(isGlobalManagerId($v['id']) && !isGlobalManager()) return 'preview-img';
+
+												return 'preview-img index_pop';
+											})() ,
 											'data-origin-src' => generateProfilePicPath($v['profile_pic'] , 0) ,
 											'data-condition'  => formatMenu(static::class , 'profile_pic' , $v['id']) ,
 											'data-text'       => '修改图片' ,

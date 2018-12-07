@@ -111,7 +111,7 @@
 					[
 						'field'      => '安装包上传' ,
 						'value'      => '/admin/module/uploadPackage' ,
-						'is_display' => 1,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'uploadPackage') ,
 					] ,
 				] ,
 
