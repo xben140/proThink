@@ -13,7 +13,7 @@
 					integrationTags::rowButton([
 						[
 							[
-								'is_display' => 1 ,
+								'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'Module' , 'uploadPackage') ,
 								'class'      => 'btn-success btn-open-pop' ,
 								'field'      => '上传安装包' ,
 								'data'       => [

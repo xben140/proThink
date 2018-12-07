@@ -48,13 +48,10 @@
 
 			$_this->setMeta([
 				[
-					'field' => '账号 : ' ,
-					'value' => $__this->adminInfo['user'] ,
-				] ,
-				[
-					'field' => '昵称 : ' ,
 					'value' => $__this->adminInfo['nickname'] ,
+					'field' => $__this->adminInfo['user']  ,
 				] ,
+
 
 				/*
 				[
@@ -100,6 +97,11 @@
 						'value'      => '/admin/module/appGenerator' ,
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'appGenerator') ,
 					] ,
+					[
+						'field'      => '应用管理' ,
+						'value'      => '/admin/module/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'datalist') ,
+					] ,
 				] ,
 
 				[
@@ -117,22 +119,9 @@
 
 				[
 					[
-						'field'      => '应用管理' ,
-						'value'      => '/admin/module/datalist' ,
-						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'datalist') ,
-					] ,
-					[
-						'field'      => '配置列表' ,
+						'field'      => '系统配置' ,
 						'value'      => '/admin/config/datalist' ,
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'config' , 'datalist') ,
-					] ,
-				] ,
-
-				[
-					[
-						'field'      => '回收管理' ,
-						'value'      => '/admin/recovery/datalist' ,
-						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'recovery' , 'datalist') ,
 					] ,
 					[
 						'field'      => '系统工具' ,
@@ -140,7 +129,6 @@
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'basefunc') ,
 					] ,
 				] ,
-
 
 				[
 					[
@@ -169,6 +157,17 @@
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'loginlog' , 'datalist') ,
 					] ,
 				] ,
+
+
+				[
+					[
+						'field'      => '回收管理' ,
+						'value'      => '/admin/recovery/datalist' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'recovery' , 'datalist') ,
+					] ,
+				] ,
+
+
 			]);
 
 
