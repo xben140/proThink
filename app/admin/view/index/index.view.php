@@ -96,6 +96,14 @@
 			$_this->setLink([
 				[
 					[
+						'field'      => '应用生成器' ,
+						'value'      => '/admin/module/appGenerator' ,
+						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'appGenerator') ,
+					] ,
+				] ,
+
+				[
+					[
 						'field'      => '安装包管理' ,
 						'value'      => '/admin/module/packageList' ,
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'packageList') ,
@@ -103,16 +111,10 @@
 					[
 						'field'      => '安装包上传' ,
 						'value'      => '/admin/module/uploadPackage' ,
-						'is_display' => 0,
+						'is_display' => 1,
 					] ,
 				] ,
-				[
-					[
-						'field'      => '应用生成器' ,
-						'value'      => '/admin/module/appGenerator' ,
-						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'module' , 'appGenerator') ,
-					] ,
-				] ,
+
 				[
 					[
 						'field'      => '应用管理' ,
@@ -125,6 +127,7 @@
 						'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'config' , 'datalist') ,
 					] ,
 				] ,
+
 				[
 					[
 						'field'      => '回收管理' ,

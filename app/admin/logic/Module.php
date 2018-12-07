@@ -98,32 +98,11 @@
 							$flag = true;
 							$menu = $info['menu'];
 
+
 							//安装之前先卸载
 							$this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete();
 
-							function recusiveParse($menu , $moduleId , callable $callback , $level = 0)
-							{
-								static $pid;
-								$pid[0] = 0;
-
-								foreach ($menu as $k => $v)
-								{
-									$data = $v;
-									if(isset($data['son'])) unset($data['son']);
-									if(isset($data['id'])) unset($data['id']);
-									if(isset($data['pid'])) unset($data['pid']);
-									if(isset($data['path'])) unset($data['path']);
-									if(isset($data['level'])) unset($data['level']);
-
-									$data['category'] = $moduleId;
-									$data['pid'] = $pid[$level];
-									$id = call_user_func_array($callback , [$data]);
-									$pid[$level + 1] = $id;
-									recusiveParse($v['son'] , $moduleId , $callback , $level + 1);
-								}
-							}
-
-							recusiveParse($menu , $info['info']['id'] , function($data) {
+							static::recusiveParse($menu , $info['info']['id'] , function($data) {
 								return $this->model__admin_privilege->insertGetId($data);
 							});
 
@@ -480,63 +459,56 @@
 		 * @param bool $isTurlyDelte
 		 *
 		 * @return array
+		 * public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
+		 * {
+		 * $moduleName = $param['ids'];
+		 * $info = $this->getModuleInfo($moduleName);
+		 * if(!$info['is_install'])
+		 * {
+		 * $pathInfo = $this->getModulePathInfo($moduleName);
+		 * $flag = true;
+		 * if($flag && is_dir($pathInfo['appPath']) && !FileTool::isWritable($pathInfo['appPath']))
+		 * {
+		 * $flag = false;
+		 * $this->retureResult['message'] = $pathInfo['appPath'] . '</ br>目录权限不足不能删除';
+		 * }
+		 * if($flag && is_dir($pathInfo['staticPath']) && !FileTool::isWritable($pathInfo['staticPath']))
+		 * {
+		 * $flag = false;
+		 * $this->retureResult['message'] = $pathInfo['staticPath'] . '</ br>目录权限不足不能删除';
+		 * }
+		 * if($flag)
+		 * {
+		 * $res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
+		 * return true;
+		 * });
+		 * $res['sign'] && $res = FileTool::recursiveRm($pathInfo['staticPath'] , function($info , $relativePath) {
+		 * return true;
+		 * });
+		 * if($res['sign'])
+		 * {
+		 * $this->retureResult['message'] = '删除成功 ';
+		 * $this->retureResult['sign'] = RESULT_SUCCESS;
+		 * }
+		 * else
+		 * {
+		 * $this->retureResult['message'] = $res['msg'];
+		 * $this->retureResult['sign'] = RESULT_ERROR;
+		 * }
+		 * }
+		 * else
+		 * {
+		 * $this->retureResult['sign'] = RESULT_ERROR;
+		 * }
+		 * }
+		 * else
+		 * {
+		 * $this->retureResult['message'] = '应用处于安装状态，无法删除';
+		 * $this->retureResult['sign'] = RESULT_ERROR;
+		 * }
+		 * return $this->retureResult;
+		 * }
 		 */
-		public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
-		{
-			$moduleName = $param['ids'];
-
-			$info = $this->getModuleInfo($moduleName);
-
-			if(!$info['is_install'])
-			{
-				$pathInfo = $this->getModulePathInfo($moduleName);
-				$flag = true;
-				if($flag && is_dir($pathInfo['appPath']) && !FileTool::isWritable($pathInfo['appPath']))
-				{
-					$flag = false;
-					$this->retureResult['message'] = $pathInfo['appPath'] . '</ br>目录权限不足不能删除';
-				}
-
-				if($flag && is_dir($pathInfo['staticPath']) && !FileTool::isWritable($pathInfo['staticPath']))
-				{
-					$flag = false;
-					$this->retureResult['message'] = $pathInfo['staticPath'] . '</ br>目录权限不足不能删除';
-				}
-
-				if($flag)
-				{
-					$res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
-						return true;
-					});
-
-					$res['sign'] && $res = FileTool::recursiveRm($pathInfo['staticPath'] , function($info , $relativePath) {
-						return true;
-					});
-
-					if($res['sign'])
-					{
-						$this->retureResult['message'] = '删除成功 ';
-						$this->retureResult['sign'] = RESULT_SUCCESS;
-					}
-					else
-					{
-						$this->retureResult['message'] = $res['msg'];
-						$this->retureResult['sign'] = RESULT_ERROR;
-					}
-				}
-				else
-				{
-					$this->retureResult['sign'] = RESULT_ERROR;
-				}
-			}
-			else
-			{
-				$this->retureResult['message'] = '应用处于安装状态，无法删除';
-				$this->retureResult['sign'] = RESULT_ERROR;
-			}
-
-			return $this->retureResult;
-		}
 
 		/**
 		 * 开发者生成配置文件 config.json
@@ -567,6 +539,7 @@
 						'type'     => $v['type'] ,
 						'name'     => $v['name'] ,
 						'key'      => $v['key'] ,
+						'remark'   => $v['remark'] ,
 					];
 
 					switch ($v['type'])
@@ -1060,13 +1033,13 @@
 					}
 
 					/*
-										//路由表里有没有 name 为 id 的记录
-										$hasRoute = (db('route')->where(['name' => strtolower($infoFormFile['id']) ,])->count() > 0);
-										if(!$hasConfig)
-										{
-											$info['error'][] = '在 配置列表 > 配置分组 中添加一个组名为此应用 ID 的记录';
-											$info['is_install'] = 0;
-										}
+						//路由表里有没有 name 为 id 的记录
+						$hasRoute = (db('route')->where(['name' => strtolower($infoFormFile['id']) ,])->count() > 0);
+						if(!$hasConfig)
+						{
+							$info['error'][] = '在 配置列表 > 配置分组 中添加一个组名为此应用 ID 的记录';
+							$info['is_install'] = 0;
+						}
 					*/
 
 
@@ -1087,7 +1060,8 @@
 					//privilege 表有对应记录
 					//rout 表有对应记录
 					// -- 已安装
-					if($hasPrivileges && $hasConfig && $hasRoute && !in_array(false , $tablesStatus))
+					if($hasPrivileges && $hasConfig //&& $hasRoute
+						&& !in_array(false , $tablesStatus))
 					{
 						$info['is_install'] = (int)$this->model_::$appStatusMap[1]['value'];
 					}
@@ -1131,12 +1105,24 @@
 				$msg = '应用名称必填';
 			}
 
-			$flag && $this->model__admin_configgroup->insertGetId([
+			$flag && $gid = $this->model__admin_configgroup->insertGetId([
 				'name'   => $param['id'] ,
 				'remark' => $param['id'] . ' 应用的配置分组' ,
 				'time'   => TIME_NOW ,
 				'status' => '1' ,
 			]);
+
+			$flag && $this->model__admin_config->insertGetId([
+				'name'     => $param['id'] ,
+				'key'      => 'themes' ,
+				'value'    => 'default' ,
+				'type'     => '4' ,
+				'group_id' => $gid ,
+				'remark'   => '前台模板设置' ,
+				'time'     => TIME_NOW ,
+				'status'   => '1' ,
+			]);
+
 
 			$modulePathInfo = $this->getModulePathInfo($param['id']);
 			!isset($param['is_cover']) && ($param['is_cover'] = 0);
@@ -1401,10 +1387,103 @@
 								'____CONTEOLLER_NAME__' => $name ,
 							] ,
 						] ,
+
+						//视图文件 添加 add.view.php
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\view\\' . strtolower(strtr($v , ['_' => '' ,])) . '/add.view.php') ,
+							'content'     => "<?php \r\n//添加数据的视图文件，前往 admin 模块下的 view/user 文件夹复制 add.view.php 来修改\r\n" ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [] ,
+						] ,
+						//视图文件 编辑 edit.view.php
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\view\\' . strtolower(strtr($v , ['_' => '' ,])) . '/edit.view.php') ,
+							'content'     => "<?php \r\n//编辑数据的视图文件，前往 admin 模块下的 view/user 文件夹复制 edit.view.php 来修改\r\n" ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [] ,
+						] ,
+						//视图文件 列表 data_list.view.php
+						[
+							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\view\\' . strtolower(strtr($v , ['_' => '' ,])) . '/data_list.view.php') ,
+							'content'     => "<?php \r\n//数据列表的视图文件，前往 admin 模块下的 view/user 文件夹复制 data_list.view.php 来修改\r\n" ,
+							'is_cover'    => $param['is_cover'] ,
+							'replacement' => [] ,
+						] ,
 					];
 
-
 					$flag = static::writeFile($fileConfig , $msg);
+
+					if($flag)
+					{
+						$menu = [
+							[
+								'name'       => $v . ' 管理' ,
+								'module'     => $param['id'] ,
+								'controller' => $name ,
+								'action'     => 'none' ,
+								'order'      => 0 ,
+								'remark'     => '' ,
+								'is_menu'    => 1 ,
+								'son'        => [
+									[
+										'name'       => $v . ' 添加数据' ,
+										'module'     => $param['id'] ,
+										'controller' => $name ,
+										'action'     => 'add' ,
+										'order'      => 0 ,
+										'remark'     => '' ,
+										'is_menu'    => 1 ,
+										'son'        => [] ,
+									] ,
+									[
+										'name'       => '设置字段' ,
+										'module'     => $param['id'] ,
+										'controller' => $name ,
+										'action'     => 'setField' ,
+										'order'      => 0 ,
+										'remark'     => '' ,
+										'is_menu'    => 0 ,
+										'son'        => [] ,
+									] ,
+									[
+										'name'       => '编辑数据' ,
+										'module'     => $param['id'] ,
+										'controller' => $name ,
+										'action'     => 'edit' ,
+										'order'      => 0 ,
+										'remark'     => '' ,
+										'is_menu'    => 0 ,
+										'son'        => [] ,
+									] ,
+									[
+										'name'       => '删除数据' ,
+										'module'     => $param['id'] ,
+										'controller' => $name ,
+										'action'     => 'delete' ,
+										'order'      => 0 ,
+										'remark'     => '' ,
+										'is_menu'    => 0 ,
+										'son'        => [] ,
+									] ,
+									[
+										'name'       => $v . '列表' ,
+										'module'     => $param['id'] ,
+										'controller' => $name ,
+										'action'     => 'dataList' ,
+										'order'      => 0 ,
+										'remark'     => '' ,
+										'is_menu'    => 1 ,
+										'son'        => [] ,
+									] ,
+								] ,
+							] ,
+						];
+
+						static::recusiveParse($menu , $param['id'] , function($data) {
+							return $this->model__admin_privilege->insertGetId($data);
+						});
+
+					}
 				} , $tables);
 
 			}
@@ -1412,7 +1491,7 @@
 			if($flag)
 			{
 				$this->retureResult['sign'] = RESULT_SUCCESS;
-				$this->retureResult['message'] = '生成成功';
+				$this->retureResult['message'] = '生成成功，点击全局刷新更新菜单';
 			}
 			else
 			{
@@ -1656,41 +1735,37 @@
 		 * @param $param
 		 *
 		 * @return array
+		 * public function apply($param)
+		 * {
+		 * $moduleName = $param['id'];
+		 * $pathInfo = $this->getModulePathInfo($moduleName);
+		 * if(!is_dir($pathInfo['appPath']))
+		 * {
+		 * $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH . DS . 'app' , function($info , $relativePath) {
+		 * return true;
+		 * });
+		 * $res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH . DS . 'public' , function($info , $relativePath) {
+		 * return true;
+		 * });
+		 * if($res['sign'])
+		 * {
+		 * $this->retureResult['message'] = '部署成功，请前往应用列表查看';
+		 * $this->retureResult['sign'] = RESULT_SUCCESS;
+		 * }
+		 * else
+		 * {
+		 * $this->retureResult['message'] = $res['msg'];
+		 * $this->retureResult['sign'] = RESULT_ERROR;
+		 * }
+		 * }
+		 * else
+		 * {
+		 * $this->retureResult['message'] = '此应用已经存在，如需重新部署，请先到应用列表删除应用';
+		 * $this->retureResult['sign'] = RESULT_ERROR;
+		 * }
+		 * return $this->retureResult;
+		 * }
 		 */
-		public function apply($param)
-		{
-			$moduleName = $param['id'];
-			$pathInfo = $this->getModulePathInfo($moduleName);
-
-			if(!is_dir($pathInfo['appPath']))
-			{
-				$res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH . DS . 'app' , function($info , $relativePath) {
-					return true;
-				});
-
-				$res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH . DS . 'public' , function($info , $relativePath) {
-					return true;
-				});
-
-				if($res['sign'])
-				{
-					$this->retureResult['message'] = '部署成功，请前往应用列表查看';
-					$this->retureResult['sign'] = RESULT_SUCCESS;
-				}
-				else
-				{
-					$this->retureResult['message'] = $res['msg'];
-					$this->retureResult['sign'] = RESULT_ERROR;
-				}
-			}
-			else
-			{
-				$this->retureResult['message'] = '此应用已经存在，如需重新部署，请先到应用列表删除应用';
-				$this->retureResult['sign'] = RESULT_ERROR;
-			}
-
-			return $this->retureResult;
-		}
 
 		/**
 		 * 指定包解压到相邻文件夹
@@ -1863,6 +1938,30 @@
 		 * ***********************************************************************************************
 		 */
 
+
+		//解析菜单数组用
+		public static function recusiveParse($menu , $moduleId , callable $callback , $level = 0)
+		{
+			static $pid;
+			$pid[0] = 0;
+
+			foreach ($menu as $k => $v)
+			{
+				$data = $v;
+				if(isset($data['son'])) unset($data['son']);
+				if(isset($data['id'])) unset($data['id']);
+				if(isset($data['pid'])) unset($data['pid']);
+				if(isset($data['path'])) unset($data['path']);
+				if(isset($data['level'])) unset($data['level']);
+
+				$data['category'] = $moduleId;
+				$data['pid'] = $pid[$level];
+				$id = call_user_func_array($callback , [$data]);
+				$pid[$level + 1] = $id;
+				static::recusiveParse($v['son'] , $moduleId , $callback , $level + 1);
+			}
+		}
+
 		/** *
 		 * @param $moduleName
 		 *
@@ -1985,4 +2084,6 @@
 				'field' => implode(', ' , $field) ,
 			];
 		}
+
+
 	}

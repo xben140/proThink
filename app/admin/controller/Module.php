@@ -18,6 +18,7 @@
 		/**
 		 * 安装与卸载
 		 * @return mixed
+		 * @throws \ReflectionException
 		 */
 		public function operation()
 		{
@@ -52,6 +53,7 @@
 		/**
 		 * 开发者功能，生成菜单，配置文件
 		 * @return mixed
+		 * @throws \Exception
 		 */
 		public function devTool()
 		{
@@ -72,6 +74,10 @@
 		}
 
 
+		/**
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
 		public function baseFunc()
 		{
 			$this->initLogic();
@@ -101,15 +107,13 @@
 		/**
 		 * 查看备份sql文件
 		 * @return mixed
+		 * @throws \ReflectionException
 		 */
 		public function viewSql()
 		{
 			return $this->makeView($this);
 		}
 
-		/**
-		 *
-		 */
 		public function setDefault()
 		{
 			$this->initLogic();
@@ -119,6 +123,7 @@
 		/**
 		 * 安装包列表
 		 * @return mixed
+		 * @throws \ReflectionException
 		 */
 		public function packageList()
 		{
@@ -167,18 +172,19 @@
 		/**
 		 * 解压包到应用文件夹
 		 * @throws \Exception
-		 */
 		public function apply()
 		{
 			$this->initLogic();
 			$this->jump($this->logic->apply($this->param));
 		}
+		 */
 
 		/**
 		 * 上传包文件
 		 * @return mixed|\think\response\Json
 		 * @throws \LogicException
 		 * @throws \RuntimeException
+		 * @throws \ReflectionException
 		 */
 		public function uploadPackage()
 		{
@@ -234,7 +240,10 @@
 			}
 		}
 
-
+		/**
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
 		public function appGenerator()
 		{
 			$this->initLogic();

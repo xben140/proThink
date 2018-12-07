@@ -1,1 +1,10 @@
-{}
+[
+	{
+		"is_const" : 0,
+		"type"     : 4,
+		"name"     : "\u4f7f\u7528\u6a21\u677f",
+		"key"      : "themes",
+		"value"    : [ "default"],
+		"selected" : 0
+	}
+]
