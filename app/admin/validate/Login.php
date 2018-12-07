@@ -16,14 +16,14 @@
 		// 验证提示
 		protected $message = [
 
-			'username.require'   => '用户名或密码填写错误' ,
-			'username.checkName' => '用户名或密码填写错误' ,
+			'username.require'   => '用户名与密码不匹配' ,
+			'username.checkName' => '用户名与密码不匹配' ,
 
-			'password.require'   => '用户名或密码填写错误' ,
-			'password.checkName' => '用户名或密码填写错误' ,
+			'password.require'   => '用户名与密码不匹配' ,
+			'password.checkName' => '用户名与密码不匹配' ,
 
-			'captcha.require'  => '验证码填写不正确' ,
-			'captcha.alphaNum' => '验证码填写不正确' ,
+			'captcha.require'  => '验证码不正确' ,
+			'captcha.alphaNum' => '验证码不正确' ,
 		];
 
 		// 应用场景

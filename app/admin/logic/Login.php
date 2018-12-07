@@ -71,21 +71,21 @@
 							}
 							else
 							{
-								$this->retureResult['message'] = '用户名或密码错误';
+								$this->logic__loginlog->addLog($info['id'] , '2' , '密码填错' , 0);
+								$this->retureResult['message'] = '用户名与密码不匹配';
 								$this->retureResult['sign'] = RESULT_ERROR;
 							}
 						}
 						else
 						{
-							//$this->retureResult['message'] = '用户名或密码错误';
+							$this->logic__loginlog->addLog($info['id'] , '2' , '用户被禁用' , 0);
 							$this->retureResult['message'] = '用户状态异常，请联系管理员';
 							$this->retureResult['sign'] = RESULT_ERROR;
 						}
 					}
 					else
 					{
-						//$this->retureResult['message'] = '用户名或密码错误';
-						$this->retureResult['message'] = '不存在的用户';
+						$this->retureResult['message'] = '用户名与密码不匹配';
 						$this->retureResult['sign'] = RESULT_ERROR;
 					}
 				}

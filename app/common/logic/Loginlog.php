@@ -24,7 +24,7 @@
 		public function addLog($uid , $platform , $remark , $res)
 		{
 			$data = [
-				//'ip'     => IP,
+				'ip'         => IP ,
 				'uid'        => $uid ,
 				'type'       => $platform ,
 				'user_agent' => $_SERVER['HTTP_USER_AGENT'] ,
