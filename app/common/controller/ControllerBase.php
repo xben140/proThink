@@ -209,8 +209,12 @@
 		 */
 		public function initTemplatePath()
 		{
-			$this->view->config([//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			$this->view->config([
+				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
+
+
+
 		}
 
 		/**

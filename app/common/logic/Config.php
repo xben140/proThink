@@ -84,6 +84,8 @@
 			}
 
 			(is_null($selected)) && ($selected = isset($t[0]) ? 0 : "");
+			!isset($options[0]) && ($options[0] = null);
+			!$selected && ($selected = 0);
 
 			return [
 				'options'  => $options ,

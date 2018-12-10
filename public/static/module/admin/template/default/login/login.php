@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="icon" href="">
 
-		<link href="__CONTROLLER_STATIC_URL__/css/login.css" rel="stylesheet" type="text/css">
+		<link href="__CURRENT_THEME_STATIC_URL__login.css" rel="stylesheet" type="text/css">
 
 
 		<script type="text/javascript" src="__HPLUS__js/jquery.min.js"></script>
@@ -69,12 +69,12 @@
 				</li>
 				-->
 				<li >
-					<img src="__CONTROLLER_STATIC_URL__/image/banner_5.jpg">
+					<img src="__CURRENT_THEME_STATIC_URL__/image/banner_4.jpg">
 				</li>
 			</ul>
 		</div>
 
 		<script src="__STATIC__js/form.js"></script>
-		<script src="__CONTROLLER_STATIC_URL__js/login.js"></script>
+		<script src="__CURRENT_THEME_STATIC_URL__login.js"></script>
 	</body>
 </html>

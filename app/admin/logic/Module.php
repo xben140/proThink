@@ -76,7 +76,7 @@
 						if($res['sign'])
 						{
 							$res = 1;
-							$this->retureResult['message'] = '部署成功，请前往应用列表查看';
+							$this->retureResult['message'] = '应用文件部署成功，位于 app 目录下的 '. $info['info']['id'] .'文件夹';
 						}
 						else
 						{
@@ -111,7 +111,7 @@
 						[] ,
 						'菜单信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '菜单信息写入成功，位于 ithink_privilege 表中 字段category，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '菜单配置写入成功，位于 ithink_privilege 表中 字段category，值为 ' . $info['info']['id'] . ' 的记录';
 					$res = execClosureList($transaction , $err , $_param);
 
 					break;
@@ -136,7 +136,7 @@
 						[] ,
 						'路由信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '路由数据写入成功，位于 ithink_route 表中 字段name，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '路由配置写入成功，位于 ithink_route 表中 字段name，值为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -163,7 +163,7 @@
 						[] ,
 						'回收信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '回收数据写入成功，位于 ithink_rcovery 表中 字段 category，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '回收配置写入成功，位于 ithink_rcovery 表中 字段 category，值为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -237,7 +237,7 @@
 						[] ,
 						'配置数据安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '配置数据写入成功，位于 ithink_config 表中 分组为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '设置配置写入成功，位于 ithink_config 表中 分组为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -320,7 +320,7 @@
 
 						if($res['sign'])
 						{
-							$this->retureResult['message'] = '删除成功 ';
+							$this->retureResult['message'] = '应用文件删除成功 ';
 							$this->retureResult['sign'] = RESULT_SUCCESS;
 						}
 						else
@@ -373,7 +373,7 @@
 						[] ,
 						'路由信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '路由信息安装成功';
+					$this->retureResult['message'] = '路由配置删除成功';
 					break;
 
 				case 'recovery' :
@@ -389,7 +389,7 @@
 						[] ,
 						'回收信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '回收信息安装成功';
+					$this->retureResult['message'] = '回收配置删除成功';
 					break;
 
 				case 'config' :
@@ -406,7 +406,7 @@
 						[] ,
 						'配置信息删除出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '配置删除成功';
+					$this->retureResult['message'] = '设置信息删除成功';
 					break;
 
 				case 'db' :
@@ -1114,7 +1114,7 @@
 
 			$flag && $this->model__admin_config->insertGetId([
 				'name'     => $param['id'] ,
-				'key'      => 'themes' ,
+				'key'      => $param['id'].'.themes' ,
 				'value'    => 'default' ,
 				'type'     => '4' ,
 				'group_id' => $gid ,
@@ -1417,23 +1417,26 @@
 					{
 						$menu = [
 							[
-								'name'       => $v . ' 管理' ,
+								'name'       => $v . '管理' ,
 								'module'     => $param['id'] ,
 								'controller' => $name ,
 								'action'     => 'none' ,
 								'order'      => 0 ,
 								'remark'     => '' ,
+								'ico'        => 'fa-circle-o' ,
 								'is_menu'    => 1 ,
 								'son'        => [
 									[
-										'name'       => $v . ' 添加数据' ,
+										'name'       => $v . '添加数据' ,
 										'module'     => $param['id'] ,
 										'controller' => $name ,
 										'action'     => 'add' ,
 										'order'      => 0 ,
-										'remark'     => '' ,
-										'is_menu'    => 1 ,
-										'son'        => [] ,
+
+										'ico'     => 'fa-plus-circle' ,
+										'remark'  => '' ,
+										'is_menu' => 1 ,
+										'son'     => [] ,
 									] ,
 									[
 										'name'       => '设置字段' ,
@@ -1441,6 +1444,7 @@
 										'controller' => $name ,
 										'action'     => 'setField' ,
 										'order'      => 0 ,
+										'ico'        => 'fa-circle' ,
 										'remark'     => '' ,
 										'is_menu'    => 0 ,
 										'son'        => [] ,
@@ -1451,6 +1455,7 @@
 										'controller' => $name ,
 										'action'     => 'edit' ,
 										'order'      => 0 ,
+										'ico'        => 'fa-edit' ,
 										'remark'     => '' ,
 										'is_menu'    => 0 ,
 										'son'        => [] ,
@@ -1461,6 +1466,7 @@
 										'controller' => $name ,
 										'action'     => 'delete' ,
 										'order'      => 0 ,
+										'ico'        => 'fa-remove' ,
 										'remark'     => '' ,
 										'is_menu'    => 0 ,
 										'son'        => [] ,
@@ -1469,6 +1475,7 @@
 										'name'       => $v . '列表' ,
 										'module'     => $param['id'] ,
 										'controller' => $name ,
+										'ico'        => 'fa-list' ,
 										'action'     => 'dataList' ,
 										'order'      => 0 ,
 										'remark'     => '' ,

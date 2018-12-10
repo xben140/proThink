@@ -242,12 +242,10 @@ str;
 				
 				<!-- ~~~profile_link~~~ -->
 				
-				<!--
 				<div class="profile-item">
 					<span><a href="/" target="_blank" class=" font-bold">访问首页</a></span>
-					<span><a href="&lt;!&ndash; ~~~logout_url~~~ &ndash;&gt;" class=" font-bold">退出登陆</a></span>
+					<span><a href="<!-- ~~~logout_url~~~ -->" class=" font-bold">退出登陆</a></span>
 				</div>
-				-->
 			</div>
 				
 				
