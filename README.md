@@ -70,7 +70,7 @@
 
 ### :-: **特性**
 
-## 高效开发-模块化自动构造
+## 高效开发-表单与表格元素构造器
 * [ ]  由笔者倾心打造的页面构造器类库，所有的常用的页面元素，可以通过调用一个函数来直接生成，包括表单里常用的输入组件（文本，密码，单选，复选，开关，option，时间选择，单/多文件上传，单/多图片上传，地域选择，富文本编辑器（自带ueditor和summernote））等等，和表格里的常用组件，包括单个td，tr，按钮，开关，option选项等等，还有搜索表单框的各种组件等，有需要亦可自己添加组件，详情可参考文档 ，代码参考 extend\builder;(其中integrationTags类是元素生成类，是对其他功能的封装，可直接调用，使用方式参考admin模块下的view文件夹)，下面有张图可以比较直观的看到效果
 ``
 
@@ -105,17 +105,17 @@
 `
 
 
+## 自定义依赖注入机制
+
+* [ ]  拥有一套自定义的依赖注入机制，trait引入，通过__get实现，可以在任何类里仅通过调用自身属性即可得到任何模块下的model、logic、service的实例，无需繁琐的使用model方法实例化模型，参考 `app\common\common\set;
+`
+
 
 ## 齐全的调用示例
 
 * [ ]  对笔者提及到的每个功能，都写的专门的调用示例，参考 `app\demo\controller\Example
 `
 
-
-## 自定义依赖注入机制
-
-* [ ]  拥有一套自定义的依赖注入机制，trait引入，通过__get实现，可以在任何类里仅通过调用自身属性即可得到任何模块下的model、logic、service的实例，无需繁琐的使用model方法实例化模型，参考 `app\common\common\set;
-`
 
 
 ## 架构
@@ -192,6 +192,20 @@
 
 # 预览图
 ![](public/static/image/1.png)
+------ 
 ![](public/static/image/2.png)
+------ 
 ![](public/static/image/3.png)
+------ 
+![](public/static/image/4.png)
+------ 
+![](public/static/image/5.png)
+------ 
+![](public/static/image/6.png)
+------ 
+![](public/static/image/7.png)
+------ 
+![](public/static/image/8.png)
+------ 
+![](public/static/image/9.png)
 

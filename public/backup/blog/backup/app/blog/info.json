@@ -6,7 +6,7 @@
 	"description"     : "功能强大，操作傻瓜的博客管理系统",
 	"default_action"  : "blog/index/index",
 	"update_time"     : 1541131622,
-	"is_deving"       : 0,
+	"is_deving"       : 1,
 	"database_tables" : [
 		"ithink_blog_article",
 		"ithink_blog_article_tag",

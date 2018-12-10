@@ -266,7 +266,7 @@
 				'item'    => '根目录写权限' ,
 				'require' => ROOT_PATH ,
 				'value'   => $t ? $info['mode'] : '登陆SSH执行：<span style="color: #00f">chmod -R 777 ' . replaceToSysSeparator(ROOT_PATH) . '</span>' ,
-				'result'  =>  (function($t) use ($data){
+				'result'  =>  (function($t) use ($data, &$isEvnOk){
 					!input('_') && tool::S($data);
 					return $t ? 1 : ($isEvnOk = 0) ;
 				})($t)
