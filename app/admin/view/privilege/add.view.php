@@ -37,7 +37,7 @@
 					//随便写
 					'field_name'  => '应用ID' ,
 					'placeholder' => '' ,
-					'tip'         => '这里填写应用id，同应用里的'.MODULE_FILE_INFO.'里的id字段的值一致' ,
+					'tip'         => '这里填写应用id，同应用里的' . MODULE_FILE_INFO . '里的id字段的值一致' ,
 					//'value'       => 'value' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'category' ,
@@ -96,68 +96,64 @@
 				]) ,
 
 
-
-
-				/*
-				 *
 				integrationTags::text([
 					//随便写
 					'field_name'  => '图标' ,
 					'placeholder' => '' ,
-					'tip'         => '' ,
-					'value'       => '-' ,
-					//'value'       => 'fa-edit' ,
+					'tip'         => '图标参考 <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">https://fontawesome.com/v4.7.0/icons/</a>' ,
+					'value'       => 'fa-circle-o' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'ico' ,
 				]) ,
 
-										integrationTags::switchery([
-											//额外属性
-											//'attr'       => '' ,
-											'isChecked'  => 'checked' ,
-											//随便写
-											'tip'        => '' ,
-											//随便写
-											'field_name' => '是否作为菜单显示' ,
-											//表单name值
-											'name'       => 'is_menu' ,
-											//表单value值,$data里的字段
-											'value'      => '1' ,
-											//表单value对应名字,$data里的字段
-											'field'      => '' ,
-										]) ,
+				/**
+													integrationTags::switchery([
+														//额外属性
+														//'attr'       => '' ,
+														'isChecked'  => 'checked' ,
+														//随便写
+														'tip'        => '' ,
+														//随便写
+														'field_name' => '是否作为菜单显示' ,
+														//表单name值
+														'name'       => 'is_menu' ,
+														//表单value值,$data里的字段
+														'value'      => '1' ,
+														//表单value对应名字,$data里的字段
+														'field'      => '' ,
+													]) ,
 
-										integrationTags::switchery([
-											//额外属性
-											//'attr'       => '' ,
-											//随便写
-											'isChecked'  => '' ,
-											'tip'        => '' ,
-											//随便写
-											'field_name' => '是否为公共方法' ,
-											//表单name值
-											'name'       => 'is_common' ,
-											//表单value值,$data里的字段
-											'value'      => '1' ,
-											//表单value对应名字,$data里的字段
-											'field'      => '' ,
-										]) ,
+													integrationTags::switchery([
+														//额外属性
+														//'attr'       => '' ,
+														//随便写
+														'isChecked'  => '' ,
+														'tip'        => '' ,
+														//随便写
+														'field_name' => '是否为公共方法' ,
+														//表单name值
+														'name'       => 'is_common' ,
+														//表单value值,$data里的字段
+														'value'      => '1' ,
+														//表单value对应名字,$data里的字段
+														'field'      => '' ,
+													]) ,
 
-										integrationTags::switchery([
-											'isChecked'  => 'checked' ,
-											//额外属性
-											//'attr'       => '{if 1 == 1}checked{/if}' ,
-											//随便写
-											'tip'        => '是否启用' ,
-											//随便写
-											'field_name' => '是否启用' ,
-											//表单name值
-											'name'       => 'status' ,
-											//表单value值,$data里的字段
-											'value'      => '1' ,
-											//表单value对应名字,$data里的字段
-											'field'      => '' ,
-										]) ,*/
+													integrationTags::switchery([
+														'isChecked'  => 'checked' ,
+														//额外属性
+														//'attr'       => '{if 1 == 1}checked{/if}' ,
+														//随便写
+														'tip'        => '是否启用' ,
+														//随便写
+														'field_name' => '是否启用' ,
+														//表单name值
+														'name'       => 'status' ,
+														//表单value值,$data里的字段
+														'value'      => '1' ,
+														//表单value对应名字,$data里的字段
+														'field'      => '' ,
+													]) ,*/
 
 				integrationTags::textarea([
 					'field_name' => '备注' ,

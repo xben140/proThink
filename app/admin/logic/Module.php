@@ -610,7 +610,7 @@
 						$info['info']['id'] ,
 					] ,
 				] ,
-				'field' => 'name,module,controller,action,order,remark,is_menu,id,pid' ,
+				'field' => 'ico,name,module,controller,action,order,remark,is_menu,id,pid' ,
 			]);;
 
 			if(!$data->isEmpty())

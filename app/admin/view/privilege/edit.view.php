@@ -39,8 +39,8 @@
 					//随便写
 					'field_name'  => '应用ID' ,
 					'placeholder' => '' ,
-					'tip'         => '这里填写应用id，同应用里的'.MODULE_FILE_INFO.'里的id字段的值一致' ,
-					'value'       => $info['category'],
+					'tip'         => '这里填写应用id，同应用里的' . MODULE_FILE_INFO . '里的id字段的值一致' ,
+					'value'       => $info['category'] ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'category' ,
 				]) ,
@@ -96,19 +96,17 @@
 					//'attr'        => 'disabled' ,
 					'name'        => 'order' ,
 				]) ,
-/*
+
 				integrationTags::text([
 					//随便写
 					'field_name'  => '图标' ,
 					'placeholder' => '' ,
-					'tip'         => '' ,
+					'tip'         => '图标参考 <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">https://fontawesome.com/v4.7.0/icons/</a>' ,
 					'value'       => $info['ico'] ,
-					//'value'       => 'fa-edit' ,
 					//'attr'        => 'disabled' ,
 					'name'        => 'ico' ,
 				]) ,
 
-				*/
 
 				/*
 										integrationTags::switchery([
