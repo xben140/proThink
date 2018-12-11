@@ -309,7 +309,7 @@
 										'selected'   => $v['group_id'] ,
 										'options'    => $configGroup ,
 									]) ,
-									' ' ,
+									'<br/>' ,
 									integrationTags::tdSelect([
 										'field_name' => '类型:' ,
 										'name'       => 'type' ,

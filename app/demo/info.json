@@ -1,0 +1,15 @@
+{
+	"id"              : "demo",
+	"author"          : "",
+	"page_url"        : "",
+	"name"            : "demo",
+	"title"           : "",
+	"is_deving"       : "1",
+	"version"         : "1.0",
+	"description"     : "",
+	"default_action"  : "",
+	"update_time"     : 1544495470,
+	"database_tables" : [
+
+	]
+}

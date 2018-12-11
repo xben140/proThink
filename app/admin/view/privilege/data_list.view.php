@@ -64,16 +64,16 @@
 						 */
 						$_this->setHead([
 							[
-								'field' => 'ID' ,
-								'attr'  => 'style="width:80px;"' ,
+								'field' => '' ,
+								'attr'  => 'style="width:50px;"' ,
 							] ,
 							[
 								'field' => '权限名' ,
-								'attr'  => 'style="width:220px;"' ,
+								//'attr'  => 'style="width:200px;"' ,
 							] ,
 							[
 								'field' => '模块/控制器/方法' ,
-								'attr'  => 'style="width:280px;"' ,
+								//'attr'  => 'style="width:260px;"' ,
 							] ,
 
 							[
@@ -82,35 +82,35 @@
 							] ,
 
 							[
-								'field' => '排序' ,
+								'field' => '图标' ,
 								'attr'  => '' ,
+							] ,
+							[
+								'field' => '排序' ,
+								'attr'  => 'style="width:50px;"' ,
 							] ,
 							[
 								'field' => '添加时间' ,
 								'attr'  => '' ,
 							] ,
-							[
-								'field' => '图标' ,
-								'attr'  => '' ,
-							] ,
 
 							[
 								'field' => '备注' ,
-								'attr'  => 'style="width:150px;"' ,
+								'attr'  => 'style="width:100px;"' ,
 							] ,
 
 							[
-								'field' => '是否作为菜单' ,
-								'attr'  => '' ,
+								'field' => '作为菜单' ,
+								'attr'  => 'style="width:70px;"' ,
 							] ,
 							[
-								'field' => '是否通用方法' ,
-								'attr'  => '' ,
+								'field' => '公共方法' ,
+								'attr'  => 'style="width:70px;"' ,
 							] ,
 
 							[
 								'field' => '状态' ,
-								'attr'  => '' ,
+								'attr'  => 'style="width:60px;"' ,
 							] ,
 							[
 								'field' => '操作' ,
@@ -260,7 +260,9 @@
 								integrationTags::td([
 									integrationTags::tdCheckbox() ,
 									integrationTags::tdSimple([
-										'value' => $v['id'] ,
+										'value'      => $v['id'] ,
+										'is_display' => 0 ,
+
 									]) ,
 								]) ,
 								//权限名字

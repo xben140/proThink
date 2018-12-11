@@ -19,7 +19,7 @@
 
 
 ## 体验demo <a target="_blank" href="http://demo.ithinkphp.org/admin">demo.ithinkphp.org/admin</a>
-![](public/static/image/2.png)
+![](public/static/image/6.png)
 
 *****
 * [ ] iThink是一个基于thinkphp5.0开发的模块化，应用化，自动构造化的WEB应用开发框架（Web Application Framework），集成高可用，高稳定的页面构造器，可以极其方便的构造后台页面包括表单，表格，上传等组件在内的各种元素！是笔者在参考了当前10多个主流的基于TP5的CMF/CMS的架构和思想后的沉淀出的产品！
