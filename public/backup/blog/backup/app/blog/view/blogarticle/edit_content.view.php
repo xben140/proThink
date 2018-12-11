@@ -44,7 +44,7 @@
 				]) ,
 
 				(function($info) {
-					return ($info['source_type'] == '1') ? integrationTags::summernote([
+					return ($info['source_type'] == '1') ? integrationTags::uediter([
 						'left'       => '0' ,
 						'right'      => '12' ,
 						'field_name' => '' ,

@@ -69,7 +69,7 @@
 				]) ,
 
 
-				integrationTags::summernote([
+				integrationTags::uediter([
 					'field_name' => '内容' ,
 					'name'       => 'content' ,
 					'value'      => '' ,
