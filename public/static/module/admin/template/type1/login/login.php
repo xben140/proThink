@@ -53,8 +53,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="__CURRENT_THEME_STATIC_URL__js/pintuer1.js"></script>
-
 		<script src="__STATIC__js/form.js"></script>
 		<script src="__CURRENT_THEME_STATIC_URL__js/login.js"></script>
 	</body>

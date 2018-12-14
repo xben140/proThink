@@ -1,0 +1,15 @@
+{
+	"uid"        : 1,
+	"module"     : "admin",
+	"controller" : "config",
+	"action"     : "setfield",
+	"url"        : "\/admin\/config\/setfield.html",
+	"referer"    : "http:\/\/local2.cc\/admin\/config\/datalist.html?group_id=1&type=-1&key=&name=&reg_time_begin=&reg_time_end=&is_const=-1&pagerow=20&order_filed=id&order=asc&status=-1",
+	"method"     : "POST",
+	"ip"         : "127.0.0.1",
+	"is_ajax"    : 1,
+	"exe_time"   : 0.23401498794555664,
+	"exe_memory" : 5219776,
+	"remark"     : "设置字段",
+	"params"     : "{\"get\":[],\"post\":[],\"request\":[],\"cookie\":[]}"
+}

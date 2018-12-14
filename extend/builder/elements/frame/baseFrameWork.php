@@ -303,6 +303,9 @@ str;
 			</button>
 			<nav class="page-tabs J_menuTabs">
 				<div class="page-tabs-content">
+					<span class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+								<i class="fa fa-bars"></i>
+						</span>
 					<a id="refresh"  class="" data-id="">全局刷新</a>
 					<!--<a id="clear"  class="" data-id="">清除缓存</a>-->
 					<a href="javascript:;" class="active J_menuTab" data-id="<!-- ~~~default_page~~~ -->"> 主页 </a>

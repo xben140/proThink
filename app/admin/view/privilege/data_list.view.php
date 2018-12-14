@@ -378,7 +378,7 @@
 											'change_callback' => 'switcherUpdateField' ,
 											//switcherUpdateFieldConfirm
 										] ,
-										'name'    => '' ,
+										//'name'    => '' ,
 										'is_auto' => '1' ,
 									]) ,
 								]) ,
@@ -393,7 +393,7 @@
 											'change_callback' => 'switcherUpdateField' ,
 											//switcherUpdateFieldConfirm
 										] ,
-										'name'    => '' ,
+										//'name'    => '' ,
 										'is_auto' => '1' ,
 									]) ,
 								]) ,

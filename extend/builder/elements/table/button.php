@@ -75,12 +75,17 @@ js;
 				}
 			}
 
+			isset($attr['value']) && ($field = $attr['value']);
+			isset($attr['field']) && ($field = $attr['field']);
+
 			$replacement['__DATA__'] = $t;
-			$replacement['__FIELD__'] = $attr['value'];
+			$replacement['__FIELD__'] = $field;
 			$replacement['__CLASS__'] = $attr['class'];
 			$replacement['__ATTR__'] = '';
 			$replacement['__PARAM__'] = '';
 			$replacement['__OPTIONS__'] = '';
+
+
 
 			isset($attr['attr']) && $attr['attr'] && ($replacement['__ATTR__'] = $attr['attr']);
 			isset($attr['params']) && $attr['params'] && ($replacement['__PARAM__'] = strtr('data-params=__DATA___', ['__DATA___' => json_encode($attr['params']),]));

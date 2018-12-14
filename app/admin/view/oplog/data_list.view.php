@@ -28,10 +28,27 @@
 								'field'      => '批量删除' ,
 								'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 							] ,
+							[
+								'class'      => ' btn-info btn-custom-request' ,
+								'data'       => [
+									'src'        => url('Oplog/syncLog') ,
+									'is_reload'  => 1 ,
+									'is_confirm' => 0 ,
+									'is_alert'   => 0 ,
+									'msg'        => '确认将日志同步至数据库？' ,
+								] ,
+								'params'     => [] ,
+								'field'      => '同步日志' ,
+								'is_display' => $__this->isButtonDisplay(MODULE_NAME , 'Oplog' , 'syncLog') ,
+							] ,
 						] ,
 					]) ,
+					'<p>出于性能考虑，每次请求会将日志写入日志文件，位于 ' . $__this->logic::$logPath . '</p>' ,
+					'<p>同步日志 会将此文件里的日志写入数据库之后清空文件</p>' ,
+					'<p>所以要查看最新的日志信息，必须先进行 同步日志 操作</p>' ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {
+
 						//$data = $__this->logic->dataList($__this->param);
 						$data = $__this->logic->dataListWithPagination($__this->param);
 
@@ -44,11 +61,11 @@
 								'attr'  => 'style="width:80px;"' ,
 							] ,
 							[
-								'field' => '用户信息' ,
+								'field' => '信息' ,
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '登陆信息' ,
+								'field' => '' ,
 								'attr'  => '' ,
 							] ,
 							[
@@ -77,6 +94,7 @@
 							'editUrl'     => url('edit') ,
 							'addUrl'      => url('add') ,
 						]);
+
 						/**
 						 * 设置表格搜索框
 						 *searchFormCol
@@ -90,7 +108,7 @@
 									'name'        => 'user' ,
 									'placeholder' => '' ,
 								]) ,
-							] , ['col' => '6']);
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
 
 
@@ -101,22 +119,110 @@
 									'name'        => 'nickname' ,
 									'placeholder' => '' ,
 								]) ,
-							] , ['col' => '6']);
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
 
 							$t = integrationTags::searchFormCol([
 								integrationTags::searchFormText([
-									'field'       => 'ip' ,
+									'field'       => 'IP' ,
 									'value'       => input('ip' , '') ,
 									'name'        => 'ip' ,
 									'placeholder' => '' ,
 								]) ,
-							] , ['col' => '6']);
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '模块(应用)' ,
+									'value'       => input('module' , '') ,
+									'name'        => 'module' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '控制器' ,
+									'value'       => input('controller' , '') ,
+									'name'        => 'controller' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '方法' ,
+									'value'       => input('action' , '') ,
+									'name'        => 'action' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
 
 							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '参数包含' ,
+									'value'       => input('params' , '') ,
+									'name'        => 'params' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '请求方法' ,
+									'value'       => input('method' , '') ,
+									'name'        => 'method' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormText([
+									'field'       => '备注' ,
+									'value'       => input('remark' , '') ,
+									'name'        => 'remark' ,
+									'placeholder' => '' ,
+								]) ,
+							] , ['col' => '4']);
+							$doms = array_merge($doms , $t);
+
+
+
+							//状态
+							$t = integrationTags::searchFormCol([
+								integrationTags::searchFormRadio([
+									[
+										'value' => '-1' ,
+										'field' => '全部' ,
+									] ,
+									[
+										'value' => '1' ,
+										'field' => '是' ,
+									] ,
+									[
+										'value' => '0' ,
+										'field' => '不是' ,
+									] ,
+								] , 'is_ajax' , '是否AJAX' , input('is_ajax' , '-1')) ,
+
+							] , ['col' => '6']);
+							$doms = array_merge($doms , $t);
+
+
+							$t = integrationTags::searchFormCol([
 								integrationTags::searchFormDate([
-									'field' => '登陆时间' ,
+									'field' => '访问时间' ,
 
 									'value1'       => input('reg_time_begin' , '') ,
 									'name1'        => 'reg_time_begin' ,
@@ -137,7 +243,7 @@
 									'name'        => 'pagerow' ,
 									'placeholder' => '' ,
 								]) ,
-							] , ['col' => '6']);
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
 
 							//排序字段
@@ -148,7 +254,7 @@
 										'field' => '默认' ,
 									] ,
 								] , 'order_filed' , '排序字段' , input('order_filed' , 'id')) ,
-							] , ['col' => '6']);
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
 
 
@@ -165,8 +271,10 @@
 									] ,
 								] , 'order' , '排序方向' , input('order' , 'desc')) ,
 
-							] , ['col' => '6']);
+							] , ['col' => '4']);
 							$doms = array_merge($doms , $t);
+
+
 
 						});
 
@@ -191,7 +299,7 @@
 								integrationTags::td([
 									integrationTags::tdSimple([
 										'value'    => $v['user'] ,
-										'name'     => '用户 : ' ,
+										'name'    =>strtr("<span style='color: #2434ff;'>__1__</span>" , ['__1__' => '用户 : ' ,]),
 										'editable' => 0 ,
 									]) ,
 									'</br>' ,
@@ -200,20 +308,53 @@
 										'name'     => '用户名 : ' ,
 										'editable' => 0 ,
 									]) ,
-								]) ,
-
-								integrationTags::td([
-
-									integrationTags::tdSimple([
-										'name'     => '登陆时间 : ' ,
-										'editable' => '0' ,
-										'value'    => formatTime($v['time'] , 1) ,
-									]) ,
 									'</br>' ,
 
 									integrationTags::tdSimple([
+										'value'    => $v['exe_time'] ,
+										'name'     => '耗时 : ' ,
+										'editable' => 0 ,
+									]) ,
+									'</br>' ,
+									integrationTags::tdSimple([
+										'value'    => formatBytes($v['exe_memory']) ,
+										'name'     => '耗内存 : ' ,
+										'editable' => 0 ,
+									]) ,
+									'</br>' ,
+									integrationTags::tdSimple([
+										'value'    => formatTime($v['time'] ),
+										'name'     => '时间 : ' ,
+										'editable' => 0 ,
+									]) ,
+								]) ,
+
+								integrationTags::td([
+									integrationTags::tdSimple([
+										'value'    => implode('/' , [
+											$v['module'] ,
+											$v['controller'] ,
+											$v['action'] ,
+										]) ,
+										'name'     => '路由 : ' ,
+										'editable' => 0 ,
+									]) ,
+									'</br>' ,
+									integrationTags::tdSimple([
+										'name'     => '方法 : ' ,
+										'editable' => '0' ,
+										'value'    => $v['method'] ,
+									]) ,
+									'</br>' ,
+									integrationTags::tdSimple([
+										'name'     => '是否 AJAX : ' ,
+										'editable' => '0' ,
+										'value'    => $v['is_ajax'] ? '<span style="color: #00f">是</span>' : '<span style="color: #f00">否</span>' ,
+									]) ,
+									'</br>' ,
+									integrationTags::tdSimple([
 										'value'    => $v['ip'] ,
-										'name'     => '登陆Ip : ' ,
+										'name'     => '客户端 IP : ' ,
 										'editable' => 0 ,
 									]) ,
 								]) ,
@@ -233,12 +374,27 @@
 
 								//操作
 								integrationTags::td([
-
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,
 										'value'      => '删除' ,
 										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 									]) ,
+
+
+									integrationTags::tdButton([
+										'class'      => ' btn-info btn-open-pop' ,
+										'data'       => [
+											'src'   => url('detail') ,
+											'title' => '详细信息' ,
+										] ,
+										'params'     => [
+											'id' => $v['id'] ,
+										] ,
+										'value'      => '详细信息' ,
+										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'detail') ,
+
+									]) ,
+
 								]) ,
 
 							] , ['id' => $v['id']]);
@@ -249,7 +405,7 @@
 					}) ,
 				] , [
 					'width'      => '12' ,
-					'main_title' => '操作日志' ,
+					'main_title' => '角色列表' ,
 					'sub_title'  => '' ,
 				]) ,
 			]) ,

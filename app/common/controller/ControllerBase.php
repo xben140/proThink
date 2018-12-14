@@ -69,7 +69,12 @@
 			//初始化静态资源
 			$this->initBaseStaticResource();
 			$this->initModuleStaticResource();
+
+			//写入访问日志
+			config('is_write_oplog') && $this->addOplog();
+
 			parent::_initialize();
+
 		}
 
 		/**
@@ -209,10 +214,8 @@
 		 */
 		public function initTemplatePath()
 		{
-			$this->view->config([
-				//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
+			$this->view->config([//'view_path' => PATH_THEMES .$theme. DS . strtolower(MODULE_NAME) . DS ,
 			]);
-
 
 
 		}
@@ -262,6 +265,18 @@
 		public function initModuleStaticResource() { }
 
 		/**
+		 * 写入日志，支持自定义写入日志规则
+		 * 可以在子类重写这方法，自定义写入日志的规则，默认是所有请求都写入日志
+		 *
+		 * @param callable|null $rule
+		 */
+		public function addOplog(callable $rule = null)
+		{
+			//记录访问日志
+			$this->logic__common_Oplog::pushLogToFile($rule);
+		}
+
+		/**
 		 * ***********************************************************************************************
 		 * ***********************************************************************************************
 		 *                    公共curd方法
@@ -295,7 +310,6 @@
 				return $this->makeView($this);
 			}
 		}
-
 
 
 		public function setField()
@@ -432,6 +446,7 @@
 			else
 			{
 				$contents = $this->makePage()->setBody($this->displayContents)->getContents();
+				//$contents = preg_replace('/^\s*/im' , '' , $contents);
 				//file_put_contents($cacheFileName , $contents);
 			}
 

@@ -4,6 +4,7 @@
 
 	use db\Db;
 	use file\FileTool;
+	use think\Cache;
 	use think\Exception;
 	use zip\phpZip;
 
@@ -76,7 +77,7 @@
 						if($res['sign'])
 						{
 							$res = 1;
-							$this->retureResult['message'] = '应用文件部署成功，位于 app 目录下的 '. $info['info']['id'] .'文件夹';
+							$this->retureResult['message'] = '应用文件部署成功，位于 app 目录下的 ' . $info['info']['id'] . '文件夹';
 						}
 						else
 						{
@@ -1114,7 +1115,7 @@
 
 			$flag && $this->model__admin_config->insertGetId([
 				'name'     => $param['id'] ,
-				'key'      => $param['id'].'.themes' ,
+				'key'      => $param['id'] . '.themes' ,
 				'value'    => 'default' ,
 				'type'     => '4' ,
 				'group_id' => $gid ,
@@ -1825,11 +1826,128 @@
 		 * ***********************************************************************************************
 		 */
 
+		public function test_email()
+		{
+			$title = '来自 iThink 的测试邮件';
+			$body = '来自 iThink 的测试邮件';
+			$to = [
+				getAdminSessionInfo(SESSOIN_TAG_USER , 'email') => 'by hello' ,
+			];
+			$res = sendEmail($title , $body , $to , $err);
+
+			if($res)
+			{
+				$this->retureResult['message'] = '发送成功，登录管理员邮箱查收';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = $err;
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
 		/**
-		 * 备份数据库
+		 * 清除缓存
+		 *
+		 * @param $param
+		 *
 		 * @return array
 		 */
-		public function backup_database()
+		public function clear_cache($param)
+		{
+			$flag = true;
+			$this->retureResult['message'] = '清除成功';
+			switch ($param['type'])
+			{
+				case 'template' :
+					$res = FileTool::recursiveRm(TEMP_PATH , function($info , $relativePath) {return true;});
+					if(!$res['sign'])
+					{
+						$flag = false;
+						$this->retureResult['message'] = '删除失败，请检查目前权限';
+					}
+					break;
+				case 'log' :
+					$res = FileTool::recursiveRm(LOG_PATH , function($info , $relativePath) {
+						return true;
+					});
+
+					if(!$res['sign'])
+					{
+						$flag = false;
+						$this->retureResult['message'] = '删除失败，请检查目前权限';
+					}
+					break;
+				case 'cache' :
+					if(!Cache::clear())
+					{
+						$flag = false;
+						$this->retureResult['message'] = '删除失败，请检查目前权限';
+					}
+					break;
+
+				default :
+					#...
+					break;
+			}
+
+
+			if($flag)
+			{
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+
+
+		/**
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 *                    数据库功能
+		 * ***********************************************************************************************
+		 * ***********************************************************************************************
+		 */
+
+		/**
+		 * 数据表列表
+		 * @return array|mixed
+		 */
+		public function dbList()
+		{
+			$list = \think\Db::query('SHOW TABLE STATUS');
+
+			return array_map('array_change_key_case' , $list);
+		}
+
+		/**
+		 * 备份的sql文件列表
+		 * @return array|mixed
+		 */
+		public function dbBackupList()
+		{
+			$sqlFiles = [];
+			FileTool::mkdir_(PATH_DATABASE_BACKUP);
+			$res = FileTool::listDir(PATH_DATABASE_BACKUP , function($v) use (&$sqlFiles) {
+				$sqlFiles[] = $v;
+			} , FileTool::FILE);
+
+			return $sqlFiles;
+		}
+
+		/**
+		 * 备份sql数据
+		 * @return array
+		 */
+		public function backupData()
 		{
 			$res = querySql('SHOW TABLEs;');
 			//获取表对应应用所拥有的表
@@ -1873,29 +1991,28 @@
 		}
 
 		/**
-		 * 备份的sql文件列表
-		 * @return array|mixed
+		 * 恢复sql数据
+		 *
+		 * @param $param
+		 *
+		 * @return array
 		 */
-		public function viewSql()
-		{
-			$sqlFiles = [];
-			FileTool::mkdir_(PATH_DATABASE_BACKUP);
-			$res = FileTool::listDir(PATH_DATABASE_BACKUP , function($v) use (&$sqlFiles) {
-				$sqlFiles[] = $v;
-			} , FileTool::FILE);
-
-			return $sqlFiles;
-		}
-
 		public function recoverData($param)
 		{
-			$this->retureResult['message'] = RESULT_ERROR;
+			$this->retureResult['message'] = '功能还没写。';
 			$this->retureResult['sign'] = RESULT_ERROR;
 
 			return $this->retureResult;
 
 		}
 
+		/**
+		 * 删除sql数据
+		 *
+		 * @param $param
+		 *
+		 * @return array
+		 */
 		public function deleteData($param)
 		{
 			$sqlFile = (PATH_DATABASE_BACKUP . $param['id']);
@@ -1913,23 +2030,59 @@
 			return $this->retureResult;
 		}
 
-		public function test_email()
+		/**
+		 * 优化表
+		 * @return array|mixed
+		 */
+		public function optimizeDb()
 		{
-			$title = '来自 iThink 的测试邮件';
-			$body = '来自 iThink 的测试邮件';
-			$to = [
-				getAdminSessionInfo(SESSOIN_TAG_USER , 'email') => 'by hello' ,
-			];
-			$res = sendEmail($title , $body , $to , $err);
+			$res = querySql('SHOW TABLEs;');
+			//获取表对应应用所拥有的表
+			$tables = array_map(function($v) {
+				return array_values($v)[0];
+			} , $res);
 
+			$tables = implode('`,`' , $tables);
+
+			$res = querySql("OPTIMIZE TABLE `{$tables}`");
 			if($res)
 			{
-				$this->retureResult['message'] = '发送成功，登录管理员邮箱查收';
+				$this->retureResult['message'] = '所有数据表优化完成';
 				$this->retureResult['sign'] = RESULT_SUCCESS;
 			}
 			else
 			{
-				$this->retureResult['message'] = $err;
+				$this->retureResult['message'] = '数据表优化失败';
+				$this->retureResult['sign'] = RESULT_ERROR;
+			}
+
+			return $this->retureResult;
+		}
+
+		/**
+		 * 修复表
+		 * @return array|mixed
+		 */
+		public function restoreDb()
+		{
+
+			$res = querySql('SHOW TABLEs;');
+			//获取表对应应用所拥有的表
+			$tables = array_map(function($v) {
+				return array_values($v)[0];
+			} , $res);
+
+			$tables = implode('`,`' , $tables);
+
+			$res = querySql("REPAIR TABLE `{$tables}`");
+			if($res)
+			{
+				$this->retureResult['message'] = '所有数据表修复完成';
+				$this->retureResult['sign'] = RESULT_SUCCESS;
+			}
+			else
+			{
+				$this->retureResult['message'] = '数据表修复失败';
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 

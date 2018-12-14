@@ -94,21 +94,26 @@ Css;
 						}
 					}
 
-					$replacement['__DATA__'] = $t;
-					$replacement['__FIELD__'] = $v['field'];
-					$replacement['__CLASS__'] = $v['class'];
+					isset($v['value']) && ($field = $v['value']);
+					isset($v['field']) && ($field = $v['field']);
 
+					$replacement['__DATA__'] = $t;
+					$replacement['__FIELD__'] = $field;
+					$replacement['__CLASS__'] = $v['class'];
 					$replacement['__ATTR__'] = '';
-					$replacement['__SRC__'] = '';
-					$replacement['__TITLE__'] = '';
 					$replacement['__PARAM__'] = '';
 					$replacement['__OPTIONS__'] = '';
 
 					isset($v['attr']) && $v['attr'] && ($replacement['__ATTR__'] = $v['attr']);
+					isset($v['params']) && $v['params'] && ($replacement['__PARAM__'] = strtr('data-params=__DATA___', ['__DATA___' => json_encode($v['params']),]));
+					isset($v['options']) && $v['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__' , ['__OPTIONS__' => json_encode($v['options']) ,]));
+
+
+					$replacement['__SRC__'] = '';
+					$replacement['__TITLE__'] = '';
 					isset($v['src']) && $v['src'] && ($replacement['__SRC__'] = $v['src']);
 					isset($v['title']) && $v['title'] && ($replacement['__TITLE__'] = $v['title']);
-					isset($v['param']) && $v['param'] && ($replacement['__PARAM__'] = json_encode($v['param']));
-					isset($v['options']) && $v['options'] && ($replacement['__OPTIONS__'] = strtr('data-options=__OPTIONS__' , ['__OPTIONS__' => json_encode($v['options']) ,]));
+
 
 					$str .= strtr($tmp , $replacement);
 				}

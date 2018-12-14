@@ -2,10 +2,6 @@
 
 	namespace app\common\logic;
 
-	/**
-	 * Class User
-	 * @package app\common\logic
-	 */
 	class Loginlog extends LogicBase
 	{
 		public function __construct()
@@ -107,10 +103,7 @@
 				'left' ,
 			];
 
-			$field[] = $this->model_::makeSelfAliasField('id');
-			$field[] = $this->model_::makeSelfAliasField('ip');
-			$field[] = $this->model_::makeSelfAliasField('remark');
-			$field[] = $this->model_::makeSelfAliasField('time');
+			$field[] = $this->model_::makeSelfAliasField('*');
 			$field[] = 'b.user,b.nickname';
 
 			return $condition = [

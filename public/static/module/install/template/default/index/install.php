@@ -205,7 +205,10 @@
 							else
 							{
 								allowNext = false;
-								layer.msg('请先阅读条款，并勾选同意复选框');
+								layer.msg('请先阅读条款，并勾选同意复选框', {
+									icon: 2,
+									time: 3000
+								});
 							}
 						}
 						if ((currentIndex === 1) && (newIndex === 2))
@@ -218,7 +221,10 @@
 							else
 							{
 								allowNext = false;
-								layer.alert('安装环境不满足要求，无法安装');
+								layer.alert('安装环境不满足要求，无法安装', {
+									icon: 5,
+									time: 3000 //2秒关闭（如果不配置，默认是3秒）
+								});
 							}
 						}
 						if ((currentIndex === 2) && (newIndex === 3))
@@ -232,7 +238,10 @@
 							else
 							{
 								allowNext = false;
-								layer.alert('请填写完整相关配置并点击 测试数据库配置<br>确保数据库配置无误');
+								layer.alert('请填写完整相关配置并点击 测试数据库配置<br>确保数据库配置无误', {
+									icon: 6,
+									time: 3000 //2秒关闭（如果不配置，默认是3秒）
+								});
 							}
 						}
 						if ((currentIndex === 3) && (newIndex === 2))
@@ -240,7 +249,10 @@
 							allowNext = ($('#isDbOk').val() === '0');
 							if (!allowNext)
 							{
-								layer.alert('正在安装中，请不要刷新页面和做其他操作');
+								layer.alert('正在安装中，请不要刷新页面和做其他操作', {
+									icon: 6,
+									time: 3000 //2秒关闭（如果不配置，默认是3秒）
+								});
 							}
 						}
 						return allowNext;
@@ -349,9 +361,20 @@
 						layer.close(loadIndex);
 						$('#isEvnOk').val(data.code)
 						$('#tb').html(data.msg);
+
 						if (!data.code)
 						{
-							layer.alert('安装环境不满足要求，无法安装');
+							layer.alert('安装环境不满足要求，无法安装', {
+								icon: 5,
+								time: 3000
+							});
+						}
+						else
+						{
+							layer.msg('环境满足要求，可以按装', {
+								icon: 6,
+								time: 3000 //2秒关闭（如果不配置，默认是3秒）
+							});
 						}
 					},
 					error   : function () {
@@ -373,7 +396,19 @@
 					success : function (data) {
 						layer.close(loadIndex);
 						$('#isDbOk').val(data.code)
-						layer.msg(data.msg);
+						if (data.code)
+						{
+							layer.msg('环境满足要求，可以按装', {
+								icon: 6,
+								time: 3000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						}
+						else
+						{
+							layer.alert(data.msg, {
+								icon: 5,
+							});
+						}
 					},
 					error   : function () {
 						layer.close(loadIndex);

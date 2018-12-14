@@ -4,7 +4,7 @@
 	use builder\integrationTags;
 
 	return function($__this) {
-		$__this->setPageTitle('模块列表');
+		$__this->setPageTitle('应用列表');
 		$__this->initLogic();
 
 		$__this->displayContents = integrationTags::basicFrame([
@@ -62,7 +62,7 @@
 							] ,
 							[
 								'field' => '状态' ,
-								//'attr'  => 'style="width:120px;"' ,
+								'attr'  => '' ,
 							] ,
 							[
 								'field' => '操作' ,

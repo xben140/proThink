@@ -15,6 +15,16 @@
 			parent::_initialize();
 		}
 
+
+		/***
+		 * *********************************************************************
+		 * *********************************************************************
+		 *                应用管理
+		 * *********************************************************************
+		 * *********************************************************************
+		 */
+
+
 		/**
 		 * 安装与卸载
 		 * @return mixed
@@ -50,75 +60,25 @@
 			}
 		}
 
+
 		/**
-		 * 开发者功能，生成菜单，配置文件
-		 * @return mixed
+		 * 设置应用为默认应用
 		 * @throws \Exception
 		 */
-		public function devTool()
-		{
-			$this->initLogic();
-			$action = $this->param['option'];
-			switch (strtolower($action))
-			{
-				case 'menu' :
-				case 'conf' :
-				case 'sql' :
-					$res = $this->logic->{$action}($this->param);
-					break;
-				default :
-					$res['message'] = '安装出错，请重试';
-					$res['sign'] = RESULT_ERROR;
-			}
-			$this->jump($res);
-		}
-
-
-		/**
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
-		public function baseFunc()
-		{
-			$this->initLogic();
-			if(IS_POST)
-			{
-				$action = $this->param['option'];
-				switch (($action))
-				{
-					case 'backup_database' :
-					case 'recoverData' :
-					case 'deleteData' :
-					case 'test_email' :
-						$res = $this->logic->{$action}($this->param);
-						break;
-					default :
-						$res['message'] = '操作出错，请重试';
-						$res['sign'] = RESULT_ERROR;
-				}
-				$this->jump($res);
-			}
-			else
-			{
-				return $this->makeView($this);
-			}
-		}
-
-		/**
-		 * 查看备份sql文件
-		 * @return mixed
-		 * @throws \ReflectionException
-		 */
-		public function viewSql()
-		{
-			return $this->makeView($this);
-		}
-
 		public function setDefault()
 		{
 			$this->initLogic();
 			$this->jump($this->logic->setDefault($this->param));
 		}
+
+		/***
+		 * *********************************************************************
+		 * *********************************************************************
+		 *                包管理
+		 * *********************************************************************
+		 * *********************************************************************
+		 */
+
 
 		/**
 		 * 安装包列表
@@ -150,16 +110,6 @@
 		}
 
 		/**
-		 *    下载sql文件
-		 */
-		public function downloadSql()
-		{
-			$this->initLogic();
-			$sqlFile = (PATH_DATABASE_BACKUP . base64_decode($this->param['id']));
-			downloadFile($sqlFile , base64_decode($this->param['id']));
-		}
-
-		/**
 		 * 备份包
 		 * @throws \Exception
 		 */
@@ -169,15 +119,6 @@
 			$this->jump($this->logic->backup($this->param));
 		}
 
-		/**
-		 * 解压包到应用文件夹
-		 * @throws \Exception
-		public function apply()
-		{
-			$this->initLogic();
-			$this->jump($this->logic->apply($this->param));
-		}
-		 */
 
 		/**
 		 * 上传包文件
@@ -233,6 +174,139 @@
 				});
 
 				return json($res);
+			}
+			else
+			{
+				return $this->makeView($this);
+			}
+		}
+
+
+
+		/***
+		 * *********************************************************************
+		 * *********************************************************************
+		 *                数据表功能
+		 * *********************************************************************
+		 * *********************************************************************
+		 */
+
+
+		/**
+		 * 数据表各种功能
+		 * @throws \Exception
+		 */
+		public function dbOperation()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$action = $this->param['option'];
+				switch (($action))
+				{
+					//优化
+					case 'optimizeDb' :
+					//修复
+					case 'restoreDb' :
+					//备份数据
+					case 'backupData' :
+					//恢复备份数据
+					case 'recoverData' :
+					//删除备份数据
+					case 'deleteData' :
+						$res = $this->logic->{$action}($this->param);
+						break;
+					default :
+						$res['message'] = '操作出错，请重试';
+						$res['sign'] = RESULT_ERROR;
+				}
+				$this->jump($res);
+			}
+		}
+
+		/**
+		 * 备份sql文件列表
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
+		public function dbBackupList()
+		{
+			return $this->makeView($this);
+		}
+
+		/**
+		 * 数据表管理
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
+		public function dbList()
+		{
+			return $this->makeView($this);
+		}
+
+		/**
+		 *    下载sql文件
+		 */
+		public function downloadSql()
+		{
+			$this->initLogic();
+			$sqlFile = (PATH_DATABASE_BACKUP . base64_decode($this->param['id']));
+			downloadFile($sqlFile , base64_decode($this->param['id']));
+		}
+
+		/***
+		 * *********************************************************************
+		 * *********************************************************************
+		 *                基础功能
+		 * *********************************************************************
+		 * *********************************************************************
+		 */
+
+
+		/**
+		 * 开发者功能，生成菜单，配置文件
+		 * @return mixed
+		 * @throws \Exception
+		 */
+		public function devTool()
+		{
+			$this->initLogic();
+			$action = $this->param['option'];
+			switch (strtolower($action))
+			{
+				case 'menu' :
+				case 'conf' :
+				case 'sql' :
+					$res = $this->logic->{$action}($this->param);
+					break;
+				default :
+					$res['message'] = '安装出错，请重试';
+					$res['sign'] = RESULT_ERROR;
+			}
+			$this->jump($res);
+		}
+
+		/**
+		 * @return mixed
+		 * @throws \ReflectionException
+		 */
+		public function baseFunc()
+		{
+			$this->initLogic();
+			if(IS_POST)
+			{
+				$action = $this->param['option'];
+				switch (($action))
+				{
+					case 'test_email' :
+					case 'clear_cache' :
+						$res = $this->logic->{$action}($this->param);
+						break;
+					default :
+						$res['message'] = '操作出错，请重试';
+						$res['sign'] = RESULT_ERROR;
+				}
+				$this->jump($res);
 			}
 			else
 			{

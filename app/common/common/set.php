@@ -117,8 +117,6 @@
 		];
 
 		/**
-		 * $this->model__common_User
-		 *
 		 * @param string $name
 		 *
 		 * @return \think\Model
@@ -126,19 +124,36 @@
 		 */
 		public function __get($name)
 		{
-			//  -- 属性命名不规范,示例: model__Admin_User, logic__User, logic__common_UserType ...
-			$result = explode('__' , $name);
+			preg_match('/([a-z]+)__(?:([a-z]+)_)?([a-z]+)/im' , $name , $result);
 
-			if(!isset($result[0]) || !isset($result[1]))
+			/**
+			 * [0] => logic__common_UserType
+			 * [1] => logic
+			 * [2] => common
+			 * [3] => UserType
+			 */
+
+			if(empty($result))
 			{
-				$msg = '不正确的命名 : ' . $name;
+				$msg = '不正确的命名 : ' . $name . ' , 示例: model__Admin_User, model__User, logic__common_UserType ...';
 				exception($msg);
 			}
+			else
+			{
+				//logic/model/validate/service
+				$layerName = strtolower($result[1]);
 
-			$layerName = $result[0];
-			$modelName = strtr($result[1] , ['_' => '/']);
+				//admin/User
+				//admin/Usertype
+				$modelName = (function($result) {
+					$t = [ucwords($result[3])];
+					$result[2] && (array_unshift($t , strtolower($result[2])));
 
-			return model($modelName , $layerName);
+					return implode('/' , $t);
+				})($result);
+
+				return model($modelName , $layerName);
+			}
 		}
 
 		public static function makeClassName($classNameWithNamespace , $layer)
