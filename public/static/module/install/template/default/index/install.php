@@ -371,7 +371,7 @@
 						}
 						else
 						{
-							layer.msg('环境满足要求，可以按装', {
+							layer.msg('环境满足要求，可以安装', {
 								icon: 6,
 								time: 3000 //2秒关闭（如果不配置，默认是3秒）
 							});
@@ -398,7 +398,7 @@
 						$('#isDbOk').val(data.code)
 						if (data.code)
 						{
-							layer.msg('环境满足要求，可以按装', {
+							layer.msg('环境满足要求，可以安装', {
 								icon: 6,
 								time: 3000 //2秒关闭（如果不配置，默认是3秒）
 							});

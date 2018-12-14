@@ -146,8 +146,10 @@
 		'admin_login_index'          => 'admin/index/index' ,
 
 		//默认头像
-		//'default_profile_pic'    => '/static/image/default_pic.gif' ,
-		'default_profile_pic'    => '/static/image/default-logo.jpg' ,
+		'website_logo'    => '/static/image/logo.png' ,
+
+		//默认头像
+		'default_profile_pic'    => '/static/image/logo.png' ,
 		//上传默认占位图
 		'default_img'            => '/static/image/timg.jpg' ,
 
