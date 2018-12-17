@@ -16,7 +16,7 @@
 		 */
 		public function syncLog()
 		{
-			$logs = file_get_contents(static::$logPath);
+			$logs = is_file(static::$logPath) ? file_get_contents(static::$logPath) : "";
 			$val = preg_split('/[\r\n]/im' , $logs , -1 , PREG_SPLIT_NO_EMPTY);
 
 			$data = array_map(function($v) {

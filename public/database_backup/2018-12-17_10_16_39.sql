@@ -189,6 +189,7 @@ CREATE TABLE `ithink_user` (
   `time` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_login_key` (`user`),
+  KEY `user_nicename` (`nickname`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='后台用户表';
 
 
