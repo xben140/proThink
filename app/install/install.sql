@@ -188,7 +188,7 @@ CREATE TABLE `ithink_user` (
   `del_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   `time` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `user_login_key` (`user`),
+  KEY `user_login_key` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='后台用户表';
 
 
