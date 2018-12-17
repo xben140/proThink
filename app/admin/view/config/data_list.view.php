@@ -75,27 +75,26 @@
 							] ,
 							[
 								'field' => '属性' ,
-								'attr'  => '' ,
 							] ,
 							[
 								'field' => '值' ,
-								'attr'  => '' ,
+								'attr'  => 'style="width:150px;"' ,
 							] ,
 							[
 								'field' => '备注' ,
+								'attr'  => 'style="width:150px;"' ,
+							] ,
+							[
+								'field' => '添加时间' ,
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '时间' ,
-								'attr'  => '' ,
-							] ,
-							[
-								'field' => '是否常量' ,
-								'attr'  => '' ,
+								'field' => '常量' ,
+								'attr'  => 'style="width:70px;"' ,
 							] ,
 							[
 								'field' => '状态' ,
-								'attr'  => '' ,
+								'attr'  => 'style="width:70px;"' ,
 							] ,
 							[
 								'field' => '操作' ,
