@@ -1,5 +1,21 @@
 <?php
 
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 	use think\Db;
 
 	/*
@@ -42,10 +58,10 @@
 	 *
 	 * @return mixed
 	 */
-	function autoCache($key , callable $func , $params = [] , $time = 1 , $isForce = false)
+	function autoCache($key , callable $func , $params = [] , $time = 3600 , $isForce = false)
 	{
 		$result = cache($key);
-		if(empty($result) || $isForce)
+		if((!$result) || $isForce)
 		{
 			$result = call_user_func_array($func , $params);
 			!empty($result) && cache($key , $result , $time);
@@ -826,7 +842,7 @@
 	 * @param string $tag
 	 * @param array  $params
 	 */
-	function hook($tag = '' , $params = [])
+	function hook($tag = '' , &$params = [])
 	{
 		\think\Hook::listen($tag , $params);
 	}

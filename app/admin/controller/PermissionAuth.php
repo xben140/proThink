@@ -1,5 +1,21 @@
 <?php
 
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 	namespace app\admin\controller;
 
 	use app\common\controller\ControllerBase;
@@ -130,16 +146,17 @@
 		}
 
 
-		//用户基础资料
+		/**
+		 * 用户基础资料
+		 */
 		private function _initEnv()
 		{
 			$this->adminInfo = getAdminSessionInfo(SESSOIN_TAG_USER);
 			$this->assign('adminInfo' , $this->adminInfo);
 		}
 
-		//用户状态验证
-
 		/**
+		 * 用户状态验证
 		 * @throws \Exception
 		 */
 		private function _authUserStatus()

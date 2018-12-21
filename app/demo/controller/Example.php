@@ -1,11 +1,29 @@
 <?php
 
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 	namespace app\demo\controller;
 
 	use builder\elementsFactory;
 	use builder\integrationTags;
 	use builder\tagConstructor;
+	//use PhpOffice\PhpSpreadsheet\Spreadsheet;
 	use pingyin\PingYin;
+
 
 	/**
 	 * ******************************************************************************************
@@ -2403,6 +2421,27 @@ css;
 
 			return $this->showPage();
 		}
+
+		public function testInjection()
+		{
+			$a = $this->logic__common_Config;
+			$b = model('common/Config' , 'logic');
+
+			var_dump($a === $b);
+			var_dump($a);
+			exit;;
+		}
+
+
+
+
+/*
+		public function testInjection(\think\Request $request)
+		{
+			$request = \think\Request::instance();
+
+			//$request = $request;
+		}*/
 
 
 	}

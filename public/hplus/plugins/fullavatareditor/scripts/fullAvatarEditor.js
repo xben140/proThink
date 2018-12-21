@@ -1,3 +1,17 @@
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
 function fullAvatarEditor() {
 	var id				= 'fullAvatarEditor'			//flash文件的ID
 	var file			= 'plugins/fullavatareditor/fullAvatarEditor.swf';		//flash文件的路径

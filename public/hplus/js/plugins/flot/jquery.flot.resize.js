@@ -1,3 +1,17 @@
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
 /* Flot plugin for automatically redrawing plots as the placeholder resizes.
 
 Copyright (c) 2007-2013 IOLA and Ole Laursen.

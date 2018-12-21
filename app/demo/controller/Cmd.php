@@ -1,5 +1,21 @@
 <?php
 
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 	namespace app\demo\controller;
 
 	use base64\Base64;
@@ -45,8 +61,8 @@
 
 		public function imgEncrypt()
 		{
-			imageProcessor::encrpty()::en($this->testImg, $this->testPath, 'xxx');
-			imageProcessor::encrpty()::de($this->testPath.'ab0199108680aa2f875c6546bff0f323', $this->testPath.'\\fff', 'xxx');
+			imageProcessor::encrpty()::en($this->testImg , $this->testPath , 'xxx');
+			imageProcessor::encrpty()::de($this->testPath . 'ab0199108680aa2f875c6546bff0f323' , $this->testPath . '\\fff' , 'xxx');
 		}
 
 		//删除指定目录的所有空目录
@@ -320,8 +336,37 @@ VALUES
 						]);
 			*/
 
-
 		}
+
+		public function replace()
+		{
+			$path = 'E:\localweb\public_local2\app';
+			$path = 'E:\localweb\public_local2\extend';
+			$path = 'E:\localweb\public_local2\public';
+			FileTool::itreatorDFS($path , function($info , $relativePath) {
+				if($info->getExtension() == 'js')
+				{
+					$file = $info->getPathname();
+					echo $file;
+					echo "\r\n";
+
+
+					$subject = file_get_contents($file);
+					$result = preg_replace('/^<\?php\s*/', '', $subject);
+
+					$t = 'C:\Users\Administrator\Desktop\cc\\'.$relativePath;
+					FileTool::mkdir_(dirname($t));
+
+					//file_put_contents($t, $result);
+					file_put_contents($file, $result);
+				}
+
+				return true;
+			} , function($info , $relativePath) use (&$flag) {
+
+			});
+		}
+
 	}
 
 
@@ -330,7 +375,6 @@ VALUES
 	 * [\r\n][ \t]+|[ \t]+|[\r\n](?=})
 	 * [\r\n]+                                [\r\n]
 	 * (?:^\s+)|(?:\s+(?=:|\{|}|;))|(?:(?<=:|\{|;)\s+)
-	 *
 	 */
 
 

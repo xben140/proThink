@@ -1,5 +1,21 @@
 <?php
 
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 	namespace app\common\logic;
 
 	use app\common\common\set;
@@ -139,7 +155,6 @@
 
 			if($validateResult)
 			{
-				//TODO 执行前置钩子，根据结果处理
 				$globalVariable = $param;
 				$closureList = [];
 
@@ -208,9 +223,6 @@
 		 */
 		public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
 		{
-			//TODO 执行前置钩子，根据结果决定是否删除
-			//TODO 把删除语句加入闭包队列中最后一个都通过才删除
-			//TODO 或者在执行删除语句之前执行一个前置方法，通过才删除
 			$globalVariable = $param;
 			$closureList = [];
 

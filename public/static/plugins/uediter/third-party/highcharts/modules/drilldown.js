@@ -1,3 +1,17 @@
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
 (function(e){function q(b,a,c){return"rgba("+[Math.round(b[0]+(a[0]-b[0])*c),Math.round(b[1]+(a[1]-b[1])*c),Math.round(b[2]+(a[2]-b[2])*c),b[3]+(a[3]-b[3])*c].join(",")+")"}var m=function(){},j=e.getOptions(),g=e.each,n=e.extend,o=e.wrap,h=e.Chart,i=e.seriesTypes,k=i.pie,l=i.column,r=HighchartsAdapter.fireEvent;n(j.lang,{drillUpText:"◁ Back to {series.name}"});j.drilldown={activeAxisLabelStyle:{cursor:"pointer",color:"#039",fontWeight:"bold",textDecoration:"underline"},activeDataLabelStyle:{cursor:"pointer",
 color:"#039",fontWeight:"bold",textDecoration:"underline"},animation:{duration:500},drillUpButton:{position:{align:"right",x:-10,y:10}}};e.SVGRenderer.prototype.Element.prototype.fadeIn=function(){this.attr({opacity:0.1,visibility:"visible"}).animate({opacity:1},{duration:250})};h.prototype.drilldownLevels=[];h.prototype.addSeriesAsDrilldown=function(b,a){var c=b.series,d=c.xAxis,f=c.yAxis,e;e=b.color||c.color;var g,a=n({color:e},a);g=HighchartsAdapter.inArray(this,c.points);this.drilldownLevels.push({seriesOptions:c.userOptions,
 shapeArgs:b.shapeArgs,bBox:b.graphic.getBBox(),color:e,newSeries:a,pointOptions:c.options.data[g],pointIndex:g,oldExtremes:{xMin:d&&d.userMin,xMax:d&&d.userMax,yMin:f&&f.userMin,yMax:f&&f.userMax}});e=this.addSeries(a,!1);if(d)d.oldPos=d.pos,d.userMin=d.userMax=null,f.userMin=f.userMax=null;if(c.type===e.type)e.animate=e.animateDrilldown||m,e.options.animation=!0;c.remove(!1);this.redraw();this.showDrillUpButton()};h.prototype.getDrilldownBackText=function(){return this.options.lang.drillUpText.replace("{series.name}",

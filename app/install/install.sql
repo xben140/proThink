@@ -27,7 +27,7 @@ CREATE TABLE `ithink_config` (
   `del_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='系统配置表';
-INSERT INTO `ithink_config` (`id` , `name` , `key` , `value` , `type` , `group_id` , `is_const` , `remark` , `status` , `time` , `del_time`) VALUES ( 1,'应用调试模式','app_debug','1',3,1,0,'应用调试模式',1,1534393510,0 ) , ( 2,'应用Trace','app_trace','0',3,1,0,'应用Trace',1,1534393553,0 ) , ( 3,'分页配置','paginate.type','bootstrap',2,2,0,'',1,1534393577,0 ) , ( 4,'分页变量','paginate.var_page','page',2,2,0,'',1,1535333811,0 ) , ( 5,'每页记录条数','paginate.list_rows','20',2,2,0,'',1,1535333877,0 ) , ( 6,'邮件服务器端口','email_port','25',2,7,0,'',1,1534393577,0 ) , ( 7,'邮箱账号','email_username','-',2,7,0,'邮箱账号',1,1534393577,0 ) , ( 8,'邮件用户登陆秘钥','email_password','-',2,7,0,'用于登陆第三方客户端的密码',1,1534393577,0 ) , ( 9,'对方显示发件人','email_user','来自iThink的测试邮件',2,7,0,'',1,1534393577,0 ) , ( 10,'邮件服务器','email_host','smtp.yeah.net',2,7,0,'',1,1534482480,0 ) , ( 11,'缓存类型','cache.type','File!!--!!\r\nMemcache\r\nRedis',4,8,0,'设置缓存驱动\n暂未配置redis和memcache\n使用File',1,1534482480,0 ) , ( 14,'错误页面模板','exception_tmpl','../thinkphp/tpl/think_exception.tpl!!--!!\r\n../app/common/view/think_exception.php',4,1,0,'报错模板页面',1,1535507309,1537952833 ) , ( 15,'IP白名单','white_list','127.0.0.1',1,1,0,'',1,1537495275,0 ) , ( 16,'网站形象图片','website_logo','20181214\\8bd64f46d168f02ed7110b552ab179d1.png',5,1,0,'',1,1537495654,0 ) , ( 17,'默认占位图','default_img','20181214\\0d52e66f2b32d711e1caaec005ff0c99.jpg',5,1,0,'',1,1537510228,0 ) , ( 18,'默认头像','default_profile_pic','20181214\\59c59ce4507f5ae1da8964e9160b59e4.png',5,1,0,'',1,1537510244,0 ) , ( 297,'默认模块','default_module','blog',2,1,0,'',0,1541581045,0 ) , ( 298,'默认控制器名','default_controller','index',2,1,0,'',0,1541582756,0 ) , ( 299,'默认操作名','default_action','index',2,1,0,'',0,1541582770,0 ) , ( 308,'前端模板','admin.themes','default\r\ntype1!!--!!',4,1,0,'',1,1544425340,0 ) , ( 330,'开启访问日志','is_write_oplog','0',3,1,0,'开启以后所有请求会写入访问日志文件，可以自己在模块中定义 ControllerBase 中的 addOplog 方法重写写入日志时机',1,1544692273,0 );
+INSERT INTO `ithink_config` (`id` , `name` , `key` , `value` , `type` , `group_id` , `is_const` , `remark` , `status` , `time` , `del_time`) VALUES ( 1,'应用调试模式','app_debug','1',3,1,0,'应用调试模式',1,1534393510,0 ) , ( 2,'应用Trace','app_trace','0',3,1,0,'应用Trace',1,1534393553,0 ) , ( 3,'分页配置','paginate.type','bootstrap',2,2,0,'',1,1534393577,0 ) , ( 4,'分页变量','paginate.var_page','page',2,2,0,'',1,1535333811,0 ) , ( 5,'每页记录条数','paginate.list_rows','20',2,2,0,'',1,1535333877,0 ) , ( 6,'邮件服务器端口','email_port','25',2,7,0,'',1,1534393577,0 ) , ( 7,'邮箱账号','email_username','-',2,7,0,'邮箱账号',1,1534393577,0 ) , ( 8,'邮件用户登陆秘钥','email_password','-',2,7,0,'用于登陆第三方客户端的密码',1,1534393577,0 ) , ( 9,'对方显示发件人','email_user','来自iThink的测试邮件',2,7,0,'',1,1534393577,0 ) , ( 10,'邮件服务器','email_host','smtp.yeah.net',2,7,0,'',1,1534482480,0 ) , ( 11,'缓存类型','cache.type','File!!--!!\r\nMemcache\r\nRedis',4,8,0,'设置缓存驱动\n暂未配置redis和memcache\n使用File',1,1534482480,0 ) , ( 14,'错误页面模板','exception_tmpl','../thinkphp/tpl/think_exception.tpl!!--!!\r\n../app/common/view/think_exception.php',4,1,0,'报错模板页面',1,1535507309,1537952833 ) , ( 15,'IP白名单','white_list','127.0.0.1',1,1,0,'',1,1537495275,0 ) , ( 16,'网站形象图片','website_logo','20181214\\8bd64f46d168f02ed7110b552ab179d1.png',5,1,0,'',1,1537495654,0 ) , ( 17,'默认占位图','default_img','20181214\\0d52e66f2b32d711e1caaec005ff0c99.jpg',5,1,0,'',1,1537510228,0 ) , ( 18,'默认头像','default_profile_pic','20181214\\59c59ce4507f5ae1da8964e9160b59e4.png',5,1,0,'',1,1537510244,0 ) , ( 297,'默认模块','default_module','blog',2,1,0,'',0,1541581045,0 ) , ( 298,'默认控制器名','default_controller','index',2,1,0,'',0,1541582756,0 ) , ( 299,'默认操作名','default_action','index',2,1,0,'',0,1541582770,0 ) , ( 308,'前端模板','admin.themes','default\r\ntype1!!--!!',4,1,0,'',1,1544425340,0 ) , ( 330,'开启访问日志','is_write_oplog','1',3,1,0,'开启以后所有请求会写入访问日志文件，可以自己在模块中定义 ControllerBase 中的 addOplog 方法重写写入日志时机',1,1544692273,0 );
 
 
 
@@ -60,7 +60,8 @@ CREATE TABLE `ithink_login_log` (
   `del_time` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='登陆日志表';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='登陆日志表';
+
 
 
 DROP TABLE IF EXISTS `ithink_oplog`;
@@ -83,7 +84,8 @@ CREATE TABLE `ithink_oplog` (
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `del_time` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+
 
 
 DROP TABLE IF EXISTS `ithink_privilege`;
@@ -159,7 +161,7 @@ CREATE TABLE `ithink_route` (
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '应用id',
   `route` text NOT NULL COMMENT '路由数组，json',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='应用路由信息表';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='应用路由信息表';
 
 
 DROP TABLE IF EXISTS `ithink_user`;
@@ -188,8 +190,10 @@ CREATE TABLE `ithink_user` (
   `del_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   `time` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `user_login_key` (`user`)
+  KEY `user_login_key` (`user`),
+  KEY `user_nicename` (`nickname`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='后台用户表';
+
 
 
 DROP TABLE IF EXISTS `ithink_user_role`;

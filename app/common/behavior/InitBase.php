@@ -1,13 +1,21 @@
 <?php
-// +---------------------------------------------------------------------+
-// | OneBase    | [ WE CAN DO IT JUST THINK ]                            |
-// +---------------------------------------------------------------------+
-// | Licensed   | http://www.apache.org/licenses/LICENSE-2.0 )           |
-// +---------------------------------------------------------------------+
-// | Author     | Bigotry <3162875@qq.com>                               |
-// +---------------------------------------------------------------------+
-// | Repository | https://gitee.com/Bigotry/OneBase                      |
-// +---------------------------------------------------------------------+
+
+/*
++---------------------------------------------------------------------+
+| iThink        | [ WE CAN DO IT JUST THINK ]                         |
++---------------------------------------------------------------------+
+| Official site | http://www.ithinkphp.org/                           |
++---------------------------------------------------------------------+
+| Author        | hello wf585858@yeah.net                             |
++---------------------------------------------------------------------+
+| Repository    | https://gitee.com/wf5858585858/iThink               |
++---------------------------------------------------------------------+
+| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
++---------------------------------------------------------------------+
+*/
+
+
+
 
 	namespace app\common\behavior;
 
@@ -212,15 +220,18 @@
 		 */
 		private function initConfig()
 		{
-			$configList = autoCache('config_list' , Auth::createClosure([
-				$this->logic__Common_Config ,
-				'getAvailableConfig' ,
-			]));
+			$configList = autoCache(
+				'config_list' ,
+				Auth::createClosure([$this->logic__Common_Config , 'getAvailableConfig' ]),
+				[] ,
+				3600 ,
+				true
+			);
 
-			//print_r($configList);exit;;
 			array_map(function($info) {
-				($info['is_const']) ? defined($info['field']) or define($info['field'] , $info['value']) : config($info['field'] , $info['value']);
-				//return true;
+				($info['is_const'])
+				? (defined($info['field']) or define($info['field'] , $info['value']))
+				: config($info['field'] , $info['value']);
 			} , $configList);
 		}
 
@@ -231,7 +242,10 @@
 		private function initRoute()
 		{
 			$res = db('route')->column('route');
-			foreach ($res as $k => $v) Route::rule(json_decode($v , 1));
+
+			array_map(function($v) {
+				Route::rule(json_decode($v , 1));
+			} , $res);
 		}
 
 
