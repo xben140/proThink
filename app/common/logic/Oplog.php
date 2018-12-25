@@ -18,6 +18,8 @@
 
 	namespace app\common\logic;
 
+	use think\Exception;
+
 	class Oplog extends LogicBase
 	{
 		public static $logPath = PATH_PUBLIC . 'oplog.log';
@@ -36,12 +38,22 @@
 			$val = preg_split('/[\r\n]/im' , $logs , -1 , PREG_SPLIT_NO_EMPTY);
 
 			$data = array_map(function($v) {
-				return json_decode($v , 1);
+				$res = json_decode($v , 1);
+				$res['uid'] = (int)$res['uid'];
+				return $res;
+
 			} , $val);
 
-			$this->model_->insertAll($data);
-			file_put_contents(static::$logPath , '');
-			$this->retureResult['message'] = '日志同步成功';
+			try
+			{
+				$this->model_->saveAll($data);
+				file_put_contents(static::$logPath , '');
+				$this->retureResult['message'] = '日志同步成功';
+			} catch (Exception $e)
+			{
+				$this->retureResult['sign'] = RESULT_ERROR;
+				$this->retureResult['message'] = $e->getMessage();
+			}
 
 			return $this->retureResult;
 		}
@@ -66,7 +78,7 @@
 		public static function makeOplog(): array
 		{
 			return [
-				'uid'        => getAdminSessionInfo('user' , 'id') ,
+				'uid'        => getAdminSessionInfo('user' , 'id') ?: 0 ,
 				'module'     => MODULE_NAME ,
 				'controller' => CONTROLLER_NAME ,
 				'action'     => ACTION_NAME ,

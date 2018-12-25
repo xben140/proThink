@@ -1,19 +1,18 @@
 <?php
 
-/*
-+---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
-+---------------------------------------------------------------------+
-| Official site | http://www.ithinkphp.org/                           |
-+---------------------------------------------------------------------+
-| Author        | hello wf585858@yeah.net                             |
-+---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
-+---------------------------------------------------------------------+
-| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
-+---------------------------------------------------------------------+
-*/
-
+	/*
+	+---------------------------------------------------------------------+
+	| iThink        | [ WE CAN DO IT JUST THINK ]                         |
+	+---------------------------------------------------------------------+
+	| Official site | http://www.ithinkphp.org/                           |
+	+---------------------------------------------------------------------+
+	| Author        | hello wf585858@yeah.net                             |
+	+---------------------------------------------------------------------+
+	| Repository    | https://gitee.com/wf5858585858/iThink               |
+	+---------------------------------------------------------------------+
+	| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
+	+---------------------------------------------------------------------+
+	*/
 
 
 	namespace builder\elements\frame;
@@ -257,11 +256,11 @@ str;
 				<!-- ~~~profile_pop_link~~~ -->
 				
 				<!-- ~~~profile_link~~~ -->
-				
+				<!--
 				<div class="profile-item">
 					<span><a href="/" target="_blank" class=" font-bold">访问首页</a></span>
-					<span><a href="<!-- ~~~logout_url~~~ -->" class=" font-bold">退出登陆</a></span>
-				</div>
+					<span><a href="&lt;!&ndash; ~~~logout_url~~~ &ndash;&gt;" class=" font-bold">退出登陆</a></span>
+				</div>-->
 			</div>
 				
 				
@@ -315,26 +314,32 @@ str;
 	<div id="page-wrapper" class="gray-bg dashbard-1">
 
 		<div class="row content-tabs">
-			<button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
-			</button>
+		
+			<button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i></button>
+			
 			<nav class="page-tabs J_menuTabs">
 				<div class="page-tabs-content">
-					<span class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-								<i class="fa fa-bars"></i>
-						</span>
-					<a id="refresh"  class="" data-id="">全局刷新</a>
-					<!--<a id="clear"  class="" data-id="">清除缓存</a>-->
+					<span class="navbar-minimalize minimalize-styl-2 btn btn-primary " >
+						<i class="fa fa-bars"  ></i>
+					</span>
+					<span class=" minimalize-styl-2 btn btn-primary" >
+						<i class="fa fa-home" id="home" ></i>
+					</span>
+					<span class=" minimalize-styl-2 btn btn-primary" >
+						<i class="fa fa-refresh" id="refresh" ></i>
+					</span>
+				
 					<a href="javascript:;" class="active J_menuTab" data-id="<!-- ~~~default_page~~~ -->"> 主页 </a>
 				</div>
 			</nav>
-			<button class="roll-nav roll-right J_tabRight">
-			<i class="fa fa-forward"></i>
-			</button>
+			
+			<button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+			
 			<div class="btn-group roll-nav roll-right">
 				<button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span></button>
 				<ul role="menu" class="dropdown-menu dropdown-menu-right">
 					<li class="J_tabShowActive">
-						<a>定位当前选项卡</a>
+						<a>定位当前页面</a>
 					</li>
 					<!--<li class="divider"></li>-->
 					
@@ -345,7 +350,7 @@ str;
 					-->
 					
 					<li class="J_tabCloseOther">
-						<a>关闭其他选项卡</a>
+						<a>关闭其他页面</a>
 					</li>
 				</ul>
 			</div>

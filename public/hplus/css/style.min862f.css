@@ -127,7 +127,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side{display:block;width:70px}
 @media (min-width:992px){.menu-visible-md{display:block !important}}
 @media (max-width:767px){.menu-visible-lg, .menu-visible-md{display:block !important}}
 .btn{border-radius:3px}
-.float-e-margins .btn{margin-bottom:5px}
+.float-e-margins .btn{/* margin-bottom:5px; */}
 .btn-w-m{min-width:120px}
 .btn-primary.btn-outline{color:#1ab394}
 .btn-success.btn-outline{color:#1c84c6}
@@ -576,7 +576,7 @@ body.body-small .footer.fixed{margin-left:0}
 .content-tabs .roll-right{right:0;border-left:solid 1px #eee}
 .content-tabs button{background:#fff;border:0;height:40px;width:40px;outline:0;}
 .content-tabs button:hover{background:#fafafa}
-nav.page-tabs{margin-left:40px;width:100000px;height:40px;overflow:hidden}
+nav.page-tabs{margin-left:40px;width:100000px;height:40px;overflow:hidden;box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);}
 nav.page-tabs .page-tabs-content{float:left}
 .page-tabs a{display:block;float:left;border: solid 1px #ddd;/* border-radius: 8px 8px 0px 0; */padding: 0px 15px;background: #fff;}
 .page-tabs a i:hover{color:#c00}
@@ -592,7 +592,7 @@ nav.page-tabs .page-tabs-content{float:left}
 .table-bordered > thead > tr > td, .table-bordered > thead > tr > th{background-color:#F5F5F6}
 .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th{border:1px solid #e7e7e7}
 .table > thead > tr > th{border-bottom:1px solid #DDD}
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{border-top:1px solid #e7eaec;line-height:1.1;padding:4px;vertical-align:middle;}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{border-top:1px solid #e7eaec;/* line-height:1.1; */padding:4px;vertical-align:middle;}
 .table > tbody > tr > td > span.name{display:inline-block;padding:2px 2px;margin:1px 1px;min-width:18px;min-height:10px;/* line-height:23px;*/}
 .panel.blank-panel{background:0 0;margin:0}
 .blank-panel .panel-heading{padding-bottom:0}

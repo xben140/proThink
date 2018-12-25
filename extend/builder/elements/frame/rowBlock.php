@@ -113,6 +113,7 @@ Css;
 			<h5><!-- ~~~main_title~~~ -->
 				<small><!-- ~~~sub_title~~~ --></small>
 			</h5>
+			
 			<div class="ibox-tools">
 				<!--<label class="label label-primary">可拖动</label>-->
 				<a class="collapse-link">
@@ -129,8 +130,9 @@ Css;
 					</li>
 					-->
 				</ul>
-				
 			</div>
+			
+			
 		</div>
 		<div class="ibox-content" style="position: relative">
 			

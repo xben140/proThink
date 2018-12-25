@@ -225,7 +225,7 @@
 								integrationTags::td([
 									integrationTags::tdSimple([
 										'value'    => $v['name'] ,
-										'name'     => '' ,
+										//'name'    => '' ,
 										'field'    => 'name' ,
 										'reg'      => '/^\S+$/' ,
 										'msg'      => '角色名必填' ,
@@ -238,7 +238,7 @@
 								//排序
 								integrationTags::td([
 									integrationTags::tdSimple([
-										'name'     => '' ,
+										//'name'    => '' , ,
 										'value'    => $v['order'] ,
 										'field'    => 'order' ,
 										'reg'      => '/^\d+$/' ,
@@ -288,7 +288,7 @@
 												return ($v['id'] != GLOBAL_ADMIN_ROLE_ID);
 											})() ,
 										] ,
-										'name'    => '' ,
+										//'name'    => '' , ,
 										'is_auto' => '1' ,
 
 									]) ,
