@@ -81,7 +81,7 @@
 						$_this->setHead([
 							[
 								'field' => '' ,
-								'attr'  => 'style="width:50px;"' ,
+								'attr'  => 'style="width:30px;"' ,
 							] ,
 							[
 								'field' => '权限名' ,

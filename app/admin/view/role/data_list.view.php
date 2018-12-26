@@ -70,6 +70,10 @@
 						 */
 						$_this->setHead([
 							[
+								'field' => '' ,
+								'attr'  => 'style="width:30px;"' ,
+							] ,
+							[
 								'field' => 'ID' ,
 								'attr'  => 'style="width:80px;"' ,
 							] ,
@@ -216,6 +220,12 @@
 									integrationTags::tdCheckbox((function($v) {
 										return $v['id'] != 1;
 									})($v)) ,
+
+								]) ,
+
+								//checkbox
+								integrationTags::td([
+
 									integrationTags::tdSimple([
 										'value' => $v['id'] ,
 									]) ,

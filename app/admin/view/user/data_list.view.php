@@ -70,6 +70,10 @@
 						 */
 						$_this->setHead([
 							[
+								'field' => '' ,
+								'attr'  => 'style="width:30px;"' ,
+							] ,
+							[
 								'field' => 'ID' ,
 								'attr'  => 'style="width:80px;"' ,
 							] ,
@@ -86,15 +90,15 @@
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '时间' ,
+								'field' => '' ,
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '登陆次数' ,
+								'field' => '' ,
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '状态 (允许登陆)' ,
+								'field' => '状态' ,
 								'attr'  => '' ,
 							] ,
 							[
@@ -249,6 +253,17 @@
 
 								//checkbox
 								integrationTags::td([
+									integrationTags::tdCheckbox((function() use ($v) {
+										//管理员id 和 自己的
+										if(isGlobalManagerId($v['id'])) return false;
+										if($v['id'] == getAdminSessionInfo('user' , 'id')) return false;
+
+										return true;
+									})()) ,
+								]) ,
+
+								//checkbox
+								integrationTags::td([
 									integrationTags::tdSimple([
 										'value'      => $v['id'] ,
 										'is_display' => (function() use ($v) {
@@ -258,13 +273,6 @@
 											return 1;
 										})() ,
 									]) ,
-									integrationTags::tdCheckbox((function() use ($v) {
-										//管理员id 和 自己的
-										if(isGlobalManagerId($v['id'])) return false;
-										if($v['id'] == getAdminSessionInfo('user' , 'id')) return false;
-
-										return true;
-									})()) ,
 								]) ,
 
 								//头像
@@ -371,33 +379,27 @@
 											return !isGlobalManagerId($v['id']) ? '' : 'disabled';
 										})() ,
 									]) ,
-
 								]) ,
 
 								//时间
 								integrationTags::td([
 									integrationTags::tdSimple([
-										'name'     => '注册时间' ,
+										'name'     => '注册时间 :' ,
 										'editable' => '0' ,
 										'value'    => formatTime($v['time']) ,
 									]) ,
 									'<br>' ,
 									integrationTags::tdSimple([
-										'name'     => '登陆时间' ,
+										'name'     => '登陆时间 :' ,
 										'editable' => '0' ,
 										'value'    => formatTime($v['last_login_time']) ,
 									]) ,
-									'<br>' ,
+
+									'<br/>' ,
 									integrationTags::tdSimple([
-										'name'     => '注册IP' ,
+										'name'     => '登陆次数 :' ,
 										'editable' => '0' ,
-										'value'    => $v['reg_ip'] ,
-									]) ,
-									'<br>' ,
-									integrationTags::tdSimple([
-										'name'     => '登陆IP' ,
-										'editable' => '0' ,
-										'value'    => $v['last_login_ip'] ,
+										'value'    => $v['login_count'] ,
 									]) ,
 								]) ,
 
@@ -405,9 +407,15 @@
 								//登陆次数
 								integrationTags::td([
 									integrationTags::tdSimple([
-										//'name'     => '登陆次数' ,
+										'name'     => '注册IP :' ,
 										'editable' => '0' ,
-										'value'    => $v['login_count'] ,
+										'value'    => $v['reg_ip'] ,
+									]) ,
+									'<br>' ,
+									integrationTags::tdSimple([
+										'name'     => '登陆IP :' ,
+										'editable' => '0' ,
+										'value'    => $v['last_login_ip'] ,
 									]) ,
 								]) ,
 
@@ -464,6 +472,7 @@
 										})() ,
 									]) ,
 
+									'<br>' ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-info btn-open-pop' ,

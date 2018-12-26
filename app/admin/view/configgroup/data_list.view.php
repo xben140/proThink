@@ -70,8 +70,11 @@
 						 */
 						$_this->setHead([
 							[
+								'field' => '' ,
+								'attr'  => 'style="width:30px;"' ,
+							] ,
+							[
 								'field' => 'ID' ,
-								'attr'  => 'style="width:80px;"' ,
 							] ,
 							[
 								'field' => '组名' ,
@@ -192,6 +195,11 @@
 								//checkbox
 								integrationTags::td([
 									integrationTags::tdCheckbox() ,
+
+								]) ,
+
+								//checkbox
+								integrationTags::td([
 									integrationTags::tdSimple([
 										'value' => $v['id'] ,
 									]) ,
