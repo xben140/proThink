@@ -16,61 +16,28 @@
 
 
 
-	namespace app\common\validate;
+	namespace app\admin\logic;
+	use app\common\logic\LogicBase;
 
-	class Area extends ValidateBase
+
+	/**
+	 * Class Aera
+	 * @package app\common\logic
+	 */
+	class Area extends LogicBase
 	{
+		public function __construct()
+		{
+			$this->initBaseClass();
+		}
 
+		public function getAreaByPid($param)
+		{
+			$pid = $param['pid'];
+			$data = $this->model_->getAreaByPid($pid);
 
-		// 验证规则
-		protected $rule = [
-
-		];
-
-		// 验证提示
-		protected $message = [
-
-		];
-
-		// 应用场景
-		protected $scene = [/*
-			'add'  => [
-				'user' ,
-				'password' ,
-				'email' ,
-			] ,
-			'edit' => [
-				'user' ,
-				'email' ,
-				'phone' ,
-			] ,
-*/
-
-		];
+			//array
+			return $data->toArray();
+		}
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

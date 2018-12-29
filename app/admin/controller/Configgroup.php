@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Configgroup extends PermissionAuth
+	class Configgroup extends BackendBase
 	{
 		public function _initialize()
 		{

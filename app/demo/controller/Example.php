@@ -2424,7 +2424,7 @@ css;
 
 		public function testInjection()
 		{
-			$a = $this->logic__common_Config;
+			$a = $this->logic__admin_config;
 			$b = model('common/Config' , 'logic');
 
 			var_dump($a === $b);

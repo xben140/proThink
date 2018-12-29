@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Role extends PermissionAuth
+	class Role extends BackendBase
 	{
 		public function _initialize()
 		{
@@ -48,8 +48,6 @@
 		 */
 		public function delete()
 		{
-			
-
 			return $this->jump($this->logic->delete($this->param , [
 				[
 					//看有没有用户有这个角色，有的话就不能删除

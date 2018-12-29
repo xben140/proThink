@@ -23,7 +23,7 @@
 	 * Class CustomFrontendBase
 	 * @package app\common\controller
 	 */
-	class CustomFrontendBase  extends \app\admin\controller\FrontendBase
+	class CustomFrontendBase  extends FrontendBaseController
 	{
 		use CustomBase;
 

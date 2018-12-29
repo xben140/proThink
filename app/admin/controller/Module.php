@@ -21,7 +21,7 @@
 	use file\FileTool;
 	use zip\phpZip;
 
-	class Module extends PermissionAuth
+	class Module extends BackendBase
 	{
 		/**
 		 * @throws \Exception

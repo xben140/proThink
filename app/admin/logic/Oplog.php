@@ -16,8 +16,9 @@
 
 
 
-	namespace app\common\logic;
+	namespace app\admin\logic;
 
+	use app\common\logic\LogicBase;
 	use think\Exception;
 
 	class Oplog extends LogicBase

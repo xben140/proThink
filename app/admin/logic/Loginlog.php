@@ -16,7 +16,9 @@
 
 
 
-	namespace app\common\logic;
+	namespace app\admin\logic;
+
+	use app\common\logic\LogicBase;
 
 	class Loginlog extends LogicBase
 	{

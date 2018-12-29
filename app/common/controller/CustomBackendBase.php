@@ -23,7 +23,7 @@
 	 * Class CustomBackendBase
 	 * @package app\common\controller
 	 */
-	class CustomBackendBase extends \app\admin\controller\PermissionAuth
+	class CustomBackendBase extends BackendBaseController
 	{
 		use CustomBase;
 	}

@@ -16,31 +16,63 @@
 
 
 
-	namespace app\common\model;
+	namespace app\admin\validate;
 
-	class Loginlog extends ModelBase
+	use app\common\validate\ValidateBase;
+
+	class Area extends ValidateBase
 	{
-		public $name = 'login_log';
 
-		/**
-		 *  初始化模型
-		 * @access protected
-		 * @return void
-		 */
-		protected function initialize()
-		{
-			parent::initialize();
-		}
 
-		//自动完成[新增和修改时都会执行]
-		protected $auto = [];
+		// 验证规则
+		protected $rule = [
 
-		//新增时自动验证
-		protected $insert = [
-			'ip' => IP ,
 		];
 
-		public $update = [//'status' ,
+		// 验证提示
+		protected $message = [
+
+		];
+
+		// 应用场景
+		protected $scene = [/*
+			'add'  => [
+				'user' ,
+				'password' ,
+				'email' ,
+			] ,
+			'edit' => [
+				'user' ,
+				'email' ,
+				'phone' ,
+			] ,
+*/
+
 		];
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

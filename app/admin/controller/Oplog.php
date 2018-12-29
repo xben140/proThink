@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Oplog extends PermissionAuth
+	class Oplog extends BackendBase
 	{
 		public function _initialize()
 		{

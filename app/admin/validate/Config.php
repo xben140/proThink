@@ -16,7 +16,9 @@
 
 
 
-	namespace app\common\validate;
+	namespace app\admin\validate;
+
+	use app\common\validate\ValidateBase;
 
 	class Config extends ValidateBase
 	{

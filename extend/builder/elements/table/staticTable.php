@@ -198,7 +198,7 @@ js;
 				'attr'       => '' ,
 				'pagination' => '' ,
 				'method'     => 'get' ,
-				'class'      => 'form-horizontal' ,
+				'class'      => 'table-striped  table-bordered- table-hover table-condensed ' ,
 			]);
 			/**
 			 *--------------------------------------------------------------------------
@@ -218,7 +218,7 @@ js;
 				<!-- ~~~pagination~~~ -->
 
 				<!--<span class="tips"> * 所有红色标题的字段或者背景颜色为黄色的字段可以双击修改</span>-->
-				<table class="table table-striped  table-bordered table-hover table-condensed ">
+				<table class="table <!-- ~~~class~~~ -->">
 					<thead>
 						<tr>
 							<!-- ~~~head~~~ -->

@@ -222,7 +222,7 @@
 		{
 			$configList = autoCache(
 				'config_list' ,
-				Auth::createClosure([$this->logic__Common_Config , 'getAvailableConfig' ]),
+				Auth::createClosure([$this->logic__admin_Config , 'getAvailableConfig' ]),
 				[] ,
 				3600 ,
 				true

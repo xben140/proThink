@@ -204,7 +204,7 @@
 								'status' => 1 ,
 							]);
 
-							$configModel = $this->model__common_config;
+							$configModel = $this->model__admin_config;
 							$val = '';
 							$data = [];
 							foreach ($config as $k => $v)
@@ -360,7 +360,7 @@
 							$flag = true;
 							$flag && $flag = ($this->model__admin_privilege->where(['category' => strtolower($info['info']['id']) ,])->delete() !== false);
 
-							$flag && $flag = $this->logic__common_config->model_->updateField([
+							$flag && $flag = $this->logic__admin_config->model_->updateField([
 								'status' => '0' ,
 							] , [
 								'key' => [
@@ -577,7 +577,7 @@
 							break;
 						case '4' :
 							#option
-							$temp = $this->logic__common_config->makeOptionsVal($v);
+							$temp = $this->logic__admin_config->makeOptionsVal($v);
 							$val['value'] = $temp['options'];
 							$val['selected'] = $temp['selected'];
 							break;
@@ -720,22 +720,22 @@
 				'\\' => '/' ,
 			]));
 
-			$flag = $this->logic__common_config->model_->updateField([
+			$flag = $this->logic__admin_config->model_->updateField([
 				'value' => $route[0] ,
 			] , [
 				'key' => 'default_module' ,
 			]);
-			$flag && $flag = $this->logic__common_config->model_->updateField([
+			$flag && $flag = $this->logic__admin_config->model_->updateField([
 				'value' => $route[1] ,
 			] , [
 				'key' => 'default_controller' ,
 			]);
-			$flag && $flag = $this->logic__common_config->model_->updateField([
+			$flag && $flag = $this->logic__admin_config->model_->updateField([
 				'value' => $route[2] ,
 			] , [
 				'key' => 'default_action' ,
 			]);
-			$flag && $flag = $this->logic__common_config->model_->updateField([
+			$flag && $flag = $this->logic__admin_config->model_->updateField([
 				'status' => '1' ,
 			] , [
 				'key' => [

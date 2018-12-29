@@ -16,12 +16,12 @@
 
 
 
-	namespace app\common\model;
+	namespace app\admin\model;
 
-	class Oplog extends ModelBase
+	use app\common\model\ModelBase;
+
+	class Area extends ModelBase
 	{
-		public $name = 'oplog';
-
 		/**
 		 *  初始化模型
 		 * @access protected
@@ -32,15 +32,17 @@
 			parent::initialize();
 		}
 
-		//自动完成[新增和修改时都会执行]
-		protected $auto = [];
+		public function getAreaByPid($pid)
+		{
+			$this->setCondition([
+				'alias' => self::$currentTableAlias ,
+				'where' => [
+					self::makeSelfAliasField('pid') => $pid ,
+				] ,
+			]);
+			$data = $this->select();
 
-		//新增时自动验证
-		protected $insert = [
-			'ip' => IP ,
-		];
-
-		public $update = [//'status' ,
-		];
-
+			//collection
+			return $data;
+		}
 	}

@@ -16,10 +16,14 @@
 
 
 
-	namespace app\common\model;
+	namespace app\admin\model;
 
-	class Area extends ModelBase
+	use app\common\model\ModelBase;
+
+	class Loginlog extends ModelBase
 	{
+		public $name = 'login_log';
+
 		/**
 		 *  初始化模型
 		 * @access protected
@@ -30,17 +34,15 @@
 			parent::initialize();
 		}
 
-		public function getAreaByPid($pid)
-		{
-			$this->setCondition([
-				'alias' => self::$currentTableAlias ,
-				'where' => [
-					self::makeSelfAliasField('pid') => $pid ,
-				] ,
-			]);
-			$data = $this->select();
+		//自动完成[新增和修改时都会执行]
+		protected $auto = [];
 
-			//collection
-			return $data;
-		}
+		//新增时自动验证
+		protected $insert = [
+			'ip' => IP ,
+		];
+
+		public $update = [//'status' ,
+		];
+
 	}

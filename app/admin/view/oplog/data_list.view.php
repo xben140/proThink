@@ -85,10 +85,6 @@
 								'attr'  => '' ,
 							] ,
 							[
-								'field' => '' ,
-								'attr'  => '' ,
-							] ,
-							[
 								'field' => '备注' ,
 								'attr'  => 'style="width:150px;"' ,
 							] ,
@@ -328,10 +324,7 @@
 										'name'     => '用户名 : ' ,
 										'editable' => 0 ,
 									]) ,
-								]) ,
-
-								integrationTags::td([
-
+									'</br>' ,
 
 									integrationTags::tdSimple([
 										'value'    => $v['exe_time'] ,
@@ -403,7 +396,6 @@
 										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'delete') ,
 									]) ,
 
-									'</br>' ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-info btn-open-pop' ,

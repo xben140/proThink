@@ -65,11 +65,8 @@
 						 */
 						$_this->setHead([
 							[
-								'field' => '' ,
-								'attr'  => 'style="width:30px;"' ,
-							] ,
-							[
 								'field' => 'ID' ,
+								'attr'  => 'style="width:80px;"' ,
 							] ,
 							[
 								'field' => '信息' ,
@@ -203,10 +200,6 @@
 								//checkbox
 								integrationTags::td([
 									integrationTags::tdCheckbox() ,
-
-								]) ,
-								//checkbox
-								integrationTags::td([
 									integrationTags::tdSimple([
 										'value' => $v['id'] ,
 									]) ,
@@ -295,9 +288,8 @@
 											'id' => $v['id'] ,
 										] ,
 										'is_display' => $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'viewInfo') ,
-									]) ,
 
-									'<br>' ,
+									]) ,
 
 									integrationTags::tdButton([
 										'class'      => ' btn-danger btn-delete' ,

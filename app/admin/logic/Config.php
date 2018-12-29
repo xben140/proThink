@@ -16,8 +16,10 @@
 
 
 
-	namespace app\common\logic;
+	namespace app\admin\logic;
 
+
+	use app\common\logic\LogicBase;
 
 	class Config extends LogicBase
 	{

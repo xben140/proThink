@@ -17,8 +17,8 @@
 
 	namespace app\admin\controller;
 
-	use app\common\controller\FrontendBaseController;
+	use app\common\controller\BackendBaseController;
 
-	class FrontendBase extends FrontendBaseController
+	class BackendBase extends BackendBaseController
 	{
 	}

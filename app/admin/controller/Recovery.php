@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Recovery extends PermissionAuth
+	class Recovery extends BackendBase
 	{
 		public function _initialize()
 		{

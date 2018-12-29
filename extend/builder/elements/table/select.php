@@ -133,7 +133,7 @@ js;
 			 */
 			$contents = <<<'CONTENTS'
 			
-		<select style='max-width:130px;background: <!-- ~~~ccccc~~~ -->'  data-field="<!-- ~~~field~~~ -->"  class=" td-select"   data-change-callback="<!-- ~~~change_callback~~~ -->"   data-success-callback="<!-- ~~~success_callback~~~ -->" <!-- ~~~attr~~~ --> <!-- ~~~disabled~~~ --> >
+		<select style='max-width:230px;background: <!-- ~~~ccccc~~~ -->'  data-field="<!-- ~~~field~~~ -->"  class=" td-select"   data-change-callback="<!-- ~~~change_callback~~~ -->"   data-success-callback="<!-- ~~~success_callback~~~ -->" <!-- ~~~attr~~~ --> <!-- ~~~disabled~~~ --> >
 			<!-- ~~~options~~~ -->
 		</select>
 

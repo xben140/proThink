@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Privilege extends PermissionAuth
+	class Privilege extends BackendBase
 	{
 		public function _initialize()
 		{

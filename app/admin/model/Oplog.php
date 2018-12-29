@@ -16,27 +16,33 @@
 
 
 
-	namespace app\common\logic;
+	namespace app\admin\model;
 
+	use app\common\model\ModelBase;
 
-	/**
-	 * Class Aera
-	 * @package app\common\logic
-	 */
-	class Area extends LogicBase
+	class Oplog extends ModelBase
 	{
-		public function __construct()
+		public $name = 'oplog';
+
+		/**
+		 *  初始化模型
+		 * @access protected
+		 * @return void
+		 */
+		protected function initialize()
 		{
-			$this->initBaseClass();
+			parent::initialize();
 		}
 
-		public function getAreaByPid($param)
-		{
-			$pid = $param['pid'];
-			$data = $this->model_->getAreaByPid($pid);
+		//自动完成[新增和修改时都会执行]
+		protected $auto = [];
 
-			//array
-			return $data->toArray();
-		}
+		//新增时自动验证
+		protected $insert = [
+			'ip' => IP ,
+		];
+
+		public $update = [//'status' ,
+		];
 
 	}

@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class Loginlog extends PermissionAuth
+	class Loginlog extends BackendBase
 	{
 		public function _initialize()
 		{

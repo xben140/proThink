@@ -19,7 +19,7 @@
 	namespace app\admin\controller;
 
 
-	class Config extends PermissionAuth
+	class Config extends BackendBase
 	{
 		public function _initialize()
 		{

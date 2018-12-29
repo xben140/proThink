@@ -289,7 +289,7 @@
 		public function addOplog(callable $rule = null)
 		{
 			//记录访问日志
-			$this->logic__common_Oplog::pushLogToFile($rule);
+			$this->logic__admin_Oplog::pushLogToFile($rule);
 		}
 
 		/**

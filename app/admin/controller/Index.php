@@ -18,13 +18,11 @@
 
 	namespace app\admin\controller;
 
-	class Index extends PermissionAuth
+	class Index extends BackendBase
 	{
 
 		public function index()
 		{
-			//exception('kljsdfjsdlfj');
-			//print_r(config('default_timezone'));exit;;
 			return $this->makeView($this);
 		}
 

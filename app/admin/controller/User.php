@@ -18,7 +18,7 @@
 
 	namespace app\admin\controller;
 
-	class User extends PermissionAuth
+	class User extends BackendBase
 	{
 		public function _initialize()
 		{

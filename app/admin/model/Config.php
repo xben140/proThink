@@ -16,7 +16,9 @@
 
 
 
-	namespace app\common\model;
+	namespace app\admin\model;
+
+	use app\common\model\ModelBase;
 
 	class Config extends ModelBase
 	{

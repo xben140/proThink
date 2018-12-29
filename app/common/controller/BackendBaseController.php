@@ -16,16 +16,13 @@
 
 
 
-	namespace app\admin\controller;
-
-	use app\common\controller\ControllerBase;
-
+	namespace app\common\controller;
 
 	use auth\Auth;
 	use builder\elementsFactory;
 	use builder\tagConstructor;
 
-	class PermissionAuth extends ControllerBase
+	class BackendBaseController extends ControllerBase
 	{
 		//admin信息
 		public $adminInfo;
