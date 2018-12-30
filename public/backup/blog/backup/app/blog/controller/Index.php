@@ -18,6 +18,8 @@
 
 	namespace app\blog\controller;
 
+	use Phelium\Component\MySQLBackup;
+
 	class Index extends FrontendBase
 	{
 		public function __construct()
@@ -42,6 +44,7 @@
 
 		public function index()
 		{
+
 			//类型查询
 			//?type=6
 

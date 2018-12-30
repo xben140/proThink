@@ -18,7 +18,7 @@
 
 	namespace app\blog\logic;
 
-	use app\common\logic\LogicBase;
+	use ithinkphp\logic\LogicBase;
 
 	class Base extends LogicBase
 	{

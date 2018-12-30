@@ -131,7 +131,7 @@
 
 			$join = [
 				[
-					'ithink_blog_article_tag b ' ,
+					'ithinkphp_blog_article_tag b ' ,
 					self::makeSelfAliasField('id') . '  = b.tag_id ' ,
 					'left' ,
 				] ,

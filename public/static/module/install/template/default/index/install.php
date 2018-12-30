@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>iThink 安装向导</title>
+		<title>iThinkphp 安装向导</title>
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<link rel="shortcut icon" href="favicon.ico">
@@ -31,29 +31,29 @@
 						<div class="ibox float-e-margins">
 							<div class="ibox-content text-center p-md">
 								<h2>
-									<span class="text-navy">iThink 安装向导</span>
+									<span class="text-navy">iThinkphp 安装向导</span>
 								</h2>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div id="step">
-					<h1>iThink 版权申明</h1>
+					<h1>iThinkphp 版权申明</h1>
 					<fieldset>
 						<div class="well">
-							<h3 class="text-center">iThink 安装协议</h3>
-							<p>iThink是一个基于thinkphp5.0开发的模块化，应用化，自动构建化的WEB应用开发框架(Web Application Framework)，旨在为广大web开发者提供一套简单、快速、高效的web应用解决方案。</p>
-							<p>iThink拥有全部知识产权，包括商标和著作权。</p>
-							<p>版权所有 © 2016~2020，iThink开源社区保留所有权利。</p>
-							<p>iThink遵循Apache Licence2开源协议，并且免费使用，但不能未经授权抹除产品标志再次用于开源。Apache Licence是著名的非盈利开源组织Apache采用的协议，该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，允许代码修改，再作为开源或商业软件发布。需要满足的条件：</p>
+							<h3 class="text-center">iThinkphp 安装协议</h3>
+							<p>iThinkphp是一个基于thinkphp5.0开发的模块化，应用化，自动构建化的WEB应用开发框架(Web Application Framework)，旨在为广大web开发者提供一套简单、快速、高效的web应用解决方案。</p>
+							<p>iThinkphp拥有全部知识产权，包括商标和著作权。</p>
+							<p>版权所有 © 2016~2020，iThinkphp开源社区保留所有权利。</p>
+							<p>iThinkphp遵循Apache Licence2开源协议，并且免费使用，但不能未经授权抹除产品标志再次用于开源。Apache Licence是著名的非盈利开源组织Apache采用的协议，该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，允许代码修改，再作为开源或商业软件发布。需要满足的条件：</p>
 							<p>1． 需要给用户一份Apache Licence；</p>
 							<p>2． 如果你修改了代码，需要在被修改的文件中说明；</p>
 							<p>3． 在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明；</p>
 							<p>4． 如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有本协议内容。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</p>
-							<h3 class="text-center">iThink免责声明</h3>
+							<h3 class="text-center">iThinkphp免责声明</h3>
 							<p>1、警告：按照我国法律，在未取得相关资源（影片、动画、图书、音乐等）授权的情况下，请不要传播任何形式的相关资源（资源数据文件、种子文件、网盘文件、FTP 文件等）！否则后果自负。</p>
-							<p>2、使用iThink构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，iThink官方不承担任何责任。</p>
-							<p>3、一旦您安装使用iThink，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。</p>
+							<p>2、使用iThinkphp构建的网站的任何信息内容以及导致的任何版权纠纷和法律争议及后果，iThinkphp官方不承担任何责任。</p>
+							<p>3、一旦您安装使用iThinkphp，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。</p>
 						</div>
 						<div class="well">
 							<div class="checkbox i-checks">
@@ -95,8 +95,8 @@
 										<input id="host" name="host" type="text" class="form-control " value="127.0.0.1">
 									</div>
 									<div class="form-group">
-										<label>数据库名称,如 :iThink (如果此数据库不存在会自动创建)</label>
-										<input id="dbname" name="dbname" type="text" class="form-control" value="iThink">
+										<label>数据库名称,如 :iThinkphp (如果此数据库不存在会自动创建)</label>
+										<input id="dbname" name="dbname" type="text" class="form-control" value="iThinkphp">
 									</div>
 									<div class="form-group">
 										<label>数据库用户名,如 : root</label>
@@ -155,7 +155,7 @@
 							</div>
 						</div>
 						<div class="createFinish" style="display: none;">
-							<h1 class="text-center">iThink 安装成功！enjoy...</h1>
+							<h1 class="text-center">iThinkphp 安装成功！enjoy...</h1>
 							{:$notification}
 							<div class="text-center">
 								<a href="/" class="btn btn-w-m btn-primary">访问主页</a>

@@ -171,18 +171,18 @@
 			];
 
 			$join[] = [
-				'ithink_blog_article_tag a' ,
+				'ithinkphp_blog_article_tag a' ,
 				$this->model_::makeSelfAliasField('id') . ' = a.article_id' ,
 				'left' ,
 			];
 
 			$join[] = [
-				'ithink_blog_tag b' ,
+				'ithinkphp_blog_tag b' ,
 				'a.tag_id = b.id' ,
 				'left' ,
 			];
 			$join[] = [
-				'ithink_user u' ,
+				'ithinkphp_user u' ,
 				$this->model_::makeSelfAliasField('uid') . ' = u.id' ,
 				'left' ,
 			];

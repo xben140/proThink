@@ -24,7 +24,7 @@
 			<form action="/admin/login/dologin" name="loginForm" id="loginForm" method="post">
 				<div class="login-form" style="position: relative">
 					<div class="formContent">
-						<div class="title">iThink后台管理中心</div>
+						<div class="title">iThinkphp后台管理中心</div>
 						<div class="formInfo">
 							<div class="formText">
 								<i class="icon icon-user"></i>

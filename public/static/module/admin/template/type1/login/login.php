@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="renderer" content="webkit">
-		<title>iThink 后台管理中心 登录</title>
+		<title>iThinkphp 后台管理中心 登录</title>
 		<link rel="stylesheet" href="__CURRENT_THEME_STATIC_URL__css/pintuer.css">
 		<link rel="stylesheet" href="__CURRENT_THEME_STATIC_URL__css/admin.css">
 		<script src="__CURRENT_THEME_STATIC_URL__js/jquery.js"></script>
@@ -22,7 +22,7 @@
 					<form action="/admin/login/dologin" name="loginForm" id="loginForm" method="post">
 						<div class="panel loginbox">
 							<div class="text-center margin-big padding-big-top">
-								<h1>iThink 后台管理中心</h1>
+								<h1>iThinkphp 后台管理中心</h1>
 							</div>
 							<div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
 								<div class="form-group">

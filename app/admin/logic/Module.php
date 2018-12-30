@@ -1,19 +1,18 @@
 <?php
 
-/*
-+---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
-+---------------------------------------------------------------------+
-| Official site | http://www.ithinkphp.org/                           |
-+---------------------------------------------------------------------+
-| Author        | hello wf585858@yeah.net                             |
-+---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
-+---------------------------------------------------------------------+
-| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
-+---------------------------------------------------------------------+
-*/
-
+	/*
+	+---------------------------------------------------------------------+
+	| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
+	+---------------------------------------------------------------------+
+	| Official site | http://www.ithinkphp.org/                           |
+	+---------------------------------------------------------------------+
+	| Author        | hello wf585858@yeah.net                             |
+	+---------------------------------------------------------------------+
+	| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
+	+---------------------------------------------------------------------+
+	| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
+	+---------------------------------------------------------------------+
+	*/
 
 
 	namespace app\admin\logic;
@@ -21,7 +20,6 @@
 	use db\Db;
 	use file\FileTool;
 	use think\Cache;
-	use think\Exception;
 	use zip\phpZip;
 
 	class Module extends Base
@@ -128,7 +126,7 @@
 						[] ,
 						'菜单信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '菜单配置写入成功，位于 ithink_privilege 表中 字段category，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '菜单配置写入成功，位于 ithinkphp_privilege 表中 字段category，值为 ' . $info['info']['id'] . ' 的记录';
 					$res = execClosureList($transaction , $err , $_param);
 
 					break;
@@ -153,7 +151,7 @@
 						[] ,
 						'路由信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '路由配置写入成功，位于 ithink_route 表中 字段name，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '路由配置写入成功，位于 ithinkphp_route 表中 字段name，值为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -180,7 +178,7 @@
 						[] ,
 						'回收信息安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '回收配置写入成功，位于 ithink_rcovery 表中 字段 category，值为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '回收配置写入成功，位于 ithinkphp_rcovery 表中 字段 category，值为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -254,7 +252,7 @@
 						[] ,
 						'配置数据安装出错，请尝试手动执行' ,
 					];
-					$this->retureResult['message'] = '设置配置写入成功，位于 ithink_config 表中 分组为 ' . $info['info']['id'] . ' 的记录';
+					$this->retureResult['message'] = '设置配置写入成功，位于 ithinkphp_config 表中 分组为 ' . $info['info']['id'] . ' 的记录';
 
 					$res = execClosureList($transaction , $err , $_param);
 
@@ -468,66 +466,6 @@
 		}
 
 		/**
-		 * 删除应用
-		 *
-		 * @param      $param
-		 * @param null $beforeClosureList
-		 * @param null $afterClosureList
-		 * @param bool $isTurlyDelte
-		 *
-		 * @return array
-		 * public function delete($param , $beforeClosureList = null , $afterClosureList = null , $isTurlyDelte = false)
-		 * {
-		 * $moduleName = $param['ids'];
-		 * $info = $this->getModuleInfo($moduleName);
-		 * if(!$info['is_install'])
-		 * {
-		 * $pathInfo = $this->getModulePathInfo($moduleName);
-		 * $flag = true;
-		 * if($flag && is_dir($pathInfo['appPath']) && !FileTool::isWritable($pathInfo['appPath']))
-		 * {
-		 * $flag = false;
-		 * $this->retureResult['message'] = $pathInfo['appPath'] . '</ br>目录权限不足不能删除';
-		 * }
-		 * if($flag && is_dir($pathInfo['staticPath']) && !FileTool::isWritable($pathInfo['staticPath']))
-		 * {
-		 * $flag = false;
-		 * $this->retureResult['message'] = $pathInfo['staticPath'] . '</ br>目录权限不足不能删除';
-		 * }
-		 * if($flag)
-		 * {
-		 * $res = FileTool::recursiveRm($pathInfo['appPath'] , function($info , $relativePath) {
-		 * return true;
-		 * });
-		 * $res['sign'] && $res = FileTool::recursiveRm($pathInfo['staticPath'] , function($info , $relativePath) {
-		 * return true;
-		 * });
-		 * if($res['sign'])
-		 * {
-		 * $this->retureResult['message'] = '删除成功 ';
-		 * $this->retureResult['sign'] = RESULT_SUCCESS;
-		 * }
-		 * else
-		 * {
-		 * $this->retureResult['message'] = $res['msg'];
-		 * $this->retureResult['sign'] = RESULT_ERROR;
-		 * }
-		 * }
-		 * else
-		 * {
-		 * $this->retureResult['sign'] = RESULT_ERROR;
-		 * }
-		 * }
-		 * else
-		 * {
-		 * $this->retureResult['message'] = '应用处于安装状态，无法删除';
-		 * $this->retureResult['sign'] = RESULT_ERROR;
-		 * }
-		 * return $this->retureResult;
-		 * }
-		 */
-
-		/**
 		 * 开发者生成配置文件 config.json
 		 *
 		 * @param $param
@@ -649,7 +587,7 @@
 			}
 			else
 			{
-				$this->retureResult['message'] = '请确保当前应用已经添加菜单记录，即数据库里 ithink_privilege 表里有 category 字段值为 ' . $info['info']['id'] . '的记录';
+				$this->retureResult['message'] = '请确保当前应用已经添加菜单记录，即数据库里 ithinkphp_privilege 表里有 category 字段值为 ' . $info['info']['id'] . '的记录';
 				$this->retureResult['sign'] = RESULT_ERROR;
 			}
 
@@ -1110,7 +1048,7 @@
 		{
 			$flag = true;
 			$msg = '';
-			if($flag && !preg_match('#^[a-z]+$#i' , $param['id']))
+			if($flag && !preg_match('#^[a-z][a-z\d]*$#i' , $param['id']))
 			{
 				$flag = false;
 				$msg = '应用ID格式不合法';
@@ -1140,7 +1078,6 @@
 				'status'   => '1' ,
 			]);
 
-
 			$modulePathInfo = $this->getModulePathInfo($param['id']);
 			!isset($param['is_cover']) && ($param['is_cover'] = 0);
 
@@ -1151,7 +1088,7 @@
 					[
 						//后台基类控制器
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\BackendBase.php') ,
-						'content'     => file_get_contents('../app/common/view/__controller_backend_base.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__controller_backend_base.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__' => $param['id'] ,
@@ -1160,7 +1097,7 @@
 					[
 						//前台基类控制器
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\FrontendBase.php') ,
-						'content'     => file_get_contents('../app/common/view/__controller_frontend_base.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__controller_frontend_base.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__' => $param['id'] ,
@@ -1169,7 +1106,7 @@
 					[
 						//前台通用控制器
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\Index.php') ,
-						'content'     => file_get_contents('../app/common/view/__controller_frontend.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__controller_frontend.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__'              => $param['id'] ,
@@ -1180,7 +1117,7 @@
 					//模型
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\model\Base.php') ,
-						'content'     => file_get_contents('../app/common/view/__model_base.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__model_base.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__' => $param['id'] ,
@@ -1190,7 +1127,7 @@
 					//logic 基类
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\logic\Base.php') ,
-						'content'     => file_get_contents('../app/common/view/__logic_base.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__logic_base.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__' => $param['id'] ,
@@ -1200,7 +1137,7 @@
 					//validate 基类
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\validate\Base.php') ,
-						'content'     => file_get_contents('../app/common/view/__validate_base.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__validate_base.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							'____ID__' => $param['id'] ,
@@ -1209,7 +1146,7 @@
 					//回收站配置 文件
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\recovery.php') ,
-						'content'     => file_get_contents('../app/common/view/__recovery.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__recovery.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [] ,
 					] ,
@@ -1217,7 +1154,7 @@
 					//路由配置 文件
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\route.php') ,
-						'content'     => file_get_contents('../app/common/view/__route.php') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__route.php')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [] ,
 					] ,
@@ -1225,7 +1162,7 @@
 					//info.json
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\info.json') ,
-						'content'     => file_get_contents('../app/common/view/__info.json') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__info.json')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [
 							"____ID__"          => $param['id'] ,
@@ -1240,7 +1177,7 @@
 					//menu.json
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\menu.json') ,
-						'content'     => file_get_contents('../app/common/view/__menu.json') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__menu.json')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [] ,
 					] ,
@@ -1248,7 +1185,7 @@
 					//config.json
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\config.json') ,
-						'content'     => file_get_contents('../app/common/view/__config.json') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__config.json')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [] ,
 					] ,
@@ -1256,7 +1193,15 @@
 					//sql.json
 					[
 						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\sql.json') ,
-						'content'     => file_get_contents('../app/common/view/__sql.json') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__sql.json')) ,
+						'is_cover'    => $param['is_cover'] ,
+						'replacement' => [] ,
+					] ,
+
+					//composer.json
+					[
+						'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\composer.json') ,
+						'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__composer.json')) ,
 						'is_cover'    => $param['is_cover'] ,
 						'replacement' => [] ,
 					] ,
@@ -1338,7 +1283,7 @@
 			$modulePathInfo = $this->getModulePathInfo($param['id']);
 			!isset($param['is_cover']) && ($param['is_cover'] = 0);
 
-			if($flag && !preg_match('#^[a-z]+$#i' , $param['id']))
+			if($flag && !preg_match('#^[a-z][a-z\d]*$#i' , $param['id']))
 			{
 				$flag = false;
 				$msg = '应用ID格式不合法';
@@ -1366,7 +1311,7 @@
 						//控制器
 						[
 							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\controller\\' . $name . '.php') ,
-							'content'     => file_get_contents('../app/common/view/__controller_backend.php') ,
+							'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__controller_backend.php')) ,
 							'is_cover'    => $param['is_cover'] ,
 							'replacement' => [
 								'____ID__'              => $param['id'] ,
@@ -1376,7 +1321,7 @@
 						//模型
 						[
 							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\model\\' . $name . '.php') ,
-							'content'     => file_get_contents('../app/common/view/__model.php') ,
+							'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__model.php')) ,
 							'is_cover'    => $param['is_cover'] ,
 							'replacement' => [
 								'____ID__'              => $param['id'] ,
@@ -1387,7 +1332,7 @@
 						//logic
 						[
 							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\logic\\' . $name . '.php') ,
-							'content'     => file_get_contents('../app/common/view/__logic.php') ,
+							'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__logic.php')) ,
 							'is_cover'    => $param['is_cover'] ,
 							'replacement' => [
 								'____ID__'              => $param['id'] ,
@@ -1397,7 +1342,7 @@
 						//validate
 						[
 							'path'        => replaceToSysSeparator($modulePathInfo['appPath'] . '\validate\\' . $name . '.php') ,
-							'content'     => file_get_contents('../app/common/view/__validate.php') ,
+							'content'     => file_get_contents(replaceToSysSeparator(ITHINKPHP_COMMON . '/view/__validate.php')) ,
 							'is_cover'    => $param['is_cover'] ,
 							'replacement' => [
 								'____ID__'              => $param['id'] ,
@@ -1754,44 +1699,6 @@
 		}
 
 		/**
-		 * 部署应用
-		 *
-		 * @param $param
-		 *
-		 * @return array
-		 * public function apply($param)
-		 * {
-		 * $moduleName = $param['id'];
-		 * $pathInfo = $this->getModulePathInfo($moduleName);
-		 * if(!is_dir($pathInfo['appPath']))
-		 * {
-		 * $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'app' , ROOT_PATH . DS . 'app' , function($info , $relativePath) {
-		 * return true;
-		 * });
-		 * $res['sign'] && $res = FileTool::recursiveCp($pathInfo['codePath'] . DS . 'public' , ROOT_PATH . DS . 'public' , function($info , $relativePath) {
-		 * return true;
-		 * });
-		 * if($res['sign'])
-		 * {
-		 * $this->retureResult['message'] = '部署成功，请前往应用列表查看';
-		 * $this->retureResult['sign'] = RESULT_SUCCESS;
-		 * }
-		 * else
-		 * {
-		 * $this->retureResult['message'] = $res['msg'];
-		 * $this->retureResult['sign'] = RESULT_ERROR;
-		 * }
-		 * }
-		 * else
-		 * {
-		 * $this->retureResult['message'] = '此应用已经存在，如需重新部署，请先到应用列表删除应用';
-		 * $this->retureResult['sign'] = RESULT_ERROR;
-		 * }
-		 * return $this->retureResult;
-		 * }
-		 */
-
-		/**
 		 * 指定包解压到相邻文件夹
 		 * 上传包和备份包后调用
 		 *
@@ -1811,28 +1718,6 @@
 			]);
 		}
 
-		/**
-		 * 获取包信息
-		 *
-		 * @param $moduleName
-		 */
-		public function getPackageInfo($moduleName)
-		{
-			$pathInfo = $this->getModulePathInfo($moduleName);
-			//F:\localWeb\public_local14\public\..\app\blog
-			$appPath = $pathInfo['appPath'];
-
-			//F:/localWeb/public_local14/public/static/module/blog
-			$staticPath = $pathInfo['staticPath'];
-			//http:\\local14.cc\static\module\blog
-			$staticUrl = $pathInfo['staticUrl'];
-
-			//F:\localWeb\public_local14\public\blog
-			$backupPath = $pathInfo['backupPath'];
-			//http://local14.cc/blog
-			$backupUrl = $pathInfo['backupUrl'];
-		}
-
 
 		/**
 		 * ***********************************************************************************************
@@ -1844,8 +1729,8 @@
 
 		public function test_email()
 		{
-			$title = '来自 iThink 的测试邮件';
-			$body = '来自 iThink 的测试邮件';
+			$title = '来自 iThinkphp 的测试邮件';
+			$body = '来自 iThinkphp 的测试邮件';
 			$to = [
 				getAdminSessionInfo(SESSOIN_TAG_USER , 'email') => 'by hello' ,
 			];
@@ -1879,7 +1764,7 @@
 			switch ($param['type'])
 			{
 				case 'template' :
-					$res = FileTool::recursiveRm(TEMP_PATH , function($info , $relativePath) {return true;});
+					$res = FileTool::recursiveRm(TEMP_PATH , function($info , $relativePath) { return true; });
 					if(!$res['sign'])
 					{
 						$flag = false;

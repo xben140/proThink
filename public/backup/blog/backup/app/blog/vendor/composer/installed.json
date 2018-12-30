@@ -1,0 +1,47 @@
+[
+    {
+        "name": "phelium/mysql-backup",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/shevabam/mysql-backup.git",
+            "reference": "2e0a41c0ac4338f4022a9891fbfcf79da32217cf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/shevabam/mysql-backup/zipball/2e0a41c0ac4338f4022a9891fbfcf79da32217cf",
+            "reference": "2e0a41c0ac4338f4022a9891fbfcf79da32217cf",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2018-05-23T07:13:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phelium\\Component\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-only"
+        ],
+        "authors": [
+            {
+                "name": "ShevAbam",
+                "email": "me@shevarezo.fr"
+            }
+        ],
+        "description": "Backup easily your MySQL database !",
+        "homepage": "https://github.com/shevabam/mysql-backup",
+        "keywords": [
+            "backup",
+            "database",
+            "dump",
+            "mysql"
+        ]
+    }
+]

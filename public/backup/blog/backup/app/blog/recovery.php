@@ -15,7 +15,7 @@
 */
 
 
-	//此处数据将写入ithink_recovery表
+	//此处数据将写入ithinkphp_recovery表
 	return [
 		[
 			'name'   => '博文表' ,

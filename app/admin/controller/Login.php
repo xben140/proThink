@@ -2,13 +2,13 @@
 
 /*
 +---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
+| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
 +---------------------------------------------------------------------+
 | Official site | http://www.ithinkphp.org/                           |
 +---------------------------------------------------------------------+
 | Author        | hello wf585858@yeah.net                             |
 +---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
+| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
 +---------------------------------------------------------------------+
 | Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
 +---------------------------------------------------------------------+
@@ -109,9 +109,9 @@
 			$data = [];
 
 			$data[] = [
-				'item'    => 'iThink版本' ,
+				'item'    => 'iThinkphp版本' ,
 				'require' => '' ,
-				'value'   => ITHINK_VERSION ,
+				'value'   => ITHINKPHP_VERSION ,
 				'result'  => 1 ,
 			];
 
@@ -270,6 +270,8 @@
 
 			$t = (function() {
 				$flag = true;
+				FileTool::mkdir_(PATH_UPLOAD);
+				FileTool::mkdir_(PATH_BACKUP);
 				$flag && $flag = FileTool::testWrite(APP_PATH);
 				$flag && $flag = FileTool::testWrite(PATH_BACKUP);
 				$flag && $flag = FileTool::testWrite(PATH_UPLOAD);

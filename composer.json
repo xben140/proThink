@@ -1,18 +1,19 @@
 {
-	"name"        : "topthink/think",
-	"description" : "the new thinkphp framework",
+	"name"        : "",
+	"description": "iThinkphp based on ThinkPHP 5.0 , it is a free and open source Web Application Framework",
 	"type"        : "project",
 	"keywords"    : [
 		"framework",
 		"thinkphp",
+		"iThinkphp",
 		"ORM"
 	],
-	"homepage"    : "http://thinkphp.cn/",
+	"homepage"    : "http://www.ithinkphp.org/",
 	"license"     : "Apache-2.0",
 	"authors"     : [
 		{
-			"name"  : "liu21st",
-			"email" : "liu21st@gmail.com"
+			"name"  : "hello",
+			"email" : "wf585858@yeah.net"
 		}
 	],
 	"require"     : {
@@ -37,10 +38,8 @@
 		"greenlion/php-sql-parser"    : "^4.1",
 		"workerman/workerman"         : "^3.5",
 		"jimmiw/php-time-ago"         : "^3.0",
-		"phelium/mysql-backup"        : "^1.0",
 		"wapmorgan/unified-archive"   : "~0.1.0",
-		"pclzip/pclzip"               : "^2.8",
-		"overtrue/wechat"             : "~4.0"
+		"pclzip/pclzip"               : "^2.8"
 	},
 	"autoload"    : {
 		"psr-4" : {
@@ -48,9 +47,10 @@
 		}
 	},
 	"extra"       : {
-		"think-path" : "thinkphp"
+		"think-path" : "ithinkphp/thinkphp"
 	},
 	"config"      : {
+		"vendor-dir"        : "ithinkphp/vendor",
 		"preferred-install" : "dist"
 	}
 }

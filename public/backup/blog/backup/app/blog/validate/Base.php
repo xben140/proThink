@@ -18,7 +18,7 @@
 
 	namespace app\blog\validate;
 
-	use app\common\validate\ValidateBase;
+	use ithinkphp\validate\ValidateBase;
 
 	class Base extends ValidateBase
 	{

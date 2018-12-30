@@ -18,7 +18,7 @@
 
 	namespace app\blog\controller;
 
-	use app\common\controller\CustomFrontendBase;
+	use ithinkphp\controller\CustomFrontendBase;
 	use think\Route;
 
 	/**

@@ -18,7 +18,7 @@
 
 	namespace app\blog\controller;
 
-	use app\common\controller\CustomBackendBase;
+	use ithinkphp\controller\CustomBackendBase;
 	use builder\tagConstructor;
 
 	/**

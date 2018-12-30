@@ -2,13 +2,13 @@
 
 /*
 +---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
+| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
 +---------------------------------------------------------------------+
 | Official site | http://www.ithinkphp.org/                           |
 +---------------------------------------------------------------------+
 | Author        | hello wf585858@yeah.net                             |
 +---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
+| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
 +---------------------------------------------------------------------+
 | Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
 +---------------------------------------------------------------------+
@@ -135,7 +135,7 @@
 		{
 			$isDbOk = true;
 			$data = [];
-			$msg = 'iThink 已成功安装！enjoy...';
+			$msg = 'ithinkphp 已成功安装！enjoy...';
 
 			//F:\localWeb\public_local14\app\install
 			$modulePath = realpath(replaceToSysSeparator(APP_PATH . MODULE_NAME)) . DS;
@@ -147,7 +147,7 @@
 			$dbConfig['password'] = $this->param['dbpwd'];
 			$dbConfig['hostport'] = $this->param['port'];
 			$dbConfig['database'] = $this->param['dbname'];
-			$dbConfig['prefix'] = 'ithink_';
+			$dbConfig['prefix'] = 'ithinkphp_';
 			$dbConfig['charset'] = 'utf8mb4';
 
 

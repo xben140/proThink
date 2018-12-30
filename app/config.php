@@ -1,19 +1,18 @@
 <?php
 
-/*
-+---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
-+---------------------------------------------------------------------+
-| Official site | http://www.ithinkphp.org/                           |
-+---------------------------------------------------------------------+
-| Author        | hello wf585858@yeah.net                             |
-+---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
-+---------------------------------------------------------------------+
-| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
-+---------------------------------------------------------------------+
-*/
-
+	/*
+	+---------------------------------------------------------------------+
+	| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
+	+---------------------------------------------------------------------+
+	| Official site | http://www.ithinkphp.org/                           |
+	+---------------------------------------------------------------------+
+	| Author        | hello wf585858@yeah.net                             |
+	+---------------------------------------------------------------------+
+	| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
+	+---------------------------------------------------------------------+
+	| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
+	+---------------------------------------------------------------------+
+	*/
 
 
 	return [
@@ -43,7 +42,7 @@
 		//邮件用户登陆秘钥
 		'email_password'      => '' ,
 		//对方显示发件人
-		'email_user'          => '来自iThink的邮件' ,
+		'email_user'          => '来自iThinkphp的邮件' ,
 		*/
 
 		// 扩展函数文件
@@ -58,11 +57,8 @@
 		'system_module'       => [
 			'admin' ,
 			'install' ,
-			//'doc' ,
-			//'blog' ,
 			'demo' ,
 			'extra' ,
-			'common' ,
 		] ,
 
 		'captcha'      => [
@@ -88,7 +84,7 @@
 		'paginate'     => [
 			'type'      => 'bootstrap' ,
 			'var_page'  => 'page' ,
-			'list_rows' => 50 ,
+			'list_rows' => 20 ,
 		] ,
 
 		//模板元素映射表
@@ -148,12 +144,12 @@
 		'app_namespace'          => 'app' ,
 
 		//默认没登陆的跳转页面
-		'admin_none_login_index'          => 'admin/login/login' ,
+		'admin_none_login_index' => 'admin/login/login' ,
 		//默认登陆后的跳转页面
-		'admin_login_index'          => 'admin/index/index' ,
+		'admin_login_index'      => 'admin/index/index' ,
 
 		//默认头像
-		'website_logo'    => '/static/image/logo.png' ,
+		'website_logo'           => '/static/image/logo.png' ,
 
 		//默认头像
 		'default_profile_pic'    => '/static/image/logo.png' ,
@@ -168,7 +164,9 @@
 		// 入口自动绑定模块
 		'auto_bind_module'       => false ,
 		// 注册的根命名空间
-		'root_namespace'         => [] ,
+		'root_namespace'         => [
+			'ithinkphp' => ITHINKPHP_COMMON ,
+		] ,
 		// 默认输出类型
 		'default_return_type'    => 'html' ,
 		// 默认AJAX 数据返回格式,可选json xml ...

@@ -2,13 +2,13 @@
 
 /*
 +---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
+| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
 +---------------------------------------------------------------------+
 | Official site | http://www.ithinkphp.org/                           |
 +---------------------------------------------------------------------+
 | Author        | hello wf585858@yeah.net                             |
 +---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
+| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
 +---------------------------------------------------------------------+
 | Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
 +---------------------------------------------------------------------+
@@ -52,8 +52,8 @@
 						2 ,
 					]) ,
 					'<p class="red"> <strong>开发者功能</strong> 仅在开发阶段供开发者使用，如果是使用别人开发好的包不要随意点击，此操作会影响应用文件，可能会导致包损坏</p>' ,
-					'<p class="red"> <span class=" btn-sm btn-primary">生成菜单文件</span> 功能是在开发完成后，将 ithink_privilege 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_MENU . ' ，只有在应用所有功能开发完才使用</p>' ,
-					'<p class="red"> <span class=" btn-sm btn-primary">生成配置文件</span> 功能是在开发完成后，将 ithink_config 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_CONFIG . ' ，只有在应用所有功能开发完才使用</p>' ,
+					'<p class="red"> <span class=" btn-sm btn-primary">生成菜单文件</span> 功能是在开发完成后，将 ithinkphp_privilege 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_MENU . ' ，只有在应用所有功能开发完才使用</p>' ,
+					'<p class="red"> <span class=" btn-sm btn-primary">生成配置文件</span> 功能是在开发完成后，将 ithinkphp_config 表里对应的应用的数据导出到应用文件下的 ' . MODULE_FILE_CONFIG . ' ，只有在应用所有功能开发完才使用</p>' ,
 					'<p class="red"> <span class=" btn-sm btn-primary">生成安装sql文件</span> 功能是在开发完成后，将 ' . MODULE_FILE_INFO . ' 里 database_tables 对应表数据导出到应用文件下的 ' . MODULE_FILE_SQL . ' ，只有在应用所有功能开发完才使用</p>' ,
 
 					elementsFactory::staticTable()->make(function(&$doms , $_this) use ($__this) {

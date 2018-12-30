@@ -18,7 +18,7 @@
 
 	namespace app\blog\model;
 
-	use app\common\model\ModelBase;
+	use ithinkphp\model\ModelBase;
 
 	class Base extends ModelBase
 	{

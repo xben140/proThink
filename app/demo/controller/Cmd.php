@@ -2,13 +2,13 @@
 
 /*
 +---------------------------------------------------------------------+
-| iThink        | [ WE CAN DO IT JUST THINK ]                         |
+| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
 +---------------------------------------------------------------------+
 | Official site | http://www.ithinkphp.org/                           |
 +---------------------------------------------------------------------+
 | Author        | hello wf585858@yeah.net                             |
 +---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThink               |
+| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
 +---------------------------------------------------------------------+
 | Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
 +---------------------------------------------------------------------+
@@ -125,7 +125,7 @@ HAVING COUNT(order_id) > ANY
 ";
 			/*
 			$query1 = "
-INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`)
+INSERT INTO `ithinkphp_area` (`id`, `code`, `name`, `pid`, `level`)
 VALUES
     (9, 31, '上海市', 0, 1) ;
 ";
@@ -163,7 +163,7 @@ HAVING COUNT(order_id) > ANY
 ";
 			/*
 			$query1 = "
-INSERT INTO `ithink_area` (`id`, `code`, `name`, `pid`, `level`)
+INSERT INTO `ithinkphp_area` (`id`, `code`, `name`, `pid`, `level`)
 VALUES
     (9, 31, '上海市', 0, 1) ;
 ";
@@ -293,8 +293,8 @@ VALUES
 		{
 			$Dump = new MySQLBackup(config('database.hostname') , config('database.username') , config('database.password') , config('database.database'));
 			$Dump->addTables(array(
-				'ithink_login_log' ,
-				'ithink_config' ,
+				'ithinkphp_login_log' ,
+				'ithinkphp_config' ,
 			));
 			//$Dump->setCompress('zip');
 			$Dump->setDelete(false);
@@ -365,6 +365,47 @@ VALUES
 			} , function($info , $relativePath) use (&$flag) {
 
 			});
+		}
+		
+		public function par()
+		{
+			$text = file_get_contents('C:\Users\Administrator\Desktop\data.txt');
+			$result = [];
+			$arr = explode("\r\n", $text);
+			array_map(function($v) use(&$result) {
+				$json = json_decode($v , 1);
+
+				$result = array_merge($result , $json);
+			} , $arr);
+
+			$path = 'C:\Users\Administrator\Desktop\\';
+
+			$titles = [
+				'公司' ,
+				'检查时间' ,
+				'严重程度' ,
+				'问题类型' ,
+				'项目' ,
+			];
+
+			array_unshift($result , $titles);
+
+			$fileName = $path . '结果数据.xlsx';
+
+			/**
+			 * 如果设置了这个回调，则只有添加在data上的数据会被导出
+			 *
+			 * @param $v
+			 * @param $data
+			 */
+			$func = function($v , &$data) {
+				//$v['is_menu'] && ($data[] =  $v);
+				($data[] = $v);
+			};
+			exportExcel($result , $fileName , $func , false);
+
+
+
 		}
 
 	}
