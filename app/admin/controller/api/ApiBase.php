@@ -16,17 +16,20 @@
 
 
 
-	namespace app\admin\controller;
+	namespace app\admin\controller\api;
 
-	class Area extends FrontendBase
+	use app\admin\controller\FrontendBase;
+
+	class ApiBase extends FrontendBase
 	{
 		public function _initialize()
 		{
 			parent::_initialize();
-			$this->initLogic();
+			$this->logic =  $this->logic__admin_area;
 		}
 
 		//pid=1
+		//http://local2.cc/admin/api.area/getAreaByPid?pid=1
 		public function getAreaByPid()
 		{
 			$data = $this->logic->getAreaByPid($this->param);

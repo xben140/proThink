@@ -1,19 +1,18 @@
 <?php
 
-/*
-+---------------------------------------------------------------------+
-| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
-+---------------------------------------------------------------------+
-| Official site | http://www.ithinkphp.org/                           |
-+---------------------------------------------------------------------+
-| Author        | hello wf585858@yeah.net                             |
-+---------------------------------------------------------------------+
-| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
-+---------------------------------------------------------------------+
-| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
-+---------------------------------------------------------------------+
-*/
-
+	/*
+	+---------------------------------------------------------------------+
+	| iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
+	+---------------------------------------------------------------------+
+	| Official site | http://www.ithinkphp.org/                           |
+	+---------------------------------------------------------------------+
+	| Author        | hello wf585858@yeah.net                             |
+	+---------------------------------------------------------------------+
+	| Repository    | https://gitee.com/wf5858585858/iThinkphp            |
+	+---------------------------------------------------------------------+
+	| Licensed      | http://www.apache.org/licenses/LICENSE-2.0 )        |
+	+---------------------------------------------------------------------+
+	*/
 
 
 	use builder\elementsFactory;
@@ -202,13 +201,13 @@
 										]) ,
 										'<br />' ,
 										integrationTags::tdSimple([
-											'value'    => '<span class="btn-sm btn-warning">开发中...</span>',
-											'name'     => '开发状态 : ' ,
+											'value'      => '<span class="btn-sm btn-warning">开发中...</span>' ,
+											'name'       => '开发状态 : ' ,
 											//'field'    => 'name' ,
 											//'reg'      => '/^\S+$/' ,
 											//'msg'      => '表名字必填' ,
-											'editable' => 0 ,
-											'is_display' =>  $v['info']['is_deving'] ,
+											'editable'   => 0 ,
+											'is_display' => $v['info']['is_deving'] ,
 										]) ,
 									]) ,
 
@@ -218,8 +217,9 @@
 											'value'      => '备份安装包' ,
 											'class'      => ' btn-success btn-custom-request' ,
 											'data'       => [
-												'src'   => url('backup') ,
-												'title' => '备份' ,
+												'src'        => url('backup') ,
+												'title'      => '备份' ,
+												'is_confirm' => 1 ,
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
@@ -233,8 +233,8 @@
 											'class'      => ' btn-warning btn-custom-request' ,
 											'data'       => [
 												'src'       => url('setDefault') ,
-												'is_alert'  => 1 ,
-												'is_reload' => 1 ,
+												'is_alert'  => 0 ,
+												'is_reload' => 0 ,
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
@@ -245,12 +245,12 @@
 										'<br />' ,
 
 										integrationTags::tdButton([
-											'value'      => '卸载应用',
+											'value'      => '卸载应用' ,
 											'class'      => ' btn-danger btn-open-pop' ,
 											'data'       => [
 												'src'       => url('operation') ,
-												'title'     =>  '卸载应用',
-												'is_reload' => 1 ,
+												'title'     => '卸载应用' ,
+												'is_reload' => 1
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
@@ -294,7 +294,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
-											'is_display' =>($v['info']['is_deving']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
+											'is_display' => ($v['info']['is_deving']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 										'<br />' ,
@@ -340,7 +340,7 @@
 									//信息
 									integrationTags::td([
 										integrationTags::tdSimple([
-											'value'    => $v['info']['id'].'&nbsp;<span class="btn-sm btn-warning">开发中...</span>' ,
+											'value'    => $v['info']['id'] . '&nbsp;<span class="btn-sm btn-warning">开发中...</span>' ,
 											'name'     => 'id : ' ,
 											//'field'    => 'name' ,
 											//'reg'      => '/^\S+$/' ,
@@ -397,19 +397,22 @@
 											'field'    => 'description' ,
 											//'reg'      => '/^\d{1,4}$/' ,
 											//'msg'      => '请填写合法手机号码' ,
-											'value'    => implode('<br /><br />', $v['error']),
+											'value'    => implode('<br /><br />' , $v['error']) ,
 											'editable' => 0 ,
 										]) ,
 									]) ,
 
 									//操作
 									integrationTags::td([
+
+
 										integrationTags::tdButton([
 											'value'      => '生成安装包' ,
 											'class'      => ' btn-success btn-custom-request' ,
 											'data'       => [
-												'src'   => url('backup') ,
-												'title' => '生成安装包' ,
+												'src'        => url('backup') ,
+												'title'      => '生成安装包' ,
+												'is_confirm' => 1 ,
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
@@ -423,24 +426,24 @@
 											'class'      => ' btn-warning btn-custom-request' ,
 											'data'       => [
 												'src'       => url('setDefault') ,
-												'is_alert'  => 1 ,
-												'is_reload' => 1 ,
+												'is_alert'  => 0 ,
+												'is_reload' => 0 ,
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
 											] ,
 											'value'      => '设为默认应用' ,
-											'is_display' => 1&&$v['is_install'] && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'setDefault') ,
+											'is_display' => $v['is_install'] && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'setDefault') ,
 										]) ,
 										'<br />' ,
 
 										integrationTags::tdButton([
-											'value'      => '卸载应用',
+											'value'      => '卸载应用' ,
 											'class'      => ' btn-danger btn-open-pop' ,
 											'data'       => [
 												'src'       => url('operation') ,
-												'title'     =>  '删除应用',
-												'is_reload' => 1 ,
+												'title'     => '卸载应用' ,
+												'is_reload' => 0 ,
 											] ,
 											'params'     => [
 												'id' => $v['info']['id'] ,
@@ -484,7 +487,7 @@
 												'id'     => $v['info']['id'] ,
 											] ,
 											'value'      => '生成配置文件' ,
-											'is_display' =>($v['info']['is_deving']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
+											'is_display' => ($v['info']['is_deving']) && $__this->isButtonDisplay(MODULE_NAME , CONTROLLER_NAME , 'devTool') ,
 										]) ,
 
 										'<br />' ,

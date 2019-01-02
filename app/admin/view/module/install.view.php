@@ -53,6 +53,15 @@
 			];
 		}
 
+		$btn[0][] = [
+			'is_display' => 1 ,
+			'class'      => ' btn-success btn-custom-event ' ,
+			'data'       => [
+				'callback' => 'refresh_page' ,
+			] ,
+			'field'      => '终止/重新操作' ,
+		];
+
 		$__this->setPageTitle('应用');
 
 		$__this->displayContents = integrationTags::basicFrame([
@@ -193,7 +202,7 @@
 
 				] , [
 					'width'      => '12' ,
-					'main_title' => '模块列表' ,
+					'main_title' => '卸载' ,
 					'sub_title'  => '' ,
 				]) ,
 			]) ,

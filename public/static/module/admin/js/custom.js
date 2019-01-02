@@ -88,8 +88,9 @@ function itemSet(ids, btn, callback_)
 /**
  * 安装
  */
-function install_1()
+function install_1(obj)
 {
+	$(obj).attr({'disabled':true});
 	$('.install-apply').click();
 }
 
@@ -116,15 +117,15 @@ function install_3(obj, data)
 	obj.parent().prev().text(data.msg)
 	if (count == 5)
 	{
-		// $('.btn-custom-event').hide()
-		// let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
-		$index = layer.alert('安装成，点击 全局刷新 更新菜单', {
+		$index = layer.alert('安装成功', {
 			shadeClose: false,
 			shade     : 0,
 			closeBtn  : 0, //不显示关闭按钮
 			skin      : 'layui-layer-molv' //样式类名
 		}, function () {
+			globalRefresh();
 			layer.close($index); //再执行关闭
 			// parent.layer.close(index); //再执行关闭
 		});
@@ -164,13 +165,15 @@ function uninstall_2(obj, data)
 function uninstall_3(obj, data)
 {
 	$('.install-apply').parent().prev().text(data.msg)
+	let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
-	$index = layer.alert('卸载完成，点击 全局刷新 更新菜单', {
+	$index = layer.alert('卸载完成', {
 		shadeClose: false,
 		shade     : 0,
 		closeBtn  : 0, //不显示关闭按钮
 		skin      : 'layui-layer-molv' //样式类名
 	}, function () {
+		globalRefresh();
 		layer.close($index); //再执行关闭
 		// parent.layer.close(index); //再执行关闭
 	});

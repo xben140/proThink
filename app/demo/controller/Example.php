@@ -803,7 +803,7 @@
 							 * 区域联动选择
 							 */
 							integrationTags::linkage([] , [
-								'url'        => ('/admin/area/getAreaByPid') ,
+								'url'        => ('/admin/api.area/getAreaByPid') ,
 								'field'      => 'pid' ,
 								'method'     => 'post' ,
 								'defaultVal' => 1 ,
@@ -2383,7 +2383,7 @@ css;
 								]);
 
 								$_this->setConfig([
-									'url'        => ('/admin/area/getAreaByPid') ,
+									'url'        => ('/admin/api.area/getAreaByPid') ,
 									'field'      => 'pid' ,
 									'method'     => 'post' ,
 									'defaultVal' => 1 ,

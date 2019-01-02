@@ -80,6 +80,34 @@
 	});
 })();
 
+function   globalRefresh()
+{
+	var _this = $(this);
+	var loadIndex = layer.load();
+	_this.attr({"disabled": true});
+	$.ajax({
+		"url"     : "/admin/Login/refresh",
+		"type"    : "post",
+		"dataType": "json",
+		"success" : function (data)
+		{
+			_this.attr({"disabled": false});
+			layer.msg(data.msg);
+			if (data.code == 1)
+			{
+				top.location.reload();
+			}
+			layer.close(loadIndex);
+		},
+		"error"   : function ()
+		{
+			layer.close(loadIndex);
+			_this.attr({"disabled": false});
+			layer.msg('请求未授权或者网络故障！');
+		},
+	});
+}
+
 function checkEvn()
 {
 	$.ajax({

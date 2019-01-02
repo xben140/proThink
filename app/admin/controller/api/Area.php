@@ -1,3 +1,5 @@
+<?php
+
 /*
 +---------------------------------------------------------------------+
 | iThinkphp     | [ WE CAN DO IT JUST THINK ]                         |
@@ -12,21 +14,23 @@
 +---------------------------------------------------------------------+
 */
 
-(function () {
-	$('#home').on({
-		'click': function ()
+
+	namespace app\admin\controller\api;
+
+	class Area extends ApiBase
+	{
+		public function _initialize()
 		{
-			open('/');
+			parent::_initialize();
+			$this->logic =  $this->logic__admin_area;
 		}
-	});
 
-	$('#refresh').on({
-		'click': function ()
+		//pid=1
+		//http://local2.cc/admin/api.area/getAreaByPid?pid=1
+		public function getAreaByPid()
 		{
-			globalRefresh();
+			$data = $this->logic->getAreaByPid($this->param);
+
+			return json($data);
 		}
-	});
-
-})();
-
-
+	}
